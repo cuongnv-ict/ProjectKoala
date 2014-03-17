@@ -591,7 +591,6 @@ public class ListKoala extends javax.swing.JFrame {
     private void Menu_DanhSachLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopMouseClicked
         // TODO add your handling code here:
         DSLop dslop1 = new DSLop();
-        System.out.print("Đ");
         Panel_GDChinh.add("Danh Sach Lop", dslop1);
         Panel_GDChinh.setSelectedComponent(dslop1);
         new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);

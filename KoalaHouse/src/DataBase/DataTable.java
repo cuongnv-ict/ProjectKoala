@@ -34,13 +34,13 @@ public class DataTable {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public DefaultTableModel BangDanhSachLop(JTable table){
+    public void BangDanhSachLop(JTable table){
         try {
-            Object [] nameColumn = { "Tên Lớp", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái"};
-            ArrayList<String []> data = new ArrayList<String []>();
+            Object [] nameColumn = { "Tên Lớp", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái","Đánh dấu"};
+            ArrayList<Object []> data = new ArrayList<Object []>();
             rs1 = statement.executeQuery("select * ,count(Students_id) from classes,classes_has_students where classes.id= Classes_Id group by Classes_Id");
             while(rs1.next()){
-                String str[] = new String[9];
+                Object str[] = new Object[10];
                     str[0] = rs1.getString(6);
                    switch(rs1.getInt(4)){
                        case 1:
@@ -69,7 +69,8 @@ public class DataTable {
                        case 1:
                             str[8] = "Đã kết thúc";
                            break;
-                 }       
+                 }  
+                 str[9]=false;
                  data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];
@@ -77,10 +78,17 @@ public class DataTable {
             rowColumn[i] = data.get(i);
             model = new DefaultTableModel(rowColumn, nameColumn){
                 boolean[] canEdit = new boolean [] {
-                false, false, false, false, false,false,false,false,
+                false, false, false, false, false,false,false,false,true
             };
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
             };
             table.setModel(model);
@@ -88,7 +96,6 @@ public class DataTable {
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return model;
     }
     public void BangDanhSachHocSinh(JTable table){
         try {
