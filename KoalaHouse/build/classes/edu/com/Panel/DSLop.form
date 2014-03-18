@@ -17,11 +17,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="Button_DSLop_ThemLop1" min="-2" max="-2" attributes="0"/>
+              <Component id="Them" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Button_DSLop_SuaLop1" min="-2" max="-2" attributes="0"/>
+              <Component id="Sua" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Button_DSLop_Xoa1" min="-2" max="-2" attributes="0"/>
+              <Component id="Xoa" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Component id="jScrollPane7" alignment="0" pref="1045" max="32767" attributes="0"/>
@@ -31,9 +31,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Button_DSLop_ThemLop1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Button_DSLop_SuaLop1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Button_DSLop_Xoa1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Them" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Sua" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Xoa" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane7" pref="472" max="32767" attributes="0"/>
@@ -49,7 +49,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable5">
+        <Component class="javax.swing.JTable" name="BangLop">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="9" rowCount="4">
@@ -69,12 +69,12 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable5MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BangLopMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="Button_DSLop_ThemLop1">
+    <Component class="javax.swing.JLabel" name="Them">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/com/image/them.jpg"/>
@@ -82,10 +82,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Button_DSLop_ThemLop1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ThemMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="Button_DSLop_SuaLop1">
+    <Component class="javax.swing.JLabel" name="Sua">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/com/image/sua.JPG"/>
@@ -93,16 +93,19 @@
         <Property name="toolTipText" type="java.lang.String" value="S&#x1eed;a"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Button_DSLop_SuaLop1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SuaMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="Button_DSLop_Xoa1">
+    <Component class="javax.swing.JLabel" name="Xoa">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/edu/com/image/xoa.jpg"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="X&#xf3;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="XoaMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

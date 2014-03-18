@@ -147,7 +147,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             }
             return;
         }
-        Vector vec =  (Vector) model.getDataVector().elementAt(2);
+        Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemGia cost = new ThemGia(null, true, vec);
         cost.setVisible(true);
         editRow(row, cost);

@@ -13,6 +13,7 @@ import edu.com.Dialog.chuyenlop;
 import edu.com.Dialog.trongmuon;
 import edu.com.upbang.AddRowOfTable;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +31,7 @@ public class LopX extends javax.swing.JPanel {
      */
     public LopX() {
         initComponents();
-       model= new DataBase.DataTable().BangDanhHSLop(1, jTable1);
+       model= new DataBase.DataTable().BangDanhHSLop(1, LopX);
        mshs=5;
     }
 
@@ -43,20 +44,20 @@ public class LopX extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lopX = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        LopX = new javax.swing.JTable();
+        them = new javax.swing.JLabel();
+        sua = new javax.swing.JLabel();
+        xoa = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        chitiet = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        LopX.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -75,204 +76,208 @@ public class LopX extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        LopX.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                LopXMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane3.setViewportView(LopX);
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
-        jLabel17.setToolTipText("Thêm");
-        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+        them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
+        them.setToolTipText("Thêm");
+        them.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel17MouseClicked(evt);
+                themMouseClicked(evt);
             }
         });
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/sua.JPG"))); // NOI18N
-        jLabel18.setToolTipText("Sửa");
-        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+        sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/sua.JPG"))); // NOI18N
+        sua.setToolTipText("Sửa");
+        sua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel18MouseClicked(evt);
+                suaMouseClicked(evt);
             }
         });
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
-        jLabel19.setToolTipText("Xóa");
+        xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
+        xoa.setToolTipText("Xóa");
+        xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xoaMouseClicked(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Chuyển Lớp");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton4.setText("Chuyển Lớp");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nợ", "Chính Quy", "Khách", "Đóng Tiền Đầy Đủ", " " }));
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tât cả", "Chính quy", "Khách", "Đóng tiền đầy đủ", "Nợ" }));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Danh Sách Trông Muộn");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("Danh Sách Trông Muộn");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Danh Sách Nghỉ Phép");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton6.setText("Danh Sách Nghỉ Phép");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setText("Tìm Kiếm");
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setText("Tìm Kiếm");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        javax.swing.GroupLayout lopXLayout = new javax.swing.GroupLayout(lopX);
-        lopX.setLayout(lopXLayout);
-        lopXLayout.setHorizontalGroup(
-            lopXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lopXLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lopXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lopXLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel18)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton1)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton2)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton3)
-                        .addGap(51, 51, 51)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 15, Short.MAX_VALUE))
-        );
-        lopXLayout.setVerticalGroup(
-            lopXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lopXLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(lopXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18)
-                    .addGroup(lopXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(lopXLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel20)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel19)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        chitiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/chitiet.png"))); // NOI18N
+        chitiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chitietMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4427, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lopX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(them)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sua)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chitiet)
+                .addGap(24, 24, 24)
+                .addComponent(jButton4)
+                .addGap(28, 28, 28)
+                .addComponent(jButton5)
+                .addGap(27, 27, 27)
+                .addComponent(jButton6)
+                .addGap(44, 44, 44)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
+            .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1107, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lopX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sua)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
+                        .addComponent(xoa))
+                    .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chitiet))
+                .addGap(11, 11, 11)
+                .addComponent(jScrollPane3))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        ThemHS themhs = new ThemHS(null,true);
-        themhs.setLocation(420,130);
-        themhs.show();
-         if(themhs.getButton())
-        {
-         mshs+=1;
-         Vector v= new Vector();
-         v.add(mshs);
-         v.add(themhs.getTenHS());
-         v.add(themhs.getNgaySinh());
-         v.add(themhs.getHinhThuc());
-         v.add(themhs.getDienThoai());
-         v.add(themhs.getDaiDien());
-         
-         AddRowOfTable a= new AddRowOfTable();
-         a.addRowOfTable(model, v);
-         
-        }
-    }//GEN-LAST:event_jLabel17MouseClicked
-
-    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+    private void LopXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LopXMouseClicked
         // TODO add your handling code here:
-        ThemHS suaHS = new ThemHS(null,true);
-        suaHS.setLocation(420, 50);
-        suaHS.show();
-    }//GEN-LAST:event_jLabel18MouseClicked
+    }//GEN-LAST:event_LopXMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        chuyenlop cl = new chuyenlop(null,true);
-        cl.setLocation(420, 130);
-        cl.show();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
         // TODO add your handling code here:
-        trongmuon tm = new trongmuon(null,true);
-        tm.setLocation(420, 130);
-        tm.show();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        ThemHS hs = new ThemHS(null, true);
+        hs.setVisible(true);
+    }//GEN-LAST:event_themMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        NghiPhep np = new NghiPhep(null,true);
-        np.setLocation(420, 130);
-        np.show();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        if(evt.getClickCount()==2){
-            HocSinhA aa = new HocSinhA();
-            center.add("Hoc Sinh B", aa);
-            center.setSelectedComponent(aa);
-        new CloseTabButton(center,center.getComponentCount()-2);
+    private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
+        // TODO add your handling code here:
+        int count =1, row=0;
+        for(int i = model.getRowCount()-1;i>=0;i--){
+            if((Boolean)model.getValueAt(i, 6)==true){
+                count--;
+                row = i;
+            }
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+        if(count!=0){
+            if(count==1){
+                JOptionPane.showMessageDialog(null,"Bạn chưa chọn hoc sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
+                for(int i = model.getRowCount()-1;i>=0;i--){
+             model.setValueAt(false,i,6);
+               }
+            }
+            return;
+        }
+        Vector vec =  (Vector) model.getDataVector().elementAt(row);
+        ThemHS hs = new ThemHS(null, true, vec);
+        hs.setVisible(true);
+    }//GEN-LAST:event_suaMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
+        // TODO add your handling code here:
+        for(int i = model.getRowCount()-1;i>=0;i--){
+            if((Boolean)model.getValueAt(i, 6)==true){
+                model.removeRow(i);
+            }
+        }
+    }//GEN-LAST:event_xoaMouseClicked
+
+    private void chitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chitietMouseClicked
+        // TODO add your handling code here:
+        for(int i = model.getRowCount()-1;i>=0;i--){
+            if((Boolean)model.getValueAt(i, 6)==true){
+                HocSinhA a = new HocSinhA();
+                center.add("Nguyen duc son", a);
+                center.setSelectedComponent(a);
+                  new CloseTabButton(center,center.getComponentCount()-2);
+            }
+        }
+    }//GEN-LAST:event_chitietMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JPanel lopX;
+    private javax.swing.JTable LopX;
+    private javax.swing.JLabel chitiet;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel sua;
+    private javax.swing.JLabel them;
+    private javax.swing.JLabel xoa;
     // End of variables declaration//GEN-END:variables
 }

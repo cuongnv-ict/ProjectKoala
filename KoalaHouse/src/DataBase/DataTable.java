@@ -78,7 +78,7 @@ public class DataTable {
             rowColumn[i] = data.get(i);
             model = new DefaultTableModel(rowColumn, nameColumn){
                 boolean[] canEdit = new boolean [] {
-                false, false, false, false, false,false,false,false,true
+                false, false, false, false, false,false,false,false,false,true
             };
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];

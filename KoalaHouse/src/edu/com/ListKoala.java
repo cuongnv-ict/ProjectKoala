@@ -564,7 +564,6 @@ public class ListKoala extends javax.swing.JFrame {
             LopX dslopa= new LopX();
             Panel_GDChinh.add(selNode.toString(),dslopa);
             Panel_GDChinh.setSelectedComponent(dslopa);
-            
             dslopa.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
                            
