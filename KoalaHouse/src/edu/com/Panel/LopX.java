@@ -25,14 +25,13 @@ public class LopX extends javax.swing.JPanel {
     
     private DefaultTableModel model;
     public JTabbedPane center;
-    private int mshs;
     /**
      * Creates new form LopX
      */
     public LopX() {
-        initComponents();
-       model= new DataBase.DataTable().BangDanhHSLop(1, LopX);
-       mshs=5;
+       initComponents();
+       new DataBase.DataTable().BangDanhHSLop(1, lopx);
+       model = (DefaultTableModel) lopx.getModel();
     }
 
     /**
@@ -45,19 +44,19 @@ public class LopX extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        LopX = new javax.swing.JTable();
+        lopx = new javax.swing.JTable();
         them = new javax.swing.JLabel();
         sua = new javax.swing.JLabel();
         xoa = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel24 = new javax.swing.JLabel();
+        chuyenlop = new javax.swing.JButton();
+        loc = new javax.swing.JComboBox();
+        muon = new javax.swing.JButton();
+        nghi = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         chitiet = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
-        LopX.setModel(new javax.swing.table.DefaultTableModel(
+        lopx.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -76,12 +75,12 @@ public class LopX extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        LopX.addMouseListener(new java.awt.event.MouseAdapter() {
+        lopx.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LopXMouseClicked(evt);
+                lopxMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(LopX);
+        jScrollPane3.setViewportView(lopx);
 
         them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
         them.setToolTipText("Thêm");
@@ -107,44 +106,54 @@ public class LopX extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setText("Chuyển Lớp");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        chuyenlop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chuyenlop.setText("Chuyển Lớp");
+        chuyenlop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                chuyenlopActionPerformed(evt);
             }
         });
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tât cả", "Chính quy", "Khách", "Đóng tiền đầy đủ", "Nợ" }));
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton5.setText("Danh Sách Trông Muộn");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        loc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        loc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tât cả", "Chính quy", "Khách", "Đóng tiền đầy đủ", "Nợ" }));
+        loc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                locActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton6.setText("Danh Sách Nghỉ Phép");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        muon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        muon.setText("Danh Sách Trông Muộn");
+        muon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                muonActionPerformed(evt);
             }
         });
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel24.setText("Tìm Kiếm");
+        nghi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nghi.setText("Danh Sách Nghỉ Phép");
+        nghi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nghiActionPerformed(evt);
+            }
+        });
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         chitiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/chitiet.png"))); // NOI18N
+        chitiet.setToolTipText("Xem chi tiết");
         chitiet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 chitietMouseClicked(evt);
             }
         });
+
+        jButton1.setText("Tìm kiếm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -160,18 +169,18 @@ public class LopX extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chitiet)
                 .addGap(24, 24, 24)
-                .addComponent(jButton4)
+                .addComponent(chuyenlop)
                 .addGap(28, 28, 28)
-                .addComponent(jButton5)
+                .addComponent(muon)
                 .addGap(27, 27, 27)
-                .addComponent(jButton6)
+                .addComponent(nghi)
                 .addGap(44, 44, 44)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel24)
-                .addGap(18, 18, 18)
+                .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
             .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
@@ -179,31 +188,54 @@ public class LopX extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sua)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5)
-                            .addComponent(jButton6)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24))
-                        .addComponent(xoa))
-                    .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chitiet))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sua)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(chuyenlop)
+                                    .addComponent(muon)
+                                    .addComponent(nghi)
+                                    .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(xoa))
+                            .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chitiet))
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LopXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LopXMouseClicked
+    private void lopxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lopxMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_LopXMouseClicked
+        if(evt.getClickCount()==2){
+            int row = lopx.getSelectedRow();
+            model.setValueAt(false, row, 6);
+            HocSinhA a = new HocSinhA();
+            center.add(model.getValueAt(row, 1).toString(), a);
+            center.setSelectedComponent(a);
+            new CloseTabButton(center,center.getComponentCount()-2);
+        }
+    }//GEN-LAST:event_lopxMouseClicked
 
     private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
         // TODO add your handling code here:
         ThemHS hs = new ThemHS(null, true);
         hs.setVisible(true);
+        if(hs.getButton()){
+            Vector vector = new Vector();
+            vector.add(model.getRowCount()+1);
+            vector.add(hs.getTenHS());
+            vector.add(hs.getNgaySinh());
+            vector.add(hs.getHinhThuc());
+            vector.add(hs.getDienThoai());
+            vector.add(hs.getDaiDien());
+            vector.add(false);
+            model.addRow(vector);
+        }
     }//GEN-LAST:event_themMouseClicked
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
@@ -230,19 +262,52 @@ public class LopX extends javax.swing.JPanel {
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemHS hs = new ThemHS(null, true, vec);
         hs.setVisible(true);
+        if(hs.getButton()){
+            model.setValueAt(hs.getTenHS(), row, 1);
+            model.setValueAt(hs.getNgaySinh(), row, 2);
+            model.setValueAt(hs.getHinhThuc(), row, 3);
+            model.setValueAt(hs.getDienThoai(), row, 4);
+            model.setValueAt(hs.getDaiDien(), row, 5);
+            model.setValueAt(false, row, 6);
+        }
     }//GEN-LAST:event_suaMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void chuyenlopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenlopActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        int count=0;
+        for(int i = model.getRowCount()-1;i>=0;i--){
+            if((Boolean)model.getValueAt(i, 6)==true){
+                count++;
+            }
+        }
+        if(count==0){
+            return;
+        }
+        chuyenlop chuyen = new chuyenlop(null, true);
+        chuyen.setVisible(true);
+        for(int i = model.getRowCount()-1;i>=0;i--){
+            if((Boolean)model.getValueAt(i, 6)==true){
+                model.removeRow(i);
+            }
+        }
+        
+    }//GEN-LAST:event_chuyenlopActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void muonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        trongmuon muon = new trongmuon(null, true);
+        muon.setTitle("Danh sách trông muộn lớp "+this.getName());
+        muon.setVisible(true);
+       
+    }//GEN-LAST:event_muonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void nghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nghiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        NghiPhep nghi = new NghiPhep(null, true);
+        nghi.setTitle("Danh sách nghi phép lớp "+this.getName());
+        nghi.setVisible(true);
+         
+    }//GEN-LAST:event_nghiActionPerformed
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
@@ -257,25 +322,56 @@ public class LopX extends javax.swing.JPanel {
         // TODO add your handling code here:
         for(int i = model.getRowCount()-1;i>=0;i--){
             if((Boolean)model.getValueAt(i, 6)==true){
+                model.setValueAt(false, i, 6);
                 HocSinhA a = new HocSinhA();
-                center.add("Nguyen duc son", a);
+                center.add(model.getValueAt(i, 1).toString(), a);
                 center.setSelectedComponent(a);
-                  new CloseTabButton(center,center.getComponentCount()-2);
+                new CloseTabButton(center,center.getComponentCount()-2);
             }
         }
     }//GEN-LAST:event_chitietMouseClicked
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locActionPerformed
+        // TODO add your handling code here:
+        switch (loc.getSelectedIndex()){
+            case 0:
+                new DataBase.DataTable().BangDanhHSLop(1, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 1:
+                new DataBase.DataTable().BangDanhHSLop_ChinhQuy(1, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 2:
+                new DataBase.DataTable().BangDanhHSLop_Khach(1, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 3:
+                new DataBase.DataTable().BangDanhSachHSDongDuPhi(1, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 4:
+                new DataBase.DataTable().BangDanhSachHocSinhNoPhi(1, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+        }
+    }//GEN-LAST:event_locActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable LopX;
     private javax.swing.JLabel chitiet;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel24;
+    private javax.swing.JButton chuyenlop;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox loc;
+    private javax.swing.JTable lopx;
+    private javax.swing.JButton muon;
+    private javax.swing.JButton nghi;
     private javax.swing.JLabel sua;
     private javax.swing.JLabel them;
     private javax.swing.JLabel xoa;

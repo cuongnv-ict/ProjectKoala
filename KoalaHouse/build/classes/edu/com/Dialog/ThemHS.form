@@ -29,7 +29,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -45,17 +44,16 @@
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="combo_ngay" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="combo_thang" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="combo_nam" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ngay" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="thang" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="nam" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="edit_diachi" pref="267" max="32767" attributes="0"/>
-                                  <Component id="edit_daidien" alignment="0" pref="267" max="32767" attributes="0"/>
-                                  <Component id="combo_hinhthuc" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="edit_dienthoai" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="edit_ten" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="daidien" alignment="0" pref="267" max="32767" attributes="0"/>
+                                  <Component id="hinhthuc" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dienthoai" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ten" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -81,46 +79,38 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edit_ten" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="ten" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="edit_dienthoai" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="dienthoai" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edit_diachi" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edit_daidien" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="daidien" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="combo_hinhthuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="hinhthuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="combo_ngay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="combo_thang" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="combo_nam" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="ngay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="thang" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="nam" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="HuyBo" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="HuyBo" pref="25" max="32767" attributes="0"/>
                   <Component id="DongY" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,12 +121,12 @@
         <Property name="text" type="java.lang.String" value="H&#x1ecd; V&#xe0; T&#xea;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="edit_ten">
+    <Component class="javax.swing.JTextField" name="ten">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n H&#x1ea3;i Anh"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_tenActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tenActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -144,7 +134,7 @@
         <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec7;n Tho&#x1ea1;i:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="edit_dienthoai">
+    <Component class="javax.swing.JTextField" name="dienthoai">
       <Properties>
         <Property name="text" type="java.lang.String" value="01694379201"/>
       </Properties>
@@ -154,25 +144,12 @@
         <Property name="text" type="java.lang.String" value="Ng&#x1b0;&#x1edd;i &#x110;&#x1ea1;i Di&#x1ec7;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="edit_daidien">
+    <Component class="javax.swing.JTextField" name="daidien">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nguy&#x1ec5;n Ng&#x1ecd;c Lan&#x9;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_daidienActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a Ch&#x1ec9;:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="edit_diachi">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cau Giay - Ha Noi"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_diachiActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daidienActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="HuyBo">
@@ -196,12 +173,12 @@
         <Property name="text" type="java.lang.String" value="H&#xec;nh Th&#x1ee9;c H&#x1ecd;c:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="combo_hinhthuc">
+    <Component class="javax.swing.JComboBox" name="hinhthuc">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
-            <StringItem index="0" value="Ch&#xed;nh Quy"/>
-            <StringItem index="1" value="Kh&#xe1;ch"/>
+            <StringItem index="0" value="Ch&#xed;nh quy"/>
+            <StringItem index="1" value="Ch&#x1b0;&#x1a1;ng tr&#xec;nh b&#x1ea1;n l&#xe0; kh&#xe1;ch"/>
           </StringArray>
         </Property>
       </Properties>
@@ -213,7 +190,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
     </Component>
-    <Component class="javax.swing.JComboBox" name="combo_thang">
+    <Component class="javax.swing.JComboBox" name="thang">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="13">
@@ -234,7 +211,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="combo_nam">
+    <Component class="javax.swing.JComboBox" name="nam">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="9">
@@ -251,7 +228,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="combo_ngay">
+    <Component class="javax.swing.JComboBox" name="ngay">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="32">
@@ -291,7 +268,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combo_ngayActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ngayActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="title">

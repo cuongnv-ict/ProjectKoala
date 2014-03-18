@@ -157,7 +157,7 @@ public class ListKoala extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jSplitPane2.setOneTouchExpandable(true);
+        jSplitPane2.setEnabled(false);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -562,6 +562,7 @@ public class ListKoala extends javax.swing.JFrame {
         DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)evt.getPath().getLastPathComponent();
 	if(selNode.isLeaf()){
             LopX dslopa= new LopX();
+            dslopa.setName(selNode.toString());
             Panel_GDChinh.add(selNode.toString(),dslopa);
             Panel_GDChinh.setSelectedComponent(dslopa);
             dslopa.center = Panel_GDChinh;

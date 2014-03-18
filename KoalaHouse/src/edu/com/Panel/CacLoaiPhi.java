@@ -150,7 +150,9 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemGia cost = new ThemGia(null, true, vec);
         cost.setVisible(true);
-        editRow(row, cost);
+        if(cost.getButton()){
+            editRow(row, cost);
+        }
     }//GEN-LAST:event_SuaMouseClicked
 
     private void BangPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BangPhiMouseClicked
@@ -159,7 +161,9 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             Vector vec =  (Vector) model.getDataVector().elementAt(BangPhi.getSelectedRow());     
             ThemGia cost = new ThemGia(null, true, vec);
             cost.setVisible(true);
-            editRow(BangPhi.getSelectedRow(), cost);
+            if(cost.getButton()){
+                editRow(BangPhi.getSelectedRow(), cost);
+            }
         }
     }//GEN-LAST:event_BangPhiMouseClicked
     private void editRow(int row,ThemGia cost){

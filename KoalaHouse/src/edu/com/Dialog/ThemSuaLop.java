@@ -45,7 +45,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
     }
     private void setSelectComboBox(JComboBox x,Object obj){
         for(int i =0;i<x.getItemCount();i++){
-            if(x.getItemAt(i).toString().equals(obj.toString())){
+            if(x.getItemAt(i).toString().equalsIgnoreCase(obj.toString())){
               x.setSelectedIndex(i);
               break;
             } 

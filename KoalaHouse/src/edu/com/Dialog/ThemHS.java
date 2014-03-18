@@ -5,6 +5,7 @@
 package edu.com.Dialog;
 
 import java.util.Vector;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -24,6 +25,22 @@ public class ThemHS extends javax.swing.JDialog {
         initComponents();
         DongY.setText("Chỉnh sửa");
         title.setText("Chỉnh sửa thông tin học sinh");
+        ten.setText(vector.get(1).toString());
+        dienthoai.setText(vector.get(4).toString());
+        daidien.setText(vector.get(5).toString());
+        Object obj[] = vector.get(2).toString().split("-");
+        setSelectComboBox(hinhthuc,vector.get(3));
+        setSelectComboBox(nam, obj[0]);
+        setSelectComboBox(thang, obj[1]);
+        setSelectComboBox(ngay, obj[2]);
+    }
+    private void setSelectComboBox(JComboBox x,Object obj){
+        for(int i =0;i<x.getItemCount();i++){
+            if(x.getItemAt(i).toString().equalsIgnoreCase(obj.toString())){
+              x.setSelectedIndex(i);
+              break;
+            } 
+        }     
     }
     //getdulieu
     public boolean getButton()//lay xem la create hay cancle
@@ -32,27 +49,23 @@ public class ThemHS extends javax.swing.JDialog {
     }
     public String getTenHS()// lay ten hs
     {
-        return edit_ten.getText();
+        return ten.getText();
     }
     public String getDaiDien()// lay dai dien
     {
-        return edit_daidien.getText();
+        return daidien.getText();
     }
     public String getDienThoai()// lay dien thoai
     {
-        return edit_dienthoai.getText();
-    }
-    public String getDiaChi()// lay dia chi
-    {
-        return edit_diachi.getText();
+        return dienthoai.getText();
     }
     public String getHinhThuc()// lay hinh thuc
     {
-        return combo_hinhthuc.getSelectedItem().toString();
+        return hinhthuc.getSelectedItem().toString();
     }
     public String getNgaySinh()// lay ngay sinh
     {
-        return combo_nam.getSelectedItem().toString() + "-" +"0"+combo_thang.getSelectedItem().toString()+ "-" +"0"+combo_ngay.getSelectedItem().toString();
+        return nam.getSelectedItem().toString() + "-"+thang.getSelectedItem().toString()+ "-"+ngay.getSelectedItem().toString();
     }
     
 
@@ -66,54 +79,43 @@ public class ThemHS extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        edit_ten = new javax.swing.JTextField();
+        ten = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        edit_dienthoai = new javax.swing.JTextField();
+        dienthoai = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        edit_daidien = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        edit_diachi = new javax.swing.JTextField();
+        daidien = new javax.swing.JTextField();
         HuyBo = new javax.swing.JButton();
         DongY = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        combo_hinhthuc = new javax.swing.JComboBox();
+        hinhthuc = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        combo_thang = new javax.swing.JComboBox();
-        combo_nam = new javax.swing.JComboBox();
-        combo_ngay = new javax.swing.JComboBox();
+        thang = new javax.swing.JComboBox();
+        nam = new javax.swing.JComboBox();
+        ngay = new javax.swing.JComboBox();
         title = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Họ Và Tên:");
 
-        edit_ten.setText("Nguyễn Hải Anh");
-        edit_ten.addActionListener(new java.awt.event.ActionListener() {
+        ten.setText("Nguyễn Hải Anh");
+        ten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edit_tenActionPerformed(evt);
+                tenActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Điện Thoại:");
 
-        edit_dienthoai.setText("01694379201");
+        dienthoai.setText("01694379201");
 
         jLabel3.setText("Người Đại Diện:");
 
-        edit_daidien.setText("Nguyễn Ngọc Lan\t");
-        edit_daidien.addActionListener(new java.awt.event.ActionListener() {
+        daidien.setText("Nguyễn Ngọc Lan\t");
+        daidien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edit_daidienActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Địa Chỉ:");
-
-        edit_diachi.setText("Cau Giay - Ha Noi");
-        edit_diachi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edit_diachiActionPerformed(evt);
+                daidienActionPerformed(evt);
             }
         });
 
@@ -133,18 +135,18 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel4.setText("Hình Thức Học:");
 
-        combo_hinhthuc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chính Quy", "Khách" }));
+        hinhthuc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chính quy", "Chương trình bạn là khách" }));
 
         jLabel6.setText("Ngày Sinh:");
 
-        combo_thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        combo_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
-        combo_ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        combo_ngay.addActionListener(new java.awt.event.ActionListener() {
+        ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        ngay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_ngayActionPerformed(evt);
+                ngayActionPerformed(evt);
             }
         });
 
@@ -162,7 +164,6 @@ public class ThemHS extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,16 +176,15 @@ public class ThemHS extends javax.swing.JDialog {
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(combo_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(combo_thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(combo_nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(edit_diachi, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                    .addComponent(edit_daidien, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                    .addComponent(combo_hinhthuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(edit_dienthoai)
-                                    .addComponent(edit_ten)))
+                                        .addComponent(ngay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(daidien, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                                    .addComponent(hinhthuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dienthoai)
+                                    .addComponent(ten)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(DongY, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
@@ -201,58 +201,48 @@ public class ThemHS extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(edit_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ten, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(edit_dienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(edit_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(edit_daidien, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(daidien, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(combo_hinhthuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hinhthuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(combo_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_thang, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ngay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(thang, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(HuyBo, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(DongY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void edit_daidienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_daidienActionPerformed
+    private void daidienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daidienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_edit_daidienActionPerformed
+    }//GEN-LAST:event_daidienActionPerformed
 
-    private void edit_diachiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_diachiActionPerformed
+    private void ngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngayActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_edit_diachiActionPerformed
+    }//GEN-LAST:event_ngayActionPerformed
 
-    private void combo_ngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_ngayActionPerformed
+    private void tenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_combo_ngayActionPerformed
-
-    private void edit_tenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_tenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edit_tenActionPerformed
+    }//GEN-LAST:event_tenActionPerformed
 
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
         // TODO add your handling code here:
@@ -310,21 +300,19 @@ public class ThemHS extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DongY;
     private javax.swing.JButton HuyBo;
-    private javax.swing.JComboBox combo_hinhthuc;
-    private javax.swing.JComboBox combo_nam;
-    private javax.swing.JComboBox combo_ngay;
-    private javax.swing.JComboBox combo_thang;
-    private javax.swing.JTextField edit_daidien;
-    private javax.swing.JTextField edit_diachi;
-    private javax.swing.JTextField edit_dienthoai;
-    private javax.swing.JTextField edit_ten;
+    private javax.swing.JTextField daidien;
+    private javax.swing.JTextField dienthoai;
+    private javax.swing.JComboBox hinhthuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JComboBox nam;
+    private javax.swing.JComboBox ngay;
+    private javax.swing.JTextField ten;
+    private javax.swing.JComboBox thang;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

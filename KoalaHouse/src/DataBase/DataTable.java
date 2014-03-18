@@ -129,7 +129,7 @@ public class DataTable {
                            str[5] = "Chinh quy";
                            break;
                        case 0:
-                            str[5] = "Chuong trinh ban la khach";
+                            str[5] = "Chương trình bạn là khách";
                            break;
                  }       
                  data.add(str);
@@ -193,7 +193,7 @@ public class DataTable {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public DefaultTableModel BangDanhHSLop(int classes_id,JTable table){
+    public void BangDanhHSLop(int classes_id,JTable table){
         try {
             Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
@@ -204,11 +204,11 @@ public class DataTable {
                 str[1] = rs1.getString(3);
                 str[2] = rs1.getString(4);
                 switch(rs1.getInt(7)){
-                       case 1:
+                       case 0:
                            str[3] = "Chinh quy";
                            break;
-                       case 0:
-                            str[3] = "Chuong trinh ban la khach";
+                       case 1:
+                            str[3] = "Chương trình bạn là khách";
                            break;
                  }       
                 str[4] = rs1.getString(5); 
@@ -239,7 +239,98 @@ public class DataTable {
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return model;
+    }
+    public void BangDanhHSLop_Khach(int classes_id,JTable table){
+        try {
+            Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            ArrayList<Object []> data = new ArrayList<Object []>();
+            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from classes_has_students where classes_id = "+classes_id+ " )");
+            while(rs1.next()){
+                Object[]str = new Object[7];
+                if(rs1.getInt(7)==0){
+                    continue;
+                }
+                else{
+                    str[3] = "Chương trình bạn là khách";
+                }
+                str[0] = rs1.getString(1);
+                str[1] = rs1.getString(3);
+                str[2] = rs1.getString(4);
+                
+                str[4] = rs1.getString(5); 
+                str[5] = rs1.getString(6);
+                str[6] = false;
+                data.add(str);
+            }
+            Object [][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+            rowColumn[i] = data.get(i);
+            model = new DefaultTableModel(rowColumn, nameColumn){
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false,false,true
+            };
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+            };
+            table.setModel(model);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void BangDanhHSLop_ChinhQuy(int classes_id,JTable table){
+        try {
+            Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            ArrayList<Object []> data = new ArrayList<Object []>();
+            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from classes_has_students where classes_id = "+classes_id+ " )");
+            while(rs1.next()){
+                Object[]str = new Object[7];
+                if(rs1.getInt(7)==1){
+                    continue;
+                }
+                else{
+                    str[3] = "Chinh quy";
+                }
+                str[0] = rs1.getString(1);
+                str[1] = rs1.getString(3);
+                str[2] = rs1.getString(4);
+                
+                str[4] = rs1.getString(5); 
+                str[5] = rs1.getString(6);
+                str[6] = false;
+                data.add(str);
+            }
+            Object [][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+            rowColumn[i] = data.get(i);
+            model = new DefaultTableModel(rowColumn, nameColumn){
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false,false,true
+            };
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+            };
+            table.setModel(model);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public void BangDanhSachHocSinhDuCho(JTable table){
         
@@ -248,7 +339,7 @@ public class DataTable {
          try {
             Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from students_has_cost where isdebt = 0 group by students_id)");
+            rs1 = statement.executeQuery("select * from students where students.id not in(select students_id from students_has_cost where isdebt = 1 group by students_id) and debt = 0");
             while(rs1.next()){
                 Object[]str = new Object[7];
                 str[0] = rs1.getString(1);
@@ -295,7 +386,7 @@ public class DataTable {
          try {
             Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from students_has_cost,classes_has_students where isdebt = 0 and students_has_cost.students_id=classes_has_students.students_id and classes_id = "+classes_id+" group by students_id)");
+            rs1 = statement.executeQuery("select * from students where  debt=0 and students.id in(select Students_Id from classes_has_students where classes_id = "+classes_id+" and Students_Id not in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = "+classes_id+" group by students_has_cost.students_id))");
             while(rs1.next()){
                 Object[]str = new Object[7];
                 str[0] = rs1.getString(1);
@@ -336,7 +427,7 @@ public class DataTable {
          try {
             Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id)");
+            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0");
             while(rs1.next()){
                 Object[]str = new Object[7];
                 str[0] = rs1.getString(1);
@@ -383,7 +474,7 @@ public class DataTable {
         try {
             Object [] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = "+classes_id+" group by students_id)");
+            rs1 = statement.executeQuery("select * from students where students.id in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = "+classes_id+" group by students_has_cost.students_id) or debt!=0");
             while(rs1.next()){
                 Object[]str = new Object[7];
                 str[0] = rs1.getString(1);
@@ -538,14 +629,14 @@ public class DataTable {
          try {
             Object [] nameColumn = {"Mã số", "Họ và tên", "Ngày Sinh", "Số ngày"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select *,count(students_id) from students,lateday where students.id= students_id and students_id in(select students_id from classes_has_students where classes_id = "+classes_id+" group by students_id)");
+            rs1 = statement.executeQuery("SELECT students.id,FullName,BrithDay ,count(students_id) from students, lateday where students.Id = Students_Id and students.Id in(select Students_Id from classes_has_students where Classes_Id = "+classes_id+") group by Students_Id");
             while(rs1.next()){
                
                 Object str[] = new Object[4];
                 str[0] = rs1.getString(1);
-                str[1] = rs1.getString(3);
-                str[2] = rs1.getString(4);
-                str[3] = rs1.getString(15);         
+                str[1] = rs1.getString(2);
+                str[2] = rs1.getString(3);
+                str[3] = rs1.getString(4);         
                 data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];
@@ -572,5 +663,8 @@ public class DataTable {
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void DanhSachNghiPhep(int classes_id,JTable table){
+        
     }
 }

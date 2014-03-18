@@ -125,8 +125,10 @@ public class DSLop extends javax.swing.JPanel {
     private void BangLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BangLopMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount()==2){
+            int x = BangLop.getSelectedRow();
             LopX lop = new LopX();
-            center.add("Nắng Mai",lop);
+            lop.setName(((Vector)model.getDataVector().elementAt(x)).get(0).toString());
+            center.add(((Vector)model.getDataVector().elementAt(x)).get(0).toString(),lop);//Lay ten lop duoc click vao;
             center.setSelectedComponent(lop);
             lop.center = center;
             new CloseTabButton(center,center.getComponentCount()-2);
@@ -177,15 +179,18 @@ public class DSLop extends javax.swing.JPanel {
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemSuaLop lop = new ThemSuaLop(null, true, vec);
         lop.setVisible(true);
-        model.setValueAt(lop.getTenLop(), row, 0);
-        model.setValueAt(lop.getKhoiHoc(), row, 1);
-        model.setValueAt(lop.getHocKy(), row, 2);
-        model.setValueAt(lop.getGiaoVien(), row, 3);
-        model.setValueAt(lop.getBday(), row, 4);
-        model.setValueAt(lop.getEday(), row, 5);
-        model.setValueAt(lop.getSoHS(), row, 7);
-        model.setValueAt(lop.getTrangThai(), row, 8);
-        model.setValueAt(false, row,9);
+        if(lop.getButton()){
+            model.setValueAt(lop.getTenLop(), row, 0);
+            model.setValueAt(lop.getKhoiHoc(), row, 1);
+            model.setValueAt(lop.getHocKy(), row, 2);
+            model.setValueAt(lop.getGiaoVien(), row, 3);
+            model.setValueAt(lop.getBday(), row, 4);
+            model.setValueAt(lop.getEday(), row, 5);
+            model.setValueAt(lop.getSoHS(), row, 7);
+            model.setValueAt(lop.getTrangThai(), row, 8);
+            model.setValueAt(false, row,9);
+        }
+        
     }//GEN-LAST:event_SuaMouseClicked
 
     private void XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaMouseClicked
