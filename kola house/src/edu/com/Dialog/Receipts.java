@@ -4,11 +4,24 @@
  */
 package edu.com.Dialog;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.PrintJob;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttribute;
+import javax.print.attribute.PrintRequestAttributeSet;
+
 /**
  *
  * @author Venus
  */
-public class Receipts extends javax.swing.JDialog {
+public class Receipts extends javax.swing.JDialog implements Printable {
 
     /**
      * Creates new form Receipts
@@ -17,7 +30,6 @@ public class Receipts extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +82,8 @@ public class Receipts extends javax.swing.JDialog {
         jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hóa Đơn");
+        setAutoRequestFocus(false);
 
         jLabel24.setText("Cần Đóng :");
 
@@ -321,7 +335,7 @@ public class Receipts extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(538, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
                             .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -347,7 +361,7 @@ public class Receipts extends javax.swing.JDialog {
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19)
                             .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel26)
@@ -412,8 +426,26 @@ public class Receipts extends javax.swing.JDialog {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        dispose();
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        //PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+        //PageFormat pf = pj.pageDialog(aset);
+        
+        pj.setJobName("Print");
+        jButton1.setVisible(false);
+        pj.setPrintable(this);
+        
+        boolean toPrint = pj.printDialog();
+        
+        if(toPrint) {
+            try {
+                pj.print();
+                jButton1.setVisible(true);
+                //this.setSize(607, this.getHeight());
+            } catch (PrinterException ex) {
+                Logger.getLogger(Receipts.class.getName()).log(Level.SEVERE, null, ex);
+                jButton1.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
@@ -508,4 +540,19 @@ public class Receipts extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public int print(Graphics grphcs, PageFormat pf, int i) throws PrinterException {
+        if(i > 0) {
+            return Printable.NO_SUCH_PAGE;
+        }
+        
+        Graphics2D g2d = (Graphics2D) grphcs;
+        g2d.translate(pf.getImageableX(), pf.getImageableY());
+        g2d.scale(0.95, 1);
+        
+        this.paintAll(grphcs);
+        
+        return PAGE_EXISTS;
+    }
 }
