@@ -139,45 +139,57 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_ThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_ThemLopMouseClicked
         // TODO add your handling code here:
-        ThemSuaLop themSuaLop= new ThemSuaLop(null,true);
-        themSuaLop.setLocation(420,130);
-        themSuaLop.show();
-        if(themSuaLop.getButton())
-        {
-         Vector v= new Vector();
-         v.add(themSuaLop.getTenLop());
-         v.add(themSuaLop.getKhoiHoc());
-         v.add(themSuaLop.getHocKy());
-         v.add(themSuaLop.getGiaoVien());
-         v.add("2013-03-08");
-         v.add("2013-03-08");
-         v.add("0");
-         v.add(themSuaLop.getSoHS());
-         v.add("Chưa Bắt Đầu");
-         AddRowOfTable a= new AddRowOfTable();
-         a.addRowOfTable(model, v);
-         
+        ThemSuaLop lop = new ThemSuaLop(null,true);
+        lop.setVisible(true);
+        Vector vector = new Vector();
+        if(lop.getButton()){
+            vector.add(lop.getTenLop());
+            vector.add(lop.getKhoiHoc());
+            vector.add(lop.getHocKy());
+            vector.add(lop.getGiaoVien());
+            vector.add(lop.getBday());
+            vector.add(lop.getEday());
+            vector.add(lop.getSoHS());
+            vector.add(0);
+            vector.add("Đang giảng dậy");
+            vector.add(false);
+            model.addRow(vector);
         }
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
     private void Button_DSLop_SuaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_SuaLopMouseClicked
-        int a=jTable4.getSelectedRow();
-        String tenlop=jTable4.getValueAt(a,0).toString();
-        String giaovien=jTable4.getValueAt(a,3).toString();
-        String hocky=jTable4.getValueAt(a,2).toString();
-        String khoihoc=jTable4.getValueAt(a,1).toString();
-        String sohs=jTable4.getValueAt(a,6).toString();
-        String trungtam="Bà Triệu";
-        ThemSuaLop suaLop = new ThemSuaLop(null,true,tenlop,giaovien,hocky,khoihoc,trungtam,sohs);
-        suaLop.setLocation(420, 130);
-        suaLop.show();
-        if(suaLop.getButton()==true)
-        {
-            jTable4.setValueAt(suaLop.getTenLop(), a, 0);
-            jTable4.setValueAt(suaLop.getGiaoVien(), a, 3);
-            jTable4.setValueAt(suaLop.getHocKy(), a, 2);
-            jTable4.setValueAt(suaLop.getKhoiHoc(), a, 1);
-            jTable4.setValueAt(suaLop.getSoHS(), a, 6);
+              int count =1, row=0;
+        for(int i = model.getRowCount()-1;i>=0;i--){
+            if((Boolean)model.getValueAt(i, 9)==true){
+                count--;
+                row = i;
+            }
+        }
+        if(count!=0){
+            if(count==1){
+                JOptionPane.showMessageDialog(null,"Bạn chưa chọn lớp cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
+                for(int i = model.getRowCount()-1;i>=0;i--){
+                    model.setValueAt(false,i,9);
+               }
+            }
+            return;
+        }
+        Vector vec =  (Vector) model.getDataVector().elementAt(row);
+        ThemSuaLop lop = new ThemSuaLop(null, true, vec);
+        lop.setVisible(true);
+        if(lop.getButton()){
+            model.setValueAt(lop.getTenLop(), row, 0);
+            model.setValueAt(lop.getKhoiHoc(), row, 1);
+            model.setValueAt(lop.getHocKy(), row, 2);
+            model.setValueAt(lop.getGiaoVien(), row, 3);
+            model.setValueAt(lop.getBday(), row, 4);
+            model.setValueAt(lop.getEday(), row, 5);
+            model.setValueAt(lop.getSoHS(), row, 7);
+            model.setValueAt(lop.getTrangThai(), row, 8);
+            model.setValueAt(false, row,9);
         }
     }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
 

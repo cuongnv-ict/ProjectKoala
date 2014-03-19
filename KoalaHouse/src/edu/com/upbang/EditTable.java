@@ -71,12 +71,10 @@ public class EditTable {
         DefaultTableModel tableModel;
         tableModel = (DefaultTableModel) tableName.getModel();
         int i=0,a=0;
-        a= tableName.getRowCount();
-        while(i<a)
+        for(a= tableName.getRowCount();a>0;a--)
         {
-            if(Boolean.parseBoolean(tableName.getValueAt(i,3).toString())==true)
-            vector.add(i);
-            i++;
+            if(Boolean.parseBoolean(tableName.getValueAt(a-1,3).toString())==true)
+            vector.add(a-1);
         }
         vector.add(null);
         i=0;
