@@ -8,6 +8,7 @@ package edu.com;
 import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDaDongTienHoc;
 import edu.com.Dialog.DSDatCoc;
+import edu.com.Dialog.DSTaiKhoan;
 
 import edu.com.Dialog.Receipts;
 import edu.com.Dialog.TaoTaiKhoan;
@@ -157,7 +158,7 @@ public class ListKoala extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jSplitPane2.setEnabled(false);
+        jSplitPane2.setOneTouchExpandable(true);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -276,7 +277,7 @@ public class ListKoala extends javax.swing.JFrame {
             .addGroup(Panel_trungtamLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         Panel_GDChinh.addTab("Trung Tâm", Panel_trungtam);
@@ -495,6 +496,16 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_TaiKhoan.add(Menu_SuaTaiKhoan);
 
         jMenuItem10.setText("Xóa");
+        jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem10MouseClicked(evt);
+            }
+        });
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         Menu_TaiKhoan.add(jMenuItem10);
 
         HeThong.add(Menu_TaiKhoan);
@@ -561,13 +572,12 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)evt.getPath().getLastPathComponent();
 	if(selNode.isLeaf()){
-            LopX dslopa= new LopX();
-            dslopa.setName(selNode.toString());
-            Panel_GDChinh.add(selNode.toString(),dslopa);
-            Panel_GDChinh.setSelectedComponent(dslopa);
+           LopX dslopa= new LopX(selNode.toString());
+           Panel_GDChinh.add(selNode.toString(),dslopa);
+           Panel_GDChinh.setSelectedComponent(dslopa);
             dslopa.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
-                           
+            
         }
     }//GEN-LAST:event_jTree1ValueChanged
 
@@ -699,6 +709,19 @@ public class ListKoala extends javax.swing.JFrame {
         receipts.setLocation(420,20);
         receipts.show();
     }//GEN-LAST:event_jLabel27MouseClicked
+
+    private void jMenuItem10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem10MouseClicked
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        DSTaiKhoan dstaikhoan= new DSTaiKhoan(this, rootPaneCheckingEnabled);
+        dstaikhoan.setAlwaysOnTop(rootPaneCheckingEnabled);
+        dstaikhoan.setLocation(420, 20);
+        dstaikhoan.show();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments

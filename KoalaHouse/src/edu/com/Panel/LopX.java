@@ -11,7 +11,6 @@ import edu.com.Dialog.NghiPhep;
 import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
 import edu.com.Dialog.trongmuon;
-import edu.com.upbang.AddRowOfTable;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -25,6 +24,7 @@ public class LopX extends javax.swing.JPanel {
     
     private DefaultTableModel model;
     public JTabbedPane center;
+    private int malop;
     /**
      * Creates new form LopX
      */
@@ -32,6 +32,34 @@ public class LopX extends javax.swing.JPanel {
        initComponents();
        new DataBase.DataTable().BangDanhHSLop(1, lopx);
        model = (DefaultTableModel) lopx.getModel();
+    }
+    public LopX(String tenlop) {
+        initComponents();
+        setMaLopFromTen(tenlop);
+        new DataBase.DataTable().BangDanhHSLop(malop,lopx);
+        model = (DefaultTableModel) lopx.getModel();
+
+     }
+    public void setMaLop(int malop)
+    {
+        this.malop=malop;
+    }
+    public int getMaLop()
+    {
+        return malop;
+    }
+    public void setMaLopFromTen(String tenlop)
+    {
+        if (tenlop.equals("SUNSHINE_1")) this.malop=1;
+        else if(tenlop.equals("SUNSHINE_2")) this.malop=2;
+        else if(tenlop.equals("SUNSHINE_3")) this.malop=3;
+        else if(tenlop.equals("BEEHIVE_1")) this.malop=4;
+        else if(tenlop.equals("BEEHIVE_2")) this.malop=5;
+        else if(tenlop.equals("BEEHIVE_3")) this.malop=6;
+        else if(tenlop.equals("CHRYSALIS_1")) this.malop=7;
+        else if(tenlop.equals("CHRYSALIS_1")) this.malop=8;
+        else if(tenlop.equals("KINDERGARTEN_1")) this.malop=9;
+        else this.malop=10;
     }
 
     /**

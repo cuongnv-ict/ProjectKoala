@@ -9,6 +9,7 @@ package edu.com.Panel;
 import DataBase.ConnectData;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.ThemSuaLop;
+import edu.com.upbang.EditTable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
+import koalaproject.AddRowOfTable;
 
 /**
  *
@@ -36,8 +37,8 @@ public class DSLop extends javax.swing.JPanel {
    private DefaultTableModel model;
    public DSLop() {
         initComponents();
-        new DataBase.DataTable().BangDanhSachLop(BangLop);
-        model = (DefaultTableModel) BangLop.getModel();
+         new DataBase.DataTable().BangDanhSachLop(jTable4);
+        model = (DefaultTableModel) jTable4.getModel();
     }
     
     /**
@@ -49,13 +50,14 @@ public class DSLop extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane7 = new javax.swing.JScrollPane();
-        BangLop = new javax.swing.JTable();
-        Them = new javax.swing.JLabel();
-        Sua = new javax.swing.JLabel();
-        Xoa = new javax.swing.JLabel();
+        Panel_DSLop = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        Button_DSLop_ThemLop = new javax.swing.JLabel();
+        Button_DSLop_SuaLop = new javax.swing.JLabel();
+        Button_DSLop_Xoa = new javax.swing.JLabel();
 
-        BangLop.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -66,148 +68,146 @@ public class DSLop extends javax.swing.JPanel {
                 "Tên Lớp", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái"
             }
         ));
-        BangLop.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BangLopMouseClicked(evt);
+                jTable4MouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(BangLop);
+        jScrollPane6.setViewportView(jTable4);
 
-        Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
-        Them.setToolTipText("Thêm");
-        Them.addMouseListener(new java.awt.event.MouseAdapter() {
+        Button_DSLop_ThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
+        Button_DSLop_ThemLop.setToolTipText("Thêm");
+        Button_DSLop_ThemLop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ThemMouseClicked(evt);
-            }
-        });
-
-        Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/sua.JPG"))); // NOI18N
-        Sua.setToolTipText("Sửa");
-        Sua.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SuaMouseClicked(evt);
+                Button_DSLop_ThemLopMouseClicked(evt);
             }
         });
 
-        Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
-        Xoa.setToolTipText("Xóa");
-        Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+        Button_DSLop_SuaLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/sua.JPG"))); // NOI18N
+        Button_DSLop_SuaLop.setToolTipText("Sửa");
+        Button_DSLop_SuaLop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                XoaMouseClicked(evt);
+                Button_DSLop_SuaLopMouseClicked(evt);
             }
         });
+
+        Button_DSLop_Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
+        Button_DSLop_Xoa.setToolTipText("Xóa");
+        Button_DSLop_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Button_DSLop_XoaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_DSLopLayout = new javax.swing.GroupLayout(Panel_DSLop);
+        Panel_DSLop.setLayout(Panel_DSLopLayout);
+        Panel_DSLopLayout.setHorizontalGroup(
+            Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                .addComponent(Button_DSLop_ThemLop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Button_DSLop_SuaLop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Button_DSLop_Xoa)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Panel_DSLopLayout.setVerticalGroup(
+            Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Button_DSLop_ThemLop)
+                    .addComponent(Button_DSLop_SuaLop)
+                    .addComponent(Button_DSLop_Xoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Them)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Sua)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Xoa)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1045, Short.MAX_VALUE)
+            .addComponent(Panel_DSLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Them)
-                    .addComponent(Sua)
-                    .addComponent(Xoa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+            .addComponent(Panel_DSLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BangLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BangLopMouseClicked
+    private void Button_DSLop_ThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_ThemLopMouseClicked
+        // TODO add your handling code here:
+        ThemSuaLop themSuaLop= new ThemSuaLop(null,true);
+        themSuaLop.setLocation(420,130);
+        themSuaLop.show();
+        if(themSuaLop.getButton())
+        {
+         Vector v= new Vector();
+         v.add(themSuaLop.getTenLop());
+         v.add(themSuaLop.getKhoiHoc());
+         v.add(themSuaLop.getHocKy());
+         v.add(themSuaLop.getGiaoVien());
+         v.add("2013-03-08");
+         v.add("2013-03-08");
+         v.add("0");
+         v.add(themSuaLop.getSoHS());
+         v.add("Chưa Bắt Đầu");
+         AddRowOfTable a= new AddRowOfTable();
+         a.addRowOfTable(model, v);
+         
+        }
+    }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
+
+    private void Button_DSLop_SuaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_SuaLopMouseClicked
+        int a=jTable4.getSelectedRow();
+        String tenlop=jTable4.getValueAt(a,0).toString();
+        String giaovien=jTable4.getValueAt(a,3).toString();
+        String hocky=jTable4.getValueAt(a,2).toString();
+        String khoihoc=jTable4.getValueAt(a,1).toString();
+        String sohs=jTable4.getValueAt(a,6).toString();
+        String trungtam="Bà Triệu";
+        ThemSuaLop suaLop = new ThemSuaLop(null,true,tenlop,giaovien,hocky,khoihoc,trungtam,sohs);
+        suaLop.setLocation(420, 130);
+        suaLop.show();
+        if(suaLop.getButton()==true)
+        {
+            jTable4.setValueAt(suaLop.getTenLop(), a, 0);
+            jTable4.setValueAt(suaLop.getGiaoVien(), a, 3);
+            jTable4.setValueAt(suaLop.getHocKy(), a, 2);
+            jTable4.setValueAt(suaLop.getKhoiHoc(), a, 1);
+            jTable4.setValueAt(suaLop.getSoHS(), a, 6);
+        }
+    }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount()==2){
-            int x = BangLop.getSelectedRow();
-            LopX lop = new LopX();
-            lop.setName(((Vector)model.getDataVector().elementAt(x)).get(0).toString());
-            center.add(((Vector)model.getDataVector().elementAt(x)).get(0).toString(),lop);//Lay ten lop duoc click vao;
-            center.setSelectedComponent(lop);
-            lop.center = center;
-            new CloseTabButton(center,center.getComponentCount()-2);
+            String tenlop=jTable4.getValueAt(jTable4.getSelectedRow(),0).toString();
+            LopX aa = new LopX(tenlop);
+            center.add(tenlop, aa);
+            center.setSelectedComponent(aa);
+            aa.center = center;
+        new CloseTabButton(center,center.getComponentCount()-2);
+           
+            
         }
-    }//GEN-LAST:event_BangLopMouseClicked
+    }//GEN-LAST:event_jTable4MouseClicked
 
-    private void ThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThemMouseClicked
+    private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
-        ThemSuaLop lop = new ThemSuaLop(null,true);
-        lop.setVisible(true);
-        Vector vector = new Vector();
-        if(lop.getButton()){
-            vector.add(lop.getTenLop());
-            vector.add(lop.getKhoiHoc());
-            vector.add(lop.getHocKy());
-            vector.add(lop.getGiaoVien());
-            vector.add(lop.getBday());
-            vector.add(lop.getEday());
-            vector.add(lop.getSoHS());
-            vector.add(0);
-            vector.add("Đang giảng dậy");
-            vector.add(false);
-            model.addRow(vector);
-        }
-    }//GEN-LAST:event_ThemMouseClicked
-
-    private void SuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuaMouseClicked
-        // TODO add your handling code here:
-        int count =1, row=0;
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 9)==true){
-                count--;
-                row = i;
-            }
-        }
-        if(count!=0){
-            if(count==1){
-                JOptionPane.showMessageDialog(null,"Bạn chưa chọn lớp cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
-                for(int i = model.getRowCount()-1;i>=0;i--){
-                    model.setValueAt(false,i,9);
-               }
-            }
-            return;
-        }
-        Vector vec =  (Vector) model.getDataVector().elementAt(row);
-        ThemSuaLop lop = new ThemSuaLop(null, true, vec);
-        lop.setVisible(true);
-        if(lop.getButton()){
-            model.setValueAt(lop.getTenLop(), row, 0);
-            model.setValueAt(lop.getKhoiHoc(), row, 1);
-            model.setValueAt(lop.getHocKy(), row, 2);
-            model.setValueAt(lop.getGiaoVien(), row, 3);
-            model.setValueAt(lop.getBday(), row, 4);
-            model.setValueAt(lop.getEday(), row, 5);
-            model.setValueAt(lop.getSoHS(), row, 7);
-            model.setValueAt(lop.getTrangThai(), row, 8);
-            model.setValueAt(false, row,9);
-        }
-        
-    }//GEN-LAST:event_SuaMouseClicked
-
-    private void XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaMouseClicked
-        // TODO add your handling code here:
-         for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 9)==true){
-                model.removeRow(i);
-            }
-        }
-    }//GEN-LAST:event_XoaMouseClicked
+        EditTable edit= new EditTable();
+        edit.removeRowOfTable(jTable4);
+    }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BangLop;
-    private javax.swing.JLabel Sua;
-    private javax.swing.JLabel Them;
-    private javax.swing.JLabel Xoa;
-    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JLabel Button_DSLop_SuaLop;
+    private javax.swing.JLabel Button_DSLop_ThemLop;
+    private javax.swing.JLabel Button_DSLop_Xoa;
+    private javax.swing.JPanel Panel_DSLop;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
 }

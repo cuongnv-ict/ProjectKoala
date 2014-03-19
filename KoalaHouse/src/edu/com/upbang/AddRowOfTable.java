@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package edu.com.upbang;
+package koalaproject;
 
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
