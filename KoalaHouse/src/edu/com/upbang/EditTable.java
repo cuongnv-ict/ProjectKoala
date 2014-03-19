@@ -7,6 +7,7 @@
 package edu.com.upbang;
 
 import java.awt.print.PrinterException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,5 +102,30 @@ public class EditTable {
         } catch (PrinterException ex) {
             Logger.getLogger(EditTable.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public ArrayList getCost(JTable tableName){
+        DefaultTableModel tableModel;
+        tableModel = (DefaultTableModel) tableName.getModel();
+        
+        ArrayList a = new ArrayList();
+        for(int i=0;i< tableModel.getRowCount();i++){
+            Vector v = new Vector();
+            v = (Vector) tableModel.getDataVector().elementAt(i);
+            if((v.get(4).toString())=="true"){
+               a.add(v); 
+            }
+        }
+        return a;
+    }
+    public ArrayList getAllRow(JTable tableName){
+        DefaultTableModel tableModel;
+        tableModel = (DefaultTableModel) tableName.getModel();
+        ArrayList a = new ArrayList();
+        for(int i=0;i< tableModel.getRowCount();i++){
+            Vector v = new Vector();
+            v = (Vector) tableModel.getDataVector().elementAt(i);
+               a.add(v);
+        }
+        return a;
     }
 }

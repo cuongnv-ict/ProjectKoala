@@ -9,8 +9,7 @@ import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDaDongTienHoc;
 import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
-
-import edu.com.Dialog.Receipts;
+import edu.com.Dialog.HoaDon;
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemSuaLop;
 
@@ -704,7 +703,7 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
         // TODO add your handling code here:
-        Receipts receipts= new Receipts(this, rootPaneCheckingEnabled);
+        HoaDon receipts= new HoaDon(this, rootPaneCheckingEnabled);
         receipts.setAlwaysOnTop(rootPaneCheckingEnabled);
         receipts.setLocation(420,20);
         receipts.show();

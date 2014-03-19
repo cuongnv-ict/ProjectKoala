@@ -126,10 +126,10 @@ public class DataTable {
                    str[4] = rs1.getString(5);
                    switch(rs1.getInt(6)){
                        case 1:
-                           str[5] = "Chinh quy";
+                           str[5] = "Chính Quy";
                            break;
                        case 0:
-                            str[5] = "Chuong trinh ban la khach";
+                            str[5] = "Chương Trình Bạn Là Khách";
                            break;
                  }       
                  data.add(str);
@@ -205,10 +205,10 @@ public class DataTable {
                 str[2] = rs1.getString(4);
                 switch(rs1.getInt(7)){
                        case 0:
-                           str[3] = "Chinh quy";
+                           str[3] = "Chính Quy";
                            break;
                        case 1:
-                            str[3] = "Chương trình bạn là khách";
+                            str[3] = "Chương Trình Bạn Là Khách";
                            break;
                  }       
                 str[4] = rs1.getString(5); 
@@ -297,7 +297,7 @@ public class DataTable {
                     continue;
                 }
                 else{
-                    str[3] = "Chinh quy";
+                    str[3] = "Chính Quy";
                 }
                 str[0] = rs1.getString(1);
                 str[1] = rs1.getString(3);
@@ -347,10 +347,10 @@ public class DataTable {
                 str[2] = rs1.getString(4);
                 switch(rs1.getInt(7)){
                        case 1:
-                           str[3] = "Chinh quy";
+                           str[3] = "Chính Quy";
                            break;
                        case 0:
-                            str[3] = "Chuong trinh ban la khach";
+                            str[3] = "Chương Trình Bạn Là Khách";
                            break;
                  }       
                 str[4] = rs1.getString(5); 
@@ -394,10 +394,10 @@ public class DataTable {
                 str[2] = rs1.getString(4);
                 switch(rs1.getInt(7)){
                        case 1:
-                           str[3] = "Chinh quy";
+                           str[3] = "Chính Quy";
                            break;
                        case 0:
-                            str[3] = "Chuong trinh ban la khach";
+                            str[3] = "Chương Trình Bạn Là Khách";
                            break;
                  }       
                 str[4] = rs1.getString(5); 
@@ -435,10 +435,10 @@ public class DataTable {
                 str[2] = rs1.getString(4);
                 switch(rs1.getInt(7)){
                        case 1:
-                           str[3] = "Chinh quy";
+                           str[3] = "Chính Quy";
                            break;
                        case 0:
-                            str[3] = "Chuong trinh ban la khach";
+                            str[3] = "Chương Trình Bạn Là Khách";
                            break;
                  }       
                 str[4] = rs1.getString(5); 
@@ -482,10 +482,10 @@ public class DataTable {
                 str[2] = rs1.getString(4);
                 switch(rs1.getInt(7)){
                        case 1:
-                           str[3] = "Chinh quy";
+                           str[3] = "Chính Quy";
                            break;
                        case 0:
-                            str[3] = "Chuong trinh ban la khach";
+                            str[3] = "Chương Trình Bạn Là Khách";
                            break;
                  }       
                 str[4] = rs1.getString(5); 
@@ -699,4 +699,70 @@ public class DataTable {
          return model;
         
     }
+public ArrayList HocSinhA1(int ID){
+    ArrayList infoStudent = new ArrayList();
+    String str[] = new String[9];
+        try {
+            rs1 = statement.executeQuery("select students.id,fullname,brithday,PhoneNumber,Representative,levels_id,nameclass,isclient,faculties.name from students,classes,classes_has_students,faculties where students.id = students_id and classes.id=classes_id and students.id = "+ID+" and faculties.Id = students.Faculties_Id");
+            while(rs1.next()){
+                    str[0] = rs1.getString(1);
+                    str[1] = rs1.getString(2);
+                    str[2] = rs1.getString(3);
+                    str[3] = rs1.getString(4);
+                    str[4] = rs1.getString(5);
+                   switch(rs1.getInt(6)){
+                       case 1:
+                           str[5] = "NẮNG MAI (SUNSHINE)";
+                           break;
+                       case 2:
+                            str[5] = "TỔ ONG (BEEHIVE)";
+                           break;
+                       case 3:
+                            str[5] = "TỔ KÉN (CHRYSALIS)";
+                           break;
+                       case 4:
+                            str[5] = "MẪU GIÁO (KINDERGARTEN)";
+                           break;
+                   }
+                   
+                 
+                   str[6] = rs1.getString(7);
+                   switch(rs1.getInt(8)){
+                       case 1:
+                           str[7] = "Chính Quy";
+                           break;
+                       case 0:
+                            str[7] = "Chương Trình Bạn Là Khách";
+                           break;
+                 }
+                   str[8] = rs1.getString(9);    
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i = 0;i<9;i++){
+            infoStudent.add(str[i]);
+            }
+        
+        return infoStudent;
+}
+public ArrayList LateDay(int ID){
+    int count = 0;
+    ArrayList infoStudent = new ArrayList();
+    String str[] = new String[365];
+        try {
+            rs1 = statement.executeQuery("select LateDate from lateday where Students_Id = "+ID);
+            if(rs1!= null)
+            while(rs1.next()){
+                    str[count] = rs1.getString(1);
+                    count++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i = 0;i<count;i++){
+            infoStudent.add(str[i]);
+            }
+        return infoStudent;
+}
 }

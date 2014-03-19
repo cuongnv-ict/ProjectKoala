@@ -6,7 +6,9 @@
 
 package edu.com.Panel;
 
+import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
+import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 
 /**
@@ -21,7 +23,9 @@ public class DSHS extends javax.swing.JPanel {
     public JTabbedPane center;
     public DSHS() {
         initComponents();
-        new DataBase.DataTable().BangDanhSachHocSinh(LopHS);
+        new DataBase.DataTable().BangDanhSachHocSinh(DSHS);
+        Integer count = new Integer(DSHS.getRowCount());
+        Count.setText(count.toString()); 
     }
 
     /**
@@ -33,18 +37,13 @@ public class DSHS extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel16 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        LopHS = new javax.swing.JTable();
+        Panel_DSHS = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        DSHS = new javax.swing.JTable();
+        Count = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Tổng số học sinh");
-
-        jTextField18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField18.setText("0");
-
-        LopHS.setModel(new javax.swing.table.DefaultTableModel(
+        DSHS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -55,45 +54,101 @@ public class DSHS extends javax.swing.JPanel {
                 "ID", "Tên", "Trình Độ", "Lớp", "Hình Thức Học", "Ngay Sinh"
             }
         ));
-        LopHS.addMouseListener(new java.awt.event.MouseAdapter() {
+        DSHS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LopHSMouseClicked(evt);
+                DSHSMouseClicked(evt);
             }
         });
-        jScrollPane9.setViewportView(LopHS);
+        jScrollPane8.setViewportView(DSHS);
+
+        Count.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Count.setText("0");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Tổng Số HS:");
+
+        javax.swing.GroupLayout Panel_DSHSLayout = new javax.swing.GroupLayout(Panel_DSHS);
+        Panel_DSHS.setLayout(Panel_DSHSLayout);
+        Panel_DSHSLayout.setHorizontalGroup(
+            Panel_DSHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_DSHSLayout.createSequentialGroup()
+                .addGap(390, 390, 390)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Count, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Panel_DSHSLayout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 1099, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        Panel_DSHSLayout.setVerticalGroup(
+            Panel_DSHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_DSHSLayout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addGroup(Panel_DSHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(Count, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
+            .addGap(0, 4417, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 1659, Short.MAX_VALUE)
+                    .addComponent(Panel_DSHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 1659, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+            .addGap(0, 1107, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 348, Short.MAX_VALUE)
+                    .addComponent(Panel_DSHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 349, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LopHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LopHSMouseClicked
+    private void DSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHSMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_LopHSMouseClicked
+        if(evt.getClickCount()==2){
+            //map cac truong
+            String idStudent = DSHS.getValueAt(DSHS.getSelectedRow(), 0).toString();
+            int id = Integer.parseInt(idStudent);
+            DataTable a = new DataTable();
+            ArrayList info,lateday;
+            info = a.HocSinhA1(id);
+            lateday = a.LateDay(id);
+            HocSinhA.tenHS = (String) info.get(1);
+            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
+            HocSinhA.ngaySinh = (String) info.get(2);
+            HocSinhA.SDT = (String) info.get(3);
+            HocSinhA.hinhThucHoc = (String) info.get(7);
+            HocSinhA.lop = (String) info.get(6);
+            HocSinhA.trinhDo = (String) info.get(5);
+            HocSinhA.trungTam = (String) info.get(8);
+            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
+            //add tab
+            HocSinhA aa = new HocSinhA();
+            aa.id = id;
+            aa.lateday = lateday;
+            center.add((String) info.get(1), aa);
+            center.setSelectedComponent(aa);
+        new CloseTabButton(center,center.getComponentCount()-2);
+        }
+    }//GEN-LAST:event_DSHSMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable LopHS;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField Count;
+    private javax.swing.JTable DSHS;
+    private javax.swing.JPanel Panel_DSHS;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JScrollPane jScrollPane8;
     // End of variables declaration//GEN-END:variables
 }

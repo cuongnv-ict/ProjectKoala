@@ -8,6 +8,10 @@ package edu.com.Panel;
 
 import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
 
 /**
@@ -22,7 +26,7 @@ public class DSNo extends javax.swing.JPanel {
     public JTabbedPane center;
     public DSNo() {
         initComponents();
-        new DataTable().BangDanhSachHocSinhNoPhi(jTable5);
+        new DataTable().BangDanhSachHocSinhNoPhi(DSHocSinhNo);
     }
 
     /**
@@ -34,10 +38,11 @@ public class DSNo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Panel_DSNo = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        DSHocSinhNo = new javax.swing.JTable();
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        DSHocSinhNo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -63,39 +68,78 @@ public class DSNo extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+        DSHocSinhNo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable5MouseClicked(evt);
+                DSHocSinhNoMouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(jTable5);
+        jScrollPane7.setViewportView(DSHocSinhNo);
+
+        javax.swing.GroupLayout Panel_DSNoLayout = new javax.swing.GroupLayout(Panel_DSNo);
+        Panel_DSNo.setLayout(Panel_DSNoLayout);
+        Panel_DSNoLayout.setHorizontalGroup(
+            Panel_DSNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1099, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        Panel_DSNoLayout.setVerticalGroup(
+            Panel_DSNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 1099, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 1169, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(35, Short.MAX_VALUE)
+                    .addComponent(Panel_DSNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(35, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 1153, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(370, Short.MAX_VALUE)
+                    .addComponent(Panel_DSNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(371, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+    private void DSHocSinhNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHocSinhNoMouseClicked
         if(evt.getClickCount()==2){
+            //map cac truong
+            String idStudent = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 0).toString();
+            int id = Integer.parseInt(idStudent);
+            DataTable a = new DataTable();
+            ArrayList info,lateday;
+            info = a.HocSinhA1(id);
+            lateday = a.LateDay(id);
+            HocSinhA.tenHS = (String) info.get(1);
+            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
+            HocSinhA.ngaySinh = (String) info.get(2);
+            HocSinhA.SDT = (String) info.get(3);
+            HocSinhA.hinhThucHoc = (String) info.get(7);
+            HocSinhA.lop = (String) info.get(6);
+            HocSinhA.trinhDo = (String) info.get(5);
+            HocSinhA.trungTam = (String) info.get(8);
+            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
             HocSinhA aa = new HocSinhA();
-            center.add("Hoc Sinh B", aa);
+            aa.id = id;
+            aa.lateday = lateday;
+            //add tab
+            center.add((String) info.get(1), aa);
             center.setSelectedComponent(aa);
         new CloseTabButton(center,center.getComponentCount()-2);
         }
-    }//GEN-LAST:event_jTable5MouseClicked
+    }//GEN-LAST:event_DSHocSinhNoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DSHocSinhNo;
+    private javax.swing.JPanel Panel_DSNo;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable5;
     // End of variables declaration//GEN-END:variables
 }

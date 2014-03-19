@@ -6,11 +6,13 @@
 
 package edu.com.Panel;
 
+import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.NghiPhep;
 import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
 import edu.com.Dialog.trongmuon;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -242,9 +244,28 @@ public class LopX extends javax.swing.JPanel {
         if(evt.getClickCount()==2){
             int row = lopx.getSelectedRow();
             model.setValueAt(false, row, 6);
-            HocSinhA a = new HocSinhA();
-            center.add(model.getValueAt(row, 1).toString(), a);
-            center.setSelectedComponent(a);
+            //map cac truong
+            String idStudent = lopx.getValueAt(row, 0).toString();
+            int id = Integer.parseInt(idStudent);
+            DataTable a = new DataTable();
+            ArrayList info,lateday;
+            info = a.HocSinhA1(id);
+            lateday = a.LateDay(id);
+            HocSinhA.tenHS = (String) info.get(1);
+            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
+            HocSinhA.ngaySinh = (String) info.get(2);
+            HocSinhA.SDT = (String) info.get(3);
+            HocSinhA.hinhThucHoc = (String) info.get(7);
+            HocSinhA.lop = (String) info.get(6);
+            HocSinhA.trinhDo = (String) info.get(5);
+            HocSinhA.trungTam = (String) info.get(8);
+            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
+            //add tab
+            HocSinhA aa = new HocSinhA();
+            aa.id = id;
+            aa.lateday = lateday;
+            center.add(model.getValueAt(row, 1).toString(), aa);
+            center.setSelectedComponent(aa);
             new CloseTabButton(center,center.getComponentCount()-2);
         }
     }//GEN-LAST:event_lopxMouseClicked

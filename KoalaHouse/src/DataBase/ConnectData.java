@@ -19,7 +19,7 @@ public class ConnectData {
     private Connection conn;
     private String user = "root";
     private String url = "jdbc:mysql://localhost/projectkoala";
-    private String password = "hoalan93";
+    private String password = "123456";
     
     public Connection connectionDatabase() {
         try {       

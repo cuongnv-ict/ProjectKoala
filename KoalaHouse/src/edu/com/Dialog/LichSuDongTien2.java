@@ -4,11 +4,21 @@
  */
 package edu.com.Dialog;
 
+import edu.com.Panel.HocSinhA;
+import edu.com.upbang.AddRowOfTable;
+import edu.com.upbang.EditTable;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Venus
  */
 public class LichSuDongTien2 extends javax.swing.JDialog {
+    public static ArrayList ls = new ArrayList();
+    public static ArrayList temp = new ArrayList();
+    public DefaultTableModel model;
 
     /**
      * Creates new form LichSuDongTien2
@@ -17,6 +27,15 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         new DataBase.DataTable().BangLichSuDongTienCuaHocSinh(1, jTable1);
+        model = (DefaultTableModel) jTable1.getModel();
+        for(int i=0;i<ls.size();i++){
+            Vector v= new Vector();
+            v = (Vector) ls.get(i);
+            AddRowOfTable a= new AddRowOfTable();
+            a.addRowOfTable(model, v);
+        }
+        temp.clear();
+        
     }
 
     /**
@@ -35,10 +54,7 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Tên Phí", "Kì", "Số Tiền"

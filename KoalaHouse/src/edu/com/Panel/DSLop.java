@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import koalaproject.AddRowOfTable;
+import edu.com.upbang.AddRowOfTable;
 
 /**
  *

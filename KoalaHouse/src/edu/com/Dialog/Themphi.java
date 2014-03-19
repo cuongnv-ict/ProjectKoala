@@ -4,12 +4,19 @@
  */
 package edu.com.Dialog;
 
+import edu.com.upbang.EditTable;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nguyen van cuong
  */
 public class Themphi extends javax.swing.JDialog {
-
+    private boolean button;
+    public JTable jTable2;
     /**
      * Creates new form Themphi
      */
@@ -17,8 +24,12 @@ public class Themphi extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         new DataBase.DataTable().BangThemHocPhiChoHocSinh(jTable1, 1);
+        jTable2 = jTable1;
     }
-
+public boolean getButton()//lay xem la create hay cancle
+    {
+        return button;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,8 +69,18 @@ public class Themphi extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("ok");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,6 +108,16 @@ public class Themphi extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        button= true;
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        button= false;
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

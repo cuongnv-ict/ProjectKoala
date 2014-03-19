@@ -4,8 +4,10 @@
  */
 package edu.com.Dialog;
 
+import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Panel.HocSinhA;
+import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 
 /**
@@ -96,8 +98,27 @@ public class DSChuaHoanThanhHocPhi extends javax.swing.JDialog {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         if(evt.getClickCount()==2){
+            //map cac truong
+            String idStudent = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            int id = Integer.parseInt(idStudent);
+            DataTable a = new DataTable();
+            ArrayList info,lateday;
+            info = a.HocSinhA1(id);
+            lateday = a.LateDay(id);
+            HocSinhA.tenHS = (String) info.get(1);
+            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
+            HocSinhA.ngaySinh = (String) info.get(2);
+            HocSinhA.SDT = (String) info.get(3);
+            HocSinhA.hinhThucHoc = (String) info.get(7);
+            HocSinhA.lop = (String) info.get(6);
+            HocSinhA.trinhDo = (String) info.get(5);
+            HocSinhA.trungTam = (String) info.get(8);
+            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
+            //add tab
             HocSinhA aa = new HocSinhA();
-            center.add("Học Sinh B", aa);
+            aa.id = id;
+            aa.lateday = lateday;
+            center.add((String) info.get(1), aa);
             center.setSelectedComponent(aa);
         new CloseTabButton(center,center.getComponentCount()-2);
         }
