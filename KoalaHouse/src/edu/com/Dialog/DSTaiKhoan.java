@@ -93,7 +93,7 @@ public class DSTaiKhoan extends javax.swing.JDialog {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        new EditTable().removeManyRowOfTable(jTable1);
+        new EditTable().removeManyRowOfTable(jTable1,3);
     }//GEN-LAST:event_jLabel1MouseClicked
 
     /**

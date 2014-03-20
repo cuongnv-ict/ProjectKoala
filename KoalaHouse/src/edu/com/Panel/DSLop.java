@@ -210,7 +210,7 @@ public class DSLop extends javax.swing.JPanel {
     private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
         EditTable edit= new EditTable();
-        edit.removeRowOfTable(jTable4);
+        edit.removeManyRowOfTable(jTable4, 9);
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 
 

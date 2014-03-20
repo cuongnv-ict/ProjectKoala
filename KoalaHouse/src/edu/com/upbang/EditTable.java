@@ -66,14 +66,14 @@ public class EditTable {
             // do something else
         }
     }
-    public void removeManyRowOfTable(JTable tableName)
+    public void removeManyRowOfTable(JTable tableName,int colunmcheck)
     {   Vector vector= new Vector();
         DefaultTableModel tableModel;
         tableModel = (DefaultTableModel) tableName.getModel();
         int i=0,a=0;
         for(a= tableName.getRowCount();a>0;a--)
         {
-            if(Boolean.parseBoolean(tableName.getValueAt(a-1,3).toString())==true)
+            if(Boolean.parseBoolean(tableName.getValueAt(a-1,colunmcheck).toString())==true)
             vector.add(a-1);
         }
         vector.add(null);
