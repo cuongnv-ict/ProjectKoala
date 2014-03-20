@@ -9,6 +9,7 @@ import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDaDongTienHoc;
 import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
+import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemSuaLop;
@@ -513,9 +514,19 @@ public class ListKoala extends javax.swing.JFrame {
         HeThong.add(Menu_Update);
 
         Menu_DangXuat.setText("Đăng Xuất");
+        Menu_DangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_DangXuatActionPerformed(evt);
+            }
+        });
         HeThong.add(Menu_DangXuat);
 
         Menu_thoat.setText("Thoát");
+        Menu_thoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_thoatActionPerformed(evt);
+            }
+        });
         HeThong.add(Menu_thoat);
 
         jMenuBar1.add(HeThong);
@@ -721,6 +732,21 @@ public class ListKoala extends javax.swing.JFrame {
         dstaikhoan.setLocation(420, 20);
         dstaikhoan.show();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void Menu_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DangXuatActionPerformed
+        // TODO add your handling code here:
+        DangNhapVao d= new DangNhapVao(this, rootPaneCheckingEnabled);
+        this.dispose();
+        d.setLocation(420, 20);
+        d.show();
+        
+        
+    }//GEN-LAST:event_Menu_DangXuatActionPerformed
+
+    private void Menu_thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_thoatActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_Menu_thoatActionPerformed
 
     /**
      * @param args the command line arguments

@@ -151,6 +151,8 @@ public class DangNhapVao extends javax.swing.JDialog {
         ListKoala center = new ListKoala();
         dialog.setVisible(false);
         center.setVisible(true);
+        center.setAlwaysOnTop(rootPaneCheckingEnabled);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
