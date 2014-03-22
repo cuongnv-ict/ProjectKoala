@@ -129,6 +129,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable {
         setPreferredSize(new java.awt.Dimension(640, 740));
         setResizable(false);
 
+        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\new\\kola house_V21\\kola house\\src\\edu\\com\\image\\avatar.jpg")); // NOI18N
+
         javax.swing.GroupLayout avatarLayout = new javax.swing.GroupLayout(avatar);
         avatar.setLayout(avatarLayout);
         avatarLayout.setHorizontalGroup(
@@ -604,6 +606,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable {
     }//GEN-LAST:event_NoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        button = true;
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Print Details");
         jButton1.setVisible(false);
@@ -620,6 +623,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable {
                 jButton1.setVisible(true);
             }
         }
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -715,8 +719,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField tenLop;
     // End of variables declaration//GEN-END:variables
-
-    @Override
+ @Override
     public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterException {
         if(page > 0) {
             return Printable.NO_SUCH_PAGE;

@@ -141,6 +141,7 @@ public class DangNhapVao extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Checkbox_remembermeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Checkbox_remembermeActionPerformed
@@ -151,7 +152,7 @@ public class DangNhapVao extends javax.swing.JDialog {
         ListKoala center = new ListKoala();
         dialog.setVisible(false);
         center.setVisible(true);
-        center.setAlwaysOnTop(rootPaneCheckingEnabled);
+        center.setAlwaysOnTop(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
