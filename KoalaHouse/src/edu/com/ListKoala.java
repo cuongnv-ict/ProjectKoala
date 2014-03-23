@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -45,12 +46,14 @@ public class ListKoala extends javax.swing.JFrame {
     /**
      * Creates new form List
      */
+    public static JFrame frame;
     public ListKoala() {
         initComponents();
         Panel_GDChinh.removeAll();
         HocSinhA a = new HocSinhA();
         Panel_GDChinh.add("Trung Tâm",Panel_trungtam);
         new CloseTabButton(Panel_GDChinh,0);
+        frame = this;
        
     }
 
@@ -97,16 +100,6 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        Menu_QuanLy = new javax.swing.JMenu();
-        Menu_DanhSachLop = new javax.swing.JMenuItem();
-        Menu_HSDatCoc = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        Menu_ThemLop = new javax.swing.JMenuItem();
-        Menu_SuaLop = new javax.swing.JMenuItem();
-        Menu_XoaLop = new javax.swing.JMenuItem();
-        DongPhi = new javax.swing.JMenu();
-        Menu_HSHoanThanh = new javax.swing.JMenuItem();
-        Menu_HSChuaHoanThanh = new javax.swing.JMenuItem();
         HeThong = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         Menu_TaiKhoan = new javax.swing.JMenu();
@@ -157,8 +150,10 @@ public class ListKoala extends javax.swing.JFrame {
         tree.add(jMenu1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jSplitPane2.setOneTouchExpandable(true);
+        jSplitPane2.setAutoscrolls(true);
+        jSplitPane2.setEnabled(false);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -249,7 +244,7 @@ public class ListKoala extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
         );
 
         jSplitPane2.setLeftComponent(jPanel3);
@@ -277,7 +272,7 @@ public class ListKoala extends javax.swing.JFrame {
             .addGroup(Panel_trungtamLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         Panel_GDChinh.addTab("Trung Tâm", Panel_trungtam);
@@ -359,29 +354,29 @@ public class ListKoala extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
                     .addComponent(jLabel22))
-                .addGap(53, 53, 53)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel21)
-                        .addGap(60, 60, 60)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel24))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel25)
-                        .addGap(44, 44, 44)
+                        .addGap(35, 35, 35)
                         .addComponent(jLabel29)))
-                .addGap(52, 52, 52)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
                     .addComponent(jLabel30))
-                .addGap(58, 58, 58)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
                     .addComponent(jLabel31))
-                .addGap(52, 52, 52)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel28)
                     .addComponent(jLabel32))
-                .addContainerGap(836, Short.MAX_VALUE))
+                .addContainerGap(902, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,79 +400,6 @@ public class ListKoala extends javax.swing.JFrame {
                     .addComponent(jLabel32))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
-
-        Menu_QuanLy.setText("Quản Lý");
-
-        Menu_DanhSachLop.setText("Danh Sách Lớp");
-        Menu_DanhSachLop.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_DanhSachLopMouseClicked(evt);
-            }
-        });
-        Menu_DanhSachLop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_DanhSachLopActionPerformed(evt);
-            }
-        });
-        Menu_QuanLy.add(Menu_DanhSachLop);
-
-        Menu_HSDatCoc.setText("Danh sách học sinh giữ chỗ");
-        Menu_HSDatCoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_HSDatCocActionPerformed(evt);
-            }
-        });
-        Menu_QuanLy.add(Menu_HSDatCoc);
-
-        jMenuBar1.add(Menu_QuanLy);
-
-        jMenu3.setText("Quản Lý Lớp");
-
-        Menu_ThemLop.setText("Thêm");
-        Menu_ThemLop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_ThemLopActionPerformed(evt);
-            }
-        });
-        jMenu3.add(Menu_ThemLop);
-
-        Menu_SuaLop.setText("Sửa");
-        Menu_SuaLop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_SuaLopActionPerformed(evt);
-            }
-        });
-        jMenu3.add(Menu_SuaLop);
-
-        Menu_XoaLop.setText("Xóa");
-        jMenu3.add(Menu_XoaLop);
-
-        jMenuBar1.add(jMenu3);
-
-        DongPhi.setText("Quá trình đóng phí");
-        DongPhi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DongPhiActionPerformed(evt);
-            }
-        });
-
-        Menu_HSHoanThanh.setText("Học sinh đã hoàn thành phí học tập");
-        Menu_HSHoanThanh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_HSHoanThanhActionPerformed(evt);
-            }
-        });
-        DongPhi.add(Menu_HSHoanThanh);
-
-        Menu_HSChuaHoanThanh.setText("Học sinh chưa hoàn thành phí học tập");
-        Menu_HSChuaHoanThanh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_HSChuaHoanThanhActionPerformed(evt);
-            }
-        });
-        DongPhi.add(Menu_HSChuaHoanThanh);
-
-        jMenuBar1.add(DongPhi);
 
         HeThong.setText("Hệ Thống");
         HeThong.add(jSeparator1);
@@ -552,16 +474,16 @@ public class ListKoala extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
         );
 
         pack();
@@ -587,7 +509,8 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)evt.getPath().getLastPathComponent();
 	if(selNode.isLeaf()){
-           LopX dslopa= new LopX(selNode.toString());
+           LopX dslopa= new LopX();
+           dslopa.setName(selNode.toString());
            Panel_GDChinh.add(selNode.toString(),dslopa);
            Panel_GDChinh.setSelectedComponent(dslopa);
             dslopa.center = Panel_GDChinh;
@@ -600,51 +523,9 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BActionPerformed
 
-    private void Menu_HSDatCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_HSDatCocActionPerformed
-        // TODO add your handling code here:
-        DSDatCoc dSDat= new DSDatCoc(this,rootPaneCheckingEnabled);
-        dSDat.setAlwaysOnTop(rootPaneCheckingEnabled);
-        dSDat.setLocation(420, 130);
-        dSDat.show();
-    
-    }//GEN-LAST:event_Menu_HSDatCocActionPerformed
-
     private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Panel_GDChinhStateChanged
 
     }//GEN-LAST:event_Panel_GDChinhStateChanged
-
-    private void Menu_DanhSachLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopMouseClicked
-        // TODO add your handling code here:
-        DSLop dslop1 = new DSLop();
-        Panel_GDChinh.add("Danh Sach Lop", dslop1);
-        Panel_GDChinh.setSelectedComponent(dslop1);
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
-    }//GEN-LAST:event_Menu_DanhSachLopMouseClicked
-
-    private void Menu_DanhSachLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopActionPerformed
-        // TODO add your handling code here:
-        DSLop dslop2 = new DSLop();
-        Panel_GDChinh.add("Danh Sach Lop", dslop2);
-        Panel_GDChinh.setSelectedComponent(dslop2);
-        dslop2.center = Panel_GDChinh;
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
-    }//GEN-LAST:event_Menu_DanhSachLopActionPerformed
-
-    private void Menu_ThemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemLopActionPerformed
-        // TODO add your handling code here:
-        ThemSuaLop themSuaLop= new ThemSuaLop(this, rootPaneCheckingEnabled);
-        themSuaLop.setLocation(420, 130);
-        themSuaLop.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_Menu_ThemLopActionPerformed
-
-    private void Menu_SuaLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_SuaLopActionPerformed
-        // TODO add your handling code here:
-    ThemSuaLop themSuaLop= new ThemSuaLop(this, rootPaneCheckingEnabled);
-        //themSuaLop.show();
-    
-        themSuaLop.setLocation(420, 130);
-        themSuaLop.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_Menu_SuaLopActionPerformed
 
     private void Menu_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemTaiKhoanActionPerformed
         // TODO add your handling code here:
@@ -659,29 +540,6 @@ public class ListKoala extends javax.swing.JFrame {
         taoTaiKhoan.setLocation(420, 130);
         taoTaiKhoan.show();
     }//GEN-LAST:event_Menu_SuaTaiKhoanActionPerformed
-
-    private void DongPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DongPhiActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_DongPhiActionPerformed
-
-    private void Menu_HSChuaHoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_HSChuaHoanThanhActionPerformed
-        // TODO add your handling code here:
-        DSChuaHoanThanhHocPhi ds= new DSChuaHoanThanhHocPhi(this, rootPaneCheckingEnabled);
-        ds.setAlwaysOnTop(rootPaneCheckingEnabled);
-        ds.center = Panel_GDChinh;
-        ds.setLocation(320, 130);
-        ds.show();
-    }//GEN-LAST:event_Menu_HSChuaHoanThanhActionPerformed
-
-    private void Menu_HSHoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_HSHoanThanhActionPerformed
-        // TODO add your handling code here:
-        DSDaDongTienHoc ds= new DSDaDongTienHoc(this, rootPaneCheckingEnabled);
-        ds.setAlwaysOnTop(rootPaneCheckingEnabled);
-        ds.center = Panel_GDChinh;
-        ds.setLocation(320, 130);
-        ds.show();
-    }//GEN-LAST:event_Menu_HSHoanThanhActionPerformed
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
         // TODO add your handling code here:
@@ -797,23 +655,14 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem B;
     private javax.swing.JMenuItem C;
     private javax.swing.JMenuItem D;
-    private javax.swing.JMenu DongPhi;
     private javax.swing.JMenu HeThong;
     private javax.swing.JMenuItem Menu_BackUp;
     private javax.swing.JMenuItem Menu_DangXuat;
-    private javax.swing.JMenuItem Menu_DanhSachLop;
     private javax.swing.JMenuItem Menu_DongBo;
-    private javax.swing.JMenuItem Menu_HSChuaHoanThanh;
-    private javax.swing.JMenuItem Menu_HSDatCoc;
-    private javax.swing.JMenuItem Menu_HSHoanThanh;
-    private javax.swing.JMenu Menu_QuanLy;
-    private javax.swing.JMenuItem Menu_SuaLop;
     private javax.swing.JMenuItem Menu_SuaTaiKhoan;
     private javax.swing.JMenu Menu_TaiKhoan;
-    private javax.swing.JMenuItem Menu_ThemLop;
     private javax.swing.JMenuItem Menu_ThemTaiKhoan;
     private javax.swing.JMenuItem Menu_Update;
-    private javax.swing.JMenuItem Menu_XoaLop;
     private javax.swing.JMenuItem Menu_thoat;
     private javax.swing.JTabbedPane Panel_GDChinh;
     private javax.swing.JPanel Panel_trungtam;
@@ -833,7 +682,6 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JPanel jPanel3;

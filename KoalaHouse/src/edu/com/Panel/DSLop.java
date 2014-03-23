@@ -6,23 +6,13 @@
 
 package edu.com.Panel;
 
-import DataBase.ConnectData;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.ThemSuaLop;
 import edu.com.upbang.EditTable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import edu.com.upbang.AddRowOfTable;
 
 /**
  *
@@ -198,6 +188,7 @@ public class DSLop extends javax.swing.JPanel {
         if(evt.getClickCount()==2){
             String tenlop=jTable4.getValueAt(jTable4.getSelectedRow(),0).toString();
             LopX aa = new LopX(tenlop);
+            aa.setName(tenlop);
             center.add(tenlop, aa);
             center.setSelectedComponent(aa);
             aa.center = center;

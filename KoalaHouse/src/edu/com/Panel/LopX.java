@@ -12,6 +12,7 @@ import edu.com.Dialog.NghiPhep;
 import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
 import edu.com.Dialog.trongmuon;
+import edu.com.ListKoala;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -80,7 +81,6 @@ public class LopX extends javax.swing.JPanel {
         xoa = new javax.swing.JLabel();
         chuyenlop = new javax.swing.JButton();
         loc = new javax.swing.JComboBox();
-        muon = new javax.swing.JButton();
         nghi = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         chitiet = new javax.swing.JLabel();
@@ -152,14 +152,6 @@ public class LopX extends javax.swing.JPanel {
             }
         });
 
-        muon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        muon.setText("Danh Sách Trông Muộn");
-        muon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                muonActionPerformed(evt);
-            }
-        });
-
         nghi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nghi.setText("Danh Sách Nghỉ Phép");
         nghi.addActionListener(new java.awt.event.ActionListener() {
@@ -198,11 +190,9 @@ public class LopX extends javax.swing.JPanel {
                 .addComponent(xoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chitiet)
-                .addGap(24, 24, 24)
-                .addComponent(chuyenlop)
-                .addGap(28, 28, 28)
-                .addComponent(muon)
-                .addGap(27, 27, 27)
+                .addGap(191, 191, 191)
+                .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(nghi)
                 .addGap(44, 44, 44)
                 .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,7 +214,6 @@ public class LopX extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(chuyenlop)
-                                    .addComponent(muon)
                                     .addComponent(nghi)
                                     .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,7 +261,7 @@ public class LopX extends javax.swing.JPanel {
 
     private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
         // TODO add your handling code here:
-        ThemHS hs = new ThemHS(null, true);
+        ThemHS hs = new ThemHS(ListKoala.frame, true);
         hs.setVisible(true);
         if(hs.getButton()){
             Vector vector = new Vector();
@@ -332,7 +321,7 @@ public class LopX extends javax.swing.JPanel {
         if(count==0){
             return;
         }
-        chuyenlop chuyen = new chuyenlop(null, true);
+        chuyenlop chuyen = new chuyenlop(null, true,getName());
         chuyen.setVisible(true);
         for(int i = model.getRowCount()-1;i>=0;i--){
             if((Boolean)model.getValueAt(i, 6)==true){
@@ -341,14 +330,6 @@ public class LopX extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_chuyenlopActionPerformed
-
-    private void muonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_muonActionPerformed
-        // TODO add your handling code here:
-        trongmuon muon = new trongmuon(null, true);
-        muon.setTitle("Danh sách trông muộn lớp "+this.getName());
-        muon.setVisible(true);
-       
-    }//GEN-LAST:event_muonActionPerformed
 
     private void nghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nghiActionPerformed
         // TODO add your handling code here:
@@ -419,7 +400,6 @@ public class LopX extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox loc;
     private javax.swing.JTable lopx;
-    private javax.swing.JButton muon;
     private javax.swing.JButton nghi;
     private javax.swing.JLabel sua;
     private javax.swing.JLabel them;

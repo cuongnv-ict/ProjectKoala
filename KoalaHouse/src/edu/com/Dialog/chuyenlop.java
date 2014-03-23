@@ -14,10 +14,11 @@ public class chuyenlop extends javax.swing.JDialog {
      * Creates new form chuyenlop
      */
     private Boolean button;
-    public chuyenlop(java.awt.Frame parent, boolean modal) {
+    public chuyenlop(java.awt.Frame parent, boolean modal,String NameClass) {
         super(parent, modal);
         button = false;
         initComponents();
+        Lop.setModel(new DataBase.DataTable().DanhSachLop(NameClass));
     }
 
     /**
@@ -32,7 +33,7 @@ public class chuyenlop extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         DongY = new javax.swing.JButton();
         HuyBo = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        Lop = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Chuyển lớp");
@@ -56,8 +57,8 @@ public class chuyenlop extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SUNSHINE1", "SUNSHINE2", "SUNSHINE3", "SUNSHINE3" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(81, 25));
+        Lop.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SUNSHINE1", "SUNSHINE2", "SUNSHINE3", "SUNSHINE3" }));
+        Lop.setPreferredSize(new java.awt.Dimension(81, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +75,7 @@ public class chuyenlop extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(Lop, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -83,7 +84,7 @@ public class chuyenlop extends javax.swing.JDialog {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Lop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HuyBo)
@@ -136,7 +137,7 @@ public class chuyenlop extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                chuyenlop dialog = new chuyenlop(new javax.swing.JFrame(), true);
+                chuyenlop dialog = new chuyenlop(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -150,7 +151,7 @@ public class chuyenlop extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DongY;
     private javax.swing.JButton HuyBo;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox Lop;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

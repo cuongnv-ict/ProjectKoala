@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -161,7 +163,7 @@ public class DataTable {
                 Object str[] = new Object[5];
                 str[0] = rs1.getString(4);
                 str[1] = rs1.getString(3);
-                str[2] = rs1.getString(7);
+                str[2] = rs1.getString(7).substring(0, 4);
                 str[3] = rs1.getString(6);        
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
@@ -699,7 +701,7 @@ public class DataTable {
          return model;
         
     }
-public ArrayList HocSinhA1(int ID){
+    public ArrayList HocSinhA1(int ID){
     ArrayList infoStudent = new ArrayList();
     String str[] = new String[9];
         try {
@@ -746,7 +748,7 @@ public ArrayList HocSinhA1(int ID){
         
         return infoStudent;
 }
-public ArrayList LateDay(int ID){
+    public ArrayList LateDay(int ID){
     int count = 0;
     ArrayList infoStudent = new ArrayList();
     String str[] = new String[365];
@@ -765,4 +767,19 @@ public ArrayList LateDay(int ID){
             }
         return infoStudent;
 }
+    //Tra ve danh sach lop de phuc vu cho viec chuyen lop cua hoc sinh
+    public DefaultComboBoxModel DanhSachLop(String NameClasses){
+      try {
+            Vector vector = new Vector();
+            rs1 = statement.executeQuery("select NameClass from classes where IsActive = 1 and NameClass != "+"\""+NameClasses+"\"");
+            while(rs1.next()){
+                 vector.add(rs1.getString(1));
+            }
+            DefaultComboBoxModel model = new DefaultComboBoxModel(vector);
+            return model;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return null;
+    }
 }
