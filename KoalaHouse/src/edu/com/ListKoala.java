@@ -12,6 +12,7 @@ import edu.com.Dialog.DSTaiKhoan;
 import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
 import edu.com.Dialog.TaoTaiKhoan;
+import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
 
 import edu.com.Panel.CacLoaiPhi;
@@ -36,24 +37,107 @@ import javax.swing.tree.TreePath;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeModel;
 
 /**
  *
  * @author nguyen van cuong
  */
 public class ListKoala extends javax.swing.JFrame {
-
+    DefaultMutableTreeNode nodex;    
     /**
      * Creates new form List
      */
     public static JFrame frame;
     public ListKoala() {
         initComponents();
+        taoTree();
         Panel_GDChinh.removeAll();
         HocSinhA a = new HocSinhA();
         Panel_GDChinh.add("Trung Tâm",Panel_trungtam);
         new CloseTabButton(Panel_GDChinh,0);
         frame = this;
+       
+    }// khoi tao
+    public void taoTree()// tao ra tree dung co so vao
+    {
+        
+        DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Koala House");
+        DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Bà Triệu");
+        DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+        DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_2");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_3");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_2");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_3");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_1");
+        treeNode3.add(treeNode4);
+        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_2");
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Hoàng Ngân");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Phan Kế Bính");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Nguyễn Huy Tự");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.setAutoscrolls(true);
+        jTree1.setMinimumSize(new java.awt.Dimension(100, 80));
+        jTree1.setPreferredSize(new java.awt.Dimension(300, 80));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            /*public void mouseReleased(java.awt.event.MouseEvent evt) {
+                JtreeMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtreeMouseClicked(evt);
+            }*/
+        });
+        jScrollPane1.setViewportView(jTree1);
        
     }
 
@@ -128,12 +212,18 @@ public class ListKoala extends javax.swing.JFrame {
         trinhdo.setText("len trinh do");
         tree.add(trinhdo);
 
-        jMenu1.setText("jMenu1");
+        jMenu1.setText("Thêm,Xóa");
 
-        A.setText("jMenuItem2");
+        A.setText("Thêm Lớp");
+        A.setToolTipText("");
+        A.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActionPerformed(evt);
+            }
+        });
         jMenu1.add(A);
 
-        B.setText("jMenuItem3");
+        B.setText("Thêm Khối");
         B.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BActionPerformed(evt);
@@ -141,10 +231,20 @@ public class ListKoala extends javax.swing.JFrame {
         });
         jMenu1.add(B);
 
-        C.setText("jMenuItem4");
+        C.setText("Thêm Trung Tâm");
+        C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CActionPerformed(evt);
+            }
+        });
         jMenu1.add(C);
 
-        D.setText("jMenuItem5");
+        D.setText("Xóa");
+        D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DActionPerformed(evt);
+            }
+        });
         jMenu1.add(D);
 
         tree.add(jMenu1);
@@ -157,79 +257,15 @@ public class ListKoala extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Koala House");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Bà Triệu");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_2");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_3");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_2");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_3");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_2");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_2");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Hoàng Ngân");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Phan Kế Bính");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Nguyễn Huy Tự");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setAutoscrolls(true);
         jTree1.setMinimumSize(new java.awt.Dimension(100, 80));
         jTree1.setPreferredSize(new java.awt.Dimension(300, 80));
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTree1MouseReleased(evt);
+                JtreeMouseReleased(evt);
             }
-        });
-        jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTree1ValueChanged(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtreeMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTree1);
@@ -272,7 +308,7 @@ public class ListKoala extends javax.swing.JFrame {
             .addGroup(Panel_trungtamLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         Panel_GDChinh.addTab("Trung Tâm", Panel_trungtam);
@@ -491,41 +527,70 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseReleased
         // TODO add your handling code here:
-        if(evt.isPopupTrigger()){
-            JTree node = (JTree)evt.getSource();
-        TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
-        if(path==null){
-            return;
-        }
-        //node.setSelectionPath(path);
-        DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)path.getLastPathComponent();
-            JOptionPane.showMessageDialog(null, (String)selNode.getUserObject());
-            tree.show(this,evt.getXOnScreen()-this.getX(),evt.getYOnScreen()-this.getY());
-            
-        }
+     
+      
     }//GEN-LAST:event_jTree1MouseReleased
-
-    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
-        // TODO add your handling code here:
-        DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)evt.getPath().getLastPathComponent();
-	if(selNode.isLeaf()){
-           LopX dslopa= new LopX();
-           dslopa.setName(selNode.toString());
-           Panel_GDChinh.add(selNode.toString(),dslopa);
-           Panel_GDChinh.setSelectedComponent(dslopa);
-            dslopa.center = Panel_GDChinh;
-            new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
-            
-        }
-    }//GEN-LAST:event_jTree1ValueChanged
 
     private void BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActionPerformed
         // TODO add your handling code here:
+       ThemKhoi khoi=new ThemKhoi(this, true,"Tên Khối");
+       khoi.setAlwaysOnTop(true);
+       khoi.show();
+       String a=null;
+       if(!nodex.getFirstChild().isLeaf())
+       {
+        a=khoi.getTenKhoi();
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        model.insertNodeInto(new DefaultMutableTreeNode(a),nodex , nodex.getChildCount());
+        
+       }
     }//GEN-LAST:event_BActionPerformed
 
-    private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Panel_GDChinhStateChanged
+    private void Menu_HSDatCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_HSDatCocActionPerformed
+        // TODO add your handling code here:
+        DSDatCoc dSDat= new DSDatCoc(this,rootPaneCheckingEnabled);
+        dSDat.setAlwaysOnTop(rootPaneCheckingEnabled);
+        dSDat.setLocation(420, 130);
+        dSDat.show();
+    
+    }//GEN-LAST:event_Menu_HSDatCocActionPerformed
 
-    }//GEN-LAST:event_Panel_GDChinhStateChanged
+    private void Menu_DanhSachLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopMouseClicked
+        // TODO add your handling code here:
+        DSLop dslop1 = new DSLop();
+        Panel_GDChinh.add("Danh Sach Lop", dslop1);
+        Panel_GDChinh.setSelectedComponent(dslop1);
+        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+    }//GEN-LAST:event_Menu_DanhSachLopMouseClicked
+
+    private void Menu_DanhSachLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopActionPerformed
+        // TODO add your handling code here:
+        DSLop dslop2 = new DSLop();
+        Panel_GDChinh.add("Danh Sach Lop", dslop2);
+        Panel_GDChinh.setSelectedComponent(dslop2);
+        dslop2.center = Panel_GDChinh;
+        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+    }//GEN-LAST:event_Menu_DanhSachLopActionPerformed
+
+    private void Menu_ThemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemLopActionPerformed
+        // TODO add your handling code here:
+        ThemSuaLop themSuaLop= new ThemSuaLop(this, rootPaneCheckingEnabled);
+        themSuaLop.setLocation(420, 130);
+        themSuaLop.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_Menu_ThemLopActionPerformed
+
+    private void Menu_SuaLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_SuaLopActionPerformed
+        // TODO add your handling code here:
+    ThemSuaLop themSuaLop= new ThemSuaLop(this, rootPaneCheckingEnabled);
+        //themSuaLop.show();
+    
+        themSuaLop.setLocation(420, 130);
+        themSuaLop.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_Menu_SuaLopActionPerformed
+
+    private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {                                           
+
+    }                                          
 
     private void Menu_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemTaiKhoanActionPerformed
         // TODO add your handling code here:
@@ -543,36 +608,72 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
         // TODO add your handling code here:
+        int a=0;    
+        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
+            {
+                if("Danh Sách HS".equals(Panel_GDChinh.getTitleAt(i)))
+                    a+=1;
+            }
+        if(a==0)
+        {
         DSHS dshs = new DSHS();
         Panel_GDChinh.add("Danh Sách HS", dshs);
         Panel_GDChinh.setSelectedComponent(dshs);
         dshs.center = Panel_GDChinh;
         new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+        int a=0;    
+        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
+            {
+                if("Danh Sách Lớp".equals(Panel_GDChinh.getTitleAt(i)))
+                    a+=1;
+            }
+        if(a==0)
+        {
         DSLop dsl = new DSLop();
         Panel_GDChinh.add("Danh Sách Lớp",dsl);
         Panel_GDChinh.setSelectedComponent(dsl);
         dsl.center = Panel_GDChinh;
         new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
         // TODO add your handling code here:
+        int a=0;    
+        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
+            {
+                if("Các Loại Phí".equals(Panel_GDChinh.getTitleAt(i)))
+                    a+=1;
+            }
+        if(a==0)
+        {
         CacLoaiPhi loaiphi = new CacLoaiPhi();
         Panel_GDChinh.add("Các Loại Phí", loaiphi);
         Panel_GDChinh.setSelectedComponent(loaiphi);
         new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
     }//GEN-LAST:event_jLabel24MouseClicked
 
     private void jLabel26MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseClicked
         // TODO add your handling code here:
+        int a=0;    
+        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
+            {
+                if("Danh Sách Nợ".equals(Panel_GDChinh.getTitleAt(i)))
+                    a+=1;
+            }
+        if(a==0)
+        {
         DSNo dsno = new DSNo();
        Panel_GDChinh.add("Danh Sách Nợ",dsno);
        Panel_GDChinh.setSelectedComponent(dsno);
        dsno.center =Panel_GDChinh;
        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
     }//GEN-LAST:event_jLabel26MouseClicked
 
     private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
@@ -614,6 +715,85 @@ public class ListKoala extends javax.swing.JFrame {
     private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel28MouseClicked
+// xu ly su kien kick chuot vao tree
+    private void JtreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseClicked
+        // TODO add your handling code here:
+        JTree node = (JTree)evt.getSource();
+        TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
+        node.setSelectionPath(path);
+        DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)path.getLastPathComponent();
+        if(selNode.isLeaf()){
+            int a=0;
+            LopX dslopa= new LopX(selNode.toString());
+            for(int i=0;i<Panel_GDChinh.getTabCount();i++)
+            {
+                if(selNode.toString().equals(Panel_GDChinh.getTitleAt(i)))
+                    a+=1;
+            }
+            if(a==0)
+            {
+            Panel_GDChinh.add(selNode.toString(),dslopa);
+            Panel_GDChinh.setSelectedComponent(dslopa);
+            dslopa.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+            }
+        }
+    }//GEN-LAST:event_JtreeMouseClicked
+// xu ly su kien chuot phai
+    private void JtreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseReleased
+        // TODO add your handling code here:
+        if(evt.isPopupTrigger()){
+            JTree node = (JTree)evt.getSource();
+            TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
+            if(path==null){
+                return;
+            }
+            node.setSelectionPath(path);
+            nodex=(DefaultMutableTreeNode)path.getLastPathComponent();
+            tree.show(this,evt.getXOnScreen()-this.getX(),evt.getYOnScreen()-this.getY());
+            
+        }
+    }//GEN-LAST:event_JtreeMouseReleased
+/*
+    private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Panel_GDChinhStateChanged
+
+    }//GEN-LAST:event_Panel_GDChinhStateChanged
+*/
+    private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
+        // TODO add your handling code here:
+       ThemSuaLop lop=new ThemSuaLop(this, true);
+       lop.setAlwaysOnTop(true);
+       lop.show();
+       String a=null;
+       if(lop.getButton())
+       {
+        a=lop.getTenLop();
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        model.insertNodeInto(new DefaultMutableTreeNode(a),nodex , nodex.getChildCount());
+       }
+       
+    }//GEN-LAST:event_AActionPerformed
+
+    private void DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DActionPerformed
+        // TODO add your handling code here:
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        model.removeNodeFromParent(nodex);
+    }//GEN-LAST:event_DActionPerformed
+
+    private void CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CActionPerformed
+        // TODO add your handling code here:
+       ThemKhoi khoi=new ThemKhoi(this, true,"Ten Trung Tâm");
+       khoi.setAlwaysOnTop(true);
+       khoi.show();
+       String a=null;
+       if(!nodex.getFirstChild().isLeaf())
+       {
+        a=khoi.getTenKhoi();
+        DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+        model.insertNodeInto(new DefaultMutableTreeNode(a),nodex , nodex.getChildCount());
+        
+       }
+    }//GEN-LAST:event_CActionPerformed
 
     /**
      * @param args the command line arguments
@@ -735,4 +915,4 @@ class CloseIcon implements Icon {
   public int getIconHeight() {
     return 17;
   }
-}
+ }

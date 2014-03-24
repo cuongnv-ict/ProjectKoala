@@ -6,13 +6,24 @@
 
 package edu.com.Panel;
 
+import DataBase.ConnectData;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.ThemSuaLop;
 import edu.com.upbang.EditTable;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import edu.com.upbang.AddRowOfTable;
+import java.awt.Toolkit;
 
 /**
  *
@@ -131,6 +142,7 @@ public class DSLop extends javax.swing.JPanel {
         // TODO add your handling code here:
         ThemSuaLop lop = new ThemSuaLop(null,true);
         lop.setVisible(true);
+        lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         Vector vector = new Vector();
         if(lop.getButton()){
             vector.add(lop.getTenLop());
@@ -170,6 +182,7 @@ public class DSLop extends javax.swing.JPanel {
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemSuaLop lop = new ThemSuaLop(null, true, vec);
         lop.setVisible(true);
+        lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         if(lop.getButton()){
             model.setValueAt(lop.getTenLop(), row, 0);
             model.setValueAt(lop.getKhoiHoc(), row, 1);

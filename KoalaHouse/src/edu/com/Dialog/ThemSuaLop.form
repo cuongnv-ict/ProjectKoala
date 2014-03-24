@@ -110,14 +110,14 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ten" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="ten" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="trinhdo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="giaovien" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="giaovien" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ky" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>

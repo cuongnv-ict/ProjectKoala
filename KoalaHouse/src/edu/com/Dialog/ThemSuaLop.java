@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import java.awt.Toolkit;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Vector;
@@ -21,6 +22,8 @@ public class ThemSuaLop extends javax.swing.JDialog {
     public ThemSuaLop(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+
     }
      public ThemSuaLop(java.awt.Frame parent, boolean modal,Vector vector) {
         super(parent, modal);
@@ -42,7 +45,8 @@ public class ThemSuaLop extends javax.swing.JDialog {
         setSelectComboBox(E_year, B_date[0]);
         DongY.setText("Chỉnh sửa");
         title.setText("Chỉnh sửa thông tin lớp");
-    }
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+     }
     private void setSelectComboBox(JComboBox x,Object obj){
         for(int i =0;i<x.getItemCount();i++){
             if(x.getItemAt(i).toString().equalsIgnoreCase(obj.toString())){
@@ -253,13 +257,13 @@ public class ThemSuaLop extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(ten, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ten, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(trinhdo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(giaovien, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(giaovien, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(ky, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

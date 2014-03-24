@@ -150,9 +150,15 @@ public class DangNhapVao extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ListKoala center = new ListKoala();
-        dialog.setVisible(false);
+        this.setVisible(false);
         center.setVisible(true);
         this.dispose();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

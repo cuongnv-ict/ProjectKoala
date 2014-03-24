@@ -43,17 +43,21 @@
         </MenuItem>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenu1"/>
+            <Property name="text" type="java.lang.String" value="Th&#xea;m,X&#xf3;a"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="A">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem2"/>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m L&#x1edb;p"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="B">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem3"/>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m Kh&#x1ed1;i"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
@@ -61,13 +65,19 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="C">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem4"/>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m Trung T&#xe2;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="D">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem5"/>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -166,7 +176,6 @@
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -243,9 +252,6 @@
               <SubComponents>
                 <Component class="javax.swing.JTree" name="jTree1">
                   <Properties>
-                    <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                      <TreeModel code="Koala House&#xa; Koala House B&#xe0; Tri&#x1ec7;u&#xa;  N&#x1eae;NG MAI (SUNSHINE)&#xa;   SUNSHINE_1&#xa;   SUNSHINE_2&#xa;   SUNSHINE_3&#xa;  T&#x1ed4; ONG (BEEHIVE)&#xa;   BEEHIVE_1&#xa;   BEEHIVE_2&#xa;   BEEHIVE_3&#xa;  T&#x1ed4; K&#xc9;N (CHRYSALIS)&#xa;   CHRYSALIS_1&#xa;   CHRYSALIS_2&#xa;  M&#x1eaa;U GI&#xc1;O (KINDERGARTEN)&#xa;   KINDERGARTEN_1&#xa;   KINDERGARTEN_2&#xa; Koala House Ho&#xe0;ng Ng&#xe2;n&#xa;   N&#x1eae;NG MAI (SUNSHINE)&#xa;   T&#x1ed4; ONG (BEEHIVE)&#xa;   T&#x1ed4; K&#xc9;N (CHRYSALIS)&#xa;   M&#x1eaa;U GI&#xc1;O (KINDERGARTEN)&#xa; Koala House Phan K&#x1ebf; B&#xed;nh&#xa;   N&#x1eae;NG MAI (SUNSHINE)&#xa;   T&#x1ed4; ONG (BEEHIVE)&#xa;   T&#x1ed4; K&#xc9;N (CHRYSALIS)&#xa;   M&#x1eaa;U GI&#xc1;O (KINDERGARTEN)&#xa; Koala House Nguy&#x1ec5;n Huy T&#x1ef1;&#xa;   N&#x1eae;NG MAI (SUNSHINE)&#xa;   T&#x1ed4; ONG (BEEHIVE)&#xa;   T&#x1ed4; K&#xc9;N (CHRYSALIS)&#xa;   M&#x1eaa;U GI&#xc1;O (KINDERGARTEN)"/>
-                    </Property>
                     <Property name="autoscrolls" type="boolean" value="true"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[100, 80]"/>
@@ -255,8 +261,8 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTree1MouseReleased"/>
-                    <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jTree1ValueChanged"/>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JtreeMouseReleased"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JtreeMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -310,7 +316,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel14" min="-2" pref="495" max="-2" attributes="0"/>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
+                              <EmptySpace pref="39" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
