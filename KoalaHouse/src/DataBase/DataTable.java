@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -29,11 +30,13 @@ public class DataTable {
     Object [][] rowColumn;
     public DataTable(){
         ConnectData c = new ConnectData();
-        connect = c.connectionDatabase();
+        
         try {
+            connect = c.connectionDatabase();
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, null, "Đăng nhập không thành công !!! \n Xem lại user name hoặc "
+                    + "password", JOptionPane.ERROR_MESSAGE);
         }
     }
     public void BangDanhSachLop(JTable table){

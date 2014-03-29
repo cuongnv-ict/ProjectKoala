@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +18,21 @@ import java.util.logging.Logger;
  */
 public class ConnectData {
     private Connection conn;
-    private String user = "root";
+    private static String user = "root";
     private String url = "jdbc:mysql://localhost/projectkoala";
-    private String password = "hoalan93";
+    private static String password = "baobffka2010";
+    
+    public void setUrl(String strUrl) {
+        this.url = strUrl;
+    }
+    
+    public void setUser(String strUser) {
+        this.user = strUser;
+    }
+    
+    public void setPassword(String strPass) {
+        this.password = strPass;
+    }
     
     public Connection connectionDatabase() {
         try {       
@@ -27,10 +40,14 @@ public class ConnectData {
             conn = DriverManager.getConnection(url + "?user=" + user + "&password=" + password); 
             Statement statement = conn.createStatement();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConnectData.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ConnectData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Đăng nhập không thành công !!! \n Xem lại user name hoặc password", "ERROR !!!", 
+                    JOptionPane.ERROR_MESSAGE);
             return null;
         }catch (SQLException ex) {
-                Logger.getLogger(ConnectData.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ConnectData.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Đăng nhập không thành công !!! \n Xem lại user name hoặc password", "ERROR !!!", 
+                        JOptionPane.ERROR_MESSAGE);
                 return null;
             }
         return conn;

@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import DataBase.ConnectData;
 import edu.com.ListKoala;
 
 /**
@@ -18,6 +19,7 @@ public class DangNhapVao extends javax.swing.JDialog {
     public DangNhapVao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -149,6 +151,12 @@ public class DangNhapVao extends javax.swing.JDialog {
     }//GEN-LAST:event_Checkbox_remembermeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String userName = getTfUserName();
+        String password = getPfPassword();
+        ConnectData connect = new ConnectData();
+        connect.setUser(userName);
+        connect.setPassword(password);
+        
         ListKoala center = new ListKoala();
         this.setVisible(false);
         center.setVisible(true);
@@ -215,4 +223,20 @@ public class DangNhapVao extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
+
+    public String getTfUserName() {
+        return Textfield_userName.getText();
+    }
+    
+    public String getPfPassword() {
+        return Textfield_password.getText();
+    }
+    
+    public void setTfUserName(String str) {
+        this.Textfield_userName.setText(str);
+    }
+    
+    public void setPfPassword(String str) {
+        this.Textfield_password.setText(str);
+    }
 }

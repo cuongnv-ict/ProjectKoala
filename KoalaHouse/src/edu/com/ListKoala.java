@@ -27,8 +27,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
@@ -36,7 +41,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JViewport;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeModel;
@@ -47,6 +56,15 @@ import javax.swing.tree.TreeModel;
  */
 public class ListKoala extends javax.swing.JFrame {
     DefaultMutableTreeNode nodex;    
+    private JTable table;
+    
+    public void setTable(JTable table) {
+        this.table = table;
+    }
+    
+    public JTable getTable() {
+        return this.table;
+    }
     /**
      * Creates new form List
      */
@@ -589,7 +607,42 @@ public class ListKoala extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_SuaLopActionPerformed
 
     private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {                                           
-
+        table = new JTable();
+        JPanel panel, itemPanel;
+        Component component;
+        Component[] components, itemComponents;
+        Component item;
+        JScrollPane scrollPane;
+        int selectedIndex = Panel_GDChinh.getSelectedIndex();
+        System.out.println("Index: " + selectedIndex);
+        if(selectedIndex >= 0) {
+            component = Panel_GDChinh.getComponentAt(selectedIndex);
+            System.err.println(component.toString());
+            if(component instanceof JPanel) {
+                System.out.println("OK");
+                panel = (JPanel) component;
+                components = panel.getComponents();
+                for(int i = 0 ; i < components.length ; i++) {
+                    item = components[i];
+                    if(item instanceof JPanel) {
+                        System.out.println("NGON");
+                        itemPanel = (JPanel) item;
+                        itemComponents = itemPanel.getComponents();
+                        for(int j = 0 ; j < itemComponents.length ; j++) {
+                            item = itemComponents[j];
+                            if(item instanceof JScrollPane) {
+                                System.out.println("DM NGON VAI");
+                                scrollPane = (JScrollPane) item;
+                                JViewport viewPort = scrollPane.getViewport();
+                                table = (JTable) viewPort.getView();
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("DM L'");
+        }
     }                                          
 
     private void Menu_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemTaiKhoanActionPerformed
@@ -597,6 +650,7 @@ public class ListKoala extends javax.swing.JFrame {
         TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this,rootPaneCheckingEnabled);
         taoTaiKhoan.setLocation(420, 130);
         taoTaiKhoan.show();
+        
     }//GEN-LAST:event_Menu_ThemTaiKhoanActionPerformed
 
     private void Menu_SuaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_SuaTaiKhoanActionPerformed
@@ -713,7 +767,21 @@ public class ListKoala extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_thoatActionPerformed
 
     private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
-        // TODO add your handling code here:
+        //JTextField headderFiled = new JTextField("Danh sach hoc sinh");
+        int selectedInDex = Panel_GDChinh.getSelectedIndex();
+        String label = Panel_GDChinh.getTitleAt(selectedInDex);
+        MessageFormat headderField = new MessageFormat(label);
+        MessageFormat footerField = null;
+        try {
+            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null);
+            if(complete) {
+                JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (PrinterException ex) {
+            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel28MouseClicked
 // xu ly su kien kick chuot vao tree
     private void JtreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseClicked

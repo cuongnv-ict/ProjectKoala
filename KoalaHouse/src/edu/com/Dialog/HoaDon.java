@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.com.Dialog;
 
 import edu.com.Panel.HocSinhA;
@@ -11,6 +10,7 @@ import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -19,13 +19,15 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Pham The Quyen
  */
-public class HoaDon extends javax.swing.JDialog implements Printable{
+public class HoaDon extends javax.swing.JDialog implements Printable {
+
     public static int idhs;
     public static String tenHS;
     public static String tenNguoiDaiDien;
@@ -35,7 +37,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private DefaultTableModel model;
     private boolean button = false;
 
-    
     /**
      * Creates new form NewJDialog
      */
@@ -50,24 +51,26 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         new DataBase.DataTable().BangHocPhiCuaHocSinh(1, jTable1);
         model = (DefaultTableModel) jTable1.getModel();
         int k = model.getRowCount();
-        for(int i = 0;i<k;i++)
+        for (int i = 0; i < k; i++) {
             model.removeRow(0);
+        }
         EditTable edit = new EditTable();
         ArrayList data = new ArrayList();
-        if(HocSinhA.DSphi != null){
-        data = edit.getAllRow(HocSinhA.DSphi);
-        for(int i=0;i<data.size();i++){
-            Vector v= new Vector();
-            v = (Vector) data.get(i);
-            edit.addRowOfTable(jTable1, v);
-        }
+        if (HocSinhA.DSphi != null) {
+            data = edit.getAllRow(HocSinhA.DSphi);
+            for (int i = 0; i < data.size(); i++) {
+                Vector v = new Vector();
+                v = (Vector) data.get(i);
+                edit.addRowOfTable(jTable1, v);
+            }
         }
         int Total = 0;
-        for(int i=0;i<model.getRowCount();i++){
+        for (int i = 0; i < model.getRowCount(); i++) {
             Total += Integer.parseInt(model.getValueAt(i, 3).toString());
         }
         TongTien.setText(String.valueOf(Total));
     }
+
     public boolean getButton()//lay xem la create hay cancle
     {
         return button;
@@ -600,15 +603,15 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         button = true;
-        HoaDon.sott ++;
+        HoaDon.sott++;
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Print Details");
         jButton1.setVisible(false);
         pj.setPrintable(this);
-        
+
         boolean toPrint = pj.printDialog();
-        
-        if(toPrint) {
+
+        if (toPrint) {
             try {
                 pj.print();
                 jButton1.setVisible(true);
@@ -714,16 +717,24 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JTextField tenLop;
     // End of variables declaration//GEN-END:variables
 public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterException {
-        if(page > 0) {
+        JLabel icon = null;
+        if (page > 0) {
             return Printable.NO_SUCH_PAGE;
         }
-        
-        Graphics2D g2d = (Graphics2D)grphcs;
+
+        Graphics2D g2d = (Graphics2D) grphcs;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         g2d.scale(0.95, 1);
-        
-        this.print(grphcs);
-        
+
+        //this.print(grphcs);
+        Object components = avatar.getComponent(0);
+        if (components instanceof JLabel) {
+            icon = (JLabel) components;
+            //grphcs.draw(icon, 0, 21, null);
+        } else {
+            System.out.println("dm, khong phai");
+        }
+        //grphcs.drawImage(icon, 0, 21, null);
         return Printable.PAGE_EXISTS;
     }
 }
