@@ -37,6 +37,7 @@ public class ConnectData {
     public Connection connectionDatabase() {
         try {       
             Class.forName("com.mysql.jdbc.Driver");
+            System.out.println(user + "  " + password);
             conn = DriverManager.getConnection(url + "?user=" + user + "&password=" + password); 
             Statement statement = conn.createStatement();
         } catch (ClassNotFoundException ex) {

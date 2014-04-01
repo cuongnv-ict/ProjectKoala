@@ -4,6 +4,14 @@
  */
 package edu.com.Dialog;
 
+import DataBase.ConnectData;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Venus
@@ -40,7 +48,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         Textfield_email = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         Textfield_SDT = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbtOK = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -77,10 +85,15 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
 
         Textfield_SDT.setText("SoDT");
 
-        jButton1.setText("Ok");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbtOK.setText("Ok");
+        jbtOK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jbtOKMouseClicked(evt);
+            }
+        });
+        jbtOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtOKActionPerformed(evt);
             }
         });
 
@@ -97,10 +110,10 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtOK, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +181,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jbtOK)
                     .addComponent(jButton2))
                 .addGap(51, 51, 51))
         );
@@ -180,15 +193,77 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_Textfield_maNVActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jbtOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtOKMouseClicked
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jbtOKMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
+        String user;
+        String password;
+        String rePassword;
+        String id;
+        String email;
+        String phoneNumber;
+        
+        id = Textfield_maNV.getText();
+        user = Textfield_tenDangNhap.getText();
+        password = TextField_MatKhau.getText();
+        rePassword = Textfield_XacNhanMK.getText();
+        email = Textfield_email.getText();
+        phoneNumber = Textfield_SDT.getText();
+        
+        // Kiem tra xem co truong nao bi bo trong khong.
+        if(id == null || user == null || password == null || rePassword == null || email == null || phoneNumber == null) {
+            JOptionPane.showMessageDialog(null, "Bạn không được bỏ sót trường nào !", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+            Textfield_maNV.requestFocus();
+        } else {
+        
+            // Kiem tra password va rePassword 
+            if(!password.equals(rePassword)) {
+            JOptionPane.showMessageDialog(null, "Xác nhận mật khẩu không chính xác. Vui lòng nhập lại", "ERROR !!!", 
+                    JOptionPane.ERROR_MESSAGE);
+            TextField_MatKhau.requestFocus();
+            } else {
+                try {
+                    // Them nguoi dung vao database.
+                    ConnectData connectData = new ConnectData();
+                    Connection connect;
+                    
+                    connect = connectData.connectionDatabase();
+                    Statement statements = connect.createStatement();
+                    
+                    String sqlCommnand = "INSERT INTO projectkoala.accounts(Id, Faculties_Id, FullName, UserName, PassWord, Emai, "
+                            + "PhoneNumber)" + " VALUES ('" + id + "', '1', '" + user + "', '" + user +  "', '" + password + 
+                            "', '" + email + "', '" + phoneNumber + "');";
+                    System.out.println(sqlCommnand);
+                    statements.executeUpdate(sqlCommnand);
+                    
+                    // tao tai khoan nguoi dung
+                    sqlCommnand = "CREATE USER '" + user + "'@'localhost' IDENTIFIED BY '" + password + "';";
+                    
+                    statements.execute(sqlCommnand);
+                    
+                    // grand toan quyen cho user
+                    sqlCommnand = "GRANT ALL ON *.* TO '" + user + "'@'localhost';";
+                    statements.execute(sqlCommnand);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+                    // Neu khong thanh cong thi xoa du lieu da them vao truoc do de tranh bi trung lap
+                    
+                    ex.printStackTrace();
+                } finally {
+                    
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_jbtOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,7 +313,6 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
     private javax.swing.JTextField Textfield_email;
     private javax.swing.JTextField Textfield_maNV;
     private javax.swing.JTextField Textfield_tenDangNhap;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -247,5 +321,6 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton jbtOK;
     // End of variables declaration//GEN-END:variables
 }
