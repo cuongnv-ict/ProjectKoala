@@ -252,10 +252,23 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     // grand toan quyen cho user
                     sqlCommnand = "GRANT SELECT, INSERT ON projectkoala.* TO '" + user + "'@'localhost';";
                     statements.execute(sqlCommnand);
+                    JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
                 } catch (SQLException ex) {
                     //JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!", JOptionPane.ERROR_MESSAGE);
                     //ex.printStackTrace();
                     System.out.println(ex.toString());
+                    // Neu trung voi ma khac cua nguoi dung
+                    if(ex.toString().equals("com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException:"
+                            + " Duplicate entry '789-1' for key 'PRIMARY'")) {
+                        JOptionPane.showMessageDialog(this, "Bị trùng mã nhân viên", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                    // Neu ma nhan vien khong dung cu phap
+                    if(ex.toString().equals("java.sql.SQLException: Incorrect integer value: " + "'" +id + "'" +
+                            " for column 'Id' at row 1")) {
+                        JOptionPane.showMessageDialog(this, "Mã nhân viên sai cú pháp", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
                     // Neu khong thanh cong thi xoa du lieu da them vao truoc do de tranh bi trung lap
                     if(ex.toString().equals("com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: "
                             + "Access denied; you need (at least one of) the CREATE USER privilege(s) for this operation")) {
@@ -263,11 +276,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                                 JOptionPane.ERROR_MESSAGE);
                         dispose();
                         //System.out.println("");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!",
-                                JOptionPane.ERROR_MESSAGE);
                     }
-                    
                 } finally {
                     System.out.println("OK");
                 }
