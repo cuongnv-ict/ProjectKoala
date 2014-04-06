@@ -250,15 +250,26 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     statements.execute(sqlCommnand);
                     
                     // grand toan quyen cho user
-                    sqlCommnand = "GRANT ALL ON *.* TO '" + user + "'@'localhost';";
+                    sqlCommnand = "GRANT SELECT, INSERT ON projectkoala.* TO '" + user + "'@'localhost';";
                     statements.execute(sqlCommnand);
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+                    //ex.printStackTrace();
+                    System.out.println(ex.toString());
                     // Neu khong thanh cong thi xoa du lieu da them vao truoc do de tranh bi trung lap
+                    if(ex.toString().equals("com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: "
+                            + "Access denied; you need (at least one of) the CREATE USER privilege(s) for this operation")) {
+                        JOptionPane.showMessageDialog(this, "Bạn không đủ quyền tạo thêm tài khoản mới !!", "ERROR", 
+                                JOptionPane.ERROR_MESSAGE);
+                        dispose();
+                        //System.out.println("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                     
-                    ex.printStackTrace();
                 } finally {
-                    
+                    System.out.println("OK");
                 }
             }
         }
