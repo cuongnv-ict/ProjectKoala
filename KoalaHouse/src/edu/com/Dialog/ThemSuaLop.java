@@ -5,6 +5,7 @@
 package edu.com.Dialog;
 
 import DataBase.DataTable;
+import edu.com.ThongTin;
 import java.awt.TextField;
 import java.awt.Toolkit;
 import java.sql.Date;
@@ -29,6 +30,8 @@ public class ThemSuaLop extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+        trungtam.setSelectedIndex(ThongTin.trungtam-1);
+        trungtam.setEnabled(false);
 
     }
      public ThemSuaLop(java.awt.Frame parent, boolean modal,Vector vector) {
@@ -49,7 +52,6 @@ public class ThemSuaLop extends javax.swing.JDialog {
         setSelectComboBox(E_day, B_date[2]);
         setSelectComboBox(E_month, B_date[1]);
         setSelectComboBox(E_year, B_date[0]);
-        setSelectComboBox(trungtam, vector.get(1));
         DongY.setText("Chỉnh sửa");
         title.setText("Chỉnh sửa thông tin lớp");
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
@@ -58,6 +60,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
         for(int i =0;i<x.getItemCount();i++){
             if(x.getItemAt(i).toString().equalsIgnoreCase(obj.toString())){
               x.setSelectedIndex(i);
+              trungtam.setEnabled(false);
               break;
             } 
         }     

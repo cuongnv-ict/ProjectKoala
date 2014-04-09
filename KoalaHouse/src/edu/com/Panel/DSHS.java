@@ -3,13 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.com.Panel;
 
 import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
+import edu.com.Dialog.chuyenlop;
+import edu.com.XuLy;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.List;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -21,11 +29,20 @@ public class DSHS extends javax.swing.JPanel {
      * Creates new form DSHS
      */
     public JTabbedPane center;
+    ArrayList<Integer> id_students;
+    int[] arrRows;
+
     public DSHS() {
         initComponents();
-        new DataBase.DataTable().BangDanhSachHocSinh(DSHS);
-        Integer count = new Integer(DSHS.getRowCount());
-        Count.setText(count.toString()); 
+        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
+        id_students = new ArrayList<Integer>();
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+        arrRows = null;
     }
 
     /**
@@ -37,11 +54,46 @@ public class DSHS extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Panel_DSHS = new javax.swing.JPanel();
+        NghiHoc = new javax.swing.JPopupMenu();
+        KhoiPhuc = new javax.swing.JMenuItem();
+        Xoa = new javax.swing.JMenuItem();
+        RaTruong = new javax.swing.JPopupMenu();
+        XoaRaTruong = new javax.swing.JMenuItem();
         jScrollPane8 = new javax.swing.JScrollPane();
         DSHS = new javax.swing.JTable();
         Count = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        LoaiHS = new javax.swing.JComboBox();
+
+        NghiHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NghiHocMouseClicked(evt);
+            }
+        });
+
+        KhoiPhuc.setText("Khôi phục");
+        KhoiPhuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KhoiPhucActionPerformed(evt);
+            }
+        });
+        NghiHoc.add(KhoiPhuc);
+
+        Xoa.setText("Xóa");
+        Xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                XoaActionPerformed(evt);
+            }
+        });
+        NghiHoc.add(Xoa);
+
+        XoaRaTruong.setText("Xóa");
+        XoaRaTruong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                XoaRaTruongActionPerformed(evt);
+            }
+        });
+        RaTruong.add(XoaRaTruong);
 
         DSHS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,6 +110,9 @@ public class DSHS extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DSHSMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                DSHSMouseReleased(evt);
+            }
         });
         jScrollPane8.setViewportView(DSHS);
 
@@ -67,87 +122,162 @@ public class DSHS extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Tổng Số HS:");
 
-        javax.swing.GroupLayout Panel_DSHSLayout = new javax.swing.GroupLayout(Panel_DSHS);
-        Panel_DSHS.setLayout(Panel_DSHSLayout);
-        Panel_DSHSLayout.setHorizontalGroup(
-            Panel_DSHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Panel_DSHSLayout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Count, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(Panel_DSHSLayout.createSequentialGroup()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 1099, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        Panel_DSHSLayout.setVerticalGroup(
-            Panel_DSHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Panel_DSHSLayout.createSequentialGroup()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addGroup(Panel_DSHSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(Count, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        LoaiHS.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Học sinh đang học", "Học sinh nghỉ học", "Học sinh ra trường" }));
+        LoaiHS.setMinimumSize(new java.awt.Dimension(114, 25));
+        LoaiHS.setPreferredSize(new java.awt.Dimension(114, 25));
+        LoaiHS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoaiHSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 4417, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 1659, Short.MAX_VALUE)
-                    .addComponent(Panel_DSHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1659, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(Count, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(LoaiHS, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1107, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 348, Short.MAX_VALUE)
-                    .addComponent(Panel_DSHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 349, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Count, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+    /*
+     * setID dung de chuyen id hoc sinh sang so thu tu, từ số thứ tự thì chỉ số i-1 sẽ giúp truy suất trong mang id
+     * giá trị Id_student tương ứng.
+     */
 
     private void DSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHSMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==2){
+        if (evt.getClickCount() == 2 && LoaiHS.getSelectedIndex() == 0) {
             //map cac truong
-            String idStudent = DSHS.getValueAt(DSHS.getSelectedRow(), 0).toString();
-            int id = Integer.parseInt(idStudent);
-            DataTable a = new DataTable();
-            ArrayList info,lateday;
-            info = a.HocSinhA1(id);
-            lateday = a.LateDay(id);
-            HocSinhA.tenHS = (String) info.get(1);
-            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
-            HocSinhA.ngaySinh = (String) info.get(2);
-            HocSinhA.SDT = (String) info.get(3);
-            HocSinhA.hinhThucHoc = (String) info.get(7);
-            HocSinhA.lop = (String) info.get(6);
-            HocSinhA.trinhDo = (String) info.get(5);
-            HocSinhA.trungTam = (String) info.get(8);
-            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
-            //add tab
-            HocSinhA aa = new HocSinhA();
-            aa.id = id;
-            aa.lateday = lateday;
-            center.add((String) info.get(1), aa);
-            center.setSelectedComponent(aa);
-        new CloseTabButton(center,center.getComponentCount()-2);
+        } else {
+            arrRows = DSHS.getSelectedRows();
         }
     }//GEN-LAST:event_DSHSMouseClicked
 
+    private void LoaiHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoaiHSActionPerformed
+        // TODO add your handling code here:
+        switch (LoaiHS.getSelectedIndex()) {
+            case 0:
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
+                break;
+            case 1:
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
+                break;
+            case 2:
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, -1);
+                break;
+        }
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+        arrRows = null;
+
+    }//GEN-LAST:event_LoaiHSActionPerformed
+
+    private void KhoiPhucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KhoiPhucActionPerformed
+        // TODO add your handling code here:
+        if (Count.getText().equals("0")) {
+            return;
+        }
+        for (int i = 0; i < arrRows.length; i++) {
+            new DataBase.SQLDanhSachHocSinh().khoiphucHocSinh(id_students.get(arrRows[i]));
+        }
+        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+        arrRows = null;
+    }//GEN-LAST:event_KhoiPhucActionPerformed
+
+    private void NghiHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NghiHocMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NghiHocMouseClicked
+
+    private void DSHSMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHSMouseReleased
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger() && arrRows != null) {
+            if (Count.getText().equals("0")) {
+                return;
+            }
+            switch (LoaiHS.getSelectedIndex()) {
+                case 1:
+                    NghiHoc.show(this, this.getX() + evt.getX() + 5, this.getY() + evt.getY() + 40);
+                    break;
+                case 2:
+                    RaTruong.show(this, this.getX() + evt.getX() + 5, this.getY() + evt.getY() + 40);
+                    break;
+            }
+        }
+    }//GEN-LAST:event_DSHSMouseReleased
+
+    private void XoaRaTruongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaRaTruongActionPerformed
+        // TODO add your handling code here:
+        if (Count.getText().equals("0")) {
+            return;
+        }
+        for (int i = 0; i < arrRows.length; i++) {
+            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(arrRows[i]));
+        }
+        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, -1);
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+        arrRows = null;
+    }//GEN-LAST:event_XoaRaTruongActionPerformed
+
+    private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
+        // TODO add your handling code here:
+        if (Count.getText().equals("0")) {
+            return;
+        }
+        for (int i = 0; i < arrRows.length; i++) {
+            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(arrRows[i]));
+        }
+        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+        arrRows = null;
+    }//GEN-LAST:event_XoaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Count;
     private javax.swing.JTable DSHS;
-    private javax.swing.JPanel Panel_DSHS;
+    private javax.swing.JMenuItem KhoiPhuc;
+    private javax.swing.JComboBox LoaiHS;
+    private javax.swing.JPopupMenu NghiHoc;
+    private javax.swing.JPopupMenu RaTruong;
+    private javax.swing.JMenuItem Xoa;
+    private javax.swing.JMenuItem XoaRaTruong;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane8;
     // End of variables declaration//GEN-END:variables

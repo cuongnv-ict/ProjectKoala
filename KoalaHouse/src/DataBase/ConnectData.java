@@ -20,7 +20,7 @@ public class ConnectData {
     private Connection conn;
     private static String user = "root";
     private String url = "jdbc:mysql://localhost/projectkoala";
-    private static String password = "hoalan93";
+    private static String password = "akatsuki";
     
     public void setUrl(String strUrl) {
         this.url = strUrl;
@@ -37,7 +37,6 @@ public class ConnectData {
     public Connection connectionDatabase() {
         try {       
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println(user + "  " + password);
             conn = DriverManager.getConnection(url + "?user=" + user + "&password=" + password); 
             Statement statement = conn.createStatement();
         } catch (ClassNotFoundException ex) {

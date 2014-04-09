@@ -101,6 +101,7 @@ public class ListKoala extends javax.swing.JFrame {
         int idlev=0;
         DataBase.DataTable data = new DataBase.DataTable();
         idfali=data.LayTenTrungTam(nameadmin);
+        ThongTin.trungtam=idfali;
         this.idtrungtam=idfali;
         if (idfali==1)tentrungtam="Koala House Bà Triệu";
         else if(idfali==2) tentrungtam="Koala House Hoàng Ngân";   

@@ -59,7 +59,7 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="trangthai" pref="151" max="32767" attributes="0"/>
+                                              <Component id="trangthai" max="32767" attributes="0"/>
                                               <Component id="trungtam" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>

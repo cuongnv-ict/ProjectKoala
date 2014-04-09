@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.com.Panel;
 
 import DataBase.DataTable;
@@ -13,6 +12,7 @@ import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
 import edu.com.Dialog.trongmuon;
 import edu.com.ListKoala;
+import edu.com.XuLy;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -24,46 +24,63 @@ import javax.swing.table.DefaultTableModel;
  * @author Pham The Quyen
  */
 public class LopX extends javax.swing.JPanel {
-    
+
     private DefaultTableModel model;
     public JTabbedPane center;
     private int malop;
+    ArrayList<Integer> id_students;
+
     /**
      * Creates new form LopX
      */
     public LopX() {
-       initComponents();
-       new DataBase.DataTable().BangDanhHSLop(1, lopx);
-       model = (DefaultTableModel) lopx.getModel();
+        initComponents();
+        new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
+        model = (DefaultTableModel) lopx.getModel();
+        id_students = new ArrayList<Integer>();
+        XuLy.setID(id_students, lopx, 0);
     }
+
     public LopX(String tenlop) {
         initComponents();
-        DataTable a= new DataTable();
-        malop=a.LayIdTenLop(tenlop);
-        new DataBase.DataTable().BangDanhHSLop(malop,lopx);
+        setMaLopFromTen(tenlop);
+        new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
+        id_students = new ArrayList<Integer>();
+        XuLy.setID(id_students, lopx, 0);
 
-     }
-    public void setMaLop(int malop)
-    {
-        this.malop=malop;
     }
-    public int getMaLop()
-    {
+
+    public void setMaLop(int malop) {
+        this.malop = malop;
+    }
+
+    public int getMaLop() {
         return malop;
     }
-    public void setMaLopFromTen(String tenlop)
-    {
-        if (tenlop.equals("SUNSHINE_1")) this.malop=1;
-        else if(tenlop.equals("SUNSHINE_2")) this.malop=2;
-        else if(tenlop.equals("SUNSHINE_3")) this.malop=3;
-        else if(tenlop.equals("BEEHIVE_1")) this.malop=4;
-        else if(tenlop.equals("BEEHIVE_2")) this.malop=5;
-        else if(tenlop.equals("BEEHIVE_3")) this.malop=6;
-        else if(tenlop.equals("CHRYSALIS_1")) this.malop=7;
-        else if(tenlop.equals("CHRYSALIS_1")) this.malop=8;
-        else if(tenlop.equals("KINDERGARTEN_1")) this.malop=9;
-        else this.malop=10;
+
+    public void setMaLopFromTen(String tenlop) {
+        if (tenlop.equals("SUNSHINE_1")) {
+            this.malop = 1;
+        } else if (tenlop.equals("SUNSHINE_2")) {
+            this.malop = 2;
+        } else if (tenlop.equals("SUNSHINE_3")) {
+            this.malop = 3;
+        } else if (tenlop.equals("BEEHIVE_1")) {
+            this.malop = 4;
+        } else if (tenlop.equals("BEEHIVE_2")) {
+            this.malop = 5;
+        } else if (tenlop.equals("BEEHIVE_3")) {
+            this.malop = 6;
+        } else if (tenlop.equals("CHRYSALIS_1")) {
+            this.malop = 7;
+        } else if (tenlop.equals("CHRYSALIS_1")) {
+            this.malop = 8;
+        } else if (tenlop.equals("KINDERGARTEN_1")) {
+            this.malop = 9;
+        } else {
+            this.malop = 10;
+        }
     }
 
     /**
@@ -191,13 +208,13 @@ public class LopX extends javax.swing.JPanel {
                 .addComponent(xoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chitiet)
-                .addGap(191, 191, 191)
+                .addGap(167, 167, 167)
                 .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(nghi)
                 .addGap(44, 44, 44)
                 .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,36 +226,36 @@ public class LopX extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sua)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(chuyenlop)
-                                    .addComponent(nghi)
-                                    .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(xoa))
-                            .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chitiet))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(sua)
+                        .addComponent(xoa)
+                        .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chitiet))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(7, 7, 7)
+                            .addComponent(nghi, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(loc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chuyenlop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lopxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lopxMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==2){
+        if (evt.getClickCount() == 2) {
             int row = lopx.getSelectedRow();
             model.setValueAt(false, row, 6);
             //map cac truong
             String idStudent = lopx.getValueAt(row, 0).toString();
             int id = Integer.parseInt(idStudent);
             DataTable a = new DataTable();
-            ArrayList info,lateday;
+            ArrayList info, lateday;
             info = a.HocSinhA1(id);
             lateday = a.LateDay(id);
             HocSinhA.tenHS = (String) info.get(1);
@@ -256,7 +273,7 @@ public class LopX extends javax.swing.JPanel {
             aa.lateday = lateday;
             center.add(model.getValueAt(row, 1).toString(), aa);
             center.setSelectedComponent(aa);
-            new CloseTabButton(center,center.getComponentCount()-2);
+            new CloseTabButton(center, center.getComponentCount() - 2);
         }
     }//GEN-LAST:event_lopxMouseClicked
 
@@ -264,9 +281,9 @@ public class LopX extends javax.swing.JPanel {
         // TODO add your handling code here:
         ThemHS hs = new ThemHS(ListKoala.frame, true);
         hs.setVisible(true);
-        if(hs.getButton()){
+        if (hs.getButton()) {
             Vector vector = new Vector();
-            vector.add(model.getRowCount()+1);
+            vector.add(model.getRowCount() + 1);
             vector.add(hs.getTenHS());
             vector.add(hs.getNgaySinh());
             vector.add(hs.getHinhThuc());
@@ -279,103 +296,100 @@ public class LopX extends javax.swing.JPanel {
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
         // TODO add your handling code here:
-        int count =1, row=0;
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 6)==true){
+        int count = 1, row = 0;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
                 count--;
                 row = i;
             }
         }
-        if(count!=0){
-            if(count==1){
-                JOptionPane.showMessageDialog(null,"Bạn chưa chọn hoc sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
-                for(int i = model.getRowCount()-1;i>=0;i--){
-             model.setValueAt(false,i,6);
-               }
+        if (count != 0) {
+            if (count == 1) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn hoc sinh cần chỉnh sửa", null, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
+                for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                    model.setValueAt(false, i, 6);
+                }
             }
             return;
         }
-        Vector vec =  (Vector) model.getDataVector().elementAt(row);
+        Vector vec = (Vector) model.getDataVector().elementAt(row);
+        vec.setElementAt(id_students.get((Integer) model.getValueAt(row, 0)),0);
         ThemHS hs = new ThemHS(null, true, vec);
         hs.setVisible(true);
-        if(hs.getButton()){
-            model.setValueAt(hs.getTenHS(), row, 1);
-            model.setValueAt(hs.getNgaySinh(), row, 2);
-            model.setValueAt(hs.getHinhThuc(), row, 3);
-            model.setValueAt(hs.getDienThoai(), row, 4);
-            model.setValueAt(hs.getDaiDien(), row, 5);
-            model.setValueAt(false, row, 6);
+        if (hs.getButton()) {
+            new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
+            model = (DefaultTableModel) lopx.getModel();
+            XuLy.setID(id_students, lopx, 0);
         }
     }//GEN-LAST:event_suaMouseClicked
 
     private void chuyenlopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenlopActionPerformed
         // TODO add your handling code here:
-        int count=0;
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 6)==true){
+        int count = 0;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
                 count++;
             }
         }
-        if(count==0){
+        if (count == 0) {
             return;
         }
-        chuyenlop chuyen = new chuyenlop(null, true,getName());
+        chuyenlop chuyen = new chuyenlop(null, true, getName());
         chuyen.setVisible(true);
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 6)==true){
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
                 model.removeRow(i);
             }
         }
-        
+
     }//GEN-LAST:event_chuyenlopActionPerformed
 
     private void nghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nghiActionPerformed
         // TODO add your handling code here:
         NghiPhep nghi = new NghiPhep(null, true);
-        nghi.setTitle("Danh sách nghi phép lớp "+this.getName());
+        nghi.setTitle("Danh sách nghi phép lớp " + this.getName());
         nghi.setVisible(true);
-         
+
     }//GEN-LAST:event_nghiActionPerformed
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 6)==true){
-                model.removeRow(i);
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
+                new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
             }
         }
     }//GEN-LAST:event_xoaMouseClicked
 
     private void chitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chitietMouseClicked
         // TODO add your handling code here:
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 6)==true){
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
                 model.setValueAt(false, i, 6);
                 String idStudent = lopx.getValueAt(i, 0).toString();
-            int id = Integer.parseInt(idStudent);
-            DataTable a = new DataTable();
-            ArrayList info,lateday;
-            info = a.HocSinhA1(id);
-            lateday = a.LateDay(id);
-            HocSinhA.tenHS = (String) info.get(1);
-            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
-            HocSinhA.ngaySinh = (String) info.get(2);
-            HocSinhA.SDT = (String) info.get(3);
-            HocSinhA.hinhThucHoc = (String) info.get(7);
-            HocSinhA.lop = (String) info.get(6);
-            HocSinhA.trinhDo = (String) info.get(5);
-            HocSinhA.trungTam = (String) info.get(8);
-            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
-            //add tab
-            HocSinhA aa = new HocSinhA();
-            aa.id = id;
-            aa.lateday = lateday;
-            center.add(model.getValueAt(i, 1).toString(), aa);
-            center.setSelectedComponent(aa);
-            new CloseTabButton(center,center.getComponentCount()-2);
+                int id = Integer.parseInt(idStudent);
+                DataTable a = new DataTable();
+                ArrayList info, lateday;
+                info = a.HocSinhA1(id);
+                lateday = a.LateDay(id);
+                HocSinhA.tenHS = (String) info.get(1);
+                HocSinhA.tenNguoiDaiDien = (String) info.get(4);
+                HocSinhA.ngaySinh = (String) info.get(2);
+                HocSinhA.SDT = (String) info.get(3);
+                HocSinhA.hinhThucHoc = (String) info.get(7);
+                HocSinhA.lop = (String) info.get(6);
+                HocSinhA.trinhDo = (String) info.get(5);
+                HocSinhA.trungTam = (String) info.get(8);
+                HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
+                //add tab
+                HocSinhA aa = new HocSinhA();
+                aa.id = id;
+                aa.lateday = lateday;
+                center.add(model.getValueAt(i, 1).toString(), aa);
+                center.setSelectedComponent(aa);
+                new CloseTabButton(center, center.getComponentCount() - 2);
             }
         }
     }//GEN-LAST:event_chitietMouseClicked
@@ -386,31 +400,34 @@ public class LopX extends javax.swing.JPanel {
 
     private void locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locActionPerformed
         // TODO add your handling code here:
-        switch (loc.getSelectedIndex()){
+        switch (loc.getSelectedIndex()) {
             case 0:
-                new DataBase.DataTable().BangDanhHSLop(1, lopx);
+                new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
                 model = (DefaultTableModel) lopx.getModel();
+                XuLy.setID(id_students, lopx, 0);
                 break;
             case 1:
                 new DataBase.DataTable().BangDanhHSLop_ChinhQuy(1, lopx);
                 model = (DefaultTableModel) lopx.getModel();
+                XuLy.setID(id_students, lopx, 0);
                 break;
             case 2:
                 new DataBase.DataTable().BangDanhHSLop_Khach(1, lopx);
                 model = (DefaultTableModel) lopx.getModel();
+                XuLy.setID(id_students, lopx, 0);
                 break;
             case 3:
                 new DataBase.DataTable().BangDanhSachHSDongDuPhi(1, lopx);
                 model = (DefaultTableModel) lopx.getModel();
+                XuLy.setID(id_students, lopx, 0);
                 break;
             case 4:
                 new DataBase.DataTable().BangDanhSachHocSinhNoPhi(1, lopx);
                 model = (DefaultTableModel) lopx.getModel();
+                XuLy.setID(id_students, lopx, 0);
                 break;
         }
     }//GEN-LAST:event_locActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chitiet;
     private javax.swing.JButton chuyenlop;
