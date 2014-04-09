@@ -323,7 +323,7 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        HeThong = new javax.swing.JMenu();
+        Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         Menu_TaiKhoan = new javax.swing.JMenu();
         Menu_ThemTaiKhoan = new javax.swing.JMenuItem();
@@ -566,8 +566,13 @@ public class ListKoala extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        HeThong.setText("Hệ Thống");
-        HeThong.add(jSeparator1);
+        Namhoc.setText("Hệ Thống");
+        Namhoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NamhocActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jSeparator1);
 
         Menu_TaiKhoan.setText("Tài khoản");
 
@@ -600,10 +605,10 @@ public class ListKoala extends javax.swing.JFrame {
         });
         Menu_TaiKhoan.add(jMenuItem10);
 
-        HeThong.add(Menu_TaiKhoan);
+        Namhoc.add(Menu_TaiKhoan);
 
         Menu_Update.setText("Cập nhật hệ thống");
-        HeThong.add(Menu_Update);
+        Namhoc.add(Menu_Update);
 
         Menu_DangXuat.setText("Đăng Xuất");
         Menu_DangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -611,7 +616,7 @@ public class ListKoala extends javax.swing.JFrame {
                 Menu_DangXuatActionPerformed(evt);
             }
         });
-        HeThong.add(Menu_DangXuat);
+        Namhoc.add(Menu_DangXuat);
 
         Menu_thoat.setText("Thoát");
         Menu_thoat.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +624,7 @@ public class ListKoala extends javax.swing.JFrame {
                 Menu_thoatActionPerformed(evt);
             }
         });
-        HeThong.add(Menu_thoat);
+        Namhoc.add(Menu_thoat);
 
         jMenuItem1.setText("Cập Nhật Năm Học");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -627,9 +632,9 @@ public class ListKoala extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        HeThong.add(jMenuItem1);
+        Namhoc.add(jMenuItem1);
 
-        jMenuBar1.add(HeThong);
+        jMenuBar1.add(Namhoc);
 
         jMenu2.setText("Dữ Liệu");
 
@@ -1040,9 +1045,16 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        NamHoc nam = new NamHoc(frame, rootPaneCheckingEnabled);
-        nam.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void NamhocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamhocActionPerformed
+        // TODO add your handling code here:
+        NamHoc nam = new NamHoc(frame, rootPaneCheckingEnabled);
+        System.out.print("SDFdsfsd");
+        nam.setVisible(true);
+       
+    }//GEN-LAST:event_NamhocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1082,7 +1094,6 @@ public class ListKoala extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem A;
     private javax.swing.JMenuItem D;
-    private javax.swing.JMenu HeThong;
     private javax.swing.JMenuItem Menu_BackUp;
     private javax.swing.JMenuItem Menu_DangXuat;
     private javax.swing.JMenuItem Menu_DongBo;
@@ -1091,6 +1102,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem Menu_ThemTaiKhoan;
     private javax.swing.JMenuItem Menu_Update;
     private javax.swing.JMenuItem Menu_thoat;
+    private javax.swing.JMenu Namhoc;
     private javax.swing.JTabbedPane Panel_GDChinh;
     private javax.swing.JPanel Panel_trungtam;
     private javax.swing.JMenuItem chitiet;
