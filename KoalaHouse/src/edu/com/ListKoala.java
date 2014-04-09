@@ -13,6 +13,7 @@ import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
 import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
+import edu.com.Dialog.NamHoc;
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
@@ -331,6 +332,7 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_Update = new javax.swing.JMenuItem();
         Menu_DangXuat = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Menu_DongBo = new javax.swing.JMenuItem();
         Menu_BackUp = new javax.swing.JMenuItem();
@@ -618,6 +620,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         HeThong.add(Menu_thoat);
+
+        jMenuItem1.setText("Cập Nhật Năm Học");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        HeThong.add(jMenuItem1);
 
         jMenuBar1.add(HeThong);
 
@@ -1028,6 +1038,12 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_trinhdoActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        NamHoc nam = new NamHoc(frame, rootPaneCheckingEnabled);
+        nam.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1094,6 +1110,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
