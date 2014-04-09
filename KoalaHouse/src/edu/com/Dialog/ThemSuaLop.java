@@ -4,11 +4,14 @@
  */
 package edu.com.Dialog;
 
+import DataBase.DataTable;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +19,9 @@ import javax.swing.JComboBox;
  */
 public class ThemSuaLop extends javax.swing.JDialog {
     private boolean button;
+    private boolean themorsua;//cho biet la them lop hay sua lop
+    private String oldName;
+    public int idtrungtam;
     /**
      * Creates new form ThemSuaLop
      */
@@ -28,21 +34,22 @@ public class ThemSuaLop extends javax.swing.JDialog {
      public ThemSuaLop(java.awt.Frame parent, boolean modal,Vector vector) {
         super(parent, modal);
         initComponents();
-        Object B_date[] = vector.get(4).toString().split("-");
-        Object E_date[] = vector.get(4).toString().split("-");
+        Object B_date[] = vector.get(5).toString().split("-");
+        Object E_date[] = vector.get(6).toString().split("-");
         trangthai.setEnabled(true);
         ten.setText(vector.get(0).toString());
-        giaovien.setText(vector.get(3).toString());
-        sohs.setValue(Integer.parseInt(vector.get(7).toString()));
-        setSelectComboBox(ky, vector.get(2));
-        setSelectComboBox(trangthai, vector.get(8));
-        setSelectComboBox(trinhdo, vector.get(1)); 
+        giaovien.setText(vector.get(4).toString());
+        sohs.setValue(Integer.parseInt(vector.get(8).toString()));
+        setSelectComboBox(ky, vector.get(3));
+        setSelectComboBox(trangthai, vector.get(9));
+        setSelectComboBox(trinhdo, vector.get(2)); 
         setSelectComboBox(B_day, B_date[2]);
         setSelectComboBox(B_month, B_date[1]);
         setSelectComboBox(B_year, B_date[0]);
         setSelectComboBox(E_day, B_date[2]);
         setSelectComboBox(E_month, B_date[1]);
         setSelectComboBox(E_year, B_date[0]);
+        setSelectComboBox(trungtam, vector.get(1));
         DongY.setText("Chỉnh sửa");
         title.setText("Chỉnh sửa thông tin lớp");
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
@@ -54,6 +61,19 @@ public class ThemSuaLop extends javax.swing.JDialog {
               break;
             } 
         }     
+    }
+    //set gia tri
+    public void setKhoiName(String khoiname)
+    {
+        this.trinhdo.setSelectedItem(khoiname);
+    }
+    public void setOldName(String oldname)
+    {
+        this.oldName=oldname;
+    }
+    public void setThemSuaLop(boolean a)
+    {
+        this.themorsua=a;
     }
     //get cac gia tri 
     public boolean getButton()
@@ -78,7 +98,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
     }
     public String getTrungTam()
     {
-        return trungtam.getSelectedObjects().toString();
+        return trungtam.getSelectedItem().toString();
     }
     public String getSoHS()
     {
@@ -146,7 +166,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
 
         ky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
 
-        trungtam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bà Triệu", "Hoàng Ngân", "Phan Kế Bính", "Nguyễn Huy Tự" }));
+        trungtam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Koala House Bà Triệu", "Koala House Hoàng Ngân", "Koala House Phan Kế Bình", "Koala House Nguyễn Huy Tự" }));
 
         DongY.setText("Thêm lớp");
         DongY.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -298,8 +318,66 @@ public class ThemSuaLop extends javax.swing.JDialog {
 
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
         // TODO add your handling code here:
-        button=true;
-        dispose();
+        
+        DataBase.DataTable a = new DataTable();
+        String tenlop= ten.getText();
+        String tengiaovien=giaovien.getText();
+        String hocky=ky.getSelectedItem().toString();
+        String tentrinhdo=trinhdo.getSelectedItem().toString();
+        String tentrungtam=trungtam.getSelectedItem().toString();
+        String tonghs=sohs.getValue().toString();
+        String ngaybd=B_year.getSelectedItem().toString()+"-"+B_month.getSelectedItem().toString()+"-"+B_day.getSelectedItem().toString();
+        String ngaykt=E_year.getSelectedItem().toString()+"-"+E_month.getSelectedItem().toString()+"-"+E_day.getSelectedItem().toString();
+        String tentrangthai=trangthai.getSelectedItem().toString();
+        //doi ten khoi thanh so
+        if(tentrinhdo.equals("NẮNG MAI (SUNSHINE)")) tentrinhdo="1";
+        else if(tentrinhdo.equals("TỔ ONG (BEEHEVE)")) tentrinhdo="2";
+        else if(tentrinhdo.equals("TỔ KÉN (CHRYSARYS)")) tentrinhdo="3";
+        else tentrinhdo="4";
+        //doi ten trung tam thanh so 
+        if(tentrungtam.equals("Koala House Bà Triệu")) tentrungtam="1";
+        else if (tentrungtam.equals("Koala House Hoàng Ngân")) tentrungtam="2";
+        else if (tentrungtam.equals("Koala House Phan Kế Bình")) tentrungtam="3";
+        else tentrungtam="4";
+        //doi ten trang thai sang so
+        this.idtrungtam=Integer.parseInt(tentrungtam);
+        if(tentrangthai.equals("Đang giảng dạy")) tentrangthai="0";
+        else tentrangthai="1";
+        // kiem tra xem la co cho nao chua dien khong 
+        if(tengiaovien!=null&&tenlop!=null)
+        {
+            if(themorsua==true)//them lop
+            {
+                  DataTable data= new DataTable();
+                  if(data.ThemLop(tentrungtam, hocky, tentrinhdo, tenlop, tengiaovien, ngaybd, ngaykt, tonghs))
+                    {
+                        String message =String.format( "Bạn đã tạo thành công lớp mới");
+                        JOptionPane.showMessageDialog( null, message );
+                        button=true;
+                        dispose();
+                    }
+            }
+            else
+            {
+                    DataTable data= new DataTable();
+                    if(data.SuaLop(oldName,idtrungtam ,tentrungtam, hocky, tentrinhdo, tenlop, tengiaovien, ngaybd, ngaykt, tonghs, tentrangthai))
+                    {
+                        String message =String.format( "Bạn đã chinh sua thanh cong");
+                        JOptionPane.showMessageDialog( null, message );
+                        button=true;
+                        dispose();
+                    }
+                    
+             
+            }
+        }    
+        else
+        {
+                String message =String.format( "lỗi tạo lớp mời bạn xem lại dữ liệu");
+                JOptionPane.showMessageDialog( null, message );
+        }
+        
+        
     }//GEN-LAST:event_DongYMouseClicked
 
     private void HuyBoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HuyBoMouseClicked

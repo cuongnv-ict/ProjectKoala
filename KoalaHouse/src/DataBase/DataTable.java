@@ -5,10 +5,13 @@
 package DataBase;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +28,7 @@ import javax.swing.table.TableModel;
 public class DataTable {
     private Connection connect;
     ResultSet rs1,rs2;
-    Statement statement;
+    Statement statement,statement2;
     DefaultTableModel model;
     Object [][] rowColumn;
     public DataTable(){
@@ -34,48 +37,75 @@ public class DataTable {
         try {
             connect = c.connectionDatabase();
             statement = connect.createStatement();
+            statement2 = connect.createStatement();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, null, "Đăng nhập không thành công !!! \n Xem lại user name hoặc "
                     + "password", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void BangDanhSachLop(JTable table){
+    public void BangDanhSachLop(JTable table,int idtrungtam){
+        int id;
         try {
-            Object [] nameColumn = { "Tên Lớp", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái","Đánh dấu"};
+            Object [] nameColumn = { "Tên Lớp","Trung tâm", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái","Đánh dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * ,count(Students_id) from classes,classes_has_students where classes.id= Classes_Id group by Classes_Id");
+           // rs2 = statement.executeQuery("select * ,count(Students_id) from classes,classes_has_students where classes.id= Classes_Id group by Classes_Id");
+            if(idtrungtam==5) rs1= statement.executeQuery("select * from classes order by Faculties_Id ");
+            else rs1=statement.executeQuery("select * from classes where Faculties_Id= '"+idtrungtam+"' order by Faculties_Id ");
             while(rs1.next()){
-                Object str[] = new Object[10];
+                Object str[] = new Object[11];
                     str[0] = rs1.getString(6);
-                   switch(rs1.getInt(4)){
+                    id= rs1.getInt(1);
+                    System.out.println(id);
+                    System.out.println("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
+                    switch(rs1.getInt(4)){
                        case 1:
-                           str[1] = "NẮNG MAI (SUNSHINE)";
+                           str[2] = "NẮNG MAI (SUNSHINE)";
                            break;
                        case 2:
-                            str[1] = "TỔ ONG (BEEHIVE)";
+                            str[2] = "TỔ ONG (BEEHIVE)";
                            break;
                        case 3:
-                            str[1] = "TỔ KÉN (CHRYSALIS)";
+                            str[2] = "TỔ KÉN (CHRYSALIS)";
                            break;
                        case 4:
-                            str[1] = "MẪU GIÁO (KINDERGARTEN)";
+                            str[2] = "MẪU GIÁO (KINDERGARTEN)";
                            break;
                    }
-                   str[2] = rs1.getString(3);
-                   str[3] = rs1.getString(7);
-                   str[4] = rs1.getString(8);
-                   str[5] = rs1.getString(9);
-                   str[6] = rs1.getString(17);
-                   str[7] = rs1.getString(11);
+                   switch(rs1.getInt(2))
+                   {
+                       case 1: str[1]="Koala House Bà Triệu";
+                               break;
+                       case 2: str[1]="Koala House Hoàng Ngân";
+                               break;
+                       case 3: str[1]="Koala House Phan Kế Bình";
+                               break;
+                       case 4: str[1]="Koala House Nguyễn Huy Tưởng";
+                               break;
+                   }
+                   str[3] = rs1.getString(3);
+                   str[4] = rs1.getString(7);
+                   str[5] = rs1.getString(8);
+                   str[6] = rs1.getString(9);
+                   str[8] = rs1.getString(11);
                    switch(rs1.getInt(12)){
                        case 0:
-                           str[8] = "Đang giảng dạy";
+                           str[9] = "Đang giảng dạy";
                            break;
                        case 1:
-                            str[8] = "Đã kết thúc";
+                            str[9] = "Đã kết thúc";
                            break;
                  }       
-                 str[9]=false;
+                 str[10]=false;
+                 rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
+                 while(rs2.next())
+                 {
+                     System.out.println("chay qua roi");
+                     System.out.println(rs2.getString(1));
+                 
+                     str[7] = rs2.getString(1);
+                 }
+                 
+                      
                  data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];
@@ -83,13 +113,13 @@ public class DataTable {
             rowColumn[i] = data.get(i);
             model = new DefaultTableModel(rowColumn, nameColumn){
                 boolean[] canEdit = new boolean [] {
-                false, false, false, false, false,false,false,false,false,true
+                false,false, false, false, false, false,false,false,false,false,true
             };
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -782,7 +812,186 @@ public class DataTable {
             return model;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+                
         }  
         return null;
     }
-}
+    public boolean ThemLop(String trungtam,String kyhoc,String tenkhoi,String tenlop,String giaovien,String startdate,String enddate,String sohs){
+        Calendar now = Calendar.getInstance();
+        int Year=now.get(Calendar.YEAR);  
+        int id=0;
+        int test=0;
+        try{
+            rs1=statement.executeQuery("select * from classes");
+            rs2=statement2.executeQuery("select * from classes where NameClass ='" + tenlop + "' ");
+            while(rs2.next()){
+                test=rs2.getInt(1);
+            }
+            if(test==0)
+            {
+                while(rs1.next()){id=rs1.getInt(1);}
+                id+=1;
+                statement.executeUpdate("INSERT INTO classes  VALUES "
+                        + "('" + id + "','" + trungtam + "','" + kyhoc + "','" + tenkhoi + "','" + Year + "','" + tenlop + "','" + giaovien + "',"
+                        + "'" + startdate + "','" + enddate + "',null,'" + sohs + "',0)");
+                System.out.println("INSERT INTO classes  VALUES "
+                        + "('" + id + "','" + trungtam + "','" + kyhoc + "','" + tenkhoi + "','" + Year + "','" + tenlop + "','" + giaovien + "',"
+                        + "'" + startdate + "','" + enddate + "',null,'" + sohs + "',0)");
+
+                return true;
+            }
+            else
+            {
+                String message =String.format( "ten lop da co trong he thong");
+                JOptionPane.showMessageDialog( null, message );
+                return false;
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+            String message =String.format( "Bạn chưa điền đúng thông tin xin mời xem lại!");
+                JOptionPane.showMessageDialog( null, message );
+            
+        }  
+        return false;
+    }
+    public boolean SuaLop(String oldnameclass,int idtrungtam,String trungtam,String kyhoc,String tenkhoi,String tenlop,String giaovien,String startdate,String enddate,String sohs,String trangthai)
+    {
+        int id=0;
+       try
+         { 
+            System.out.println("select * from classes where NameClass = '" + oldnameclass + "' and Faculties_Id= '" + idtrungtam + "' ");
+            rs1=statement.executeQuery("select * from classes where NameClass = '" + oldnameclass + "'and Faculties_Id= '" + idtrungtam + "'");
+            while(rs1.next())
+            {
+            id=rs1.getInt(1);
+            }
+            String query = "update classes  set Faculties_Id = '" + trungtam + "' , Semesters='" + kyhoc + "' , Levels_Id = '" + tenkhoi + "', NameClass = '" + tenlop + "', TeacherClass='" + giaovien + "',StartDate='" + startdate + "',EndDate='" + enddate + "',MaxNumber='" + sohs + "' ,IsActive='" + trangthai + "' where Id='" + id + "'";
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+
+            
+            return true;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+            String message =String.format( "Bạn chưa điền đúng thông tin xin mời xem lại!");
+                JOptionPane.showMessageDialog( null, message );
+            
+        }  
+        return false;
+    }        
+    public boolean XoaLop(JTable tableName,int colunmcheck)
+    {
+        try
+        {
+            Vector vector= new Vector();
+            Vector vector2=new Vector();
+            DefaultTableModel tableModel;
+            tableModel = (DefaultTableModel) tableName.getModel();
+            int i=0,a=0;
+            boolean xoahoackhong=true;
+           
+            for(a= tableName.getRowCount();a>0;a--)
+                {
+                    if(Boolean.parseBoolean(tableName.getValueAt(a-1,colunmcheck).toString())== true&&Integer.parseInt(tableName.getValueAt(a-1,7).toString())>0)
+                    {
+                       xoahoackhong=false;
+                       break;
+                    }
+                }
+            if(xoahoackhong)
+            {
+                    for(a= tableName.getRowCount();a>0;a--)
+                    {
+                        if(Boolean.parseBoolean(tableName.getValueAt(a-1,colunmcheck).toString())== true)
+                        {
+                            vector.add(tableName.getValueAt(a-1, 0).toString());
+                            System.out.println(tableName.getValueAt(a-1, 1).toString());
+                            vector2.add(tableName.getValueAt(a-1, 1).toString());
+                        }
+                    }
+                    //vector.add("hoasung");
+                    vector.add(null);
+                    i=0;
+                    int id=0;
+                    String name;
+                    String idtrungtam;
+                    String query;
+                    PreparedStatement pstmt;
+                    while(vector.get(i) !=null)
+                    {
+                        idtrungtam=vector2.get(i).toString();
+                        if(idtrungtam.equals("Koala House Bà Triệu")) idtrungtam="1";
+                        else if (idtrungtam.equals("Koala House Hoàng Ngân")) idtrungtam="2";
+                        else if (idtrungtam.equals("Koala House Phan Kế Bình")) idtrungtam="3";
+                        else idtrungtam="4";
+                        name=vector.get(i).toString();
+                        //System.out.println("select * from classes where NameClass = '" + name + "' and Faculties_Id= '" + idtrungtam + "'");
+                        rs1=statement.executeQuery("select * from classes where NameClass = '" + name + "' and Faculties_Id= '" + idtrungtam + "'");
+                        
+                        while(rs1.next())
+                        {
+                        id=rs1.getInt(1);
+                        }
+
+                        query="delete from classes_has_students where Classes_Id = '" + id + "' and Faculties_Id= '" + idtrungtam + "'";
+                        pstmt = connect.prepareStatement(query);
+                        pstmt.executeUpdate();
+                        query = "delete from classes where `Id`='" + id + "' and Faculties_Id= '" + idtrungtam + "'";
+                        pstmt = connect.prepareStatement(query);
+                        pstmt.executeUpdate();
+
+
+                         i++;  
+                    }
+                return true;
+            }
+            else
+            {
+                String message =String.format( "Trong các lớp chọn có lớp vẫn đang tồn tại hs bạn cần xóa hs trong lớp hoặc chuyển lớp cho các hs!");
+                JOptionPane.showMessageDialog( null, message );
+                return false;
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return false;
+        
+    }
+    public int LayIdTenLop(String nameclass)
+    {
+        int id=0;
+        try
+        {
+            rs1=statement.executeQuery("select * from classes where NameClass = '" + nameclass + "'");
+                while(rs1.next())
+                {
+                id=rs1.getInt(1);
+                }
+                return id;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+    public int LayTenTrungTam(String nameadmin)
+    {
+        int id=0;
+        try
+        {
+            rs1=statement.executeQuery("select * from accounts where UserName='"+nameadmin+"'");
+            while(rs1.next())
+            {
+                id=rs1.getInt(2);
+            }
+            return id;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+} 

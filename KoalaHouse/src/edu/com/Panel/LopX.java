@@ -38,7 +38,8 @@ public class LopX extends javax.swing.JPanel {
     }
     public LopX(String tenlop) {
         initComponents();
-        setMaLopFromTen(tenlop);
+        DataTable a= new DataTable();
+        malop=a.LayIdTenLop(tenlop);
         new DataBase.DataTable().BangDanhHSLop(malop,lopx);
         model = (DefaultTableModel) lopx.getModel();
 

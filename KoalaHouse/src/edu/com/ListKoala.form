@@ -40,6 +40,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="len trinh do"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trinhdoActionPerformed"/>
+          </Events>
         </MenuItem>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
@@ -53,22 +56,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="B">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m Kh&#x1ed1;i"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="C">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m Trung T&#xe2;m"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="D">

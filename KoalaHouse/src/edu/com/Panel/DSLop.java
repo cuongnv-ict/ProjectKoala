@@ -7,9 +7,13 @@
 package edu.com.Panel;
 
 import DataBase.ConnectData;
+import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.ThemSuaLop;
+import edu.com.ListKoala;
+import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,12 +22,11 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import edu.com.upbang.AddRowOfTable;
-import java.awt.Toolkit;
 
 /**
  *
@@ -34,13 +37,22 @@ public class DSLop extends javax.swing.JPanel {
     /**
      * Creates new form DSLop
      */
+   private int idtrungtams;
+   public ListKoala listkoala;
    public JTabbedPane center;
    private DefaultTableModel model;
-   public DSLop() {
+   public DSLop(int idtrungtam) {
         initComponents();
-         new DataBase.DataTable().BangDanhSachLop(jTable4);
+        
+        new DataBase.DataTable().BangDanhSachLop(jTable4,idtrungtam);
+        
         model = (DefaultTableModel) jTable4.getModel();
     }
+   //set cac gia tri
+   public void setIdTrungTam(int  a)
+   {
+       this.idtrungtams=a;
+   }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,13 +72,13 @@ public class DSLop extends javax.swing.JPanel {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tên Lớp", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái"
+                "Tên Lớp", "Trung tâm", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái"
             }
         ));
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,11 +153,13 @@ public class DSLop extends javax.swing.JPanel {
     private void Button_DSLop_ThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_ThemLopMouseClicked
         // TODO add your handling code here:
         ThemSuaLop lop = new ThemSuaLop(null,true);
+        lop.setThemSuaLop(true);//day la them
         lop.setVisible(true);
         lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         Vector vector = new Vector();
         if(lop.getButton()){
             vector.add(lop.getTenLop());
+            vector.add(lop.getTrungTam());
             vector.add(lop.getKhoiHoc());
             vector.add(lop.getHocKy());
             vector.add(lop.getGiaoVien());
@@ -153,16 +167,18 @@ public class DSLop extends javax.swing.JPanel {
             vector.add(lop.getEday());
             vector.add(lop.getSoHS());
             vector.add(0);
-            vector.add("Đang giảng dậy");
+            vector.add(lop.getTrangThai());
             vector.add(false);
             model.addRow(vector);
+            
         }
+      listkoala.taoTree();
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
     private void Button_DSLop_SuaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_SuaLopMouseClicked
               int count =1, row=0;
         for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 9)==true){
+            if((Boolean)model.getValueAt(i, 10)==true){
                 count--;
                 row = i;
             }
@@ -174,25 +190,29 @@ public class DSLop extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
                 for(int i = model.getRowCount()-1;i>=0;i--){
-                    model.setValueAt(false,i,9);
+                    model.setValueAt(false,i,10);
                }
             }
             return;
         }
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemSuaLop lop = new ThemSuaLop(null, true, vec);
+        String oldname=model.getValueAt(row, 0).toString();
+        lop.setOldName(oldname);
         lop.setVisible(true);
+        lop.setThemSuaLop(false);
         lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         if(lop.getButton()){
             model.setValueAt(lop.getTenLop(), row, 0);
-            model.setValueAt(lop.getKhoiHoc(), row, 1);
-            model.setValueAt(lop.getHocKy(), row, 2);
-            model.setValueAt(lop.getGiaoVien(), row, 3);
-            model.setValueAt(lop.getBday(), row, 4);
-            model.setValueAt(lop.getEday(), row, 5);
-            model.setValueAt(lop.getSoHS(), row, 7);
-            model.setValueAt(lop.getTrangThai(), row, 8);
-            model.setValueAt(false, row,9);
+            model.setValueAt(lop.getTrungTam(), row, 1);
+            model.setValueAt(lop.getKhoiHoc(), row, 2);
+            model.setValueAt(lop.getHocKy(), row, 3);
+            model.setValueAt(lop.getGiaoVien(), row, 4);
+            model.setValueAt(lop.getBday(), row, 5);
+            model.setValueAt(lop.getEday(), row, 6);
+            model.setValueAt(lop.getSoHS(), row, 8);
+            model.setValueAt(lop.getTrangThai(), row, 9);
+            model.setValueAt(false, row,10);
         }
     }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
 
@@ -213,8 +233,16 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
+        boolean xoaorkhong;
+        DataBase.DataTable data= new DataTable();
+        xoaorkhong=data.XoaLop(jTable4, 10);
+        if(xoaorkhong)
+        {
         EditTable edit= new EditTable();
-        edit.removeManyRowOfTable(jTable4, 9);
+        edit.removeManyRowOfTable(jTable4, 10);
+        
+        listkoala.taoTree();
+        }
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 
 

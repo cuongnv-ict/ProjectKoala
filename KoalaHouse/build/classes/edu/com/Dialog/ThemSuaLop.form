@@ -6,6 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -219,10 +220,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="B&#xe0; Tri&#x1ec7;u"/>
-            <StringItem index="1" value="Ho&#xe0;ng Ng&#xe2;n"/>
-            <StringItem index="2" value="Phan K&#x1ebf; B&#xed;nh"/>
-            <StringItem index="3" value="Nguy&#x1ec5;n Huy T&#x1ef1;"/>
+            <StringItem index="0" value="Koala House B&#xe0; Tri&#x1ec7;u"/>
+            <StringItem index="1" value="Koala House Ho&#xe0;ng Ng&#xe2;n"/>
+            <StringItem index="2" value="Koala House Phan K&#x1ebf; B&#xec;nh"/>
+            <StringItem index="3" value="Koala House Nguy&#x1ec5;n Huy T&#x1ef1;"/>
           </StringArray>
         </Property>
       </Properties>
