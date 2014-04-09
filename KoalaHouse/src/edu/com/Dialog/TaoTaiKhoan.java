@@ -6,6 +6,7 @@ package edu.com.Dialog;
 
 import DataBase.ConnectData;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -50,6 +51,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         Textfield_SDT = new javax.swing.JTextField();
         jbtOK = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jcbAdmin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,6 +106,13 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
             }
         });
 
+        jcbAdmin.setText("Đặt làm Admin");
+        jcbAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,12 +129,14 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(jLabel1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addComponent(jLabel1)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbAdmin)
+                                    .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(118, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -179,7 +190,9 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jcbAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtOK)
                     .addComponent(jButton2))
@@ -210,6 +223,8 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         String id;
         String email;
         String phoneNumber;
+        String sqlCommandCurentUser = "SELECT CURRENT_USER();";
+        String currentUser = "";
         
         id = Textfield_maNV.getText();
         user = Textfield_tenDangNhap.getText();
@@ -238,6 +253,12 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     connect = connectData.connectionDatabase();
                     Statement statements = connect.createStatement();
                     
+                    //statements.execute(sqlCommandCurentUser);
+                    ResultSet rs = statements.executeQuery(sqlCommandCurentUser);
+                    //currentUser = rs.getString("user()");
+                    while(rs.next()) {
+                        currentUser = rs.getString(1);
+                    }
                     String sqlCommnand = "INSERT INTO projectkoala.accounts(Id, Faculties_Id, FullName, UserName, PassWord, Emai, "
                             + "PhoneNumber)" + " VALUES ('" + id + "', '1', '" + user + "', '" + user +  "', '" + password + 
                             "', '" + email + "', '" + phoneNumber + "');";
@@ -250,9 +271,15 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     statements.execute(sqlCommnand);
                     
                     // grand toan quyen cho user
-                    sqlCommnand = "GRANT SELECT, INSERT ON projectkoala.* TO '" + user + "'@'localhost';";
-                    statements.execute(sqlCommnand);
-                    JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
+                    if(jcbAdmin.isSelected()) {
+                        sqlCommnand = "GRANT ALL ON projectkoala.* TO '" + user + "'@'localhost';";
+                        statements.execute(sqlCommnand);
+                        JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
+                    } else {
+                        sqlCommnand = "GRANT SELECT ON projectkoala.* TO '" + user + "'@'localhost';";
+                        statements.execute(sqlCommnand);
+                        JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
+                    }
                 } catch (SQLException ex) {
                     //JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!", JOptionPane.ERROR_MESSAGE);
                     //ex.printStackTrace();
@@ -262,6 +289,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                             + " Duplicate entry '789-1' for key 'PRIMARY'")) {
                         JOptionPane.showMessageDialog(this, "Bị trùng mã nhân viên", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
+                    
                     
                     // Neu ma nhan vien khong dung cu phap
                     if(ex.toString().equals("java.sql.SQLException: Incorrect integer value: " + "'" +id + "'" +
@@ -277,6 +305,16 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                         dispose();
                         //System.out.println("");
                     }
+                    
+                    // Khong co quyen them vao tai khoan moi.
+                    String[] slipUser = currentUser.split("@");
+                    String err = "com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: INSERT "
+                            + "command denied to user '" + slipUser[0] + "'@'" + slipUser[1] + "' for table 'accounts'";
+                    System.out.println(err);
+                    if(ex.toString().equals(err)) {
+                        JOptionPane.showMessageDialog(this, "Bạn không đủ quyền thêm tài khoản mới !!!", "ERROR", 
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 } finally {
                     System.out.println("OK");
                 }
@@ -284,6 +322,19 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_jbtOKActionPerformed
+    
+    private void processString(String currentUser) {
+        char[] arrayUser = currentUser.toCharArray();
+        for(int i = 0 ; i < currentUser.length() ; i++) {
+            if(arrayUser[i] == '@') {
+                
+            }
+        }
+    }
+    
+    private void jcbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,5 +393,6 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jbtOK;
+    private javax.swing.JCheckBox jcbAdmin;
     // End of variables declaration//GEN-END:variables
 }
