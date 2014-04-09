@@ -82,7 +82,7 @@ public class ListKoala extends javax.swing.JFrame {
         initComponents();
         taoTree();
         Panel_GDChinh.removeAll();
-        HocSinhA a = new HocSinhA();
+        
         Panel_GDChinh.add("Trung Tâm",Panel_trungtam);
         new CloseTabButton(Panel_GDChinh,0);
         frame = this;

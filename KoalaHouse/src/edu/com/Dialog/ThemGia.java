@@ -6,62 +6,76 @@ package edu.com.Dialog;
 
 import java.awt.Toolkit;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Venus
  */
 public class ThemGia extends javax.swing.JDialog {
+
     private boolean button;// set gia tri cua button
+    private Vector old;
+
     /**
      * Creates new form ThemGia
      */
     public ThemGia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
+        this.setResizable(false);
     }
-     public ThemGia(java.awt.Frame parent, boolean modal,Vector vector) {
+
+    public ThemGia(java.awt.Frame parent, boolean modal, Vector vector) {
         super(parent, modal);
         initComponents();
+        this.setResizable(false);
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         DongY.setText("Cập nhật");
         title.setText("Chỉnh sửa học phí");
         TenPhi.setText(vector.get(0).toString());
-        Gia.setText(vector.get(3).toString());
-        for(int i =0;i<Ky.getItemCount();i++){
-            if(Ky.getItemAt(i).toString().equals(vector.get(1).toString())){
-              Ky.setSelectedIndex(i);
-              break;
-            } 
+        Gia.setText(vector.get(5).toString());
+        for (int i = 0; i < Ky.getItemCount(); i++) {
+            if (Ky.getItemAt(i).toString().equals(vector.get(1).toString())) {
+                Ky.setSelectedIndex(i);
+                break;
+            }
         }
-        for(int i =0;i<Nam.getItemCount();i++){
-            if(Nam.getItemAt(i).toString().equals(vector.get(2).toString())){
-              Nam.setSelectedIndex(i);
-              break;
-            } 
+        for (int i = 0; i < Nam.getItemCount(); i++) {
+            if (Nam.getItemAt(i).toString().equals(vector.get(2).toString())) {
+                Nam.setSelectedIndex(i);
+                break;
+            }
         }
+        old = new Vector();
+        old.add(getTenPhi());
+        old.add(Ky.getSelectedIndex() + 1);
+        old.add(getNamHoc());
+        old.add(getGia());
     }
     //lay gia tri cua 
-    public boolean getButton()
-    {
+
+    public boolean getButton() {
         return button;
     }
-    public String getTenPhi()
-    {
+
+    public String getTenPhi() {
         return TenPhi.getText();
     }
-    public String getGia()
-    {
+
+    public String getGia() {
         return Gia.getText();
     }
-    public String getHocKy()
-    {
+
+    public String getHocKy() {
         return Ky.getSelectedItem().toString();
     }
-    public String getNamHoc(){
+
+    public String getNamHoc() {
         return Nam.getSelectedItem().toString();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,7 +110,7 @@ public class ThemGia extends javax.swing.JDialog {
 
         TenPhi.setToolTipText("");
 
-        Ky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+        Ky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kỳ 1", "Kỳ 2", "Kỳ 3", "Kỳ hè", "Cả năm" }));
 
         Gia.setPreferredSize(new java.awt.Dimension(48, 25));
 
@@ -126,35 +140,32 @@ public class ThemGia extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Gia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Ky, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Nam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TenPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addComponent(DongY, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(58, Short.MAX_VALUE))
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(DongY, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(Ky, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(Gia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TenPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(34, 36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,8 +197,23 @@ public class ThemGia extends javax.swing.JDialog {
 
     private void DongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DongYActionPerformed
         // TODO add your handling code here:
-        button = true;
-        dispose();
+        Vector vec = new Vector();
+        if (getTenPhi().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên loại phí", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        vec.add(getTenPhi());
+        vec.add(Ky.getSelectedIndex() + 1);
+        vec.add(getNamHoc());
+        vec.add(getGia());
+        if (!DongY.getText().equals("Cập nhật") && new DataBase.SQLHocPhi().themHocPhi(vec)) {
+            button = true;
+            dispose();
+        } else if (DongY.getText().equals("Cập nhật") && new DataBase.SQLHocPhi().suaHocPhi(vec, old)) {
+            button = true;
+            dispose();
+        }
+
     }//GEN-LAST:event_DongYActionPerformed
 
     private void HuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuyBoActionPerformed
@@ -195,11 +221,9 @@ public class ThemGia extends javax.swing.JDialog {
         button = false;
         dispose();
     }//GEN-LAST:event_HuyBoActionPerformed
-
     /**
      * @param args the command line arguments
      */
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DongY;
     private javax.swing.JTextField Gia;
