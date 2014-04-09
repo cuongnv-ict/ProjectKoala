@@ -1051,8 +1051,8 @@ public class ListKoala extends javax.swing.JFrame {
     private void NamhocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamhocActionPerformed
         // TODO add your handling code here:
         NamHoc nam = new NamHoc(frame, rootPaneCheckingEnabled);
-        System.out.print("SDFdsfsd");
         nam.setVisible(true);
+        nam.show();
        
     }//GEN-LAST:event_NamhocActionPerformed
 
