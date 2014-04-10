@@ -56,8 +56,6 @@ public class DataTable {
                 Object str[] = new Object[11];
                 str[0] = rs1.getString(6);
                     id= rs1.getInt(1);
-                    System.out.println(id);
-                    System.out.println("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
                     switch(rs1.getInt(4)){
                     case 1:
                            str[2] = "NẮNG MAI (SUNSHINE)";
@@ -100,8 +98,6 @@ public class DataTable {
                  rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
                  while(rs2.next())
                  {
-                     System.out.println("chay qua roi");
-                     System.out.println(rs2.getString(1));
                  
                      str[7] = rs2.getString(1);
                  }
@@ -703,7 +699,7 @@ public class DataTable {
         int test=0;
         try{
             rs1=statement.executeQuery("select * from classes");
-            rs2=statement2.executeQuery("select * from classes where NameClass ='" + tenlop + "' ");
+            rs2=statement2.executeQuery("select * from classes where NameClass ='" + tenlop + "' and Faculties_Id= '" + trungtam +"' ");
             while(rs2.next()){
                 test=rs2.getInt(1);
 }
@@ -737,11 +733,17 @@ public class DataTable {
     }
     public boolean SuaLop(String oldnameclass,int idtrungtam,String trungtam,String kyhoc,String tenkhoi,String tenlop,String giaovien,String startdate,String enddate,String sohs,String trangthai)
     {
-        int id=0;
+        int id=0,test=0;
        try
          { 
             System.out.println("select * from classes where NameClass = '" + oldnameclass + "' and Faculties_Id= '" + idtrungtam + "' ");
             rs1=statement.executeQuery("select * from classes where NameClass = '" + oldnameclass + "'and Faculties_Id= '" + idtrungtam + "'");
+            rs2=statement2.executeQuery("select * from classes where NameClass ='" + tenlop + "' and Faculties_Id= '" + trungtam +"' ");
+            while(rs2.next()){
+                test=rs2.getInt(1);
+            }
+            if(test==0)
+            {
             while(rs1.next())
             {
             id=rs1.getInt(1);
@@ -752,6 +754,14 @@ public class DataTable {
 
             
             return true;
+            }
+            else
+            {
+                String message =String.format( "ten lop da co trong he thong");
+                JOptionPane.showMessageDialog( null, message );
+                return false;
+            
+            }
         }
         catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);

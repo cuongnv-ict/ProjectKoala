@@ -40,13 +40,16 @@ public class LopX extends javax.swing.JPanel {
         id_students = new ArrayList<Integer>();
         XuLy.setID(id_students, lopx, 0);
     }
-
     public LopX(String tenlop) {
         initComponents();
-        setMaLopFromTen(tenlop);
+        DataTable a=new DataBase.DataTable();
+        malop=a.LayIdTenLop(tenlop);
         new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
+        System.out.println(lopx.getRowCount());
+        System.out.println("hehe");
+            
         XuLy.setID(id_students, lopx, 0);
 
     }
@@ -57,30 +60,6 @@ public class LopX extends javax.swing.JPanel {
 
     public int getMaLop() {
         return malop;
-    }
-
-    public void setMaLopFromTen(String tenlop) {
-        if (tenlop.equals("SUNSHINE_1")) {
-            this.malop = 1;
-        } else if (tenlop.equals("SUNSHINE_2")) {
-            this.malop = 2;
-        } else if (tenlop.equals("SUNSHINE_3")) {
-            this.malop = 3;
-        } else if (tenlop.equals("BEEHIVE_1")) {
-            this.malop = 4;
-        } else if (tenlop.equals("BEEHIVE_2")) {
-            this.malop = 5;
-        } else if (tenlop.equals("BEEHIVE_3")) {
-            this.malop = 6;
-        } else if (tenlop.equals("CHRYSALIS_1")) {
-            this.malop = 7;
-        } else if (tenlop.equals("CHRYSALIS_1")) {
-            this.malop = 8;
-        } else if (tenlop.equals("KINDERGARTEN_1")) {
-            this.malop = 9;
-        } else {
-            this.malop = 10;
-        }
     }
 
     /**
@@ -100,7 +79,7 @@ public class LopX extends javax.swing.JPanel {
         chuyenlop = new javax.swing.JButton();
         loc = new javax.swing.JComboBox();
         nghi = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        textfield_timkiem = new javax.swing.JTextField();
         chitiet = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -178,10 +157,10 @@ public class LopX extends javax.swing.JPanel {
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        textfield_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        textfield_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                textfield_timkiemActionPerformed(evt);
             }
         });
 
@@ -194,6 +173,11 @@ public class LopX extends javax.swing.JPanel {
         });
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -217,7 +201,7 @@ public class LopX extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
             .addComponent(jScrollPane3)
         );
@@ -229,7 +213,7 @@ public class LopX extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(6, 6, 6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(sua)
                         .addComponent(xoa)
                         .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,9 +378,9 @@ public class LopX extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_chitietMouseClicked
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_textfield_timkiemActionPerformed
 
     private void locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locActionPerformed
         // TODO add your handling code here:
@@ -428,16 +412,36 @@ public class LopX extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_locActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        String thongtin= textfield_timkiem.getText();
+        if (thongtin.equals(null))
+        {
+               JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        else
+        {
+                boolean a=new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
+                System.out.print(a);
+                if(a==false)
+                { 
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chitiet;
     private javax.swing.JButton chuyenlop;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox loc;
     private javax.swing.JTable lopx;
     private javax.swing.JButton nghi;
     private javax.swing.JLabel sua;
+    private javax.swing.JTextField textfield_timkiem;
     private javax.swing.JLabel them;
     private javax.swing.JLabel xoa;
     // End of variables declaration//GEN-END:variables

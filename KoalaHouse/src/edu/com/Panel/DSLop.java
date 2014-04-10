@@ -11,6 +11,7 @@ import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.ThemSuaLop;
 import edu.com.ListKoala;
+import edu.com.ThongTin;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import java.awt.Toolkit;
@@ -172,6 +173,8 @@ public class DSLop extends javax.swing.JPanel {
             model.addRow(vector);
             
         }
+        new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
+        
       listkoala.taoTree();
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
@@ -214,6 +217,8 @@ public class DSLop extends javax.swing.JPanel {
             model.setValueAt(lop.getTrangThai(), row, 9);
             model.setValueAt(false, row,10);
         }
+        new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
+        
     }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
