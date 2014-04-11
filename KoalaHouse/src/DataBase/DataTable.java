@@ -682,7 +682,7 @@ public class DataTable {
     public DefaultComboBoxModel DanhSachLop(String NameClasses) {
         try {
             Vector vector = new Vector();
-            rs1 = statement.executeQuery("select NameClass from classes where IsActive = 1 and NameClass != " + "\"" + NameClasses + "\"");
+            rs1 = statement.executeQuery("select NameClass from classes where IsActive = 1 and NameClass != " + "\"" + NameClasses + "\" and Faculties_Id= '" + ThongTin.trungtam + "'");
             while (rs1.next()) {
                 vector.add(rs1.getString(1));
             }

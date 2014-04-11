@@ -6,6 +6,7 @@
 package edu.com.Panel;
 
 import DataBase.DataTable;
+import DataBase.SQLLopX;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.NghiPhep;
 import edu.com.Dialog.ThemHS;
@@ -39,8 +40,8 @@ public class LopX extends javax.swing.JPanel {
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_students, lopx, 0);
-        }
+        XuLy.setID(id_students, lopx, 0);
+    }
     }
 
     public LopX(String tenlop) {
@@ -50,8 +51,8 @@ public class LopX extends javax.swing.JPanel {
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_students, lopx, 0);
-        }
+        XuLy.setID(id_students, lopx, 0);
+    }
     }
 
     public void setMaLop(int malop) {
@@ -183,9 +184,9 @@ public class LopX extends javax.swing.JPanel {
                 .addComponent(xoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chitiet)
-                .addGap(325, 325, 325)
+                .addGap(319, 319, 319)
                 .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
+                .addGap(91, 91, 91)
                 .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -314,8 +315,11 @@ public class LopX extends javax.swing.JPanel {
         }
         chuyenlop chuyen = new chuyenlop(null, true, getName());
         chuyen.setVisible(true);
+        String tenlop= chuyen.getTenLop();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
+            if ((Boolean) model.getValueAt(i, 6) == true) 
+            {
+                new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
                 model.removeRow(i);
             }
         }
@@ -402,16 +406,16 @@ public class LopX extends javax.swing.JPanel {
         }
         String thongtin = textfield_timkiem.getText() + "";
         if (thongtin.equals("")) {
-            JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
         } else {
             boolean a = new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
             if (a == false) {
                 JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 if (!lopx.getValueAt(0, 0).toString().equals("")) {
-                    XuLy.setID(id_students, lopx, 0);
+                XuLy.setID(id_students, lopx, 0);
+        }
                 }
-            }
         }
     }//GEN-LAST:event_jButton1MouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables

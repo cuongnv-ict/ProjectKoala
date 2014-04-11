@@ -349,10 +349,10 @@ public class ListKoala extends javax.swing.JFrame {
         xoa.setText("xoa");
         tuychon.add(xoa);
 
-        trinhdo.setText("len trinh do");
+        trinhdo.setText("Ra Trường");
         trinhdo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trinhdoActionPerformed(evt);
+                RatruongActionPerformed(evt);
             }
         });
         tree.add(trinhdo);
@@ -1040,9 +1040,22 @@ public class ListKoala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DActionPerformed
 
-    private void trinhdoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trinhdoActionPerformed
+    private void RatruongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatruongActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_trinhdoActionPerformed
+         if(nodex.isLeaf())
+        {
+            String tenlop=nodex.toString();
+            int idtenlop;
+            idtenlop= new DataBase.DataTable().LayIdTenLop(tenlop);
+            new DataBase.SQLJTree().ratruong(idtenlop);
+        }
+        else{
+            String message =String.format( "Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
+            JOptionPane.showMessageDialog( null, message );
+        
+                }        
+        
+    }//GEN-LAST:event_RatruongActionPerformed
 
     private void CapNhatNamHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatNamHocActionPerformed
         // TODO add your handling code here:

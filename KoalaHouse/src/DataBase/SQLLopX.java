@@ -164,7 +164,18 @@ public class SQLLopX {
         }
     }
 
-    public boolean chuyenlopHocSinh(int[] id, String name_class) {
+    public boolean chuyenlopHocSinh(int id, String name_class) {
+        try {
+            int id_classes;
+            id_classes = new DataTable().LayIdTenLop(name_class);
+
+            String query = "update classes_has_students set Classes_Id='" + id_classes + "' where Students_Id='" + id + "'";
+            System.out.println(query);
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLLopX.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 

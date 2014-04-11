@@ -25,9 +25,9 @@
               <Component id="xoa" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chitiet" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="319" max="-2" attributes="0"/>
               <Component id="chuyenlop" min="-2" pref="140" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               <Component id="loc" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="94" max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>

@@ -94,7 +94,10 @@ public class chuyenlop extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public String getTenLop()
+    {
+        return Lop.getSelectedItem().toString();
+    }
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
         // TODO add your handling code here:
         button = true;

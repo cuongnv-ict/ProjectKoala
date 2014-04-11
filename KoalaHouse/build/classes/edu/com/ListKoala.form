@@ -38,10 +38,10 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="trinhdo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="len trinh do"/>
+            <Property name="text" type="java.lang.String" value="Ra Tr&#x1b0;&#x1edd;ng"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trinhdoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RatruongActionPerformed"/>
           </Events>
         </MenuItem>
         <Menu class="javax.swing.JMenu" name="jMenu1">
