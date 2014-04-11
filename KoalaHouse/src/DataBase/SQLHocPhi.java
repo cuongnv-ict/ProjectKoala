@@ -5,6 +5,7 @@
 package DataBase;
 
 import edu.com.ThongTin;
+import edu.com.XuLy;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -182,6 +183,136 @@ public class SQLHocPhi {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Bạn hãy kiểm tra lại học phí bạn vừa nhập", null, JOptionPane.ERROR_MESSAGE);
             return false;
+        }
+    }
+
+    public void BangDanhSachHSDongDuPhi(int classes_id, JTable table) {
+        try {
+            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            rs1 = statement.executeQuery("select * from students where  debt=0 and isactive = 1 and students.id in(select Students_Id from classes_has_students where classes_id = " + classes_id + " and Students_Id not in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id))");
+            if (!rs1.next()) {
+                for (int i = 0; i < 10; i++) {
+                    Object[] str = new Object[7];
+                    str[0] = "";
+                    str[1] = "";
+                    str[2] = "";
+                    str[3] = "";
+                    str[4] = "";
+                    str[5] = "";
+                    data.add(str);
+                }
+            } else {
+                do {
+                    Object[] str = new Object[7];
+                    str[0] = rs1.getString(1);
+                    str[1] = rs1.getString(3);
+                    str[2] = rs1.getString(4);
+                    switch (rs1.getInt(7)) {
+                        case 0:
+                            str[3] = "Chính Quy";
+                            break;
+                        case 1:
+                            str[3] = "Chương Trình Bạn Là Khách";
+                            break;
+                    }
+                    str[4] = rs1.getString(5);
+                    str[5] = rs1.getString(6);
+                    str[6] = false;
+                    data.add(str);
+                } while (rs1.next());
+                XuLy.SapXepTen(data, 1);
+            }
+            Object[][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+            }
+            model = new DefaultTableModel(rowColumn, nameColumn) {
+                Class[] types = new Class[]{
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, true
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            };
+            table.setModel(model);
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void BangDanhSachHocSinhNoPhi(int classes_id, JTable table) {
+        try {
+            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            ArrayList<Object[]> data = new ArrayList<Object[]>();
+           rs1 = statement.executeQuery("select * from students where isactive =1 and  students.id in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id) or debt!=0");
+            if (!rs1.next()) {
+                for (int i = 0; i < 10; i++) {
+                    Object[] str = new Object[7];
+                    str[0] = "";
+                    str[1] = "";
+                    str[2] = "";
+                    str[3] = "";
+                    str[4] = "";
+                    str[5] = "";
+                    data.add(str);
+                }
+            } else {
+                do {
+                    Object[] str = new Object[7];
+                    str[0] = rs1.getString(1);
+                    str[1] = rs1.getString(3);
+                    str[2] = rs1.getString(4);
+                    switch (rs1.getInt(7)) {
+                        case 0:
+                            str[3] = "Chính Quy";
+                            break;
+                        case 1:
+                            str[3] = "Chương Trình Bạn Là Khách";
+                            break;
+                    }
+                    str[4] = rs1.getString(5);
+                    str[5] = rs1.getString(6);
+                    str[6] = false;
+                    data.add(str);
+                } while (rs1.next());
+                XuLy.SapXepTen(data, 1);
+            }
+            Object[][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+            }
+            model = new DefaultTableModel(rowColumn, nameColumn) {
+                Class[] types = new Class[]{
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, true
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            };
+            table.setModel(model);
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

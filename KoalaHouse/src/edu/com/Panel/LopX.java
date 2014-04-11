@@ -40,8 +40,8 @@ public class LopX extends javax.swing.JPanel {
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
-        XuLy.setID(id_students, lopx, 0);
-    }
+            XuLy.setID(id_students, lopx, 0);
+        }
     }
 
     public LopX(String tenlop) {
@@ -51,8 +51,8 @@ public class LopX extends javax.swing.JPanel {
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
-        XuLy.setID(id_students, lopx, 0);
-    }
+            XuLy.setID(id_students, lopx, 0);
+        }
     }
 
     public void setMaLop(int malop) {
@@ -315,10 +315,9 @@ public class LopX extends javax.swing.JPanel {
         }
         chuyenlop chuyen = new chuyenlop(null, true, getName());
         chuyen.setVisible(true);
-        String tenlop= chuyen.getTenLop();
+        String tenlop = chuyen.getTenLop();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) 
-            {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
                 new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
                 model.removeRow(i);
             }
@@ -332,6 +331,11 @@ public class LopX extends javax.swing.JPanel {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
             }
+        }
+        new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
+        model = (DefaultTableModel) lopx.getModel();
+        if (!lopx.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_students, lopx, 0);
         }
     }//GEN-LAST:event_xoaMouseClicked
 
@@ -378,19 +382,19 @@ public class LopX extends javax.swing.JPanel {
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 1:
-                new DataBase.DataTable().BangDanhHSLop_ChinhQuy(malop, lopx);
+                new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 2:
-                new DataBase.DataTable().BangDanhHSLop_Khach(malop, lopx);
+                new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 3:
-                new DataBase.DataTable().BangDanhSachHSDongDuPhi(malop, lopx);
+                new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 4:
-                new DataBase.DataTable().BangDanhSachHocSinhNoPhi(malop, lopx);
+                new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
         }
@@ -406,16 +410,16 @@ public class LopX extends javax.swing.JPanel {
         }
         String thongtin = textfield_timkiem.getText() + "";
         if (thongtin.equals("")) {
-               JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
         } else {
             boolean a = new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
             if (a == false) {
                 JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 if (!lopx.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_students, lopx, 0);
-        }
+                    XuLy.setID(id_students, lopx, 0);
                 }
+            }
         }
     }//GEN-LAST:event_jButton1MouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
