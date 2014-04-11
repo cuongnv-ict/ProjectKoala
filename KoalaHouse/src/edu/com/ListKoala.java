@@ -65,6 +65,9 @@ import javax.swing.tree.TreeModel;
  */
 public class ListKoala extends javax.swing.JFrame {
     DefaultMutableTreeNode nodex;    
+    
+    ConnectData connectData;
+    Connection connect;
     private JTable table;
     private String nameadmin="XuanNT";
     private int idtrungtam;
@@ -756,15 +759,38 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void Menu_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemTaiKhoanActionPerformed
         // TODO add your handling code here:
-        TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this,rootPaneCheckingEnabled);
-        taoTaiKhoan.setLocation(420, 130);
-        taoTaiKhoan.show();
+               String result = "";
+        try {
+            // TODO add your handling code here:
+            // Kiem tra xem user co duong quyen tao tai khoan moi hay khong
+            connectDataBase();
+            String user = ConnectData.user;
+            Statement stmt = connect.createStatement();
+            //String result;
+            
+            java.sql.ResultSet rs = stmt.executeQuery("SELECT IsRoot FROM projectkoala.accounts WHERE UserName = '" + user + "';");
+            while(rs.next()) {
+                result = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(result.equals("0")) {
+            JOptionPane.showMessageDialog(this, "Bạn không đủ quyền tạo tài khoản mới !", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else {
+            TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this,rootPaneCheckingEnabled);
+            //TaoTaiKhoan.setChanged(false);
+            TaoTaiKhoan.setChanged(true);
+            taoTaiKhoan.setLocation(420, 130);
+            taoTaiKhoan.show();
+        }
         
     }//GEN-LAST:event_Menu_ThemTaiKhoanActionPerformed
 
     private void Menu_SuaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_SuaTaiKhoanActionPerformed
         // TODO add your handling code here:
-        TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this,rootPaneCheckingEnabled);
+        TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this);
+        TaoTaiKhoan.setChanged(false);
         taoTaiKhoan.setLocation(420, 130);
         taoTaiKhoan.show();
     }//GEN-LAST:event_Menu_SuaTaiKhoanActionPerformed
@@ -857,10 +883,28 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        DSTaiKhoan dstaikhoan= new DSTaiKhoan(this, rootPaneCheckingEnabled);
-        dstaikhoan.setAlwaysOnTop(rootPaneCheckingEnabled);
-        dstaikhoan.setLocation(420, 20);
-        dstaikhoan.show();
+               String result = "";
+        String user = ConnectData.user;
+        try {
+            // TODO add your handling code here:
+            connectDataBase();
+            Statement stmt = connect.createStatement();
+            java.sql.ResultSet rs = stmt.executeQuery("SELECT IsRoot FROM projectkoala.accounts WHERE UserName = '" + user + "';" );
+            while(rs.next()) {
+                result = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(result.equals("0")) {
+            JOptionPane.showMessageDialog(this, "Bạn không đủ quyền thực hiện thao tác này !", "Thông báo",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            DSTaiKhoan dstaikhoan= new DSTaiKhoan(this, rootPaneCheckingEnabled);
+            dstaikhoan.setAlwaysOnTop(rootPaneCheckingEnabled);
+            dstaikhoan.setLocation(420, 20);
+            dstaikhoan.show();
+        }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void Menu_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DangXuatActionPerformed
@@ -1067,7 +1111,11 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_NamhocActionPerformed
-
+     
+    public void connectDataBase() {
+        connectData = new ConnectData();
+        connect = connectData.connectionDatabase();
+    }
     /**
      * @param args the command line arguments
      */

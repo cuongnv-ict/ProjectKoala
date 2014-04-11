@@ -739,12 +739,13 @@ public class DataTable {
          { 
             System.out.println("select * from classes where NameClass = '" + oldnameclass + "' and Faculties_Id= '" + idtrungtam + "' ");
             rs1=statement.executeQuery("select * from classes where NameClass = '" + oldnameclass + "'and Faculties_Id= '" + idtrungtam + "'");
-            rs2=statement2.executeQuery("select * from classes where NameClass ='" + tenlop + "' and Faculties_Id= '" + trungtam +"' ");
+            /*rs2=statement2.executeQuery("select * from classes where NameClass ='" + tenlop + "' and Faculties_Id= '" + trungtam +"' ");
             while(rs2.next()){
                 test=rs2.getInt(1);
             }
-            if(test==0)
-            {
+                    */
+            //if(test==0)
+            //{
             while(rs1.next())
             {
             id=rs1.getInt(1);
@@ -755,7 +756,7 @@ public class DataTable {
 
             
             return true;
-            }
+            /*}
             else
             {
                 String message =String.format( "ten lop da co trong he thong");
@@ -763,6 +764,7 @@ public class DataTable {
                 return false;
             
             }
+                    */
         }
         catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);

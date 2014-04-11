@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ConnectData {
     private Connection conn;
-    private static String user = "root";
+    public static String user = "root";
     private String url = "jdbc:mysql://localhost/projectkoala";
     private static String password = "akatsuki";
     

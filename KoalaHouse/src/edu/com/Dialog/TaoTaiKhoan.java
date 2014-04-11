@@ -6,6 +6,7 @@ package edu.com.Dialog;
 
 import DataBase.ConnectData;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
  * @author Venus
  */
 public class TaoTaiKhoan extends javax.swing.JDialog {
+    private static boolean changed = false;
 
     /**
      * Creates new form TaoTaiKhoan
@@ -24,6 +26,19 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
     public TaoTaiKhoan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public TaoTaiKhoan(java.awt.Frame parent) {
+        super(parent);
+        initComponents();
+        changedAccout();
+        Textfield_maNV.setEditable(false);
+        Textfield_tenDangNhap.setEditable(false);
+        jcbAdmin.setEnabled(false);
+    }
+    
+    public static void setChanged(boolean changed) {
+        TaoTaiKhoan.changed = changed;
     }
 
     /**
@@ -50,6 +65,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         Textfield_SDT = new javax.swing.JTextField();
         jbtOK = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jcbAdmin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,6 +120,13 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
             }
         });
 
+        jcbAdmin.setText("Đặt làm Admin");
+        jcbAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,12 +143,14 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(jLabel1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addComponent(jLabel1)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbAdmin)
+                                    .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(118, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -179,7 +204,9 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(Textfield_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jcbAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtOK)
                     .addComponent(jButton2))
@@ -204,69 +231,127 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
-        String user;
-        String password;
-        String rePassword;
-        String id;
-        String email;
-        String phoneNumber;
+        //if(changed == true) {
+            String user;
+            String password;
+            String rePassword;
+            String id;
+            String email;
+            String phoneNumber;
+            String sqlCommandCurentUser = "SELECT CURRENT_USER();";
+            String currentUser = "";
+            ConnectData connectData = new ConnectData();
+            Connection connect;        
+            connect = connectData.connectionDatabase();
+        //if(changed == true) {
+            System.out.println(changed);
+            id = Textfield_maNV.getText();
+            user = Textfield_tenDangNhap.getText();
+            password = TextField_MatKhau.getText();
+            rePassword = Textfield_XacNhanMK.getText();
+            email = Textfield_email.getText();
+            phoneNumber = Textfield_SDT.getText();
+        if(changed == true) {
+            // Kiem tra xem co truong nao bi bo trong khong.
+            if(id == null || user == null || password == null || rePassword == null || email == null || phoneNumber == null) {
+                JOptionPane.showMessageDialog(null, "Bạn không được bỏ sót trường nào !", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
+                Textfield_maNV.requestFocus();
+            } else if
         
-        id = Textfield_maNV.getText();
-        user = Textfield_tenDangNhap.getText();
-        password = TextField_MatKhau.getText();
-        rePassword = Textfield_XacNhanMK.getText();
-        email = Textfield_email.getText();
-        phoneNumber = Textfield_SDT.getText();
-        
-        // Kiem tra xem co truong nao bi bo trong khong.
-        if(id == null || user == null || password == null || rePassword == null || email == null || phoneNumber == null) {
-            JOptionPane.showMessageDialog(null, "Bạn không được bỏ sót trường nào !", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
-            Textfield_maNV.requestFocus();
-        } else {
-        
-            // Kiem tra password va rePassword 
-            if(!password.equals(rePassword)) {
-            JOptionPane.showMessageDialog(null, "Xác nhận mật khẩu không chính xác. Vui lòng nhập lại", "ERROR !!!", 
-                    JOptionPane.ERROR_MESSAGE);
-            TextField_MatKhau.requestFocus();
-            } else {
-                try {
-                    // Them nguoi dung vao database.
-                    ConnectData connectData = new ConnectData();
-                    Connection connect;
+                // Kiem tra password va rePassword 
+                (!password.equals(rePassword)) {
+                JOptionPane.showMessageDialog(null, "Xác nhận mật khẩu không chính xác. Vui lòng nhập lại", "ERROR !!!", 
+                        JOptionPane.ERROR_MESSAGE);
+                TextField_MatKhau.requestFocus();
+                } else {
+                    try {
+                        // Them nguoi dung vao database.
+                        
+                        Statement statements = connect.createStatement();
                     
-                    connect = connectData.connectionDatabase();
-                    Statement statements = connect.createStatement();
+                        //statements.execute(sqlCommandCurentUser);
+                        String sqlCommnand = "CREATE USER '" + user + "'@'localhost' IDENTIFIED BY '" + password + "';";
+                        statements.execute(sqlCommnand);
+                        
+                        sqlCommnand = "INSERT INTO projectkoala.accounts(Id, Faculties_Id, FullName, UserName, PassWord, Emai, "
+                                + "PhoneNumber)" + " VALUES ('" + id + "', '1', '" + user + "', '" + user +  "', '" + password + 
+                                "', '" + email + "', '" + phoneNumber + "');";
+                        System.out.println(sqlCommnand);
+                        statements.executeUpdate(sqlCommnand);
                     
-                    String sqlCommnand = "INSERT INTO projectkoala.accounts(Id, Faculties_Id, FullName, UserName, PassWord, Emai, "
-                            + "PhoneNumber)" + " VALUES ('" + id + "', '1', '" + user + "', '" + user +  "', '" + password + 
-                            "', '" + email + "', '" + phoneNumber + "');";
-                    System.out.println(sqlCommnand);
-                    statements.executeUpdate(sqlCommnand);
+                        // tao tai khoan nguoi dung
+                        
                     
-                    // tao tai khoan nguoi dung
-                    sqlCommnand = "CREATE USER '" + user + "'@'localhost' IDENTIFIED BY '" + password + "';";
-                    
-                    statements.execute(sqlCommnand);
-                    
+                    //statements.execute(sqlCommnand);
+                    /*
+                    ResultSet rs = statements.executeQuery(sqlCommandCurentUser);
+                        //currentUser = rs.getString("user()");
+                        while(rs.next()) {
+                            currentUser = rs.getString(1);
+                        }
+                    */
                     // grand toan quyen cho user
-                    sqlCommnand = "GRANT SELECT, INSERT ON projectkoala.* TO '" + user + "'@'localhost';";
-                    statements.execute(sqlCommnand);
-                    JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
+                    if(jcbAdmin.isSelected()) {
+                        statements.execute("UPDATE mysql.user SET Grant_priv='Y', Super_priv='Y' WHERE User= '" 
+                                + user + "';");
+                        statements.execute("FLUSH PRIVILEGES;");
+                        sqlCommnand = "GRANT ALL PRIVILEGES ON *.* TO '" + user + "'@'localhost';";
+                        statements.execute(sqlCommnand);
+                        //sqlCommnand = "";
+                        statements.executeUpdate("UPDATE projectkoala.accounts SET IsRoot = 1 WHERE UserName = '" + user + "';");
+                        JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
+                    } else {
+                        sqlCommnand = "GRANT SELECT, UPDATE ON *.* TO '" + user + "'@'localhost';";
+                        System.out.println(sqlCommnand);
+                        statements.execute(sqlCommnand);
+                        //sqlCommnand = ;
+                        statements.executeUpdate("UPDATE projectkoala.accounts SET IsRoot = 0 WHERE UserName = '" + user + "';");
+                        JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
+                    }
                 } catch (SQLException ex) {
                     //JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công." , "ERROR !!!", JOptionPane.ERROR_MESSAGE);
                     //ex.printStackTrace();
+                    ex.printStackTrace();
                     System.out.println(ex.toString());
+                        //System.out.println(ex.printStackTrace());
                     // Neu trung voi ma khac cua nguoi dung
                     if(ex.toString().equals("com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException:"
-                            + " Duplicate entry '789-1' for key 'PRIMARY'")) {
+                            + " Duplicate entry '" + id + "-1" + "' for key 'PRIMARY'")) {
                         JOptionPane.showMessageDialog(this, "Bị trùng mã nhân viên", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        // xoa user
+                        Statement stmt;
+                        try {
+                            stmt = connect.createStatement();
+                            stmt.execute("DROP USER '" + user + "'@'localhost';");
+                        } catch (SQLException ex1) {
+                            Logger.getLogger(TaoTaiKhoan.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                        
                     }
+                    
                     
                     // Neu ma nhan vien khong dung cu phap
                     if(ex.toString().equals("java.sql.SQLException: Incorrect integer value: " + "'" +id + "'" +
-                            " for column 'Id' at row 1")) {
-                        JOptionPane.showMessageDialog(this, "Mã nhân viên sai cú pháp", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            " for column 'Id' at row 1") || ex.toString().equals("java.sql.SQLException: Field "
+                                    + "'Id' doesn't have a default value")) {
+                        try {
+                            JOptionPane.showMessageDialog(this, "Mã nhân viên sai cú pháp", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            // xoa user
+                            Statement stmt = connect.createStatement();
+                            stmt.execute("DROP USER '" + user + "'@'localhost';");
+                        } catch (SQLException ex1) {
+                            Logger.getLogger(TaoTaiKhoan.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                    }
+                    
+                    // Neu khong tao thanh cong
+                    String sqlERR = "java.sql.SQLException: Operation CREATE USER failed for "
+                            + "'" + user +"'@'localhost'";
+                        System.out.println(sqlERR);
+                    if(ex.toString().equals(sqlERR)) {
+                        JOptionPane.showMessageDialog(this, "Tạo tài khoản không thành công. \n Tài khoản đã được dùng. Bạn"
+                                + " phải tạo tài khoản khác !",
+                                "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                     
                     // Neu khong thanh cong thi xoa du lieu da them vao truoc do de tranh bi trung lap
@@ -277,13 +362,96 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                         dispose();
                         //System.out.println("");
                     }
+                    /*
+                    // Khong co quyen them vao tai khoan moi.
+                    String[] slipUser = currentUser.split("@");
+                    String err = "com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: INSERT "
+                            + "command denied to user '" + slipUser[0] + "'@'" + slipUser[1] + "' for table 'accounts'";
+                    System.out.println(err);
+                    if(ex.toString().equals(err)) {
+                        JOptionPane.showMessageDialog(this, "Bạn không đủ quyền thêm tài khoản mới !!!", "ERROR", 
+                                JOptionPane.ERROR_MESSAGE);
+                    } */
                 } finally {
                     System.out.println("OK");
+                }
+            }
+        
+        
+        } else {     
+            connect = connectData.connectionDatabase();
+            
+            if(password == null || rePassword == null || email == null || phoneNumber == null) {
+                JOptionPane.showMessageDialog(this, "Bạn không được bỏ sót trường nào !!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            } else if(!password.equals(rePassword)) {
+                JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không chính xác. Vui lòng nhập lại", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    Statement statements = connect.createStatement();
+                    //if(TextField_MatKhau.getText() != Textfield_XacNhanMK.getText()) {
+                     //   JOptionPane.showMessageDialog(this, "", email, WIDTH);
+                    //}
+                    if(! password.equals(rePassword)) {
+                        JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không đúng !", "ERROR", 
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    statements.execute("SET PASSWORD = PASSWORD('" + password + "');");
+                    connectData.setPassword(password);
+                    statements.execute("UPDATE projectkoala.accounts SET PassWord = '" + password + "', "
+                            + "Emai = '" + email + "', PhoneNumber = '" 
+                    + phoneNumber + "' WHERE UserName = '" + user +"';");
+                    
+                    JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công !", "Thành công", JOptionPane.OK_OPTION);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TaoTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         
     }//GEN-LAST:event_jbtOKActionPerformed
+    
+    private void changedAccout() {
+        String currentUser = "";
+        String sqlCommandCurentUser = "SELECT CURRENT_USER();";
+        ConnectData connectData = new ConnectData();
+            Connection connect;
+                    
+            connect = connectData.connectionDatabase();
+                try {
+                    Statement statements = connect.createStatement();
+                    ResultSet rs = statements.executeQuery(sqlCommandCurentUser);
+                    while(rs.next()) 
+                        currentUser = rs.getString(1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TaoTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            String[] splitUser = currentUser.split("@");
+            Textfield_tenDangNhap.setText(splitUser[0]);
+                try {
+                    Statement statements = connect.createStatement();
+                    ResultSet rs = statements.executeQuery("SELECT * FROM projectkoala.accounts WHERE "
+                            + "projectkoala.accounts.UserName = '" + splitUser[0] + "';");
+                    while(rs.next()) {
+                        String resultID = rs.getString(1);
+                        Textfield_maNV.setText(resultID);
+                        String resultPassword = rs.getString(5);
+                        TextField_MatKhau.setText(resultPassword);
+                        Textfield_XacNhanMK.setText(resultPassword);
+                        String resultEmail = rs.getString(6);
+                        Textfield_email.setText(resultEmail);
+                        String reslutPhone = rs.getString(7);
+                        Textfield_SDT.setText(reslutPhone);
+                        
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(TaoTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }
+    
+    private void jcbAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,5 +510,6 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jbtOK;
+    private javax.swing.JCheckBox jcbAdmin;
     // End of variables declaration//GEN-END:variables
 }
