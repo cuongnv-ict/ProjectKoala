@@ -97,6 +97,31 @@ public class SQLNamHoc {
                     str[2] = rs1.getString(5);
                     data.add(str);
                 } while (rs1.next());
+                if(data.size()<4){
+                    for (int i = 0; i < 5; i++) {
+                    Object str[] = new Object[3];
+                    switch (i + 1) {
+                        case 1:
+                            str[0] = "Kỳ 1";
+                            break;
+                        case 2:
+                            str[0] = "Kỳ 2";
+                            break;
+                        case 3:
+                            str[0] = "Kỳ 3";
+                            break;
+                        case 4:
+                            str[0] = "Kỳ hè";
+                            break;
+                        case 5:
+                            str[0] = "Kỳ hè";
+                            break;
+                    }
+                    str[1] = "";
+                    str[2] = "";
+                    data.add(str);
+                }
+                }
             }
             Object[][] rowColumn = new Object[data.size() - 1][];
             for (int i = 0; i < data.size() - 1; i++) {

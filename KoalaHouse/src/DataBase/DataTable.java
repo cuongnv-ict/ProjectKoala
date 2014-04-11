@@ -4,6 +4,7 @@
  */
 package DataBase;
 
+import edu.com.ThongTin;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -855,7 +856,7 @@ public class DataTable {
         int id=0;
         try
         {
-            rs1=statement.executeQuery("select * from classes where NameClass = '" + nameclass + "'");
+            rs1=statement.executeQuery("select * from classes where NameClass = '" + nameclass + "' and Faculties_Id= '" + ThongTin.trungtam + "'");
                 while(rs1.next())
                 {
                 id=rs1.getInt(1);

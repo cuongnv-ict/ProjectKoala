@@ -6,6 +6,7 @@ package edu.com.Dialog;
 
 import java.awt.Toolkit;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -153,6 +154,9 @@ public class NamHoc extends javax.swing.JDialog {
         vector5.add(((Vector) model.getDataVector().elementAt(0)).elementAt(1));
         vector5.add(((Vector) model.getDataVector().elementAt(3)).elementAt(2));
         flags = new DataBase.SQLNamHoc().setNamHoc(vector5, Integer.parseInt(namhoc.getSelectedItem().toString()), 5);
+        if(!flags){
+            JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", null, JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_CapNhatActionPerformed
 
     /**

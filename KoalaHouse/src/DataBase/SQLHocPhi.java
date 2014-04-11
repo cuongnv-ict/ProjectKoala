@@ -49,9 +49,6 @@ public class SQLHocPhi {
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from cost,semesters where cost.year = semesters.year and semesters.semesternumber=cost.semesters and semesters.Faculties_Id = cost.Faculties_Id and cost.Faculties_Id = " + ThongTin.trungtam);
             while (rs1.next()) {
-                if (rs1.getInt(5) != 0) {
-                    continue;//Neu bang khong la am chi may nghi cua học sinh, không được coi là phí
-                }
                 Object str[] = new Object[7];
                 str[0] = rs1.getString(4);
                 switch (rs1.getInt(3)) {
@@ -71,10 +68,10 @@ public class SQLHocPhi {
                         str[1] = "Cả năm";
                         break;
                 }
-                str[2] = rs1.getString(7).substring(0, 4);
-                str[3] = rs1.getString(11);
-                str[4] = rs1.getString(12);
-                str[5] = rs1.getString(6);
+                str[2] = rs1.getString(6).substring(0, 4);
+                str[3] = rs1.getString(10);
+                str[4] = rs1.getString(11);
+                str[5] = rs1.getString(5);
                 if (((String) str[5]).charAt(0) == '-') {
                     str[5] = ((String) str[5]).substring(1);
                 }
@@ -84,26 +81,27 @@ public class SQLHocPhi {
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
-                model = new DefaultTableModel(rowColumn, nameColumn) {
-                    Class[] types = new Class[]{
-                        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
-                    };
-
-                    public Class getColumnClass(int columnIndex) {
-                        return types[columnIndex];
-                    }
-                    boolean[] canEdit = new boolean[]{
-                        false, false, false, false, false, false, true
-                    };
-
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return canEdit[columnIndex];
-                    }
-                };
-                table.setModel(model);
             }
+            model = new DefaultTableModel(rowColumn, nameColumn) {
+                Class[] types = new Class[]{
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, true
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            };
+            table.setModel(model);
+
         } catch (SQLException ex) {
-            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Lỗi nạp dữ liệu", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -119,6 +117,22 @@ public class SQLHocPhi {
 
     public boolean suaHocPhi(Vector vector, Vector oldVertor) {
         try {
+            Pstate = connect.prepareStatement("select id from cost where namecost = ? and semesters = ? and year = ?");
+            Pstate.setString(1, vector.get(0).toString());
+            Pstate.setString(2, vector.get(1).toString());
+            Pstate.setString(3, vector.get(2).toString());
+            rs1 = Pstate.executeQuery();
+            if (rs1.next()) {
+                JOptionPane.showMessageDialog(null, "Loại phí đã tồn tại, bạn không thể thay đổi", null, JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            Pstate = connect.prepareStatement("select year from semesters where year = ?");
+            Pstate.setString(1, vector.get(2).toString());
+            if (!rs1.next()) {
+                JOptionPane.showMessageDialog(null, "Năm học bạn chọn chưa được thiết lập", null, JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            rs1 = Pstate.executeQuery();
             Pstate = connect.prepareStatement("update cost set semesters=?,namecost=?,amount=?,year=? where year = ? and semesters = ? and namecost =?");
             Pstate.setString(1, vector.get(1).toString());
             Pstate.setString(2, vector.get(0).toString());
@@ -130,7 +144,7 @@ public class SQLHocPhi {
             Pstate.execute();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(SQLHocPhi.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Hãy chắc chắn rằng kì học đó đã được thiết lập", null, JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }

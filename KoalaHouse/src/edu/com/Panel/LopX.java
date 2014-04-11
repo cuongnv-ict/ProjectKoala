@@ -38,20 +38,20 @@ public class LopX extends javax.swing.JPanel {
         new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
-        XuLy.setID(id_students, lopx, 0);
+        if (!lopx.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_students, lopx, 0);
+        }
     }
+
     public LopX(String tenlop) {
         initComponents();
-        DataTable a=new DataBase.DataTable();
-        malop=a.LayIdTenLop(tenlop);
+        malop = new DataBase.DataTable().LayIdTenLop(tenlop);
         new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
-        System.out.println(lopx.getRowCount());
-        System.out.println("hehe");
-            
-        XuLy.setID(id_students, lopx, 0);
-
+        if (!lopx.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_students, lopx, 0);
+        }
     }
 
     public void setMaLop(int malop) {
@@ -78,7 +78,6 @@ public class LopX extends javax.swing.JPanel {
         xoa = new javax.swing.JLabel();
         chuyenlop = new javax.swing.JButton();
         loc = new javax.swing.JComboBox();
-        nghi = new javax.swing.JButton();
         textfield_timkiem = new javax.swing.JTextField();
         chitiet = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -149,14 +148,6 @@ public class LopX extends javax.swing.JPanel {
             }
         });
 
-        nghi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nghi.setText("Danh Sách Nghỉ Phép");
-        nghi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nghiActionPerformed(evt);
-            }
-        });
-
         textfield_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textfield_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,11 +183,9 @@ public class LopX extends javax.swing.JPanel {
                 .addComponent(xoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chitiet)
-                .addGap(167, 167, 167)
+                .addGap(325, 325, 325)
                 .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(nghi)
-                .addGap(44, 44, 44)
+                .addGap(85, 85, 85)
                 .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -218,13 +207,13 @@ public class LopX extends javax.swing.JPanel {
                         .addComponent(xoa)
                         .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(chitiet))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(7, 7, 7)
-                            .addComponent(nghi, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(loc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(chuyenlop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
         );
@@ -232,6 +221,9 @@ public class LopX extends javax.swing.JPanel {
 
     private void lopxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lopxMouseClicked
         // TODO add your handling code here:
+        if (lopx.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
         if (evt.getClickCount() == 2) {
             int row = lopx.getSelectedRow();
             model.setValueAt(false, row, 6);
@@ -299,7 +291,7 @@ public class LopX extends javax.swing.JPanel {
             return;
         }
         Vector vec = (Vector) model.getDataVector().elementAt(row);
-        vec.setElementAt(id_students.get((Integer) model.getValueAt(row, 0)),0);
+        vec.setElementAt(id_students.get((Integer) model.getValueAt(row, 0)), 0);
         ThemHS hs = new ThemHS(null, true, vec);
         hs.setVisible(true);
         if (hs.getButton()) {
@@ -329,14 +321,6 @@ public class LopX extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_chuyenlopActionPerformed
-
-    private void nghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nghiActionPerformed
-        // TODO add your handling code here:
-        NghiPhep nghi = new NghiPhep(null, true);
-        nghi.setTitle("Danh sách nghi phép lớp " + this.getName());
-        nghi.setVisible(true);
-
-    }//GEN-LAST:event_nghiActionPerformed
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
@@ -386,52 +370,50 @@ public class LopX extends javax.swing.JPanel {
         // TODO add your handling code here:
         switch (loc.getSelectedIndex()) {
             case 0:
-                new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
+                new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
-                XuLy.setID(id_students, lopx, 0);
                 break;
             case 1:
-                new DataBase.DataTable().BangDanhHSLop_ChinhQuy(1, lopx);
+                new DataBase.DataTable().BangDanhHSLop_ChinhQuy(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
-                XuLy.setID(id_students, lopx, 0);
                 break;
             case 2:
-                new DataBase.DataTable().BangDanhHSLop_Khach(1, lopx);
+                new DataBase.DataTable().BangDanhHSLop_Khach(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
-                XuLy.setID(id_students, lopx, 0);
                 break;
             case 3:
-                new DataBase.DataTable().BangDanhSachHSDongDuPhi(1, lopx);
+                new DataBase.DataTable().BangDanhSachHSDongDuPhi(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
-                XuLy.setID(id_students, lopx, 0);
                 break;
             case 4:
-                new DataBase.DataTable().BangDanhSachHocSinhNoPhi(1, lopx);
+                new DataBase.DataTable().BangDanhSachHocSinhNoPhi(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
-                XuLy.setID(id_students, lopx, 0);
                 break;
+        }
+        if (!lopx.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_students, lopx, 0);
         }
     }//GEN-LAST:event_locActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        String thongtin= textfield_timkiem.getText();
-        if (thongtin.equals(null))
-        {
-               JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
-            
+        if (lopx.getValueAt(0, 0).toString().equals("")) {
+            return;
         }
-        else
-        {
-                boolean a=new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
-                System.out.print(a);
-                if(a==false)
-                { 
-                    JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
+        String thongtin = textfield_timkiem.getText() + "";
+        if (thongtin.equals("")) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            boolean a = new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
+            if (a == false) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                if (!lopx.getValueAt(0, 0).toString().equals("")) {
+                    XuLy.setID(id_students, lopx, 0);
                 }
+            }
         }
     }//GEN-LAST:event_jButton1MouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chitiet;
     private javax.swing.JButton chuyenlop;
@@ -439,7 +421,6 @@ public class LopX extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JComboBox loc;
     private javax.swing.JTable lopx;
-    private javax.swing.JButton nghi;
     private javax.swing.JLabel sua;
     private javax.swing.JTextField textfield_timkiem;
     private javax.swing.JLabel them;

@@ -332,7 +332,7 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_Update = new javax.swing.JMenuItem();
         Menu_DangXuat = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        CapNhatNamHoc = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Menu_DongBo = new javax.swing.JMenuItem();
         Menu_BackUp = new javax.swing.JMenuItem();
@@ -437,7 +437,7 @@ public class ListKoala extends javax.swing.JFrame {
             .addGroup(Panel_trungtamLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         Panel_GDChinh.addTab("Trung Tâm", Panel_trungtam);
@@ -626,13 +626,13 @@ public class ListKoala extends javax.swing.JFrame {
         });
         Namhoc.add(Menu_thoat);
 
-        jMenuItem1.setText("Cập Nhật Năm Học");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        CapNhatNamHoc.setText("Cập Nhật Năm Học");
+        CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                CapNhatNamHocActionPerformed(evt);
             }
         });
-        Namhoc.add(jMenuItem1);
+        Namhoc.add(CapNhatNamHoc);
 
         jMenuBar1.add(Namhoc);
 
@@ -918,6 +918,7 @@ public class ListKoala extends javax.swing.JFrame {
             new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
             }
         }
+        else{}
     }//GEN-LAST:event_JtreeMouseClicked
 // xu ly su kien chuot phai
     private void JtreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseReleased
@@ -1043,16 +1044,14 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_trinhdoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void NamhocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamhocActionPerformed
+    private void CapNhatNamHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatNamHocActionPerformed
         // TODO add your handling code here:
         NamHoc nam = new NamHoc(frame, rootPaneCheckingEnabled);
         nam.setVisible(true);
-        nam.show();
+    }//GEN-LAST:event_CapNhatNamHocActionPerformed
+
+    private void NamhocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamhocActionPerformed
+        // TODO add your handling code here:
        
     }//GEN-LAST:event_NamhocActionPerformed
 
@@ -1093,6 +1092,7 @@ public class ListKoala extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem A;
+    private javax.swing.JMenuItem CapNhatNamHoc;
     private javax.swing.JMenuItem D;
     private javax.swing.JMenuItem Menu_BackUp;
     private javax.swing.JMenuItem Menu_DangXuat;
@@ -1122,7 +1122,6 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
