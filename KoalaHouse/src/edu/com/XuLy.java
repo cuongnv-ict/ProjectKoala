@@ -68,7 +68,7 @@ public class XuLy {
                 }
                 return msg.toString();
             } catch (NumberFormatException e) {           
-                return null;
+                return str;
             }
         }
     }

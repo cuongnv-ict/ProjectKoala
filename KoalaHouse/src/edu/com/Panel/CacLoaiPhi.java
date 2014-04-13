@@ -6,6 +6,8 @@
 package edu.com.Panel;
 
 import edu.com.Dialog.ThemGia;
+import edu.com.XuLy;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,11 +23,16 @@ public class CacLoaiPhi extends javax.swing.JPanel {
      * Creates new form CacLoaiPhi
      */
     private DefaultTableModel model;
+    ArrayList<Integer> id_cost;
 
     public CacLoaiPhi() {
         initComponents();
         new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
         model = (DefaultTableModel) BangPhi.getModel();
+        id_cost = new ArrayList<Integer>();
+        if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_cost, BangPhi, 0);
+        }
     }
 
     /**
@@ -117,7 +124,9 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         if (cost.getButton()) {
             new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
             model = (DefaultTableModel) BangPhi.getModel();
-
+            if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+                XuLy.setID(id_cost, BangPhi, 0);
+            }
         }
     }//GEN-LAST:event_ThemPhiMouseClicked
 
@@ -125,7 +134,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         // TODO add your handling code here:
         int count = 1, row = 0;
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
+            if ((Boolean) model.getValueAt(i, 7) == true) {
                 count--;
                 row = i;
             }
@@ -136,17 +145,20 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
                 for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                    model.setValueAt(false, i, 6);
+                    model.setValueAt(false, i, 7);
                 }
             }
             return;
         }
         Vector vec = (Vector) model.getDataVector().elementAt(row);
-        ThemGia cost = new ThemGia(null, true, vec);
+        ThemGia cost = new ThemGia(null, true, vec, id_cost.get(row));
         cost.setVisible(true);
         if (cost.getButton()) {
             new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
             model = (DefaultTableModel) BangPhi.getModel();
+            if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+                XuLy.setID(id_cost, BangPhi, 0);
+            }
         }
     }//GEN-LAST:event_SuaMouseClicked
 
@@ -154,11 +166,14 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             Vector vec = (Vector) model.getDataVector().elementAt(BangPhi.getSelectedRow());
-            ThemGia cost = new ThemGia(null, true, vec);
+            ThemGia cost = new ThemGia(null, true, vec, id_cost.get(BangPhi.getSelectedRow()));
             cost.setVisible(true);
             if (cost.getButton()) {
                 new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
                 model = (DefaultTableModel) BangPhi.getModel();
+                if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+                    XuLy.setID(id_cost, BangPhi, 0);
+                }
             }
         }
     }//GEN-LAST:event_BangPhiMouseClicked
@@ -167,20 +182,8 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
-                int x = 0;
-                if (BangPhi.getValueAt(i, 1).toString().equals("Kỳ 1")) {
-                    x = 1;
-                } else if (BangPhi.getValueAt(i, 1).toString().equals("Kỳ 2")) {
-                    x = 2;
-                } else if (BangPhi.getValueAt(i, 1).toString().equals("Kỳ 3")) {
-                    x = 3;
-                } else if (BangPhi.getValueAt(i, 1).toString().equals("Kỳ hè")) {
-                    x = 4;
-                } else {
-                    x = 5;
-                }
-                if (new DataBase.SQLHocPhi().xoaHocPhi(x, BangPhi.getValueAt(i, 0).toString())) {
+            if ((Boolean) model.getValueAt(i, 7) == true) {
+                if (new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i))) {
                     model.removeRow(i);
                 };
             }

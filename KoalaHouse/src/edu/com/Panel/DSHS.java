@@ -42,7 +42,6 @@ public class DSHS extends javax.swing.JPanel {
             Count.setText(String.valueOf(DSHS.getRowCount()));
             XuLy.setID(id_students, DSHS, 0);
         }
-        System.err.println(id_students.get(2));
         arrRows = null;
     }
 
