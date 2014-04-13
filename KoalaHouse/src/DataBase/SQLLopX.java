@@ -121,6 +121,7 @@ public class SQLLopX {
             rs1.next();
             int max = rs1.getInt(1);
             rs1 = statement.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id= " + id_class);
+            rs1.next();
             if (max == rs1.getInt(1)) {
                 JOptionPane.showMessageDialog(null, "Số học sinh trong lớp đã đạt tối đa, không thể thêm học sinh", null, JOptionPane.INFORMATION_MESSAGE);
                 return false;

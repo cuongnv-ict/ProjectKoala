@@ -10,6 +10,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -19,6 +21,7 @@ public class ThemGia extends javax.swing.JDialog {
 
     private boolean button;// set gia tri cua button
     private int id;
+    String str;
 
     /**
      * Creates new form ThemGia
@@ -28,9 +31,28 @@ public class ThemGia extends javax.swing.JDialog {
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
+        Gia.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               str = Gia.getText();
+//                Gia.setText(XuLy.setMoney(str));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                 str = Gia.getText();
+//                Gia.setText(XuLy.setMoney(str));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                str = Gia.getText();
+//                Gia.setText(XuLy.setMoney(str));
+            }
+        });
     }
 
-    public ThemGia(java.awt.Frame parent, boolean modal, Vector vector,int id) {
+    public ThemGia(java.awt.Frame parent, boolean modal, Vector vector, int id) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
@@ -228,7 +250,7 @@ public class ThemGia extends javax.swing.JDialog {
         if (!DongY.getText().equals("Cập nhật") && new DataBase.SQLHocPhi().themHocPhi(vec)) {
             button = true;
             dispose();
-        } else if (DongY.getText().equals("Cập nhật") && new DataBase.SQLHocPhi().suaHocPhi(vec,id)) {
+        } else if (DongY.getText().equals("Cập nhật") && new DataBase.SQLHocPhi().suaHocPhi(vec, id)) {
             button = true;
             dispose();
         }
@@ -242,10 +264,8 @@ public class ThemGia extends javax.swing.JDialog {
     }//GEN-LAST:event_HuyBoActionPerformed
 
     private void GiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GiaKeyTyped
-        
-            String str = Gia.getText();
-            Gia.setText(XuLy.setMoney(str));
-       
+//        String str = Gia.getText();
+        Gia.setText(XuLy.setMoney(str));
     }//GEN-LAST:event_GiaKeyTyped
     /**
      * @param args the command line arguments

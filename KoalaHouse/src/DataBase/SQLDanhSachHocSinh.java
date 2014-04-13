@@ -116,6 +116,8 @@ public class SQLDanhSachHocSinh {
             statement.execute("delete from classes_has_students where students_id = " + id);
             statement.execute("delete from students_has_cost where students_id = " + id);
             statement.execute("delete from lateday where students_id = " + id);
+            statement.execute("delete from receipts where students_id = " + id);
+            statement.execute("delete from leaves where students_id = " + id);
             statement.execute("delete from students where id = " + id);
         } catch (SQLException ex) {
             Logger.getLogger(SQLDanhSachHocSinh.class.getName()).log(Level.SEVERE, null, ex);
