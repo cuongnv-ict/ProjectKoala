@@ -448,6 +448,7 @@ public class HocSinhA extends javax.swing.JPanel {
 
     private void Button_HS_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_CapNhatActionPerformed
         new AStudentAndLateDay().UpdataInfoStudent(id,idTrungTam,edit_ten.getText(),NgaySinh.getText(),edit_daidien.getText(),SoDT.getText());
+        JOptionPane.showMessageDialog(Panel_hocsinhA, "Thông Tin Học Sinh Đã Được Cập Nhật");
     }//GEN-LAST:event_Button_HS_CapNhatActionPerformed
 
     private void Button_HS_DongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_DongActionPerformed

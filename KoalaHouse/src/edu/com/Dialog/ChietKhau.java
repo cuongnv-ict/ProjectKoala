@@ -6,6 +6,8 @@
 
 package edu.com.Dialog;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Pham The Quyen
@@ -92,10 +94,24 @@ public class ChietKhau extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        phanTram = PT.getText();
+        String x = PT.getText();
+        if(x.length() >0){
+        String[] bc = x.split("%");
+        String[] dc = bc[0].split(" ");
+        phanTram = dc[0];
+        try{
+        int i = Integer.parseInt(phanTram);
         check = true;
         lido = Reason.getText();
+        
         dispose();
+        }
+        catch(java.lang.NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Hãy Nhập Lại Số % Chiết Khấu");
+        }
+        }
+        else
+            dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
