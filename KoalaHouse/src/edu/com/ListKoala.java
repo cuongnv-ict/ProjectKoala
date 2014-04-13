@@ -6,7 +6,6 @@ package edu.com;
 
 
 import DataBase.ConnectData;
-import com.mysql.jdbc.ResultSet;
 import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
@@ -16,7 +15,6 @@ import edu.com.Dialog.NamHoc;
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
-
 import edu.com.Panel.CacLoaiPhi;
 import edu.com.Panel.DSHS;
 import edu.com.Panel.DSLop;
@@ -33,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
@@ -43,20 +42,20 @@ import javax.swing.JButton;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.JViewport;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  *

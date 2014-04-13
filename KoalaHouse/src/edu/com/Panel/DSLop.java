@@ -151,6 +151,7 @@ public class DSLop extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void Button_DSLop_ThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_ThemLopMouseClicked
         // TODO add your handling code here:
         ThemSuaLop lop = new ThemSuaLop(null,true);

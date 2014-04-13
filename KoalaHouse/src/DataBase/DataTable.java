@@ -745,7 +745,7 @@ public class DataTable {
             }
             else
             {
-                String message =String.format( "Trong các lớp chọn có lớp vẫn đang tồn tại hs bạn cần xóa hs trong lớp hoặc chuyển lớp cho các hs!");
+                String message =String.format( "Trong các lớp chọn có lớp vẫn đang tồn tại hs, hoặc có hs đặt chỗ hay học sinh xin tạm nghỉ , bạn cần xóa hs trong lớp hoặc chuyển lớp cho các hs!");
                 JOptionPane.showMessageDialog( null, message );
                 return false;
             }

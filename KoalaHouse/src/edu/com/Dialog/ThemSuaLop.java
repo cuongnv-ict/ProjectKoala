@@ -116,6 +116,25 @@ public class ThemSuaLop extends javax.swing.JDialog {
     public String getTrangThai(){
         return trangthai.getSelectedItem().toString();
     }
+    //kiem tra ngay ket thuc va ngay bat dau
+    public boolean kiemtrangaythang()
+    {
+        int ngaybd,thangbd,nambd,ngaykt,thangkt,namkt;
+        ngaybd=Integer.parseInt(B_day.getSelectedItem().toString());
+        thangbd=Integer.parseInt(B_month.getSelectedItem().toString());
+        nambd=Integer.parseInt(B_year.getSelectedItem().toString());
+        ngaykt=Integer.parseInt(E_day.getSelectedItem().toString());
+        thangkt=Integer.parseInt(E_month.getSelectedItem().toString());
+        namkt=Integer.parseInt(E_year.getSelectedItem().toString());
+        
+        if(namkt>nambd) return true;
+        else if (namkt<nambd) return false;
+        else if (namkt==nambd&&thangkt>thangbd) return true;
+        else if (namkt==nambd&&thangkt<thangbd) return false;
+        else if (namkt==nambd&&thangkt==thangbd&&ngaykt>ngaybd) return true;
+        
+        return false;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,6 +183,8 @@ public class ThemSuaLop extends javax.swing.JDialog {
         jLabel5.setText("Kì Học");
 
         jLabel6.setText("Khối Học");
+
+        sohs.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         trinhdo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NẮNG MAI (SUNSHINE)", "TỔ ONG (BEEHEVE)", "TỔ KÉN (CHRYSARYS)", "MẪU GIÁO (KINDERGENTEN)" }));
 
@@ -246,7 +267,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
                                                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGap(10, 10, 10)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(trangthai, 0, 151, Short.MAX_VALUE)
+                                                .addComponent(trangthai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(trungtam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -321,7 +342,9 @@ public class ThemSuaLop extends javax.swing.JDialog {
 
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
         // TODO add your handling code here:
-        
+        boolean kiemtrangay=kiemtrangaythang();
+       if(kiemtrangay==true)
+       {
         DataBase.DataTable a = new DataTable();
         String tenlop= ten.getText();
         String tengiaovien=giaovien.getText();
@@ -376,11 +399,17 @@ public class ThemSuaLop extends javax.swing.JDialog {
         }    
         else
         {
-                String message =String.format( "lỗi tạo lớp mời bạn xem lại dữ liệu");
+                String message =String.format( "lỗi tạo lớp, mời bạn xem lại dữ liệu");
                 JOptionPane.showMessageDialog( null, message );
         }
         
-        
+       }
+       else 
+       {        
+                 String message =String.format( "lỗi tạo lớp phần ngày tháng, mới bạn xem lại");
+                JOptionPane.showMessageDialog( null, message );
+       
+       }
     }//GEN-LAST:event_DongYMouseClicked
 
     private void HuyBoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HuyBoMouseClicked

@@ -50,10 +50,13 @@ public class SQLJTree {
     {
         try{
             String query = "update students set isactive = -1 where Id  in (select Students_Id from classes_has_students where Classes_Id='"+id_lop+"' ) and Faculties_Id='"+ThongTin.trungtam+"'" ;
-            System.out.println(query);
+           
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
-           
+            query = "delete from classes_has_students where Classes_Id='"+id_lop+"'  and Faculties_Id='"+ThongTin.trungtam+"'";
+            
+            connect.prepareStatement(query);
+            pstmt.executeUpdate();
         }
         catch(SQLException ex){
             
