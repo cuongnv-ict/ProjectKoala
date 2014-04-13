@@ -29,11 +29,11 @@
               <Component id="chuyenlop" min="-2" pref="140" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               <Component id="loc" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
+              <EmptySpace pref="115" max="32767" attributes="0"/>
+              <Component id="textfield_timkiem" min="-2" pref="122" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="textfield_timkiem" min="-2" pref="122" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
           <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -43,29 +43,22 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="textfield_timkiem" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="sua" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="xoa" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="them" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="chitiet" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="sua" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="xoa" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="them" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="chitiet" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="loc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="chuyenlop" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButton1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="loc" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="chuyenlop" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textfield_timkiem" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="402" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" pref="400" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -172,6 +165,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_timkiemActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textfield_timkiemKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="chitiet">

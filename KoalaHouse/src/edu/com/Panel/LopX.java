@@ -34,16 +34,6 @@ public class LopX extends javax.swing.JPanel {
     /**
      * Creates new form LopX
      */
-    public LopX() {
-        initComponents();
-        new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
-        model = (DefaultTableModel) lopx.getModel();
-        id_students = new ArrayList<Integer>();
-        if (!lopx.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_students, lopx, 0);
-        }
-    }
-
     public LopX(String tenlop) {
         initComponents();
         malop = new DataBase.DataTable().LayIdTenLop(tenlop);
@@ -155,6 +145,11 @@ public class LopX extends javax.swing.JPanel {
                 textfield_timkiemActionPerformed(evt);
             }
         });
+        textfield_timkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textfield_timkiemKeyTyped(evt);
+            }
+        });
 
         chitiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/chitiet.png"))); // NOI18N
         chitiet.setToolTipText("Xem chi tiết");
@@ -188,11 +183,11 @@ public class LopX extends javax.swing.JPanel {
                 .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
                 .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
@@ -200,23 +195,19 @@ public class LopX extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(sua)
-                        .addComponent(xoa)
-                        .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(chitiet))
+                    .addComponent(sua)
+                    .addComponent(xoa)
+                    .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chitiet)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -241,18 +232,15 @@ public class LopX extends javax.swing.JPanel {
 
     private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
         // TODO add your handling code here:
-        ThemHS hs = new ThemHS(ListKoala.frame, true);
+        ThemHS hs = new ThemHS(ListKoala.frame, true, malop);
         hs.setVisible(true);
         if (hs.getButton()) {
-            Vector vector = new Vector();
-            vector.add(model.getRowCount() + 1);
-            vector.add(hs.getTenHS());
-            vector.add(hs.getNgaySinh());
-            vector.add(hs.getHinhThuc());
-            vector.add(hs.getDienThoai());
-            vector.add(hs.getDaiDien());
-            vector.add(false);
-            model.addRow(vector);
+            new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+            model = (DefaultTableModel) lopx.getModel();
+            id_students = new ArrayList<Integer>();
+            if (!lopx.getValueAt(0, 0).toString().equals("")) {
+                XuLy.setID(id_students, lopx, 0);
+            }
         }
     }//GEN-LAST:event_themMouseClicked
 
@@ -277,11 +265,10 @@ public class LopX extends javax.swing.JPanel {
             return;
         }
         Vector vec = (Vector) model.getDataVector().elementAt(row);
-        vec.setElementAt(id_students.get((Integer) model.getValueAt(row, 0)), 0);
-        ThemHS hs = new ThemHS(null, true, vec);
+        ThemHS hs = new ThemHS(null, true, vec, id_students.get(row));
         hs.setVisible(true);
         if (hs.getButton()) {
-            new DataBase.SQLLopX().BangDanhHSLop(1, lopx);
+            new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
             model = (DefaultTableModel) lopx.getModel();
             XuLy.setID(id_students, lopx, 0);
         }
@@ -317,7 +304,7 @@ public class LopX extends javax.swing.JPanel {
                 new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
             }
         }
-        new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
+        new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_students, lopx, 0);
@@ -331,8 +318,8 @@ public class LopX extends javax.swing.JPanel {
                 model.setValueAt(false, i, 6);
                 int id = id_students.get(i);
                 String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
-            //HocSinhA.idTemp = id;
-            HocSinhA aa = new HocSinhA(id);
+                //HocSinhA.idTemp = id;
+                HocSinhA aa = new HocSinhA(id);
                 center.add(model.getValueAt(i, 1).toString(), aa);
                 center.setSelectedComponent(aa);
                 new CloseTabButton(center, center.getComponentCount() - 2);
@@ -342,6 +329,9 @@ public class LopX extends javax.swing.JPanel {
 
     private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
         // TODO add your handling code here:
+        if (textfield_timkiem.getText().equals("")) {
+            this.locActionPerformed(evt);
+        }
     }//GEN-LAST:event_textfield_timkiemActionPerformed
 
     private void locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locActionPerformed
@@ -392,6 +382,37 @@ public class LopX extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void textfield_timkiemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_timkiemKeyTyped
+        // TODO add your handling code here:
+        if (textfield_timkiem.getText().equals("")) {
+            switch (loc.getSelectedIndex()) {
+                case 0:
+                    new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+                    model = (DefaultTableModel) lopx.getModel();
+                    break;
+                case 1:
+                    new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
+                    model = (DefaultTableModel) lopx.getModel();
+                    break;
+                case 2:
+                    new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
+                    model = (DefaultTableModel) lopx.getModel();
+                    break;
+                case 3:
+                    new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
+                    model = (DefaultTableModel) lopx.getModel();
+                    break;
+                case 4:
+                    new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
+                    model = (DefaultTableModel) lopx.getModel();
+                    break;
+            }
+            if (!lopx.getValueAt(0, 0).toString().equals("")) {
+                XuLy.setID(id_students, lopx, 0);
+            }
+        }
+    }//GEN-LAST:event_textfield_timkiemKeyTyped
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chitiet;
     private javax.swing.JButton chuyenlop;

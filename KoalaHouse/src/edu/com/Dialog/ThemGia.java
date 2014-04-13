@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import edu.com.XuLy;
 import java.awt.Toolkit;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -113,6 +114,11 @@ public class ThemGia extends javax.swing.JDialog {
         Ky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kỳ 1", "Kỳ 2", "Kỳ 3", "Kỳ hè", "Cả năm" }));
 
         Gia.setPreferredSize(new java.awt.Dimension(48, 25));
+        Gia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                GiaKeyTyped(evt);
+            }
+        });
 
         HuyBo.setText("Hủy bỏ");
         HuyBo.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +227,13 @@ public class ThemGia extends javax.swing.JDialog {
         button = false;
         dispose();
     }//GEN-LAST:event_HuyBoActionPerformed
+
+    private void GiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GiaKeyTyped
+        // TODO add your handling code here:
+        String str = Gia.getText();
+        System.err.println(str);
+        Gia.setText(XuLy.setMoney(str));
+    }//GEN-LAST:event_GiaKeyTyped
     /**
      * @param args the command line arguments
      */

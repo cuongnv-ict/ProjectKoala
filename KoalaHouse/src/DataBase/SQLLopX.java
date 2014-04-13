@@ -4,6 +4,7 @@
  */
 package DataBase;
 
+import edu.com.ThongTin;
 import edu.com.XuLy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -116,40 +117,65 @@ public class SQLLopX {
             } else {
                 x = 1;
             }
+            rs1 = statement.executeQuery("select maxnumber from classes where id = " + id_class);
+            rs1.next();
+            int max = rs1.getInt(1);
+            rs1 = statement.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id= " + id_class);
+            if (max == rs1.getInt(1)) {
+                JOptionPane.showMessageDialog(null, "Số học sinh trong lớp đã đạt tối đa, không thể thêm học sinh", null, JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
             Pstate = connect.prepareStatement("insert into students(id,Faculties_Id,FullName,BrithDay,PhoneNumber,Representative,IsClient,Debt,IsActive)"
                     + " values (?,?,?,?,?,?,?,?,?)");
             Pstate.setString(1, String.valueOf(x));
-            Pstate.setString(2, vector.get(0).toString());
-            Pstate.setString(3, vector.get(1).toString());
-            Pstate.setString(4, vector.get(2).toString());
-            Pstate.setString(5, vector.get(3).toString());
-            Pstate.setString(6, vector.get(4).toString());
-            Pstate.setString(7, vector.get(5).toString());
-            Pstate.setString(8, vector.get(6).toString());
-            Pstate.setString(9, vector.get(7).toString());
+            Pstate.setString(2, String.valueOf(ThongTin.trungtam));
+            Pstate.setString(3, vector.get(0).toString());
+            Pstate.setString(4, vector.get(1).toString());
+            Pstate.setString(5, vector.get(2).toString());
+            Pstate.setString(6, vector.get(3).toString());
+            System.out.println(vector.get(4).toString());
+            Pstate.setString(7, vector.get(4).toString());
+            Pstate.setString(8, "0");
+            Pstate.setString(9, "1");
             Pstate.execute();
             Pstate = connect.prepareStatement("insert into classes_has_students(Classes_Id,Students_Id,Faculties_Id) values(?,?,?)");
-            Pstate.setString(1, String.valueOf(x));
-            Pstate.setString(2, vector.get(0).toString());
-            Pstate.setString(3, vector.get(1).toString());
+            Pstate.setString(1, String.valueOf(id_class));
+            Pstate.setString(2, String.valueOf(x));
+            Pstate.setString(3, String.valueOf(ThongTin.trungtam));
             Pstate.execute();
             statement.close();
             connect.close();
+            JOptionPane.showMessageDialog(null, "Thêm học sinh thành công", null, JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Xảy ra lỗi trong quá trình thêm học sinh.\n Bạn hãy thử lại", null, JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(SQLLopX.class.getName()).log(Level.SEVERE, null, ex);
             try {
                 statement.close();
                 connect.close();
             } catch (SQLException ex1) {
                 Logger.getLogger(SQLLopX.class.getName()).log(Level.SEVERE, null, ex1);
+                return false;
             }
             return false;
         }
     }
 
     public boolean suaHocSinh(Vector vector, int id_student) {
-        return true;
+        try {
+            Pstate = connect.prepareStatement("update students set FullName=?,BrithDay=?,PhoneNumber=?,Representative=?,IsClient=? where id = " + id_student);
+            Pstate.setString(1, vector.get(0).toString());
+            Pstate.setString(2, vector.get(1).toString());
+            Pstate.setString(3, vector.get(2).toString());
+            Pstate.setString(4, vector.get(3).toString());
+            Pstate.setString(5, vector.get(4).toString());
+            Pstate.execute();
+            JOptionPane.showMessageDialog(null, "Chỉnh sửa học sinh thành công", null, JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLLopX.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     public boolean xoaHocSinh(int id_student) {
@@ -237,7 +263,8 @@ public class SQLLopX {
             return false;
         }
     }
- public void BangDanhHSLop_iType(int classes_id, JTable table, int isClient) {
+
+    public void BangDanhHSLop_iType(int classes_id, JTable table, int isClient) {
         try {
             Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();

@@ -74,7 +74,10 @@ public class SQLHocPhi {
                 str[4] = rs1.getString(11);
                 str[5] = rs1.getString(5);
                 if (((String) str[5]).charAt(0) == '-') {
-                    str[5] = ((String) str[5]).substring(1);
+                    str[5] = XuLy.setMoney(((String) str[5]).substring(1));
+                }
+                else{
+                     str[5] = XuLy.setMoney((String) str[5]);
                 }
                 str[6] = false;
                 data.add(str);
@@ -118,7 +121,7 @@ public class SQLHocPhi {
 
     public boolean suaHocPhi(Vector vector, Vector oldVertor) {
         try {
-            Pstate = connect.prepareStatement("select id from cost where namecost = ? and semesters = ? and year = ?");
+            Pstate = connect.prepareStatement("select id from cost where namecost = ? and semesters = ? and year = ? and Faculties_Id=" + ThongTin.trungtam);
             Pstate.setString(1, vector.get(0).toString());
             Pstate.setString(2, vector.get(1).toString());
             Pstate.setString(3, vector.get(2).toString());
@@ -127,14 +130,15 @@ public class SQLHocPhi {
                 JOptionPane.showMessageDialog(null, "Loại phí đã tồn tại, bạn không thể thay đổi", null, JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            Pstate = connect.prepareStatement("select year from semesters where year = ?");
+            Pstate = connect.prepareStatement("select * from semesters where year = ? and Faculties_Id=" + ThongTin.trungtam);
             Pstate.setString(1, vector.get(2).toString());
+            rs1 = Pstate.executeQuery();
             if (!rs1.next()) {
                 JOptionPane.showMessageDialog(null, "Năm học bạn chọn chưa được thiết lập", null, JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             rs1 = Pstate.executeQuery();
-            Pstate = connect.prepareStatement("update cost set semesters=?,namecost=?,amount=?,year=? where year = ? and semesters = ? and namecost =?");
+            Pstate = connect.prepareStatement("update cost set semesters=?,namecost=?,amount=?,year=? where year = ? and semesters = ? and namecost =? and Faculties_Id=" + ThongTin.trungtam);
             Pstate.setString(1, vector.get(1).toString());
             Pstate.setString(2, vector.get(0).toString());
             Pstate.setString(3, vector.get(3).toString());
@@ -159,6 +163,13 @@ public class SQLHocPhi {
             rs1 = Pstate.executeQuery();
             if (rs1.next()) {
                 JOptionPane.showMessageDialog(null, "Loại phí này đã tồn tại rồi", null, JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            Pstate = connect.prepareStatement("select * from semesters where year = ?");
+            Pstate.setString(1, vector.get(2).toString());
+            rs1 = Pstate.executeQuery();
+            if (!rs1.next()) {
+                JOptionPane.showMessageDialog(null, "Năm học bạn chọn chưa được thiết lập", null, JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             rs1 = statement.executeQuery("select max(id) from cost");
@@ -255,7 +266,7 @@ public class SQLHocPhi {
         try {
             Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-           rs1 = statement.executeQuery("select * from students where isactive =1 and  students.id in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id) or debt!=0");
+            rs1 = statement.executeQuery("select * from students where (isactive= 1 and students.id in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id))or(isactive= 1 and debt!=0 and id in(SELECT Students_Id FROM projectkoala.classes_has_students where Classes_Id=" + classes_id + "))");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[7];

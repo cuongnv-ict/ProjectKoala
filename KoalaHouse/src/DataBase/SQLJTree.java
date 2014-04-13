@@ -54,7 +54,7 @@ public class SQLJTree {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
             query = "delete from classes_has_students where Classes_Id='"+id_lop+"'  and Faculties_Id='"+ThongTin.trungtam+"'";
-            
+           
             connect.prepareStatement(query);
             pstmt.executeUpdate();
         }

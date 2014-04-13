@@ -7,23 +7,29 @@ package edu.com.Dialog;
 import java.awt.Toolkit;
 import java.util.Vector;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Venus
  */
 public class ThemHS extends javax.swing.JDialog {
+
     private boolean button;
+    private int id_classes, id_student;
+
     /**
      * Creates new form ThemHS
      */
-    public ThemHS(java.awt.Frame parent, boolean modal) {
+    public ThemHS(java.awt.Frame parent, boolean modal,int id_classes) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
-        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
+        this.id_classes = id_classes;
     }
-    public ThemHS(java.awt.Frame parent, boolean modal,Vector vector) {
+
+    public ThemHS(java.awt.Frame parent, boolean modal, Vector vector,int id_students) {
         super(parent, modal);
         initComponents();
         DongY.setText("Chỉnh sửa");
@@ -32,46 +38,53 @@ public class ThemHS extends javax.swing.JDialog {
         dienthoai.setText(vector.get(4).toString());
         daidien.setText(vector.get(5).toString());
         Object obj[] = vector.get(2).toString().split("-");
-        setSelectComboBox(hinhthuc,vector.get(3));
+        setSelectComboBox(hinhthuc, vector.get(3));
         setSelectComboBox(nam, obj[0]);
         setSelectComboBox(thang, obj[1]);
         setSelectComboBox(ngay, obj[2]);
         this.setResizable(false);
+        this.id_student = id_students;
     }
-    private void setSelectComboBox(JComboBox x,Object obj){
-        for(int i =0;i<x.getItemCount();i++){
-            if(x.getItemAt(i).toString().equalsIgnoreCase(obj.toString())){
-              x.setSelectedIndex(i);
-              break;
-            } 
-        }     
+
+    private void setSelectComboBox(JComboBox x, Object obj) {
+        for (int i = 0; i < x.getItemCount(); i++) {
+            if (x.getItemAt(i).toString().equalsIgnoreCase(obj.toString())) {
+                x.setSelectedIndex(i);
+                break;
+            }
+        }
     }
     //getdulieu
+
     public boolean getButton()//lay xem la create hay cancle
     {
         return button;
     }
+
     public String getTenHS()// lay ten hs
     {
         return ten.getText();
     }
+
     public String getDaiDien()// lay dai dien
     {
         return daidien.getText();
     }
+
     public String getDienThoai()// lay dien thoai
     {
         return dienthoai.getText();
     }
+
     public String getHinhThuc()// lay hinh thuc
     {
         return hinhthuc.getSelectedItem().toString();
     }
+
     public String getNgaySinh()// lay ngay sinh
     {
-        return nam.getSelectedItem().toString() + "-"+thang.getSelectedItem().toString()+ "-"+ngay.getSelectedItem().toString();
+        return nam.getSelectedItem().toString() + "-" + thang.getSelectedItem().toString() + "-" + ngay.getSelectedItem().toString();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,7 +117,6 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel1.setText("Họ Và Tên:");
 
-        ten.setText("Nguyễn Hải Anh");
         ten.setPreferredSize(new java.awt.Dimension(83, 25));
         ten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,11 +126,11 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel2.setText("Điện Thoại:");
 
-        dienthoai.setText("01694379201");
+        dienthoai.setMinimumSize(new java.awt.Dimension(6, 25));
+        dienthoai.setPreferredSize(new java.awt.Dimension(6, 25));
 
         jLabel3.setText("Phụ Huynh");
 
-        daidien.setText("Nguyễn Ngọc Lan\t");
         daidien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 daidienActionPerformed(evt);
@@ -215,7 +227,7 @@ public class ThemHS extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(dienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hinhthuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,57 +264,40 @@ public class ThemHS extends javax.swing.JDialog {
 
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
         // TODO add your handling code here:
-        button= true;
-        dispose();
+        if (ten.getText().equals("") || daidien.getText().equals("") || dienthoai.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn hãy điền đủ thông tin trước khi tạo mới", null, JOptionPane.INFORMATION_MESSAGE);
+            button = false;
+            return;
+        }
+        if (ngay.getSelectedIndex() == 0 || thang.getSelectedIndex() == 0 || nam.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa hoàn thành thông tin ngày sinh của học sinh", null, JOptionPane.INFORMATION_MESSAGE);
+            button = false;
+            return;
+        }
+        Vector vector = new Vector();
+        vector.add(getTenHS());
+        vector.add(getNgaySinh());
+        vector.add(getDienThoai());
+        vector.add(getDaiDien());
+        vector.add(hinhthuc.getSelectedIndex());
+        if (!DongY.getText().equals("Chỉnh sửa")&&new DataBase.SQLLopX().themHocSinh(vector, id_classes)) {
+            button = true;
+            dispose();
+        } else if (DongY.getText().equals("Chỉnh sửa")&&new DataBase.SQLLopX().suaHocSinh(vector, id_student)) {
+            button = true;
+            dispose();
+        }
+
     }//GEN-LAST:event_DongYMouseClicked
 
     private void HuyBoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HuyBoMouseClicked
         // TODO add your handling code here:
-        button= false;
+        button = false;
         dispose();
     }//GEN-LAST:event_HuyBoMouseClicked
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemHS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemHS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemHS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemHS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ThemHS dialog = new ThemHS(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DongY;
     private javax.swing.JButton HuyBo;

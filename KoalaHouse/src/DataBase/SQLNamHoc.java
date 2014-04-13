@@ -97,8 +97,8 @@ public class SQLNamHoc {
                     str[2] = rs1.getString(5);
                     data.add(str);
                 } while (rs1.next());
-                if(data.size()<4){
-                    for (int i = 0; i < 5; i++) {
+                if(data.size()<5){
+                    for (int i = data.size(); i < 5; i++) {
                     Object str[] = new Object[3];
                     switch (i + 1) {
                         case 1:
@@ -111,9 +111,6 @@ public class SQLNamHoc {
                             str[0] = "Kỳ 3";
                             break;
                         case 4:
-                            str[0] = "Kỳ hè";
-                            break;
-                        case 5:
                             str[0] = "Kỳ hè";
                             break;
                     }
