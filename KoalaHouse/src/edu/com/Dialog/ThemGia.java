@@ -31,25 +31,7 @@ public class ThemGia extends javax.swing.JDialog {
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
-        Gia.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-               str = Gia.getText();
-//                Gia.setText(XuLy.setMoney(str));
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                 str = Gia.getText();
-//                Gia.setText(XuLy.setMoney(str));
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                str = Gia.getText();
-//                Gia.setText(XuLy.setMoney(str));
-            }
-        });
+       
     }
 
     public ThemGia(java.awt.Frame parent, boolean modal, Vector vector, int id) {
@@ -75,6 +57,7 @@ public class ThemGia extends javax.swing.JDialog {
             }
         }
         this.id = id;
+        
     }
     //lay gia tri cua 
 
@@ -264,10 +247,23 @@ public class ThemGia extends javax.swing.JDialog {
     }//GEN-LAST:event_HuyBoActionPerformed
 
     private void GiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GiaKeyTyped
-//        String str = Gia.getText();
-        Gia.setText(XuLy.setMoney(str));
+//         new Thread() {
+//            public void run() {
+//               
+//                     try {
+//                        Thread.sleep(200);
+                        String str = Gia.getText();
+                        Gia.setText(XuLy.setMoney(str));
+//  
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(ThemGia.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                
+//            }
+//        }.start();
     }//GEN-LAST:event_GiaKeyTyped
     /**
+     * 
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables

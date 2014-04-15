@@ -37,8 +37,6 @@ public class SQLDanhSachHocSinh {
             connect = c.connectionDatabase();
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, null, "Đăng nhập không thành công !!! \n Xem lại user name hoặc "
-                    + "password", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -12,7 +12,8 @@ import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
 import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
-import edu.com.Dialog.NamHoc;
+import edu.com.Dialog.Nam;
+
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
@@ -1102,7 +1103,7 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void CapNhatNamHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatNamHocActionPerformed
         // TODO add your handling code here:
-        NamHoc nam = new NamHoc(frame, rootPaneCheckingEnabled);
+        Nam nam = new Nam(frame, rootPaneCheckingEnabled);
         nam.setVisible(true);
     }//GEN-LAST:event_CapNhatNamHocActionPerformed
 
