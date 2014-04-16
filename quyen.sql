@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `projectkoala` /*!40100 DEFAULT CHARACTER SET utf
 USE `projectkoala`;
 -- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: projectkoala
+-- Host: localhost    Database: projectkoala
 -- ------------------------------------------------------
--- Server version	5.6.16
+-- Server version	5.6.14
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,7 +34,6 @@ CREATE TABLE `accounts` (
   `PhoneNumber` char(20) DEFAULT NULL,
   `IsActive` tinyint(1) DEFAULT NULL,
   `IsRoot` tinyint(1) DEFAULT NULL,
-  `ChucVu` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`Id`,`Faculties_Id`),
   KEY `fk_Accounts_Faculties1_idx` (`Faculties_Id`),
   CONSTRAINT `fk_Accounts_Faculties1` FOREIGN KEY (`Faculties_Id`) REFERENCES `faculties` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -47,7 +46,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (-1634859365,1,'hangcute','hangcute','hangcute','hangcute@yahoo.com','0123456789',NULL,0,'Kế Toán'),(-61091516,1,'hangham','hangham','hangham','hangham@yahoo.com','0123456789',NULL,1,'Trưởng phòng'),(1,1,'Nguyễn Thị Xuân','XuanNT','123456','xuan@gmail.com','+(84)169.825.3452',1,NULL,NULL),(2,2,'Lã Minh Nguyệt','NguyenLM','123456','nguyet@gmail.com','+(84)169.825.3453',1,NULL,NULL),(3,3,'Trần Thị Thu Thủy','ThuyTTT','123456','thuy@gmail.com','+(84)169.825.3454',0,NULL,NULL),(4,4,'Văn Thị Hải Yến','YenVTH','123456','yen@gmail.com','+(84)169.825.3455',1,NULL,NULL),(5,1,'admin','admin','admi','admin','adimn',1,NULL,NULL),(735104048,1,'test','test','test','LeTung@yahoo.com','SoDT',NULL,0,'Trưởng Phòng');
+INSERT INTO `accounts` VALUES (1,1,'Nguyễn Thị Xuân','XuanNT','123456','xuan@gmail.com','+(84)169.825.3452',1,NULL),(2,2,'Lã Minh Nguyệt','NguyenLM','123456','nguyet@gmail.com','+(84)169.825.3453',1,NULL),(3,3,'Trần Thị Thu Thủy','ThuyTTT','123456','thuy@gmail.com','+(84)169.825.3454',0,NULL),(4,4,'Văn Thị Hải Yến','YenVTH','123456','yen@gmail.com','+(84)169.825.3455',1,NULL),(5,1,'admin','admin','admi','admin','adimn',1,NULL);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +149,7 @@ CREATE TABLE `cost` (
 
 LOCK TABLES `cost` WRITE;
 /*!40000 ALTER TABLE `cost` DISABLE KEYS */;
-INSERT INTO `cost` VALUES (1,1,1,'Học Phí',24000000,2013),(2,1,4,'Xe Bus Ha Noi',-5000,2013),(3,1,2,'Học Phí',24000000,2013),(4,2,1,'Học Phí',24000000,2013),(5,2,1,'Học Phí',3000000,2013),(6,3,2,'Học Phí',24000000,2013),(7,3,2,'Xe Bus',500000,2013),(8,4,4,'Học Phí',24000000,2013),(9,4,4,'Tham Quan',500000,2013),(10,1,1,'Phí Đặt Cọc',-5000000,2013),(11,1,1,'Học Múa',1000000,2013),(12,1,1,'Học Đàn',5000000,2013),(13,1,1,'Phí Trông Muộn',20000,0000),(14,2,1,'Phí Trông Muộn',20000,0000),(15,3,1,'Phí Trông Muộn',20000,0000),(16,4,1,'Phí Trông Muộn',20000,0000),(17,1,1,'Đặt cọc',-123445654,2013),(18,1,1,'Xe Bus',122433,2013);
+INSERT INTO `cost` VALUES (1,1,1,'Học Phí',24000000,2013),(2,1,4,'Xe Bus Ha Noi',-5000,2013),(3,1,2,'Học Phí',24000000,2013),(4,2,1,'Học Phí',24000000,2013),(5,2,1,'Học Phí',3000000,2013),(6,3,2,'Học Phí',24000000,2013),(7,3,2,'Xe Bus',500000,2013),(8,4,4,'Học Phí',24000000,2013),(9,4,4,'Tham Quan',500000,2013),(10,1,1,'Phí Đặt Cọc',-5000000,2013),(11,1,1,'Học Múa',1000000,2013),(12,1,1,'Học Đàn',5000000,2013),(13,1,1,'Phí Trông Muộn',20000,2013),(14,2,1,'Phí Trông Muộn',20000,2013),(15,3,1,'Phí Trông Muộn',20000,2013),(16,4,1,'Phí Trông Muộn',20000,2013),(17,1,1,'Đặt cọc',-123445654,2013),(18,1,1,'Xe Bus',122433,2013);
 /*!40000 ALTER TABLE `cost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,6 +196,8 @@ CREATE TABLE `lateday` (
   `LateDate` date DEFAULT NULL,
   `Time` int(11) DEFAULT '0',
   `isActive` int(11) DEFAULT NULL,
+  `Semester` int(11) DEFAULT NULL,
+  `year` year(4) DEFAULT NULL,
   PRIMARY KEY (`Id`,`Faculties_Id`),
   KEY `fk_LateDay_Faculties1_idx` (`Faculties_Id`),
   KEY `fk_LateDay_Students1_idx` (`Students_Id`),
@@ -211,7 +212,7 @@ CREATE TABLE `lateday` (
 
 LOCK TABLES `lateday` WRITE;
 /*!40000 ALTER TABLE `lateday` DISABLE KEYS */;
-INSERT INTO `lateday` VALUES (1,1,1,'2013-03-08',50,1),(3,1,1,'2013-03-10',10,1),(4,1,2,'2013-03-08',30,1),(5,1,2,'2013-03-09',20,1),(6,1,3,'2014-03-08',20,1),(7,1,3,'2014-03-09',10,1),(8,1,4,'2014-03-10',20,1),(15,1,23,'2014-01-01',10,1),(16,1,1,'2014-01-01',90,1),(21,1,24,'2014-01-01',10,1),(22,1,23,'2014-01-04',30,1),(23,1,17,'2014-01-01',12,1),(25,1,7,'2014-01-01',10,1),(26,1,29,'2014-01-01',101,0);
+INSERT INTO `lateday` VALUES (1,1,1,'2013-03-08',50,0,1,2013),(3,1,1,'2013-03-10',10,0,1,2013),(4,1,2,'2013-03-08',30,1,NULL,NULL),(5,1,2,'2013-03-09',20,1,NULL,NULL),(6,1,3,'2014-03-08',20,1,NULL,NULL),(7,1,3,'2014-03-09',10,1,NULL,NULL),(8,1,4,'2014-03-10',20,1,NULL,NULL),(15,1,23,'2014-01-01',10,1,NULL,NULL),(16,1,1,'2014-01-01',90,0,1,2013),(21,1,24,'2014-01-01',10,1,NULL,NULL),(22,1,23,'2014-01-04',30,1,NULL,NULL),(23,1,17,'2014-01-01',12,1,NULL,NULL),(25,1,7,'2014-01-01',10,1,NULL,NULL),(26,1,29,'2014-01-01',101,1,NULL,NULL),(27,1,16,'2014-01-01',10,0,1,2013),(28,1,16,'2014-01-03',23,1,NULL,NULL);
 /*!40000 ALTER TABLE `lateday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,9 +410,13 @@ CREATE TABLE `students_has_cost` (
 
 LOCK TABLES `students_has_cost` WRITE;
 /*!40000 ALTER TABLE `students_has_cost` DISABLE KEYS */;
-INSERT INTO `students_has_cost` VALUES (1,2,1,0),(1,10,1,0),(1,11,1,0),(1,12,1,0),(1,13,1,1),(5,10,1,0),(5,12,1,0),(7,10,1,1),(7,12,1,1),(7,13,1,1),(12,1,1,0),(12,10,1,0),(12,11,1,0),(16,1,1,1),(17,1,1,1),(18,1,1,0),(18,10,1,1),(18,13,1,1),(19,1,1,1),(20,1,1,0),(21,1,1,0),(22,1,1,0),(23,1,1,1),(23,13,1,1),(24,1,1,1),(24,13,1,1),(25,1,1,1),(26,1,1,1),(27,1,1,0),(28,1,1,1),(29,1,1,0),(29,11,1,0),(29,12,1,0),(30,1,1,1),(49,8,4,1),(49,11,4,1),(49,16,4,1);
+INSERT INTO `students_has_cost` VALUES (1,2,1,0),(1,10,1,0),(1,11,1,0),(1,12,1,0),(1,13,1,1),(5,10,1,0),(5,12,1,0),(7,10,1,1),(7,12,1,1),(7,13,1,1),(12,1,1,0),(12,10,1,0),(12,11,1,0),(16,1,1,1),(16,13,1,1),(17,1,1,1),(18,1,1,0),(18,10,1,1),(18,13,1,1),(19,1,1,1),(20,1,1,0),(21,1,1,0),(22,1,1,0),(23,1,1,1),(23,13,1,1),(24,1,1,1),(24,13,1,1),(25,1,1,1),(26,1,1,1),(27,1,1,0),(28,1,1,1),(29,1,1,0),(29,11,1,0),(29,12,1,0),(30,1,1,1),(49,8,4,1),(49,11,4,1),(49,16,4,1);
 /*!40000 ALTER TABLE `students_has_cost` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'projectkoala'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -422,4 +427,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-04-16 19:54:15
+-- Dump completed on 2014-04-16 21:21:37

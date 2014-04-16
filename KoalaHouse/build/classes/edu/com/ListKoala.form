@@ -323,7 +323,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel14">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Anh trung tam"/>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/edu/com/image/800-IMG_7699.jpg"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>

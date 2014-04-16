@@ -472,14 +472,7 @@ public class HocSinhA extends javax.swing.JPanel {
             int k = model.getRowCount();
             for(int i = 0;i<k;i++){
                 int idCost = Integer.parseInt(model.getValueAt(0,0).toString());
-                if(idCost==13 || idCost==14|| idCost==15 ||idCost ==16){
-                    new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
-                    TimeTrongMuon.setText("0");
-                    new AStudentAndLateDay().UpdateTrongMuon(id);
-                }
-                else{
                 new CostOfStudent().UpdatePhiCuaHs(id, idCost, idTrungTam);
-                }
                 model.removeRow(0);
             }
             Total();
@@ -526,6 +519,38 @@ public class HocSinhA extends javax.swing.JPanel {
             AddRowOfTable addrow = new AddRowOfTable();
             addrow.addRowOfTable(model, v);//them vector v vao bang
               new CostOfStudent().InsertDSPhiCuaHS(id,idCost, idTrungTam);
+              //neu la phi trong muon
+              //kiem tra xem co phai phi trong muon khong
+              int num = model.getRowCount();
+                String ten = model.getValueAt(num - 1, 1).toString();
+                boolean check2 = false;
+        ten = ten.toLowerCase();
+        if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
+            check2 = true;
+        }
+                if(check2){
+                    String ki = "0";
+                    String kiHoc = model.getValueAt(num - 1, 2).toString();
+                    if(kiHoc.equals("Kỳ 1")){
+                        ki = "1";
+                    }
+                    else if(kiHoc.equals("Kỳ 2")){
+                        ki = "2";
+                    }
+                    else if(kiHoc.equals("Kỳ 3")){
+                        ki = "3";
+                    }
+                    else if(kiHoc.equals("Kỳ hè")){
+                        ki = "4";
+                    }
+                    else ki = "5";
+                    String nam = model.getValueAt(num -1, 3).toString();
+                    TimeTrongMuon.setText("0");
+                    new AStudentAndLateDay().UpdateTrongMuon(id,ki,nam);
+                }
+                else{
+                    
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null,v.get(0)+" Kì "+v.get(1)+" Năm học "+v.get(2)+" đã bị trùng");
@@ -555,10 +580,40 @@ public class HocSinhA extends javax.swing.JPanel {
         else{
         int row  = DanhSachPhi.getSelectedRow();
         int idCost = Integer.parseInt(DanhSachPhi.getValueAt(row, 0).toString());
+        //kiem tra xem co phai phi trong muon khong
+              int num = DanhSachPhi.getSelectedRow();
+                String ten = model.getValueAt(num, 1).toString();
+                boolean check2 = false;
+        ten = ten.toLowerCase();
+        if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
+            check2 = true;
+        }
+                if(check2){
+                    String ki = "0";
+                    String kiHoc = model.getValueAt(num, 2).toString();
+                    if(kiHoc.equals("Kỳ 1")){
+                        ki = "1";
+                    }
+                    else if(kiHoc.equals("Kỳ 2")){
+                        ki = "2";
+                    }
+                    else if(kiHoc.equals("Kỳ 3")){
+                        ki = "3";
+                    }
+                    else if(kiHoc.equals("Kỳ hè")){
+                        ki = "4";
+                    }
+                    else ki = "5";
+                    String nam = model.getValueAt(num, 3).toString();
+                    TimeTrongMuon.setText("0");
+                    new AStudentAndLateDay().XoaTrongMuon(id,ki,nam);
+                }
         new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
         EditTable edit = new EditTable();
         edit.removeRowOfTable(DanhSachPhi);
         Total();
+        totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);
+        TimeTrongMuon.setText(String.valueOf(totalTime));
         }
     }//GEN-LAST:event_jLabel11MouseClicked
 

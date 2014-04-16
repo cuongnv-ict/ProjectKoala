@@ -733,7 +733,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         String sotien = daThu.getText();
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
-        String phantram = ChietKhau.getText();
+        String[] abc = ChietKhau.getText().split(" %");
+        String phantram = abc[0];
         new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
         dispose();
         }

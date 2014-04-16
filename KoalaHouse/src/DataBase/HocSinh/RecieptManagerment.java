@@ -58,16 +58,40 @@ public class RecieptManagerment {
             while(rs1.next()){
                 Object str[] = new Object[4];
                 str[0] = rs1.getString(4);
-                str[1] = rs1.getString(3);
-                str[2] = rs1.getString(6);
+                //kiem tra xem có phai trong muon hay ko
+                boolean check = false;
+                String ten = str[0].toString();
+                ten = ten.toLowerCase();
+                 if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
+                    check = true;
+                }
+                switch (rs1.getInt(3)) {
+                    case 1:
+                        str[1] = "Kỳ 1";
+                        break;
+                    case 2:
+                        str[1] = "Kỳ 2";
+                        break;
+                    case 3:
+                        str[1] = "Kỳ 3";
+                        break;
+                    case 4:
+                        str[1] = "Kỳ hè";
+                        break;
+                    case 5:
+                        str[1] = "Cả năm";
+                        break;
+                }
+                str[2] = rs1.getString(6).substring(0, 4);
                 str[3] = rs1.getString(5);        
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
                 }
-                Object ma = rs1.getString(1);
-                if(ma.equals("13")||ma.equals("14")||ma.equals("15")||ma.equals("16")){
+                if(check){
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
                     int phi = Integer.parseInt((String) str[3]);
-                    int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac);
+                    int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
                     str[3] = phi;
                 }
