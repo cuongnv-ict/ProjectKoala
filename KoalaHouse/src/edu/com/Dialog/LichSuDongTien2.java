@@ -30,7 +30,7 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         id = idStudent;
-         new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id, jTable1);
+         new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id,1,jTable1);
         model = (DefaultTableModel) jTable1.getModel();
     }
 
@@ -95,7 +95,7 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         check=false;
         }
         else{
-            new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id, jTable1);
+            new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id,1, jTable1);
             ls.setText("Xem Lịch Sử Hóa Đơn");
             check = true;
         }

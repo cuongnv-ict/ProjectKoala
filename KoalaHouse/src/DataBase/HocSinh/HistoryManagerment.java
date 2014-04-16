@@ -111,7 +111,7 @@ public class HistoryManagerment {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void BangLichSuPhiDongCuaHocSinh(int students_id,JTable table){
+    public void BangLichSuPhiDongCuaHocSinh(int students_id,int idFac,JTable table){
        try {
             Object [] nameColumn = {"Mã",  "Tên", "Kì học", "Năm học", "Giá" };
             ArrayList<Object []> data = new ArrayList<Object []>();
@@ -120,12 +120,43 @@ public class HistoryManagerment {
                 Object str[] = new Object[5];
                 str[0]= rs1.getString(1);
                 str[1] = rs1.getString(4);
-                str[2] = rs1.getString(3);
-                str[3] = rs1.getString(6);
+                //kiem tra xem có phai trong muon hay ko
+                boolean check = false;
+                String ten = str[1].toString();
+                ten = ten.toLowerCase();
+                 if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
+                    check = true;
+                }
+                switch (rs1.getInt(3)) {
+                    case 1:
+                        str[2] = "Kỳ 1";
+                        break;
+                    case 2:
+                        str[2] = "Kỳ 2";
+                        break;
+                    case 3:
+                        str[2] = "Kỳ 3";
+                        break;
+                    case 4:
+                        str[2] = "Kỳ hè";
+                        break;
+                    case 5:
+                        str[2] = "Cả năm";
+                        break;
+                }
+                str[3] = rs1.getString(6).substring(0, 4);
                 str[4] = rs1.getString(5);        
                 if(((String)str[4]).charAt(0)=='-'){
                     str[4] = ((String)str[4]).substring(1);
-                }       
+                }
+                if(check){
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
+                    int phi = Integer.parseInt((String) str[4]);
+                    int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
+                    phi = totalTime *phi;
+                    str[4] = phi;
+                }
                 data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];

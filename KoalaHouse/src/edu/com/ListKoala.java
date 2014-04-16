@@ -425,7 +425,7 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("Anh trung tam");
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/800-IMG_7699.jpg"))); // NOI18N
 
         javax.swing.GroupLayout Panel_trungtamLayout = new javax.swing.GroupLayout(Panel_trungtam);
         Panel_trungtam.setLayout(Panel_trungtamLayout);
