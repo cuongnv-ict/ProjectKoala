@@ -271,8 +271,8 @@ public class ThemGia extends javax.swing.JDialog {
 //               
 //                     try {
 //                        Thread.sleep(200);
-                        String str = Gia.getText();
-                        Gia.setText(XuLy.setMoney(str));
+//                        String str = Gia.getText();
+//                        Gia.setText(XuLy.setMoney(str));
 //  
 //                    } catch (InterruptedException ex) {
 //                        Logger.getLogger(ThemGia.class.getName()).log(Level.SEVERE, null, ex);

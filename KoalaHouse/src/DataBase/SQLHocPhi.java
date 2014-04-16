@@ -200,7 +200,6 @@ public class SQLHocPhi {
             Pstate.setInt(3, Integer.parseInt(vector.get(1).toString()));
             Pstate.setString(4, vector.get(0).toString());
             Pstate.setDouble(5, Double.parseDouble(vector.get(3).toString()));
-            Pstate.setString(6, vector.get(2).toString());
             Pstate.execute();
             return true;
         } catch (SQLException ex) {

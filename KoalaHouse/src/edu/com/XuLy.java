@@ -77,7 +77,6 @@ public class XuLy {
             return null;
         } else {           
             String arr[] = str.split("\\.");
-            System.out.println(arr.length);
             try {
                 for (int i = 0; i < arr.length; i++) {
                     Integer.parseInt(arr[i]);
@@ -88,7 +87,7 @@ public class XuLy {
                 }     
                 return str;
             } catch (NumberFormatException e) {           
-                return null;
+                return str;
             }
         }
     }
