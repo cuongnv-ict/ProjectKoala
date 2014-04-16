@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -72,9 +73,9 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText(" Đăng ký tài khoản mới");
 
-        jLabel2.setText("Mã Nhân Viên :");
+        jLabel2.setText("Chức vụ");
 
-        Textfield_maNV.setText("Lê Tung ");
+        Textfield_maNV.setText("Kế Toán");
         Textfield_maNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Textfield_maNVActionPerformed(evt);
@@ -99,7 +100,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
 
         jLabel7.setText("Số Điện Thoại:");
 
-        Textfield_SDT.setText("SoDT");
+        Textfield_SDT.setText("0123456789");
 
         jbtOK.setText("Ok");
         jbtOK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -272,10 +273,11 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                         //statements.execute(sqlCommandCurentUser);
                         String sqlCommnand = "CREATE USER '" + user + "'@'localhost' IDENTIFIED BY '" + password + "';";
                         statements.execute(sqlCommnand);
-                        
+                        Random rd = new Random();
+                        int randomId = rd.nextInt();
                         sqlCommnand = "INSERT INTO projectkoala.accounts(Id, Faculties_Id, FullName, UserName, PassWord, Emai, "
-                                + "PhoneNumber)" + " VALUES ('" + id + "', '1', '" + user + "', '" + user +  "', '" + password + 
-                                "', '" + email + "', '" + phoneNumber + "');";
+                                + "PhoneNumber, ChucVu)" + " VALUES ('" + randomId + "', '1', '" + user + "', '" + user +  "', '" + password + 
+                                "', '" + email + "', '" + phoneNumber + "', '" + id + "');";
                         System.out.println(sqlCommnand);
                         statements.executeUpdate(sqlCommnand);
                     
@@ -433,7 +435,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                     ResultSet rs = statements.executeQuery("SELECT * FROM projectkoala.accounts WHERE "
                             + "projectkoala.accounts.UserName = '" + splitUser[0] + "';");
                     while(rs.next()) {
-                        String resultID = rs.getString(1);
+                        String resultID = rs.getString(10);
                         Textfield_maNV.setText(resultID);
                         String resultPassword = rs.getString(5);
                         TextField_MatKhau.setText(resultPassword);

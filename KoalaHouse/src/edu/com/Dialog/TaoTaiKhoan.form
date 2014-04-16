@@ -141,12 +141,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="M&#xe3; Nh&#xe2;n Vi&#xea;n :"/>
+        <Property name="text" type="java.lang.String" value="Ch&#x1ee9;c v&#x1ee5;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="Textfield_maNV">
       <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xea; Tung "/>
+        <Property name="text" type="java.lang.String" value="K&#x1ebf; To&#xe1;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Textfield_maNVActionPerformed"/>
@@ -199,7 +199,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="Textfield_SDT">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SoDT"/>
+        <Property name="text" type="java.lang.String" value="0123456789"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jbtOK">
