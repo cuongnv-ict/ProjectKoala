@@ -252,9 +252,11 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
             rePassword = Textfield_XacNhanMK.getText();
             email = Textfield_email.getText();
             phoneNumber = Textfield_SDT.getText();
+            System.out.println("Truong ID:'" + id + "'");
         if(changed == true) {
             // Kiem tra xem co truong nao bi bo trong khong.
-            if(id == null || user == null || password == null || rePassword == null || email == null || phoneNumber == null) {
+            if(id.equals("") || user.equals("") || password.equals("") || rePassword.equals("") ||
+                    email.equals("") || phoneNumber.equals("")) {
                 JOptionPane.showMessageDialog(null, "Bạn không được bỏ sót trường nào !", "ERROR !!!", JOptionPane.ERROR_MESSAGE);
                 Textfield_maNV.requestFocus();
             } else if
@@ -303,7 +305,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                         statements.executeUpdate("UPDATE projectkoala.accounts SET IsRoot = 1 WHERE UserName = '" + user + "';");
                         JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
                     } else {
-                        sqlCommnand = "GRANT SELECT, UPDATE ON *.* TO '" + user + "'@'localhost';";
+                        sqlCommnand = "GRANT SELECT ON *.* TO '" + user + "'@'localhost';";
                         System.out.println(sqlCommnand);
                         statements.execute(sqlCommnand);
                         //sqlCommnand = ;
@@ -383,7 +385,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         } else {     
             connect = connectData.connectionDatabase();
             
-            if(password == null || rePassword == null || email == null || phoneNumber == null) {
+            if(password.equals("") || rePassword.equals("") || email.equals("") || phoneNumber.equals("")) {
                 JOptionPane.showMessageDialog(this, "Bạn không được bỏ sót trường nào !!", "Thông báo", JOptionPane.ERROR_MESSAGE);
             } else if(!password.equals(rePassword)) {
                 JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không chính xác. Vui lòng nhập lại", "Thông báo",
