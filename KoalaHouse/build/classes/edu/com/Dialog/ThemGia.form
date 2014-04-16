@@ -41,24 +41,25 @@
                       <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="datcoc" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="Ky" min="-2" pref="96" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" pref="51" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                                      <Component id="DongY" min="-2" pref="94" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="DongY" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="HuyBo" min="-2" pref="74" max="-2" attributes="0"/>
                                   <Component id="Nam" min="-2" pref="73" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="datcoc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="trongmuon" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -73,13 +74,13 @@
               <Component id="title" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="TenPhi" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="TenPhi" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="Gia" alignment="3" max="32767" attributes="0"/>
+                  <Component id="Gia" alignment="3" pref="30" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -89,7 +90,10 @@
                   <Component id="Nam" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="13" max="32767" attributes="0"/>
-              <Component id="datcoc" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="datcoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="trongmuon" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="DongY" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -128,6 +132,12 @@
     <Component class="javax.swing.JTextField" name="TenPhi">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[6, 25]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[6, 25]"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="Ky">
@@ -203,6 +213,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ph&#xed; &#x111;&#x1eb7;t c&#x1ecd;c"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="datcocActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="trongmuon">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ph&#xed; tr&#xf4;ng mu&#x1ed9;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trongmuonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

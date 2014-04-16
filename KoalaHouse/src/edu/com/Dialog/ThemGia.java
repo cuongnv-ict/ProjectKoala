@@ -43,6 +43,7 @@ public class ThemGia extends javax.swing.JDialog {
         title.setText("Chỉnh sửa học phí");
         datcoc.setSelected(new DataBase.SQLHocPhi().getSelected(id));
         TenPhi.setText(vector.get(1).toString());
+        trongmuon.setSelected(vector.get(1).toString().equals("Phí trông muộn"));
         Gia.setText(vector.get(6).toString());
         for (int i = 0; i < Ky.getItemCount(); i++) {
             if (Ky.getItemAt(i).toString().equals(vector.get(2).toString())) {
@@ -102,6 +103,7 @@ public class ThemGia extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         Nam = new javax.swing.JComboBox();
         datcoc = new javax.swing.JCheckBox();
+        trongmuon = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -115,6 +117,8 @@ public class ThemGia extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(22, 20));
 
         TenPhi.setToolTipText("");
+        TenPhi.setMinimumSize(new java.awt.Dimension(6, 25));
+        TenPhi.setPreferredSize(new java.awt.Dimension(6, 25));
 
         Ky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kỳ 1", "Kỳ 2", "Kỳ 3", "Kỳ hè", "Cả năm" }));
 
@@ -148,6 +152,18 @@ public class ThemGia extends javax.swing.JDialog {
         Nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
         datcoc.setText("Phí đặt cọc");
+        datcoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                datcocActionPerformed(evt);
+            }
+        });
+
+        trongmuon.setText("Phí trông muộn");
+        trongmuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trongmuonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,20 +185,21 @@ public class ThemGia extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datcoc)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(Ky, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(DongY, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(DongY, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(datcoc)
+                                .addGap(37, 37, 37)
+                                .addComponent(trongmuon)))))
                 .addGap(34, 48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -191,12 +208,12 @@ public class ThemGia extends javax.swing.JDialog {
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TenPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TenPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Gia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Gia, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +221,9 @@ public class ThemGia extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(datcoc)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(datcoc)
+                    .addComponent(trongmuon))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DongY)
@@ -218,8 +237,8 @@ public class ThemGia extends javax.swing.JDialog {
     private void DongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DongYActionPerformed
         // TODO add your handling code here:
         Vector vec = new Vector();
-        if (getTenPhi().equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên loại phí", null, JOptionPane.ERROR_MESSAGE);
+        if (getTenPhi().equals("")||getGia().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên điền đủ thông tin", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         vec.add(getTenPhi());
@@ -262,6 +281,30 @@ public class ThemGia extends javax.swing.JDialog {
 //            }
 //        }.start();
     }//GEN-LAST:event_GiaKeyTyped
+
+    private void datcocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datcocActionPerformed
+        // TODO add your handling code here:
+        if(datcoc.isSelected()){
+            trongmuon.setSelected(false);
+            TenPhi.setEditable(false);
+            TenPhi.setText("Phí đặt cọc");
+        }
+        else{
+             TenPhi.setEditable(true);
+        }
+    }//GEN-LAST:event_datcocActionPerformed
+
+    private void trongmuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trongmuonActionPerformed
+        // TODO add your handling code here:
+        if(trongmuon.isSelected()){
+            datcoc.setSelected(false);
+            TenPhi.setEditable(false);
+            TenPhi.setText("Phí trông muộn");
+        }
+        else{
+              TenPhi.setEditable(true);
+        }
+    }//GEN-LAST:event_trongmuonActionPerformed
     /**
      * 
      * @param args the command line arguments
@@ -279,5 +322,6 @@ public class ThemGia extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel title;
+    private javax.swing.JCheckBox trongmuon;
     // End of variables declaration//GEN-END:variables
 }
