@@ -116,10 +116,13 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         int Total = 0;
         try{
         for(int i=0;i<model.getRowCount();i++){
-            if(model.getValueAt(i, 3).toString().length()>0)
-            Total += Integer.parseInt(model.getValueAt(i, 3).toString());
+            if(model.getValueAt(i, 3).toString().length()>0){
+                    Total += Integer.parseInt(model.getValueAt(i, 3).toString());
+            }
         }
-        TongTien.setText(String.valueOf(Total));
+        int phidatcoc = new RecieptManagerment().PhiDatCoc(idHocSinh);
+        Total = Total + 2*phidatcoc;
+                TongTien.setText(String.valueOf(Total));
         }
         catch(java.lang.NumberFormatException e){
             
@@ -720,7 +723,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         
         if(toPrint){
         
-        if(debt>0){
+        if(debt>=0){
             new AStudentAndLateDay().InsertDebt(idHocSinh, idTrungTam, debt);
         }
         button = true;

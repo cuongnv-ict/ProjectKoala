@@ -154,7 +154,7 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        Xoa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pham The Quyen\\Desktop\\newCode\\ProjectKoala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\xoa.jpg")); // NOI18N
+        Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
         Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 XoaMouseClicked(evt);

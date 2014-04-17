@@ -9,6 +9,8 @@ package edu.com.Panel;
 import DataBase.DataTable;
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.CostOfStudent;
+import DataBase.HocSinh.RecieptManagerment;
+import edu.com.Dialog.ChiTietNghiPhep;
 import edu.com.Dialog.HoaDon;
 import edu.com.Dialog.LichSuDongTien2;
 import edu.com.Dialog.Themphi;
@@ -145,6 +147,7 @@ public class HocSinhA extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         Panel_hocsinhA.setFocusCycleRoot(true);
         Panel_hocsinhA.setRequestFocusEnabled(false);
@@ -287,6 +290,13 @@ public class HocSinhA extends javax.swing.JPanel {
 
         jLabel12.setText("Phút");
 
+        jButton2.setText("Nghỉ Phép");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_hocsinhALayout = new javax.swing.GroupLayout(Panel_hocsinhA);
         Panel_hocsinhA.setLayout(Panel_hocsinhALayout);
         Panel_hocsinhALayout.setHorizontalGroup(
@@ -308,18 +318,6 @@ public class HocSinhA extends javax.swing.JPanel {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(Panel_hocsinhALayout.createSequentialGroup()
-                                .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(Panel_hocsinhALayout.createSequentialGroup()
-                                        .addGap(180, 180, 180)
-                                        .addComponent(Button_HS_Dong, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(Panel_hocsinhALayout.createSequentialGroup()
-                                        .addComponent(TimeTrongMuon)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel12)
-                                        .addGap(69, 69, 69)
-                                        .addComponent(jButton10)))
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_hocsinhALayout.createSequentialGroup()
                                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,7 +353,19 @@ public class HocSinhA extends javax.swing.JPanel {
                                                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(Button_HocSinh_ThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(Button_HS_LichSuDongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                                .addGap(39, 39, 39))))
+                                .addGap(39, 39, 39))
+                            .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                                .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                                        .addComponent(TimeTrongMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel12))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41)
+                                .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Button_HS_Dong, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(Panel_hocsinhALayout.createSequentialGroup()
                         .addComponent(Button_HS_CapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -424,7 +434,8 @@ public class HocSinhA extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_HS_CapNhat)
-                    .addComponent(Button_HS_Dong))
+                    .addComponent(Button_HS_Dong)
+                    .addComponent(jButton2))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
@@ -474,6 +485,10 @@ public class HocSinhA extends javax.swing.JPanel {
                 int idCost = Integer.parseInt(model.getValueAt(0,0).toString());
                 new CostOfStudent().UpdatePhiCuaHs(id, idCost, idTrungTam);
                 model.removeRow(0);
+            }
+            int a= new RecieptManagerment().PhiDatCoc(id);
+            if(a!= 0){
+                new CostOfStudent().UpdatePhiCuaHs(id,1,idTrungTam);
             }
             Total();
         }
@@ -628,6 +643,14 @@ public class HocSinhA extends javax.swing.JPanel {
         tb.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ChiTietNghiPhep.idStudent = id;
+        ChiTietNghiPhep.idTrungTam = idTrungTam;
+        ChiTietNghiPhep chitiet = new ChiTietNghiPhep(null,true);
+        chitiet.setLocation(500,130);
+        chitiet.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_HS_CapNhat;
@@ -649,6 +672,7 @@ public class HocSinhA extends javax.swing.JPanel {
     private javax.swing.JTextField edit_ten;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
