@@ -220,13 +220,24 @@ public class LopX extends javax.swing.JPanel {
             int row = lopx.getSelectedRow();
             model.setValueAt(false, row, 6);
             //map cac truong
+            int a=-1;
             int id = id_students.get(row);
             String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
+            for(int i=0;i<center.getTabCount();i++)
+            {
+                if(tenHocSinh.equals(center.getTitleAt(i)))
+                { a+=1;
+                center.setSelectedIndex(i);
+                }
+            }
+            if(a==-1)
+            {
             //HocSinhA.idTemp = id;
             HocSinhA aa = new HocSinhA(id);
             center.add(model.getValueAt(row, 1).toString(), aa);
             center.setSelectedComponent(aa);
             new CloseTabButton(center, center.getComponentCount() - 2);
+            }
         }
     }//GEN-LAST:event_lopxMouseClicked
 

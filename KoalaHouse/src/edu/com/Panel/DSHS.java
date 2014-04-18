@@ -168,15 +168,24 @@ public class DSHS extends javax.swing.JPanel {
         if (evt.getClickCount() == 2 && LoaiHS.getSelectedIndex() == 0) {
             int row = DSHS.getSelectedRow();
             //map cac truong
-            
+              int a=-1;
             int id = id_students.get(row);
             String tenHocSinh = DSHS.getValueAt(DSHS.getSelectedRow(), 1).toString();
             //HocSinhA.idTemp = id;
+            for(int i=0;i<center.getTabCount();i++)
+            {
+                if(tenHocSinh.equals(center.getTitleAt(i)))
+                { a+=1;
+                center.setSelectedIndex(i);
+                }
+            }
+            if(a==-1)
+            {
             HocSinhA aa = new HocSinhA(id);
             center.add(DSHS.getModel().getValueAt(row, 1).toString(), aa);
             center.setSelectedComponent(aa);
             new CloseTabButton(center, center.getComponentCount() - 2);
-            
+            }
         } else {
             arrRows = DSHS.getSelectedRows();
         }
