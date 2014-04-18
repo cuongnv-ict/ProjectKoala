@@ -18,6 +18,7 @@ import edu.com.Dialog.ThongBao;
 import edu.com.Dialog.chiTietTrongMuon2;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
+import edu.com.upbang.XuLiXau;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,6 +66,11 @@ public class HocSinhA extends javax.swing.JPanel {
             lop = (String) info.get(6);
             trinhDo = (String) info.get(5);
             trungTam = (String) info.get(8);
+            String thoihoc = (String) info.get(9);
+            if(thoihoc.equals("0")){
+                thoiHoc.setText("Đã Thôi Học");
+                thoiHoc.setEnabled(false);
+            }
         edit_ten.setText(ten);
         edit_daidien.setText(tenNguoiDaiDien);
         NgaySinh.setText(ngaySinh);
@@ -135,7 +141,7 @@ public class HocSinhA extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         tongSoPhi = new javax.swing.JTextField();
         Button_HS_CapNhat = new javax.swing.JButton();
-        Button_HS_Dong = new javax.swing.JButton();
+        thoiHoc = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         debt = new javax.swing.JTextField();
         Button_HocSinh_ThanhToan = new javax.swing.JButton();
@@ -230,10 +236,10 @@ public class HocSinhA extends javax.swing.JPanel {
             }
         });
 
-        Button_HS_Dong.setText("Thôi Học");
-        Button_HS_Dong.addActionListener(new java.awt.event.ActionListener() {
+        thoiHoc.setText("Thôi Học");
+        thoiHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Button_HS_DongActionPerformed(evt);
+                thoiHocActionPerformed(evt);
             }
         });
 
@@ -363,7 +369,7 @@ public class HocSinhA extends javax.swing.JPanel {
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)
                                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Button_HS_Dong, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                                    .addComponent(thoiHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(Panel_hocsinhALayout.createSequentialGroup()
@@ -434,7 +440,7 @@ public class HocSinhA extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Button_HS_CapNhat)
-                    .addComponent(Button_HS_Dong)
+                    .addComponent(thoiHoc)
                     .addComponent(jButton2))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
@@ -458,14 +464,20 @@ public class HocSinhA extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Button_HS_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_CapNhatActionPerformed
-        new AStudentAndLateDay().UpdataInfoStudent(id,idTrungTam,edit_ten.getText(),NgaySinh.getText(),edit_daidien.getText(),SoDT.getText());
+        new AStudentAndLateDay().UpdataInfoStudent(id,idTrungTam,edit_ten.getText(),new XuLiXau().NamThangNgay(NgaySinh.getText()),edit_daidien.getText(),SoDT.getText());
         JOptionPane.showMessageDialog(Panel_hocsinhA, "Thông Tin Học Sinh Đã Được Cập Nhật");
     }//GEN-LAST:event_Button_HS_CapNhatActionPerformed
 
-    private void Button_HS_DongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_DongActionPerformed
-        new AStudentAndLateDay().ThoiHoc(id, idTrungTam);
-        JOptionPane.showMessageDialog(Panel_hocsinhA, "Học Sinh Này Đã Bị Thôi Học");
-    }//GEN-LAST:event_Button_HS_DongActionPerformed
+    private void thoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thoiHocActionPerformed
+        
+        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Cho Học Sinh Này Thôi Học?", "",JOptionPane.OK_CANCEL_OPTION);
+        if(click == JOptionPane.YES_OPTION){
+            new AStudentAndLateDay().ThoiHoc(id, idTrungTam);
+            JOptionPane.showMessageDialog(Panel_hocsinhA, "Học Sinh Này Đã Bị Thôi Học");
+            thoiHoc.setText("Đã Thôi Học");
+            thoiHoc.setEnabled(false);
+        }
+    }//GEN-LAST:event_thoiHocActionPerformed
 
     private void Button_HocSinh_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HocSinh_ThanhToanActionPerformed
         HoaDon.tenHS = edit_ten.getText();
@@ -654,7 +666,6 @@ public class HocSinhA extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_HS_CapNhat;
-    private javax.swing.JButton Button_HS_Dong;
     private javax.swing.JButton Button_HS_LichSuDongTien;
     private javax.swing.JButton Button_HocSinh_ThanhToan;
     private javax.swing.JButton Button_HocSinh_ThemPhi;
@@ -688,6 +699,7 @@ public class HocSinhA extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton thoiHoc;
     private javax.swing.JTextField tongSoPhi;
     // End of variables declaration//GEN-END:variables
 }

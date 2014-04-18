@@ -120,7 +120,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="Button_HS_Dong" pref="97" max="32767" attributes="0"/>
+                                      <Component id="thoiHoc" pref="97" max="32767" attributes="0"/>
                                       <Component id="jButton10" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -215,7 +215,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Button_HS_CapNhat" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Button_HS_Dong" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="thoiHoc" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="110" max="32767" attributes="0"/>
@@ -387,12 +387,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_HS_CapNhatActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Button_HS_Dong">
+        <Component class="javax.swing.JButton" name="thoiHoc">
           <Properties>
             <Property name="text" type="java.lang.String" value="Th&#xf4;i H&#x1ecd;c"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Button_HS_DongActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="thoiHocActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">

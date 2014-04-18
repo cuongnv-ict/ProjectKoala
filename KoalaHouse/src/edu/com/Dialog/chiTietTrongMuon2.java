@@ -2,6 +2,7 @@ package edu.com.Dialog;
 
 import DataBase.HocSinh.AStudentAndLateDay;
 import edu.com.upbang.EditTable;
+import edu.com.upbang.XuLiXau;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -218,6 +219,7 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
         }
         else{
             String date = bangTrongmuon.getValueAt(bangTrongmuon.getSelectedRow(), 0).toString();
+            date = new XuLiXau().NamThangNgay(date);
         String time = bangTrongmuon.getValueAt(bangTrongmuon.getSelectedRow(), 1).toString();
         new AStudentAndLateDay().DeleteTrongMuon(idStudent, date, time);
         new AStudentAndLateDay().LateDayInfo(idStudent, bangTrongmuon);

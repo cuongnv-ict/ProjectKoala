@@ -772,7 +772,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }//GEN-LAST:event_ChietKhauActionPerformed
 
     private void ChietKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChietKhauMouseClicked
-        if(evt.getClickCount()==2){
+        
             ChietKhau ck = new ChietKhau(null, true);
             ck.setLocation(430, 200);
             ck.setVisible(true);
@@ -786,7 +786,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 daThu.setText(String.valueOf(cd));
                 lido = new String(ck.lido);
             }
-        }
     }//GEN-LAST:event_ChietKhauMouseClicked
 
     private void daThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daThuActionPerformed

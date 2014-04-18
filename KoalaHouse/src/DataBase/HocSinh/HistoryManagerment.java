@@ -12,6 +12,7 @@ package DataBase.HocSinh;
  */
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,7 +58,7 @@ public class HistoryManagerment {
                 str[1] = rs1.getString(6);
                 str[2] = rs1.getString(7);
                 str[3] = rs1.getString(8);  
-                str[4] = rs1.getString(11);
+                str[4] = new XuLiXau().NamThangNgay(rs1.getString(11));
                 switch(rs1.getInt(12)){
                     case 0:
                         str[5] = "Tiền mặt";

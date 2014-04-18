@@ -5,6 +5,7 @@
 package DataBase;
 
 import edu.com.ThongTin;
+import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -226,12 +227,12 @@ public class DataTable {
         try {
             Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select * from students where students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0");
+            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
             while (rs1.next()) {
                 Object[] str = new Object[7];
                 str[0] = rs1.getString(1);
                 str[1] = rs1.getString(3);
-                str[2] = rs1.getString(4);
+                str[2] = new XuLiXau().NgayThangNam(rs1.getString(4));
                 switch (rs1.getInt(7)) {
                     case 1:
                         str[3] = "Chính Quy";
