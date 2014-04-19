@@ -12,6 +12,7 @@ package DataBase.HocSinh;
  */
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,13 +48,13 @@ public class AStudentAndLateDay {
     }
     public ArrayList HocSinhA1(int ID){
     ArrayList infoStudent = new ArrayList();
-    String str[] = new String[9];
+    String str[] = new String[10];
         try {
-            rs1 = statement.executeQuery("select students.id,fullname,brithday,PhoneNumber,Representative,levels_id,nameclass,isclient,faculties.name from students,classes,classes_has_students,faculties where students.id = students_id and classes.id=classes_id and students.id = "+ID+" and faculties.Id = students.Faculties_Id");
+            rs1 = statement.executeQuery("select students.id,fullname,brithday,PhoneNumber,Representative,levels_id,nameclass,isclient,faculties.name,students.isactive from students,classes,classes_has_students,faculties where students.id = students_id and classes.id=classes_id and students.id = "+ID+" and faculties.Id = students.Faculties_Id");
             while(rs1.next()){
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(2);
-                    str[2] = rs1.getString(3);
+                    str[2] = new XuLiXau().NgayThangNam(rs1.getString(3));
                     str[3] = rs1.getString(4);
                     str[4] = rs1.getString(5);
                    switch(rs1.getInt(6)){
@@ -81,12 +82,13 @@ public class AStudentAndLateDay {
                             str[7] = "Chương Trình Bạn Là Khách";
                            break;
                  }
-                   str[8] = rs1.getString(9);    
+                   str[8] = rs1.getString(9);
+                   str[9] = rs1.getString(10);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i = 0;i<9;i++){
+        for(int i = 0;i<10;i++){
             infoStudent.add(str[i]);
             }
         
@@ -139,7 +141,7 @@ public class AStudentAndLateDay {
             rs1 = statement.executeQuery("select * from lateday where Students_Id = "+idStudent);
             while(rs1.next()){
                 Object str[] = new Object[2];
-                str[0]= rs1.getString(4);
+                str[0]= new XuLiXau().NgayThangNam(rs1.getString(4));
                 str[1] = rs1.getString(5);
                 data.add(str);
             }

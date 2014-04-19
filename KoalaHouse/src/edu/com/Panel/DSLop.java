@@ -174,7 +174,7 @@ public class DSLop extends javax.swing.JPanel {
             
         }
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
-        
+        model=(DefaultTableModel) jTable4.getModel();
       listkoala.taoTree();
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
@@ -218,7 +218,7 @@ public class DSLop extends javax.swing.JPanel {
             model.setValueAt(false, row,10);
         }
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
-        
+        model=(DefaultTableModel) jTable4.getModel();
     }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
@@ -248,6 +248,7 @@ public class DSLop extends javax.swing.JPanel {
         
         listkoala.taoTree();
         }
+        model=(DefaultTableModel) jTable4.getModel();
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 
 
