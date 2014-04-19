@@ -61,7 +61,7 @@ public class SQLDanhSachHocSinh {
                     String str[] = new String[6];
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(2);
-                    str[2] = rs1.getString(3);
+                    str[2] = XuLy.getDate(rs1.getString(3));
                     switch (rs1.getInt(4)) {
                         case 1:
                             str[3] = "NẮNG MAI (SUNSHINE)";

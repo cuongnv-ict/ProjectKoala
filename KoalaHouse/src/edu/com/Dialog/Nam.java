@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import edu.com.XuLy;
 import java.awt.Toolkit;
 import java.util.Vector;
 import javax.swing.JComboBox;
@@ -215,10 +216,9 @@ public class Nam extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -334,14 +334,15 @@ public class Nam extends javax.swing.JDialog {
                     .addComponent(E_Ngay3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(E_Nam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E_Thang4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E_Ngay4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B_Ngay4, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                    .addComponent(B_Thang4)
-                    .addComponent(B_Nam4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(B_Ngay4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(B_Thang4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(B_Nam4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(E_Nam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(E_Thang4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(E_Ngay4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CapNhat)
@@ -420,6 +421,16 @@ public class Nam extends javax.swing.JDialog {
         boolean flags = false;
         Vector vector = new Vector();
         String begin, end;
+        if(!(XuLy.getTime(B_Nam1.getSelectedItem().toString() + "-" + B_Thang1.getSelectedItem().toString() + "-" + B_Ngay1.getSelectedItem().toString(),E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString())
+           &&XuLy.getTime(B_Nam2.getSelectedItem().toString() + "-" + B_Thang2.getSelectedItem().toString() + "-" + B_Ngay2.getSelectedItem().toString(),E_Nam2.getSelectedItem().toString() + "-" + E_Thang2.getSelectedItem().toString() + "-" + E_Ngay2.getSelectedItem().toString())
+           &&XuLy.getTime(B_Nam3.getSelectedItem().toString() + "-" + B_Thang3.getSelectedItem().toString() + "-" + B_Ngay3.getSelectedItem().toString(),E_Nam3.getSelectedItem().toString() + "-" + E_Thang3.getSelectedItem().toString() + "-" + E_Ngay3.getSelectedItem().toString())
+           &&XuLy.getTime(B_Nam4.getSelectedItem().toString() + "-" + B_Thang4.getSelectedItem().toString() + "-" + B_Ngay4.getSelectedItem().toString(),E_Nam4.getSelectedItem().toString() + "-" + E_Thang4.getSelectedItem().toString() + "-" + E_Ngay4.getSelectedItem().toString())
+           &&XuLy.getTime(E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString(),B_Nam2.getSelectedItem().toString() + "-" + B_Thang2.getSelectedItem().toString() + "-" + B_Ngay2.getSelectedItem().toString())
+           &&XuLy.getTime(E_Nam2.getSelectedItem().toString() + "-" + E_Thang2.getSelectedItem().toString() + "-" + E_Ngay2.getSelectedItem().toString(),B_Nam3.getSelectedItem().toString() + "-" + B_Thang3.getSelectedItem().toString() + "-" + B_Ngay3.getSelectedItem().toString())
+           &&XuLy.getTime(E_Nam3.getSelectedItem().toString() + "-" + E_Thang3.getSelectedItem().toString() + "-" + E_Ngay3.getSelectedItem().toString(),B_Nam4.getSelectedItem().toString() + "-" + B_Thang4.getSelectedItem().toString() + "-" + B_Ngay4.getSelectedItem().toString()))){
+            JOptionPane.showMessageDialog(rootPane, "Thiết lập thời gian không chính xác.\nHãy kiển tra lại thời gian bắt đầu và kết thúc của một kì\nvà thời gian kết thúc của kì trước và thời gian bắt đầu cảu kì sau.", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         begin = B_Nam1.getSelectedItem().toString() + "-" + B_Thang1.getSelectedItem().toString() + "-" + B_Ngay1.getSelectedItem().toString();
         end = E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString();
         vector.add(begin);

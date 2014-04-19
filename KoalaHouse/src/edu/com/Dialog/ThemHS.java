@@ -39,9 +39,9 @@ public class ThemHS extends javax.swing.JDialog {
         daidien.setText(vector.get(5).toString());
         Object obj[] = vector.get(2).toString().split("-");
         setSelectComboBox(hinhthuc, vector.get(3));
-        setSelectComboBox(nam, obj[0]);
+        setSelectComboBox(nam, obj[2]);
         setSelectComboBox(thang, obj[1]);
-        setSelectComboBox(ngay, obj[2]);
+        setSelectComboBox(ngay, obj[0]);
         this.setResizable(false);
         this.id_student = id_students;
     }
@@ -159,7 +159,7 @@ public class ThemHS extends javax.swing.JDialog {
 
         thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
         ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         ngay.addActionListener(new java.awt.event.ActionListener() {

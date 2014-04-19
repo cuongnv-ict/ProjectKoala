@@ -85,8 +85,8 @@ public class SQLHocPhi {
                             break;
                     }
                     str[3] = rs1.getString(6).substring(0, 4);
-                    str[4] = rs1.getString(10);
-                    str[5] = rs1.getString(11);
+                    str[4] = XuLy.getDate(rs1.getString(10));
+                    str[5] = XuLy.getDate(rs1.getString(11));
                     str[6] = rs1.getString(5);
                     if (((String) str[6]).charAt(0) == '-') {
                         str[6] = XuLy.setMoney(((String) str[6]).substring(1));
@@ -130,7 +130,7 @@ public class SQLHocPhi {
             statement.execute("delete from cost where id = " + id);
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Loai phí:" + name + " của kỳ: " + ky + " này đã có học sinh được tính phí, không thể xóa", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Bạn không thể xóa phí "+name+" khi đang được áp dụng cho một số học sinh trong trường.", null, JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
@@ -200,6 +200,7 @@ public class SQLHocPhi {
             Pstate.setInt(3, Integer.parseInt(vector.get(1).toString()));
             Pstate.setString(4, vector.get(0).toString());
             Pstate.setDouble(5, Double.parseDouble(vector.get(3).toString()));
+            Pstate.setString(6, vector.get(2).toString());
             Pstate.execute();
             return true;
         } catch (SQLException ex) {

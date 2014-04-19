@@ -43,21 +43,21 @@ public class XuLy {
     public static String setMoney(String str) {
         if (str == null) {
             return null;
-        } else {           
+        } else {
             String arr[] = str.split("\\.");
             try {
                 for (int i = 0; i < arr.length; i++) {
                     Integer.parseInt(arr[i]);
                 }
-                str="";
+                str = "";
                 for (int i = 0; i < arr.length; i++) {
                     str += arr[i];
                 }
                 int lenght = str.length();
                 int q = lenght / 3;
                 int r = lenght % 3;
-                if(r==0){
-                    r=3;
+                if (r == 0) {
+                    r = 3;
                     q--;
                 }
                 int count = 0;
@@ -67,28 +67,53 @@ public class XuLy {
                     count++;
                 }
                 return msg.toString();
-            } catch (NumberFormatException e) {           
+            } catch (NumberFormatException e) {
                 return str;
             }
         }
     }
-     public static String getMoney(String str) {
+
+    public static String getMoney(String str) {
         if (str == null) {
             return null;
-        } else {           
+        } else {
             String arr[] = str.split("\\.");
             try {
                 for (int i = 0; i < arr.length; i++) {
                     Integer.parseInt(arr[i]);
                 }
-                str="";
+                str = "";
                 for (int i = 0; i < arr.length; i++) {
                     str += arr[i];
-                }     
+                }
                 return str;
-            } catch (NumberFormatException e) {           
+            } catch (NumberFormatException e) {
                 return str;
             }
         }
+    }
+
+    public static String getDate(String msg) {
+        String str[] = msg.split("-");
+        return str[2] + "-" + str[1] + "-" + str[0];
+    }
+
+    public static boolean getTime(String before, String after) {
+        String arrBefore[] = before.split("-");
+        String arrAfter[] = after.split("-");
+        int x, y, z;
+        x = Integer.parseInt(arrAfter[0]) - Integer.parseInt(arrBefore[0]);
+        y = Integer.parseInt(arrAfter[1]) - Integer.parseInt(arrBefore[1]);
+        z = Integer.parseInt(arrAfter[2]) - Integer.parseInt(arrBefore[2]);
+        if (x < 0) {
+            return false;
+        }
+        if (x==0&&y<0) {
+            return false;
+        }
+        if (y==0&&z<0) {
+            return false;
+        }
+        return true;
     }
 }
