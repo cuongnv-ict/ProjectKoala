@@ -68,7 +68,12 @@ public class ThemSuaLop extends javax.swing.JDialog {
     //set gia tri
     public void setKhoiName(String khoiname)
     {
-        this.trinhdo.setSelectedItem(khoiname);
+        int id=0;
+        if(khoiname.equals("NẮNG MAI (SUNSHINE)")) id=0;
+        else if(khoiname.equals("TỔ ONG (BEEHIVE)")) id=1;
+        else if(khoiname.equals("TỔ KÉN (CHRYSALIS)")) id=2;
+        else  id=3;
+        this.trinhdo.setSelectedIndex(id);
     }
     public void setOldName(String oldname)
     {
@@ -118,7 +123,9 @@ public class ThemSuaLop extends javax.swing.JDialog {
     }
     //kiem tra ngay ket thuc va ngay bat dau
     public boolean kiemtrangaythang()
-    {
+    {   
+        if(B_day.getSelectedItem().toString().equals("Ngày")||B_month.getSelectedItem().toString().equals("Tháng")||B_year.getSelectedItem().toString().equals("Năm")) return false;
+        if(E_day.getSelectedItem().toString().equals("Ngày")||E_month.getSelectedItem().toString().equals("Tháng")||E_year.getSelectedItem().toString().equals("Năm")) return false;
         int ngaybd,thangbd,nambd,ngaykt,thangkt,namkt;
         ngaybd=Integer.parseInt(B_day.getSelectedItem().toString());
         thangbd=Integer.parseInt(B_month.getSelectedItem().toString());
