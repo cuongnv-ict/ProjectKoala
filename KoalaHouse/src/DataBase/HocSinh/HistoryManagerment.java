@@ -12,6 +12,7 @@ package DataBase.HocSinh;
  */
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,7 +58,7 @@ public class HistoryManagerment {
                 str[0] = rs1.getString(1);
                 str[1] = rs1.getString(6);
                 str[2] = rs1.getString(7);
-                str[3] = rs1.getString(8);  
+                str[3] = XuLy.setMoney(rs1.getString(8));  
                 str[4] = new XuLiXau().NamThangNgay(rs1.getString(11));
                 switch(rs1.getInt(12)){
                     case 0:
@@ -158,6 +159,7 @@ public class HistoryManagerment {
                     phi = totalTime *phi;
                     str[4] = phi;
                 }
+                str[4] = XuLy.setMoney(str[4].toString());
                 data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];

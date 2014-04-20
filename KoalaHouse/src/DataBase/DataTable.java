@@ -228,7 +228,7 @@ public class DataTable {
 
     public void BangDanhSachHocSinhNoPhi(JTable table) {
         try {
-            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Tiền Nợ"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
             while (rs1.next()) {
@@ -246,7 +246,7 @@ public class DataTable {
                 }
                 str[4] = rs1.getString(5);
                 str[5] = rs1.getString(6);
-                str[6] = false;
+                str[6] = XuLy.setMoney(rs1.getString(9));
                 data.add(str);
             }
             Object[][] rowColumn = new Object[data.size()][];
@@ -254,14 +254,14 @@ public class DataTable {
                 rowColumn[i] = data.get(i);
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false, false, false, false, false, false, true
+                        false, false, false, false, false, false, false
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -277,7 +277,7 @@ public class DataTable {
 
     public void BangDanhSachHocSinhNoPhi(int classes_id, JTable table) {
         try {
-            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Tiền Nợ"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from students where students.id in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id) or debt!=0");
             while (rs1.next()) {

@@ -12,6 +12,7 @@ package DataBase.HocSinh;
  */
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.XuLy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,6 +107,7 @@ public class CostOfStudent {
                 if(((String)str[4]).charAt(0)=='-'){
                     str[4] = ((String)str[4]).substring(1);
                 }
+                str[4] = XuLy.setMoney(str[4].toString());
                 str[5] = false;
                 data.add(str);
             }
@@ -181,6 +183,7 @@ public class CostOfStudent {
                     phi = totalTime *phi;
                     str[4] = phi;
                 }
+                str[4] = XuLy.setMoney(str[4].toString());
                 data.add(str);
             }
             //xem xem hoc sinh co bi no khong
@@ -192,7 +195,7 @@ public class CostOfStudent {
                 str1[1] = "Nợ";
                 str1[2] = "---";
                 str1[3] = "---";
-                str1[4] = rs1.getString(1);
+                str1[4] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 }
             }

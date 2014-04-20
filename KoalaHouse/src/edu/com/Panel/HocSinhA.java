@@ -16,6 +16,7 @@ import edu.com.Dialog.LichSuDongTien2;
 import edu.com.Dialog.Themphi;
 import edu.com.Dialog.ThongBao;
 import edu.com.Dialog.chiTietTrongMuon2;
+import edu.com.XuLy;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import edu.com.upbang.XuLiXau;
@@ -80,7 +81,7 @@ public class HocSinhA extends javax.swing.JPanel {
         TrinhDo.setText(trinhDo);
         TrungTam.setText(trungTam);
         int noPhi = new AStudentAndLateDay().GetDebt(id);
-        debt.setText(String.valueOf(noPhi));
+        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
         switch(TrungTam.getText().length()){
             case 20: idTrungTam = 1;break;
             case 22: idTrungTam = 2;break;
@@ -104,9 +105,9 @@ public class HocSinhA extends javax.swing.JPanel {
     public void Total(){
         int Total = 0;
         for(int i=0;i<model.getRowCount();i++){
-            Total += Integer.parseInt(model.getValueAt(i, 4).toString());
+            Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 4).toString()));
         }
-        tongSoPhi.setText(String.valueOf(Total));
+        tongSoPhi.setText(XuLy.setMoney(String.valueOf(Total)));
     }
 
     /**
@@ -247,6 +248,11 @@ public class HocSinhA extends javax.swing.JPanel {
 
         debt.setEditable(false);
         debt.setText("0");
+        debt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                debtActionPerformed(evt);
+            }
+        });
 
         Button_HocSinh_ThanhToan.setText("Thanh Toán");
         Button_HocSinh_ThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -507,7 +513,7 @@ public class HocSinhA extends javax.swing.JPanel {
         new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
         model = (DefaultTableModel) DanhSachPhi.getModel();
         int noPhi = new AStudentAndLateDay().GetDebt(id);
-        debt.setText(String.valueOf(noPhi));
+        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
     }//GEN-LAST:event_Button_HocSinh_ThanhToanActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -662,6 +668,10 @@ public class HocSinhA extends javax.swing.JPanel {
         chitiet.setLocation(500,130);
         chitiet.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void debtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_debtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

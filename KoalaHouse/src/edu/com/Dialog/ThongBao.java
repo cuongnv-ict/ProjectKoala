@@ -7,6 +7,7 @@
 package edu.com.Dialog;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Panel.HocSinhA;
+import edu.com.XuLy;
 import edu.com.upbang.EditTable;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -87,9 +88,9 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
         int Total = 0;
         for(int i=0;i<model.getRowCount();i++){
             if(model.getValueAt(i, 3).toString().length() >0)
-            Total += Integer.parseInt(model.getValueAt(i, 3).toString());
+            Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
         }
-        TongTien.setText(String.valueOf(Total));
+        TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
     }
 
     /**

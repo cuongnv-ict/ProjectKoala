@@ -8,6 +8,7 @@ package DataBase.HocSinh;
 
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.XuLy;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -95,6 +96,7 @@ public class RecieptManagerment {
                     phi = totalTime *phi;
                     str[3] = phi;
                 }
+                str[3] = XuLy.setMoney(str[3].toString());
                 data.add(str);
             }
             //xem xem hoc sinh co bi no khong
@@ -105,7 +107,7 @@ public class RecieptManagerment {
                 str1[0]= "Nợ";
                 str1[1] = "---";
                 str1[2] = "---";
-                str1[3] = rs1.getString(1);
+                str1[3] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 }
             }
@@ -137,6 +139,7 @@ public class RecieptManagerment {
                 if(((String)str1[3]).charAt(0)=='-'){
                     str1[3] = ((String)str1[3]).substring(1);
                 }
+                str1[3] = XuLy.setMoney(str1[3].toString());
                 data.add(str1);
                 }
             }

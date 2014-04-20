@@ -10,6 +10,7 @@ import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.HistoryManagerment;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Panel.HocSinhA;
+import edu.com.XuLy;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import java.awt.Graphics;
@@ -117,12 +118,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         try{
         for(int i=0;i<model.getRowCount();i++){
             if(model.getValueAt(i, 3).toString().length()>0){
-                    Total += Integer.parseInt(model.getValueAt(i, 3).toString());
+                    Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
             }
         }
         int phidatcoc = new RecieptManagerment().PhiDatCoc(idHocSinh);
         Total = Total + 2*phidatcoc;
-                TongTien.setText(String.valueOf(Total));
+        TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
         }
         catch(java.lang.NumberFormatException e){
             
@@ -694,12 +695,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-        int a = Integer.parseInt(daThu.getText());
+        int a = Integer.parseInt(XuLy.getMoney(daThu.getText()));
         if((a > 0)&& nguoiThu.getText().length()>0 && nguoiNop.getText().length() >0)
         {
             //tinh no
-        int can = Integer.parseInt(CanDong.getText());
-        int dong = Integer.parseInt(daThu.getText());
+        int can = Integer.parseInt(XuLy.getMoney(CanDong.getText()));
+        int dong = Integer.parseInt(XuLy.getMoney(daThu.getText()));
         int debt = can - dong;
         if(debt<0){
             JOptionPane.showMessageDialog(rootPane, "Số Tiền Đóng Đã Nhiều Hơn Số Tiền Cần Thu");
@@ -733,7 +734,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         idFac = String.valueOf(idTrungTam);
         String nguoidong = nguoiNop.getText();
         String nguoithu = nguoiThu.getText();
-        String sotien = daThu.getText();
+        String sotien = XuLy.getMoney(daThu.getText());
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String[] abc = ChietKhau.getText().split(" %");
@@ -778,12 +779,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             ck.setVisible(true);
             if(ck.check){
                 ChietKhau.setText(ck.phanTram);
-                int tt = Integer.parseInt(TongTien.getText());
+                int tt = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
                 int chietk = Integer.parseInt(ChietKhau.getText());
                 ChietKhau.setText(ChietKhau.getText() +" %");
                 int cd = tt - (chietk*tt/100);
-                CanDong.setText(String.valueOf(cd));
-                daThu.setText(String.valueOf(cd));
+                CanDong.setText(XuLy.setMoney(String.valueOf(cd)));
+                daThu.setText(XuLy.setMoney(String.valueOf(cd)));
                 lido = new String(ck.lido);
             }
     }//GEN-LAST:event_ChietKhauMouseClicked
