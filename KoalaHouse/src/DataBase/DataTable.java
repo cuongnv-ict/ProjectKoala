@@ -5,6 +5,7 @@
 package DataBase;
 
 import edu.com.ThongTin;
+import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.Date;
@@ -86,7 +87,9 @@ public class DataTable {
                    str[3] = rs1.getString(3);
                    str[4] = rs1.getString(7);
                    str[5] = rs1.getString(8);
+                   str[5]=XuLy.getDate((String) str[5]);
                    str[6] = rs1.getString(9);
+                   str[6]=XuLy.getDate((String) str[6]);
                    str[8] = rs1.getString(11);
                    switch(rs1.getInt(12)){
                     case 0:

@@ -201,7 +201,10 @@ public class DSLop extends javax.swing.JPanel {
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         ThemSuaLop lop = new ThemSuaLop(null, true, vec);
         String oldname=model.getValueAt(row, 0).toString();
+        String khoiname=model.getValueAt(row, 2).toString();
+        System.out.println(khoiname);
         lop.setOldName(oldname);
+        lop.setKhoiName(khoiname);
         lop.setVisible(true);
         lop.setThemSuaLop(false);
         lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
