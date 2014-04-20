@@ -21,7 +21,7 @@ public class ThemHS extends javax.swing.JDialog {
     /**
      * Creates new form ThemHS
      */
-    public ThemHS(java.awt.Frame parent, boolean modal,int id_classes) {
+    public ThemHS(java.awt.Frame parent, boolean modal, int id_classes) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
@@ -29,7 +29,7 @@ public class ThemHS extends javax.swing.JDialog {
         this.id_classes = id_classes;
     }
 
-    public ThemHS(java.awt.Frame parent, boolean modal, Vector vector,int id_students) {
+    public ThemHS(java.awt.Frame parent, boolean modal, Vector vector, int id_students) {
         super(parent, modal);
         initComponents();
         DongY.setText("Chỉnh sửa");
@@ -44,6 +44,9 @@ public class ThemHS extends javax.swing.JDialog {
         setSelectComboBox(ngay, obj[0]);
         this.setResizable(false);
         this.id_student = id_students;
+        this.setResizable(false);
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
+
     }
 
     private void setSelectComboBox(JComboBox x, Object obj) {
@@ -280,10 +283,10 @@ public class ThemHS extends javax.swing.JDialog {
         vector.add(getDienThoai());
         vector.add(getDaiDien());
         vector.add(hinhthuc.getSelectedIndex());
-        if (!DongY.getText().equals("Chỉnh sửa")&&new DataBase.SQLLopX().themHocSinh(vector, id_classes)) {
+        if (!DongY.getText().equals("Chỉnh sửa") && new DataBase.SQLLopX().themHocSinh(vector, id_classes)) {
             button = true;
             dispose();
-        } else if (DongY.getText().equals("Chỉnh sửa")&&new DataBase.SQLLopX().suaHocSinh(vector, id_student)) {
+        } else if (DongY.getText().equals("Chỉnh sửa") && new DataBase.SQLLopX().suaHocSinh(vector, id_student)) {
             button = true;
             dispose();
         }
