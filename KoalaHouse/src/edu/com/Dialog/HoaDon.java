@@ -895,7 +895,7 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         
         Graphics2D g2d = (Graphics2D)grphcs;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        g2d.scale(0.95, 1);
+        g2d.scale(0.5, 0.5);
         
         this.print(grphcs);
         
