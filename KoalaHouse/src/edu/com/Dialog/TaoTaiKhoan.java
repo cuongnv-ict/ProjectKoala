@@ -308,6 +308,7 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                         sqlCommnand = "GRANT SELECT ON *.* TO '" + user + "'@'localhost';";
                         System.out.println(sqlCommnand);
                         statements.execute(sqlCommnand);
+                        sqlCommnand = "GRANT INSERT ON *.accounts TO '" + user + "'@'localhost';";
                         //sqlCommnand = ;
                         statements.executeUpdate("UPDATE projectkoala.accounts SET IsRoot = 0 WHERE UserName = '" + user + "';");
                         JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công", "Thành công", JOptionPane.OK_OPTION);
