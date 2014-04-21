@@ -517,7 +517,7 @@ public class ListKoala extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel23)
                     .addComponent(jLabel22))
                 .addGap(32, 32, 32)
@@ -747,9 +747,17 @@ public class ListKoala extends javax.swing.JFrame {
                                 table = (JTable) viewPort.getView();
                             }
                         }
+                    } else if(item instanceof JScrollPane) {
+                        scrollPane = (JScrollPane) item;
+                        JViewport viewPort = scrollPane.getViewport();
+                        table = (JTable) viewPort.getView();
                     }
                 }
-            }
+            } /*else if(component instanceof JScrollPane) {
+                scrollPane = (JScrollPane) component;
+                JViewport viewPort = scrollPane.getViewport();
+                table = (JTable) viewPort.getView();
+            }*/
         } else {
             System.out.println("DM L'");
         }
