@@ -112,11 +112,11 @@ public class RecieptManagerment {
                 }
             }
             //xem co dong hoc phi dat coc khong
-            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id in(select Cost_Id from students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id = 1);");
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
             while(rs1.next()){
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
-                str1[0]= rs1.getString(4);
+                str1[0]= rs1.getString(4)+" (Hoàn Trả)";
                 switch (rs1.getInt(3)) {
                     case 1:
                         str1[1] = "Kỳ 1";
@@ -161,7 +161,7 @@ public class RecieptManagerment {
     public int PhiDatCoc(int idStudent){
         int total = 0;
         try {
-            rs1 = statement.executeQuery("SELECT Amount FROM projectkoala.cost where Id in(select Cost_Id from students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id = 1);");
+            rs1 = statement.executeQuery("SELECT Amount FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
             while(rs1.next()){
                 total = rs1.getInt(1);
             }
@@ -169,5 +169,17 @@ public class RecieptManagerment {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
+    }
+    public int GetIdPhiDatCoc(int idStudent){
+        int id = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\")");
+            while(rs1.next()){
+                id = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 }

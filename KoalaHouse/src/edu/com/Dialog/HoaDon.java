@@ -107,6 +107,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         HoaDon.idhs = 0;
         HoaDon.lop = "";
         HoaDon.idTT = 0;
+        int x = Integer.parseInt(XuLy.getMoney(daThu.getText()));
+        if(x <0){
+            jLabel29.setText("Đã Trả");
+            x = x* (-1);
+            daThu.setText(XuLy.setMoney(String.valueOf(x)));
+        }
     }
     public boolean getButton()//lay xem la create hay cancle
     {

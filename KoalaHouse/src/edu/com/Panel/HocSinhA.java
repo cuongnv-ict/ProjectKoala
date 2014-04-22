@@ -498,15 +498,19 @@ public class HocSinhA extends javax.swing.JPanel {
         if(receipts.getButton()){
             //them cac phi vao lich su dong tien
             //xoa cac phi trong bang
+            boolean check = true;
             int k = model.getRowCount();
             for(int i = 0;i<k;i++){
                 int idCost = Integer.parseInt(model.getValueAt(0,0).toString());
+                if(model.getValueAt(0, 1).equals("Phí Đặt Cọc")) check = false;
                 new CostOfStudent().UpdatePhiCuaHs(id, idCost, idTrungTam);
                 model.removeRow(0);
             }
-            int a= new RecieptManagerment().PhiDatCoc(id);
-            if(a!= 0){
-                new CostOfStudent().UpdatePhiCuaHs(id,1,idTrungTam);
+            if(check){
+            {
+                int idCost = new RecieptManagerment().GetIdPhiDatCoc(id);
+                new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
+            }
             }
             Total();
         }

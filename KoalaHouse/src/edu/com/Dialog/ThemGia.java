@@ -151,14 +151,14 @@ public class ThemGia extends javax.swing.JDialog {
 
         Nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
-        datcoc.setText("Phí đặt cọc");
+        datcoc.setText("Phí Đặt Cọc");
         datcoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datcocActionPerformed(evt);
             }
         });
 
-        trongmuon.setText("Phí trông muộn");
+        trongmuon.setText("Phí Trông Muộn");
         trongmuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trongmuonActionPerformed(evt);
@@ -196,10 +196,10 @@ public class ThemGia extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(datcoc)
-                                .addGap(37, 37, 37)
-                                .addComponent(trongmuon)))))
+                            .addComponent(datcoc)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(trongmuon)
+                                .addGap(1, 1, 1)))))
                 .addGap(34, 48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -287,7 +287,7 @@ public class ThemGia extends javax.swing.JDialog {
         if(datcoc.isSelected()){
             trongmuon.setSelected(false);
             TenPhi.setEditable(false);
-            TenPhi.setText("Phí đặt cọc");
+            TenPhi.setText("Phí Đặt Cọc");
         }
         else{
              TenPhi.setEditable(true);
@@ -299,7 +299,7 @@ public class ThemGia extends javax.swing.JDialog {
         if(trongmuon.isSelected()){
             datcoc.setSelected(false);
             TenPhi.setEditable(false);
-            TenPhi.setText("Phí trông muộn");
+            TenPhi.setText("Phí Trông Muộn");
         }
         else{
               TenPhi.setEditable(true);

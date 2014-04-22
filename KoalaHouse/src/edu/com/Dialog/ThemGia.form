@@ -56,10 +56,10 @@
                                   <Component id="Nam" min="-2" pref="73" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="datcoc" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="datcoc" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="trongmuon" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -211,7 +211,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="datcoc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ph&#xed; &#x111;&#x1eb7;t c&#x1ecd;c"/>
+        <Property name="text" type="java.lang.String" value="Ph&#xed; &#x110;&#x1eb7;t C&#x1ecd;c"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="datcocActionPerformed"/>
@@ -219,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="trongmuon">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ph&#xed; tr&#xf4;ng mu&#x1ed9;n"/>
+        <Property name="text" type="java.lang.String" value="Ph&#xed; Tr&#xf4;ng Mu&#x1ed9;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trongmuonActionPerformed"/>
