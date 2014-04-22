@@ -7,6 +7,7 @@
 package edu.com.Panel;
 
 import DataBase.DataTable;
+import DataBase.HocSinh.DebtList;
 import edu.com.CloseButton.CloseTabButton;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ public class DSNo extends javax.swing.JPanel {
     /**
      * Creates new form DSNo
      */
+    ArrayList ListId;
     public JTabbedPane center;
     public DSNo() {
         initComponents();
-        new DataTable().BangDanhSachHocSinhNoPhi(DSHocSinhNo);
+        new DebtList().BangDanhSachHocSinhNoPhi(DSHocSinhNo);
+        ListId = new DebtList().GetIdStudent();
     }
 
     /**
@@ -111,8 +114,9 @@ public class DSNo extends javax.swing.JPanel {
     private void DSHocSinhNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHocSinhNoMouseClicked
         if(evt.getClickCount()==2){
             //map cac truong
-            String idStudent = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 0).toString();
-            int id = Integer.parseInt(idStudent);
+            String sTT = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 0).toString();
+            int stt = Integer.parseInt(sTT);
+            int id = Integer.parseInt(ListId.get(stt - 1).toString());
             String tenHocSinh = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 1).toString();
             //HocSinhA.idTemp = id;
             HocSinhA aa = new HocSinhA(id);
