@@ -258,6 +258,9 @@ public class LopX extends javax.swing.JPanel {
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
         // TODO add your handling code here:
         int count = 1, row = 0;
+         if (lopx.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 count--;
@@ -288,6 +291,9 @@ public class LopX extends javax.swing.JPanel {
     private void chuyenlopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenlopActionPerformed
         // TODO add your handling code here:
         int count = 0;
+         if (lopx.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 count++;
@@ -310,6 +316,9 @@ public class LopX extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
+         if (lopx.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));

@@ -14,6 +14,7 @@ import java.awt.Component;
 import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -64,6 +65,8 @@ public class DSHS extends javax.swing.JPanel {
         Count = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         LoaiHS = new javax.swing.JComboBox();
+        khoiphuc = new javax.swing.JLabel();
+        xoa = new javax.swing.JLabel();
 
         NghiHoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,11 +110,11 @@ public class DSHS extends javax.swing.JPanel {
             }
         ));
         DSHS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DSHSMouseClicked(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 DSHSMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DSHSMouseClicked(evt);
             }
         });
         jScrollPane8.setViewportView(DSHS);
@@ -131,30 +134,55 @@ public class DSHS extends javax.swing.JPanel {
             }
         });
 
+        khoiphuc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        khoiphuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/khoiphuc.png"))); // NOI18N
+        khoiphuc.setToolTipText("Khôi phục");
+        khoiphuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                khoiphucMouseClicked(evt);
+            }
+        });
+
+        xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
+        xoa.setToolTipText("Xóa");
+        xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xoaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(Count, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(LoaiHS, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(khoiphuc)
+                .addGap(18, 18, 18)
+                .addComponent(xoa)
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Count, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Count, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(khoiphuc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     /*
@@ -168,23 +196,21 @@ public class DSHS extends javax.swing.JPanel {
         if (evt.getClickCount() == 2 && LoaiHS.getSelectedIndex() == 0) {
             int row = DSHS.getSelectedRow();
             //map cac truong
-              int a=-1;
+            int a = -1;
             int id = id_students.get(row);
             String tenHocSinh = DSHS.getValueAt(DSHS.getSelectedRow(), 1).toString();
             //HocSinhA.idTemp = id;
-            for(int i=0;i<center.getTabCount();i++)
-            {
-                if(tenHocSinh.equals(center.getTitleAt(i)))
-                { a+=1;
-                center.setSelectedIndex(i);
+            for (int i = 0; i < center.getTabCount(); i++) {
+                if (tenHocSinh.equals(center.getTitleAt(i))) {
+                    a += 1;
+                    center.setSelectedIndex(i);
                 }
             }
-            if(a==-1)
-            {
-            HocSinhA aa = new HocSinhA(id);
-            center.add(DSHS.getModel().getValueAt(row, 1).toString(), aa);
-            center.setSelectedComponent(aa);
-            new CloseTabButton(center, center.getComponentCount() - 2);
+            if (a == -1) {
+                HocSinhA aa = new HocSinhA(id);
+                center.add(DSHS.getModel().getValueAt(row, 1).toString(), aa);
+                center.setSelectedComponent(aa);
+                new CloseTabButton(center, center.getComponentCount() - 2);
             }
         } else {
             arrRows = DSHS.getSelectedRows();
@@ -289,6 +315,68 @@ public class DSHS extends javax.swing.JPanel {
         arrRows = null;
     }//GEN-LAST:event_XoaActionPerformed
 
+    private void khoiphucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_khoiphucMouseClicked
+        // TODO add your handling code here:
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
+        switch (LoaiHS.getSelectedIndex()) {
+            case 0:
+                JOptionPane.showMessageDialog(center, "Chức năng khôi phục chỉ sử dụng trong danh sách học sinh nghỉ học", null, JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 1:
+                for (int i = 0; i < DSHS.getRowCount(); i++) {
+                    if(Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())){
+                        new DataBase.SQLDanhSachHocSinh().khoiphucHocSinh(id_students.get(i));
+                    }
+                }
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(center, "Chức năng khôi phục chỉ sử dụng trong danh sách học sinh nghỉ học", null, JOptionPane.INFORMATION_MESSAGE);
+                break;
+        }
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+    }//GEN-LAST:event_khoiphucMouseClicked
+
+    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
+        // TODO add your handling code here:
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
+        switch (LoaiHS.getSelectedIndex()) {
+            case 0:
+                JOptionPane.showMessageDialog(center, "Chức năng xóa được sử dụng trong danh sách học sinh nghỉ học\n và danh sách học sinh ra trường,", null, JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 1:
+                 for (int i = 0; i < DSHS.getRowCount(); i++) {
+                    if(Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())){
+                        new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
+                    }
+                }
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
+                break;
+            case 2:
+                 for (int i = 0; i < DSHS.getRowCount(); i++) {
+                    if(Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())){
+                        new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
+                    }
+                }
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, -1);
+                break;
+        }
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+    }//GEN-LAST:event_xoaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Count;
     private javax.swing.JTable DSHS;
@@ -300,5 +388,7 @@ public class DSHS extends javax.swing.JPanel {
     private javax.swing.JMenuItem XoaRaTruong;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JLabel khoiphuc;
+    private javax.swing.JLabel xoa;
     // End of variables declaration//GEN-END:variables
 }

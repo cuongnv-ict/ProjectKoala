@@ -42,23 +42,24 @@ public class SQLDanhSachHocSinh {
 
     public void BangDanhSachHocSinh(JTable table, int stype) {
         try {
-            Object[] nameColumn = {"STT", "Tên", "Ngay Sinh", "Trình Độ", "Lớp", "Hình Thức Học"};
+            Object[] nameColumn = {"STT", "Tên", "Ngay Sinh", "Trình Độ", "Lớp", "Hình Thức Học", "Đánh dấu"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select students.id,fullname,brithday,levels_id,nameclass,isclient  from students,classes,classes_has_students where students.id = students_id and classes.id=classes_id and students.isactive = " + stype);
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
-                    String str[] = new String[6];
+                    Object str[] = new Object[7];
                     str[0] = "";
                     str[1] = "";
                     str[2] = "";
                     str[3] = "";
                     str[4] = "";
                     str[5] = "";
+                    str[6] = false;
                     data.add(str);
                 }
             } else {
                 do {
-                    String str[] = new String[6];
+                    Object str[] = new Object[7];
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(2);
                     str[2] = XuLy.getDate(rs1.getString(3));
@@ -85,6 +86,7 @@ public class SQLDanhSachHocSinh {
                             str[5] = "Chương Trình Bạn Là Khách";
                             break;
                     }
+                    str[6] = false;
                     data.add(str);
                 } while (rs1.next());
             }
@@ -93,17 +95,24 @@ public class SQLDanhSachHocSinh {
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
-                model = new DefaultTableModel(rowColumn, nameColumn) {
-                    boolean[] canEdit = new boolean[]{
-                        false, false, false, false, false, false
-                    };
-
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return canEdit[columnIndex];
-                    }
-                };
-                table.setModel(model);
             }
+            model = new DefaultTableModel(rowColumn, nameColumn) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, true
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+                Class[] types = new Class[]{
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+            };
+            table.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }

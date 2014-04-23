@@ -183,10 +183,13 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 7) == true) {
-                if (new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i))) {
-                    model.removeRow(i);
-                };
+                new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i));
             }
+        }
+        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+        model = (DefaultTableModel) BangPhi.getModel();
+        if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_cost, BangPhi, 0);
         }
     }//GEN-LAST:event_XoaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
