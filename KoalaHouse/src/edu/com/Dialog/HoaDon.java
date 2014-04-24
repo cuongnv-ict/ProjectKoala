@@ -107,11 +107,13 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         HoaDon.idhs = 0;
         HoaDon.lop = "";
         HoaDon.idTT = 0;
+        if(idHocSinh>0){
         int x = Integer.parseInt(XuLy.getMoney(daThu.getText()));
         if(x <0){
             jLabel29.setText("Đã Trả");
             x = x* (-1);
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
+        }
         }
     }
     public boolean getButton()//lay xem la create hay cancle
@@ -132,7 +134,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
         }
         catch(java.lang.NumberFormatException e){
-            
+            JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
         }
     }
     }

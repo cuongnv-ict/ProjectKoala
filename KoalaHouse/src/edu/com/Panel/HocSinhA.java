@@ -530,6 +530,7 @@ public class HocSinhA extends javax.swing.JPanel {
         if(chitiet.them){
             totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);
             TimeTrongMuon.setText(String.valueOf(totalTime));
+            new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi); 
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 

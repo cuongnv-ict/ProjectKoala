@@ -136,13 +136,39 @@ public class AStudentAndLateDay {
 }
     public void LateDayInfo(int idStudent,JTable table){
         try {
-            Object [] nameColumn = {"Ngày","Số phút trông muộn"};
+            Object [] nameColumn = {"Ngày","Số phút trông muộn","Kì học"};
             ArrayList<Object []> data = new ArrayList<Object []>();
             rs1 = statement.executeQuery("select * from lateday where Students_Id = "+idStudent);
             while(rs1.next()){
-                Object str[] = new Object[2];
+                Object str[] = new Object[3];
                 str[0]= new XuLiXau().NgayThangNam(rs1.getString(4));
                 str[1] = rs1.getString(5);
+                str[2] = rs1.getString(7);
+                if(str[2]== null){
+                    str[2]= "Chưa thanh toán";
+                }
+                else {
+                    switch (rs1.getInt(7)) {
+                    case 0:
+                        str[2] = "Chưa thanh toán";
+                        break;
+                    case 1:
+                        str[2] = "Kỳ 1";
+                        break;
+                    case 2:
+                        str[2] = "Kỳ 2";
+                        break;
+                    case 3:
+                        str[2] = "Kỳ 3";
+                        break;
+                    case 4:
+                        str[2] = "Kỳ hè";
+                        break;
+                    case 5:
+                        str[2] = "Cả năm";
+                        break;
+                }
+                }
                 data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];

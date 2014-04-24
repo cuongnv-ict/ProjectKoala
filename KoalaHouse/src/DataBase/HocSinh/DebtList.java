@@ -64,6 +64,9 @@ public class DebtList {
                 str[4] = rs1.getString(5);
                 str[5] = rs1.getString(6);
                 str[6] = XuLy.setMoney(rs1.getString(9));
+                if(str[6].equals("0")){
+                    str[6] = "Chưa đóng học phí";
+                }
                 data.add(str);
             }
             Object[][] rowColumn = new Object[data.size()][];

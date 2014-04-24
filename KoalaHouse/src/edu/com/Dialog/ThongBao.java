@@ -23,6 +23,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.midi.Receiver;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -86,11 +87,24 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
     }
     public void Total(){
         int Total = 0;
+        try{
         for(int i=0;i<model.getRowCount();i++){
-            if(model.getValueAt(i, 3).toString().length() >0)
-            Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+            if(model.getValueAt(i, 3).toString().length()>0){
+                    Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+            }
         }
+        int phidatcoc = new RecieptManagerment().PhiDatCoc(idhs);
+        Total = Total + 2*phidatcoc;
+        if(Total <0){
+            soTienCanDong.setText("Số Tiền Được Trả :");
+            TongTien.setText(XuLy.setMoney(String.valueOf(Total)).substring(1));
+        }
+        else
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
+        }
+        catch(java.lang.NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
+        }
     }
 
     /**
@@ -132,7 +146,7 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        soTienCanDong = new javax.swing.JLabel();
         TongTien = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -407,7 +421,7 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
             }
         });
 
-        jLabel4.setText("Số Tiền Cần Đóng:");
+        soTienCanDong.setText("Số Tiền Cần Đóng:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -429,7 +443,7 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel4)
+                        .addComponent(soTienCanDong)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -443,7 +457,7 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(soTienCanDong)
                     .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(jButton1)
@@ -563,10 +577,10 @@ public class ThongBao extends javax.swing.JDialog implements Printable{
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JComboBox ngay;
+    private javax.swing.JLabel soTienCanDong;
     private javax.swing.JTextField tenLop1;
     private javax.swing.JComboBox thang;
     // End of variables declaration//GEN-END:variables
