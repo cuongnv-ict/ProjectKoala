@@ -23,6 +23,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -181,6 +182,9 @@ public class CostOfStudent {
                     int phi = Integer.parseInt((String) str[4]);
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
+                    if(phi==0){
+                        JOptionPane.showMessageDialog(null, "Học Sinh Này Không Còn Số Tiền Trông Muộn, Bạn Nên Xóa Phí Đó");
+                    }
                     str[4] = phi;
                 }
                 str[4] = XuLy.setMoney(str[4].toString());
