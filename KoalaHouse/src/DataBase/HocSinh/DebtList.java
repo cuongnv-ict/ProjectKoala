@@ -45,7 +45,7 @@ public class DebtList {
     public void BangDanhSachHocSinhNoPhi(JTable table) {
         int stt = 1;
         try {
-            Object[] nameColumn = {"Số TT", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Tiền Nợ"};
+            Object[] nameColumn = {"Số TT", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Cần Đóng"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
             while (rs1.next()) {
@@ -62,12 +62,14 @@ public class DebtList {
                         break;
                 }
                 str[4] = rs1.getString(5);
-                str[5] = rs1.getString(6);
-                str[6] = XuLy.setMoney(rs1.getString(9));
-                if(str[6].equals("0")){
-                    str[6] = "Chưa đóng học phí";
-                }
-                data.add(str);
+                str[5] = rs1.getString(6);    
+                //tinh tong tien can dong
+                int idHS = rs1.getInt(1);
+                int idFac = rs1.getInt(2);
+                int tongtien = new GetTotal().GetTotalMoney(idHS, idFac);
+                str[6] = XuLy.setMoney(String.valueOf(tongtien));
+                if(tongtien >0)
+                    data.add(str);
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
@@ -108,5 +110,4 @@ public ArrayList GetIdStudent(){
         }
         return data;
     }
-
 }
