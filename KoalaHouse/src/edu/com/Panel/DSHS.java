@@ -317,16 +317,19 @@ public class DSHS extends javax.swing.JPanel {
 
     private void khoiphucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_khoiphucMouseClicked
         // TODO add your handling code here:
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            return;
-        }
         switch (LoaiHS.getSelectedIndex()) {
             case 0:
+                if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                    return;
+                }
                 JOptionPane.showMessageDialog(center, "Chức năng khôi phục chỉ sử dụng trong danh sách học sinh nghỉ học", null, JOptionPane.INFORMATION_MESSAGE);
                 break;
             case 1:
+                if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                    return;
+                }
                 for (int i = 0; i < DSHS.getRowCount(); i++) {
-                    if(Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())){
+                    if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
                         new DataBase.SQLDanhSachHocSinh().khoiphucHocSinh(id_students.get(i));
                     }
                 }
@@ -346,24 +349,27 @@ public class DSHS extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            return;
-        }
         switch (LoaiHS.getSelectedIndex()) {
             case 0:
                 JOptionPane.showMessageDialog(center, "Chức năng xóa được sử dụng trong danh sách học sinh nghỉ học\n và danh sách học sinh ra trường,", null, JOptionPane.INFORMATION_MESSAGE);
                 break;
             case 1:
-                 for (int i = 0; i < DSHS.getRowCount(); i++) {
-                    if(Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())){
+                if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                    return;
+                }
+                for (int i = 0; i < DSHS.getRowCount(); i++) {
+                    if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
                         new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
                     }
                 }
                 new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
                 break;
             case 2:
-                 for (int i = 0; i < DSHS.getRowCount(); i++) {
-                    if(Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())){
+                if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                    return;
+                }
+                for (int i = 0; i < DSHS.getRowCount(); i++) {
+                    if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
                         new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
                     }
                 }
