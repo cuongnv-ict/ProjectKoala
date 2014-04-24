@@ -55,48 +55,12 @@ public class DSHS extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        NghiHoc = new javax.swing.JPopupMenu();
-        KhoiPhuc = new javax.swing.JMenuItem();
-        Xoa = new javax.swing.JMenuItem();
-        RaTruong = new javax.swing.JPopupMenu();
-        XoaRaTruong = new javax.swing.JMenuItem();
         jScrollPane8 = new javax.swing.JScrollPane();
         DSHS = new javax.swing.JTable();
         Count = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         LoaiHS = new javax.swing.JComboBox();
-        khoiphuc = new javax.swing.JLabel();
         xoa = new javax.swing.JLabel();
-
-        NghiHoc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NghiHocMouseClicked(evt);
-            }
-        });
-
-        KhoiPhuc.setText("Khôi phục");
-        KhoiPhuc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KhoiPhucActionPerformed(evt);
-            }
-        });
-        NghiHoc.add(KhoiPhuc);
-
-        Xoa.setText("Xóa");
-        Xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                XoaActionPerformed(evt);
-            }
-        });
-        NghiHoc.add(Xoa);
-
-        XoaRaTruong.setText("Xóa");
-        XoaRaTruong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                XoaRaTruongActionPerformed(evt);
-            }
-        });
-        RaTruong.add(XoaRaTruong);
 
         DSHS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,9 +74,6 @@ public class DSHS extends javax.swing.JPanel {
             }
         ));
         DSHS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                DSHSMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DSHSMouseClicked(evt);
             }
@@ -131,15 +92,6 @@ public class DSHS extends javax.swing.JPanel {
         LoaiHS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoaiHSActionPerformed(evt);
-            }
-        });
-
-        khoiphuc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        khoiphuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/khoiphuc.png"))); // NOI18N
-        khoiphuc.setToolTipText("Khôi phục");
-        khoiphuc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                khoiphucMouseClicked(evt);
             }
         });
 
@@ -164,23 +116,20 @@ public class DSHS extends javax.swing.JPanel {
                 .addGap(57, 57, 57)
                 .addComponent(LoaiHS, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(khoiphuc)
-                .addGap(18, 18, 18)
                 .addComponent(xoa)
-                .addGap(42, 42, 42))
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(Count, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(khoiphuc, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(xoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -240,118 +189,36 @@ public class DSHS extends javax.swing.JPanel {
 
     }//GEN-LAST:event_LoaiHSActionPerformed
 
-    private void KhoiPhucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KhoiPhucActionPerformed
+    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-        if (Count.getText().equals("0")) {
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
             return;
         }
-        for (int i = 0; i < arrRows.length; i++) {
-            new DataBase.SQLDanhSachHocSinh().khoiphucHocSinh(id_students.get(arrRows[i]));
-        }
-        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            Count.setText("0");
-        } else {
-            Count.setText(String.valueOf(DSHS.getRowCount()));
-            XuLy.setID(id_students, DSHS, 0);
-        }
-        arrRows = null;
-    }//GEN-LAST:event_KhoiPhucActionPerformed
-
-    private void NghiHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NghiHocMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NghiHocMouseClicked
-
-    private void DSHSMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHSMouseReleased
-        // TODO add your handling code here:
-        if (evt.isPopupTrigger() && arrRows != null) {
-            if (Count.getText().equals("0")) {
-                return;
-            }
-            switch (LoaiHS.getSelectedIndex()) {
-                case 1:
-                    NghiHoc.show(this, this.getX() + evt.getX() + 5, this.getY() + evt.getY() + 40);
-                    break;
-                case 2:
-                    RaTruong.show(this, this.getX() + evt.getX() + 5, this.getY() + evt.getY() + 40);
-                    break;
+        boolean flags = true;
+        for (int i = DSHS.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean)DSHS.getValueAt(i, 6) == true) {
+                flags = false;
             }
         }
-    }//GEN-LAST:event_DSHSMouseReleased
-
-    private void XoaRaTruongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaRaTruongActionPerformed
-        // TODO add your handling code here:
-        if (Count.getText().equals("0")) {
+        if (flags) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        for (int i = 0; i < arrRows.length; i++) {
-            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(arrRows[i]));
-        }
-        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, -1);
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            Count.setText("0");
-        } else {
-            Count.setText(String.valueOf(DSHS.getRowCount()));
-            XuLy.setID(id_students, DSHS, 0);
-        }
-        arrRows = null;
-    }//GEN-LAST:event_XoaRaTruongActionPerformed
-
-    private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
-        // TODO add your handling code here:
-        if (Count.getText().equals("0")) {
+        int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+        if(click==JOptionPane.NO_OPTION){
             return;
         }
-        for (int i = 0; i < arrRows.length; i++) {
-            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(arrRows[i]));
-        }
-        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            Count.setText("0");
-        } else {
-            Count.setText(String.valueOf(DSHS.getRowCount()));
-            XuLy.setID(id_students, DSHS, 0);
-        }
-        arrRows = null;
-    }//GEN-LAST:event_XoaActionPerformed
-
-    private void khoiphucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_khoiphucMouseClicked
-        // TODO add your handling code here:
         switch (LoaiHS.getSelectedIndex()) {
             case 0:
-                if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                    return;
-                }
-                JOptionPane.showMessageDialog(center, "Chức năng khôi phục chỉ sử dụng trong danh sách học sinh nghỉ học", null, JOptionPane.INFORMATION_MESSAGE);
-                break;
-            case 1:
                 if (DSHS.getValueAt(0, 0).toString().equals("")) {
                     return;
                 }
                 for (int i = 0; i < DSHS.getRowCount(); i++) {
                     if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                        new DataBase.SQLDanhSachHocSinh().khoiphucHocSinh(id_students.get(i));
+                         new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
                     }
                 }
-                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
-                break;
-            case 2:
-                JOptionPane.showMessageDialog(center, "Chức năng khôi phục chỉ sử dụng trong danh sách học sinh nghỉ học", null, JOptionPane.INFORMATION_MESSAGE);
-                break;
-        }
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            Count.setText("0");
-        } else {
-            Count.setText(String.valueOf(DSHS.getRowCount()));
-            XuLy.setID(id_students, DSHS, 0);
-        }
-    }//GEN-LAST:event_khoiphucMouseClicked
-
-    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
-        // TODO add your handling code here:
-        switch (LoaiHS.getSelectedIndex()) {
-            case 0:
-                JOptionPane.showMessageDialog(center, "Chức năng xóa được sử dụng trong danh sách học sinh nghỉ học\n và danh sách học sinh ra trường,", null, JOptionPane.INFORMATION_MESSAGE);
+                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
                 break;
             case 1:
                 if (DSHS.getValueAt(0, 0).toString().equals("")) {
@@ -386,15 +253,9 @@ public class DSHS extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Count;
     private javax.swing.JTable DSHS;
-    private javax.swing.JMenuItem KhoiPhuc;
     private javax.swing.JComboBox LoaiHS;
-    private javax.swing.JPopupMenu NghiHoc;
-    private javax.swing.JPopupMenu RaTruong;
-    private javax.swing.JMenuItem Xoa;
-    private javax.swing.JMenuItem XoaRaTruong;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JLabel khoiphuc;
     private javax.swing.JLabel xoa;
     // End of variables declaration//GEN-END:variables
 }

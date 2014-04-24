@@ -220,23 +220,21 @@ public class LopX extends javax.swing.JPanel {
             int row = lopx.getSelectedRow();
             model.setValueAt(false, row, 6);
             //map cac truong
-            int a=-1;
+            int a = -1;
             int id = id_students.get(row);
             String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
-            for(int i=0;i<center.getTabCount();i++)
-            {
-                if(tenHocSinh.equals(center.getTitleAt(i)))
-                { a+=1;
-                center.setSelectedIndex(i);
+            for (int i = 0; i < center.getTabCount(); i++) {
+                if (tenHocSinh.equals(center.getTitleAt(i))) {
+                    a += 1;
+                    center.setSelectedIndex(i);
                 }
             }
-            if(a==-1)
-            {
-            //HocSinhA.idTemp = id;
-            HocSinhA aa = new HocSinhA(id);
-            center.add(model.getValueAt(row, 1).toString(), aa);
-            center.setSelectedComponent(aa);
-            new CloseTabButton(center, center.getComponentCount() - 2);
+            if (a == -1) {
+                //HocSinhA.idTemp = id;
+                HocSinhA aa = new HocSinhA(id);
+                center.add(model.getValueAt(row, 1).toString(), aa);
+                center.setSelectedComponent(aa);
+                new CloseTabButton(center, center.getComponentCount() - 2);
             }
         }
     }//GEN-LAST:event_lopxMouseClicked
@@ -258,7 +256,7 @@ public class LopX extends javax.swing.JPanel {
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
         // TODO add your handling code here:
         int count = 1, row = 0;
-         if (lopx.getValueAt(0, 0).toString().equals("")) {
+        if (lopx.getValueAt(0, 0).toString().equals("")) {
             return;
         }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
@@ -290,16 +288,17 @@ public class LopX extends javax.swing.JPanel {
 
     private void chuyenlopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenlopActionPerformed
         // TODO add your handling code here:
-        int count = 0;
-         if (lopx.getValueAt(0, 0).toString().equals("")) {
+        if (lopx.getValueAt(0, 0).toString().equals("")) {
             return;
         }
+        boolean flags = true;
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
-                count++;
+                flags = false;
             }
         }
-        if (count == 0) {
+        if (flags) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh chuyển lớp", null, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         chuyenlop chuyen = new chuyenlop(null, true, getName());
@@ -308,15 +307,32 @@ public class LopX extends javax.swing.JPanel {
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
-                model.removeRow(i);
             }
         }
-
+        new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+        model = (DefaultTableModel) lopx.getModel();
+        if (!lopx.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_students, lopx, 0);
+        }
     }//GEN-LAST:event_chuyenlopActionPerformed
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-         if (lopx.getValueAt(0, 0).toString().equals("")) {
+        if (lopx.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
+        boolean flags = true;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 6) == true) {
+                flags = false;
+            }
+        }
+        if (flags) {
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.NO_OPTION) {
             return;
         }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {

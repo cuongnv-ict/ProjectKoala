@@ -4,6 +4,8 @@
  */
 package edu.com.Dialog;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Venus
@@ -19,6 +21,9 @@ public class chuyenlop extends javax.swing.JDialog {
         button = false;
         initComponents();
         Lop.setModel(new DataBase.DataTable().DanhSachLop(NameClass));
+        this.setResizable(false);
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 100);
+        
     }
 
     /**

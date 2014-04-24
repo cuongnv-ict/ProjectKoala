@@ -180,7 +180,23 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
     private void XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaMouseClicked
         // TODO add your handling code here:
-
+        if (BangPhi.getValueAt(0, 0).toString().equals("")) {
+           return;
+        }
+        boolean flags = true;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            if ((Boolean) model.getValueAt(i, 7) == true) {
+                flags = false;
+            }
+        }
+        if(flags){
+             JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa loại phí đã chọn không?", null, JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.NO_OPTION) {
+            return;
+        }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 7) == true) {
                 new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i));
