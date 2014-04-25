@@ -13,6 +13,7 @@ import edu.com.Panel.HocSinhA;
 import edu.com.XuLy;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -901,11 +902,20 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
             return Printable.NO_SUCH_PAGE;
         }
         
+        Dimension dim = this.getSize();
+        double cHeight = dim.getHeight();
+        double cWidth = dim.getWidth();
+        double pHeight = pf.getImageableHeight();
+        double pWidth = pf.getImageableWidth();
+        
+        double xScale = pWidth / cWidth;
+        double yScale = pHeight / cHeight;
         Graphics2D g2d = (Graphics2D)grphcs;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        g2d.scale(0.5, 0.5);
+        g2d.scale(xScale, yScale);
         
-        this.print(grphcs);
+        this.paint(g2d);
+        this.repaint();
         
         return Printable.PAGE_EXISTS;
     }
