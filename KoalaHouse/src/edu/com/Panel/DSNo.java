@@ -119,11 +119,22 @@ public class DSNo extends javax.swing.JPanel {
             int id = Integer.parseInt(ListId.get(stt - 1).toString());
             String tenHocSinh = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 1).toString();
             //HocSinhA.idTemp = id;
+            int a=-1;
+            for (int i = 0; i < center.getTabCount(); i++) {
+                if (tenHocSinh.equals(center.getTitleAt(i))) {
+                    a += 1;
+                    center.setSelectedIndex(i);
+                }
+            }
+            if (a == -1) {
+           
             HocSinhA aa = new HocSinhA(id);
             //add tab
+            
             center.add(tenHocSinh, aa);
             center.setSelectedComponent(aa);
-        new CloseTabButton(center,center.getComponentCount()-2);
+            new CloseTabButton(center,center.getComponentCount()-2);
+        }
         }
     }//GEN-LAST:event_DSHocSinhNoMouseClicked
 
