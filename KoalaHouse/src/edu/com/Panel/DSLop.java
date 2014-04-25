@@ -241,6 +241,10 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
+        int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+        if(click==JOptionPane.NO_OPTION){
+            return;
+        }
         boolean xoaorkhong;
         DataBase.DataTable data= new DataTable();
         xoaorkhong=data.XoaLop(jTable4, 10);

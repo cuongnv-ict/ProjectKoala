@@ -67,7 +67,7 @@ public class ListKoala extends javax.swing.JFrame {
     ConnectData connectData;
     Connection connect;
     private JTable table;
-    private String nameadmin="XuanNT";
+    private String nameadmin="admin";
     private int idtrungtam;
     public void setTable(JTable table) {
         this.table = table;
