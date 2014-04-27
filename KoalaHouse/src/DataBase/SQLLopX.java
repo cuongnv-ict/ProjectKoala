@@ -289,7 +289,7 @@ public class SQLLopX {
                     Object[] str = new Object[7];
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(3);
-                    str[2] = rs1.getString(4);
+                    str[2] = XuLy.getDate(rs1.getString(4));
                     switch (rs1.getInt(7)) {
                         case 0:
                             str[3] = "Chính Quy";

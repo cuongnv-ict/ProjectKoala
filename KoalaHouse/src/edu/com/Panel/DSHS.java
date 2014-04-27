@@ -80,6 +80,7 @@ public class DSHS extends javax.swing.JPanel {
         });
         jScrollPane8.setViewportView(DSHS);
 
+        Count.setEditable(false);
         Count.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Count.setText("0");
 

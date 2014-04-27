@@ -238,7 +238,7 @@ public class ThemGia extends javax.swing.JDialog {
         // TODO add your handling code here:
         Vector vec = new Vector();
         if (getTenPhi().equals("")||getGia().equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên điền đủ thông tin", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa điền đủ thông tin", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         vec.add(getTenPhi());
