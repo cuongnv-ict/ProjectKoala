@@ -228,13 +228,21 @@ public class DSLop extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(evt.getClickCount()==2){
             String tenlop=jTable4.getValueAt(jTable4.getSelectedRow(),0).toString();
+            int a=-1;
+            a=center.indexOfTab(tenlop);
+            if(a==-1)
+            {
             LopX aa = new LopX(tenlop);
             aa.setName(tenlop);
             center.add(tenlop, aa);
             center.setSelectedComponent(aa);
             aa.center = center;
         new CloseTabButton(center,center.getComponentCount()-2);
-           
+            }
+            else
+            {
+                center.setSelectedIndex(a);
+            }
             
         }
     }//GEN-LAST:event_jTable4MouseClicked
