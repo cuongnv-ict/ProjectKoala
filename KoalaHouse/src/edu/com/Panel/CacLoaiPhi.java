@@ -50,6 +50,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         Sua = new javax.swing.JLabel();
         Xoa = new javax.swing.JLabel();
 
+        BangPhi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BangPhi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -61,6 +62,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 "Tên", "Kì học", "Năm học", "Giá"
             }
         ));
+        BangPhi.setRowHeight(25);
         BangPhi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BangPhiMouseClicked(evt);

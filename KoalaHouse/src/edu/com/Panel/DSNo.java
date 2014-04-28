@@ -44,6 +44,7 @@ public class DSNo extends javax.swing.JPanel {
         jScrollPane7 = new javax.swing.JScrollPane();
         DSHocSinhNo = new javax.swing.JTable();
 
+        DSHocSinhNo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         DSHocSinhNo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -70,6 +71,7 @@ public class DSNo extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        DSHocSinhNo.setRowHeight(30);
         DSHocSinhNo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DSHocSinhNoMouseClicked(evt);

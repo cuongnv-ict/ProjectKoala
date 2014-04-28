@@ -959,12 +959,16 @@ public class ListKoala extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel28MouseClicked
 // xu ly su kien kick chuot vao tree
     private void JtreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseClicked
-        // TODO add your handling code here:
+            // TODO add your handling code here:
         JTree node = (JTree)evt.getSource();
         TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
         node.setSelectionPath(path);
         DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)path.getLastPathComponent();
         if(selNode.isLeaf()){
+            if(selNode.getParent().toString().equals("Koala House")||selNode.getParent().getParent().toString().equals("Koala House"))
+            {}
+            else
+            {
             int a=0;
             LopX dslopa= new LopX(selNode.toString());
             for(int i=0;i<Panel_GDChinh.getTabCount();i++)
@@ -980,6 +984,7 @@ public class ListKoala extends javax.swing.JFrame {
             Panel_GDChinh.setSelectedComponent(dslopa);
             dslopa.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+            }
             }
         }
         else{}

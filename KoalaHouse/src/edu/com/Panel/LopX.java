@@ -74,6 +74,7 @@ public class LopX extends javax.swing.JPanel {
         chitiet = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        lopx.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lopx.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -93,6 +94,7 @@ public class LopX extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        lopx.setRowHeight(25);
         lopx.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lopxMouseClicked(evt);

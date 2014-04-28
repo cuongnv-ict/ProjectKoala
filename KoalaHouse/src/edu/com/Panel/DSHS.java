@@ -62,6 +62,7 @@ public class DSHS extends javax.swing.JPanel {
         LoaiHS = new javax.swing.JComboBox();
         xoa = new javax.swing.JLabel();
 
+        DSHS.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         DSHS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -73,6 +74,7 @@ public class DSHS extends javax.swing.JPanel {
                 "ID", "Tên", "Trình Độ", "Lớp", "Hình Thức Học", "Ngay Sinh"
             }
         ));
+        DSHS.setRowHeight(30);
         DSHS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DSHSMouseClicked(evt);

@@ -71,6 +71,7 @@ public class DSLop extends javax.swing.JPanel {
         Button_DSLop_SuaLop = new javax.swing.JLabel();
         Button_DSLop_Xoa = new javax.swing.JLabel();
 
+        jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -82,6 +83,7 @@ public class DSLop extends javax.swing.JPanel {
                 "Tên Lớp", "Trung tâm", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái"
             }
         ));
+        jTable4.setRowHeight(30);
         jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable4MouseClicked(evt);
