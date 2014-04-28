@@ -871,7 +871,7 @@ public class ListKoala extends javax.swing.JFrame {
         int a=-1;    
         for(int i=0;i<Panel_GDChinh.getTabCount();i++)
             {
-                if("Danh Sách Nợ".equals(Panel_GDChinh.getTitleAt(i)))
+                if("DS Chưa Đóng Phí".equals(Panel_GDChinh.getTitleAt(i)))
                 { a+=1;
                 Panel_GDChinh.setSelectedIndex(i);
                 }
@@ -879,7 +879,7 @@ public class ListKoala extends javax.swing.JFrame {
         if(a==-1)
         {
         DSNo dsno = new DSNo();
-       Panel_GDChinh.add("Danh Sách Nợ",dsno);
+       Panel_GDChinh.add("DS Chưa Đóng Phí",dsno);
        Panel_GDChinh.setSelectedComponent(dsno);
        dsno.center =Panel_GDChinh;
        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);

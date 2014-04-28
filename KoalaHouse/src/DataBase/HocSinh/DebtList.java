@@ -50,7 +50,7 @@ public class DebtList {
             rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
             while (rs1.next()) {
                 Object[] str = new Object[7];
-                str[0] = stt;stt++;
+                str[0] = stt;
                 str[1] = rs1.getString(3);
                 str[2] = new XuLiXau().NgayThangNam(rs1.getString(4));
                 switch (rs1.getInt(7)) {
@@ -68,8 +68,10 @@ public class DebtList {
                 int idFac = rs1.getInt(2);
                 int tongtien = new GetTotal().GetTotalMoney(idHS, idFac);
                 str[6] = XuLy.setMoney(String.valueOf(tongtien));
-                if(tongtien >0)
+                if(tongtien >0){
+                    stt++;
                     data.add(str);
+                }
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
