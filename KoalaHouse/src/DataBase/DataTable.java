@@ -48,7 +48,7 @@ public class DataTable {
         }
     }
     public void BangDanhSachLop(JTable table,int idtrungtam){
-        int id;
+        int id,dem=0;
         try {
             Object [] nameColumn = { "Tên Lớp","Trung tâm", "Trình độ", "Học kì", "Giáo Viên", "Ngày bắt đầu", "Ngày kết thúc", "Số học sinh", "Tối đa", "Trạng thái","Đánh dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
@@ -56,6 +56,7 @@ public class DataTable {
             if(idtrungtam==5) rs1= statement.executeQuery("select * from classes order by Faculties_Id ");
             else rs1=statement.executeQuery("select * from classes where Faculties_Id= '"+idtrungtam+"' order by Faculties_Id ");
             while(rs1.next()){
+                
                 Object str[] = new Object[11];
                 str[0] = rs1.getString(6);
                     id= rs1.getInt(1);
@@ -100,7 +101,9 @@ public class DataTable {
                         break;
                 }
                  str[10]=false;
-                 rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
+                 
+                // rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
+                 rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students,students where classes_has_students.Classes_Id='"+id+"' and classes_has_students.Students_Id=students.Id and students.isactive=1");
                  while(rs2.next())
                  {
                  

@@ -13,6 +13,7 @@ import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
 import edu.com.Dialog.trongmuon;
 import edu.com.ListKoala;
+import edu.com.ThongTin;
 import edu.com.XuLy;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -323,6 +324,21 @@ public class LopX extends javax.swing.JPanel {
         new CloseTabButton(center,a);
            
             aa.center = center;
+        }
+        a=-1;
+        a=center.indexOfTab("Danh Sách Lớp");
+        if(a!=-1)
+        {
+          center.getTabComponentAt(a);
+          center.removeTabAt(a);
+          DSLop bb = new DSLop(ThongTin.trungtam);
+            bb.setName("Danh Sách Lớp");
+            
+            center.add(bb, a);
+            
+        new CloseTabButton(center,a);
+           
+            bb.center = center;
         }
         new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
