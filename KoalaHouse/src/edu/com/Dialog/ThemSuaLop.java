@@ -49,9 +49,9 @@ public class ThemSuaLop extends javax.swing.JDialog {
         setSelectComboBox(B_day, B_date[0]);
         setSelectComboBox(B_month, B_date[1]);
         setSelectComboBox(B_year, B_date[2]);
-        setSelectComboBox(E_day, B_date[0]);
-        setSelectComboBox(E_month, B_date[1]);
-        setSelectComboBox(E_year, B_date[2]);
+        setSelectComboBox(E_day, E_date[0]);
+        setSelectComboBox(E_month, E_date[1]);
+        setSelectComboBox(E_year, E_date[2]);
         DongY.setText("Chỉnh sửa");
         title.setText("Chỉnh sửa thông tin lớp");
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);

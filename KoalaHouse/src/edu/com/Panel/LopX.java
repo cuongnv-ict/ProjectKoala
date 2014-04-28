@@ -309,6 +309,21 @@ public class LopX extends javax.swing.JPanel {
                 new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
             }
         }
+        int a;
+        a=center.indexOfTab(tenlop);
+        if(a!=-1)
+        {
+          center.getTabComponentAt(a);
+          center.removeTabAt(a);
+          LopX aa = new LopX(tenlop);
+            aa.setName(tenlop);
+            
+            center.add(aa, a);
+            
+        new CloseTabButton(center,a);
+           
+            aa.center = center;
+        }
         new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
