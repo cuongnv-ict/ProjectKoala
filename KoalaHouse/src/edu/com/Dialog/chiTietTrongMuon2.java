@@ -1,6 +1,7 @@
 package edu.com.Dialog;
 
 import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.GetTotal;
 import edu.com.upbang.EditTable;
 import edu.com.upbang.XuLiXau;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Năm/ Tháng/ Ngày", "Số phút", "kì học"
+                "Năm/ Tháng/ Ngày", "Số phút", "kì học", "tình trạng"
             }
         ));
         jScrollPane1.setViewportView(bangTrongmuon);
@@ -176,10 +177,10 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Xoa)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 6, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +203,13 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
         try{
         String date = nam.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+ngay.getSelectedItem().toString();
         int time = Integer.parseInt(soPhut.getText());
-        new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time);
+        int idSemester = new GetTotal().GetIdSemester(idTrungTam, nam.getSelectedItem().toString(), date);
+        if(idSemester > 0){
+        new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),nam.getSelectedItem().toString());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Ngày Bạn Chọn Không Có Trong Lịch Học");
+        }
         new AStudentAndLateDay().LateDayInfo(idStudent, bangTrongmuon);
         them = true; 
         }

@@ -136,11 +136,11 @@ public class AStudentAndLateDay {
 }
     public void LateDayInfo(int idStudent,JTable table){
         try {
-            Object [] nameColumn = {"Ngày","Số phút trông muộn","Kì học"};
+            Object [] nameColumn = {"Ngày","Số phút trông muộn","Kì học","Tình Trạng"};
             ArrayList<Object []> data = new ArrayList<Object []>();
             rs1 = statement.executeQuery("select * from lateday where Students_Id = "+idStudent);
             while(rs1.next()){
-                Object str[] = new Object[3];
+                Object str[] = new Object[4];
                 str[0]= new XuLiXau().NgayThangNam(rs1.getString(4));
                 str[1] = rs1.getString(5);
                 str[2] = rs1.getString(7);
@@ -168,6 +168,12 @@ public class AStudentAndLateDay {
                         str[2] = "Cả năm";
                         break;
                 }
+                }
+                switch(rs1.getInt(6)){
+                    case 0:
+                        str[3] = "Đã Thanh Toán";break;
+                    case 1:
+                        str[3] = "Chưa Thanh Toán";break;
                 }
                 data.add(str);
             }
@@ -205,14 +211,14 @@ public class AStudentAndLateDay {
         }
     }
     public void UpdateTrongMuon(int idStudent,String semester, String year){
-        String query = "UPDATE `projectkoala`.`lateday` SET `Semester`='"+semester+"', `year`="+year+" WHERE `Students_Id`='"+idStudent+"' and `isActive`='1';";
-        try {
-            PreparedStatement pstmt = connect.prepareStatement(query);
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        query = "UPDATE `projectkoala`.`lateday` SET `isActive`='0' WHERE `Students_Id`='"+idStudent+"';";
+//        String query = "UPDATE `projectkoala`.`lateday` SET `Semester`='"+semester+"', `year`="+year+" WHERE `Students_Id`='"+idStudent+"' and `isActive`='1';";
+//        try {
+//            PreparedStatement pstmt = connect.prepareStatement(query);
+//            pstmt.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        String query = "UPDATE `projectkoala`.`lateday` SET `isActive`='0' WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year`="+year+";";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
@@ -220,7 +226,7 @@ public class AStudentAndLateDay {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void InsertTrongMuon(int idStudent,int idFac,String date,int time){
+    public void InsertTrongMuon(int idStudent,int idFac,String date,int time,String semester, String year){
         int id = 0;
         try {
             rs1 = statement.executeQuery("SELECT max(Id) FROM lateday");
@@ -231,7 +237,19 @@ public class AStudentAndLateDay {
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String query ="INSERT INTO `projectkoala`.`lateday` (`Id`, `Faculties_Id`, `Students_Id`, `LateDate`, `Time`, `isActive`) VALUES ('"+id+"', '"+idFac+"', '"+idStudent+"', '"+date+"', '"+time+"', '1');";
+        int isactive = 1;
+        try {
+            rs1 = statement.executeQuery("SELECT IsActive FROM projectkoala.lateday where Students_Id = "+idStudent+" and Semester = "+semester+" and year = "+year+";");
+            if(rs1.next()){
+                System.out.println("LOL "+rs1.getString(1));
+                isactive = rs1.getInt(1);
+            }
+                
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String query ="INSERT INTO `projectkoala`.`lateday` (`Id`, `Faculties_Id`, `Students_Id`, `LateDate`, `Time`, `isActive`, `Semester`, `year`) VALUES ('"+id+"', '"+idFac+"', '"+idStudent+"', '"+date+"', '"+time+"', '"+isactive+"', '"+semester+"', '"+year+"');";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
@@ -256,7 +274,7 @@ public class AStudentAndLateDay {
             }
             Object [][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
-            rowColumn[i] = data.get(i);
+                rowColumn[i] = data.get(i);
             model = new DefaultTableModel(rowColumn, nameColumn){
                 Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
@@ -310,7 +328,7 @@ public class AStudentAndLateDay {
         }
     }
     public void XoaTrongMuon(int idStudent,String semester, String year){
-        String query = "UPDATE `projectkoala`.`lateday` SET `isActive`='1', `Semester`='0', `year`=0 WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year` = '"+year+"';";
+        String query = "UPDATE `projectkoala`.`lateday` SET `isActive`='1' WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year` = '"+year+"';";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
