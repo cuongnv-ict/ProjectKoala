@@ -42,6 +42,7 @@ public class DSLop extends javax.swing.JPanel {
    public ListKoala listkoala;
    public JTabbedPane center;
    private DefaultTableModel model;
+   private boolean isadmin=true;
    public DSLop(int idtrungtam) {
         initComponents();
         
@@ -53,6 +54,13 @@ public class DSLop extends javax.swing.JPanel {
    public void setIdTrungTam(int  a)
    {
        this.idtrungtams=a;
+   }
+   public void setNotAdmin()
+   {
+       Button_DSLop_ThemLop.setEnabled(false);
+       Button_DSLop_SuaLop.setEnabled(false);
+       Button_DSLop_Xoa.setEnabled(false);
+       this.isadmin=false;
    }
     
     /**
@@ -153,6 +161,8 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_ThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_ThemLopMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         ThemSuaLop lop = new ThemSuaLop(null,true);
         lop.setThemSuaLop(true);//day la them
         lop.setVisible(true);
@@ -176,10 +186,13 @@ public class DSLop extends javax.swing.JPanel {
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
         model=(DefaultTableModel) jTable4.getModel();
       listkoala.taoTree();
+        }
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
     private void Button_DSLop_SuaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_SuaLopMouseClicked
-              int count =1, row=0;
+        if(isadmin)
+        {
+        int count =1, row=0;
         for(int i = model.getRowCount()-1;i>=0;i--){
             if((Boolean)model.getValueAt(i, 10)==true){
                 count--;
@@ -222,10 +235,12 @@ public class DSLop extends javax.swing.JPanel {
         }
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
         model=(DefaultTableModel) jTable4.getModel();
+        }
     }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
+        
         if(evt.getClickCount()==2){
             String tenlop=jTable4.getValueAt(jTable4.getSelectedRow(),0).toString();
             int a=-1;
@@ -249,6 +264,8 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
         if(click==JOptionPane.NO_OPTION){
             return;
@@ -264,6 +281,7 @@ public class DSLop extends javax.swing.JPanel {
         listkoala.taoTree();
         }
         model=(DefaultTableModel) jTable4.getModel();
+        }
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 
 

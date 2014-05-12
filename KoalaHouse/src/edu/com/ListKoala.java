@@ -837,13 +837,17 @@ public class ListKoala extends javax.swing.JFrame {
         if(a==-1)
         {
         DSLop dsl = new DSLop(idtrungtam);
+        if(!(new DataBase.DataTable().CheckAdmin()))
+        dsl.setNotAdmin();
         dsl.setIdTrungTam(idtrungtam);
         Panel_GDChinh.add("Danh Sách Lớp",dsl);
         Panel_GDChinh.setSelectedComponent(dsl);
         dsl.center = Panel_GDChinh;
         dsl.listkoala= this;
         
+            
         new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        
         }
     }//GEN-LAST:event_jLabel22MouseClicked
 
