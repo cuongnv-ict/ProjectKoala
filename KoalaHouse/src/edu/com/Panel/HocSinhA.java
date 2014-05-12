@@ -68,6 +68,15 @@ public class HocSinhA extends javax.swing.JPanel {
             trinhDo = (String) info.get(5);
             trungTam = (String) info.get(8);
             String thoihoc = (String) info.get(9);
+            //kiem tra co phai admin khong
+            boolean isAdmin = new DataTable().CheckAdmin();
+            System.out.println("is admin: "+isAdmin);
+            if(!isAdmin){
+                thoiHoc.setEnabled(false);
+                Button_HS_CapNhat.setEnabled(false);
+                Button_HocSinh_ThanhToan.setEnabled(false);
+                Button_HocSinh_ThemPhi.setEnabled(false);
+            }
             if(thoihoc.equals("0")){
                 thoiHoc.setText("Đã Thôi Học");
                 thoiHoc.setEnabled(false);
@@ -583,8 +592,9 @@ public class HocSinhA extends javax.swing.JPanel {
                     }
                     else ki = "5";
                     String nam = model.getValueAt(num -1, 3).toString();
-                    TimeTrongMuon.setText("0");
                     new AStudentAndLateDay().UpdateTrongMuon(id,ki,nam);
+                    totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
+                    TimeTrongMuon.setText(String.valueOf(totalTime));
                 }
                 else{
                     

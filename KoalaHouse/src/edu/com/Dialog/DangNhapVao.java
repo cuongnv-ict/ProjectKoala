@@ -151,6 +151,7 @@ public class DangNhapVao extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
+        DataBase.DataTable.user = Textfield_userName.getText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

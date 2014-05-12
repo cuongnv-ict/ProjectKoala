@@ -29,6 +29,7 @@ import javax.swing.table.TableModel;
  * @author nguyen van cuong
  */
 public class DataTable {
+    public static String user;//bien de lay ten tai khoan
     private Connection connect;
     ResultSet rs1,rs2;
     Statement statement,statement2;
@@ -796,5 +797,28 @@ public class DataTable {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    public boolean CheckAdmin(){
+        boolean isAdmin = false;
+        int isRoot=0;
+        if(user.equals("root")){
+            isAdmin = true;
+        }
+        else{
+        try
+        {
+            rs1=statement.executeQuery("select isRoot from accounts where UserName='"+user+"'");
+            while(rs1.next())
+            {
+                isRoot = rs1.getInt(1);
+            }
+            if(isRoot == 1)
+                isAdmin = true;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        return isAdmin;
     }
 } 
