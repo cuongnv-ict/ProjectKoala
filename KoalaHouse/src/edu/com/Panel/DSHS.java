@@ -32,7 +32,7 @@ public class DSHS extends javax.swing.JPanel {
     public JTabbedPane center;
     ArrayList<Integer> id_students;
     int[] arrRows;
-
+    private boolean isadmin=true;
     public DSHS() {
         initComponents();
         new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
@@ -45,7 +45,11 @@ public class DSHS extends javax.swing.JPanel {
         }
         arrRows = null;
     }
-
+    public void setNotAdmin()
+    {
+        xoa.setEnabled(false);
+        this.isadmin=false;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,6 +198,8 @@ public class DSHS extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         if (DSHS.getValueAt(0, 0).toString().equals("")) {
             return;
         }
@@ -251,6 +257,7 @@ public class DSHS extends javax.swing.JPanel {
         } else {
             Count.setText(String.valueOf(DSHS.getRowCount()));
             XuLy.setID(id_students, DSHS, 0);
+        }
         }
     }//GEN-LAST:event_xoaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables

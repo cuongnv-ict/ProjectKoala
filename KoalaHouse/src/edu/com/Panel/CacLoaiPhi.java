@@ -24,7 +24,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
      */
     private DefaultTableModel model;
     ArrayList<Integer> id_cost;
-
+    private boolean isadmin=true;
     public CacLoaiPhi() {
         initComponents();
         new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
@@ -33,6 +33,13 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_cost, BangPhi, 0);
         }
+    }
+    public void setNotAdmin()
+    {
+        ThemPhi.setEnabled(false);
+        Sua.setEnabled(false);
+        Xoa.setEnabled(false);
+        isadmin= false;
     }
 
     /**
@@ -120,6 +127,8 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
     private void ThemPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThemPhiMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         ThemGia cost = new ThemGia(null, true);
         cost.setVisible(true);
         Vector vec = new Vector();
@@ -130,10 +139,13 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 XuLy.setID(id_cost, BangPhi, 0);
             }
         }
+        }
     }//GEN-LAST:event_ThemPhiMouseClicked
 
     private void SuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuaMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         int count = 1, row = 0;
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 7) == true) {
@@ -162,6 +174,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 XuLy.setID(id_cost, BangPhi, 0);
             }
         }
+        }
     }//GEN-LAST:event_SuaMouseClicked
 
     private void BangPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BangPhiMouseClicked
@@ -182,6 +195,8 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
     private void XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         if (BangPhi.getValueAt(0, 0).toString().equals("")) {
            return;
         }
@@ -208,6 +223,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         model = (DefaultTableModel) BangPhi.getModel();
         if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_cost, BangPhi, 0);
+        }
         }
     }//GEN-LAST:event_XoaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@
 
 package DataBase;
 
+import static DataBase.DataTable.user;
 import edu.com.ThongTin;
 import edu.com.XuLy;
 import java.sql.Connection;
@@ -62,6 +63,30 @@ public class SQLJTree {
             
         }
         return false;
+    }
+    public boolean CheckAdmin(String user){
+        boolean isAdmin = false;
+        int isRoot=0;
+        System.out.println(user);
+        if(user.equals("root")){
+            isAdmin = true;
+        }
+        else{
+        try
+        {
+            rs1=statement.executeQuery("select isRoot from accounts where UserName='"+user+"'");
+            while(rs1.next())
+            {
+                isRoot = rs1.getInt(1);
+            }
+            if(isRoot == 1)
+                isAdmin = true;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        return isAdmin;
     }
 
 }

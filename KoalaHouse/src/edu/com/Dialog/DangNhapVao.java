@@ -6,6 +6,7 @@ package edu.com.Dialog;
 
 import DataBase.ConnectData;
 import edu.com.ListKoala;
+import edu.com.ThongTin;
 import javax.swing.UIManager;
 
 /**
@@ -152,6 +153,8 @@ public class DangNhapVao extends javax.swing.JDialog {
                     }
                 });
         DataBase.DataTable.user = Textfield_userName.getText();
+        ThongTin.isadmin= new DataBase.SQLJTree().CheckAdmin(Textfield_userName.getText().toString());
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

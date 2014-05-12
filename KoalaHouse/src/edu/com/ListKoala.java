@@ -818,6 +818,8 @@ public class ListKoala extends javax.swing.JFrame {
         if(a==-1)
         {
         DSHS dshs = new DSHS();
+        if(!ThongTin.isadmin)
+        dshs.setNotAdmin();
         Panel_GDChinh.add("Danh Sách HS", dshs);
         Panel_GDChinh.setSelectedComponent(dshs);
         dshs.center = Panel_GDChinh;
@@ -837,7 +839,7 @@ public class ListKoala extends javax.swing.JFrame {
         if(a==-1)
         {
         DSLop dsl = new DSLop(idtrungtam);
-        if(!(new DataBase.DataTable().CheckAdmin()))
+        if(!ThongTin.isadmin)
         dsl.setNotAdmin();
         dsl.setIdTrungTam(idtrungtam);
         Panel_GDChinh.add("Danh Sách Lớp",dsl);
@@ -864,6 +866,7 @@ public class ListKoala extends javax.swing.JFrame {
         if(a==-1)
         {
         CacLoaiPhi loaiphi = new CacLoaiPhi();
+        if (!ThongTin.isadmin) loaiphi.setNotAdmin();
         Panel_GDChinh.add("Các Loại Phí", loaiphi);
         Panel_GDChinh.setSelectedComponent(loaiphi);
         new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
@@ -975,6 +978,8 @@ public class ListKoala extends javax.swing.JFrame {
             {
             int a=0;
             LopX dslopa= new LopX(selNode.toString());
+            if(!ThongTin.isadmin)
+            dslopa.setNotAdmin();
             for(int i=0;i<Panel_GDChinh.getTabCount();i++)
             {
                 if(selNode.toString().equals(Panel_GDChinh.getTitleAt(i)))

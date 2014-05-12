@@ -31,6 +31,7 @@ public class LopX extends javax.swing.JPanel {
     public JTabbedPane center;
     private int malop;
     ArrayList<Integer> id_students;
+    private boolean isadmin= true;
 
     /**
      * Creates new form LopX
@@ -52,6 +53,15 @@ public class LopX extends javax.swing.JPanel {
 
     public int getMaLop() {
         return malop;
+    }
+    public void setNotAdmin()
+    {
+        them.setEnabled(false);
+        sua.setEnabled(false);
+        xoa.setEnabled(false);
+        this.isadmin=false;
+        chitiet.setEnabled(false);
+        chuyenlop.setEnabled(false);
     }
 
     /**
@@ -244,6 +254,8 @@ public class LopX extends javax.swing.JPanel {
 
     private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
         // TODO add your handling code here:
+    if(isadmin)
+    {
         ThemHS hs = new ThemHS(ListKoala.frame, true, malop);
         hs.setVisible(true);
         if (hs.getButton()) {
@@ -254,6 +266,7 @@ public class LopX extends javax.swing.JPanel {
                 XuLy.setID(id_students, lopx, 0);
             }
         }
+    }
     }//GEN-LAST:event_themMouseClicked
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
@@ -291,6 +304,8 @@ public class LopX extends javax.swing.JPanel {
 
     private void chuyenlopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenlopActionPerformed
         // TODO add your handling code here:
+        if(isadmin)
+        {
         if (lopx.getValueAt(0, 0).toString().equals("")) {
             return;
         }
@@ -347,10 +362,13 @@ public class LopX extends javax.swing.JPanel {
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_students, lopx, 0);
         }
+        }
     }//GEN-LAST:event_chuyenlopActionPerformed
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         if (lopx.getValueAt(0, 0).toString().equals("")) {
             return;
         }
@@ -378,10 +396,13 @@ public class LopX extends javax.swing.JPanel {
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_students, lopx, 0);
         }
+        }
     }//GEN-LAST:event_xoaMouseClicked
 
     private void chitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chitietMouseClicked
         // TODO add your handling code here:
+        if(isadmin)
+        {
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 model.setValueAt(false, i, 6);
@@ -393,6 +414,7 @@ public class LopX extends javax.swing.JPanel {
                 center.setSelectedComponent(aa);
                 new CloseTabButton(center, center.getComponentCount() - 2);
             }
+        }
         }
     }//GEN-LAST:event_chitietMouseClicked
 
@@ -482,6 +504,7 @@ public class LopX extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_textfield_timkiemKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chitiet;
     private javax.swing.JButton chuyenlop;

@@ -14,4 +14,6 @@ public class ThongTin {
     public static int PHANKEBINH = 3;
     public static int NGUYENHUYTU = 4;
     public static int trungtam = 1;
+    public static boolean isadmin = true;
+   
 }

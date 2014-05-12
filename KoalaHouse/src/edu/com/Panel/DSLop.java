@@ -248,6 +248,8 @@ public class DSLop extends javax.swing.JPanel {
             if(a==-1)
             {
             LopX aa = new LopX(tenlop);
+            if(!ThongTin.isadmin)
+               aa.setNotAdmin();
             aa.setName(tenlop);
             center.add(tenlop, aa);
             center.setSelectedComponent(aa);
