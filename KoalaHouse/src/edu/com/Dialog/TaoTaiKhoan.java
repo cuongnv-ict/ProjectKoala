@@ -231,6 +231,30 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton2MouseClicked
 
+    public String getFalculitiForUser() {
+        if(ConnectData.user.equals("root")) {
+            return "1";
+        } else {
+            ConnectData connectData = new ConnectData();
+            Connection connect;        
+            connect = connectData.connectionDatabase();
+            String falculities = "";
+        
+            try {
+                Statement stmt = connect.createStatement();
+                String sqlCommand = "SELECT Faculties_Id FROM projectkoala.accounts WHERE UserName like '" + ConnectData.user + "';";
+                ResultSet rs = stmt.executeQuery(sqlCommand);
+                while(rs.next()) {
+                    falculities = rs.getString(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TaoTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(falculities);
+            return falculities;
+            }
+        //System.out.println(falculities);
+    }
     private void jbtOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtOKActionPerformed
         //if(changed == true) {
             String user;
@@ -275,10 +299,11 @@ public class TaoTaiKhoan extends javax.swing.JDialog {
                         //statements.execute(sqlCommandCurentUser);
                         String sqlCommnand = "CREATE USER '" + user + "'@'localhost' IDENTIFIED BY '" + password + "';";
                         statements.execute(sqlCommnand);
+                        String falculities = getFalculitiForUser();
                         Random rd = new Random();
                         int randomId = rd.nextInt();
                         sqlCommnand = "INSERT INTO projectkoala.accounts(Id, Faculties_Id, FullName, UserName, PassWord, Emai, "
-                                + "PhoneNumber, ChucVu)" + " VALUES ('" + randomId + "', '1', '" + user + "', '" + user +  "', '" + password + 
+                                + "PhoneNumber, ChucVu)" + " VALUES ('" + randomId + "', '" + falculities + "', '" + user + "', '" + user +  "', '" + password + 
                                 "', '" + email + "', '" + phoneNumber + "', '" + id + "');";
                         System.out.println(sqlCommnand);
                         statements.executeUpdate(sqlCommnand);
