@@ -9,6 +9,7 @@ import DataBase.DataTable;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.chuyenlop;
 import edu.com.XuLy;
+import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.List;
@@ -33,6 +34,8 @@ public class DSHS extends javax.swing.JPanel {
     ArrayList<Integer> id_students;
     int[] arrRows;
     private boolean isadmin=true;
+    public JTable BangHS;
+    public JComboBox ChonLoai;
     public DSHS() {
         initComponents();
         new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
@@ -44,6 +47,8 @@ public class DSHS extends javax.swing.JPanel {
             XuLy.setID(id_students, DSHS, 0);
         }
         arrRows = null;
+        BangHS = DSHS;
+        ChonLoai = LoaiHS;
     }
     public void setNotAdmin()
     {

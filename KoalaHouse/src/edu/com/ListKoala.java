@@ -6,6 +6,7 @@ package edu.com;
 
 
 import DataBase.ConnectData;
+import DataBase.HocSinh.DebtList;
 import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
@@ -63,7 +64,8 @@ import javax.swing.tree.TreePath;
  */
 public class ListKoala extends javax.swing.JFrame {
     DefaultMutableTreeNode nodex;    
-    
+    DSNo dsno;
+    DSHS dshs;
     ConnectData connectData;
     Connection connect;
     private JTable table;
@@ -762,6 +764,18 @@ public class ListKoala extends javax.swing.JFrame {
                 JViewport viewPort = scrollPane.getViewport();
                 table = (JTable) viewPort.getView();
             }*/
+            //load lai tab chon
+            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Chưa Đóng Phí")){
+                new DebtList().BangDanhSachHocSinhNoPhi(dsno.BangDSNo);
+            }
+            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")){
+                int s = dshs.ChonLoai.getSelectedIndex();
+                switch(s){
+                    case 0:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 1);break;
+                    case 1:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 0);break;
+                    case 2:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, -1); ;break;
+                }
+            }
         } else {
             System.out.println("DM L'");
         }
@@ -817,7 +831,7 @@ public class ListKoala extends javax.swing.JFrame {
             }
         if(a==-1)
         {
-        DSHS dshs = new DSHS();
+        dshs = new DSHS();
         if(!ThongTin.isadmin)
         dshs.setNotAdmin();
         Panel_GDChinh.add("Danh Sách HS", dshs);
@@ -885,7 +899,7 @@ public class ListKoala extends javax.swing.JFrame {
             }
         if(a==-1)
         {
-        DSNo dsno = new DSNo();
+       dsno = new DSNo();
        Panel_GDChinh.add("DS Chưa Đóng Phí",dsno);
        Panel_GDChinh.setSelectedComponent(dsno);
        dsno.center =Panel_GDChinh;

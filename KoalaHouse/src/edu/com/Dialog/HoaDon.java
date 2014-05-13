@@ -111,7 +111,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         if(idHocSinh>0){
         int x = Integer.parseInt(XuLy.getMoney(daThu.getText()));
         if(x <0){
-            jLabel29.setText("Đã Trả");
+            jLabel29.setText("Đã Trả Lại");
             x = x* (-1);
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }
@@ -713,6 +713,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         int debt = can - dong;
         if(debt<0){
             JOptionPane.showMessageDialog(rootPane, "Số Tiền Đóng Đã Nhiều Hơn Số Tiền Cần Thu");
+            debt = 0;
         }
         //print
         PrinterJob pj = PrinterJob.getPrinterJob();

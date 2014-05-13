@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -26,10 +27,12 @@ public class DSNo extends javax.swing.JPanel {
      */
     ArrayList ListId;
     public JTabbedPane center;
+    public JTable BangDSNo;
     public DSNo() {
         initComponents();
         new DebtList().BangDanhSachHocSinhNoPhi(DSHocSinhNo);
         ListId = new DebtList().GetIdStudent();
+        BangDSNo = DSHocSinhNo;
     }
 
     /**
