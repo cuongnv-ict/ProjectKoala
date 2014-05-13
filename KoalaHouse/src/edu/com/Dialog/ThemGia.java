@@ -42,8 +42,15 @@ public class ThemGia extends javax.swing.JDialog {
         DongY.setText("Cập nhật");
         title.setText("Chỉnh sửa học phí");
         datcoc.setSelected(new DataBase.SQLHocPhi().getSelected(id));
+        if(datcoc.isSelected()){
+            TenPhi.setEnabled(false);
+            Ky.setEnabled(false);
+        }
         TenPhi.setText(vector.get(1).toString());
         trongmuon.setSelected(vector.get(1).toString().equals("Phí trông muộn"));
+        if(trongmuon.isSelected()){
+            TenPhi.setEnabled(false);
+        }
         Gia.setText(vector.get(6).toString());
         for (int i = 0; i < Ky.getItemCount(); i++) {
             if (Ky.getItemAt(i).toString().equals(vector.get(2).toString())) {
