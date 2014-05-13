@@ -4,6 +4,7 @@
  */
 package DataBase;
 
+import edu.com.ThongTin;
 import edu.com.XuLy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,7 +45,7 @@ public class SQLDanhSachHocSinh {
         try {
             Object[] nameColumn = {"STT", "Tên", "Ngay Sinh", "Trình Độ", "Lớp", "Hình Thức Học", "Đánh dấu"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select students.id,fullname,brithday,levels_id,nameclass,isclient  from students,classes,classes_has_students where students.id = students_id and classes.id=classes_id and students.isactive = " + stype);
+            rs1 = statement.executeQuery("select students.id,fullname,brithday,levels_id,nameclass,isclient  from students,classes,classes_has_students where students.id = students_id and classes.id=classes_id and students.isactive = " + stype+" and and classes.Faculties_Id = " + ThongTin.trungtam);
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object str[] = new Object[7];

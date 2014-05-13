@@ -33,9 +33,10 @@ public class DSHS extends javax.swing.JPanel {
     public JTabbedPane center;
     ArrayList<Integer> id_students;
     int[] arrRows;
-    private boolean isadmin=true;
+    private boolean isadmin = true;
     public JTable BangHS;
     public JComboBox ChonLoai;
+
     public DSHS() {
         initComponents();
         new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
@@ -50,11 +51,22 @@ public class DSHS extends javax.swing.JPanel {
         BangHS = DSHS;
         ChonLoai = LoaiHS;
     }
-    public void setNotAdmin()
-    {
+
+    public void setNotAdmin() {
         xoa.setEnabled(false);
-        this.isadmin=false;
+        this.isadmin = false;
     }
+
+    public void reload() {
+        if (DSHS.getValueAt(0, 0).toString().equals("")) {
+            Count.setText("0");
+        } else {
+            Count.setText(String.valueOf(DSHS.getRowCount()));
+            XuLy.setID(id_students, DSHS, 0);
+        }
+        arrRows = null;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,66 +215,65 @@ public class DSHS extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            return;
-        }
-        boolean flags = true;
-        for (int i = DSHS.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean)DSHS.getValueAt(i, 6) == true) {
-                flags = false;
+        if (isadmin) {
+            if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                return;
             }
-        }
-        if (flags) {
-            JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-        if(click==JOptionPane.NO_OPTION){
-            return;
-        }
-        switch (LoaiHS.getSelectedIndex()) {
-            case 0:
-                if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                    return;
+            boolean flags = true;
+            for (int i = DSHS.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) DSHS.getValueAt(i, 6) == true) {
+                    flags = false;
                 }
-                for (int i = 0; i < DSHS.getRowCount(); i++) {
-                    if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                         new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
+            }
+            if (flags) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+            if (click == JOptionPane.NO_OPTION) {
+                return;
+            }
+            switch (LoaiHS.getSelectedIndex()) {
+                case 0:
+                    if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                        return;
                     }
-                }
-                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
-                break;
-            case 1:
-                if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                    return;
-                }
-                for (int i = 0; i < DSHS.getRowCount(); i++) {
-                    if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                        new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
+                    for (int i = 0; i < DSHS.getRowCount(); i++) {
+                        if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
+                            new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
+                        }
                     }
-                }
-                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
-                break;
-            case 2:
-                if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                    return;
-                }
-                for (int i = 0; i < DSHS.getRowCount(); i++) {
-                    if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                        new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
+                    new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 1);
+                    break;
+                case 1:
+                    if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                        return;
                     }
-                }
-                new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, -1);
-                break;
-        }
-        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-            Count.setText("0");
-        } else {
-            Count.setText(String.valueOf(DSHS.getRowCount()));
-            XuLy.setID(id_students, DSHS, 0);
-        }
+                    for (int i = 0; i < DSHS.getRowCount(); i++) {
+                        if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
+                            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
+                        }
+                    }
+                    new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, 0);
+                    break;
+                case 2:
+                    if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                        return;
+                    }
+                    for (int i = 0; i < DSHS.getRowCount(); i++) {
+                        if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
+                            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
+                        }
+                    }
+                    new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(DSHS, -1);
+                    break;
+            }
+            if (DSHS.getValueAt(0, 0).toString().equals("")) {
+                Count.setText("0");
+            } else {
+                Count.setText(String.valueOf(DSHS.getRowCount()));
+                XuLy.setID(id_students, DSHS, 0);
+            }
         }
     }//GEN-LAST:event_xoaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables

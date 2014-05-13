@@ -730,24 +730,24 @@ public class ListKoala extends javax.swing.JFrame {
         Component item;
         JScrollPane scrollPane;
         int selectedIndex = Panel_GDChinh.getSelectedIndex();
-        System.out.println("Index: " + selectedIndex);
+//        System.out.println("Index: " + selectedIndex);
         if(selectedIndex >= 0) {
             component = Panel_GDChinh.getComponentAt(selectedIndex);
             System.err.println(component.toString());
             if(component instanceof JPanel) {
-                System.out.println("OK");
+//                System.out.println("OK");
                 panel = (JPanel) component;
                 components = panel.getComponents();
                 for(int i = 0 ; i < components.length ; i++) {
                     item = components[i];
                     if(item instanceof JPanel) {
-                        System.out.println("NGON");
+//                        System.out.println("NGON");
                         itemPanel = (JPanel) item;
                         itemComponents = itemPanel.getComponents();
                         for(int j = 0 ; j < itemComponents.length ; j++) {
                             item = itemComponents[j];
                             if(item instanceof JScrollPane) {
-                                System.out.println("DM NGON VAI");
+//                                System.out.println("DM NGON VAI");
                                 scrollPane = (JScrollPane) item;
                                 JViewport viewPort = scrollPane.getViewport();
                                 table = (JTable) viewPort.getView();
@@ -775,9 +775,10 @@ public class ListKoala extends javax.swing.JFrame {
                     case 1:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 0);break;
                     case 2:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, -1); ;break;
                 }
+                dshs.reload();
             }
         } else {
-            System.out.println("DM L'");
+//            System.out.println("DM L'");
         }
     }                                          
 

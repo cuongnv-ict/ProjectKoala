@@ -31,7 +31,7 @@ public class ThemGia extends javax.swing.JDialog {
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
-       
+
     }
 
     public ThemGia(java.awt.Frame parent, boolean modal, Vector vector, int id) {
@@ -58,7 +58,7 @@ public class ThemGia extends javax.swing.JDialog {
             }
         }
         this.id = id;
-        
+
     }
     //lay gia tri cua 
 
@@ -237,7 +237,7 @@ public class ThemGia extends javax.swing.JDialog {
     private void DongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DongYActionPerformed
         // TODO add your handling code here:
         Vector vec = new Vector();
-        if (getTenPhi().equals("")||getGia().equals("")) {
+        if (getTenPhi().equals("") || getGia().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Bạn chưa điền đủ thông tin", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -284,29 +284,33 @@ public class ThemGia extends javax.swing.JDialog {
 
     private void datcocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datcocActionPerformed
         // TODO add your handling code here:
-        if(datcoc.isSelected()){
+        if (datcoc.isSelected()) {
             trongmuon.setSelected(false);
             TenPhi.setEditable(false);
             TenPhi.setText("Phí Đặt Cọc");
-        }
-        else{
-             TenPhi.setEditable(true);
+            Ky.setSelectedIndex(4);
+            Ky.setEnabled(false);
+        } else {
+            TenPhi.setEditable(true);
+            Ky.setSelectedIndex(0);
+            Ky.setEnabled(true);
         }
     }//GEN-LAST:event_datcocActionPerformed
 
     private void trongmuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trongmuonActionPerformed
         // TODO add your handling code here:
-        if(trongmuon.isSelected()){
+        if (trongmuon.isSelected()) {
             datcoc.setSelected(false);
             TenPhi.setEditable(false);
             TenPhi.setText("Phí Trông Muộn");
-        }
-        else{
-              TenPhi.setEditable(true);
+            Ky.setSelectedIndex(0);
+            Ky.setEnabled(true);
+        } else {
+            TenPhi.setEditable(true);
         }
     }//GEN-LAST:event_trongmuonActionPerformed
     /**
-     * 
+     *
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
