@@ -4,7 +4,6 @@
  */
 package edu.com;
 
-
 import DataBase.ConnectData;
 import DataBase.HocSinh.DebtList;
 import edu.com.Dialog.DSChuaHoanThanhHocPhi;
@@ -63,18 +62,20 @@ import javax.swing.tree.TreePath;
  * @author nguyen van cuong
  */
 public class ListKoala extends javax.swing.JFrame {
-    DefaultMutableTreeNode nodex;    
+
+    DefaultMutableTreeNode nodex;
     DSNo dsno;
     DSHS dshs;
     ConnectData connectData;
     Connection connect;
     private JTable table;
-    private String nameadmin="admin";
+    private String nameadmin = "admin";
     private int idtrungtam;
+
     public void setTable(JTable table) {
         this.table = table;
     }
-    
+
     public JTable getTable() {
         return this.table;
     }
@@ -82,192 +83,197 @@ public class ListKoala extends javax.swing.JFrame {
      * Creates new form List
      */
     public static JFrame frame;
+
     public ListKoala() {
         initComponents();
         taoTree();
         Panel_GDChinh.removeAll();
-        
-        Panel_GDChinh.add("Trung Tâm",Panel_trungtam);
-        new CloseTabButton(Panel_GDChinh,0);
+
+        Panel_GDChinh.add("Trung Tâm", Panel_trungtam);
+        new CloseTabButton(Panel_GDChinh, 0);
         frame = this;
-       
+
     }// khoi tao
+
     public void taoTree()// tao ra tree dung co so vao
-    {   
-        String tentrungtam=null;
-        String tenkhoi=null;
-        String tenlop=null;
+    {
+        String tentrungtam = null;
+        String tenkhoi = null;
+        String tenlop = null;
         DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Koala House");
         DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Bà Triệu");
         DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
         DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_1");
-        int idfali=0;
-        int idlev=0;
+        int idfali = 0;
+        int idlev = 0;
         DataBase.DataTable data = new DataBase.DataTable();
-        idfali=data.LayTenTrungTam(nameadmin);
-        ThongTin.trungtam=idfali;
-        this.idtrungtam=idfali;
-        if (idfali==1)tentrungtam="Koala House Bà Triệu";
-        else if(idfali==2) tentrungtam="Koala House Hoàng Ngân";   
-        else if(idfali==3) tentrungtam="Koala House Phan Kế Bính";
-        else if(idfali==4) tentrungtam="Koala House Nguyễn Huy Tự";
-        else if(idfali==0) tentrungtam="Koala House Nguyễn Đức Sơn";
-        
-        System.out.println(tentrungtam);
-        if(idfali!=5)
-        {
-            treeNode2= new javax.swing.tree.DefaultMutableTreeNode(tentrungtam);
+        idfali = data.LayTenTrungTam(nameadmin);
+        ThongTin.trungtam = idfali;
+        this.idtrungtam = idfali;
+        if (idfali == 1) {
+            tentrungtam = "Koala House Bà Triệu";
+        } else if (idfali == 2) {
+            tentrungtam = "Koala House Hoàng Ngân";
+        } else if (idfali == 3) {
+            tentrungtam = "Koala House Phan Kế Bính";
+        } else if (idfali == 4) {
+            tentrungtam = "Koala House Nguyễn Huy Tự";
+        } else if (idfali == 0) {
+            tentrungtam = "Koala House Nguyễn Đức Sơn";
+        }
+        if (idfali != 5) {
+            treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(tentrungtam);
             treeNode1.add(treeNode2);
             try {
-                        // Them nguoi dung vao database.
-                        ConnectData connectData = new ConnectData();
-                        Connection connect;
-                        ResultSet rs1,rs2;
+                // Them nguoi dung vao database.
+                ConnectData connectData = new ConnectData();
+                Connection connect;
+                ResultSet rs1, rs2;
 
-                        connect = connectData.connectionDatabase();
-                        Statement statements1 = connect.createStatement();
-                        Statement statements2 = connect.createStatement();
+                connect = connectData.connectionDatabase();
+                Statement statements1 = connect.createStatement();
+                Statement statements2 = connect.createStatement();
 
-                        rs1=(ResultSet) statements1.executeQuery("select DISTINCT Levels_Id from classes where Faculties_Id= '"+idfali+"'");
-                        while(rs1.next())
-                        {
-                            idlev=rs1.getInt(1);
-                            if (idlev==1) tenkhoi="NẮNG MAI (SUNSHINE)";
-                            else if (idlev==2) tenkhoi="TỔ ONG (BEEHIVE)";
-                            else if (idlev==3) tenkhoi="TỔ KIẾN (CHRYSALIS)";
-                            else tenkhoi= tenkhoi="MẪU GIÁO (KINDERGARTEN)";
-                            treeNode3= new javax.swing.tree.DefaultMutableTreeNode(tenkhoi);
-                            treeNode2.add(treeNode3);
-                            rs2=(ResultSet) statements2.executeQuery("select NameClass from classes where Levels_Id = '"+idlev+"' and Faculties_Id = '"+idfali+"' ");
-                            while(rs2.next())
-                            {
-                               tenlop=rs2.getString(1);
-                               treeNode4= new javax.swing.tree.DefaultMutableTreeNode(tenlop);
-                               treeNode3.add(treeNode4);
-                            }
+                rs1 = (ResultSet) statements1.executeQuery("select DISTINCT Levels_Id from classes where Faculties_Id= '" + idfali + "'");
+                while (rs1.next()) {
+                    idlev = rs1.getInt(1);
+                    if (idlev == 1) {
+                        tenkhoi = "NẮNG MAI (SUNSHINE)";
+                    } else if (idlev == 2) {
+                        tenkhoi = "TỔ ONG (BEEHIVE)";
+                    } else if (idlev == 3) {
+                        tenkhoi = "TỔ KIẾN (CHRYSALIS)";
+                    } else {
+                        tenkhoi = tenkhoi = "MẪU GIÁO (KINDERGARTEN)";
+                    }
+                    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(tenkhoi);
+                    treeNode2.add(treeNode3);
+                    rs2 = (ResultSet) statements2.executeQuery("select NameClass from classes where Levels_Id = '" + idlev + "' and Faculties_Id = '" + idfali + "' ");
+                    while (rs2.next()) {
+                        tenlop = rs2.getString(1);
+                        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode(tenlop);
+                        treeNode3.add(treeNode4);
+                    }
+                }
+            } catch (SQLException ex) {
+
+            }
+
+        } else if (idfali == 5) {
+            try {
+                // Them nguoi dung vao database.
+                ConnectData connectData = new ConnectData();
+                Connection connect;
+                ResultSet rs1, rs2, rs3;
+
+                connect = connectData.connectionDatabase();
+                Statement statements1 = connect.createStatement();
+                Statement statements2 = connect.createStatement();
+                Statement statements3 = connect.createStatement();
+                rs3 = (ResultSet) statements3.executeQuery("select Id from faculties ");
+
+                while (rs3.next()) {
+
+                    idfali = rs3.getInt(1);
+                    if (idfali == 1) {
+                        tentrungtam = "Koala House Bà Triệu";
+                    } else if (idfali == 2) {
+                        tentrungtam = "Koala House Hoàng Ngân";
+                    } else if (idfali == 3) {
+                        tentrungtam = "Koala House Phan Kế Bính";
+                    } else if (idfali == 4) {
+                        tentrungtam = "Koala House Nguyễn Huy Tự";
+                    }
+                    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(tentrungtam);
+                    treeNode1.add(treeNode2);
+                    rs1 = (ResultSet) statements1.executeQuery("select DISTINCT Levels_Id from classes where Faculties_Id= '" + idfali + "'");
+                    while (rs1.next()) {
+                        idlev = rs1.getInt(1);
+                        if (idlev == 1) {
+                            tenkhoi = "NẮNG MAI (SUNSHINE)";
+                        } else if (idlev == 2) {
+                            tenkhoi = "TỔ ONG (BEEHIVE)";
+                        } else if (idlev == 3) {
+                            tenkhoi = "TỔ KIẾN (CHRYSALIS)";
+                        } else {
+                            tenkhoi = tenkhoi = "MẪU GIÁO (KINDERGARTEN)";
                         }
-                 } catch (SQLException ex) 
-                        {
-
+                        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode(tenkhoi);
+                        treeNode2.add(treeNode3);
+                        rs2 = (ResultSet) statements2.executeQuery("select NameClass from classes where Levels_Id = '" + idlev + "' and Faculties_Id = '" + idfali + "' ");
+                        while (rs2.next()) {
+                            tenlop = rs2.getString(1);
+                            treeNode4 = new javax.swing.tree.DefaultMutableTreeNode(tenlop);
+                            treeNode3.add(treeNode4);
                         }
+                    }
 
+                }
+
+            } catch (SQLException ex) {
+
+            }
 
         }
-        else if(idfali==5)
-        {
-            try 
-            {
-                    // Them nguoi dung vao database.
-                    ConnectData connectData = new ConnectData();
-                    Connection connect;
-                    ResultSet rs1,rs2,rs3;
-                    
-                    connect = connectData.connectionDatabase();
-                    Statement statements1 = connect.createStatement();
-                    Statement statements2 = connect.createStatement();
-                    Statement statements3 = connect.createStatement();
-                    rs3=(ResultSet) statements3.executeQuery("select Id from faculties ");
-                    
-                    while(rs3.next())
-                    {
-                        
-                        idfali=rs3.getInt(1);
-                        if (idfali==1)tentrungtam="Koala House Bà Triệu";
-                        else if(idfali==2) tentrungtam="Koala House Hoàng Ngân";   
-                        else if(idfali==3) tentrungtam="Koala House Phan Kế Bính";
-                        else if(idfali==4) tentrungtam="Koala House Nguyễn Huy Tự";
-                        treeNode2= new javax.swing.tree.DefaultMutableTreeNode(tentrungtam);
-                        treeNode1.add(treeNode2);
-                        rs1=(ResultSet) statements1.executeQuery("select DISTINCT Levels_Id from classes where Faculties_Id= '"+idfali+"'");
-                        while(rs1.next())
-                        {
-                            idlev=rs1.getInt(1);
-                            if (idlev==1) tenkhoi="NẮNG MAI (SUNSHINE)";
-                            else if (idlev==2) tenkhoi="TỔ ONG (BEEHIVE)";
-                            else if (idlev==3) tenkhoi="TỔ KIẾN (CHRYSALIS)";
-                            else tenkhoi= tenkhoi="MẪU GIÁO (KINDERGARTEN)";
-                            treeNode3= new javax.swing.tree.DefaultMutableTreeNode(tenkhoi);
-                            treeNode2.add(treeNode3);
-                            rs2=(ResultSet) statements2.executeQuery("select NameClass from classes where Levels_Id = '"+idlev+"' and Faculties_Id = '"+idfali+"' ");
-                            while(rs2.next())
-                            {
-                               tenlop=rs2.getString(1);
-                               treeNode4= new javax.swing.tree.DefaultMutableTreeNode(tenlop);
-                               treeNode3.add(treeNode4);
-                            }
-                        }
-                        
-                        
-                    }
-                    
-            }    catch (SQLException ex) 
-                    {
-                        
-                    }
-        
-                          
-        
-            
-        }
-       
+
         /*
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_2");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_3");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_2");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_3");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_2");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_1");
-        treeNode3.add(treeNode4);
-        treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_2");
-        treeNode3.add(treeNode4);
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Hoàng Ngân");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Phan Kế Bính");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Nguyễn Huy Tự");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
-        treeNode2.add(treeNode3);
-        */
+         treeNode3.add(treeNode4);
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_2");
+         treeNode3.add(treeNode4);
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("SUNSHINE_3");
+         treeNode3.add(treeNode4);
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_1");
+         treeNode3.add(treeNode4);
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_2");
+         treeNode3.add(treeNode4);
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("BEEHIVE_3");
+         treeNode3.add(treeNode4);
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_1");
+         treeNode3.add(treeNode4);
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("CHRYSALIS_2");
+         treeNode3.add(treeNode4);
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_1");
+         treeNode3.add(treeNode4);
+         treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("KINDERGARTEN_2");
+         treeNode3.add(treeNode4);
+         treeNode2.add(treeNode3);
+         treeNode1.add(treeNode2);
+         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Hoàng Ngân");
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+         treeNode2.add(treeNode3);
+         treeNode1.add(treeNode2);
+         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Phan Kế Bính");
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+         treeNode2.add(treeNode3);
+         treeNode1.add(treeNode2);
+         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Koala House Nguyễn Huy Tự");
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NẮNG MAI (SUNSHINE)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ ONG (BEEHIVE)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TỔ KÉN (CHRYSALIS)");
+         treeNode2.add(treeNode3);
+         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("MẪU GIÁO (KINDERGARTEN)");
+         treeNode2.add(treeNode3);
+         */
         //treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setAutoscrolls(true);
@@ -275,14 +281,14 @@ public class ListKoala extends javax.swing.JFrame {
         jTree1.setPreferredSize(new java.awt.Dimension(300, 80));
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             /*public void mouseReleased(java.awt.event.MouseEvent evt) {
-                JtreeMouseReleased(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JtreeMouseClicked(evt);
-            }*/
+             JtreeMouseReleased(evt);
+             }
+             public void mouseClicked(java.awt.event.MouseEvent evt) {
+             JtreeMouseClicked(evt);
+             }*/
         });
         jScrollPane1.setViewportView(jTree1);
-        
+
     }
 
     /**
@@ -676,17 +682,17 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jTree1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseReleased
         // TODO add your handling code here:
-     
-      
+
+
     }//GEN-LAST:event_jTree1MouseReleased
 
     private void Menu_HSDatCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_HSDatCocActionPerformed
         // TODO add your handling code here:
-        DSDatCoc dSDat= new DSDatCoc(this,rootPaneCheckingEnabled);
+        DSDatCoc dSDat = new DSDatCoc(this, rootPaneCheckingEnabled);
         dSDat.setAlwaysOnTop(rootPaneCheckingEnabled);
         dSDat.setLocation(420, 130);
         dSDat.show();
-    
+
     }//GEN-LAST:event_Menu_HSDatCocActionPerformed
 
     private void Menu_DanhSachLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopMouseClicked
@@ -694,7 +700,7 @@ public class ListKoala extends javax.swing.JFrame {
         DSLop dslop1 = new DSLop(idtrungtam);
         Panel_GDChinh.add("Danh Sach Lop", dslop1);
         Panel_GDChinh.setSelectedComponent(dslop1);
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
     }//GEN-LAST:event_Menu_DanhSachLopMouseClicked
 
     private void Menu_DanhSachLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DanhSachLopActionPerformed
@@ -703,26 +709,26 @@ public class ListKoala extends javax.swing.JFrame {
         Panel_GDChinh.add("Danh Sach Lop", dslop2);
         Panel_GDChinh.setSelectedComponent(dslop2);
         dslop2.center = Panel_GDChinh;
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
     }//GEN-LAST:event_Menu_DanhSachLopActionPerformed
 
     private void Menu_ThemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemLopActionPerformed
         // TODO add your handling code here:
-        ThemSuaLop themSuaLop= new ThemSuaLop(this, rootPaneCheckingEnabled);
+        ThemSuaLop themSuaLop = new ThemSuaLop(this, rootPaneCheckingEnabled);
         themSuaLop.setLocation(420, 130);
         themSuaLop.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_Menu_ThemLopActionPerformed
 
     private void Menu_SuaLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_SuaLopActionPerformed
         // TODO add your handling code here:
-    ThemSuaLop themSuaLop= new ThemSuaLop(this, rootPaneCheckingEnabled);
+        ThemSuaLop themSuaLop = new ThemSuaLop(this, rootPaneCheckingEnabled);
         //themSuaLop.show();
-    
+
         themSuaLop.setLocation(420, 130);
         themSuaLop.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_Menu_SuaLopActionPerformed
 
-    private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {                                           
+    private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {
         table = new JTable();
         JPanel panel, itemPanel;
         Component component;
@@ -730,61 +736,64 @@ public class ListKoala extends javax.swing.JFrame {
         Component item;
         JScrollPane scrollPane;
         int selectedIndex = Panel_GDChinh.getSelectedIndex();
-//        System.out.println("Index: " + selectedIndex);
-        if(selectedIndex >= 0) {
+        if (selectedIndex >= 0) {
             component = Panel_GDChinh.getComponentAt(selectedIndex);
-            System.err.println(component.toString());
-            if(component instanceof JPanel) {
-//                System.out.println("OK");
+            if (component instanceof JPanel) {
                 panel = (JPanel) component;
                 components = panel.getComponents();
-                for(int i = 0 ; i < components.length ; i++) {
+                for (int i = 0; i < components.length; i++) {
                     item = components[i];
-                    if(item instanceof JPanel) {
-//                        System.out.println("NGON");
+                    if (item instanceof JPanel) {
                         itemPanel = (JPanel) item;
                         itemComponents = itemPanel.getComponents();
-                        for(int j = 0 ; j < itemComponents.length ; j++) {
+                        for (int j = 0; j < itemComponents.length; j++) {
                             item = itemComponents[j];
-                            if(item instanceof JScrollPane) {
-//                                System.out.println("DM NGON VAI");
+                            if (item instanceof JScrollPane) {
                                 scrollPane = (JScrollPane) item;
                                 JViewport viewPort = scrollPane.getViewport();
                                 table = (JTable) viewPort.getView();
                             }
                         }
-                    } else if(item instanceof JScrollPane) {
+                    } else if (item instanceof JScrollPane) {
                         scrollPane = (JScrollPane) item;
                         JViewport viewPort = scrollPane.getViewport();
                         table = (JTable) viewPort.getView();
                     }
                 }
             } /*else if(component instanceof JScrollPane) {
-                scrollPane = (JScrollPane) component;
-                JViewport viewPort = scrollPane.getViewport();
-                table = (JTable) viewPort.getView();
-            }*/
+             scrollPane = (JScrollPane) component;
+             JViewport viewPort = scrollPane.getViewport();
+             table = (JTable) viewPort.getView();
+             }*/
+
             //load lai tab chon
-            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Chưa Đóng Phí")){
+
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Chưa Đóng Phí")) {
                 new DebtList().BangDanhSachHocSinhNoPhi(dsno.BangDSNo);
             }
-            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")){
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")) {
                 int s = dshs.ChonLoai.getSelectedIndex();
-                switch(s){
-                    case 0:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 1);break;
-                    case 1:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 0);break;
-                    case 2:new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, -1); ;break;
+                switch (s) {
+                    case 0:
+                        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 1);
+                        break;
+                    case 1:
+                        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, 0);
+                        break;
+                    case 2:
+                        new DataBase.SQLDanhSachHocSinh().BangDanhSachHocSinh(dshs.BangHS, -1);
+                        ;
+                        break;
                 }
                 dshs.reload();
             }
         } else {
-//            System.out.println("DM L'");
         }
-    }                                          
+    }
 
     private void Menu_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_ThemTaiKhoanActionPerformed
         // TODO add your handling code here:
-               String result = "";
+        String result = "";
         try {
             // TODO add your handling code here:
             // Kiem tra xem user co duong quyen tao tai khoan moi hay khong
@@ -792,29 +801,29 @@ public class ListKoala extends javax.swing.JFrame {
             String user = ConnectData.user;
             Statement stmt = connect.createStatement();
             //String result;
-            
+
             java.sql.ResultSet rs = stmt.executeQuery("SELECT IsRoot FROM projectkoala.accounts WHERE UserName = '" + user + "';");
-            while(rs.next()) {
+            while (rs.next()) {
                 result = rs.getString(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(result.equals("0")) {
+        if (result.equals("0")) {
             JOptionPane.showMessageDialog(this, "Bạn không đủ quyền tạo tài khoản mới !", "Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
-            TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this,rootPaneCheckingEnabled);
+            TaoTaiKhoan taoTaiKhoan = new TaoTaiKhoan(this, rootPaneCheckingEnabled);
             //TaoTaiKhoan.setChanged(false);
             TaoTaiKhoan.setChanged(true);
             taoTaiKhoan.setLocation(420, 130);
             taoTaiKhoan.show();
         }
-        
+
     }//GEN-LAST:event_Menu_ThemTaiKhoanActionPerformed
 
     private void Menu_SuaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_SuaTaiKhoanActionPerformed
         // TODO add your handling code here:
-        TaoTaiKhoan taoTaiKhoan= new TaoTaiKhoan(this);
+        TaoTaiKhoan taoTaiKhoan = new TaoTaiKhoan(this);
         TaoTaiKhoan.setChanged(false);
         taoTaiKhoan.setLocation(420, 130);
         taoTaiKhoan.show();
@@ -822,125 +831,120 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
         // TODO add your handling code here:
-        int a=-1;    
-        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
-            {
-                if("Danh Sách HS".equals(Panel_GDChinh.getTitleAt(i)))
-                {a+=1;
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("Danh Sách HS".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
                 Panel_GDChinh.setSelectedIndex(i);
-                }
             }
-        if(a==-1)
-        {
-        dshs = new DSHS();
-        if(!ThongTin.isadmin)
-        dshs.setNotAdmin();
-        Panel_GDChinh.add("Danh Sách HS", dshs);
-        Panel_GDChinh.setSelectedComponent(dshs);
-        dshs.center = Panel_GDChinh;
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
+        if (a == -1) {
+            dshs = new DSHS();
+            if (!ThongTin.isadmin) {
+                dshs.setNotAdmin();
+            }
+            Panel_GDChinh.add("Danh Sách HS", dshs);
+            Panel_GDChinh.setSelectedComponent(dshs);
+            dshs.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-        int a=-1;    
-        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
-            {
-                if("Danh Sách Lớp".equals(Panel_GDChinh.getTitleAt(i)))
-                {   a+=1;
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("Danh Sách Lớp".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
                 Panel_GDChinh.setSelectedIndex(i);
-                }
             }
-        if(a==-1)
-        {
-        DSLop dsl = new DSLop(idtrungtam);
-        if(!ThongTin.isadmin)
-        dsl.setNotAdmin();
-        dsl.setIdTrungTam(idtrungtam);
-        Panel_GDChinh.add("Danh Sách Lớp",dsl);
-        Panel_GDChinh.setSelectedComponent(dsl);
-        dsl.center = Panel_GDChinh;
-        dsl.listkoala= this;
-        
-            
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
-        
+        }
+        if (a == -1) {
+            DSLop dsl = new DSLop(idtrungtam);
+            if (!ThongTin.isadmin) {
+                dsl.setNotAdmin();
+            }
+            dsl.setIdTrungTam(idtrungtam);
+            Panel_GDChinh.add("Danh Sách Lớp", dsl);
+            Panel_GDChinh.setSelectedComponent(dsl);
+            dsl.center = Panel_GDChinh;
+            dsl.listkoala = this;
+
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+
         }
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
         // TODO add your handling code here:
-        int a=-1;    
-        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
-            {
-                if("Các Loại Phí".equals(Panel_GDChinh.getTitleAt(i)))
-                { a+=1;
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("Các Loại Phí".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
                 Panel_GDChinh.setSelectedIndex(i);
-                }
             }
-        if(a==-1)
-        {
-        CacLoaiPhi loaiphi = new CacLoaiPhi();
-        if (!ThongTin.isadmin) loaiphi.setNotAdmin();
-        Panel_GDChinh.add("Các Loại Phí", loaiphi);
-        Panel_GDChinh.setSelectedComponent(loaiphi);
-        new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
+        if (a == -1) {
+            CacLoaiPhi loaiphi = new CacLoaiPhi();
+            if (!ThongTin.isadmin) {
+                loaiphi.setNotAdmin();
+            }
+            Panel_GDChinh.add("Các Loại Phí", loaiphi);
+            Panel_GDChinh.setSelectedComponent(loaiphi);
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
     }//GEN-LAST:event_jLabel24MouseClicked
 
     private void jLabel26MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseClicked
         // TODO add your handling code here:
-        int a=-1;    
-        for(int i=0;i<Panel_GDChinh.getTabCount();i++)
-            {
-                if("DS Chưa Đóng Phí".equals(Panel_GDChinh.getTitleAt(i)))
-                { a+=1;
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("DS Chưa Đóng Phí".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
                 Panel_GDChinh.setSelectedIndex(i);
-                }
             }
-        if(a==-1)
-        {
-       dsno = new DSNo();
-       Panel_GDChinh.add("DS Chưa Đóng Phí",dsno);
-       Panel_GDChinh.setSelectedComponent(dsno);
-       dsno.center =Panel_GDChinh;
-       new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
+        }
+        if (a == -1) {
+            dsno = new DSNo();
+            Panel_GDChinh.add("DS Chưa Đóng Phí", dsno);
+            Panel_GDChinh.setSelectedComponent(dsno);
+            dsno.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
     }//GEN-LAST:event_jLabel26MouseClicked
 
     private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
         // TODO add your handling code here:
-        HoaDon receipts= new HoaDon(this, rootPaneCheckingEnabled);
+        HoaDon receipts = new HoaDon(this, rootPaneCheckingEnabled);
         receipts.setAlwaysOnTop(rootPaneCheckingEnabled);
-        receipts.setLocation(420,20);
+        receipts.setLocation(420, 20);
         receipts.show();
     }//GEN-LAST:event_jLabel27MouseClicked
 
     private void jMenuItem10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuItem10MouseClicked
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-               String result = "";
+        String result = "";
         String user = ConnectData.user;
         try {
             // TODO add your handling code here:
             connectDataBase();
             Statement stmt = connect.createStatement();
-            java.sql.ResultSet rs = stmt.executeQuery("SELECT IsRoot FROM projectkoala.accounts WHERE UserName = '" + user + "';" );
-            while(rs.next()) {
+            java.sql.ResultSet rs = stmt.executeQuery("SELECT IsRoot FROM projectkoala.accounts WHERE UserName = '" + user + "';");
+            while (rs.next()) {
                 result = rs.getString(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(result.equals("0")) {
+        if (result.equals("0")) {
             JOptionPane.showMessageDialog(this, "Bạn không đủ quyền thực hiện thao tác này !", "Thông báo",
                     JOptionPane.ERROR_MESSAGE);
         } else {
-            DSTaiKhoan dstaikhoan= new DSTaiKhoan(this, rootPaneCheckingEnabled);
+            DSTaiKhoan dstaikhoan = new DSTaiKhoan(this, rootPaneCheckingEnabled);
             dstaikhoan.setAlwaysOnTop(rootPaneCheckingEnabled);
             dstaikhoan.setLocation(420, 20);
             dstaikhoan.show();
@@ -949,12 +953,12 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void Menu_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DangXuatActionPerformed
         // TODO add your handling code here:
-        DangNhapVao d= new DangNhapVao(this, rootPaneCheckingEnabled);
+        DangNhapVao d = new DangNhapVao(this, rootPaneCheckingEnabled);
         this.dispose();
         d.setLocation(420, 20);
         d.show();
-        
-        
+
+
     }//GEN-LAST:event_Menu_DangXuatActionPerformed
 
     private void Menu_thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_thoatActionPerformed
@@ -970,7 +974,7 @@ public class ListKoala extends javax.swing.JFrame {
         MessageFormat footerField = null;
         try {
             boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null);
-            if(complete) {
+            if (complete) {
                 JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
@@ -981,173 +985,155 @@ public class ListKoala extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel28MouseClicked
 // xu ly su kien kick chuot vao tree
     private void JtreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseClicked
-            // TODO add your handling code here:
-        JTree node = (JTree)evt.getSource();
-        TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
-        node.setSelectionPath(path);
-        DefaultMutableTreeNode selNode=(DefaultMutableTreeNode)path.getLastPathComponent();
-        if(selNode.isLeaf()){
-            if(selNode.getParent().toString().equals("Koala House")||selNode.getParent().getParent().toString().equals("Koala House"))
-            {}
-            else
-            {
-            int a=0;
-            LopX dslopa= new LopX(selNode.toString());
-            if(!ThongTin.isadmin)
-            dslopa.setNotAdmin();
-            for(int i=0;i<Panel_GDChinh.getTabCount();i++)
-            {
-                if(selNode.toString().equals(Panel_GDChinh.getTitleAt(i)))
-                {    a+=1;
-                    Panel_GDChinh.setSelectedIndex(i);
+        // TODO add your handling code here:
+        try {
+            JTree node = (JTree) evt.getSource();
+            TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
+            node.setSelectionPath(path);
+            DefaultMutableTreeNode selNode = (DefaultMutableTreeNode) path.getLastPathComponent();
+            if (selNode.isLeaf()) {
+                if (selNode.getParent().toString().equals("Koala House") || selNode.getParent().getParent().toString().equals("Koala House")) {
+                } else {
+                    int a = 0;
+                    LopX dslopa = new LopX(selNode.toString());
+                    if (!ThongTin.isadmin) {
+                        dslopa.setNotAdmin();
+                    }
+                    for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+                        if (selNode.toString().equals(Panel_GDChinh.getTitleAt(i))) {
+                            a += 1;
+                            Panel_GDChinh.setSelectedIndex(i);
+                        }
+                    }
+                    if (a == 0) {
+                        Panel_GDChinh.add(selNode.toString(), dslopa);
+                        Panel_GDChinh.setSelectedComponent(dslopa);
+                        dslopa.center = Panel_GDChinh;
+                        new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+                    }
                 }
             }
-            if(a==0)
-            {
-            Panel_GDChinh.add(selNode.toString(),dslopa);
-            Panel_GDChinh.setSelectedComponent(dslopa);
-            dslopa.center = Panel_GDChinh;
-            new CloseTabButton(Panel_GDChinh,Panel_GDChinh.getComponentCount()-2);
-            }
-            }
+        } catch (NullPointerException e) {
+            
         }
-        else{}
+
     }//GEN-LAST:event_JtreeMouseClicked
 // xu ly su kien chuot phai
     private void JtreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseReleased
         // TODO add your handling code here:
-        if(evt.isPopupTrigger()){
-            JTree node = (JTree)evt.getSource();
+        if (evt.isPopupTrigger()) {
+            JTree node = (JTree) evt.getSource();
             TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
-            if(path==null){
+            if (path == null) {
                 return;
             }
             node.setSelectionPath(path);
-            nodex=(DefaultMutableTreeNode)path.getLastPathComponent();
-            tree.show(this,evt.getXOnScreen()-this.getX(),evt.getYOnScreen()-this.getY());
-            
+            nodex = (DefaultMutableTreeNode) path.getLastPathComponent();
+            tree.show(this, evt.getXOnScreen() - this.getX(), evt.getYOnScreen() - this.getY());
+
         }
     }//GEN-LAST:event_JtreeMouseReleased
 
-/*
+    /*
     private void Panel_GDChinhStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Panel_GDChinhStateChanged
 
     }//GEN-LAST:event_Panel_GDChinhStateChanged
 */
     private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
         // TODO add your handling code here:
-         if(nodex.getFirstChild().isLeaf())
-        {
-             ThemSuaLop lop = new ThemSuaLop(null,true);
-             lop.setThemSuaLop(true);//day la them
-             lop.setVisible(true);
-             lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-             lop.show();
-             String a=null;
-             String b=nodex.toString();
-             lop.setKhoiName(b);
-             if(lop.getButton())
-             {
-                 a=lop.getTenLop();
-                 DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
-                 model.insertNodeInto(new DefaultMutableTreeNode(a),nodex , nodex.getChildCount());
-             }
-        }
-        else 
-        {
-            
-                String message =String.format( "Bạn Không Thể Tạo Lớp Ở Đây");
-                JOptionPane.showMessageDialog( null, message );
+        if (nodex.getFirstChild().isLeaf()) {
+            ThemSuaLop lop = new ThemSuaLop(null, true);
+            lop.setThemSuaLop(true);//day la them
+            lop.setVisible(true);
+            lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
+            lop.show();
+            String a = null;
+            String b = nodex.toString();
+            lop.setKhoiName(b);
+            if (lop.getButton()) {
+                a = lop.getTenLop();
+                DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+                model.insertNodeInto(new DefaultMutableTreeNode(a), nodex, nodex.getChildCount());
+            }
+        } else {
+
+            String message = String.format("Bạn Không Thể Tạo Lớp Ở Đây");
+            JOptionPane.showMessageDialog(null, message);
         }
     }//GEN-LAST:event_AActionPerformed
 
     private void DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DActionPerformed
         // TODO add your handling code here:
-        if(nodex.isLeaf())
-        {
-            int id=0;int sohs=0;
-             try 
-             {
-                        ConnectData connectData = new ConnectData();
-                        Connection connect;
-                        ResultSet rs1,rs2;
+        if (nodex.isLeaf()) {
+            int id = 0;
+            int sohs = 0;
+            try {
+                ConnectData connectData = new ConnectData();
+                Connection connect;
+                ResultSet rs1, rs2;
 
-                        connect = connectData.connectionDatabase();
-                        Statement statements1 = connect.createStatement();
-                        Statement statements2 = connect.createStatement();
-                        String tentrungtam= nodex.getParent().getParent().toString();
-                        if(tentrungtam.equals("Koala House Bà Triệu")) tentrungtam="1";
-                        else if (tentrungtam.equals("Koala House Hoàng Ngân")) tentrungtam="2";
-                        else if (tentrungtam.equals("Koala House Phan Kế Bình")) tentrungtam="3";
-                        else tentrungtam="4";
-                        System.out.println(tentrungtam);
-                        rs1=(ResultSet) statements1.executeQuery("select * from classes where NameClass = '" + nodex.toString() + "' and Faculties_Id= '" + tentrungtam + "'");
-                        System.out.println("select * from classes where NameClass = '" + nodex.toString() + "' and Faculties_Id= '" + tentrungtam + "'");
-                        while(rs1.next())
-                        {
-                            id=rs1.getInt(1);
-                        }
-                        System.out.println(id);
-                        rs2= (ResultSet) statements2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id ='"+id+"' and Faculties_Id= '" + tentrungtam + "'");
-                        System.out.println("select count(Students_Id) from classes_has_students where Classes_Id ='"+id+"' and Faculties_Id= '" + tentrungtam + "'");
-                        while(rs2.next())
-                        {
-                            sohs=rs2.getInt(1);
-                        }
-                        System.out.println(sohs);
-                        if(sohs==0)
-                        {
-                            
-                            String query;
-                            PreparedStatement pstmt;
-                            
-                            query ="delete from classes_has_students where Classes_Id = '" + id + "' and Faculties_Id= '" + tentrungtam + "'";
-                            System.out.println(query);
-                            pstmt = connect.prepareStatement(query);
-                            pstmt.executeUpdate();
-                            query = "delete from classes where Id='" + id + "' and Faculties_Id= '" + tentrungtam + "'";
-                            System.out.println(query);
-                            pstmt = connect.prepareStatement(query);
-                            pstmt.executeUpdate();
-                            DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
-                            model.removeNodeFromParent(nodex);
-        
-                        }
-                        else
-                        {
-                            String message =String.format( "trong lớp vẫn còn hs, bạn cần thực hiện chuyển lớp hoặc xóa hs để có thể xóa lớp");
-                            JOptionPane.showMessageDialog( null, message );
-                        }
-             }
-             catch (SQLException ex) 
-                        {
-                            
-                        }
+                connect = connectData.connectionDatabase();
+                Statement statements1 = connect.createStatement();
+                Statement statements2 = connect.createStatement();
+                String tentrungtam = nodex.getParent().getParent().toString();
+                if (tentrungtam.equals("Koala House Bà Triệu")) {
+                    tentrungtam = "1";
+                } else if (tentrungtam.equals("Koala House Hoàng Ngân")) {
+                    tentrungtam = "2";
+                } else if (tentrungtam.equals("Koala House Phan Kế Bình")) {
+                    tentrungtam = "3";
+                } else {
+                    tentrungtam = "4";
+                }
+                rs1 = (ResultSet) statements1.executeQuery("select * from classes where NameClass = '" + nodex.toString() + "' and Faculties_Id= '" + tentrungtam + "'");
+                while (rs1.next()) {
+                    id = rs1.getInt(1);
+                }
+                rs2 = (ResultSet) statements2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id ='" + id + "' and Faculties_Id= '" + tentrungtam + "'");
+                while (rs2.next()) {
+                    sohs = rs2.getInt(1);
+                }
+                if (sohs == 0) {
 
-            
-        }
-        else
-        {
-            String message =String.format( "Bạn Không Thể Tạo Lớp Ở Đây");
-            JOptionPane.showMessageDialog( null, message );
+                    String query;
+                    PreparedStatement pstmt;
+
+                    query = "delete from classes_has_students where Classes_Id = '" + id + "' and Faculties_Id= '" + tentrungtam + "'";
+                    pstmt = connect.prepareStatement(query);
+                    pstmt.executeUpdate();
+                    query = "delete from classes where Id='" + id + "' and Faculties_Id= '" + tentrungtam + "'";                
+                    pstmt = connect.prepareStatement(query);
+                    pstmt.executeUpdate();
+                    DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+                    model.removeNodeFromParent(nodex);
+
+                } else {
+                    String message = String.format("trong lớp vẫn còn hs, bạn cần thực hiện chuyển lớp hoặc xóa hs để có thể xóa lớp");
+                    JOptionPane.showMessageDialog(null, message);
+                }
+            } catch (SQLException ex) {
+
+            }
+
+        } else {
+            String message = String.format("Bạn Không Thể Tạo Lớp Ở Đây");
+            JOptionPane.showMessageDialog(null, message);
         }
     }//GEN-LAST:event_DActionPerformed
 
     private void RatruongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatruongActionPerformed
         // TODO add your handling code here:
-         if(nodex.isLeaf())
-        {
-            String tenlop=nodex.toString();
+        if (nodex.isLeaf()) {
+            String tenlop = nodex.toString();
             int idtenlop;
-            idtenlop= new DataBase.DataTable().LayIdTenLop(tenlop);
+            idtenlop = new DataBase.DataTable().LayIdTenLop(tenlop);
             new DataBase.SQLJTree().ratruong(idtenlop);
+        } else {
+            String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
+            JOptionPane.showMessageDialog(null, message);
+
         }
-        else{
-            String message =String.format( "Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
-            JOptionPane.showMessageDialog( null, message );
-        
-                }        
-        
+
     }//GEN-LAST:event_RatruongActionPerformed
 
     private void CapNhatNamHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatNamHocActionPerformed
@@ -1158,13 +1144,14 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void NamhocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamhocActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_NamhocActionPerformed
-     
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -1197,8 +1184,7 @@ public class ListKoala extends javax.swing.JFrame {
                 new ListKoala().setVisible(true);
             }
         });
-        
-        
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem A;
@@ -1248,40 +1234,48 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem xoa;
     // End of variables declaration//GEN-END:variables
 }
+
 class CloseTabButton extends JPanel implements ActionListener {
-  private JTabbedPane pane;
-  public CloseTabButton(JTabbedPane pane, int index) {
-    this.pane = pane;
-    setOpaque(false);
-    add(new JLabel(
-        pane.getTitleAt(index),
-        pane.getIconAt(index),
-        JLabel.LEFT));
-    Icon closeIcon = new CloseIcon();
-    JButton btClose = new JButton(closeIcon);
-    btClose.setPreferredSize(new Dimension(
-        closeIcon.getIconWidth(), closeIcon.getIconHeight()));
-    add(btClose);
-    btClose.addActionListener(this);
-    pane.setTabComponentAt(index, this);
-  }
-  public void actionPerformed(ActionEvent e) {
-    int i = pane.indexOfTabComponent(this);
-    if (i != -1) {
-      pane.remove(i);
+
+    private JTabbedPane pane;
+
+    public CloseTabButton(JTabbedPane pane, int index) {
+        this.pane = pane;
+        setOpaque(false);
+        add(new JLabel(
+                pane.getTitleAt(index),
+                pane.getIconAt(index),
+                JLabel.LEFT));
+        Icon closeIcon = new CloseIcon();
+        JButton btClose = new JButton(closeIcon);
+        btClose.setPreferredSize(new Dimension(
+                closeIcon.getIconWidth(), closeIcon.getIconHeight()));
+        add(btClose);
+        btClose.addActionListener(this);
+        pane.setTabComponentAt(index, this);
     }
-  }
+
+    public void actionPerformed(ActionEvent e) {
+        int i = pane.indexOfTabComponent(this);
+        if (i != -1) {
+            pane.remove(i);
+        }
+    }
 }
+
 class CloseIcon implements Icon {
-  public void paintIcon(Component c, Graphics g, int x, int y) {
-    g.setColor(Color.RED);
-    g.drawLine(6, 6, getIconWidth() - 7, getIconHeight() - 7);
-    g.drawLine(getIconWidth() - 7, 6, 6, getIconHeight() - 7);
-  }
-  public int getIconWidth() {
-    return 17;
-  }
-  public int getIconHeight() {
-    return 17;
-  }
- }
+
+    public void paintIcon(Component c, Graphics g, int x, int y) {
+        g.setColor(Color.RED);
+        g.drawLine(6, 6, getIconWidth() - 7, getIconHeight() - 7);
+        g.drawLine(getIconWidth() - 7, 6, 6, getIconHeight() - 7);
+    }
+
+    public int getIconWidth() {
+        return 17;
+    }
+
+    public int getIconHeight() {
+        return 17;
+    }
+}

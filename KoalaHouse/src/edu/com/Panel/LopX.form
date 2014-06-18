@@ -95,6 +95,9 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lopxMouseClicked"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column){&#xa;&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;        if(arr_sex.get(row)==0){&#xa;            c.setForeground(Color.RED);&#xa;        }&#xa;        else{&#xa;            c.setForeground(Color.BLACK);&#xa;        }&#xa;        return c;&#xa;&#xa;    }&#xa;}"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

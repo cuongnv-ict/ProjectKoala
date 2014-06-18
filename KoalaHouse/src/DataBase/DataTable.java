@@ -88,8 +88,7 @@ public class DataTable {
                    }
                    str[3] = rs1.getString(3);
                    str[4] = rs1.getString(7);
-                   str[5] = rs1.getString(8);
-                   str[5]=XuLy.getDate((String) str[5]);
+                   str[5]=XuLy.getDate(rs1.getString(8));
                    str[6] = rs1.getString(9);
                    str[6]=XuLy.getDate((String) str[6]);
                    str[8] = rs1.getString(11);

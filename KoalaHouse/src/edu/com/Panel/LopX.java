@@ -15,11 +15,15 @@ import edu.com.Dialog.trongmuon;
 import edu.com.ListKoala;
 import edu.com.ThongTin;
 import edu.com.XuLy;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -31,6 +35,7 @@ public class LopX extends javax.swing.JPanel {
     public JTabbedPane center;
     private int malop;
     ArrayList<Integer> id_students;
+    ArrayList<Integer> arr_sex;
     private boolean isadmin= true;
 
     /**
@@ -39,7 +44,7 @@ public class LopX extends javax.swing.JPanel {
     public LopX(String tenlop) {
         initComponents();
         malop = new DataBase.DataTable().LayIdTenLop(tenlop);
-        new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+        arr_sex =new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
@@ -74,7 +79,20 @@ public class LopX extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        lopx = new javax.swing.JTable();
+        lopx = new javax.swing.JTable(){
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column){
+
+                Component c = super.prepareRenderer(renderer, row, column);
+                if(arr_sex.get(row)==0){
+                    c.setForeground(Color.RED);
+                }
+                else{
+                    c.setForeground(Color.BLACK);
+                }
+                return c;
+
+            }
+        };
         them = new javax.swing.JLabel();
         sua = new javax.swing.JLabel();
         xoa = new javax.swing.JLabel();
