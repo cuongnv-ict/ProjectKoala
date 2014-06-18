@@ -51,7 +51,7 @@ public class SQLLopX {
             rs1 = statement.executeQuery("select * from students where students.id in(select students_id from classes_has_students where classes_id = " + classes_id + " ) and isActive = 1");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
-                    Object[] str = new Object[11];
+                    Object[] str = new Object[12];
                     str[0] = "";
                     str[1] = "";
                     str[2] = "";
@@ -63,12 +63,12 @@ public class SQLLopX {
                     str[8] = "";
                     str[9] = "";
                     str[10] = false;
-                    arr.add(1);
+                    str[11] = 1;
                     data.add(str);
                 }
             } else {
                 do {
-                    Object[] str = new Object[11];
+                    Object[] str = new Object[12];
                     str[0] = rs1.getInt(1);
                     str[1] = rs1.getString(3);
                     str[2] = XuLy.getDate(rs1.getString(4));
@@ -84,14 +84,20 @@ public class SQLLopX {
                     str[8] = rs1.getString(12);
                     str[9] = rs1.getString(14);
                     str[10] = false;
-                    arr.add(rs1.getInt(15));
+                    str[11] = rs1.getInt(15);
                     data.add(str);
                 } while (rs1.next());
                 XuLy.SapXepTen(data, 1);
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                Object[] str = new Object[11];
+                for (int j = 0; j < 11; j++) {
+                    str[j] = (data.get(i))[j];
+                }
+                arr.add((Integer) (data.get(i))[11]);
+                rowColumn[i] = str;
+
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 Class[] types = new Class[]{
@@ -137,18 +143,22 @@ public class SQLLopX {
                 JOptionPane.showMessageDialog(null, "Số học sinh trong lớp đã đạt tối đa, không thể thêm học sinh", null, JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
-            Pstate = connect.prepareStatement("insert into students(id,Faculties_Id,FullName,BrithDay,PhoneNumber,Representative,IsClient,Debt,IsActive)"
-                    + " values (?,?,?,?,?,?,?,?,?)");
+            Pstate = connect.prepareStatement("insert into students(id,Faculties_Id,FullName,BrithDay,PhoneNumberFather,Father,IsClient,Debt,isactive,Mother,PhoneNumberMother,HomePhone,Email,Sex)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             Pstate.setString(1, String.valueOf(x));
             Pstate.setString(2, String.valueOf(ThongTin.trungtam));
             Pstate.setString(3, vector.get(0).toString());
             Pstate.setString(4, vector.get(1).toString());
             Pstate.setString(5, vector.get(2).toString());
             Pstate.setString(6, vector.get(3).toString());
-            System.out.println(vector.get(4).toString());
             Pstate.setString(7, vector.get(4).toString());
             Pstate.setString(8, "0");
             Pstate.setString(9, "1");
+            Pstate.setString(10, vector.get(5).toString());
+            Pstate.setString(11, vector.get(6).toString());
+            Pstate.setString(12, vector.get(7).toString());
+            Pstate.setString(13, vector.get(8).toString());
+            Pstate.setString(14, vector.get(9).toString());
             Pstate.execute();
             Pstate = connect.prepareStatement("insert into classes_has_students(Classes_Id,Students_Id,Faculties_Id) values(?,?,?)");
             Pstate.setString(1, String.valueOf(id_class));
@@ -175,12 +185,18 @@ public class SQLLopX {
 
     public boolean suaHocSinh(Vector vector, int id_student) {
         try {
-            Pstate = connect.prepareStatement("update students set FullName=?,BrithDay=?,PhoneNumber=?,Representative=?,IsClient=? where id = " + id_student);
+//            Pstate = connect.prepareStatement("update students set FullName=?,BrithDay=?,PhoneNumber=?,Representative=?,IsClient=? where id = " + id_student);
+            Pstate = connect.prepareStatement("update students set FullName=?,BrithDay=?,PhoneNumberFather=?,Father=?,IsClient=?,Mother=?,PhoneNumberMother=?,HomePhone=?,Email=?,Sex=? where id = " + id_student);
             Pstate.setString(1, vector.get(0).toString());
             Pstate.setString(2, vector.get(1).toString());
             Pstate.setString(3, vector.get(2).toString());
             Pstate.setString(4, vector.get(3).toString());
             Pstate.setString(5, vector.get(4).toString());
+            Pstate.setString(6, vector.get(5).toString());
+            Pstate.setString(7, vector.get(6).toString());
+            Pstate.setString(8, vector.get(7).toString());
+            Pstate.setString(9, vector.get(8).toString());
+            Pstate.setString(10, vector.get(9).toString());
             Pstate.execute();
             JOptionPane.showMessageDialog(null, "Chỉnh sửa học sinh thành công", null, JOptionPane.INFORMATION_MESSAGE);
             return true;
@@ -217,48 +233,73 @@ public class SQLLopX {
         return true;
     }
 
-    public boolean timhocsinh(String tenhs, JTable table, int classes_id) {
+    public ArrayList<Integer> timhocsinh(String tenhs, JTable table, int classes_id) {
         try {
-            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            ArrayList<Integer> arr = new ArrayList<Integer>();
+            Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from students where students.id in(select students_id from classes_has_students where classes_id = " + classes_id + " ) and isActive = 1 and FullName like '%" + tenhs + "%' ");
-            if (rs1.next()) {
+            rs1 = Pstate.executeQuery();
+            if (!rs1.next()) {
+                for (int i = 0; i < 10; i++) {
+                    Object[] str = new Object[12];
+                    str[0] = "";
+                    str[1] = "";
+                    str[2] = "";
+                    str[3] = "";
+                    str[4] = "";
+                    str[5] = "";
+                    str[6] = "";
+                    str[7] = "";
+                    str[8] = "";
+                    str[9] = "";
+                    str[10] = false;
+                    str[11] = 1;
+                    data.add(str);
+                }
+            } else {
                 do {
-                    Object[] str = new Object[7];
-                    str[0] = rs1.getString(1);
+                    Object[] str = new Object[12];
+                    str[0] = rs1.getInt(1);
                     str[1] = rs1.getString(3);
-                    str[2] = rs1.getString(4);
-                    switch (rs1.getInt(7)) {
-                        case 0:
-                            str[3] = "Chính Quy";
-                            break;
-                        case 1:
-                            str[3] = "Chương Trình Bạn Là Khách";
-                            break;
+                    str[2] = XuLy.getDate(rs1.getString(4));
+                    if (rs1.getInt(7) == 1) {
+                        str[3] = "Khách";
+                    } else {
+                        str[3] = "Chính quy";
                     }
-                    str[4] = rs1.getString(5);
+                    str[4] = rs1.getString(13);
                     str[5] = rs1.getString(6);
-                    str[6] = false;
+                    str[6] = rs1.getString(5);
+                    str[7] = rs1.getString(11);
+                    str[8] = rs1.getString(12);
+                    str[9] = rs1.getString(14);
+                    str[10] = false;
+                    str[11] = rs1.getInt(15);
                     data.add(str);
                 } while (rs1.next());
                 XuLy.SapXepTen(data, 1);
-            } else {
-                return false;
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                Object[] str = new Object[11];
+                for (int j = 0; j < 11; j++) {
+                    str[j] = (data.get(i))[j];
+                }
+                arr.add((Integer) (data.get(i))[11]);
+                rowColumn[i] = str;
+
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
                 };
 
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, true
+                    false, false, false, false, false, false, false, false, false, false, true
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -268,17 +309,17 @@ public class SQLLopX {
             table.setModel(model);
             statement.close();
             connect.close();
-            return true;
+            return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
-            return false;
+            return null;
         }
     }
 
-    public void BangDanhHSLop_iType(int classes_id, JTable table, int isClient) {
+    public ArrayList<Integer> BangDanhHSLop_iType(int classes_id, JTable table, int isClient) {
         try {
-            Object[] nameColumn = {"Mã Số HS", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Đánh Dấu"};
+            ArrayList<Integer> arr = new ArrayList<Integer>();
+            Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             Pstate = connect.prepareStatement("select * from students where students.id in(select students_id from classes_has_students where classes_id = ?) and isActive = 1 and isClient = ?");
             Pstate.setInt(1, classes_id);
@@ -286,50 +327,64 @@ public class SQLLopX {
             rs1 = Pstate.executeQuery();
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
-                    Object[] str = new Object[7];
+                    Object[] str = new Object[12];
                     str[0] = "";
                     str[1] = "";
                     str[2] = "";
                     str[3] = "";
                     str[4] = "";
                     str[5] = "";
+                    str[6] = "";
+                    str[7] = "";
+                    str[8] = "";
+                    str[9] = "";
+                    str[10] = false;
+                    str[11] = 1;
                     data.add(str);
                 }
             } else {
                 do {
-                    Object[] str = new Object[7];
-                    str[0] = rs1.getString(1);
+                    Object[] str = new Object[12];
+                    str[0] = rs1.getInt(1);
                     str[1] = rs1.getString(3);
                     str[2] = XuLy.getDate(rs1.getString(4));
-                    switch (rs1.getInt(7)) {
-                        case 0:
-                            str[3] = "Chính Quy";
-                            break;
-                        case 1:
-                            str[3] = "Chương Trình Bạn Là Khách";
-                            break;
+                    if (rs1.getInt(7) == 1) {
+                        str[3] = "Khách";
+                    } else {
+                        str[3] = "Chính quy";
                     }
-                    str[4] = rs1.getString(5);
+                    str[4] = rs1.getString(13);
                     str[5] = rs1.getString(6);
-                    str[6] = false;
+                    str[6] = rs1.getString(5);
+                    str[7] = rs1.getString(11);
+                    str[8] = rs1.getString(12);
+                    str[9] = rs1.getString(14);
+                    str[10] = false;
+                    str[11] = rs1.getInt(15);
                     data.add(str);
                 } while (rs1.next());
                 XuLy.SapXepTen(data, 1);
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                Object[] str = new Object[11];
+                for (int j = 0; j < 11; j++) {
+                    str[j] = (data.get(i))[j];
+                }
+                arr.add((Integer) (data.get(i))[11]);
+                rowColumn[i] = str;
+
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
                 };
 
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, true
+                    false, false, false, false, false, false, false, false, false, false, true
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -339,8 +394,10 @@ public class SQLLopX {
             table.setModel(model);
             statement.close();
             connect.close();
+            return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }

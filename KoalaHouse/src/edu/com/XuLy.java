@@ -27,7 +27,16 @@ public class XuLy {
             public int compare(Object[] o1, Object[] o2) {
                 String[] StrArr_1 = o1[column].toString().toUpperCase().split(" ");
                 String[] StrArr_2 = o2[column].toString().toUpperCase().split(" ");
-                return StrArr_1[StrArr_1.length - 1].compareTo(StrArr_2[StrArr_2.length - 1]);
+                int x, y;
+                x = StrArr_1.length - 1;
+                y = StrArr_2.length - 1;
+                if (StrArr_1[x].charAt(0) == '(') {
+                    x--;
+                }
+                if (StrArr_2[y].charAt(0) == '(') {
+                    y--;
+                }
+                return StrArr_1[x].compareTo(StrArr_2[y]);
             }
         });
     }
@@ -108,10 +117,10 @@ public class XuLy {
         if (x < 0) {
             return false;
         }
-        if (x==0&&y<0) {
+        if (x == 0 && y < 0) {
             return false;
         }
-        if (y==0&&z<0) {
+        if (y == 0 && z < 0) {
             return false;
         }
         return true;

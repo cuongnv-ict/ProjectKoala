@@ -36,7 +36,7 @@ public class LopX extends javax.swing.JPanel {
     private int malop;
     ArrayList<Integer> id_students;
     ArrayList<Integer> arr_sex;
-    private boolean isadmin= true;
+    private boolean isadmin = true;
 
     /**
      * Creates new form LopX
@@ -44,7 +44,7 @@ public class LopX extends javax.swing.JPanel {
     public LopX(String tenlop) {
         initComponents();
         malop = new DataBase.DataTable().LayIdTenLop(tenlop);
-        arr_sex =new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+        arr_sex = new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
         model = (DefaultTableModel) lopx.getModel();
         id_students = new ArrayList<Integer>();
         if (!lopx.getValueAt(0, 0).toString().equals("")) {
@@ -59,12 +59,12 @@ public class LopX extends javax.swing.JPanel {
     public int getMaLop() {
         return malop;
     }
-    public void setNotAdmin()
-    {
+
+    public void setNotAdmin() {
         them.setEnabled(false);
         sua.setEnabled(false);
         xoa.setEnabled(false);
-        this.isadmin=false;
+        this.isadmin = false;
         chitiet.setEnabled(false);
         chuyenlop.setEnabled(false);
     }
@@ -249,7 +249,7 @@ public class LopX extends javax.swing.JPanel {
         }
         if (evt.getClickCount() == 2) {
             int row = lopx.getSelectedRow();
-            model.setValueAt(false, row, 6);
+            model.setValueAt(false, row, 10);
             //map cac truong
             int a = -1;
             int id = id_students.get(row);
@@ -272,19 +272,13 @@ public class LopX extends javax.swing.JPanel {
 
     private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
         // TODO add your handling code here:
-    if(isadmin)
-    {
-        ThemHS hs = new ThemHS(ListKoala.frame, true, malop);
-        hs.setVisible(true);
-        if (hs.getButton()) {
-            new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
-            model = (DefaultTableModel) lopx.getModel();
-            id_students = new ArrayList<Integer>();
-            if (!lopx.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_students, lopx, 0);
+        if (isadmin) {
+            ThemHS hs = new ThemHS(ListKoala.frame, true, malop);
+            hs.setVisible(true);
+            if (hs.getButton()) {
+                locActionPerformed(null);
             }
         }
-    }
     }//GEN-LAST:event_themMouseClicked
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
@@ -294,7 +288,7 @@ public class LopX extends javax.swing.JPanel {
             return;
         }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
+            if ((Boolean) model.getValueAt(i, 10) == true) {
                 count--;
                 row = i;
             }
@@ -305,134 +299,120 @@ public class LopX extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
                 for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                    model.setValueAt(false, i, 6);
+                    model.setValueAt(false, i, 10);
                 }
             }
             return;
         }
+        model.setValueAt(false, row, 10);
         Vector vec = (Vector) model.getDataVector().elementAt(row);
-        ThemHS hs = new ThemHS(null, true, vec, id_students.get(row));
+        ThemHS hs = new ThemHS(null, true, vec, id_students.get(row), arr_sex.get(row));
         hs.setVisible(true);
         if (hs.getButton()) {
-            new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
-            model = (DefaultTableModel) lopx.getModel();
-            XuLy.setID(id_students, lopx, 0);
+            locActionPerformed(null);
         }
     }//GEN-LAST:event_suaMouseClicked
 
     private void chuyenlopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenlopActionPerformed
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        if (lopx.getValueAt(0, 0).toString().equals("")) {
-            return;
-        }
-        boolean flags = true;
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
-                flags = false;
+        if (isadmin) {
+            if (lopx.getValueAt(0, 0).toString().equals("")) {
+                return;
             }
-        }
-        if (flags) {
-            JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh chuyển lớp", null, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        chuyenlop chuyen = new chuyenlop(null, true, getName());
-        chuyen.setVisible(true);
-        String tenlop = chuyen.getTenLop();
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
-                new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 10) == true) {
+                    flags = false;
+                }
             }
-        }
-        int a;
-        a=center.indexOfTab(tenlop);
-        if(a!=-1)
-        {
-          center.getTabComponentAt(a);
-          center.removeTabAt(a);
-          LopX aa = new LopX(tenlop);
-            aa.setName(tenlop);
-            
-            center.add(aa, a);
-            
-        new CloseTabButton(center,a);
-           
-            aa.center = center;
-        }
-        a=-1;
-        a=center.indexOfTab("Danh Sách Lớp");
-        if(a!=-1)
-        {
-          center.getTabComponentAt(a);
-          center.removeTabAt(a);
-          DSLop bb = new DSLop(ThongTin.trungtam);
-            bb.setName("Danh Sách Lớp");
-            
-            center.add(bb, a);
-            
-        new CloseTabButton(center,a);
-           
-            bb.center = center;
-        }
-        new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
-        model = (DefaultTableModel) lopx.getModel();
-        if (!lopx.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_students, lopx, 0);
-        }
+            if (flags) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh chuyển lớp", null, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            chuyenlop chuyen = new chuyenlop(null, true, getName());
+            chuyen.setVisible(true);
+            String tenlop = chuyen.getTenLop();
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 10) == true) {
+                    new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
+                }
+            }
+            int a;
+            a = center.indexOfTab(tenlop);
+            if (a != -1) {
+                center.getTabComponentAt(a);
+                center.removeTabAt(a);
+                LopX aa = new LopX(tenlop);
+                aa.setName(tenlop);
+
+                center.add(aa, a);
+
+                new CloseTabButton(center, a);
+
+                aa.center = center;
+            }
+            a = -1;
+            a = center.indexOfTab("Danh Sách Lớp");
+            if (a != -1) {
+                center.getTabComponentAt(a);
+                center.removeTabAt(a);
+                DSLop bb = new DSLop(ThongTin.trungtam);
+                bb.setName("Danh Sách Lớp");
+
+                center.add(bb, a);
+
+                new CloseTabButton(center, a);
+
+                bb.center = center;
+            }
+            locActionPerformed(null);
         }
     }//GEN-LAST:event_chuyenlopActionPerformed
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        if (lopx.getValueAt(0, 0).toString().equals("")) {
-            return;
-        }
-        boolean flags = true;
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
-                flags = false;
+        if (isadmin) {
+            if (lopx.getValueAt(0, 0).toString().equals("")) {
+                return;
             }
-        }
-        if (flags) {
-            JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-        if (click == JOptionPane.NO_OPTION) {
-            return;
-        }
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
-                new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 10) == true) {
+                    flags = false;
+                }
             }
-        }
-        new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
-        model = (DefaultTableModel) lopx.getModel();
-        if (!lopx.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_students, lopx, 0);
-        }
+            if (flags) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh muốn xóa", null, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+            if (click == JOptionPane.NO_OPTION) {
+                return;
+            }
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 10) == true) {
+                    new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
+                }
+            }
+            locActionPerformed(null);
         }
     }//GEN-LAST:event_xoaMouseClicked
 
     private void chitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chitietMouseClicked
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 6) == true) {
-                model.setValueAt(false, i, 6);
-                int id = id_students.get(i);
-                String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
-                //HocSinhA.idTemp = id;
-                HocSinhA aa = new HocSinhA(id);
-                center.add(model.getValueAt(i, 1).toString(), aa);
-                center.setSelectedComponent(aa);
-                new CloseTabButton(center, center.getComponentCount() - 2);
+        if (isadmin) {
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 10) == true) {
+                    model.setValueAt(false, i, 10);
+                    int id = id_students.get(i);
+                    String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
+                    //HocSinhA.idTemp = id;
+                    HocSinhA aa = new HocSinhA(id);
+                    center.add(model.getValueAt(i, 1).toString(), aa);
+                    center.setSelectedComponent(aa);
+                    new CloseTabButton(center, center.getComponentCount() - 2);
+                }
             }
-        }
         }
     }//GEN-LAST:event_chitietMouseClicked
 
@@ -445,25 +425,26 @@ public class LopX extends javax.swing.JPanel {
 
     private void locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locActionPerformed
         // TODO add your handling code here:
+        arr_sex.removeAll(arr_sex);
         switch (loc.getSelectedIndex()) {
             case 0:
-                new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+                arr_sex = new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 1:
-                new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
+                arr_sex = new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 2:
-                new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
+                arr_sex = new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 3:
-                new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
+                arr_sex = new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
             case 4:
-                new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
+                arr_sex = new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
                 model = (DefaultTableModel) lopx.getModel();
                 break;
         }
@@ -481,8 +462,8 @@ public class LopX extends javax.swing.JPanel {
         if (thongtin.equals("")) {
             JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
         } else {
-            boolean a = new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
-            if (a == false) {
+            arr_sex =  new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
+            if (lopx.getValueAt(0, 0).toString().equals("")) {
                 JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 if (!lopx.getValueAt(0, 0).toString().equals("")) {
@@ -497,23 +478,23 @@ public class LopX extends javax.swing.JPanel {
         if (textfield_timkiem.getText().equals("")) {
             switch (loc.getSelectedIndex()) {
                 case 0:
-                    new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+                    arr_sex = new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
                     model = (DefaultTableModel) lopx.getModel();
                     break;
                 case 1:
-                    new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
+                    arr_sex = new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
                     model = (DefaultTableModel) lopx.getModel();
                     break;
                 case 2:
-                    new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
+                    arr_sex = new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
                     model = (DefaultTableModel) lopx.getModel();
                     break;
                 case 3:
-                    new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
+                    arr_sex = new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
                     model = (DefaultTableModel) lopx.getModel();
                     break;
                 case 4:
-                    new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
+                    arr_sex = new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
                     model = (DefaultTableModel) lopx.getModel();
                     break;
             }
