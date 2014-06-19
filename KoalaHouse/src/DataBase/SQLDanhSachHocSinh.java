@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,84 +42,6 @@ public class SQLDanhSachHocSinh {
         }
     }
 
-    public void BangDanhSachHocSinh(JTable table, int stype) {
-        try {
-            Object[] nameColumn = {"STT", "Tên", "Ngay Sinh", "Trình Độ", "Lớp", "Hình Thức Học", "Đánh dấu"};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select students.id,fullname,brithday,levels_id,nameclass,isclient  from students,classes,classes_has_students where students.id = students_id and classes.id=classes_id and students.isactive = " + stype+" and and classes.Faculties_Id = " + ThongTin.trungtam);
-            if (!rs1.next()) {
-                for (int i = 0; i < 10; i++) {
-                    Object str[] = new Object[7];
-                    str[0] = "";
-                    str[1] = "";
-                    str[2] = "";
-                    str[3] = "";
-                    str[4] = "";
-                    str[5] = "";
-                    str[6] = false;
-                    data.add(str);
-                }
-            } else {
-                do {
-                    Object str[] = new Object[7];
-                    str[0] = rs1.getString(1);
-                    str[1] = rs1.getString(2);
-                    str[2] = XuLy.getDate(rs1.getString(3));
-                    switch (rs1.getInt(4)) {
-                        case 1:
-                            str[3] = "NẮNG MAI (SUNSHINE)";
-                            break;
-                        case 2:
-                            str[3] = "TỔ ONG (BEEHIVE)";
-                            break;
-                        case 3:
-                            str[3] = "TỔ KÉN (CHRYSALIS)";
-                            break;
-                        case 4:
-                            str[3] = "MẪU GIÁO (KINDERGARTEN)";
-                            break;
-                    }
-                    str[4] = rs1.getString(5);
-                    switch (rs1.getInt(6)) {
-                        case 1:
-                            str[5] = "Chính Quy";
-                            break;
-                        case 0:
-                            str[5] = "Chương Trình Bạn Là Khách";
-                            break;
-                    }
-                    str[6] = false;
-                    data.add(str);
-                } while (rs1.next());
-            }
-
-            XuLy.SapXepTen(data, 1);
-            Object[][] rowColumn = new Object[data.size()][];
-            for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
-            }
-            model = new DefaultTableModel(rowColumn, nameColumn) {
-                boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, true
-                };
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit[columnIndex];
-                }
-                Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
-                };
-
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-            };
-            table.setModel(model);
-        } catch (SQLException ex) {
-            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void xoaHocSinh(int id) {
         try {
             statement.execute("delete from classes_has_students where students_id = " + id);
@@ -137,6 +60,116 @@ public class SQLDanhSachHocSinh {
             statement.execute("update students set isactive = 1 where id = " + id);
         } catch (SQLException ex) {
             Logger.getLogger(SQLDanhSachHocSinh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ArrayList<Object[]> DanhSachHocSinh(JTable table, int stype) {
+        ArrayList<Object[]> arr_title = this.DanhSachLop();
+        ArrayList<Object[]> info = new ArrayList<Object[]>();
+        int column_size = arr_title.size() + 1;
+        Object[] title = new Object[column_size];
+        ArrayList<Object[]>[] arr_content = new ArrayList[column_size - 1];
+        int max = 0;
+        for (int i = 0; i < column_size; i++) {
+            if (i == 0) {
+                title[0] = "STT";
+                continue;
+            }
+            title[i] = arr_title.get(i - 1)[1];
+            arr_content[i - 1] = this.DanhSachHocSinh(Integer.parseInt(arr_title.get(i - 1)[0].toString()), stype);
+
+            if (max < Integer.parseInt(arr_title.get(i - 1)[2].toString())) {
+                max = Integer.parseInt(arr_title.get(i - 1)[2].toString());
+            }
+        }
+        Object[][] rowColumn = new Object[max][];
+        for (int i = 0; i < max; i++) {
+            Object[] o = new Object[column_size];
+            for (int j = 0; j < column_size; j++) {
+                if (j == 0) {
+                    o[j] = i + 1;
+                    continue;
+                }
+                if (i < arr_content[j - 1].size()) {
+                    o[j] = arr_content[j - 1].get(i)[1];
+                } else {
+                    o[j] = "";
+                }
+            }
+            rowColumn[i] = o;
+        }
+        model = new DefaultTableModel(rowColumn, title) {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        table.setModel(model);
+        for (int i = 0; i < column_size; i++) {
+            Object[] in = new Object[max];
+            for (int j = 0; j < max; j++) {
+                if (i == 0) {
+                    in[j] = "x";
+                    continue;
+                }
+                if (j < arr_content[i - 1].size()) {
+                    if (arr_content[i - 1].get(j)[2].toString().equals("1")) {
+                        in[j] = arr_content[i - 1].get(j)[0];
+                    } else {
+                        in[j] = "-" + arr_content[i - 1].get(j)[0];
+                    }
+                } else {
+                    if (j < Integer.parseInt(arr_title.get(i - 1)[2].toString())) {
+                        in[j] = 0;
+                    } else {
+                        in[j] = "x";
+                    }
+                }
+            }
+            info.add(in);
+        }
+//        for(int i = 0;i<info.size();i++){
+//            for (int j = 0; j < max; j++) {
+//                System.out.print(info.get(i)[j]+"-");
+//            }
+//            System.out.println();
+//        }
+        return info;
+    }
+
+    public ArrayList<Object[]> DanhSachLop() {
+        try {
+            ArrayList<Object[]> arr = new ArrayList<Object[]>();
+            rs1 = statement.executeQuery("select id,NameClass,maxnumber from classes order by Levels_Id");
+            while (rs1.next()) {
+                Object[] o = new Object[3];
+                o[0] = rs1.getString(1);
+                o[1] = rs1.getString(2);
+                o[2] = rs1.getString(3);
+                arr.add(o);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLDanhSachHocSinh.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public ArrayList<Object[]> DanhSachHocSinh(int id_class, int stype) {
+        try {
+            ArrayList<Object[]> arr = new ArrayList<Object[]>();
+            rs1 = statement.executeQuery("select students.Id,students.FullName,sex from students,classes_has_students where Students_Id = students.id and Classes_Id = " + id_class + " and students.isactive = " + stype);
+            while (rs1.next()) {
+                Object[] o = new Object[3];
+                o[0] = rs1.getString(1);
+                o[1] = rs1.getString(2);
+                o[2] = rs1.getString(3);
+                arr.add(o);
+            }
+            XuLy.SapXepTen(arr, 1);
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLDanhSachHocSinh.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }
