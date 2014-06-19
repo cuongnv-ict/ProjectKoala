@@ -7,6 +7,7 @@
 package edu.com.Dialog;
 
 import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.Convert;
 import DataBase.HocSinh.HistoryManagerment;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Panel.HocSinhA;
@@ -16,6 +17,7 @@ import edu.com.upbang.EditTable;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -29,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -47,6 +50,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public int idTrungTam;
     public int sott;
     public int idHocSinh = 0;
+    Convert convert = new Convert();
     
     /**
      * Creates new form NewJDialog
@@ -95,7 +99,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         new RecieptManagerment().BangDSPhiHoaDon(idhs,idTrungTam, jTable1);
         model = (DefaultTableModel) jTable1.getModel();
         Total();
-        CanDong.setText(TongTien.getText());
         daThu.setText(TongTien.getText());
         }
         else{
@@ -109,10 +112,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         HoaDon.lop = "";
         HoaDon.idTT = 0;
         if(idHocSinh>0){
-        int x = Integer.parseInt(XuLy.getMoney(daThu.getText()));
+        int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
         if(x <0){
-            jLabel29.setText("Đã Trả Lại");
+            jLabel23.setText("Số Tiền Hoàn Trả :");
             x = x* (-1);
+            TongTien.setText(XuLy.setMoney(String.valueOf(x)));
+            checkDaThu.setText("Hoàn Trả :");
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }
         }
@@ -123,16 +128,38 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }
     public void Total(){
         if(idHocSinh >0){
-        int Total = 0;
+        long Total = 0;
         try{
         for(int i=0;i<model.getRowCount();i++){
+            if(hienChietKhau.isSelected()){
+                long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                int ck = 0;
+                if(model.getValueAt(i, 4).toString().length()>0){
+                    ck = Integer.parseInt(model.getValueAt(i, 4).toString());
+                }
+                long ti = (t*(100-ck))/100;
+                Total += ti;
+            }
+            else{
             if(model.getValueAt(i, 3).toString().length()>0){
                     Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+            }
             }
         }
         int phidatcoc = new RecieptManagerment().PhiDatCoc(idHocSinh);
         Total = Total + 2*phidatcoc;
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
+        daThu.setText(XuLy.setMoney(String.valueOf(Total)));
+        int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
+        if(x <0){
+            jLabel23.setText("Số Tiền Hoàn Trả :");
+            x = x* (-1);
+            TongTien.setText(XuLy.setMoney(String.valueOf(x)));
+            checkDaThu.setText("Hoàn Trả :");
+            daThu.setText(XuLy.setMoney(String.valueOf(x)));
+        }
+        String tienbc = convert.chuyentien(TongTien.getText());
+        stbc.setText("Số Tiền Bằng Chữ: "+tienbc);
         }
         catch(java.lang.NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
@@ -185,26 +212,24 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
         daThu = new javax.swing.JTextField();
         TongTien = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         nguoiNop = new javax.swing.JTextField();
-        CanDong = new javax.swing.JTextField();
-        ChietKhau = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         nguoiThu = new javax.swing.JTextField();
+        checkDaThu = new javax.swing.JCheckBox();
+        stbc = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        hienChietKhau = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/avatar.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/ava.png"))); // NOI18N
 
         javax.swing.GroupLayout avatarLayout = new javax.swing.GroupLayout(avatar);
         avatar.setLayout(avatarLayout);
@@ -404,7 +429,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(ThongTinHocSinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -438,34 +463,25 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
         jLabel14.setText("NGƯỜI NỘP");
 
-        jLabel29.setText("Đã Thu:");
-
         daThu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 daThuActionPerformed(evt);
             }
         });
 
-        jLabel26.setText("Chiết Khấu :");
-
         jLabel23.setText("Tổng Tiền :");
 
-        ChietKhau.setEditable(false);
-        ChietKhau.setText("0 %");
-        ChietKhau.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ChietKhauMouseClicked(evt);
-            }
-        });
-        ChietKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChietKhauActionPerformed(evt);
-            }
-        });
-
-        jLabel24.setText("Cần Đóng :");
-
         jLabel9.setText("NGƯỜI THU TIỀN");
+
+        checkDaThu.setSelected(true);
+        checkDaThu.setText("Đã Thu :");
+        checkDaThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkDaThuActionPerformed(evt);
+            }
+        });
+
+        stbc.setText("Số Tiền Bằng Chữ: ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -473,60 +489,46 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(stbc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nguoiNop, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CanDong, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel26)
-                                    .addComponent(jLabel29)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkDaThu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(daThu, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                                .addComponent(ChietKhau))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(nguoiNop, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nguoiThu, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(daThu, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(nguoiThu, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChietKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26)
                     .addComponent(jLabel23)
-                    .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(daThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CanDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkDaThu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stbc)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel9))
-                .addGap(2, 2, 2)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nguoiNop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nguoiThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                .addGap(1, 1, 1))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -598,6 +600,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable1KeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
         });
         jScrollPane1.setViewportView(jTable1);
 
@@ -624,6 +629,13 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addComponent(jButton1)
                 .addContainerGap())
         );
+
+        hienChietKhau.setText("Chiết khấu");
+        hienChietKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hienChietKhauActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -658,6 +670,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(271, 271, 271))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(hienChietKhau)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,7 +690,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                     .addComponent(ThongTinHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 51, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ThongTinHocSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hienChietKhau)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -708,7 +726,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         if((a > 0)&& nguoiThu.getText().length()>0 && nguoiNop.getText().length() >0)
         {
             //tinh no
-        int can = Integer.parseInt(XuLy.getMoney(CanDong.getText()));
+        int can = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
         int dong = Integer.parseInt(XuLy.getMoney(daThu.getText()));
         int debt = can - dong;
         if(debt<0){
@@ -747,8 +765,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         String sotien = XuLy.getMoney(daThu.getText());
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
-        String[] abc = ChietKhau.getText().split(" %");
-        String phantram = abc[0];
+        String phantram = "0";
         new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
         dispose();
         }
@@ -767,41 +784,51 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
-        Total();
+        
     }//GEN-LAST:event_jTable1MouseEntered
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        Total();
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-        
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            Total();
+        }
     }//GEN-LAST:event_jTable1KeyPressed
-
-    private void ChietKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChietKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChietKhauActionPerformed
-
-    private void ChietKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChietKhauMouseClicked
-        
-            ChietKhau ck = new ChietKhau(null, true);
-            ck.setLocation(430, 200);
-            ck.setVisible(true);
-            if(ck.check){
-                ChietKhau.setText(ck.phanTram);
-                int tt = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
-                int chietk = Integer.parseInt(ChietKhau.getText());
-                ChietKhau.setText(ChietKhau.getText() +" %");
-                int cd = tt - (chietk*tt/100);
-                CanDong.setText(XuLy.setMoney(String.valueOf(cd)));
-                daThu.setText(XuLy.setMoney(String.valueOf(cd)));
-                lido = new String(ck.lido);
-            }
-    }//GEN-LAST:event_ChietKhauMouseClicked
 
     private void daThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daThuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_daThuActionPerformed
+
+    private void checkDaThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDaThuActionPerformed
+        if(checkDaThu.isSelected()){
+            daThu.setEnabled(true);
+        }
+        else daThu.setEnabled(false);
+    }//GEN-LAST:event_checkDaThuActionPerformed
+
+    private void hienChietKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hienChietKhauActionPerformed
+        //co cho xuat hien chiet khau hay khong
+        if(hienChietKhau.isSelected()){
+            Object[] coldata = new Object[model.getRowCount()];
+            for(int j=0;j<coldata.length;j++)
+                coldata[j] = 0;
+            model.addColumn("Chiết Khấu(%)",coldata);
+        }
+        else{
+          TableColumn tcol = jTable1.getColumnModel().getColumn(4);
+          jTable1.getColumnModel().removeColumn(tcol);
+          model.setColumnCount(4);
+        }
+    }//GEN-LAST:event_hienChietKhauActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            Total();
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -846,8 +873,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CanDong;
-    private javax.swing.JTextField ChietKhau;
     private javax.swing.JTextField DiaChi;
     private javax.swing.JTextField DienThoaiTrungTam;
     private javax.swing.JComboBox HinhThucDong;
@@ -859,7 +884,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JPanel ThongTinHocSinh;
     private javax.swing.JTextField TongTien;
     private javax.swing.JPanel avatar;
+    private javax.swing.JCheckBox checkDaThu;
     private javax.swing.JTextField daThu;
+    private javax.swing.JCheckBox hienChietKhau;
     private javax.swing.JTextField idHS;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -873,9 +900,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -893,6 +917,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JComboBox ngay;
     private javax.swing.JTextField nguoiNop;
     private javax.swing.JTextField nguoiThu;
+    private javax.swing.JLabel stbc;
     private javax.swing.JTextField stt;
     private javax.swing.JTextField tenLop;
     private javax.swing.JTextField tenTrungTam;

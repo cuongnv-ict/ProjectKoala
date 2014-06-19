@@ -45,29 +45,26 @@ public class DebtList {
     public void BangDanhSachHocSinhNoPhi(JTable table) {
         int stt = 1;
         try {
-            Object[] nameColumn = {"Số TT", "Họ Tên", "Ngày Sinh", "Hình Thức Học", "SĐT", "Người Đại Diện", "Cần Đóng"};
+            Object[] nameColumn = {"Số TT", "Họ Tên", "Ngày Sinh", "Họ Tên Cha", "SĐT", "Họ Tên Mẹ", "SĐT","ĐT Nhà","Email","Tổng Tiền"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
+            rs1 = statement.executeQuery("select Id,fullname,brithday,Father,PhoneNumberFather,Mother,PhoneNumberMother,HomePhone,Email,Faculties_Id "
+                    + "from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
             while (rs1.next()) {
-                Object[] str = new Object[7];
+                Object[] str = new Object[10];
                 str[0] = stt;
-                str[1] = rs1.getString(3);
-                str[2] = new XuLiXau().NgayThangNam(rs1.getString(4));
-                switch (rs1.getInt(7)) {
-                    case 1:
-                        str[3] = "Chính Quy";
-                        break;
-                    case 0:
-                        str[3] = "Chương Trình Bạn Là Khách";
-                        break;
-                }
+                str[1] = rs1.getString(2);
+                str[2] = new XuLiXau().NgayThangNam(rs1.getString(3));
+                str[3] = rs1.getString(4);
                 str[4] = rs1.getString(5);
-                str[5] = rs1.getString(6);    
+                str[5] = rs1.getString(6);
+                str[6] = rs1.getString(7);
+                str[7] = rs1.getString(8);
+                str[8] = rs1.getString(9);  
                 //tinh tong tien can dong
                 int idHS = rs1.getInt(1);
-                int idFac = rs1.getInt(2);
+                int idFac = rs1.getInt(10);
                 int tongtien = new GetTotal().GetTotalMoney(idHS, idFac);
-                str[6] = XuLy.setMoney(String.valueOf(tongtien));
+                str[9] = XuLy.setMoney(String.valueOf(tongtien));
                 if(tongtien >0){
                     stt++;
                     data.add(str);
@@ -78,14 +75,14 @@ public class DebtList {
                 rowColumn[i] = data.get(i);
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false, false, false, false, false, false, false
+                        false, false, false, false, false, false, false, false, false, false
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -105,7 +102,11 @@ public ArrayList GetIdStudent(){
             while (rs1.next()) {
                 Object str = new Object();
                 str = rs1.getString(1);
-                data.add(str);
+                int idHS = rs1.getInt(1);
+                int idFac = rs1.getInt(2);
+                int tongtien = new GetTotal().GetTotalMoney(idHS, idFac);
+                if(tongtien>0)
+                    data.add(str);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DebtList.class.getName()).log(Level.SEVERE, null, ex);

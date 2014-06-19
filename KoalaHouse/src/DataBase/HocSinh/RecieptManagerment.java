@@ -53,7 +53,7 @@ public class RecieptManagerment {
     }
     public void BangDSPhiHoaDon(int students_id,int idFac,JTable table){
        try {
-            Object [] nameColumn = {"Tên", "Kì học", "Năm học", "Giá" };
+            Object [] nameColumn = {"Tên", "Từ Ngày", "Đến Ngày", "Thành Tiền"};
             ArrayList<Object []> data = new ArrayList<Object []>();
             rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+" and IsDebt =1)");
             while(rs1.next()){
@@ -66,24 +66,25 @@ public class RecieptManagerment {
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                     check = true;
                 }
-                switch (rs1.getInt(3)) {
-                    case 1:
-                        str[1] = "Kỳ 1";
-                        break;
-                    case 2:
-                        str[1] = "Kỳ 2";
-                        break;
-                    case 3:
-                        str[1] = "Kỳ 3";
-                        break;
-                    case 4:
-                        str[1] = "Kỳ hè";
-                        break;
-                    case 5:
-                        str[1] = "Cả năm";
-                        break;
-                }
-                str[2] = rs1.getString(6).substring(0, 4);
+//                switch (rs1.getInt(3)) {
+//                    case 1:
+//                        str[1] = "Kỳ 1";
+//                        break;
+//                    case 2:
+//                        str[1] = "Kỳ 2";
+//                        break;
+//                    case 3:
+//                        str[1] = "Kỳ 3";
+//                        break;
+//                    case 4:
+//                        str[1] = "Kỳ hè";
+//                        break;
+//                    case 5:
+//                        str[1] = "Cả năm";
+//                        break;
+//                }
+                str[1] = rs1.getString(7);
+                str[2] = rs1.getString(8);
                 str[3] = rs1.getString(5);        
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
@@ -117,24 +118,26 @@ public class RecieptManagerment {
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
                 str1[0]= rs1.getString(4)+" (Hoàn Trả)";
-                switch (rs1.getInt(3)) {
-                    case 1:
-                        str1[1] = "Kỳ 1";
-                        break;
-                    case 2:
-                        str1[1] = "Kỳ 2";
-                        break;
-                    case 3:
-                        str1[1] = "Kỳ 3";
-                        break;
-                    case 4:
-                        str1[1] = "Kỳ hè";
-                        break;
-                    case 5:
-                        str1[1] = "Cả năm";
-                        break;
-                }
-                str1[2] = rs1.getString(6).substring(0, 4);
+//                switch (rs1.getInt(3)) {
+//                    case 1:
+//                        str1[1] = "Kỳ 1";
+//                        break;
+//                    case 2:
+//                        str1[1] = "Kỳ 2";
+//                        break;
+//                    case 3:
+//                        str1[1] = "Kỳ 3";
+//                        break;
+//                    case 4:
+//                        str1[1] = "Kỳ hè";
+//                        break;
+//                    case 5:
+//                        str1[1] = "Cả năm";
+//                        break;
+//                }
+//                str1[2] = rs1.getString(6).substring(0, 4);
+                str1[1] = rs1.getString(7);
+                str1[2] = rs1.getString(8);
                 str1[3] = rs1.getString(5);        
                 if(((String)str1[3]).charAt(0)=='-'){
                     str1[3] = ((String)str1[3]).substring(1);
