@@ -48,47 +48,40 @@ public class AStudentAndLateDay {
     }
     public ArrayList HocSinhA1(int ID){
     ArrayList infoStudent = new ArrayList();
-    String str[] = new String[10];
+    String str[] = new String[13];
         try {
-            rs1 = statement.executeQuery("select students.id,fullname,brithday,PhoneNumber,Representative,levels_id,nameclass,isclient,faculties.name,students.isactive from students,classes,classes_has_students,faculties where students.id = students_id and classes.id=classes_id and students.id = "+ID+" and faculties.Id = students.Faculties_Id");
+            rs1 = statement.executeQuery("select students.Id,fullname,brithday,Father,PhoneNumberFather,"
+                    + "Mother,PhoneNumberMother,HomePhone,students.Email,isclient,nameclass,"
+                    + "faculties.name,students.isactive "
+                    + "from students,classes,classes_has_students,faculties "
+                    + "where students.id = students_id and classes.id=classes_id and students.id = "+ID+" "
+                    + "and faculties.Id = students.Faculties_Id");
             while(rs1.next()){
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(2);
                     str[2] = new XuLiXau().NgayThangNam(rs1.getString(3));
                     str[3] = rs1.getString(4);
                     str[4] = rs1.getString(5);
-                   switch(rs1.getInt(6)){
+                    str[5] = rs1.getString(6);
+                    str[6] = rs1.getString(7);
+                    str[7] = rs1.getString(8);
+                    str[8] = rs1.getString(9);
+                    switch(rs1.getInt(10)){
                        case 1:
-                           str[5] = "NẮNG MAI (SUNSHINE)";
-                           break;
-                       case 2:
-                            str[5] = "TỔ ONG (BEEHIVE)";
-                           break;
-                       case 3:
-                            str[5] = "TỔ KÉN (CHRYSALIS)";
-                           break;
-                       case 4:
-                            str[5] = "MẪU GIÁO (KINDERGARTEN)";
-                           break;
-                   }
-                   
-                 
-                   str[6] = rs1.getString(7);
-                   switch(rs1.getInt(8)){
-                       case 1:
-                           str[7] = "Chính Quy";
+                           str[9] = "Chính Quy";
                            break;
                        case 0:
-                            str[7] = "Chương Trình Bạn Là Khách";
+                            str[9] = "Chương Trình Bạn Là Khách";
                            break;
                  }
-                   str[8] = rs1.getString(9);
-                   str[9] = rs1.getString(10);
+                    str[10] = rs1.getString(11);
+                    str[11] = rs1.getString(12);
+                    str[12] = rs1.getString(13);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i = 0;i<10;i++){
+        for(int i = 0;i<13;i++){
             infoStudent.add(str[i]);
             }
         
