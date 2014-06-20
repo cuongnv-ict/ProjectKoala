@@ -6,13 +6,18 @@
 package edu.com.Panel;
 
 import DataBase.DataTable;
+import DataBase.SQLDanhSachHocSinh;
 import edu.com.CloseButton.CloseTabButton;
+import edu.com.Dialog.InfoHS;
+import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
+import edu.com.ListKoala;
 import edu.com.XuLy;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -41,7 +47,7 @@ public class DSHS extends javax.swing.JPanel {
 
     public DSHS() {
         initComponents();
-        info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, 1);
+        info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS);
 //        id_students = new ArrayList<Integer>();
 //        if (DSHS.getValueAt(0, 0).toString().equals("")) {
 //            Count.setText("0");
@@ -55,18 +61,21 @@ public class DSHS extends javax.swing.JPanel {
     }
 
     public void setNotAdmin() {
-        xoa.setEnabled(false);
         this.isadmin = false;
     }
 
     public void reload() {
-//        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-//            Count.setText("0");
-//        } else {
-//            Count.setText(String.valueOf(DSHS.getRowCount()));
-//            XuLy.setID(id_students, DSHS, 0);
-//        }
-//        arrRows = null;
+        switch (LoaiHS.getSelectedIndex()) {
+            case 0:
+                info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS);
+                break;
+            case 1:
+                info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(DSHS, 0);
+                break;
+            case 2:
+                info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(DSHS, -1);
+                break;
+        }
     }
 
     /**
@@ -85,23 +94,40 @@ public class DSHS extends javax.swing.JPanel {
                 Component c = super.prepareRenderer(renderer, row, column);
                 if(info.get(column)[row].toString().charAt(0)=='x'){
                     c.setForeground(Color.BLACK);
-                    c.setBackground(Color.WHITE);
+                    if(column==0){
+                        c.setBackground(Color.WHITE);
+                    }else{
+                        if(LoaiHS.getSelectedIndex()==0){
+                            c.setBackground(Color.BLACK);
+                        }else{
+                            c.setBackground(Color.WHITE);
+                        }
+                    }
                 }else if(info.get(column)[row].toString().charAt(0)=='-'){
                     c.setForeground(Color.RED);
                     c.setBackground(Color.WHITE);
+                    if(isRowSelected(row)&&isColumnSelected(column)){
+                        c.setBackground(Color.BLUE);
+                    }
                 }else if(info.get(column)[row].toString().charAt(0)=='0'){
                     c.setForeground(Color.RED);
-                    c.setBackground(Color.RED);;
+                    c.setBackground(Color.RED);
+                    if(isRowSelected(row)&&isColumnSelected(column)&&LoaiHS.getSelectedIndex()==0){
+                        c.setBackground(Color.BLUE);
+                    }
                 }else{
                     c.setForeground(Color.BLACK);
                     c.setBackground(Color.WHITE);
+                    if(isRowSelected(row)&&isColumnSelected(column)){
+                        c.setBackground(Color.BLUE);
+                    }
                 }
+
                 return c;
 
             }
         };
         LoaiHS = new javax.swing.JComboBox();
-        xoa = new javax.swing.JLabel();
 
         DSHS.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         DSHS.setModel(new javax.swing.table.DefaultTableModel(
@@ -132,15 +158,6 @@ public class DSHS extends javax.swing.JPanel {
             }
         });
 
-        xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
-        xoa.setToolTipText("Xóa");
-        xoa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                xoaMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,18 +166,14 @@ public class DSHS extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LoaiHS, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(xoa)
-                .addGap(38, 38, 38))
+                .addGap(38, 789, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xoa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -172,120 +185,91 @@ public class DSHS extends javax.swing.JPanel {
     private void DSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHSMouseClicked
         // TODO add your handling code here:
 
-//        if (evt.getClickCount() == 2 && LoaiHS.getSelectedIndex() == 0) {
-//            int row = DSHS.getSelectedRow();
-//            //map cac truong
-//            int a = -1;
-//            int id = id_students.get(row);
-//            String tenHocSinh = DSHS.getValueAt(DSHS.getSelectedRow(), 1).toString();
-//            //HocSinhA.idTemp = id;
-//            for (int i = 0; i < center.getTabCount(); i++) {
-//                if (tenHocSinh.equals(center.getTitleAt(i))) {
-//                    a += 1;
-//                    center.setSelectedIndex(i);
-//                }
-//            }
-//            if (a == -1) {
-//                HocSinhA aa = new HocSinhA(id);
-//                center.add(DSHS.getModel().getValueAt(row, 1).toString(), aa);
-//                center.setSelectedComponent(aa);
-//                new CloseTabButton(center, center.getComponentCount() - 2);
-//            }
-//        } else {
-//            arrRows = DSHS.getSelectedRows();
-//        }
+        if (evt.getClickCount() == 2 && isadmin) {
+            switch (LoaiHS.getSelectedIndex()) {
+                case 0:
+                    if (Loai_1()) {
+                        info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS);
+                    }
+                    ;
+                    break;
+                case 1:
+                    if (Loai_23()) {
+                        info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(DSHS, 0);
+                    }
+                    break;
+                case 2:
+                    if (Loai_23()) {
+                        info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(DSHS, -1);
+                    }
+                    break;
+            }
+        }
     }//GEN-LAST:event_DSHSMouseClicked
+    public boolean Loai_1() {
+        int row, col;
+        row = DSHS.getSelectedRow();
+        col = DSHS.getSelectedColumn();
+        if (info.get(col)[row].toString().charAt(0) == '0') {
+            String arr[] = info.get(col)[row].toString().split("-");
+            ThemHS hs = new ThemHS(ListKoala.frame, true, Integer.parseInt(arr[arr.length - 1]));
+            hs.setVisible(true);
+            return hs.getButton();
+        } else if (info.get(col)[row].toString().charAt(0) == '-') {
+            String arr[] = info.get(col)[row].toString().split("-");
+            Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[1]));
+            ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(10).toString()));
+            hs.setVisible(true);
+            return hs.getButton();
+        } else if (info.get(col)[row].toString().charAt(0) != 'x') {
+            String arr[] = info.get(col)[row].toString().split("-");
+            Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[0]));
+            ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(10).toString()));
+            hs.setVisible(true);
+            return hs.getButton();
+        }
+        return false;
+    }
 
+    public boolean Loai_23() {
+        int row, col;
+        row = DSHS.getSelectedRow();
+        col = DSHS.getSelectedColumn();
+        if (info.get(col)[row].toString().charAt(0) == '0') {
+
+        } else if (info.get(col)[row].toString().charAt(0) == '-') {
+            String arr[] = info.get(col)[row].toString().split("-");
+            Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[1]));
+            InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(10).toString()));
+            hs.setVisible(true);
+            return hs.getButton();
+        } else if (info.get(col)[row].toString().charAt(0) != 'x') {
+            String arr[] = info.get(col)[row].toString().split("-");
+            Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[0]));
+            InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(10).toString()));
+            hs.setVisible(true);
+            return hs.getButton();
+        }
+        return false;
+    }
     private void LoaiHSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoaiHSActionPerformed
         // TODO add your handling code here:
         switch (LoaiHS.getSelectedIndex()) {
             case 0:
-                new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, 1);
+                info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS);
                 break;
             case 1:
-                new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, 0);
+                info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(DSHS, 0);
                 break;
             case 2:
-                new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, -1);
+                info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(DSHS, -1);
                 break;
         }
-//        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-//            Count.setText("0");
-//        } else {
-//            Count.setText(String.valueOf(DSHS.getRowCount()));
-//            XuLy.setID(id_students, DSHS, 0);
-//        }
-//        arrRows = null;
-
     }//GEN-LAST:event_LoaiHSActionPerformed
 
-    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
-        // TODO add your handling code here:
-        if (isadmin) {
-            if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                return;
-            }
-            boolean flags = true;
-            for (int i = DSHS.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) DSHS.getValueAt(i, 6) == true) {
-                    flags = false;
-                }
-            }
-            if (flags) {
-                JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-            int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.NO_OPTION) {
-                return;
-            }
-            switch (LoaiHS.getSelectedIndex()) {
-                case 0:
-                    if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                        return;
-                    }
-                    for (int i = 0; i < DSHS.getRowCount(); i++) {
-                        if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                            new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
-                        }
-                    }
-                    new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, 1);
-                    break;
-                case 1:
-                    if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                        return;
-                    }
-                    for (int i = 0; i < DSHS.getRowCount(); i++) {
-                        if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
-                        }
-                    }
-                    new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, 0);
-                    break;
-                case 2:
-                    if (DSHS.getValueAt(0, 0).toString().equals("")) {
-                        return;
-                    }
-                    for (int i = 0; i < DSHS.getRowCount(); i++) {
-                        if (Boolean.parseBoolean(DSHS.getValueAt(i, 6).toString())) {
-                            new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_students.get(i));
-                        }
-                    }
-                    new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS, -1);
-                    break;
-            }
-//            if (DSHS.getValueAt(0, 0).toString().equals("")) {
-//                Count.setText("0");
-//            } else {
-//                Count.setText(String.valueOf(DSHS.getRowCount()));
-//                XuLy.setID(id_students, DSHS, 0);
-//            }
-        }
-    }//GEN-LAST:event_xoaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DSHS;
     private javax.swing.JComboBox LoaiHS;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JLabel xoa;
     // End of variables declaration//GEN-END:variables
 }

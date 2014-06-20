@@ -775,13 +775,13 @@ public class ListKoala extends javax.swing.JFrame {
                 int s = dshs.ChonLoai.getSelectedIndex();
                 switch (s) {
                     case 0:
-                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(dshs.BangHS, 1);
+                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(dshs.BangHS);
                         break;
                     case 1:
-                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(dshs.BangHS, 0);
+                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(dshs.BangHS, 0);
                         break;
                     case 2:
-                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(dshs.BangHS, -1);
+                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(dshs.BangHS, -1);
                         ;
                         break;
                 }

@@ -123,10 +123,10 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="sex" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="hinhthuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="sex" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel4" max="32767" attributes="0"/>
               </Group>

@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import DataBase.SQLDanhSachHocSinh;
 import java.awt.Toolkit;
 import java.util.Vector;
 import javax.swing.JComboBox;
@@ -13,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Venus
  */
-public class ThemHS extends javax.swing.JDialog {
+public class InfoHS extends javax.swing.JDialog {
 
     private boolean button;
     private int id_classes, id_student;
@@ -21,19 +22,9 @@ public class ThemHS extends javax.swing.JDialog {
     /**
      * Creates new form ThemHS
      */
-    public ThemHS(java.awt.Frame parent, boolean modal, int id_classes) {
+    public InfoHS(java.awt.Frame parent, boolean modal, Vector vector, int id_students, int gioitinh) {
         super(parent, modal);
         initComponents();
-        this.setResizable(false);
-        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
-        this.id_classes = id_classes;
-    }
-
-    public ThemHS(java.awt.Frame parent, boolean modal, Vector vector, int id_students, int gioitinh) {
-        super(parent, modal);
-        initComponents();
-        DongY.setText("Chỉnh sửa");
-        title.setText("Chỉnh sửa thông tin học sinh");
 
         ten.setText(vector.get(1).toString());
         Object obj[] = vector.get(2).toString().split("-");
@@ -41,7 +32,7 @@ public class ThemHS extends javax.swing.JDialog {
         setSelectComboBox(thang, obj[1]);
         setSelectComboBox(ngay, obj[0]);
         sex.setSelectedIndex(gioitinh);
-        setSelectComboBox(hinhthuc,vector.get(3).toString());
+        setSelectComboBox(hinhthuc, vector.get(3).toString());
         ten_cha.setText(vector.get(5).toString());
         So_cha.setText(vector.get(6).toString());
         ten_me.setText(vector.get(7).toString());
@@ -115,6 +106,7 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel1.setText("Họ Và Tên:");
 
+        ten.setEditable(false);
         ten.setPreferredSize(new java.awt.Dimension(83, 25));
         ten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +116,7 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel3.setText("Tên cha:");
 
+        ten_cha.setEditable(false);
         ten_cha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ten_chaActionPerformed(evt);
@@ -137,7 +130,7 @@ public class ThemHS extends javax.swing.JDialog {
             }
         });
 
-        DongY.setText("Thêm học sinh");
+        DongY.setText("Xóa học sinh");
         DongY.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DongYMouseClicked(evt);
@@ -147,14 +140,18 @@ public class ThemHS extends javax.swing.JDialog {
         jLabel4.setText("Giới tính:");
 
         sex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nữ", "Nam" }));
+        sex.setEnabled(false);
 
         jLabel6.setText("Ngày Sinh:");
 
         thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        thang.setEnabled(false);
 
         nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.setEnabled(false);
 
         ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        ngay.setEnabled(false);
         ngay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ngayActionPerformed(evt);
@@ -163,10 +160,11 @@ public class ThemHS extends javax.swing.JDialog {
 
         title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Thêm học sinh");
+        title.setText("Thông tin học sinh");
 
         jLabel5.setText("Số điện thoại:");
 
+        So_cha.setEditable(false);
         So_cha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 So_chaActionPerformed(evt);
@@ -175,6 +173,7 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel7.setText("Tên mẹ:");
 
+        ten_me.setEditable(false);
         ten_me.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ten_meActionPerformed(evt);
@@ -183,6 +182,7 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel9.setText("Số điện thoại:");
 
+        so_me.setEditable(false);
         so_me.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 so_meActionPerformed(evt);
@@ -192,9 +192,11 @@ public class ThemHS extends javax.swing.JDialog {
         jLabel10.setText("Hình Thức Học:");
 
         hinhthuc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chính quy", "Khách" }));
+        hinhthuc.setEnabled(false);
 
         jLabel11.setText("Email:");
 
+        email.setEditable(false);
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailActionPerformed(evt);
@@ -203,6 +205,7 @@ public class ThemHS extends javax.swing.JDialog {
 
         jLabel12.setText("Số điện nhà:");
 
+        so_nha.setEditable(false);
         so_nha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 so_nhaActionPerformed(evt);
@@ -341,35 +344,17 @@ public class ThemHS extends javax.swing.JDialog {
 
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
         // TODO add your handling code here:
-//        Vector vector = new Vector();
-//        vector.add(getTenHS());
-//        vector.add(getNgaySinh());
-//        vector.add(getDienThoai());
-//        vector.add(getDaiDien());
-//        vector.add(sex.getSelectedIndex());
-
-        if (ten.getText().equals("") || ngay.getSelectedIndex() == 0 || thang.getSelectedIndex() == 0 || nam.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa hoàn thành thông tin cơ bản của học sinh", null, JOptionPane.INFORMATION_MESSAGE);
-            button = false;
+        int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa học sinh đã chọn không ?", null, JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.NO_OPTION) {
             return;
         }
-        Vector v = new Vector();
-        v.add(ten.getText());
-        v.add(getNgaySinh());
-        v.add(So_cha.getText());
-        v.add(ten_cha.getText());
-        v.add(hinhthuc.getSelectedIndex());
-        v.add(ten_me.getText());
-        v.add(so_me.getText());
-        v.add(so_nha.getText());
-        v.add(email.getText());
-        v.add(sex.getSelectedIndex());
-        if (!DongY.getText().equals("Chỉnh sửa") && new DataBase.SQLLopX().themHocSinh(v, id_classes)) {
+        if (new DataBase.SQLDanhSachHocSinh().xoaHocSinh(id_student)) {
             button = true;
+            JOptionPane.showMessageDialog(null, "Xóa thành công !", null,JOptionPane.INFORMATION_MESSAGE);
             dispose();
-        } else if (DongY.getText().equals("Chỉnh sửa") && new DataBase.SQLLopX().suaHocSinh(v, id_student)) {
-            button = true;
-            dispose();
+        }else{
+            button = false;
+            JOptionPane.showMessageDialog(null, "Xóa thất bại !", null,JOptionPane.INFORMATION_MESSAGE); 
         }
     }//GEN-LAST:event_DongYMouseClicked
 
