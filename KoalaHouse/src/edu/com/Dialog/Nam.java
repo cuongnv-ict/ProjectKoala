@@ -24,7 +24,7 @@ public class Nam extends javax.swing.JDialog {
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 300, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
-        Vector e[] = new DataBase.SQLNam().getNamHoc(Integer.parseInt(NamHoc.getSelectedItem().toString()));
+        Vector e[] = new DataBase.SQLNam().getNamHoc(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]));
         if (e == null) {
             int x = NamHoc.getSelectedIndex();
             B_Nam1.setSelectedIndex(x);
@@ -64,7 +64,7 @@ public class Nam extends javax.swing.JDialog {
             setComBoBox(E_Ngay4, e[3].get(3).toString());
             setComBoBox(E_Thang4, e[3].get(4).toString());
             setComBoBox(E_Nam4, e[3].get(5).toString());
-            active.setSelected(new DataBase.SQLNam().getIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString())));
+            active.setSelected(new DataBase.SQLNam().getIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0])));
         }
     }
 
@@ -117,7 +117,7 @@ public class Nam extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        NamHoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        NamHoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030" }));
         NamHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NamHocActionPerformed(evt);
@@ -356,7 +356,7 @@ public class Nam extends javax.swing.JDialog {
 
     private void NamHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamHocActionPerformed
         // TODO add your handling code here:
-        Vector e[] = new DataBase.SQLNam().getNamHoc(Integer.parseInt(NamHoc.getSelectedItem().toString()));
+        Vector e[] = new DataBase.SQLNam().getNamHoc(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]));
         if (e == null) {
             int x = NamHoc.getSelectedIndex();
             B_Nam1.setSelectedIndex(x);
@@ -412,7 +412,7 @@ public class Nam extends javax.swing.JDialog {
             setComBoBox(E_Ngay4, e[3].get(3).toString());
             setComBoBox(E_Thang4, e[3].get(4).toString());
             setComBoBox(E_Nam4, e[3].get(5).toString());
-            active.setSelected(new DataBase.SQLNam().getIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString())));
+            active.setSelected(new DataBase.SQLNam().getIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0])));
         }
     }//GEN-LAST:event_NamHocActionPerformed
 
@@ -435,7 +435,7 @@ public class Nam extends javax.swing.JDialog {
         end = E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString();
         vector.add(begin);
         vector.add(end);
-        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString()), 1);
+        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), 1);
         if (!flags) {
             return;
         }
@@ -444,7 +444,7 @@ public class Nam extends javax.swing.JDialog {
         vector.removeAll(vector);
         vector.add(begin);
         vector.add(end);
-        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString()), 2);
+        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), 2);
         if (!flags) {
             return;
         }
@@ -453,7 +453,7 @@ public class Nam extends javax.swing.JDialog {
         vector.removeAll(vector);
         vector.add(begin);
         vector.add(end);
-        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString()), 3);
+        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), 3);
         if (!flags) {
             return;
         }
@@ -462,7 +462,7 @@ public class Nam extends javax.swing.JDialog {
         vector.removeAll(vector);
         vector.add(begin);
         vector.add(end);
-        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString()), 4);
+        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), 4);
         if (!flags) {
             return;
         }
@@ -471,11 +471,11 @@ public class Nam extends javax.swing.JDialog {
         vector.removeAll(vector);
         vector.add(begin);
         vector.add(end);
-        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString()), 5);
+        flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), 5);
          if (!flags) {
             return;
         }
-        if (new DataBase.SQLNam().setIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString()), active.isSelected())) {
+        if (new DataBase.SQLNam().setIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), active.isSelected())) {
             JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", null, JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_CapNhatActionPerformed

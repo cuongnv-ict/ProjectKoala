@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -47,27 +48,35 @@ public class ThemGia extends javax.swing.JDialog {
             Ky.setEnabled(false);
         }
         TenPhi.setText(vector.get(1).toString());
-        trongmuon.setSelected(vector.get(1).toString().equals("Phí trông muộn"));
+        trongmuon.setSelected(vector.get(1).toString().equals("Phí Trông Muộn"));
         if (trongmuon.isSelected()) {
             TenPhi.setEnabled(false);
         }
         Gia.setText(vector.get(6).toString());
-        for (int i = 0; i < Ky.getItemCount(); i++) {
-            if (Ky.getItemAt(i).toString().equals(vector.get(2).toString())) {
-                Ky.setSelectedIndex(i);
-                break;
-            }
-        }
-        for (int i = 0; i < Nam.getItemCount(); i++) {
-            if (Nam.getItemAt(i).toString().equals(vector.get(3).toString())) {
-                Nam.setSelectedIndex(i);
-                break;
-            }
-        }
+        setComboBox(Ky, vector.get(2).toString());
+        setComboBox(Nam, vector.get(3).toString());
+        String []arr = vector.get(4).toString().split("-");
+        setComboBox(B_ngay, arr[0]);
+        setComboBox(B_thang, arr[1]);
+        setComboBox(B_nam, arr[2]);
+        arr = vector.get(5).toString().split("-");
+        setComboBox(E_ngay, arr[0]);
+        setComboBox(E_thang, arr[1]);
+        setComboBox(E_nam, arr[2]);
         this.id = id;
 
     }
+
     //lay gia tri cua 
+
+    public void setComboBox(JComboBox c, String s) {
+        for (int i = 0; i < c.getItemCount(); i++) {
+            if (c.getItemAt(i).toString().equals(s)) {
+                c.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
 
     public boolean getButton() {
         return button;
