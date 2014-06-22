@@ -41,13 +41,38 @@ public class ThemHS extends javax.swing.JDialog {
         setSelectComboBox(thang, obj[1]);
         setSelectComboBox(ngay, obj[0]);
         sex.setSelectedIndex(gioitinh);
-        setSelectComboBox(hinhthuc,vector.get(3).toString());
-        ten_cha.setText(vector.get(5).toString());
-        So_cha.setText(vector.get(6).toString());
-        ten_me.setText(vector.get(7).toString());
-        so_me.setText(vector.get(8).toString());
-        email.setText(vector.get(9).toString());
-        so_nha.setText(vector.get(4).toString());
+        setSelectComboBox(hinhthuc, vector.get(3).toString());
+        if (vector.get(5) == null) {
+            ten_cha.setText("");
+        } else {
+            ten_cha.setText(vector.get(5).toString());
+        }
+        if (vector.get(6) == null) {
+            So_cha.setText("");
+        } else {
+            So_cha.setText(vector.get(6).toString());
+        }
+        if (vector.get(7) == null) {
+            ten_me.setText("");
+        } else {
+            ten_me.setText(vector.get(7).toString());
+        }
+        if (vector.get(8) == null) {
+            so_me.setText("");
+        } else {
+            so_me.setText(vector.get(8).toString());
+        }
+        if (vector.get(9) == null) {
+            email.setText("");
+        } else {
+            email.setText(vector.get(9).toString());
+        }
+        if (vector.get(4) == null) {
+            so_nha.setText("");
+        } else {
+            so_nha.setText(vector.get(4).toString());
+        }
+
         this.id_student = id_students;
         this.setResizable(false);
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);

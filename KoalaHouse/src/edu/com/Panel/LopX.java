@@ -329,7 +329,7 @@ public class LopX extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh chuyển lớp", null, JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            chuyenlop chuyen = new chuyenlop(null, true, getName());
+            chuyenlop chuyen = new chuyenlop(null, true, malop);
             chuyen.setVisible(true);
             String tenlop = chuyen.getTenLop();
             for (int i = model.getRowCount() - 1; i >= 0; i--) {

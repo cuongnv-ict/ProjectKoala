@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -86,8 +87,18 @@ public class SQLHocPhi {
                     }
                     String[] arr = rs1.getString(4).split("-");
                     str[3] = arr[0] + "-" + String.valueOf(Integer.parseInt(arr[0]) + 1);
-                    str[4] = XuLy.getDate(rs1.getString(5));
-                    str[5] = XuLy.getDate(rs1.getString(6));
+                    if(rs1.getString(5)!=null){
+                        str[4] = XuLy.getDate(rs1.getString(5));
+                    }
+                    else{
+                        str[4] ="";
+                    }
+                     if(rs1.getString(6)!=null){
+                        str[5] = XuLy.getDate(rs1.getString(6));
+                    }
+                    else{
+                        str[5] ="";
+                    }
                     str[6] = rs1.getString(7);
                     if (((String) str[6]).charAt(0) == '-') {
                         str[6] = XuLy.setMoney(((String) str[6]).substring(1));
@@ -395,6 +406,123 @@ public class SQLHocPhi {
         } catch (SQLException ex) {
             Logger.getLogger(SQLHocPhi.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+    }
+
+    public Object[] HS_Phi() {
+        try {
+            Object[] o = new Object[2];
+            Vector vector_1 = new Vector();
+            Vector vector_2 = new Vector();
+            rs1 = statement.executeQuery("select Id,NameCost,semesters,year from cost where Faculties_Id= '" + ThongTin.trungtam + "' order by year,semesters");
+            while (rs1.next()) {
+                vector_1.add(rs1.getString(1));
+                String str = rs1.getString(2);
+                switch (rs1.getInt(3)) {
+                    case 1:
+                        str = str + " / Học kì 1";
+                        break;
+                    case 2:
+                        str = str + " / Học kì 2";
+                        break;
+                    case 3:
+                        str = str + " / Học kì 3";
+                        break;
+                    case 4:
+                        str = str + " / Học kì hè";
+                        break;
+                    case 5:
+                        str = str + " / Cả năm";
+                        break;
+                }
+                str = str + " / " + rs1.getString(4).split("-")[0] + "-" + String.valueOf(Integer.parseInt(rs1.getString(4).split("-")[0]) + 1);
+                vector_2.add(str);
+            }
+            DefaultComboBoxModel model = new DefaultComboBoxModel(vector_2);
+            o[0] = vector_1;
+            o[1] = model;
+            return o;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void HocSinhTinhPhi(JTable table, int id_cost) {
+        ArrayList<Object[]> arr_title = this.DanhSachLop();
+        ArrayList<Object[]> info = new ArrayList<Object[]>();
+        int column_size = arr_title.size() + 1;
+        Object[] title = new Object[column_size];
+        ArrayList<Object[]>[] arr_content = new ArrayList[column_size - 1];
+        int max = 0;
+        for (int i = 0; i < column_size; i++) {
+            if (i == 0) {
+                title[0] = "STT";
+                continue;
+            }
+            title[i] = arr_title.get(i - 1)[1];
+            arr_content[i - 1] = this.DanhSachHocSinh(Integer.parseInt(arr_title.get(i - 1)[0].toString()), id_cost);
+
+            if (max < arr_content[i - 1].size()) {
+                max = arr_content[i - 1].size();
+            }
+        }
+        Object[][] rowColumn = new Object[max][];
+        for (int i = 0; i < max; i++) {
+            Object[] o = new Object[column_size];
+            for (int j = 0; j < column_size; j++) {
+                if (j == 0) {
+                    o[j] = i + 1;
+                    continue;
+                }
+                if (i < arr_content[j - 1].size()) {
+                    o[j] = arr_content[j - 1].get(i)[0];
+                } else {
+                    o[j] = "";
+                }
+            }
+            rowColumn[i] = o;
+        }
+        model = new DefaultTableModel(rowColumn, title) {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        table.setModel(model);
+    }
+
+    public ArrayList<Object[]> DanhSachLop() {
+        try {
+            ArrayList<Object[]> arr = new ArrayList<Object[]>();
+            rs1 = statement.executeQuery("select id,NameClass,maxnumber from classes order by Levels_Id");
+            while (rs1.next()) {
+                Object[] o = new Object[3];
+                o[0] = rs1.getString(1);
+                o[1] = rs1.getString(2);
+                o[2] = rs1.getString(3);
+                arr.add(o);
+            }
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLDanhSachHocSinh.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public ArrayList<Object[]> DanhSachHocSinh(int id_class, int id_cost) {
+        try {
+            ArrayList<Object[]> arr = new ArrayList<Object[]>();
+            rs1 = statement.executeQuery("select students.FullName from students,students_has_cost,classes_has_students where students.Id = classes_has_students.Students_Id and students.Id = students_has_cost.Students_Id and students_has_cost.Cost_Id = "+id_cost+" and students.isactive =1 and classes_has_students.Classes_Id = "+id_class);
+            while (rs1.next()) {
+                Object[] o = new Object[1];
+                o[0] = rs1.getString(1);
+                arr.add(o);
+            }
+            XuLy.SapXepTen(arr, 0);
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLDanhSachHocSinh.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }

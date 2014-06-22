@@ -589,10 +589,10 @@ public class DataTable {
     }
     //Tra ve danh sach lop de phuc vu cho viec chuyen lop cua hoc sinh
 
-    public DefaultComboBoxModel DanhSachLop(String NameClasses) {
+    public DefaultComboBoxModel DanhSachLop(int NameClasses) {
         try {
             Vector vector = new Vector();
-            rs1 = statement.executeQuery("select NameClass from classes where NameClass != " + "\"" + NameClasses + "\" and Faculties_Id= '" + ThongTin.trungtam + "'");
+            rs1 = statement.executeQuery("select NameClass from classes where id != " + "'" + NameClasses + "' and Faculties_Id= '" + ThongTin.trungtam + "'");
             while (rs1.next()) {
                 vector.add(rs1.getString(1));
             }

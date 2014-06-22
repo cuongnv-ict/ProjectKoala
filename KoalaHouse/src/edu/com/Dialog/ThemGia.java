@@ -55,20 +55,25 @@ public class ThemGia extends javax.swing.JDialog {
         Gia.setText(vector.get(6).toString());
         setComboBox(Ky, vector.get(2).toString());
         setComboBox(Nam, vector.get(3).toString());
-        String []arr = vector.get(4).toString().split("-");
-        setComboBox(B_ngay, arr[0]);
-        setComboBox(B_thang, arr[1]);
-        setComboBox(B_nam, arr[2]);
+        String[] arr = vector.get(4).toString().split("-");
+        if (arr.length == 2) {
+            setComboBox(B_ngay, arr[0]);
+            setComboBox(B_thang, arr[1]);
+            setComboBox(B_nam, arr[2]);
+        }
+
         arr = vector.get(5).toString().split("-");
-        setComboBox(E_ngay, arr[0]);
-        setComboBox(E_thang, arr[1]);
-        setComboBox(E_nam, arr[2]);
+        if (arr.length == 2) {
+            setComboBox(E_ngay, arr[0]);
+            setComboBox(E_thang, arr[1]);
+            setComboBox(E_nam, arr[2]);
+        }
+
         this.id = id;
 
     }
 
     //lay gia tri cua 
-
     public void setComboBox(JComboBox c, String s) {
         for (int i = 0; i < c.getItemCount(); i++) {
             if (c.getItemAt(i).toString().equals(s)) {

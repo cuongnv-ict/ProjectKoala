@@ -107,6 +107,10 @@ public class SQLDanhSachHocSinh {
                     continue;
                 }
                 if (j < arr_content[i - 1].size()) {
+                    if(arr_content[i - 1].get(j)[2]==null){
+                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
+                         continue;
+                    }
                     if (arr_content[i - 1].get(j)[2].toString().equals("1")) {
                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
                     } else {
@@ -174,6 +178,10 @@ public class SQLDanhSachHocSinh {
                     continue;
                 }
                 if (j < arr_content[i - 1].size()) {
+                    if(arr_content[i - 1].get(j)[2]==null){
+                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
+                         continue;
+                    }
                     if (arr_content[i - 1].get(j)[2].toString().equals("1")) {
                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
                     } else {

@@ -19,6 +19,7 @@ import edu.com.Panel.CacLoaiPhi;
 import edu.com.Panel.DSHS;
 import edu.com.Panel.DSLop;
 import edu.com.Panel.DSNo;
+import edu.com.Panel.HS_Phi;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
 import java.awt.Color;
@@ -66,6 +67,7 @@ public class ListKoala extends javax.swing.JFrame {
     DefaultMutableTreeNode nodex;
     DSNo dsno;
     DSHS dshs;
+    HS_Phi hsphi;
     ConnectData connectData;
     Connection connect;
     private JTable table;
@@ -338,10 +340,11 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_ThemTaiKhoan = new javax.swing.JMenuItem();
         Menu_SuaTaiKhoan = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        Menu_Update = new javax.swing.JMenuItem();
         Menu_DangXuat = new javax.swing.JMenuItem();
-        Menu_thoat = new javax.swing.JMenuItem();
+        Menu_Update = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
+        hs_phi = new javax.swing.JMenuItem();
+        Menu_thoat = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         Menu_DongBo = new javax.swing.JMenuItem();
         Menu_BackUp = new javax.swing.JMenuItem();
@@ -620,16 +623,37 @@ public class ListKoala extends javax.swing.JFrame {
 
         Namhoc.add(Menu_TaiKhoan);
 
-        Menu_Update.setText("Cập nhật hệ thống");
-        Namhoc.add(Menu_Update);
-
-        Menu_DangXuat.setText("Đăng Xuất");
+        Menu_DangXuat.setText("Đăng xuất");
         Menu_DangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Menu_DangXuatActionPerformed(evt);
             }
         });
         Namhoc.add(Menu_DangXuat);
+
+        Menu_Update.setText("Cập nhật hệ thống");
+        Namhoc.add(Menu_Update);
+
+        CapNhatNamHoc.setText("Cập nhật năm học");
+        CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CapNhatNamHocActionPerformed(evt);
+            }
+        });
+        Namhoc.add(CapNhatNamHoc);
+
+        hs_phi.setText("Danh sách học sinh tính phí");
+        hs_phi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hs_phiMouseClicked(evt);
+            }
+        });
+        hs_phi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hs_phiActionPerformed(evt);
+            }
+        });
+        Namhoc.add(hs_phi);
 
         Menu_thoat.setText("Thoát");
         Menu_thoat.addActionListener(new java.awt.event.ActionListener() {
@@ -638,14 +662,6 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(Menu_thoat);
-
-        CapNhatNamHoc.setText("Cập Nhật Năm Học");
-        CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CapNhatNamHocActionPerformed(evt);
-            }
-        });
-        Namhoc.add(CapNhatNamHoc);
 
         jMenuBar1.add(Namhoc);
 
@@ -1014,7 +1030,7 @@ public class ListKoala extends javax.swing.JFrame {
                 }
             }
         } catch (NullPointerException e) {
-            
+
         }
 
     }//GEN-LAST:event_JtreeMouseClicked
@@ -1101,7 +1117,7 @@ public class ListKoala extends javax.swing.JFrame {
                     query = "delete from classes_has_students where Classes_Id = '" + id + "' and Faculties_Id= '" + tentrungtam + "'";
                     pstmt = connect.prepareStatement(query);
                     pstmt.executeUpdate();
-                    query = "delete from classes where Id='" + id + "' and Faculties_Id= '" + tentrungtam + "'";                
+                    query = "delete from classes where Id='" + id + "' and Faculties_Id= '" + tentrungtam + "'";
                     pstmt = connect.prepareStatement(query);
                     pstmt.executeUpdate();
                     DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
@@ -1146,6 +1162,29 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_NamhocActionPerformed
+
+    private void hs_phiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hs_phiMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_hs_phiMouseClicked
+
+    private void hs_phiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hs_phiActionPerformed
+        // TODO add your handling code here:
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("Danh sách học sinh tính phí".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
+                Panel_GDChinh.setSelectedIndex(i);
+            }
+        }
+        if (a == -1) {
+            hsphi = new HS_Phi();
+            Panel_GDChinh.add("Danh sách học sinh tính phí", hsphi);
+            Panel_GDChinh.setSelectedComponent(hsphi);
+            hsphi.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+        }
+    }//GEN-LAST:event_hs_phiActionPerformed
 
     public void connectDataBase() {
         connectData = new ConnectData();
@@ -1202,6 +1241,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Panel_GDChinh;
     private javax.swing.JPanel Panel_trungtam;
     private javax.swing.JMenuItem chitiet;
+    private javax.swing.JMenuItem hs_phi;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

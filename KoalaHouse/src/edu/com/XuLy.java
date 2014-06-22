@@ -117,8 +117,14 @@ public class XuLy {
         if (x < 0) {
             return false;
         }
+        if(x>0){
+            return true;
+        }
         if (x == 0 && y < 0) {
             return false;
+        }
+        if(y>0){
+            return true;
         }
         if (y == 0 && z < 0) {
             return false;
