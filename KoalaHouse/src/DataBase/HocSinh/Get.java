@@ -139,4 +139,17 @@ public class Get{
         
         return nameClasses;
 }
+    public int GetNumberSummerWeek(int idStudent){
+        int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 1");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+        
+    }
 }

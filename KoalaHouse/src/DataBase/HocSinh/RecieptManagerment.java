@@ -9,7 +9,9 @@ package DataBase.HocSinh;
 import DataBase.ConnectData;
 import DataBase.DataTable;
 import edu.com.XuLy;
+import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -61,31 +63,18 @@ public class RecieptManagerment {
                 str[0] = rs1.getString(4);
                 //kiem tra xem có phai trong muon hay ko
                 boolean check = false;
+                boolean kiHe = false;
                 String ten = str[0].toString();
                 ten = ten.toLowerCase();
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                     check = true;
                 }
-//                switch (rs1.getInt(3)) {
-//                    case 1:
-//                        str[1] = "Kỳ 1";
-//                        break;
-//                    case 2:
-//                        str[1] = "Kỳ 2";
-//                        break;
-//                    case 3:
-//                        str[1] = "Kỳ 3";
-//                        break;
-//                    case 4:
-//                        str[1] = "Kỳ hè";
-//                        break;
-//                    case 5:
-//                        str[1] = "Cả năm";
-//                        break;
-//                }
-                str[1] = rs1.getString(7);
-                str[2] = rs1.getString(8);
-                str[3] = rs1.getString(5);        
+                if(((ten.indexOf("ky")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("kỳ")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
+                }
+                str[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                str[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str[3] = rs1.getString(5);
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
                 }
@@ -95,6 +84,12 @@ public class RecieptManagerment {
                     int phi = Integer.parseInt((String) str[3]);
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
+                    str[3] = phi;
+                }
+                if(kiHe){
+                    int number = new Get().GetNumberSummerWeek(students_id);
+                    int phi = Integer.parseInt((String) str[3]);
+                    phi = phi * number;
                     str[3] = phi;
                 }
                 str[3] = XuLy.setMoney(str[3].toString());
@@ -118,31 +113,25 @@ public class RecieptManagerment {
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
                 str1[0]= rs1.getString(4)+" (Hoàn Trả)";
-//                switch (rs1.getInt(3)) {
-//                    case 1:
-//                        str1[1] = "Kỳ 1";
-//                        break;
-//                    case 2:
-//                        str1[1] = "Kỳ 2";
-//                        break;
-//                    case 3:
-//                        str1[1] = "Kỳ 3";
-//                        break;
-//                    case 4:
-//                        str1[1] = "Kỳ hè";
-//                        break;
-//                    case 5:
-//                        str1[1] = "Cả năm";
-//                        break;
-//                }
-//                str1[2] = rs1.getString(6).substring(0, 4);
-                str1[1] = rs1.getString(7);
-                str1[2] = rs1.getString(8);
+                str1[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                str1[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
                 str1[3] = rs1.getString(5);        
                 if(((String)str1[3]).charAt(0)=='-'){
                     str1[3] = ((String)str1[3]).substring(1);
                 }
                 str1[3] = XuLy.setMoney(str1[3].toString());
+                data.add(str1);
+                }
+            }
+            //xem co phi xe bus không
+            rs1 = statement.executeQuery("SELECT TienXe,StartDate,EndDate FROM projectkoala.buslist where idStudents = "+students_id+" and IsActive = 1;");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0]= "Xe Bus";
+                str1[1] = new XuLiXau().NamThangNgay(rs1.getString(2));
+                str1[2] = new XuLiXau().NamThangNgay(rs1.getString(3));
+                str1[3] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 }
             }
@@ -184,5 +173,23 @@ public class RecieptManagerment {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    public void UpdateXeBus(int idStudent){
+        String query = "UPDATE `projectkoala`.`buslist` SET `IsActive`='0' WHERE `idStudents`='"+idStudent+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void UpdateSummerWeek(int idStudent){
+        String query = "UPDATE `projectkoala`.`buslist` SET `IsActive`='0' WHERE `idStudents`='"+idStudent+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
