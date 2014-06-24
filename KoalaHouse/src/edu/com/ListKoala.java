@@ -12,6 +12,7 @@ import edu.com.Dialog.DSTaiKhoan;
 import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
 import edu.com.Dialog.Nam;
+import edu.com.Dialog.NhapTrongMuon;
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
@@ -339,6 +340,8 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -548,6 +551,15 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel51.setText("Học Hè");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/Save_as.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Trông Muộn");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -593,6 +605,13 @@ public class ListKoala extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
                     .addComponent(jLabel51))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -608,7 +627,9 @@ public class ListKoala extends javax.swing.JFrame {
                     .addComponent(jLabel27)
                     .addComponent(jLabel28)
                     .addComponent(jLabel48)
-                    .addComponent(jLabel49))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel49)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -618,7 +639,8 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel30)
                         .addComponent(jLabel32)
                         .addComponent(jLabel50)
-                        .addComponent(jLabel51))
+                        .addComponent(jLabel51)
+                        .addComponent(jLabel2))
                     .addComponent(jLabel31))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1270,6 +1292,12 @@ public class ListKoala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel49MouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       NhapTrongMuon nhaptrongmuon = new NhapTrongMuon(null, rootPaneCheckingEnabled);
+       nhaptrongmuon.setLocation(300, 100);
+       nhaptrongmuon.setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
@@ -1326,7 +1354,9 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JPanel Panel_trungtam;
     private javax.swing.JMenuItem chitiet;
     private javax.swing.JMenuItem hs_phi;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
