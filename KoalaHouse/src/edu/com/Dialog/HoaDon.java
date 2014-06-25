@@ -767,6 +767,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String phantram = "0";
         new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
+        //update xe bus
+        new RecieptManagerment().UpdateXeBus(idStudent);
+        new RecieptManagerment().UpdateSummerWeek(idStudent);
         dispose();
         }
         jButton1.setVisible(true);

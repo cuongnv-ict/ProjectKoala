@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -49,7 +50,8 @@ public class DSLop extends javax.swing.JPanel {
         new DataBase.DataTable().BangDanhSachLop(jTable4,idtrungtam);
         
         model = (DefaultTableModel) jTable4.getModel();
-    }
+        //jTable4.getColumn( model.getColumnName(3)).setWidth(20);
+   }
    //set cac gia tri
    public void setIdTrungTam(int  a)
    {
@@ -98,6 +100,11 @@ public class DSLop extends javax.swing.JPanel {
             }
         });
         jScrollPane6.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(3).setMinWidth(50);
+            jTable4.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTable4.getColumnModel().getColumn(3).setMaxWidth(60);
+        }
 
         Button_DSLop_ThemLop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
         Button_DSLop_ThemLop.setToolTipText("Thêm");
@@ -174,8 +181,6 @@ public class DSLop extends javax.swing.JPanel {
             vector.add(lop.getKhoiHoc());
             vector.add(lop.getHocKy());
             vector.add(lop.getGiaoVien());
-            vector.add(lop.getBday());
-            vector.add(lop.getEday());
             vector.add(lop.getSoHS());
             vector.add(0);
             vector.add(lop.getTrangThai());
@@ -185,7 +190,8 @@ public class DSLop extends javax.swing.JPanel {
         }
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
         model=(DefaultTableModel) jTable4.getModel();
-      listkoala.taoTree();
+        
+        listkoala.taoTree();
         }
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
@@ -193,8 +199,9 @@ public class DSLop extends javax.swing.JPanel {
         if(isadmin)
         {
         int count =1, row=0;
+        model=(DefaultTableModel) jTable4.getModel();
         for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 10)==true){
+            if((Boolean)model.getValueAt(i, 8)==true){
                 count--;
                 row = i;
             }
@@ -211,7 +218,9 @@ public class DSLop extends javax.swing.JPanel {
             }
             return;
         }
+        System.out.println(row);
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
+        System.out.println("goi duoc ca vector1");
         ThemSuaLop lop = new ThemSuaLop(null, true, vec);
         String oldname=model.getValueAt(row, 0).toString();
         String khoiname=model.getValueAt(row, 2).toString();
@@ -221,18 +230,18 @@ public class DSLop extends javax.swing.JPanel {
         lop.setVisible(true);
         lop.setThemSuaLop(false);
         lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+        /*
         if(lop.getButton()){
             model.setValueAt(lop.getTenLop(), row, 0);
             model.setValueAt(lop.getTrungTam(), row, 1);
             model.setValueAt(lop.getKhoiHoc(), row, 2);
             model.setValueAt(lop.getHocKy(), row, 3);
             model.setValueAt(lop.getGiaoVien(), row, 4);
-            model.setValueAt(lop.getBday(), row, 5);
-            model.setValueAt(lop.getEday(), row, 6);
-            model.setValueAt(lop.getSoHS(), row, 8);
-            model.setValueAt(lop.getTrangThai(), row, 9);
-            model.setValueAt(false, row,10);
+            model.setValueAt(lop.getSoHS(), row, 5);
+            model.setValueAt(lop.getTrangThai(), row, 7);
+            model.setValueAt(false, row,8);
         }
+        */
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
         model=(DefaultTableModel) jTable4.getModel();
         }
@@ -274,11 +283,11 @@ public class DSLop extends javax.swing.JPanel {
         }
         boolean xoaorkhong;
         DataBase.DataTable data= new DataTable();
-        xoaorkhong=data.XoaLop(jTable4, 10);
+        xoaorkhong=data.XoaLop(jTable4, 8);
         if(xoaorkhong)
         {
         EditTable edit= new EditTable();
-        edit.removeManyRowOfTable(jTable4, 10);
+        edit.removeManyRowOfTable(jTable4, 8);
         
         listkoala.taoTree();
         }
