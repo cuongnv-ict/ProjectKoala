@@ -482,13 +482,13 @@ class AutoSuggestor {
         });
     }
 
-    private void setFocusToTextField() {
+    private void setFocusToTextField() {       
         container.toFront();
         container.requestFocusInWindow();
         textField.requestFocusInWindow();
     }
 
-    public ArrayList<SuggestionLabel> getAddedSuggestionLabels() {
+    public ArrayList<SuggestionLabel> getAddedSuggestionLabels() {       
         ArrayList<SuggestionLabel> sls = new ArrayList();
         for (int i = 0; i < suggestionsPanel.getComponentCount(); i++) {
             if (suggestionsPanel.getComponent(i) instanceof SuggestionLabel) {
@@ -499,7 +499,7 @@ class AutoSuggestor {
         return sls;
     }
 
-    private void checkForAndShowSuggestions() {
+    private void checkForAndShowSuggestions() {        
         typedWord = getCurrentlyTypedWord();
 
         suggestionsPanel.removeAll();//remove previos words/jlabels that were added
@@ -520,7 +520,7 @@ class AutoSuggestor {
         }
     }
 
-    protected void addWordToSuggestions(String word) {
+    protected void addWordToSuggestions(String word) {       
         SuggestionLabel suggestionLabel = new SuggestionLabel(word, suggestionFocusedColor, suggestionsTextColor, this);
 
         calculatePopUpWindowSize(suggestionLabel);
@@ -528,7 +528,7 @@ class AutoSuggestor {
         suggestionsPanel.add(suggestionLabel);
     }
 
-    public String getCurrentlyTypedWord() {//get newest word after last white spaceif any or the first word if no white spaces
+    public String getCurrentlyTypedWord() {//get newest word after last white spaceif any or the first word if no white spaces      
         String text = textField.getText();
         String wordBeingTyped = "";
         if (text.contains(" ")) {
@@ -543,7 +543,7 @@ class AutoSuggestor {
         return wordBeingTyped.trim();
     }
 
-    private void calculatePopUpWindowSize(JLabel label) {
+    private void calculatePopUpWindowSize(JLabel label) {       
         //so we can size the JWindow correctly
         if (tW < label.getPreferredSize().width) {
             tW = label.getPreferredSize().width;
@@ -551,7 +551,7 @@ class AutoSuggestor {
         tH += label.getPreferredSize().height;
     }
 
-    private void showPopUpWindow() {
+    private void showPopUpWindow() {      
         autoSuggestionPopUpWindow.getContentPane().add(suggestionsPanel);
         autoSuggestionPopUpWindow.setMinimumSize(new Dimension(textField.getWidth(), 30));
         autoSuggestionPopUpWindow.setSize(tW, tH);
@@ -574,7 +574,7 @@ class AutoSuggestor {
 
     }
 
-    public void setDictionary(ArrayList<String> words) {
+    public void setDictionary(ArrayList<String> words) {    
         dictionary.clear();
         if (words == null) {
             return;//so we can call constructor with null value for dictionary without exception thrown
@@ -584,15 +584,15 @@ class AutoSuggestor {
         }
     }
 
-    public JWindow getAutoSuggestionPopUpWindow() {
+    public JWindow getAutoSuggestionPopUpWindow() {       
         return autoSuggestionPopUpWindow;
     }
 
-    public Window getContainer() {
+    public Window getContainer() {     
         return container;
     }
 
-    public JTextField getTextField() {
+    public JTextField getTextField() {    
         return textField;
     }
 
@@ -601,7 +601,7 @@ class AutoSuggestor {
     }
 
     boolean wordTyped(String typedWord) {
-
+        
         if (typedWord.isEmpty()) {
             return false;
         }
@@ -609,16 +609,29 @@ class AutoSuggestor {
 
         boolean suggestionAdded = false;
         int j;
-        for (j=0;j<dictionary.size();j++) {//get words in the dictionary which we added
+        //doan so sanh day roi
+        for (j=0;j<dictionary.size();j++){//get words in the dictionary which we added
             String word = (String) dictionary.get(j);
             boolean fullymatches = true;
-            for (int i = 0; i < typedWord.length(); i++) {//each string in the word
-                if (!typedWord.toLowerCase().startsWith(String.valueOf(word.toLowerCase().charAt(i)), i)) {//check for match
-                    fullymatches = false;
-                    break;
+            String type  = typedWord.toLowerCase();
+            String type2 = word.toLowerCase();
+           String[] tu = type2.split(" ");
+           if(type.indexOf(" ")== -1){//neu tu nhap vao ko co dau cach
+            for(int k=0;k<tu.length;k++){
+                fullymatches = true;
+                int x = tu[k].indexOf(type);
+                if(x!=0){
+                   fullymatches = false; 
                 }
-            }
-            if (fullymatches) {
+        if(fullymatches) break;
+    }
+           }
+           else{//neu tu nhap vao chua dau cach
+                int x = type2.indexOf(type);
+                if(x== -1)
+                fullymatches = false;
+           }
+            if (fullymatches){
                 addWordToSuggestions(word);
                 suggestionAdded = true;
             }
@@ -628,7 +641,7 @@ class AutoSuggestor {
 }
 
 class SuggestionLabel extends JLabel {
-
+    
     private boolean focused = false;
     private final JWindow autoSuggestionsPopUpWindow;
     private final JTextField textField;
@@ -637,7 +650,7 @@ class SuggestionLabel extends JLabel {
 
     public SuggestionLabel(String string, final Color borderColor, Color suggestionsTextColor, AutoSuggestor autoSuggestor) {
         super(string);
-
+  
         this.suggestionsTextColor = suggestionsTextColor;
         this.autoSuggestor = autoSuggestor;
         this.textField = autoSuggestor.getTextField();
