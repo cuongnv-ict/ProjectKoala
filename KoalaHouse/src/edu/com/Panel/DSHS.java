@@ -24,9 +24,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -38,26 +43,65 @@ public class DSHS extends javax.swing.JPanel {
      * Creates new form DSHS
      */
     public JTabbedPane center;
-    ArrayList<Integer> id_students;
-    int[] arrRows;
     private boolean isadmin = true;
     private ArrayList<Object[]> info;
     public JTable BangHS;
     public JComboBox ChonLoai;
+    private TableColumnModel columnModel;
 
     public DSHS() {
         initComponents();
         info = new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(DSHS);
-//        id_students = new ArrayList<Integer>();
-//        if (DSHS.getValueAt(0, 0).toString().equals("")) {
-//            Count.setText("0");
-//        } else {
-//            Count.setText(String.valueOf(DSHS.getRowCount()));
-//            XuLy.setID(id_students, DSHS, 0);
-//        }
-        arrRows = null;
+        columnModel = DSHS.getColumnModel();
+        columnModel.addColumnModelListener(new eventColumn());
         BangHS = DSHS;
         ChonLoai = LoaiHS;
+
+    }
+
+    private class eventColumn implements TableColumnModelListener {
+
+        @Override
+        public void columnAdded(TableColumnModelEvent e) {
+          
+        }
+
+        @Override
+        public void columnRemoved(TableColumnModelEvent e) {
+          
+        }
+
+        @Override
+        public void columnMoved(TableColumnModelEvent e) {
+            if (e.getFromIndex() != e.getToIndex()) {
+                int a, b;
+                if (e.getFromIndex() < e.getToIndex()) {
+                    a = e.getFromIndex();
+                    b = e.getToIndex();
+                } else {
+                    b = e.getFromIndex();
+                    a = e.getToIndex();
+                }
+                Object[] _a, _b;
+                _a = info.get(a);
+                _b = info.get(b);
+                info.remove(b);
+                info.remove(a);
+                info.add(a, _b);
+                info.add(b, _a);
+            }
+        }
+
+        @Override
+        public void columnMarginChanged(ChangeEvent e) {
+           
+        }
+
+        @Override
+        public void columnSelectionChanged(ListSelectionEvent e) {
+          
+        }
+
     }
 
     public void setNotAdmin() {

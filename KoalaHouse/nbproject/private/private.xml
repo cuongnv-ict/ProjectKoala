@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Dialog/chuyenlop.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/ListKoala.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLLopX.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Dialog/ThemGia.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/HS_Phi.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/LopX.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLNam.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/DataTable.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLDanhSachHocSinh.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/DSHS.java</file>
             <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLHocPhi.java</file>
         </group>
     </open-files>

@@ -246,6 +246,15 @@ public class SQLDanhSachHocSinh {
                     v.add(XuLy.getDate(rs1.getString(i + 1)));
                     continue;
                 }
+                if(i==10){
+                    if(rs1.getString(11)==null){
+                        v.add(1);
+                    }
+                    else{
+                          v.add(rs1.getString(11));
+                    }
+                    continue;
+                }
                 v.add(rs1.getString(i + 1));
             }
             return v;
