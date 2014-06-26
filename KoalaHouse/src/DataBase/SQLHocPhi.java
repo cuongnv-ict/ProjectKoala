@@ -87,17 +87,15 @@ public class SQLHocPhi {
                     }
                     String[] arr = rs1.getString(4).split("-");
                     str[3] = arr[0] + "-" + String.valueOf(Integer.parseInt(arr[0]) + 1);
-                    if(rs1.getString(5)!=null){
+                    if (rs1.getString(5) != null) {
                         str[4] = XuLy.getDate(rs1.getString(5));
+                    } else {
+                        str[4] = "";
                     }
-                    else{
-                        str[4] ="";
-                    }
-                     if(rs1.getString(6)!=null){
+                    if (rs1.getString(6) != null) {
                         str[5] = XuLy.getDate(rs1.getString(6));
-                    }
-                    else{
-                        str[5] ="";
+                    } else {
+                        str[5] = "";
                     }
                     str[6] = rs1.getString(7);
                     if (((String) str[6]).charAt(0) == '-') {
@@ -131,7 +129,7 @@ public class SQLHocPhi {
                 }
             };
             table.setModel(model);
-
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
         } catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(null, "Lỗi nạp dữ liệu", null, JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.toString());
@@ -304,6 +302,7 @@ public class SQLHocPhi {
             table.setModel(model);
             statement.close();
             connect.close();
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
@@ -386,6 +385,7 @@ public class SQLHocPhi {
             table.setModel(model);
             statement.close();
             connect.close();
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
@@ -489,6 +489,18 @@ public class SQLHocPhi {
             }
         };
         table.setModel(model);
+        if (max == 0) {
+            Object[][] row = new Object[1][];
+
+            Object[] o = new Object[column_size];
+            for (int j = 0; j < column_size; j++) {
+                o[j] = 1;
+            }
+            row[0] = o;
+            XuLy.resizeColumnWidth(table, XuLy.getSize(row));
+        } else {
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+        }
     }
 
     public ArrayList<Object[]> DanhSachLop() {
@@ -512,7 +524,7 @@ public class SQLHocPhi {
     public ArrayList<Object[]> DanhSachHocSinh(int id_class, int id_cost) {
         try {
             ArrayList<Object[]> arr = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select students.FullName from students,students_has_cost,classes_has_students where students.Id = classes_has_students.Students_Id and students.Id = students_has_cost.Students_Id and students_has_cost.Cost_Id = "+id_cost+" and students.isactive =1 and classes_has_students.Classes_Id = "+id_class);
+            rs1 = statement.executeQuery("select students.FullName from students,students_has_cost,classes_has_students where students.Id = classes_has_students.Students_Id and students.Id = students_has_cost.Students_Id and students_has_cost.Cost_Id = " + id_cost + " and students.isactive =1 and classes_has_students.Classes_Id = " + id_class);
             while (rs1.next()) {
                 Object[] o = new Object[1];
                 o[0] = rs1.getString(1);

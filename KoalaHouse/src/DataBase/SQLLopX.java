@@ -84,12 +84,12 @@ public class SQLLopX {
                     str[8] = rs1.getString(12);
                     str[9] = rs1.getString(14);
                     str[10] = false;
-                    if(rs1.getString(15)==null){
-                          str[11] = 1;
-                    }else{
-                          str[11] = rs1.getInt(15);
+                    if (rs1.getString(15) == null) {
+                        str[11] = 1;
+                    } else {
+                        str[11] = rs1.getInt(15);
                     }
-                  
+
                     data.add(str);
                 } while (rs1.next());
                 XuLy.SapXepTen(data, 1);
@@ -123,6 +123,7 @@ public class SQLLopX {
             table.setModel(model);
             statement.close();
             connect.close();
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
@@ -399,6 +400,7 @@ public class SQLLopX {
             table.setModel(model);
             statement.close();
             connect.close();
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);

@@ -2,14 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/ListKoala.java</file>
             <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLDanhSachHocSinh.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/DSLop.java</file>
             <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/DSHS.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/DataTable.java</file>
             <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLHocPhi.java</file>
         </group>
-=======
-        <group/>
->>>>>>> fcd56324702d24d89018f38ada4be999fcb35212
     </open-files>
 </project-private>

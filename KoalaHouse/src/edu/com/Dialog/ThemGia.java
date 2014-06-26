@@ -56,14 +56,13 @@ public class ThemGia extends javax.swing.JDialog {
         setComboBox(Ky, vector.get(2).toString());
         setComboBox(Nam, vector.get(3).toString());
         String[] arr = vector.get(4).toString().split("-");
-        if (arr.length == 2) {
+        if (arr.length == 3) {
             setComboBox(B_ngay, arr[0]);
             setComboBox(B_thang, arr[1]);
             setComboBox(B_nam, arr[2]);
         }
-
         arr = vector.get(5).toString().split("-");
-        if (arr.length == 2) {
+        if (arr.length == 3) {
             setComboBox(E_ngay, arr[0]);
             setComboBox(E_thang, arr[1]);
             setComboBox(E_nam, arr[2]);
@@ -200,7 +199,7 @@ public class ThemGia extends javax.swing.JDialog {
             }
         });
 
-        B_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        B_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
         B_thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
@@ -211,7 +210,7 @@ public class ThemGia extends javax.swing.JDialog {
 
         E_ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        E_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        E_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

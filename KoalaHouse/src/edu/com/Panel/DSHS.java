@@ -13,6 +13,7 @@ import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
 import edu.com.ListKoala;
 import edu.com.XuLy;
+import edu.com.upbang.XuLiXau;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.List;
@@ -56,19 +57,18 @@ public class DSHS extends javax.swing.JPanel {
         columnModel.addColumnModelListener(new eventColumn());
         BangHS = DSHS;
         ChonLoai = LoaiHS;
-
     }
 
     private class eventColumn implements TableColumnModelListener {
 
         @Override
         public void columnAdded(TableColumnModelEvent e) {
-          
+
         }
 
         @Override
         public void columnRemoved(TableColumnModelEvent e) {
-          
+
         }
 
         @Override
@@ -94,12 +94,12 @@ public class DSHS extends javax.swing.JPanel {
 
         @Override
         public void columnMarginChanged(ChangeEvent e) {
-           
+
         }
 
         @Override
         public void columnSelectionChanged(ListSelectionEvent e) {
-          
+
         }
 
     }
@@ -138,14 +138,11 @@ public class DSHS extends javax.swing.JPanel {
                 Component c = super.prepareRenderer(renderer, row, column);
                 if(info.get(column)[row].toString().charAt(0)=='x'){
                     c.setForeground(Color.BLACK);
-                    if(column==0){
-                        c.setBackground(Color.WHITE);
+
+                    if(LoaiHS.getSelectedIndex()==0){
+                        c.setBackground(Color.BLACK);
                     }else{
-                        if(LoaiHS.getSelectedIndex()==0){
-                            c.setBackground(Color.BLACK);
-                        }else{
-                            c.setBackground(Color.WHITE);
-                        }
+                        c.setBackground(Color.WHITE);
                     }
                 }else if(info.get(column)[row].toString().charAt(0)=='-'){
                     c.setForeground(Color.RED);
@@ -159,6 +156,9 @@ public class DSHS extends javax.swing.JPanel {
                     if(isRowSelected(row)&&isColumnSelected(column)&&LoaiHS.getSelectedIndex()==0){
                         c.setBackground(Color.BLUE);
                     }
+                }else if(info.get(column)[row].toString().charAt(0)=='s'){
+                    c.setForeground(Color.BLACK);
+                    c.setBackground(Color.WHITE);
                 }else{
                     c.setForeground(Color.BLACK);
                     c.setBackground(Color.WHITE);
@@ -166,7 +166,6 @@ public class DSHS extends javax.swing.JPanel {
                         c.setBackground(Color.BLUE);
                     }
                 }
-
                 return c;
 
             }
@@ -265,7 +264,7 @@ public class DSHS extends javax.swing.JPanel {
             ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(10).toString()));
             hs.setVisible(true);
             return hs.getButton();
-        } else if (info.get(col)[row].toString().charAt(0) != 'x') {
+        } else if (info.get(col)[row].toString().charAt(0) != 'x'&&info.get(col)[row].toString().charAt(0) != 's') {
             String arr[] = info.get(col)[row].toString().split("-");
             Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[0]));
             ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(10).toString()));
@@ -287,7 +286,7 @@ public class DSHS extends javax.swing.JPanel {
             InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(10).toString()));
             hs.setVisible(true);
             return hs.getButton();
-        } else if (info.get(col)[row].toString().charAt(0) != 'x') {
+        } else if (info.get(col)[row].toString().charAt(0) != 'x'&&info.get(col)[row].toString().charAt(0) != 's') {
             String arr[] = info.get(col)[row].toString().split("-");
             Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[0]));
             InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(10).toString()));
@@ -310,7 +309,34 @@ public class DSHS extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_LoaiHSActionPerformed
+public static void resizeColumnWidth(JTable table,int size) {
+         int x = 0;
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 10; 
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width, width);
+            }
 
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            Object value = tableColumn.getHeaderValue();
+            TableCellRenderer renderer = tableColumn.getHeaderRenderer();
+            if (renderer == null) {
+                renderer = table.getTableHeader().getDefaultRenderer();
+            }
+            Component c = renderer.getTableCellRendererComponent(table, value, false, false, -1, column);
+            width = Math.max(c.getPreferredSize().width, width);
+            x += width;
+            columnModel.getColumn(column).setPreferredWidth(width+100);
+        }
+//        if(x>300){
+             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//        }else{
+//             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DSHS;
     private javax.swing.JComboBox LoaiHS;

@@ -4,12 +4,17 @@
  */
 package edu.com;
 
+import java.awt.Component;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -117,18 +122,70 @@ public class XuLy {
         if (x < 0) {
             return false;
         }
-        if(x>0){
+        if (x > 0) {
             return true;
         }
         if (x == 0 && y < 0) {
             return false;
         }
-        if(y>0){
+        if (y > 0) {
             return true;
         }
         if (y == 0 && z < 0) {
             return false;
         }
         return true;
+    }
+
+    public static void resizeColumnWidth(JTable table, int arr[]) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        int x = 0;
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 40;
+            width = Math.max(arr[column] * 8, width);
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            Object value = tableColumn.getHeaderValue();
+            TableCellRenderer renderer = tableColumn.getHeaderRenderer();
+            if (renderer == null) {
+                renderer = table.getTableHeader().getDefaultRenderer();
+            }
+            Component c = renderer.getTableCellRendererComponent(table, value, false, false, -1, column);
+            width = Math.max(c.getPreferredSize().width, width);
+            x = x+width+10;
+            columnModel.getColumn(column).setPreferredWidth(width + 10);
+        }
+        x = Toolkit.getDefaultToolkit().getScreenSize().width - x;
+        if(x<250){
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        }else{
+             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        }   
+    }
+
+    public static int[] getSize(Object[][] o) {
+        int arrSize[] = new int[o[0].length];
+        for (int i = 0; i < o[0].length; i++) {
+            arrSize[i] = 0;
+        }
+        for (int i = 0; i < o[0].length; i++) {
+            int max = 0;
+            for (int j = 0; j < o.length; j++) {
+//                String s = String.valueOf(o[j][i].toString());
+////                if (max < s.length()) {
+////                    max = s.length();
+////                }
+                String s;
+                if (o[j][i] == null) {
+                    s = "";
+                } else {
+                    s = String.valueOf(o[j][i].toString());
+                }
+                if (max < s.length()) {
+                    max = s.length();
+                }
+            }
+            arrSize[i] = max;
+        }
+        return arrSize;
     }
 }

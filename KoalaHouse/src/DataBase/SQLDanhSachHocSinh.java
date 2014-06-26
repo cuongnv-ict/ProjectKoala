@@ -71,7 +71,7 @@ public class SQLDanhSachHocSinh {
                 continue;
             }
             title[i] = arr_title.get(i - 1)[1];
-            arr_content[i - 1] = this.DanhSachHocSinh(Integer.parseInt(arr_title.get(i - 1)[0].toString()),1);
+            arr_content[i - 1] = this.DanhSachHocSinh(Integer.parseInt(arr_title.get(i - 1)[0].toString()), 1);
 
             if (max < Integer.parseInt(arr_title.get(i - 1)[2].toString())) {
                 max = Integer.parseInt(arr_title.get(i - 1)[2].toString());
@@ -103,13 +103,13 @@ public class SQLDanhSachHocSinh {
             Object[] in = new Object[max];
             for (int j = 0; j < max; j++) {
                 if (i == 0) {
-                    in[j] = "x";
+                    in[j] = "s";
                     continue;
                 }
                 if (j < arr_content[i - 1].size()) {
-                    if(arr_content[i - 1].get(j)[2]==null){
-                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
-                         continue;
+                    if (arr_content[i - 1].get(j)[2] == null) {
+                        in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
+                        continue;
                     }
                     if (arr_content[i - 1].get(j)[2].toString().equals("1")) {
                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
@@ -126,10 +126,22 @@ public class SQLDanhSachHocSinh {
             }
             info.add(in);
         }
+        if (max == 0) {
+            Object[][] row = new Object[1][];
+
+            Object[] o = new Object[column_size];
+            for (int j = 0; j < column_size; j++) {
+                o[j] = 1;
+            }
+            row[0] = o;
+            XuLy.resizeColumnWidth(table, XuLy.getSize(row));
+        } else {
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+        }
         return info;
     }
 
-      public ArrayList<Object[]> DanhSachHocSinh_Stype(JTable table, int stype) {
+    public ArrayList<Object[]> DanhSachHocSinh_Stype(JTable table, int stype) {
         ArrayList<Object[]> arr_title = this.DanhSachLop();
         ArrayList<Object[]> info = new ArrayList<Object[]>();
         int column_size = arr_title.size() + 1;
@@ -144,8 +156,8 @@ public class SQLDanhSachHocSinh {
             title[i] = arr_title.get(i - 1)[1];
             arr_content[i - 1] = this.DanhSachHocSinh(Integer.parseInt(arr_title.get(i - 1)[0].toString()), stype);
 
-            if (max < arr_content[i-1].size()) {
-                max = arr_content[i-1].size();
+            if (max < arr_content[i - 1].size()) {
+                max = arr_content[i - 1].size();
             }
         }
         Object[][] rowColumn = new Object[max][];
@@ -178,9 +190,9 @@ public class SQLDanhSachHocSinh {
                     continue;
                 }
                 if (j < arr_content[i - 1].size()) {
-                    if(arr_content[i - 1].get(j)[2]==null){
-                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
-                         continue;
+                    if (arr_content[i - 1].get(j)[2] == null) {
+                        in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
+                        continue;
                     }
                     if (arr_content[i - 1].get(j)[2].toString().equals("1")) {
                         in[j] = arr_content[i - 1].get(j)[0] + "-" + arr_title.get(i - 1)[0];
@@ -197,8 +209,21 @@ public class SQLDanhSachHocSinh {
             }
             info.add(in);
         }
+        if (max == 0) {
+            Object[][] row = new Object[1][];
+
+            Object[] o = new Object[column_size];
+            for (int j = 0; j < column_size; j++) {
+                o[j] = 1;
+            }
+            row[0] = o;
+            XuLy.resizeColumnWidth(table, XuLy.getSize(row));
+        } else {
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+        }
         return info;
     }
+
     public ArrayList<Object[]> DanhSachLop() {
         try {
             ArrayList<Object[]> arr = new ArrayList<Object[]>();
@@ -246,12 +271,11 @@ public class SQLDanhSachHocSinh {
                     v.add(XuLy.getDate(rs1.getString(i + 1)));
                     continue;
                 }
-                if(i==10){
-                    if(rs1.getString(11)==null){
+                if (i == 10) {
+                    if (rs1.getString(11) == null) {
                         v.add(1);
-                    }
-                    else{
-                          v.add(rs1.getString(11));
+                    } else {
+                        v.add(rs1.getString(11));
                     }
                     continue;
                 }
