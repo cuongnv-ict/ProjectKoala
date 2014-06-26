@@ -64,6 +64,7 @@ public class SQLXeBus
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("SELECT idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate FROM buslist");
             
+            
             while(rs1.next()) 
             {
                     Object[] str = new Object[11];
@@ -94,6 +95,47 @@ public class SQLXeBus
                     str[10]=false;
                     data.add(str);
             }
+            if(data.size()==0)
+            {
+                Object[] str = new Object[11];
+                str[0]="";
+                str[1]="";
+                str[2]="";
+                str[3]="";
+                str[4]="";
+                str[5]="";
+                str[6]="";
+                str[7]="";
+                str[8]="";
+                str[9]="";
+                str[10]=false;
+                data.add(str);
+                Object[][] rowColumn = new Object[data.size()][];
+                for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+                model = new DefaultTableModel(rowColumn, nameColumn) {
+                    Class[] types = new Class[]{
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
+                        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
+                        java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                    };
+
+                    public Class getColumnClass(int columnIndex) {
+                        return types[columnIndex];
+                    }
+                    boolean[] canEdit = new boolean[]{
+                        false,false,false,false,false, false, false, false, false, false, true
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                };
+                table.setModel(model);
+            }
+            }
+            else
+            {
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
@@ -108,7 +150,7 @@ public class SQLXeBus
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false, false, false, false, false, false, true
+                        false,false,false,false,false, false, false, false, false, false, true
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -116,6 +158,7 @@ public class SQLXeBus
                     }
                 };
                 table.setModel(model);
+            }
             }
             //table.setModel(model);
             statement.close();

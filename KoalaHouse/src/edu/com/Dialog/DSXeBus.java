@@ -423,10 +423,20 @@ public class DSXeBus extends javax.swing.JDialog {
             idstudent=new DataBase.SQLXeBus().getIdStudent(nameStudent, nameClass);
             System.out.println("ma so là:" +idstudent);
             //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
+            if(idstudent!=0)
+            {
             DataBase.SQLXeBus data = new DataBase.SQLXeBus();
             data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText(),datebd,datekt);
             button=true;
             dispose();
+            }
+            else
+            {
+                
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tên học sinh bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+                
+            }
             }
             else
             {
@@ -447,11 +457,19 @@ public class DSXeBus extends javax.swing.JDialog {
             String datekt = namkt.getSelectedItem().toString() +"-"+ thangkt.getSelectedItem().toString() +"-"+ngaykt.getSelectedItem().toString();
             if(sosanhngaythang(datebd, datekt))
             {
+            if(idstudent!=0)
+            {
             //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
             DataBase.SQLXeBus data = new DataBase.SQLXeBus();
             data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText(),datebd,datekt);
             button=true;
             dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Có Lỗi ngày tháng, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+   
+            }
             }
             else
             {

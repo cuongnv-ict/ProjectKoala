@@ -1283,6 +1283,8 @@ public class ListKoala extends javax.swing.JFrame {
         if (a == -1) {
             DKHocHe dkhoche= new DKHocHe();
             //DSLop dsl = new DSLop(idtrungtam);
+            dkhoche.center = Panel_GDChinh;
+           //dsl.listkoala = this;
             if (!ThongTin.isadmin) {
                 dkhoche.setNotAdmin();
             }

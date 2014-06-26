@@ -74,16 +74,29 @@ public class SQLkyhe {
             else
             {
                  Object[][] rowColumn = new Object[data.size()][];
-           
+              for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+                model = new DefaultTableModel(rowColumn, nameColumn) {
+                    Class[] types = new Class[]{
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                    };
+
+                    public Class getColumnClass(int columnIndex) {
+                        return types[columnIndex];
+                    }
+                    boolean[] canEdit = new boolean[]{
+                        false,false,false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                };
             
-                for (int i = 0; i < data.size(); i++) 
-                {
-                    rowColumn[i] = data.get(i);
-                }
-                 model.setDataVector(rowColumn,nameColumn);
+               table.setModel(model);
            
             }
-            
+            }
            
             
             statement.close();
@@ -181,19 +194,63 @@ public class SQLkyhe {
             }     
             if(data.size()==0) 
             {
-              
+                Object[] str = new Object[6];
+                    str[0]="";
+                    str[1]="";
+                    str[2]="";
+                    str[3]="";
+                    str[4]="";
+                    str[5]=false;
+                    data.add(str);
+               Object[][] rowColumn = new Object[1][];
+                for (int i = 0; i < 1; i++) {
+                    
+                rowColumn[i] = data.get(i);
+                model = new DefaultTableModel(rowColumn, nameColumn) {
+                    Class[] types = new Class[]{
+                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                    };
+
+                    public Class getColumnClass(int columnIndex) {
+                        return types[columnIndex];
+                    }
+                    boolean[] canEdit = new boolean[]{
+                        false,false,false,false,false,true
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                };
+            
+               table.setModel(model);
+              }
+                
             }
             else
             {
-                 Object[][] rowColumn = new Object[data.size()][];
-           
+                Object[][] rowColumn = new Object[data.size()][];
+                for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+                model = new DefaultTableModel(rowColumn, nameColumn) {
+                    Class[] types = new Class[]{
+                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                    };
+
+                    public Class getColumnClass(int columnIndex) {
+                        return types[columnIndex];
+                    }
+                    boolean[] canEdit = new boolean[]{
+                        false,false,false,false,false,true
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                };
             
-                for (int i = 0; i < data.size(); i++) 
-                {
-                    rowColumn[i] = data.get(i);
-                }
-                 model.setDataVector(rowColumn,nameColumn);
-           
+               table.setModel(model);
+              }
             }
             
            

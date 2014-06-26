@@ -6,6 +6,7 @@
 
 package edu.com.Panel;
 
+import edu.com.CloseButton.CloseTabButton;
 import edu.com.Dialog.BangHienThiTuanHe;
 import edu.com.Dialog.ThemSuaDKHocHe;
 import edu.com.XuLy;
@@ -13,6 +14,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +25,8 @@ public class DKHocHe extends javax.swing.JPanel {
     private boolean isadmin=true;
     ArrayList<Integer> id_hoche;
     DefaultTableModel model,modelgoc;
+    public JTabbedPane center;
+    
     /**
      * Creates new form DKHocHe
      */
@@ -217,7 +221,33 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
-
+        if (jTable4.getValueAt(0, 0).toString().equals("")) {
+            return;
+        }
+        if (evt.getClickCount() == 2) {
+            int row = jTable4.getSelectedRow();
+            model=(DefaultTableModel) jTable4.getModel();
+            model.setValueAt(false, row, 5);
+            //map cac truong
+            int a = -1;
+            int id = 0;
+            String tenHocSinh = jTable4.getValueAt(jTable4.getSelectedRow(), 1).toString();
+            String tenlop = jTable4.getValueAt(jTable4.getSelectedRow(), 2).toString();
+            id = new DataBase.SQLkyhe().getIdStudent(tenHocSinh, tenlop);
+            for (int i = 0; i < center.getTabCount(); i++) {
+                if (tenHocSinh.equals(center.getTitleAt(i))) {
+                    a += 1;
+                    center.setSelectedIndex(i);
+                }
+            }
+            if (a == -1) {
+                //HocSinhA.idTemp = id;
+                HocSinhA aa = new HocSinhA(id);
+                center.add(model.getValueAt(row, 1).toString(), aa);
+                center.setSelectedComponent(aa);
+                new CloseTabButton(center, center.getComponentCount() - 2);
+            }
+        }
     }//GEN-LAST:event_jTable4MouseClicked
 
     private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
@@ -316,6 +346,8 @@ public class DKHocHe extends javax.swing.JPanel {
         id_hoche = new ArrayList<Integer>();
             try
             {
+            
+            
             if (!jTable4.getValueAt(0, 1).toString().equals("")) {
             XuLy.setID(id_hoche, jTable4, 0);
             
@@ -323,6 +355,7 @@ public class DKHocHe extends javax.swing.JPanel {
             }
             catch(Exception ex)
             {
+                
             }
 
     }//GEN-LAST:event_xoaMouseClicked

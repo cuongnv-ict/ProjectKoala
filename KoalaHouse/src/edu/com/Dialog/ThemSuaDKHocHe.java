@@ -23,6 +23,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
     private boolean button;
     private boolean themorsua;
     private int oldIdStudents;
+    private int tongsotuan=0;
     /**
      * Creates new form ThemSuaDKHocHe
      */
@@ -51,7 +52,6 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         ten.setText(vector.get(1).toString());
         lop.setSelectedItem(vector.get(2).toString());
         tuanhoc.setText(vector.get(3).toString());
-        soTuanHoc.setSelectedItem(vector.get(4).toString());
     }
     public void setOldIdStudents(String nameStudent,String nameclass)
     {
@@ -70,6 +70,8 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
     }
     private boolean kiemtratuanhoc(String a)
     {
+        a+=",";
+        a+="/";
         String []chuoi;
         chuoi= a.split(",");
         int len=a.length();
@@ -77,6 +79,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         {
                 try{
                     if(Integer.parseInt(chuoi[0])>8) return false;
+                   tongsotuan=1;
                     return true;
                 
                 }
@@ -89,14 +92,28 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         {
             for(int i=0;i<(len/2)+1;i++)
             {
-                if(chuoi[i].equals("")) break;
+                if(i>8) return false;
+                if(chuoi[i].equals("/")) break;
                 try{
-                    Integer.parseInt(chuoi[i]);
+                       System.out.println(Integer.parseInt(chuoi[i]));
+                    int so=Integer.parseInt(chuoi[i]);
+                    for(int j=0;j<i;j++)
+                    {
+                       if (chuoi[i].equals(chuoi[j])) return false;
+                    }
+                    if(so>8||so<1)
+                    {
+                        System.out.println(Integer.parseInt(chuoi[i]));
+                     
+                        return false;
+                    }
+                    
                 }
                 catch(Exception ex)
                 {
                     return false;
                 }
+                this.tongsotuan+=1;
             }
         }    
         return true;
@@ -140,8 +157,6 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         ten = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        soTuanHoc = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -177,10 +192,6 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel1.setText("Đăng Ký Học Hè");
 
-        jLabel7.setText("Số Tuần học:");
-
-        soTuanHoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,15 +208,9 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                         .addComponent(jLabel1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(soTuanHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tuanhoc, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tuanhoc, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(87, 87, 87)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -235,11 +240,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(tuanhoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(soTuanHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -258,34 +259,60 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         try{
             if(themorsua)
             {
+                if(kiemtratuanhoc(tuanhoc.getText()))
+                {
                 int idstudent;
                 String nameStudent,nameClass;
                 nameStudent=ten.getText();
                 nameClass= lop.getSelectedItem().toString();
                 DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                data.themDkHocHe(idstudent, tuanhoc.getText(),Integer.parseInt(soTuanHoc.getSelectedItem().toString()) );
+                
+                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan);
                 
                 dispose();
-
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tuần học bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                    tongsotuan=0;
+                }
             }
             else
             {
+                if(kiemtratuanhoc(tuanhoc.getText()))
+                {
                 int idstudent;
                 String nameStudent,nameClass;
                 nameStudent=ten.getText();
                 nameClass= lop.getSelectedItem().toString();
                 DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                data.suadkhocbus(oldIdStudents, idstudent, tuanhoc.getText(),Integer.parseInt(soTuanHoc.getSelectedItem().toString()));
+                if(idstudent!=0)
+                {
+                data.suadkhocbus(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan);
                 dispose();
-
+                }
+                else
+                {
+                    
+                
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tuần học bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                    tongsotuan=0;
+                
+                }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tuần học bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                    tongsotuan=0;
+                }
             }
         }
         catch(Exception ex)
         {
             JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
-
+            tongsotuan=0;
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -342,11 +369,9 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JComboBox lop;
-    private javax.swing.JComboBox soTuanHoc;
     private javax.swing.JTextField ten;
     private javax.swing.JTextField tuanhoc;
     // End of variables declaration//GEN-END:variables
