@@ -185,8 +185,10 @@ public class AStudentAndLateDay {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void UpdataInfoStudent(int id,int fac,String name,String birthDay,String representative,String phoneNumber){
-        String query = "UPDATE `projectkoala`.`students` SET `FullName`='"+name+"', `BrithDay`='"+birthDay+"', `PhoneNumber`='"+phoneNumber+"', `Representative`='"+representative+"' WHERE `Id`='"+String.valueOf(id)+"' and`Faculties_Id`='"+String.valueOf(fac)+"'";
+    public void UpdataInfoStudent(int id,int fac,String name,String birthDay,String father,String phoneF,String mother,String phoneM,String homePhone,String email){
+        String query = "UPDATE `projectkoala`.`students` SET `FullName`='"+name+"', `BrithDay`='"+birthDay+"', `PhoneNumberFather`='"+phoneF+"',"
+                + " `Father`='"+father+"', `Mother`='"+mother+"', `PhoneNumberMother`='"+phoneM+"', `HomePhone`='"+homePhone+"',"
+                + " `Email`='"+email+"' WHERE `Id`='"+id+"' and`Faculties_Id`='"+fac+"';";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

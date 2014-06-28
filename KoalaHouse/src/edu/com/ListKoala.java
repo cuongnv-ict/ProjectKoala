@@ -1297,6 +1297,7 @@ public class ListKoala extends javax.swing.JFrame {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
        NhapTrongMuon nhaptrongmuon = new NhapTrongMuon(null, rootPaneCheckingEnabled);
        nhaptrongmuon.setLocation(300, 100);
+       nhaptrongmuon.center = Panel_GDChinh;
        nhaptrongmuon.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 

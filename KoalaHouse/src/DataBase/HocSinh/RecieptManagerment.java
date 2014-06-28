@@ -69,7 +69,7 @@ public class RecieptManagerment {
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                     check = true;
                 }
-                if(((ten.indexOf("ky")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("kỳ")!= -1)&&(ten.indexOf("hè")!= -1))){
+                if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
                     kiHe = true;
                 }
                 str[1] = new XuLiXau().NamThangNgay(rs1.getString(7));

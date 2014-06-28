@@ -587,7 +587,7 @@ public class HocSinhA extends javax.swing.JPanel {
                     ki = "4";
                 }
                 else ki = "5";
-                String nam = model.getValueAt(num, 3).toString();
+                String nam = model.getValueAt(num, 3).toString().substring(0, 4);
                 TimeTrongMuon.setText("0");
                 new AStudentAndLateDay().XoaTrongMuon(id,ki,nam);
             }
@@ -657,7 +657,7 @@ public class HocSinhA extends javax.swing.JPanel {
                             ki = "4";
                         }
                         else ki = "5";
-                        String nam = model.getValueAt(num -1, 3).toString();
+                        String nam = model.getValueAt(num -1, 3).toString().substring(0, 4);
                         new AStudentAndLateDay().UpdateTrongMuon(id,ki,nam);
                         totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
                         TimeTrongMuon.setText(String.valueOf(totalTime));
@@ -742,7 +742,8 @@ public class HocSinhA extends javax.swing.JPanel {
     }//GEN-LAST:event_thoiHocActionPerformed
 
     private void Button_HS_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_CapNhatActionPerformed
-        new AStudentAndLateDay().UpdataInfoStudent(id,idTrungTam,edit_ten.getText(),new XuLiXau().NamThangNgay(NgaySinh.getText()),cha.getText(),dtme.getText());
+        new AStudentAndLateDay().UpdataInfoStudent(id,idTrungTam,edit_ten.getText(),new XuLiXau().NamThangNgay(NgaySinh.getText()),cha.getText(),
+                dtcha.getText(),me.getText(),dtme.getText(),dtnha.getText(),email.getText());
         JOptionPane.showMessageDialog(Panel_hocsinhA, "Thông Tin Học Sinh Đã Được Cập Nhật");
     }//GEN-LAST:event_Button_HS_CapNhatActionPerformed
 

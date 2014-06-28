@@ -1,6 +1,7 @@
 package edu.com.Dialog;
 
 import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.GetTotal;
 import edu.com.upbang.EditTable;
 import edu.com.upbang.XuLiXau;
@@ -204,8 +205,9 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
         String date = nam.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+ngay.getSelectedItem().toString();
         int time = Integer.parseInt(soPhut.getText());
         int idSemester = new GetTotal().GetIdSemester(idTrungTam, nam.getSelectedItem().toString(), date);
+        int year = new Get().GetYear(idTrungTam, date);
         if(idSemester > 0){
-        new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),nam.getSelectedItem().toString());
+        new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
         }
         else{
             JOptionPane.showMessageDialog(null, "Ngày Bạn Chọn Không Có Trong Lịch Học");
