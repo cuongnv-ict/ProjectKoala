@@ -25,6 +25,7 @@ import edu.com.Panel.HS_Phi;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
 import edu.com.Panel.XeBus;
+import edu.com.ThongBaoKyHe.ThongBaoKyGeVer2;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -342,6 +343,7 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -560,6 +562,13 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel2.setText("Trông Muộn");
 
+        jButton1.setText("Thong bao hoc phi ky he");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -608,11 +617,13 @@ public class ListKoala extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,7 +640,8 @@ public class ListKoala extends javax.swing.JFrame {
                     .addComponent(jLabel48)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel49)))
+                        .addComponent(jLabel49)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1301,6 +1313,11 @@ public class ListKoala extends javax.swing.JFrame {
        nhaptrongmuon.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ThongBaoKyGeVer2 thongBaoHP = new ThongBaoKyGeVer2();
+        thongBaoHP.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
@@ -1357,6 +1374,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JPanel Panel_trungtam;
     private javax.swing.JMenuItem chitiet;
     private javax.swing.JMenuItem hs_phi;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
