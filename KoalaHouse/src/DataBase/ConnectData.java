@@ -18,7 +18,7 @@ public class ConnectData {
     private Connection conn;
     public static String user = "root";
     private String url = "jdbc:mysql://localhost/projectkoala";
-    private static String password = "akatsuki";
+    private static String password = "baobka2010";
     
     public void setUrl(String strUrl) {
         this.url = strUrl;
