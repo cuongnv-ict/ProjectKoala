@@ -531,7 +531,7 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel32.setText("Print");
 
-        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/print.png"))); // NOI18N
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xebus.png"))); // NOI18N
         jLabel48.setToolTipText("Print");
         jLabel48.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -539,7 +539,7 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
 
-        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/print.png"))); // NOI18N
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/dkhoche.png"))); // NOI18N
         jLabel49.setToolTipText("Print");
         jLabel49.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

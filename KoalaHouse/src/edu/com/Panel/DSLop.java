@@ -14,6 +14,7 @@ import edu.com.ListKoala;
 import edu.com.ThongTin;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -46,11 +49,14 @@ public class DSLop extends javax.swing.JPanel {
    private boolean isadmin=true;
    public DSLop(int idtrungtam) {
         initComponents();
-        
+        try{
         new DataBase.DataTable().BangDanhSachLop(jTable4,idtrungtam);
         
         model = (DefaultTableModel) jTable4.getModel();
-        //jTable4.getColumn( model.getColumnName(3)).setWidth(20);
+        resize(jTable4);
+        }
+        catch(Exception ex)
+        {}
    }
    //set cac gia tri
    public void setIdTrungTam(int  a)
@@ -63,6 +69,36 @@ public class DSLop extends javax.swing.JPanel {
        Button_DSLop_SuaLop.setEnabled(false);
        Button_DSLop_Xoa.setEnabled(false);
        this.isadmin=false;
+   }
+   public void resize(JTable table)
+   {
+        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+        int minwidth=80;
+        for (int column = 0; column < table.getColumnCount(); column++)
+        {
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+
+            for (int row = 0; row < table.getRowCount(); row++)
+            {
+                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+                Component c = table.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width+10);
+
+                //  We've exceeded the maximum width, no need to check other rows
+
+                if (preferredWidth >= maxWidth)
+                {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+            preferredWidth=Math.max(preferredWidth, minwidth);
+            tableColumn.setPreferredWidth( preferredWidth );
+            
+        }
    }
     
     /**
@@ -141,7 +177,7 @@ public class DSLop extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Button_DSLop_Xoa)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
         );
         Panel_DSLopLayout.setVerticalGroup(
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +187,7 @@ public class DSLop extends javax.swing.JPanel {
                     .addComponent(Button_DSLop_SuaLop)
                     .addComponent(Button_DSLop_Xoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -168,6 +204,7 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_ThemLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_ThemLopMouseClicked
         // TODO add your handling code here:
+        try{
         if(isadmin)
         {
         ThemSuaLop lop = new ThemSuaLop(null,true);
@@ -190,12 +227,18 @@ public class DSLop extends javax.swing.JPanel {
         }
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
         model=(DefaultTableModel) jTable4.getModel();
+        resize(jTable4);
         
         listkoala.taoTree();
         }
+        }
+        catch(Exception ex)
+        {}
     }//GEN-LAST:event_Button_DSLop_ThemLopMouseClicked
 
     private void Button_DSLop_SuaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_SuaLopMouseClicked
+        try
+        {
         if(isadmin)
         {
         int count =1, row=0;
@@ -227,9 +270,9 @@ public class DSLop extends javax.swing.JPanel {
         System.out.println(khoiname);
         lop.setOldName(oldname);
         lop.setKhoiName(khoiname);
+        lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         lop.setVisible(true);
         lop.setThemSuaLop(false);
-        lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         /*
         if(lop.getButton()){
             model.setValueAt(lop.getTenLop(), row, 0);
@@ -244,7 +287,11 @@ public class DSLop extends javax.swing.JPanel {
         */
         new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
         model=(DefaultTableModel) jTable4.getModel();
+        resize(jTable4);
         }
+        }
+        catch(Exception ex)
+        {}
     }//GEN-LAST:event_Button_DSLop_SuaLopMouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked

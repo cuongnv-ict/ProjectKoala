@@ -12,11 +12,15 @@ import edu.com.Dialog.ThemSuaLop;
 import edu.com.ThongTin;
 import edu.com.XuLy;
 import edu.com.upbang.EditTable;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -38,6 +42,7 @@ public class XeBus extends javax.swing.JPanel {
         try{
         if (!jTable4.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_xebus, jTable4, 0);
+            resize(jTable4);
         }
         }
         catch(Exception ex)
@@ -52,6 +57,36 @@ public class XeBus extends javax.swing.JPanel {
        xoa.setEnabled(false);
        this.isadmin=false;
     }
+   public void resize(JTable table)
+   {
+        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+        int minwidth=80;
+        for (int column = 0; column < table.getColumnCount(); column++)
+        {
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+
+            for (int row = 0; row < table.getRowCount(); row++)
+            {
+                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+                Component c = table.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width+10);
+
+                //  We've exceeded the maximum width, no need to check other rows
+
+                if (preferredWidth >= maxWidth)
+                {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+            preferredWidth=Math.max(preferredWidth, minwidth);
+            tableColumn.setPreferredWidth( preferredWidth );
+            
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,6 +256,7 @@ public class XeBus extends javax.swing.JPanel {
             try{
                 if (!jTable4.getValueAt(0, 0).toString().equals("")) {
                 XuLy.setID(id_xebus, jTable4, 0);
+                resize(jTable4);
                 }
                 }
                 catch(Exception ex)
@@ -270,6 +306,7 @@ public class XeBus extends javax.swing.JPanel {
             try{
             if (!jTable4.getValueAt(0, 0).toString().equals("")) {
                 XuLy.setID(id_xebus, jTable4, 0);
+                resize(jTable4);
             }
             }
             catch(Exception ex)
@@ -302,6 +339,7 @@ public class XeBus extends javax.swing.JPanel {
             try{
                 if (!jTable4.getValueAt(0, 0).toString().equals("")) {
                 XuLy.setID(id_xebus, jTable4, 0);
+                resize(jTable4);
                 }
                 }
             catch(Exception ex)

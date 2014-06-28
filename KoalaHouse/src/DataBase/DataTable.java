@@ -136,6 +136,10 @@ public class DataTable {
                 };
            
                 table.setModel(model);
+                statement.close();
+                statement2.close();
+                connect.close();
+            
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);

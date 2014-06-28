@@ -565,7 +565,7 @@
         <Component class="javax.swing.JLabel" name="jLabel48">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/print.png"/>
+              <Image iconType="3" name="/edu/com/image/xebus.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Print"/>
           </Properties>
@@ -576,7 +576,7 @@
         <Component class="javax.swing.JLabel" name="jLabel49">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/print.png"/>
+              <Image iconType="3" name="/edu/com/image/dkhoche.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Print"/>
           </Properties>
