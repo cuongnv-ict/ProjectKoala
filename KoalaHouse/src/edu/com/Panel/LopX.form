@@ -23,9 +23,7 @@
               <Component id="sua" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="xoa" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="chitiet" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="319" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="359" max="-2" attributes="0"/>
               <Component id="chuyenlop" min="-2" pref="140" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               <Component id="loc" min="-2" max="-2" attributes="0"/>
@@ -46,7 +44,6 @@
                   <Component id="sua" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="xoa" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="them" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="chitiet" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -173,17 +170,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_timkiemActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textfield_timkiemKeyTyped"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="chitiet">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/edu/com/image/chitiet.png"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Xem chi ti&#x1ebf;t"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chitietMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">

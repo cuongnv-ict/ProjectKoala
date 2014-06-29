@@ -244,8 +244,9 @@ public class SQLLopX {
             ArrayList<Integer> arr = new ArrayList<Integer>();
             Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
+            System.out.println(String.valueOf(tenhs));
+             System.out.println(String.valueOf(classes_id));
             rs1 = statement.executeQuery("select * from students where students.id in(select students_id from classes_has_students where classes_id = " + classes_id + " ) and isActive = 1 and FullName like '%" + tenhs + "%' ");
-            rs1 = Pstate.executeQuery();
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[12];
@@ -281,7 +282,12 @@ public class SQLLopX {
                     str[8] = rs1.getString(12);
                     str[9] = rs1.getString(14);
                     str[10] = false;
-                    str[11] = rs1.getInt(15);
+                    if (rs1.getString(15) == null) {
+                        str[11] = 1;
+                    } else {
+                        str[11] = rs1.getInt(15);
+                    }
+
                     data.add(str);
                 } while (rs1.next());
                 XuLy.SapXepTen(data, 1);
@@ -315,6 +321,7 @@ public class SQLLopX {
             table.setModel(model);
             statement.close();
             connect.close();
+            XuLy.resizeColumnWidth(table,XuLy.getSize(rowColumn));
             return arr;
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
@@ -366,7 +373,12 @@ public class SQLLopX {
                     str[8] = rs1.getString(12);
                     str[9] = rs1.getString(14);
                     str[10] = false;
-                    str[11] = rs1.getInt(15);
+                    if (rs1.getString(15) == null) {
+                        str[11] = 1;
+                    } else {
+                        str[11] = rs1.getInt(15);
+                    }
+
                     data.add(str);
                 } while (rs1.next());
                 XuLy.SapXepTen(data, 1);

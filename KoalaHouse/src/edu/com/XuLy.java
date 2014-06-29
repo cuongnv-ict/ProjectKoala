@@ -33,15 +33,29 @@ public class XuLy {
                 String[] StrArr_1 = o1[column].toString().toUpperCase().split(" ");
                 String[] StrArr_2 = o2[column].toString().toUpperCase().split(" ");
                 int x, y;
+                String tr_x = "";
+                String tr_y = "";
                 x = StrArr_1.length - 1;
                 y = StrArr_2.length - 1;
                 if (StrArr_1[x].charAt(0) == '(') {
-                    x--;
+                    for (int i = x - 1; i >= 0; i--) {
+                        tr_x += StrArr_1[i];
+                    }
+                } else {
+                    for (int i = x; i >= 0; i--) {
+                        tr_x += StrArr_1[i];
+                    }
                 }
                 if (StrArr_2[y].charAt(0) == '(') {
-                    y--;
+                    for (int i = y - 1; i >= 0; i--) {
+                        tr_y += StrArr_2[i];
+                    }
+                } else {
+                    for (int i = y; i >= 0; i--) {
+                        tr_y += StrArr_2[i];
+                    }
                 }
-                return StrArr_1[x].compareTo(StrArr_2[y]);
+                return tr_x.compareTo(tr_y);
             }
         });
     }
@@ -151,15 +165,15 @@ public class XuLy {
             }
             Component c = renderer.getTableCellRendererComponent(table, value, false, false, -1, column);
             width = Math.max(c.getPreferredSize().width, width);
-            x = x+width+10;
+            x = x + width + 10;
             columnModel.getColumn(column).setPreferredWidth(width + 10);
         }
         x = Toolkit.getDefaultToolkit().getScreenSize().width - x;
-        if(x<250){
+        if (x < 250) {
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        }else{
-             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        }   
+        } else {
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        }
     }
 
     public static int[] getSize(Object[][] o) {

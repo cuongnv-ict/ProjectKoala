@@ -65,7 +65,6 @@ public class LopX extends javax.swing.JPanel {
         sua.setEnabled(false);
         xoa.setEnabled(false);
         this.isadmin = false;
-        chitiet.setEnabled(false);
         chuyenlop.setEnabled(false);
     }
 
@@ -99,7 +98,6 @@ public class LopX extends javax.swing.JPanel {
         chuyenlop = new javax.swing.JButton();
         loc = new javax.swing.JComboBox();
         textfield_timkiem = new javax.swing.JTextField();
-        chitiet = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         lopx.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -182,14 +180,6 @@ public class LopX extends javax.swing.JPanel {
             }
         });
 
-        chitiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/chitiet.png"))); // NOI18N
-        chitiet.setToolTipText("Xem chi tiết");
-        chitiet.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chitietMouseClicked(evt);
-            }
-        });
-
         jButton1.setText("Tìm kiếm");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -208,9 +198,7 @@ public class LopX extends javax.swing.JPanel {
                 .addComponent(sua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chitiet)
-                .addGap(319, 319, 319)
+                .addGap(359, 359, 359)
                 .addComponent(chuyenlop, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
                 .addComponent(loc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,7 +217,6 @@ public class LopX extends javax.swing.JPanel {
                     .addComponent(sua)
                     .addComponent(xoa)
                     .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chitiet)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -287,6 +274,7 @@ public class LopX extends javax.swing.JPanel {
         if (lopx.getValueAt(0, 0).toString().equals("")) {
             return;
         }
+        System.out.println(model.getRowCount() );
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 10) == true) {
                 count--;
@@ -398,24 +386,6 @@ public class LopX extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_xoaMouseClicked
 
-    private void chitietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chitietMouseClicked
-        // TODO add your handling code here:
-        if (isadmin) {
-            for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 10) == true) {
-                    model.setValueAt(false, i, 10);
-                    int id = id_students.get(i);
-                    String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
-                    //HocSinhA.idTemp = id;
-                    HocSinhA aa = new HocSinhA(id);
-                    center.add(model.getValueAt(i, 1).toString(), aa);
-                    center.setSelectedComponent(aa);
-                    new CloseTabButton(center, center.getComponentCount() - 2);
-                }
-            }
-        }
-    }//GEN-LAST:event_chitietMouseClicked
-
     private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
         // TODO add your handling code here:
         if (textfield_timkiem.getText().equals("")) {
@@ -463,6 +433,7 @@ public class LopX extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
         } else {
             arr_sex =  new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
+            model = (DefaultTableModel) lopx.getModel();
             if (lopx.getValueAt(0, 0).toString().equals("")) {
                 JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -505,7 +476,6 @@ public class LopX extends javax.swing.JPanel {
     }//GEN-LAST:event_textfield_timkiemKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel chitiet;
     private javax.swing.JButton chuyenlop;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane3;

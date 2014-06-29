@@ -186,7 +186,7 @@ public class SQLDanhSachHocSinh {
             Object[] in = new Object[max];
             for (int j = 0; j < max; j++) {
                 if (i == 0) {
-                    in[j] = "x";
+                    in[j] = "s";
                     continue;
                 }
                 if (j < arr_content[i - 1].size()) {
