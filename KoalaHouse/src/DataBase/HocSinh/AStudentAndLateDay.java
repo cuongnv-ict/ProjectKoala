@@ -331,4 +331,13 @@ public class AStudentAndLateDay {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void setDatCoc(int idStudent, int idFac){
+        String query = "UPDATE `projectkoala`.`students` SET `IsDatCoc`='1' WHERE `Id`='"+idStudent+"' and`Faculties_Id`='"+idFac+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

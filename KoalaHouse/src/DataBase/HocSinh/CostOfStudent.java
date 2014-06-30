@@ -87,6 +87,17 @@ public class CostOfStudent {
                 Object str[] = new Object[6];
                 str[0] = rs1.getString(1);
                 str[1] = rs1.getString(4);
+                //kiem tra dat coc
+                boolean checkDatCoc = false;
+                String ten = str[1].toString();
+                ten = ten.toLowerCase();
+                 if(((ten.indexOf("dat")!= -1)&&(ten.indexOf("coc")!= -1))||((ten.indexOf("đặt")!= -1)&&(ten.indexOf("cọc")!= -1))){
+                    checkDatCoc = true;
+                }
+                 if(checkDatCoc){
+                     int datcoc = new Get().GetIsDatCoc(students_id, idFac);
+                     if(datcoc==1) continue;
+                 }
                 switch (rs1.getInt(3)) {
                     case 1:
                         str[2] = "Kỳ 1";
@@ -195,7 +206,9 @@ public class CostOfStudent {
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
                     if(phi==0){
-                        JOptionPane.showMessageDialog(null, "Học Sinh Này Không Còn Số Tiền Trông Muộn, Bạn Nên Xóa Phí Đó");
+                        JOptionPane.showMessageDialog(null, "Phí Trông Muộn Này Không Khả Dụng, Chương Trình Sẽ Tự Động Xóa");
+                        DeleteDSPhiCuaHs(students_id, Integer.parseInt(str[0].toString()), idFac);
+                        continue;
                     }
                     str[4] = phi;
                 }

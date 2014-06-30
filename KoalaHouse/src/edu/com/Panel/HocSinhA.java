@@ -716,6 +716,7 @@ public class HocSinhA extends javax.swing.JPanel {
                 {
                     int idCost = new RecieptManagerment().GetIdPhiDatCoc(id);
                     new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
+                    new AStudentAndLateDay().setDatCoc(id, idTrungTam);
                 }
             }
             Total();

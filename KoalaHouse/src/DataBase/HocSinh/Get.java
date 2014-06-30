@@ -55,7 +55,8 @@ public class Get{
             while(rs1.next()){
                 idClass = rs1.getInt(1);
             }
-            rs1 = statement.executeQuery("SELECT FullName FROM students, classes, classes_has_students where classes.Id = "+idClass+" and classes.Id = classes_has_students.Classes_Id and students.Id = classes_has_students.Students_Id;");
+            rs1 = statement.executeQuery("SELECT FullName FROM students, classes, classes_has_students where classes.Id = "+idClass+" and classes.Id = classes_has_students.Classes_Id and students.Id = classes_has_students.Students_Id"
+                    + " and students.isactive = 1;");
             while(rs1.next()){
                 String name = rs1.getString(1);
                 names.add(name);
@@ -162,6 +163,18 @@ public class Get{
         int number = 0;
         try {
             rs1 = statement.executeQuery("SELECT min(Year) FROM projectkoala.semesters where Faculties_Id = "+idFac+" and StartDate <= '"+date+"' and EndDate >= '"+date+"'");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+    }
+     public int GetIsDatCoc(int idStudent,int idFac){
+        int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT IsDatCoc FROM projectkoala.students Where Id = "+idStudent+" and Faculties_Id = "+idFac+"");
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
