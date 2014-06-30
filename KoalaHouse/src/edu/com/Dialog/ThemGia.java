@@ -394,7 +394,6 @@ public class ThemGia extends javax.swing.JDialog {
             hocHe.setSelected(false);
         } else {
             TenPhi.setEditable(true);
-            Ky.setSelectedIndex(0);
             Ky.setEnabled(true);
         }
     }//GEN-LAST:event_datcocActionPerformed
@@ -405,7 +404,6 @@ public class ThemGia extends javax.swing.JDialog {
             datcoc.setSelected(false);
             TenPhi.setEditable(false);
             TenPhi.setText("Phí Trông Muộn");
-            Ky.setSelectedIndex(0);
             Ky.setEnabled(true);
             hocHe.setSelected(false);
         } else {
