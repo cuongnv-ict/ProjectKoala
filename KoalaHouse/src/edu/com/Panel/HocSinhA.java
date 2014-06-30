@@ -186,6 +186,11 @@ public class HocSinhA extends javax.swing.JPanel {
         Panel_hocsinhA.setFocusCycleRoot(true);
         Panel_hocsinhA.setRequestFocusEnabled(false);
         Panel_hocsinhA.setVerifyInputWhenFocusTarget(false);
+        Panel_hocsinhA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Panel_hocsinhAMouseEntered(evt);
+            }
+        });
 
         NgaySinh.setText("2013-03-08");
 
@@ -747,6 +752,46 @@ public class HocSinhA extends javax.swing.JPanel {
                 dtcha.getText(),me.getText(),dtme.getText(),dtnha.getText(),email.getText());
         JOptionPane.showMessageDialog(Panel_hocsinhA, "Thông Tin Học Sinh Đã Được Cập Nhật");
     }//GEN-LAST:event_Button_HS_CapNhatActionPerformed
+
+    private void Panel_hocsinhAMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel_hocsinhAMouseEntered
+        // TODO add your handling code here:
+        AStudentAndLateDay a = new AStudentAndLateDay();
+            ArrayList info;
+            info = a.HocSinhA1(id);
+            ten = (String) info.get(1);
+            ngaySinh = (String) info.get(2);
+            father = (String) info.get(3);
+            sdtbo = (String) info.get(4);
+            mother = (String) info.get(5);
+            sdtme = (String) info.get(6);
+            homephone = (String) info.get(7);
+            thudt = (String) info.get(8);
+            hinhThucHoc = (String) info.get(9);
+            lop = (String) info.get(10);
+            trungTam = (String) info.get(11);
+            String thoihoc = (String) info.get(12);
+            edit_ten.setText(ten);
+        cha.setText(father);
+        NgaySinh.setText(ngaySinh);
+        dtcha.setText(sdtbo);
+        me.setText(mother);
+        dtme.setText(sdtme);
+        dtnha.setText(homephone);
+        email.setText(thudt);
+        HinhThucHoc.setText(hinhThucHoc);
+        Lop.setText(lop);
+        TrungTam.setText(trungTam);
+        int noPhi = new AStudentAndLateDay().GetDebt(id);
+        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
+        switch(TrungTam.getText().length()){
+            case 20: idTrungTam = 1;break;
+            case 22: idTrungTam = 2;break;
+            case 24: idTrungTam = 3;break;
+            case 25: idTrungTam = 4;break;
+        }
+        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
+        TimeTrongMuon.setText(String.valueOf(totalTime));
+    }//GEN-LAST:event_Panel_hocsinhAMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

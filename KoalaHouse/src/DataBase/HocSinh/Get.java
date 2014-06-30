@@ -100,7 +100,7 @@ public class Get{
             String query = "SELECT students.FullName, classes.NameClass,lateday.LateDate ,lateday.Time ";
             query +="FROM students, classes_has_students, classes, lateday ";
             query += "where students.Id = classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id ";
-            query +="and lateday.Students_Id = students.Id and lateday.isActive = 1";
+            query +="and lateday.Students_Id = students.Id and lateday.isActive = 1 and students.isactive = 1";
             rs1 = statement.executeQuery(query);
             while(rs1.next()){
                 Object str[] = new Object[4];
