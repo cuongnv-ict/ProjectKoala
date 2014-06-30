@@ -23,6 +23,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
     private boolean themorsua;//cho biet la them lop hay sua lop
     private String oldName;
     public int idtrungtam;
+    private int hshienco=0;
     /**
      * Creates new form ThemSuaLop
      */
@@ -42,6 +43,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
         ten.setText(vector.get(0).toString());
         giaovien.setText(vector.get(4).toString());
         sohs.setValue(Integer.parseInt(vector.get(6).toString()));
+        this.hshienco=Integer.parseInt(vector.get(5).toString());
         setSelectComboBox(ky, vector.get(3));
         setSelectComboBox(trangthai, vector.get(7));
         setSelectComboBox(trinhdo, vector.get(2)); 
@@ -292,6 +294,13 @@ public class ThemSuaLop extends javax.swing.JDialog {
             if(themorsua==true)//them lop
             {
                   DataTable data= new DataTable();
+                  if(tenlop.equals(""))
+                  {
+                    JOptionPane.showMessageDialog(null,"Tên lớp không được để trống!",null,JOptionPane.INFORMATION_MESSAGE);
+          
+                  }
+                  else
+                  {
                   if(data.ThemLop(tentrungtam, hocky, tentrinhdo, tenlop, tengiaovien, tonghs))
                     {
                         String message =String.format( "Bạn đã tạo thành công lớp mới");
@@ -299,9 +308,19 @@ public class ThemSuaLop extends javax.swing.JDialog {
                         button=true;
                         dispose();
                     }
+                  }
             }
             else
             {
+                if(tenlop.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Tên lớp không được để trống!",null,JOptionPane.INFORMATION_MESSAGE);
+          
+                }
+                else
+                {
+                if(hshienco<=Integer.parseInt(tonghs))
+                {    
                     DataTable data= new DataTable();
                     if(data.SuaLop(oldName,idtrungtam ,tentrungtam, hocky, tentrinhdo, tenlop, tengiaovien, tonghs, tentrangthai))
                     {
@@ -310,7 +329,14 @@ public class ThemSuaLop extends javax.swing.JDialog {
                         button=true;
                         dispose();
                     }
-                    
+                }
+                
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Số lượng tổng học sinh lớn hơn học sinh hiện có trong lớp, mời bạn sửa đổi",null,JOptionPane.INFORMATION_MESSAGE);
+        
+                }
+                }
              
             }
         }    

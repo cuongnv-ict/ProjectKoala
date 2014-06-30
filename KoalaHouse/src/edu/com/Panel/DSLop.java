@@ -322,23 +322,38 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
+        
         if(isadmin)
         {
-        int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-        if(click==JOptionPane.NO_OPTION){
-            return;
-        }
-        boolean xoaorkhong;
-        DataBase.DataTable data= new DataTable();
-        xoaorkhong=data.XoaLop(jTable4, 8);
-        if(xoaorkhong)
-        {
-        EditTable edit= new EditTable();
-        edit.removeManyRowOfTable(jTable4, 8);
-        
-        listkoala.taoTree();
-        }
-        model=(DefaultTableModel) jTable4.getModel();
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 8) == true) {
+                    flags = false;
+                }
+            }
+            if(!flags)
+            {
+                int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                if(click==JOptionPane.NO_OPTION){
+                    return;
+                }
+                boolean xoaorkhong;
+                DataBase.DataTable data= new DataTable();
+                xoaorkhong=data.XoaLop(jTable4, 8);
+                if(xoaorkhong)
+                {
+                EditTable edit= new EditTable();
+                edit.removeManyRowOfTable(jTable4, 8);
+
+                listkoala.taoTree();
+                }
+                model=(DefaultTableModel) jTable4.getModel();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Bạn chưa chọn lớp cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+   
+            }
         }
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 

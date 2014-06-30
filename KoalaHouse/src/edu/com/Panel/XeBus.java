@@ -329,22 +329,44 @@ public class XeBus extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-       
-        boolean xoaorkhong;
-        DataBase.SQLXeBus data= new DataBase.SQLXeBus();
-        xoaorkhong=data.xoaxebus(jTable4, 10);
-       
-          new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
-            id_xebus = new ArrayList<Integer>();
-            try{
-                if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_xebus, jTable4, 0);
-                resize(jTable4);
+       if(isadmin)
+       {
+            model= (DefaultTableModel) jTable4.getModel();
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 10) == true) {
+                    flags = false;
                 }
+            }
+            if(!flags)
+            {
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                if(click==JOptionPane.NO_OPTION){
+                    return;
                 }
-            catch(Exception ex)
-            {}
-        
+                
+                boolean xoaorkhong;
+                DataBase.SQLXeBus data= new DataBase.SQLXeBus();
+                xoaorkhong=data.xoaxebus(jTable4, 10);
+
+                  new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+                    id_xebus = new ArrayList<Integer>();
+                    try{
+                        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+                        XuLy.setID(id_xebus, jTable4, 0);
+                        resize(jTable4);
+                        }
+                        }
+                    catch(Exception ex)
+                    {}
+                    
+            }
+            else
+            {
+                 JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+               
+            }
+       }
     }//GEN-LAST:event_xoaMouseClicked
 
 

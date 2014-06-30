@@ -375,26 +375,48 @@ public class DKHocHe extends javax.swing.JPanel {
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
 
-        boolean xoaorkhong;
-        DataBase.SQLkyhe data= new DataBase.SQLkyhe();
-        xoaorkhong=data.xoaDkHe(jTable4, 5);
-
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-        id_hoche = new ArrayList<Integer>();
-            try
+        if(isadmin)
+        {
+            model= (DefaultTableModel) jTable4.getModel();
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i,5) == true) {
+                    flags = false;
+                }
+            }
+            if(!flags)
             {
-            
-            
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-            XuLy.setID(id_hoche, jTable4, 0);
-            resize(jTable4);
-            }
-            }
-            catch(Exception ex)
-            {
-                
-            }
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                if(click==JOptionPane.NO_OPTION){
+                    return;
+                }
+              
+                boolean xoaorkhong;
+                DataBase.SQLkyhe data= new DataBase.SQLkyhe();
+                xoaorkhong=data.xoaDkHe(jTable4, 5);
 
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                id_hoche = new ArrayList<Integer>();
+                    try
+                    {
+
+
+                    if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                    XuLy.setID(id_hoche, jTable4, 0);
+                    resize(jTable4);
+                    }
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+       
+            }
+        }
     }//GEN-LAST:event_xoaMouseClicked
 
     private void xemlichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xemlichMouseClicked
