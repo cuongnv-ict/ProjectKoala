@@ -44,13 +44,13 @@ public class ThemGia extends javax.swing.JDialog {
         title.setText("Chỉnh sửa học phí");
         datcoc.setSelected(new DataBase.SQLHocPhi().getSelected(id));
         if (datcoc.isSelected()) {
-            TenPhi.setEnabled(false);
+            TenPhi.setEditable(false);
             Ky.setEnabled(false);
         }
         TenPhi.setText(vector.get(1).toString());
         trongmuon.setSelected(vector.get(1).toString().equals("Phí Trông Muộn"));
         if (trongmuon.isSelected()) {
-            TenPhi.setEnabled(false);
+            TenPhi.setEditable(false);
         }
         Gia.setText(vector.get(6).toString());
         setComboBox(Ky, vector.get(2).toString());

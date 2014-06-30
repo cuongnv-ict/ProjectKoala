@@ -49,7 +49,7 @@ public class SQLHocPhi {
         try {
             Object[] nameColumn = {"STT", "Tên", "Kì học", "Năm học", "Ngày bắt đầu", "Ngày kết thúc", "Giá", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select Id,NameCost,Semesters,year,StartDate,EndDate,Amount from cost where cost.Faculties_Id = " + ThongTin.trungtam);
+            rs1 = statement.executeQuery("select Id,NameCost,Semesters,year,StartDate,EndDate,Amount from cost where cost.Faculties_Id = " + ThongTin.trungtam+" order by year,Semesters");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[8];
@@ -105,7 +105,6 @@ public class SQLHocPhi {
                     }
                     str[7] = false;
                     data.add(str);
-                    XuLy.SapXepTen(data, 1);
                 }
             }
             Object[][] rowColumn = new Object[data.size()][];

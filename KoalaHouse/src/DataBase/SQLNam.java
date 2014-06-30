@@ -126,4 +126,18 @@ public class SQLNam {
             return false;
         }
     }
+
+    public int getID() {
+        try {
+            rs1 = statement.executeQuery("SELECT year FROM projectkoala.semesters where Faculties_Id=" + ThongTin.trungtam + " and isactivity = 1 group by year ");
+            if (rs1.next()) {
+                return rs1.getInt(1);
+            } else {
+                return 2013;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLNam.class.getName()).log(Level.SEVERE, null, ex);
+            return 2013;
+        }
+    }
 }

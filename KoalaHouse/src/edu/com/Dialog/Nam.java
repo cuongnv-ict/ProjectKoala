@@ -24,7 +24,9 @@ public class Nam extends javax.swing.JDialog {
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 300, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
-        Vector e[] = new DataBase.SQLNam().getNamHoc(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]));
+        int h = new DataBase.SQLNam().getID();
+        setComBoBox(NamHoc, String.valueOf(h)+"-"+String.valueOf(h+1));
+        Vector e[] = new DataBase.SQLNam().getNamHoc(h);
         if (e == null) {
             int x = NamHoc.getSelectedIndex();
             B_Nam1.setSelectedIndex(x);
@@ -64,7 +66,7 @@ public class Nam extends javax.swing.JDialog {
             setComBoBox(E_Ngay4, e[3].get(3).toString());
             setComBoBox(E_Thang4, e[3].get(4).toString());
             setComBoBox(E_Nam4, e[3].get(5).toString());
-            active.setSelected(new DataBase.SQLNam().getIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0])));
+            active.setSelected(new DataBase.SQLNam().getIsActiveSemester(h));
         }
     }
 

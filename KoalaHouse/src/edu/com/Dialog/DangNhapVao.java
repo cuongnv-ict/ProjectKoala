@@ -7,6 +7,7 @@ package edu.com.Dialog;
 import DataBase.ConnectData;
 import edu.com.ListKoala;
 import edu.com.ThongTin;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 /**
@@ -144,6 +145,7 @@ public class DangNhapVao extends javax.swing.JDialog {
         
         ListKoala center = new ListKoala();
         this.setVisible(false);
+        center.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         center.setVisible(true);
         this.dispose();
         this.addWindowListener(new java.awt.event.WindowAdapter() {

@@ -350,13 +350,9 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_SuaTaiKhoan = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         Menu_DangXuat = new javax.swing.JMenuItem();
-        Menu_Update = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        Menu_DongBo = new javax.swing.JMenuItem();
-        Menu_BackUp = new javax.swing.JMenuItem();
 
         them.setText("them");
         tuychon.add(them);
@@ -694,9 +690,6 @@ public class ListKoala extends javax.swing.JFrame {
         });
         Namhoc.add(Menu_DangXuat);
 
-        Menu_Update.setText("Cập nhật hệ thống");
-        Namhoc.add(Menu_Update);
-
         CapNhatNamHoc.setText("Cập nhật năm học");
         CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -727,16 +720,6 @@ public class ListKoala extends javax.swing.JFrame {
         Namhoc.add(Menu_thoat);
 
         jMenuBar1.add(Namhoc);
-
-        jMenu2.setText("Dữ Liệu");
-
-        Menu_DongBo.setText("Đồng Bộ");
-        jMenu2.add(Menu_DongBo);
-
-        Menu_BackUp.setText("Backup");
-        jMenu2.add(Menu_BackUp);
-
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -1343,13 +1326,10 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem A;
     private javax.swing.JMenuItem CapNhatNamHoc;
     private javax.swing.JMenuItem D;
-    private javax.swing.JMenuItem Menu_BackUp;
     private javax.swing.JMenuItem Menu_DangXuat;
-    private javax.swing.JMenuItem Menu_DongBo;
     private javax.swing.JMenuItem Menu_SuaTaiKhoan;
     private javax.swing.JMenu Menu_TaiKhoan;
     private javax.swing.JMenuItem Menu_ThemTaiKhoan;
-    private javax.swing.JMenuItem Menu_Update;
     private javax.swing.JMenuItem Menu_thoat;
     private javax.swing.JMenu Namhoc;
     private javax.swing.JTabbedPane Panel_GDChinh;
@@ -1376,7 +1356,6 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JPanel jPanel3;

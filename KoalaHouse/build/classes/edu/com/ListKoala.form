@@ -122,11 +122,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Menu_DangXuatActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="Menu_Update">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t h&#x1ec7; th&#x1ed1;ng"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="CapNhatNamHoc">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t n&#x103;m h&#x1ecd;c"/>
@@ -151,23 +146,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Menu_thoatActionPerformed"/>
               </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="D&#x1eef; Li&#x1ec7;u"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="Menu_DongBo">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x110;&#x1ed3;ng B&#x1ed9;"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="Menu_BackUp">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Backup"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
