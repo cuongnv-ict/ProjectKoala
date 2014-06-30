@@ -15,9 +15,15 @@ import edu.com.XuLy;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -29,7 +35,17 @@ import java.util.GregorianCalendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttribute;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.Media;
+import javax.print.attribute.standard.MediaPrintableArea;
+import javax.print.attribute.standard.MediaSize;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -575,13 +591,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -735,18 +744,24 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         //print
         PrinterJob pj = PrinterJob.getPrinterJob();
-        pj.setJobName("Print Details");
-        jButton1.setVisible(false);
-        pj.setPrintable(this);
+        //PageFormat pf = pj.pageDialog(pj.defaultPage());
         
-        boolean toPrint = pj.printDialog();
+        pj.setJobName("Print Details");
+        //jButton1.setVisible(false);
+        pj.setPrintable(this);
+        PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
+        printRequest.add(MediaSizeName.ISO_A5);
+        printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
+        
+        boolean toPrint = pj.printDialog(printRequest);
+        
         if(toPrint) {
             try {
-                pj.print();
-                jButton1.setVisible(true);
+                pj.print(printRequest);
+               // jButton1.setVisible(true);
             } catch (PrinterException ex) {
                 Logger.getLogger(HoaDon.class.getName()).log(Level.SEVERE, null, ex);
-                jButton1.setVisible(true);
+               // jButton1.setVisible(true);
             }
         }
         
@@ -767,9 +782,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String phantram = "0";
         new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
-        //update xe bus
-        new RecieptManagerment().UpdateXeBus(idStudent);
-        new RecieptManagerment().UpdateSummerWeek(idStudent);
         dispose();
         }
         jButton1.setVisible(true);
@@ -927,25 +939,200 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JComboBox thang;
     // End of variables declaration//GEN-END:variables
 public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterException {
+        getComponentsOfReceived();
         if(page > 0) {
             return Printable.NO_SUCH_PAGE;
         }
         
-        Dimension dim = this.getSize();
-        double cHeight = dim.getHeight();
-        double cWidth = dim.getWidth();
-        double pHeight = pf.getImageableHeight();
-        double pWidth = pf.getImageableWidth();
-        
-        double xScale = pWidth / cWidth;
-        double yScale = pHeight / cHeight;
-        Graphics2D g2d = (Graphics2D)grphcs;
+        Font font = new Font("Serif", Font.PLAIN, 12);
+        Graphics2D g2d = (Graphics2D) grphcs;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        g2d.scale(xScale, yScale);
+        grphcs.setFont(font);
         
-        this.paint(g2d);
-        this.repaint();
+        grphcs.drawString(lbTitle, 150, 30);
+        // ve image
+        grphcs.drawImage(imageOfLabel, 10, 20, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
+        
+        grphcs.drawString(lbDiaChi, 110, 50);
+        grphcs.drawString(lbDienThoai, 110, 70);
+        grphcs.drawString(tfDiaChi, 180, 50);
+        grphcs.drawString(tfDienThoai, 180, 70);
+        font = new Font("Serif", Font.BOLD, 14);
+        grphcs.setFont(font);
+        grphcs.drawString(lbHoaDon, 150, 110);
+        font = new Font("Serif", Font.PLAIN, 12);
+        grphcs.setFont(font);
+        
+        grphcs.drawString(lbNgay, 20, 140);
+        grphcs.drawString(cbNgay, 50, 140);
+        grphcs.drawString(lbThang, 65, 140);
+        grphcs.drawString(cbThang, 100, 140);
+        grphcs.drawString(lbNam, 105, 140);
+        grphcs.drawString(cbNam, 135, 140);
+        grphcs.drawString(lbSo, 300, 140);
+        grphcs.drawString(tfSo, 320, 140);
+        grphcs.drawString(lbHoTen, 20, 160);
+        grphcs.drawString(tfHoTen, 75, 160);
+        grphcs.drawString(lbMa, 180, 160);
+        grphcs.drawString(tfMa, 200, 160);
+        grphcs.drawString(lbCoso, 270, 160);
+        grphcs.drawString(tfCoso, 310, 160);
+        grphcs.drawString(lbNguoiThanhToan, 20, 180);
+        grphcs.drawString(tfNguoiThanhToan, 75, 180);
+        grphcs.drawString(lbLop, 180, 180);
+        grphcs.drawString(tfLop, 200, 180);
+        grphcs.drawString(lbHinhThucThanhToan, 290, 180);
+        grphcs.drawString(tfHinhThucThanhToan, 360, 180);
+        
+        String tableDataToString = "";
+        grphcs.drawString("Tên Phí", 30, 210);
+        grphcs.drawString("Kỳ học", 130, 210);
+        grphcs.drawString("Năm học", 230, 210);
+        grphcs.drawString("Giá", 330, 210);
+        
+        for(int i = 0 ; i < nRow ; i++) {
+            for(int j = 0 ; j < nCol ; j++) {
+                if(tableData[i][j] == null) {
+                    tableDataToString = "trong";
+                } else {
+                    tableDataToString = (String) tableData[i][j];
+                }
+                if(j == 0) {
+                    grphcs.drawString(tableDataToString, 30, (210 + (i + 1) * 20));
+                } else if(j == 1) {
+                    grphcs.drawString(tableDataToString, 130, (210 + (i + 1) * 20));
+                } else if(j == 2) {
+                    grphcs.drawString(tableDataToString, 230, (210 + (i + 1) * 20));
+                } else {
+                    grphcs.drawString(tableDataToString, 330, (210 + (i + 1) * 20));
+                }
+            }
+        }
+        
+        grphcs.drawString(lbTongTien, 30, 500);
+        grphcs.drawString(tfTongTien, 90, 500);
+        grphcs.drawString(lbDathu, 290, 500);
+        grphcs.drawString(tfDaThu, 335, 500);
+        grphcs.drawString(lbStbc, 30, 520);
+        
+        grphcs.drawString(lbNguoiNop, 50, 540);
+        grphcs.drawString(lbNguoiThu, 280, 540);
+        grphcs.drawString(tfNguoiNop, 45, 570);
+        grphcs.drawString(tfNguoiThu, 280, 570);
         
         return Printable.PAGE_EXISTS;
     }
+public Image ConvertToImage(Icon icon) {
+    if(icon instanceof ImageIcon) {
+        return ((ImageIcon) icon).getImage();
+    } else {
+        int w = icon.getIconWidth();
+        int h = icon.getIconHeight();
+        
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        GraphicsConfiguration gc = gd.getDefaultConfiguration();
+        BufferedImage image = gc.createCompatibleImage(w, h);
+        return image;
+    }
+}
+
+private Icon iconOfLabel;
+private Image imageOfLabel;
+private String lbTitle;
+private String lbDiaChi;
+private String lbDienThoai;
+private String tfDiaChi;
+private String tfDienThoai;
+private String lbHoaDon;
+private String lbNgay;
+private String lbThang;
+private String lbNam;
+private String cbNgay;
+private String cbThang;
+private String cbNam;
+private String lbSo;
+private String tfSo;
+private String lbHoTen;
+private String lbMa;
+private String lbCoso;
+private String tfHoTen;
+private String tfMa;
+private String tfCoso;
+private String lbNguoiThanhToan;
+private String lbLop;
+private String lbHinhThucThanhToan;
+private String tfNguoiThanhToan;
+private String tfLop;
+private String tfHinhThucThanhToan;
+private int nRow;
+private int nCol;
+private Object[][] tableData;
+private String lbTongTien;
+private String lbDathu;
+private String tfTongTien;
+private String tfDaThu;
+private String lbNguoiNop;
+private String lbNguoiThu;
+private String tfNguoiNop;
+private String tfNguoiThu;
+private String lbStbc;
+
+private void getTableData(JTable table) {
+    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+    nRow = tableModel.getRowCount();
+    nCol = tableModel.getColumnCount();
+    
+    tableData = new Object[nRow][nCol];
+    for(int i = 0 ; i < nRow ; i++) {
+        for(int j = 0 ; j < nCol ; j++) {
+            tableData[i][j] = tableModel.getValueAt(i, j);
+        }
+    }
+}
+
+public void getComponentsOfReceived() {
+    iconOfLabel = jLabel4.getIcon();
+    imageOfLabel = ConvertToImage(iconOfLabel);
+    lbTitle = jLabel2.getText();
+    lbDiaChi = jLabel1.getText();
+    lbDienThoai = jLabel3.getText();
+    tfDiaChi = DiaChi.getText();
+    tfDienThoai = DienThoaiTrungTam.getText();
+    lbHoaDon = jLabel5.getText();
+    lbNgay = jLabel6.getText();
+    lbThang = jLabel7.getText();
+    lbNam = jLabel8.getText();
+    cbNgay = String.valueOf(ngay.getSelectedItem());
+    cbThang = String.valueOf(thang.getSelectedItem());
+    cbNam = String.valueOf(nam.getSelectedItem());
+    lbSo = jLabel10.getText();
+    tfSo = stt.getText();
+    lbHoTen = jLabel11.getText();
+    lbMa = jLabel12.getText();
+    lbCoso = jLabel13.getText();
+    tfHoTen = TenHocSinh.getText();
+    tfMa = idHS.getText();
+    tfCoso = tenTrungTam.getText();
+    lbNguoiThanhToan = jLabel17.getText();
+    lbLop = jLabel18.getText();
+    lbHinhThucThanhToan = jLabel19.getText();
+    tfNguoiThanhToan = NguoiDaiDien.getText();
+    tfLop = tenLop.getText();
+    tfHinhThucThanhToan = String.valueOf(HinhThucDong.getSelectedItem());
+    getTableData(jTable1);
+    lbTongTien = jLabel23.getText();
+    tfTongTien = TongTien.getText();
+    
+    if(checkDaThu.isSelected()) {
+        lbDathu = checkDaThu.getText();
+        tfDaThu = daThu.getText();
+    }
+    
+    lbNguoiNop = jLabel14.getText();
+    lbNguoiThu = jLabel9.getText();
+    tfNguoiNop = nguoiNop.getText();
+    tfNguoiThu = nguoiThu.getText();
+    lbStbc = stbc.getText();
+}
 }

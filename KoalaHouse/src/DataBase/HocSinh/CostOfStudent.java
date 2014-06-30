@@ -13,6 +13,7 @@ package DataBase.HocSinh;
 import DataBase.ConnectData;
 import DataBase.DataTable;
 import edu.com.XuLy;
+import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,6 +87,17 @@ public class CostOfStudent {
                 Object str[] = new Object[6];
                 str[0] = rs1.getString(1);
                 str[1] = rs1.getString(4);
+                //kiem tra dat coc
+                boolean checkDatCoc = false;
+                String ten = str[1].toString();
+                ten = ten.toLowerCase();
+                 if(((ten.indexOf("dat")!= -1)&&(ten.indexOf("coc")!= -1))||((ten.indexOf("đặt")!= -1)&&(ten.indexOf("cọc")!= -1))){
+                    checkDatCoc = true;
+                }
+                 if(checkDatCoc){
+                     int datcoc = new Get().GetIsDatCoc(students_id, idFac);
+                     if(datcoc==1) continue;
+                 }
                 switch (rs1.getInt(3)) {
                     case 1:
                         str[2] = "Kỳ 1";
@@ -104,6 +116,9 @@ public class CostOfStudent {
                         break;
                 }
                 str[3] = rs1.getString(6).substring(0, 4);
+                int year = Integer.parseInt(String.valueOf(str[3]));
+                year ++;
+                str[3] = String.valueOf(year-1)+"-"+String.valueOf(year);
                 str[4] = rs1.getString(5);        
                 if(((String)str[4]).charAt(0)=='-'){
                     str[4] = ((String)str[4]).substring(1);
@@ -149,10 +164,15 @@ public class CostOfStudent {
                 str[1] = rs1.getString(4);
                 //kiem tra xem có phai trong muon hay ko
                 boolean check = false;
+                //kiem tra xem co phai ky he khong
+                boolean kiHe = false;
                 String ten = str[1].toString();
                 ten = ten.toLowerCase();
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                     check = true;
+                }
+                 if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
                 }
                 switch (rs1.getInt(3)) {
                     case 1:
@@ -172,6 +192,9 @@ public class CostOfStudent {
                         break;
                 }
                 str[3] = rs1.getString(6).substring(0, 4);
+                int year = Integer.parseInt(String.valueOf(str[3]));
+                year ++;
+                str[3] = String.valueOf(year-1)+"-"+String.valueOf(year);
                 str[4] = rs1.getString(5);        
                 if(((String)str[4]).charAt(0)=='-'){
                     str[4] = ((String)str[4]).substring(1);
@@ -183,8 +206,16 @@ public class CostOfStudent {
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
                     if(phi==0){
-                        JOptionPane.showMessageDialog(null, "Học Sinh Này Không Còn Số Tiền Trông Muộn, Bạn Nên Xóa Phí Đó");
+                        JOptionPane.showMessageDialog(null, "Phí Trông Muộn Này Không Khả Dụng, Chương Trình Sẽ Tự Động Xóa");
+                        DeleteDSPhiCuaHs(students_id, Integer.parseInt(str[0].toString()), idFac);
+                        continue;
                     }
+                    str[4] = phi;
+                }
+                if(kiHe){
+                    int number = new Get().GetNumberSummerWeek(students_id);
+                    int phi = Integer.parseInt((String) str[4]);
+                    phi = phi * number;
                     str[4] = phi;
                 }
                 str[4] = XuLy.setMoney(str[4].toString());
@@ -197,6 +228,19 @@ public class CostOfStudent {
                 if(rs1.getInt(1)>0){
                 str1[0]= "0";
                 str1[1] = "Nợ";
+                str1[2] = "---";
+                str1[3] = "---";
+                str1[4] = XuLy.setMoney(rs1.getString(1));
+                data.add(str1);
+                }
+            }
+            //xem co phi xe bus không
+            rs1 = statement.executeQuery("SELECT TienXe,StartDate,EndDate FROM projectkoala.buslist where idStudents = "+students_id+" and IsActive = 1;");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0]= "1";
+                str1[1]="Xe Bus";
                 str1[2] = "---";
                 str1[3] = "---";
                 str1[4] = XuLy.setMoney(rs1.getString(1));

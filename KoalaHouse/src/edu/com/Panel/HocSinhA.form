@@ -40,6 +40,9 @@
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Panel_hocsinhAMouseEntered"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">

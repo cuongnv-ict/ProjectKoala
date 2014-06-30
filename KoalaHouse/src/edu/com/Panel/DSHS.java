@@ -171,6 +171,7 @@ public class DSHS extends javax.swing.JPanel {
             }
         };
         LoaiHS = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         DSHS.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         DSHS.setModel(new javax.swing.table.DefaultTableModel(
@@ -201,6 +202,13 @@ public class DSHS extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,13 +217,17 @@ public class DSHS extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LoaiHS, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 789, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LoaiHS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -309,6 +321,11 @@ public class DSHS extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_LoaiHSActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        this.LoaiHSActionPerformed(null);
+    }//GEN-LAST:event_jLabel1MouseClicked
 public static void resizeColumnWidth(JTable table,int size) {
          int x = 0;
         final TableColumnModel columnModel = table.getColumnModel();
@@ -340,6 +357,7 @@ public static void resizeColumnWidth(JTable table,int size) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DSHS;
     private javax.swing.JComboBox LoaiHS;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane8;
     // End of variables declaration//GEN-END:variables
 }

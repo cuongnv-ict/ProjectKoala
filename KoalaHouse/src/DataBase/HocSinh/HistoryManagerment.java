@@ -124,10 +124,14 @@ public class HistoryManagerment {
                 str[1] = rs1.getString(4);
                 //kiem tra xem có phai trong muon hay ko
                 boolean check = false;
+                boolean kiHe = false;
                 String ten = str[1].toString();
                 ten = ten.toLowerCase();
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                     check = true;
+                }
+                 if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
                 }
                 switch (rs1.getInt(3)) {
                     case 1:
@@ -147,6 +151,9 @@ public class HistoryManagerment {
                         break;
                 }
                 str[3] = rs1.getString(6).substring(0, 4);
+                int year = Integer.parseInt(String.valueOf(str[3]));
+                year ++;
+                str[3] = String.valueOf(year-1)+"-"+String.valueOf(year);
                 str[4] = rs1.getString(5);        
                 if(((String)str[4]).charAt(0)=='-'){
                     str[4] = ((String)str[4]).substring(1);
@@ -157,6 +164,12 @@ public class HistoryManagerment {
                     int phi = Integer.parseInt((String) str[4]);
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
+                    str[4] = phi;
+                }
+                if(kiHe){
+                    int number = new Get().GetNumberSummerWeek(students_id);
+                    int phi = Integer.parseInt((String) str[4]);
+                    phi = phi * number;
                     str[4] = phi;
                 }
                 str[4] = XuLy.setMoney(str[4].toString());

@@ -12,6 +12,7 @@ package DataBase.HocSinh;
  */
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,48 +52,42 @@ public class GetTotal {
          try {
             Object [] nameColumn = {"Mã",  "Tên", "Kì học", "Năm học", "Giá" };
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+" and IsDebt =1)");
+             rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+" and IsDebt =1)");
             while(rs1.next()){
-                Object str[] = new Object[5];
-                str[0]= rs1.getString(1);
-                str[1] = rs1.getString(4);
+                Object str[] = new Object[4];
+                str[0] = rs1.getString(4);
                 //kiem tra xem có phai trong muon hay ko
                 boolean check = false;
-                String ten = str[1].toString();
+                boolean kiHe = false;
+                String ten = str[0].toString();
                 ten = ten.toLowerCase();
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                     check = true;
                 }
-                switch (rs1.getInt(3)) {
-                    case 1:
-                        str[2] = "Kỳ 1";
-                        break;
-                    case 2:
-                        str[2] = "Kỳ 2";
-                        break;
-                    case 3:
-                        str[2] = "Kỳ 3";
-                        break;
-                    case 4:
-                        str[2] = "Kỳ hè";
-                        break;
-                    case 5:
-                        str[2] = "Cả năm";
-                        break;
+                if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
                 }
-                str[3] = rs1.getString(6).substring(0, 4);
-                str[4] = rs1.getString(5);        
-                if(((String)str[4]).charAt(0)=='-'){
-                    str[4] = ((String)str[4]).substring(1);
+                str[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                str[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str[3] = rs1.getString(5);
+                if(((String)str[3]).charAt(0)=='-'){
+                    str[3] = ((String)str[3]).substring(1);
                 }
                 if(check){
                     String ki = rs1.getString(3);
                     String nam = rs1.getString(6).substring(0, 4);
-                    int phi = Integer.parseInt((String) str[4]);
+                    int phi = Integer.parseInt((String) str[3]);
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
-                    str[4] = phi;
+                    str[3] = phi;
                 }
+                if(kiHe){
+                    int number = new Get().GetNumberSummerWeek(students_id);
+                    int phi = Integer.parseInt((String) str[3]);
+                    phi = phi * number;
+                    str[3] = phi;
+                }
+                str[3] = XuLy.setMoney(str[3].toString());
                 data.add(str);
             }
             //xem xem hoc sinh co bi no khong
@@ -100,11 +95,38 @@ public class GetTotal {
             while(rs1.next()){
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
-                str1[0]= "0";
-                str1[1] = "Nợ";
+                str1[0]= "Nợ";
+                str1[1] = "---";
                 str1[2] = "---";
-                str1[3] = "---";
-                str1[4] = rs1.getString(1);
+                str1[3] = XuLy.setMoney(rs1.getString(1));
+                data.add(str1);
+                }
+            }
+            //xem co dong hoc phi dat coc khong
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0]= rs1.getString(4)+" (Hoàn Trả)";
+                str1[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                str1[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str1[3] = rs1.getString(5);        
+                if(((String)str1[3]).charAt(0)=='-'){
+                    str1[3] = ((String)str1[3]).substring(1);
+                }
+                str1[3] = XuLy.setMoney(str1[3].toString());
+                //data.add(str1);
+                }
+            }
+            //xem co phi xe bus không
+            rs1 = statement.executeQuery("SELECT TienXe,StartDate,EndDate FROM projectkoala.buslist where idStudents = "+students_id+" and IsActive = 1;");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0]= "Xe Bus";
+                str1[1] = new XuLiXau().NamThangNgay(rs1.getString(2));
+                str1[2] = new XuLiXau().NamThangNgay(rs1.getString(3));
+                str1[3] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 }
             }
@@ -112,7 +134,7 @@ public class GetTotal {
             for(int i=0;i<data.size();i++){
                 Object str[] = new Object[5];
                 str = data.get(i);
-                total += Integer.parseInt(str[4].toString());
+                total += Integer.parseInt(XuLy.getMoney(str[3].toString()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,7 +144,7 @@ public class GetTotal {
     public int GetIdSemester(int idFac,String nam,String date){
     int idSemester =0;
         try {
-            rs1 = statement.executeQuery("SELECT min(SemesterNumber) FROM projectkoala.semesters where Year = "+nam+" and Faculties_Id = "+idFac+" and StartDate <= '"+date+"' and EndDate >= '"+date+"'");
+            rs1 = statement.executeQuery("SELECT min(SemesterNumber) FROM projectkoala.semesters where Faculties_Id = "+idFac+" and StartDate <= '"+date+"' and EndDate >= '"+date+"'");
             if(rs1!= null)
             while(rs1.next()){
                 idSemester = rs1.getInt(1);

@@ -28,26 +28,33 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="datcoc" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="hocHe" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="DongY" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="Ky" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="DongY" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="Ky" min="-2" pref="81" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" pref="51" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="HuyBo" max="32767" attributes="0"/>
-                                  <Component id="trongmuon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Nam" alignment="0" pref="103" max="32767" attributes="0"/>
-                              </Group>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="datcoc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="HuyBo" max="32767" attributes="0"/>
+                          <Component id="trongmuon" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Nam" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -127,6 +134,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="datcoc" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="trongmuon" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hocHe" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -181,7 +189,7 @@
             <StringItem index="0" value="H&#x1ecd;c K&#x1ef3; 1"/>
             <StringItem index="1" value="H&#x1ecd;c K&#x1ef3; 2"/>
             <StringItem index="2" value="H&#x1ecd;c K&#x1ef3; 3"/>
-            <StringItem index="3" value="H&#x1ecd;c K&#x1ef3; 4"/>
+            <StringItem index="3" value="H&#x1ecd;c K&#x1ef3; H&#xe8;"/>
             <StringItem index="4" value="C&#x1ea3; N&#x103;m"/>
           </StringArray>
         </Property>
@@ -460,6 +468,14 @@
           </StringArray>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="hocHe">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ph&#xed; H&#x1ecd;c H&#xe8;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hocHeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

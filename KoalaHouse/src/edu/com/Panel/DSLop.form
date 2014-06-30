@@ -39,7 +39,7 @@
                   <Component id="Button_DSLop_Xoa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
-              <Component id="jScrollPane6" alignment="0" pref="1100" max="32767" attributes="0"/>
+              <Component id="jScrollPane6" alignment="0" pref="929" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -51,7 +51,7 @@
                       <Component id="Button_DSLop_Xoa" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane6" pref="461" max="32767" attributes="0"/>
+                  <Component id="jScrollPane6" pref="313" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

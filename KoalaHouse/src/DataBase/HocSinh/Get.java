@@ -55,7 +55,8 @@ public class Get{
             while(rs1.next()){
                 idClass = rs1.getInt(1);
             }
-            rs1 = statement.executeQuery("SELECT FullName FROM students, classes, classes_has_students where classes.Id = "+idClass+" and classes.Id = classes_has_students.Classes_Id and students.Id = classes_has_students.Students_Id;");
+            rs1 = statement.executeQuery("SELECT FullName FROM students, classes, classes_has_students where classes.Id = "+idClass+" and classes.Id = classes_has_students.Classes_Id and students.Id = classes_has_students.Students_Id"
+                    + " and students.isactive = 1;");
             while(rs1.next()){
                 String name = rs1.getString(1);
                 names.add(name);
@@ -99,7 +100,7 @@ public class Get{
             String query = "SELECT students.FullName, classes.NameClass,lateday.LateDate ,lateday.Time ";
             query +="FROM students, classes_has_students, classes, lateday ";
             query += "where students.Id = classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id ";
-            query +="and lateday.Students_Id = students.Id and lateday.isActive = 1";
+            query +="and lateday.Students_Id = students.Id and lateday.isActive = 1 and students.isactive = 1";
             rs1 = statement.executeQuery(query);
             while(rs1.next()){
                 Object str[] = new Object[4];
@@ -114,6 +115,12 @@ public class Get{
             for (int i = 0; i < data.size(); i++){
             rowColumn[i] = data.get(i);
             model = new DefaultTableModel(rowColumn, nameColumn){
+                boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
             };
             table.setModel(model);
         }
@@ -151,5 +158,29 @@ public class Get{
         }
         return number;
         
+    }
+     public int GetYear(int idFac,String date){
+        int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT min(Year) FROM projectkoala.semesters where Faculties_Id = "+idFac+" and StartDate <= '"+date+"' and EndDate >= '"+date+"'");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+    }
+     public int GetIsDatCoc(int idStudent,int idFac){
+        int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT IsDatCoc FROM projectkoala.students Where Id = "+idStudent+" and Faculties_Id = "+idFac+"");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
     }
 }

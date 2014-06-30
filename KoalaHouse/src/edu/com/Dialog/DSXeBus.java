@@ -195,8 +195,6 @@ public class DSXeBus extends javax.swing.JDialog {
 
         jLabel2.setText("Học Sinh:");
 
-        ten.setText("Tên Học Sinh");
-
         jLabel3.setText("Số Lượt Đi:");
 
         luotdi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2" }));
@@ -223,7 +221,6 @@ public class DSXeBus extends javax.swing.JDialog {
 
         jLabel6.setText("Địa Chỉ:");
 
-        diachi.setText("Địa Chỉ");
         diachi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diachiActionPerformed(evt);
@@ -232,7 +229,6 @@ public class DSXeBus extends javax.swing.JDialog {
 
         jLabel7.setText("Tiền Xe:");
 
-        tienxe.setText("0");
         tienxe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tienxeActionPerformed(evt);

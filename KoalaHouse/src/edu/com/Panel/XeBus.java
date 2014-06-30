@@ -12,11 +12,15 @@ import edu.com.Dialog.ThemSuaLop;
 import edu.com.ThongTin;
 import edu.com.XuLy;
 import edu.com.upbang.EditTable;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -38,6 +42,7 @@ public class XeBus extends javax.swing.JPanel {
         try{
         if (!jTable4.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_xebus, jTable4, 0);
+            resize(jTable4);
         }
         }
         catch(Exception ex)
@@ -52,6 +57,36 @@ public class XeBus extends javax.swing.JPanel {
        xoa.setEnabled(false);
        this.isadmin=false;
     }
+   public void resize(JTable table)
+   {
+        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+        int minwidth=80;
+        for (int column = 0; column < table.getColumnCount(); column++)
+        {
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+
+            for (int row = 0; row < table.getRowCount(); row++)
+            {
+                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+                Component c = table.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width+10);
+
+                //  We've exceeded the maximum width, no need to check other rows
+
+                if (preferredWidth >= maxWidth)
+                {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+            preferredWidth=Math.max(preferredWidth, minwidth);
+            tableColumn.setPreferredWidth( preferredWidth );
+            
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,21 +104,23 @@ public class XeBus extends javax.swing.JPanel {
         them = new javax.swing.JLabel();
         sua = new javax.swing.JLabel();
         xoa = new javax.swing.JLabel();
+        textfield_timkiem = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Học Sinh", "Lớp", "Địa Chỉ", "Số Điện Thoại", "Số Lượt Đi", "Tiền Xe", "Ngày Bắt Đầu", "Ngày Kết Thúc", "Ghi Chú", "Đánh Dấu"
+                "STT", "Học Sinh", "Lớp", "Địa Chỉ", "Số Điện Thoại", "Số Lượt Đi", "Tiền Xe", "Ngày Bắt Đầu", "Ngày Kết Thúc", "Ghi Chú", "Tình Trạng", "Đánh Dấu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -139,21 +176,41 @@ public class XeBus extends javax.swing.JPanel {
             }
         });
 
+        textfield_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        textfield_timkiem.setText("Tìm Kiếm ");
+        textfield_timkiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfield_timkiemMouseClicked(evt);
+            }
+        });
+        textfield_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfield_timkiemActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_DSLopLayout = new javax.swing.GroupLayout(Panel_DSLop);
         Panel_DSLop.setLayout(Panel_DSLopLayout);
         Panel_DSLopLayout.setHorizontalGroup(
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                        .addComponent(them)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sua)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xoa)
-                        .addGap(0, 988, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(them)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sua)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
         );
         Panel_DSLopLayout.setVerticalGroup(
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,10 +218,13 @@ public class XeBus extends javax.swing.JPanel {
                 .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(them)
                     .addComponent(sua)
-                    .addComponent(xoa))
+                    .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addComponent(xoa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -221,6 +281,7 @@ public class XeBus extends javax.swing.JPanel {
             try{
                 if (!jTable4.getValueAt(0, 0).toString().equals("")) {
                 XuLy.setID(id_xebus, jTable4, 0);
+                resize(jTable4);
                 }
                 }
                 catch(Exception ex)
@@ -236,7 +297,7 @@ public class XeBus extends javax.swing.JPanel {
         model=(DefaultTableModel) jTable4.getModel();
         try{
         for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 10)==true){
+            if((Boolean)model.getValueAt(i, 11)==true){
                 count--;
                 row = i;
             }
@@ -253,11 +314,13 @@ public class XeBus extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
                 for(int i = model.getRowCount()-1;i>=0;i--){
-                    model.setValueAt(false,i,10);
+                    model.setValueAt(false,i,11);
                }
             }
             return;
         }
+        if(jTable4.getValueAt(row, 10).equals("Chưa Thanh Toán"))
+        {
         Vector vec =  (Vector) model.getDataVector().elementAt(row);
         DSXeBus  dsbus= new DSXeBus(null, true,vec);
         dsbus.setThemSuaLop(false);
@@ -270,10 +333,18 @@ public class XeBus extends javax.swing.JPanel {
             try{
             if (!jTable4.getValueAt(0, 0).toString().equals("")) {
                 XuLy.setID(id_xebus, jTable4, 0);
+                resize(jTable4);
             }
             }
             catch(Exception ex)
             {}
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Đã \"Thanh Toán \" không thể sửa đổi",null,JOptionPane.INFORMATION_MESSAGE);
+            
+        }
         //ThemSuaLop lop = new ThemSuaLop(null, true, vec);
         /*
         if(lop.getButton()){
@@ -292,30 +363,101 @@ public class XeBus extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-       
-        boolean xoaorkhong;
-        DataBase.SQLXeBus data= new DataBase.SQLXeBus();
-        xoaorkhong=data.xoaxebus(jTable4, 10);
-       
-          new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
-            id_xebus = new ArrayList<Integer>();
-            try{
-                if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_xebus, jTable4, 0);
+       if(isadmin)
+       {
+            model= (DefaultTableModel) jTable4.getModel();
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 11) == true) {
+                    flags = false;
                 }
+            }
+            if(!flags)
+            {
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                if(click==JOptionPane.NO_OPTION){
+                    return;
                 }
-            catch(Exception ex)
-            {}
-        
+                
+                boolean xoaorkhong;
+                DataBase.SQLXeBus data= new DataBase.SQLXeBus();
+                xoaorkhong=data.xoaxebus(jTable4, 11);
+
+                  new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+                    id_xebus = new ArrayList<Integer>();
+                    try{
+                        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+                        XuLy.setID(id_xebus, jTable4, 0);
+                        resize(jTable4);
+                        }
+                        else
+                        {
+                            resize(jTable4);
+                        }
+                        }
+                    catch(Exception ex)
+                    {}
+                    
+            }
+            else
+            {
+                 JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+               
+            }
+       }
     }//GEN-LAST:event_xoaMouseClicked
+
+    private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
+        // TODO add your handling code here:
+        new DataBase.SQLXeBus().BandDanhSachXeBus_timkiem(jTable4,textfield_timkiem.getText());
+        id_xebus = new ArrayList<Integer>();
+        try{
+        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_xebus, jTable4, 0);
+            resize(jTable4);
+        
+        }
+        
+                        else
+                        {
+                            resize(jTable4);
+                        }
+        }
+        
+        catch(Exception ex)
+        {}
+        
+    }//GEN-LAST:event_textfield_timkiemActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here
+        textfield_timkiem.setText("Tìm Kiếm");
+        new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+        id_xebus = new ArrayList<Integer>();
+        try{
+        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_xebus, jTable4, 0);
+            resize(jTable4);
+        }
+        }
+        catch(Exception ex)
+        {}
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void textfield_timkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfield_timkiemMouseClicked
+        // TODO add your handling code here:
+        textfield_timkiem.setText("");
+    }//GEN-LAST:event_textfield_timkiemMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_DSLop;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable4;
     private javax.swing.JLabel sua;
+    private javax.swing.JTextField textfield_timkiem;
     private javax.swing.JLabel them;
     private javax.swing.JLabel xoa;
     // End of variables declaration//GEN-END:variables

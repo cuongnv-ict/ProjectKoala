@@ -9,6 +9,8 @@ package edu.com.Dialog;
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.Get;
 import DataBase.HocSinh.GetTotal;
+import edu.com.CloseButton.CloseTabButton;
+import edu.com.Panel.HocSinhA;
 import edu.com.upbang.XuLiXau;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JWindow;
 import javax.swing.KeyStroke;
@@ -40,6 +43,7 @@ public class NhapTrongMuon extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
+    public JTabbedPane center;
     public NhapTrongMuon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -107,6 +111,11 @@ public void MakePopup(){
                 "Tên HS", "Lớp", "Ngày Trông Muộn", "Số Phút"
             }
         ));
+        bangDSTrongMuon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bangDSTrongMuonMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(bangDSTrongMuon);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -268,8 +277,9 @@ public void MakePopup(){
         String date = nam.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+ngay.getSelectedItem().toString();
         int time = Integer.parseInt(soPhut.getText());
         int idSemester = new GetTotal().GetIdSemester(idTrungTam, nam.getSelectedItem().toString(), date);
+        int year = new Get().GetYear(idTrungTam, date);
         if(idSemester > 0){
-        new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),nam.getSelectedItem().toString());
+        new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
         }
         else{
             JOptionPane.showMessageDialog(null, "Ngày Bạn Chọn Không Có Trong Lịch Học");
@@ -303,6 +313,35 @@ public void MakePopup(){
             new Get().BangTrongMuon(bangDSTrongMuon);
         }
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void bangDSTrongMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangDSTrongMuonMouseClicked
+        if(evt.getClickCount()==2){
+            //map cac truong
+            //tinh id hoc sinh
+        String tenHocSinh = bangDSTrongMuon.getValueAt(bangDSTrongMuon.getSelectedRow(), 0).toString();
+        String classes = bangDSTrongMuon.getValueAt(bangDSTrongMuon.getSelectedRow(), 1).toString();
+        ArrayList infoHS = new Get().GetIdAndFacStudent(tenHocSinh, classes);
+        int idHS = Integer.parseInt(infoHS.get(0).toString());
+            
+            //HocSinhA.idTemp = id;
+            int a=-1;
+            for (int i = 0; i < center.getTabCount(); i++) {
+                if (tenHocSinh.equals(center.getTitleAt(i))) {
+                    a += 1;
+                    center.setSelectedIndex(i);
+                }
+            }
+            if (a == -1) {
+           
+            HocSinhA aa = new HocSinhA(idHS);
+            //add tab
+            
+            center.add(tenHocSinh, aa);
+            center.setSelectedComponent(aa);
+            new CloseTabButton(center,center.getComponentCount()-2);
+        }
+        }
+    }//GEN-LAST:event_bangDSTrongMuonMouseClicked
 
     /**
      * @param args the command line arguments
