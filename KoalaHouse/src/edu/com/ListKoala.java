@@ -844,6 +844,7 @@ public class ListKoala extends javax.swing.JFrame {
 
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Chưa Đóng Phí")) {
                 new DebtList().BangDanhSachHocSinhNoPhi(dsno.BangDSNo);
+                dsno.ListId = new DebtList().GetIdStudent();
             }
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")) {
                 int s = dshs.ChonLoai.getSelectedIndex();

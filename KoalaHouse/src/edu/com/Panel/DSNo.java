@@ -25,7 +25,7 @@ public class DSNo extends javax.swing.JPanel {
     /**
      * Creates new form DSNo
      */
-    ArrayList ListId;
+    public ArrayList ListId;
     public JTabbedPane center;
     public JTable BangDSNo;
     public DSNo() {
