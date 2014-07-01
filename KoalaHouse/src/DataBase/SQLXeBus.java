@@ -91,7 +91,7 @@ public class SQLXeBus
                     }
                     str[3]=rs1.getString(6);
                     str[5]=rs1.getString(3);
-                    str[6]=rs1.getString(5);
+                    str[6]=XuLy.setMoney(rs1.getString(5));
                     str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     str[9]=rs1.getString(4);
@@ -341,7 +341,7 @@ public class SQLXeBus
                     }
                     str[3]=rs1.getString(6);
                     str[5]=rs1.getString(3);
-                    str[6]=rs1.getString(5);
+                    str[6]=XuLy.setMoney(rs1.getString(5));
                     str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     str[9]=rs1.getString(4);

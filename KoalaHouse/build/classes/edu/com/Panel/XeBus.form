@@ -81,9 +81,9 @@
                           <Component id="them" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="sua" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="textfield_timkiem" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="xoa" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -239,6 +239,7 @@
                 <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m "/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="textfield_timkiemMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_timkiemActionPerformed"/>
               </Events>
             </Component>

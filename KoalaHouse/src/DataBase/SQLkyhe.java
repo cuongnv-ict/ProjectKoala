@@ -34,7 +34,7 @@ public class SQLkyhe {
 
     public SQLkyhe() {
         ConnectData c = new ConnectData();
-
+       
         try {
             connect = c.connectionDatabase();
             statement = connect.createStatement();

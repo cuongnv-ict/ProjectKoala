@@ -178,6 +178,11 @@ public class XeBus extends javax.swing.JPanel {
 
         textfield_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textfield_timkiem.setText("Tìm Kiếm ");
+        textfield_timkiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textfield_timkiemMouseClicked(evt);
+            }
+        });
         textfield_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textfield_timkiemActionPerformed(evt);
@@ -214,7 +219,7 @@ public class XeBus extends javax.swing.JPanel {
                     .addComponent(them)
                     .addComponent(sua)
                     .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addComponent(xoa)))
@@ -438,6 +443,11 @@ public class XeBus extends javax.swing.JPanel {
         catch(Exception ex)
         {}
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void textfield_timkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfield_timkiemMouseClicked
+        // TODO add your handling code here:
+        textfield_timkiem.setText("");
+    }//GEN-LAST:event_textfield_timkiemMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

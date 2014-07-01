@@ -187,8 +187,6 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
         jLabel2.setText("Học Sinh:");
 
-        ten.setText("Tên Học Sinh");
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel1.setText("Đăng Ký Học Hè");
 
