@@ -16,6 +16,7 @@ import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -175,7 +176,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }
         String tienbc = convert.chuyentien(TongTien.getText());
-        stbc.setText("Số Tiền Bằng Chữ: "+tienbc);
+        stbc.setText("Số tiền bằng chữ: "+tienbc);
         }
         catch(java.lang.NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
@@ -374,7 +375,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         stt.setEditable(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Số");
+        jLabel10.setText("Số:");
 
         javax.swing.GroupLayout ThongTinHoaDonLayout = new javax.swing.GroupLayout(ThongTinHoaDon);
         ThongTinHoaDon.setLayout(ThongTinHoaDonLayout);
@@ -403,7 +404,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         TenHocSinh.setText("Nguyễn Hải Anh");
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Lớp");
+        jLabel18.setText("Lớp:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Người TT:");
@@ -411,17 +412,17 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         NguoiDaiDien.setText("Nguyễn Ngọc Lan");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setText("Hình thức TT");
+        jLabel19.setText("Hình Thức TT:");
 
         HinhThucDong.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Chuyển khoản" }));
 
         idHS.setText("123");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Mã");
+        jLabel12.setText("Mã:");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Cơ Sở");
+        jLabel13.setText("Cơ Sở:");
 
         javax.swing.GroupLayout ThongTinHocSinhLayout = new javax.swing.GroupLayout(ThongTinHocSinh);
         ThongTinHocSinh.setLayout(ThongTinHocSinhLayout);
@@ -445,7 +446,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ThongTinHocSinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -506,14 +507,14 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(stbc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nguoiNop, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(stbc, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addGap(28, 28, 28)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))))
+                            .addComponent(jLabel14)))
+                    .addComponent(nguoiNop, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -940,6 +941,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     // End of variables declaration//GEN-END:variables
 public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterException {
         getComponentsOfReceived();
+        //setCoorOfNguoiThuNop();
         if(page > 0) {
             return Printable.NO_SUCH_PAGE;
         }
@@ -960,7 +962,7 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         font = new Font("Serif", Font.BOLD, 14);
         grphcs.setFont(font);
         grphcs.drawString(lbHoaDon, 150, 110);
-        font = new Font("Serif", Font.PLAIN, 12);
+        font = new Font("Serif", Font.PLAIN, 11);
         grphcs.setFont(font);
         
         grphcs.drawString(lbNgay, 20, 140);
@@ -969,31 +971,31 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(cbThang, 100, 140);
         grphcs.drawString(lbNam, 105, 140);
         grphcs.drawString(cbNam, 135, 140);
-        grphcs.drawString(lbSo, 300, 140);
-        grphcs.drawString(tfSo, 320, 140);
+        grphcs.drawString(lbSo, 290, 140);
+        grphcs.drawString(tfSo, 305, 140);
         grphcs.drawString(lbHoTen, 20, 160);
         grphcs.drawString(tfHoTen, 75, 160);
         grphcs.drawString(lbMa, 180, 160);
         grphcs.drawString(tfMa, 200, 160);
-        grphcs.drawString(lbCoso, 270, 160);
-        grphcs.drawString(tfCoso, 310, 160);
+        grphcs.drawString(lbCoso, 290, 160);
+        grphcs.drawString(tfCoso, 320, 160);
         grphcs.drawString(lbNguoiThanhToan, 20, 180);
         grphcs.drawString(tfNguoiThanhToan, 75, 180);
         grphcs.drawString(lbLop, 180, 180);
-        grphcs.drawString(tfLop, 200, 180);
+        grphcs.drawString(tfLop, 205, 180);
         grphcs.drawString(lbHinhThucThanhToan, 290, 180);
-        grphcs.drawString(tfHinhThucThanhToan, 360, 180);
+        grphcs.drawString(tfHinhThucThanhToan, 365, 180);
         
         String tableDataToString = "";
-        grphcs.drawString("Tên Phí", 30, 210);
-        grphcs.drawString("Kỳ học", 130, 210);
-        grphcs.drawString("Năm học", 230, 210);
-        grphcs.drawString("Giá", 330, 210);
+        grphcs.drawString("Tên Phí ", 30, 210);
+        grphcs.drawString("Kỳ học ", 130, 210);
+        grphcs.drawString("Năm học ", 230, 210);
+        grphcs.drawString("Giá ", 330, 210);
         
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
                 if(tableData[i][j] == null) {
-                    tableDataToString = "trong";
+                    tableDataToString = "     ";
                 } else {
                     tableDataToString = (String) tableData[i][j];
                 }
@@ -1003,7 +1005,7 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     grphcs.drawString(tableDataToString, 130, (210 + (i + 1) * 20));
                 } else if(j == 2) {
                     grphcs.drawString(tableDataToString, 230, (210 + (i + 1) * 20));
-                } else {
+                } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 330, (210 + (i + 1) * 20));
                 }
             }
@@ -1015,10 +1017,23 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(tfDaThu, 335, 500);
         grphcs.drawString(lbStbc, 30, 520);
         
-        grphcs.drawString(lbNguoiNop, 50, 540);
-        grphcs.drawString(lbNguoiThu, 280, 540);
-        grphcs.drawString(tfNguoiNop, 45, 570);
-        grphcs.drawString(tfNguoiThu, 280, 570);
+        grphcs.drawString(lbNguoiNop, 50, 550);
+        grphcs.drawString(lbNguoiThu, 280, 550);
+        //grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
+        //grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
+        
+        FontMetrics fontMetrics = grphcs.getFontMetrics(font);
+        int lengthOfNguoiNop = fontMetrics.stringWidth(tfNguoiNop);
+        int lengOfNguoiThu = fontMetrics.stringWidth(tfNguoiThu);
+        
+        lengthOfNguoiNop = lengthOfNguoiNop / 2;
+        lengOfNguoiThu = lengOfNguoiThu / 2;
+        
+        coorOfNguoiNop = 81 - lengthOfNguoiNop;
+        coorOfNguoiThu = 327 - lengOfNguoiThu;
+        
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
         
         return Printable.PAGE_EXISTS;
     }
@@ -1037,6 +1052,8 @@ public Image ConvertToImage(Icon icon) {
     }
 }
 
+private int coorOfNguoiThu;
+private int coorOfNguoiNop;
 private Icon iconOfLabel;
 private Image imageOfLabel;
 private String lbTitle;
@@ -1133,6 +1150,7 @@ public void getComponentsOfReceived() {
     lbNguoiThu = jLabel9.getText();
     tfNguoiNop = nguoiNop.getText();
     tfNguoiThu = nguoiThu.getText();
-    lbStbc = stbc.getText();
+    //lbStbc = stbc.getText();
+    lbStbc = "Số tiền bằng chữ: ";
 }
 }

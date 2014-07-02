@@ -405,43 +405,50 @@ public class HocSinhA extends javax.swing.JPanel {
                             .addComponent(dtcha, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(Panel_hocsinhALayout.createSequentialGroup()
-                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Button_HS_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
+                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                                    .addGap(3, 3, 3)
+                                    .addComponent(me, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(dtnha, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dtme, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(14, 14, 14))
+                        .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                                    .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Button_HS_CapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
                                     .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(Panel_hocsinhALayout.createSequentialGroup()
-                                            .addComponent(TimeTrongMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel12))
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(20, 20, 20)
-                                    .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(thoiHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
-                                .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TrungTam, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lop, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(HinhThucHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_hocsinhALayout.createSequentialGroup()
-                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dtme, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dtnha, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(me, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(Panel_hocsinhALayout.createSequentialGroup()
+                                                    .addComponent(TimeTrongMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jLabel12))
+                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(5, 5, 5)
+                                            .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(thoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(TrungTam, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Lop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(HinhThucHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel18))
+                            .addGap(15, 15, 15))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_hocsinhALayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,7 +471,7 @@ public class HocSinhA extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(NgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -542,13 +549,45 @@ public class HocSinhA extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ChiTietNghiPhep.idStudent = id;
-        ChiTietNghiPhep.idTrungTam = idTrungTam;
-        ChiTietNghiPhep chitiet = new ChiTietNghiPhep(null,true);
-        chitiet.setLocation(500,130);
-        chitiet.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void Panel_hocsinhAMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel_hocsinhAMouseEntered
+        // TODO add your handling code here:
+        AStudentAndLateDay a = new AStudentAndLateDay();
+        ArrayList info;
+        info = a.HocSinhA1(id);
+        ten = (String) info.get(1);
+        ngaySinh = (String) info.get(2);
+        father = (String) info.get(3);
+        sdtbo = (String) info.get(4);
+        mother = (String) info.get(5);
+        sdtme = (String) info.get(6);
+        homephone = (String) info.get(7);
+        thudt = (String) info.get(8);
+        hinhThucHoc = (String) info.get(9);
+        lop = (String) info.get(10);
+        trungTam = (String) info.get(11);
+        String thoihoc = (String) info.get(12);
+        edit_ten.setText(ten);
+        cha.setText(father);
+        NgaySinh.setText(ngaySinh);
+        dtcha.setText(sdtbo);
+        me.setText(mother);
+        dtme.setText(sdtme);
+        dtnha.setText(homephone);
+        email.setText(thudt);
+        HinhThucHoc.setText(hinhThucHoc);
+        Lop.setText(lop);
+        TrungTam.setText(trungTam);
+        int noPhi = new AStudentAndLateDay().GetDebt(id);
+        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
+        switch(TrungTam.getText().length()){
+            case 20: idTrungTam = 1;break;
+            case 22: idTrungTam = 2;break;
+            case 24: idTrungTam = 3;break;
+            case 25: idTrungTam = 4;break;
+        }
+        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
+        TimeTrongMuon.setText(String.valueOf(totalTime));
+    }//GEN-LAST:event_Panel_hocsinhAMouseEntered
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ThongBao.tenHS = edit_ten.getText();
@@ -560,59 +599,6 @@ public class HocSinhA extends javax.swing.JPanel {
         tb.setLocation(360, 0);
         tb.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        if(DanhSachPhi.getSelectedRow()==-1){
-            JOptionPane.showMessageDialog(null ,"Hãy chọn một dòng cần xóa");
-        }
-        else{
-            int row  = DanhSachPhi.getSelectedRow();
-            int idCost = Integer.parseInt(DanhSachPhi.getValueAt(row, 0).toString());
-            //kiem tra xem co phai phi trong muon khong
-            int num = DanhSachPhi.getSelectedRow();
-            String ten = model.getValueAt(num, 1).toString();
-            boolean check2 = false;
-            ten = ten.toLowerCase();
-            if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
-                check2 = true;
-            }
-            if(check2){
-                String ki = "0";
-                String kiHoc = model.getValueAt(num, 2).toString();
-                if(kiHoc.equals("Kỳ 1")){
-                    ki = "1";
-                }
-                else if(kiHoc.equals("Kỳ 2")){
-                    ki = "2";
-                }
-                else if(kiHoc.equals("Kỳ 3")){
-                    ki = "3";
-                }
-                else if(kiHoc.equals("Kỳ hè")){
-                    ki = "4";
-                }
-                else ki = "5";
-                String nam = model.getValueAt(num, 3).toString().substring(0, 4);
-                TimeTrongMuon.setText("0");
-                new AStudentAndLateDay().XoaTrongMuon(id,ki,nam);
-            }
-            new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
-            EditTable edit = new EditTable();
-            edit.removeRowOfTable(DanhSachPhi);
-            Total();
-            totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);
-            TimeTrongMuon.setText(String.valueOf(totalTime));
-        }
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void Button_HS_LichSuDongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_LichSuDongTienActionPerformed
-        //lichSuDongTien ls = new lichSuDongTien(this, rootPaneCheckingEnabled);
-        LichSuDongTien2.idStudent = id;
-        LichSuDongTien2 lic= new LichSuDongTien2(null,true);
-        lic.setLocation(380, 130);
-        lic.id = id;
-        lic.show();
-    }//GEN-LAST:event_Button_HS_LichSuDongTienActionPerformed
 
     private void Button_HocSinh_ThemPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HocSinh_ThemPhiActionPerformed
         // TODO add your handling code here:
@@ -682,20 +668,6 @@ public class HocSinhA extends javax.swing.JPanel {
         Total();
     }//GEN-LAST:event_Button_HocSinh_ThemPhiActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        chiTietTrongMuon2.idStudent = id;
-        chiTietTrongMuon2.idTrungTam = idTrungTam;
-        chiTietTrongMuon2.Info = edit_ten.getText();
-        chiTietTrongMuon2 chitiet = new chiTietTrongMuon2(null,true);
-        chitiet.setLocation(500,130);
-        chitiet.setVisible(true);
-        if(chitiet.them){
-            totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);
-            TimeTrongMuon.setText(String.valueOf(totalTime));
-            new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
-        }
-    }//GEN-LAST:event_jButton10ActionPerformed
-
     private void Button_HocSinh_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HocSinh_ThanhToanActionPerformed
         HoaDon.tenHS = edit_ten.getText();
         HoaDon.tenNguoiDaiDien = cha.getText();
@@ -736,6 +708,81 @@ public class HocSinhA extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_debtActionPerformed
 
+    private void Button_HS_LichSuDongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_LichSuDongTienActionPerformed
+        //lichSuDongTien ls = new lichSuDongTien(this, rootPaneCheckingEnabled);
+        LichSuDongTien2.idStudent = id;
+        LichSuDongTien2 lic= new LichSuDongTien2(null,true);
+        lic.setLocation(380, 130);
+        lic.id = id;
+        lic.show();
+    }//GEN-LAST:event_Button_HS_LichSuDongTienActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ChiTietNghiPhep.idStudent = id;
+        ChiTietNghiPhep.idTrungTam = idTrungTam;
+        ChiTietNghiPhep chitiet = new ChiTietNghiPhep(null,true);
+        chitiet.setLocation(500,130);
+        chitiet.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        if(DanhSachPhi.getSelectedRow()==-1){
+            JOptionPane.showMessageDialog(null ,"Hãy chọn một dòng cần xóa");
+        }
+        else{
+            int row  = DanhSachPhi.getSelectedRow();
+            int idCost = Integer.parseInt(DanhSachPhi.getValueAt(row, 0).toString());
+            //kiem tra xem co phai phi trong muon khong
+            int num = DanhSachPhi.getSelectedRow();
+            String ten = model.getValueAt(num, 1).toString();
+            boolean check2 = false;
+            ten = ten.toLowerCase();
+            if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
+                check2 = true;
+            }
+            if(check2){
+                String ki = "0";
+                String kiHoc = model.getValueAt(num, 2).toString();
+                if(kiHoc.equals("Kỳ 1")){
+                    ki = "1";
+                }
+                else if(kiHoc.equals("Kỳ 2")){
+                    ki = "2";
+                }
+                else if(kiHoc.equals("Kỳ 3")){
+                    ki = "3";
+                }
+                else if(kiHoc.equals("Kỳ hè")){
+                    ki = "4";
+                }
+                else ki = "5";
+                String nam = model.getValueAt(num, 3).toString().substring(0, 4);
+                TimeTrongMuon.setText("0");
+                new AStudentAndLateDay().XoaTrongMuon(id,ki,nam);
+            }
+            new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
+            EditTable edit = new EditTable();
+            edit.removeRowOfTable(DanhSachPhi);
+            Total();
+            totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);
+            TimeTrongMuon.setText(String.valueOf(totalTime));
+        }
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        chiTietTrongMuon2.idStudent = id;
+        chiTietTrongMuon2.idTrungTam = idTrungTam;
+        chiTietTrongMuon2.Info = edit_ten.getText();
+        chiTietTrongMuon2 chitiet = new chiTietTrongMuon2(null,true);
+        chitiet.setLocation(500,130);
+        chitiet.setVisible(true);
+        if(chitiet.them){
+            totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);
+            TimeTrongMuon.setText(String.valueOf(totalTime));
+            new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     private void thoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thoiHocActionPerformed
 
         int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Cho Học Sinh Này Thôi Học?", "",JOptionPane.OK_CANCEL_OPTION);
@@ -749,49 +796,9 @@ public class HocSinhA extends javax.swing.JPanel {
 
     private void Button_HS_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_CapNhatActionPerformed
         new AStudentAndLateDay().UpdataInfoStudent(id,idTrungTam,edit_ten.getText(),new XuLiXau().NamThangNgay(NgaySinh.getText()),cha.getText(),
-                dtcha.getText(),me.getText(),dtme.getText(),dtnha.getText(),email.getText());
+            dtcha.getText(),me.getText(),dtme.getText(),dtnha.getText(),email.getText());
         JOptionPane.showMessageDialog(Panel_hocsinhA, "Thông Tin Học Sinh Đã Được Cập Nhật");
     }//GEN-LAST:event_Button_HS_CapNhatActionPerformed
-
-    private void Panel_hocsinhAMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel_hocsinhAMouseEntered
-        // TODO add your handling code here:
-        AStudentAndLateDay a = new AStudentAndLateDay();
-            ArrayList info;
-            info = a.HocSinhA1(id);
-            ten = (String) info.get(1);
-            ngaySinh = (String) info.get(2);
-            father = (String) info.get(3);
-            sdtbo = (String) info.get(4);
-            mother = (String) info.get(5);
-            sdtme = (String) info.get(6);
-            homephone = (String) info.get(7);
-            thudt = (String) info.get(8);
-            hinhThucHoc = (String) info.get(9);
-            lop = (String) info.get(10);
-            trungTam = (String) info.get(11);
-            String thoihoc = (String) info.get(12);
-            edit_ten.setText(ten);
-        cha.setText(father);
-        NgaySinh.setText(ngaySinh);
-        dtcha.setText(sdtbo);
-        me.setText(mother);
-        dtme.setText(sdtme);
-        dtnha.setText(homephone);
-        email.setText(thudt);
-        HinhThucHoc.setText(hinhThucHoc);
-        Lop.setText(lop);
-        TrungTam.setText(trungTam);
-        int noPhi = new AStudentAndLateDay().GetDebt(id);
-        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
-        switch(TrungTam.getText().length()){
-            case 20: idTrungTam = 1;break;
-            case 22: idTrungTam = 2;break;
-            case 24: idTrungTam = 3;break;
-            case 25: idTrungTam = 4;break;
-        }
-        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
-        TimeTrongMuon.setText(String.valueOf(totalTime));
-    }//GEN-LAST:event_Panel_hocsinhAMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
