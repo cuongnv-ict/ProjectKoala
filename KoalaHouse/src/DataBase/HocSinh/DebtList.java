@@ -39,7 +39,7 @@ public class DebtList {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(DebtList.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(DebtList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void BangDanhSachHocSinhNoPhi(JTable table) {

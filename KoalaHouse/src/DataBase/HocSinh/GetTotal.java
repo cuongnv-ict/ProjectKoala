@@ -44,7 +44,7 @@ public class GetTotal {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public int GetTotalMoney(int students_id,int idFac){

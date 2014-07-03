@@ -36,7 +36,7 @@ public class NghiPhep {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void NghiPhepInfo(int idStudent,JTable table){

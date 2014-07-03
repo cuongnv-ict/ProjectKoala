@@ -43,7 +43,7 @@ public class AStudentAndLateDay {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public ArrayList HocSinhA1(int ID){
