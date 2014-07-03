@@ -49,7 +49,7 @@ public class SQLHocPhi {
         try {
             Object[] nameColumn = {"STT", "Tên", "Kì học", "Năm học", "Ngày bắt đầu", "Ngày kết thúc", "Giá", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select Id,NameCost,Semesters,year,StartDate,EndDate,Amount from cost where cost.Faculties_Id = " + ThongTin.trungtam+" order by year,Semesters");
+            rs1 = statement.executeQuery("select Id,NameCost,Semesters,year,StartDate,EndDate,Amount from cost where cost.Faculties_Id = " + ThongTin.trungtam + " order by year,Semesters");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[8];
@@ -140,8 +140,20 @@ public class SQLHocPhi {
             statement.execute("delete from cost where id = " + id);
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Bạn không thể xóa phí " + name + " khi đang được áp dụng cho một số học sinh trong trường.", null, JOptionPane.ERROR_MESSAGE);
-            return false;
+//            JOptionPane.showMessageDialog(null, "Bạn không thể xóa phí " + name + " khi đang được áp dụng cho một số học sinh trong trường.", null, JOptionPane.ERROR_MESSAGE);
+            int click = JOptionPane.showConfirmDialog(null, " Loại phí này đã được áp dụng cho 1 số học sinh.\n Nếu xóa bạn sẽ mất hết thông tin liên quan đến phí này.\n Bạn có muốn xóa không ?", "Xóa học phí", JOptionPane.YES_NO_OPTION);
+            if (click == JOptionPane.NO_OPTION) {
+                return false;
+            } else {
+                try {
+                    statement.execute("delete from students_has_cost where Cost_Id = " + id);
+                    statement.execute("delete from cost where id = " + id);
+                    return true;
+                } catch (SQLException ex1) {
+                    Logger.getLogger(SQLHocPhi.class.getName()).log(Level.SEVERE, null, ex1);
+                    return false;
+                }
+            }
         }
     }
 
