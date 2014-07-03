@@ -271,6 +271,14 @@ public class SQLDanhSachHocSinh {
                     v.add(XuLy.getDate(rs1.getString(i + 1)));
                     continue;
                 }
+                if (i == 3) {
+                    if(rs1.getInt(4)==0){
+                        v.add("Chính quy");
+                    }else{
+                        v.add("Khách");
+                    }
+                    continue;
+                }
                 if (i == 10) {
                     if (rs1.getString(11) == null) {
                         v.add(1);
