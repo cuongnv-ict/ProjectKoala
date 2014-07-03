@@ -188,7 +188,7 @@ public class LopX extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh_1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
         jLabel1.setToolTipText("Tải lại");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

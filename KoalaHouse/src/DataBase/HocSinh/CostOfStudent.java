@@ -47,7 +47,7 @@ public class CostOfStudent {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      public void InsertDSPhiCuaHS(int idStudent,String idCost,int idFac){

@@ -37,7 +37,7 @@ public class RecieptManagerment {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public int GetNumberReceipt(){

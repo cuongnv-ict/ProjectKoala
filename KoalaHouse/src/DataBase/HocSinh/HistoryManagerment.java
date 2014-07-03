@@ -45,7 +45,7 @@ public class HistoryManagerment {
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void BangLichSuDongTienCuaHocSinh(int students_id,JTable table){

@@ -43,7 +43,7 @@ public class Get{
         try {
             statement = connect.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public ArrayList GetNameStudent(String classes){

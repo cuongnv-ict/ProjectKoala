@@ -49,19 +49,26 @@ public class DSXeBus extends javax.swing.JDialog {
     public DSXeBus(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try
+        {
    //            new Get().BangTrongMuon(bangDSTrongMuon);
         MakePopup();
         //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
         for(int i=0;i<nameClasses.size();i++)
             lop.addItem(nameClasses.get(i));
-        
+        }
+        catch(Exception ex)
+        {}
+    
     }
     
     public DSXeBus(java.awt.Frame parent, boolean modal,Vector vector) {
         super(parent, modal);
         initComponents();
    //            new Get().BangTrongMuon(bangDSTrongMuon);
+        try
+        {
         MakePopup();
         //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
@@ -89,6 +96,10 @@ public class DSXeBus extends javax.swing.JDialog {
         tienxe.setText(vector.get(6).toString());
         ghichu.setText(vector.get(9).toString());
         setOldIdStudents(vector.get(1).toString(),vector.get(2).toString());
+    }
+        catch(Exception ex)
+        {}
+    
     }
     public void setOldIdStudents(String nameStudent,String nameclass)
     {
