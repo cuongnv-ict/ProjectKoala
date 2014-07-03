@@ -182,6 +182,7 @@ public class HocSinhA extends javax.swing.JPanel {
         tongSoPhi = new javax.swing.JTextField();
         Button_HocSinh_ThemPhi = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         Panel_hocsinhA.setFocusCycleRoot(true);
         Panel_hocsinhA.setRequestFocusEnabled(false);
@@ -384,6 +385,13 @@ public class HocSinhA extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_hocsinhALayout = new javax.swing.GroupLayout(Panel_hocsinhA);
         Panel_hocsinhA.setLayout(Panel_hocsinhALayout);
         Panel_hocsinhALayout.setHorizontalGroup(
@@ -448,9 +456,11 @@ public class HocSinhA extends javax.swing.JPanel {
                                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel18))
                             .addGap(15, 15, 15))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_hocsinhALayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(132, 132, 132)
                         .addComponent(jLabel11))
@@ -467,7 +477,8 @@ public class HocSinhA extends javax.swing.JPanel {
                         .addGroup(Panel_hocsinhALayout.createSequentialGroup()
                             .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(edit_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))
                             .addGap(18, 18, 18)
                             .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -504,7 +515,7 @@ public class HocSinhA extends javax.swing.JPanel {
                         .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 35, Short.MAX_VALUE)
+                        .addGap(18, 30, Short.MAX_VALUE)
                         .addGroup(Panel_hocsinhALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(HinhThucHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -551,42 +562,6 @@ public class HocSinhA extends javax.swing.JPanel {
 
     private void Panel_hocsinhAMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Panel_hocsinhAMouseEntered
         // TODO add your handling code here:
-        AStudentAndLateDay a = new AStudentAndLateDay();
-        ArrayList info;
-        info = a.HocSinhA1(id);
-        ten = (String) info.get(1);
-        ngaySinh = (String) info.get(2);
-        father = (String) info.get(3);
-        sdtbo = (String) info.get(4);
-        mother = (String) info.get(5);
-        sdtme = (String) info.get(6);
-        homephone = (String) info.get(7);
-        thudt = (String) info.get(8);
-        hinhThucHoc = (String) info.get(9);
-        lop = (String) info.get(10);
-        trungTam = (String) info.get(11);
-        String thoihoc = (String) info.get(12);
-        edit_ten.setText(ten);
-        cha.setText(father);
-        NgaySinh.setText(ngaySinh);
-        dtcha.setText(sdtbo);
-        me.setText(mother);
-        dtme.setText(sdtme);
-        dtnha.setText(homephone);
-        email.setText(thudt);
-        HinhThucHoc.setText(hinhThucHoc);
-        Lop.setText(lop);
-        TrungTam.setText(trungTam);
-        int noPhi = new AStudentAndLateDay().GetDebt(id);
-        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
-        switch(TrungTam.getText().length()){
-            case 20: idTrungTam = 1;break;
-            case 22: idTrungTam = 2;break;
-            case 24: idTrungTam = 3;break;
-            case 25: idTrungTam = 4;break;
-        }
-        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
-        TimeTrongMuon.setText(String.valueOf(totalTime));
     }//GEN-LAST:event_Panel_hocsinhAMouseEntered
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -619,10 +594,50 @@ public class HocSinhA extends javax.swing.JPanel {
                 v = (Vector) a.get(i);
                 v.remove(5);
                 String idCost = v.get(0).toString();
-                if(check){//neu ko bi trung voi row nao thi them vao bang
+                String nameCost = v.get(1).toString();
+                //kiem tra xem co trung ten voi phi da co
+                for(int j=0;j<count;j++){
+                    try{
+                        String temp = model.getValueAt(j, 1).toString();
+                    temp = temp.toLowerCase();
+                    boolean checkTrongMuon = false;
+                    boolean checkDatCoc= false;
+                    boolean checkXeBus= false;
+                    boolean checkHocHe= false;
+                    if(((temp.indexOf("trong")!= -1)&&(temp.indexOf("muon")!= -1))||((temp.indexOf("trông")!= -1)&&(temp.indexOf("muộn")!= -1))){
+                        checkTrongMuon = true;
+                    }
+                    if(((temp.indexOf("dat")!= -1)&&(temp.indexOf("coc")!= -1))||((temp.indexOf("đặt")!= -1)&&(temp.indexOf("cọc")!= -1))){
+                        checkDatCoc = true;
+                    }
+                    if((temp.indexOf("he")!=-1)||(temp.indexOf("hè")!=-1)){
+                        checkHocHe = true;
+                    }
+                    String nameCost1 = nameCost.toLowerCase();
+                    if(temp.equals(nameCost1))
+                        check = false;
+                    if(check){
+                        if(checkTrongMuon){
+                            if(((nameCost1.indexOf("trong")!= -1)&&(nameCost1.indexOf("muon")!= -1))||((nameCost1.indexOf("trông")!= -1)&&(nameCost1.indexOf("muộn")!= -1))){
+                                check = false;
+                            }
+                        }
+                        if(checkHocHe)
+                            if((nameCost1.indexOf("he")!=-1)||(nameCost1.indexOf("hè")!=-1)){
+                                check = false;
+                    }
+                        if(checkDatCoc)
+                            if(((nameCost1.indexOf("dat")!= -1)&&(nameCost1.indexOf("coc")!= -1))||((nameCost1.indexOf("đặt")!= -1)&&(nameCost1.indexOf("cọc")!= -1))){
+                                check = false;
+                    }
+                    }
+                    }
+                    catch(java.lang.ArrayIndexOutOfBoundsException e){
+                    }
+                }
                     AddRowOfTable addrow = new AddRowOfTable();
                     addrow.addRowOfTable(model, v);//them vector v vao bang
-                    new CostOfStudent().InsertDSPhiCuaHS(id,idCost, idTrungTam);
+                    
                     //neu la phi trong muon
                     //kiem tra xem co phai phi trong muon khong
                     int num = model.getRowCount();
@@ -656,9 +671,20 @@ public class HocSinhA extends javax.swing.JPanel {
                     else{
 
                     }
+                if(check){//neu ko bi trung voi row nao thi them vao bang
+                    new CostOfStudent().InsertDSPhiCuaHS(id,idCost, idTrungTam);
+                    new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
+                    model = (DefaultTableModel) DanhSachPhi.getModel();
+                    count++;
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,v.get(0)+" Kì "+v.get(1)+" Năm học "+v.get(2)+" đã bị trùng");
+                    int click = JOptionPane.showConfirmDialog(null,v.get(1)+" "+v.get(2)+" Năm "+v.get(3)+" đã tồn tại phí tương tự, Bạn có chắc muốn thêm?", "",JOptionPane.OK_CANCEL_OPTION);
+                    if(click == JOptionPane.YES_OPTION){
+                        new CostOfStudent().InsertDSPhiCuaHS(id,idCost, idTrungTam);
+                        new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
+                        model = (DefaultTableModel) DanhSachPhi.getModel();
+                        count++;
+                    }
                 }
             }
             Total();
@@ -800,6 +826,47 @@ public class HocSinhA extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(Panel_hocsinhA, "Thông Tin Học Sinh Đã Được Cập Nhật");
     }//GEN-LAST:event_Button_HS_CapNhatActionPerformed
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+         AStudentAndLateDay a = new AStudentAndLateDay();
+        ArrayList info;
+        info = a.HocSinhA1(id);
+        ten = (String) info.get(1);
+        ngaySinh = (String) info.get(2);
+        father = (String) info.get(3);
+        sdtbo = (String) info.get(4);
+        mother = (String) info.get(5);
+        sdtme = (String) info.get(6);
+        homephone = (String) info.get(7);
+        thudt = (String) info.get(8);
+        hinhThucHoc = (String) info.get(9);
+        lop = (String) info.get(10);
+        trungTam = (String) info.get(11);
+        String thoihoc = (String) info.get(12);
+        edit_ten.setText(ten);
+        cha.setText(father);
+        NgaySinh.setText(ngaySinh);
+        dtcha.setText(sdtbo);
+        me.setText(mother);
+        dtme.setText(sdtme);
+        dtnha.setText(homephone);
+        email.setText(thudt);
+        HinhThucHoc.setText(hinhThucHoc);
+        Lop.setText(lop);
+        TrungTam.setText(trungTam);
+        int noPhi = new AStudentAndLateDay().GetDebt(id);
+        debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
+        switch(TrungTam.getText().length()){
+            case 20: idTrungTam = 1;break;
+            case 22: idTrungTam = 2;break;
+            case 24: idTrungTam = 3;break;
+            case 25: idTrungTam = 4;break;
+        }
+        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
+        TimeTrongMuon.setText(String.valueOf(totalTime));
+        Total();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button_HS_CapNhat;
@@ -838,6 +905,7 @@ public class HocSinhA extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
