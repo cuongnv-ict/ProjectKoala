@@ -30,18 +30,22 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
     public ThemSuaDKHocHe(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        try{
         MakePopup();
         //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
         for(int i=0;i<nameClasses.size();i++)
             lop.addItem(nameClasses.get(i));
-        
+        }
+        catch(Exception ex)
+        {}
     }
     public ThemSuaDKHocHe(java.awt.Frame parent, boolean modal,Vector vector) {
         super(parent, modal);
         initComponents();
    //            new Get().BangTrongMuon(bangDSTrongMuon);
+        try{
+        
         MakePopup();
         //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
@@ -52,6 +56,10 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         ten.setText(vector.get(1).toString());
         lop.setSelectedItem(vector.get(2).toString());
         tuanhoc.setText(vector.get(3).toString());
+    }
+        catch(Exception ex)
+        {}
+    
     }
     public void setOldIdStudents(String nameStudent,String nameclass)
     {
