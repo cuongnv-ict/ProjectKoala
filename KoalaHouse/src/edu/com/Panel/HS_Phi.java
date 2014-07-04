@@ -43,15 +43,21 @@ public class HS_Phi extends javax.swing.JPanel {
     int[] arrRows;
     private boolean isadmin = true;
     private ArrayList<Object[]> info;
-    private Object [] o; 
+    private Object[] o;
 
     public HS_Phi() {
         initComponents();
-      
-        o  = new DataBase.SQLHocPhi().HS_Phi();
-        LoaiPhi.setModel((ComboBoxModel) o[1]);
-        LoaiPhi.setSelectedIndex(0);
-        new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector)o[0]).get(0).toString()));
+
+        o = new DataBase.SQLHocPhi().HS_Phi();
+        if (((ComboBoxModel) o[1]).getSize() == 0) {
+            JOptionPane.showMessageDialog(center, "Không có phí nào trong danh sách phí", TOOL_TIP_TEXT_KEY, JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            LoaiPhi.setModel((ComboBoxModel) o[1]);
+            LoaiPhi.setSelectedIndex(0);
+            new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(0).toString()));
+        }
+
     }
 
     public void setNotAdmin() {
@@ -87,7 +93,6 @@ public class HS_Phi extends javax.swing.JPanel {
         BangPhi.setRowHeight(30);
         jScrollPane8.setViewportView(BangPhi);
 
-        LoaiPhi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Học sinh đang học", "Học sinh nghỉ học", "Học sinh ra trường" }));
         LoaiPhi.setMinimumSize(new java.awt.Dimension(114, 25));
         LoaiPhi.setPreferredSize(new java.awt.Dimension(114, 25));
         LoaiPhi.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +138,9 @@ public class HS_Phi extends javax.swing.JPanel {
      */
     private void LoaiPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoaiPhiActionPerformed
         // TODO add your handling code here:
-        new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector)o[0]).get(LoaiPhi.getSelectedIndex()).toString()));
+        if(((ComboBoxModel) o[1]).getSize()!=0){
+            new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(LoaiPhi.getSelectedIndex()).toString()));
+        }
     }//GEN-LAST:event_LoaiPhiActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked

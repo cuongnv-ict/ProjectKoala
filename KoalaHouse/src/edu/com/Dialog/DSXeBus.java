@@ -10,6 +10,7 @@ package edu.com.Dialog;
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.Get;
 import DataBase.HocSinh.GetTotal;
+import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,6 +44,7 @@ public class DSXeBus extends javax.swing.JDialog {
     private boolean button;
     private boolean themorsua;
     private int oldIdStudents;
+    private int idxebus;
     /**
      * Creates new form DSXeBus
      */
@@ -81,14 +83,14 @@ public class DSXeBus extends javax.swing.JDialog {
         String datebd=vector.get(7).toString();
         String[] a = datebd.split("-");
         //result = a[2]+"-"+a[1]+"-"+a[0];
-        setSelectComboBox(ngaybd, a[0]);
-        setSelectComboBox(thangbd, a[1]);
+        setSelectComboBox(ngaybd, Integer.toString(Integer.parseInt(a[0])));
+        setSelectComboBox(thangbd, Integer.toString(Integer.parseInt(a[1])));
         setSelectComboBox(nambd, a[2]);
         
         String datekt=vector.get(8).toString();
         String[] b= datekt.split("-");
-        setSelectComboBox(ngaykt, b[0]);
-        setSelectComboBox(thangkt, b[1]);
+        setSelectComboBox(ngaykt, Integer.toString(Integer.parseInt(b[0])));
+        setSelectComboBox(thangkt, Integer.toString(Integer.parseInt(b[1])));
         setSelectComboBox(namkt, b[2]);
         
         
@@ -100,6 +102,10 @@ public class DSXeBus extends javax.swing.JDialog {
         catch(Exception ex)
         {}
     
+    }
+    public void setidxebus(int id)
+    {
+        this.idxebus=id;
     }
     public void setOldIdStudents(String nameStudent,String nameclass)
     {
@@ -227,6 +233,11 @@ public class DSXeBus extends javax.swing.JDialog {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -392,9 +403,9 @@ public class DSXeBus extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -432,10 +443,18 @@ public class DSXeBus extends javax.swing.JDialog {
             //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
             if(idstudent!=0)
             {
-            DataBase.SQLXeBus data = new DataBase.SQLXeBus();
-            data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText(),datebd,datekt);
-            button=true;
-            dispose();
+                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
+                {
+                DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
+                button=true;
+                dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
+
+                }
             }
             else
             {
@@ -466,15 +485,15 @@ public class DSXeBus extends javax.swing.JDialog {
             {
             if(idstudent!=0)
             {
-            //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
+            System.out.println("id xe bus la1:" +idxebus);
             DataBase.SQLXeBus data = new DataBase.SQLXeBus();
-            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText(),datebd,datekt);
+            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
             button=true;
             dispose();
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"Có Lỗi ngày tháng, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Có Lỗi thông tin học sinh, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
    
             }
             }
@@ -485,12 +504,101 @@ public class DSXeBus extends javax.swing.JDialog {
             }
         }
         }
+        
         catch(Exception ex)
         {
                             JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
 
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                try{
+        if(themorsua)
+        {
+            int idstudent;
+            String nameStudent,nameClass;
+            nameStudent=ten.getText();
+            nameClass= lop.getSelectedItem().toString();
+            String datebd = nambd.getSelectedItem().toString() +"-"+ thangbd.getSelectedItem().toString() +"-"+ngaybd.getSelectedItem().toString();
+            String datekt = namkt.getSelectedItem().toString() +"-"+ thangkt.getSelectedItem().toString() +"-"+ngaykt.getSelectedItem().toString();
+            if(sosanhngaythang(datebd, datekt))
+            {
+            idstudent=new DataBase.SQLXeBus().getIdStudent(nameStudent, nameClass);
+            System.out.println("ma so là:" +idstudent);
+            //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
+            if(idstudent!=0)
+            {
+                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
+                {
+                DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
+                button=true;
+                dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            }
+            else
+            {
+                
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tên học sinh bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+                
+            }
+            }
+            else
+            {
+                            JOptionPane.showMessageDialog(null,"Có Lỗi ngày tháng, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+        else
+        {
+            int idstudent;
+            String nameStudent,nameClass;
+            nameStudent=ten.getText();
+            nameClass= lop.getSelectedItem().toString();
+            
+            idstudent=new DataBase.SQLXeBus().getIdStudent(nameStudent, nameClass);
+            System.out.println("ma so là:" +idstudent);
+            String datebd = nambd.getSelectedItem().toString() +"-"+ thangbd.getSelectedItem().toString() +"-"+ngaybd.getSelectedItem().toString();
+            String datekt = namkt.getSelectedItem().toString() +"-"+ thangkt.getSelectedItem().toString() +"-"+ngaykt.getSelectedItem().toString();
+            if(sosanhngaythang(datebd, datekt))
+            {
+            if(idstudent!=0)
+            {
+            System.out.println("id xe bus la1:" +idxebus);
+            DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
+            button=true;
+            dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Có Lỗi thông tin học sinh, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+   
+            }
+            }
+            else
+            {
+                                JOptionPane.showMessageDialog(null,"Có Lỗi ngày tháng, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+        }
+        
+        catch(Exception ex)
+        {
+                            JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

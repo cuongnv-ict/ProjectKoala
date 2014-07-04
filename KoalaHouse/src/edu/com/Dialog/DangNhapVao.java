@@ -67,7 +67,7 @@ public class DangNhapVao extends javax.swing.JDialog {
 
         Textfield_userName.setText("root");
 
-        Textfield_password.setText("akatsuki");
+        Textfield_password.setText("123456");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Đăng Nhập");

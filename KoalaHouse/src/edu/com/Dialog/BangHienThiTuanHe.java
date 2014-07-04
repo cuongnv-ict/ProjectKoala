@@ -46,6 +46,7 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thời Gian Các Tuần Hè");
 
         sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/sua.JPG"))); // NOI18N
         sua.setToolTipText("Sửa");

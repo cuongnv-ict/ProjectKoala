@@ -288,10 +288,10 @@ public class SQLkyhe {
         }
     }
     
-    public void suadkhocbus(int oldIdStudent,int newIdStudent,String tuanhoc,int sotuanhoc)
+    public void suadkhoche(int oldIdStudent,int newIdStudent,String tuanhoc,int sotuanhoc,int idSummer)
     {
         try{
-            String query = "update learnsummer  set idStudents = '" +newIdStudent+ "' , tuanhoc = '"+tuanhoc+"', soTuanHoc= '"+sotuanhoc+"'  where idStudents= '"+oldIdStudent+"'";
+            String query = "update learnsummer  set idStudents = '" +newIdStudent+ "' , tuanhoc = '"+tuanhoc+"', soTuanHoc= '"+sotuanhoc+"'  where idStudents= '"+oldIdStudent+"' and id = '"+idSummer+"'";
             System.out.println(query);
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate(); 
@@ -319,12 +319,13 @@ public class SQLkyhe {
         }
         return id;
     }
-    public boolean xoaDkHe(JTable table, int columncheck)
+    public boolean xoaDkHe(JTable table, int columncheck,ArrayList<Integer> idhoche)
     {
         try
         {
             Vector vector= new Vector();
             Vector vector2=new Vector();
+            Vector vector3= new Vector();
             DefaultTableModel tableModel;
             tableModel = (DefaultTableModel) table.getModel();
             int i=0,a=0;
@@ -338,7 +339,7 @@ public class SQLkyhe {
                         if(Boolean.parseBoolean(table.getValueAt(a-1,columncheck).toString())== true)
                         {
                             vector.add(table.getValueAt(a-1, 1).toString());
-                         
+                            vector3.add(idhoche.get(a-1));
                             vector2.add(table.getValueAt(a-1, 2).toString());
                         }
                     }
@@ -362,7 +363,7 @@ public class SQLkyhe {
                         id=rs1.getInt(1);
                         }
 
-                        query="delete from learnsummer  where idStudents = '"+id+"'";
+                        query="delete from learnsummer  where idStudents = '"+id+"' and id = '"+vector3.get(i)+"'";
                         System.out.println(query);
                         pstmt = connect.prepareStatement(query);
                         pstmt.executeUpdate();
@@ -512,4 +513,30 @@ public class SQLkyhe {
         }
         
     }    
+    public int  getIsActiveStudent(String ten,String nameclasses) 
+    {
+        int isactive = 0;
+        int id=0;
+        try 
+        {
+        rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
+                + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
+        while(rs1.next())
+        {
+            id=rs1.getInt(1);
+        }
+        rs1 = statement.executeQuery("Select IsActive From learnsummer where idStudents = '"+id+"' and isActive = 1 ");
+        while(rs1.next())
+        {
+            isactive=rs1.getInt(1);
+            
+        }
+        return isactive;
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        return isactive;
+    }
 }

@@ -51,14 +51,14 @@ public class DataTable {
     public void BangDanhSachLop(JTable table,int idtrungtam){
         int id,dem=0;
         try {
-            Object [] nameColumn = { "Tên Lớp","Trung tâm", "Trình độ", "Học kì", "Giáo Viên", "Số học sinh", "Tối đa", "Trạng thái","Đánh dấu"};
+            Object [] nameColumn = { "Tên Lớp","Trung tâm", "Trình độ", "Học kì", "Giáo Viên", "Số học sinh", "Tối đa","Đánh dấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
            // rs2 = statement.executeQuery("select * ,count(Students_id) from classes,classes_has_students where classes.id= Classes_Id group by Classes_Id");
             if(idtrungtam==5) rs1= statement.executeQuery("select * from classes order by Faculties_Id ");
             else rs1=statement.executeQuery("select * from classes where Faculties_Id= '"+idtrungtam+"' order by Faculties_Id ");
             while(rs1.next()){
                 
-                Object str[] = new Object[9];
+                Object str[] = new Object[8];
                 str[0] = rs1.getString(6);
                     id= rs1.getInt(1);
                     switch(rs1.getInt(4)){
@@ -94,15 +94,8 @@ public class DataTable {
                    str[6]=XuLy.getDate((String) str[6]);
                    */
                    str[6] = rs1.getString(8);
-                   switch(rs1.getInt(9)){
-                    case 0:
-                           str[7] = "Đang giảng dạy";
-                        break;
-                    case 1:
-                            str[7] = "Đã kết thúc";
-                        break;
-                }
-                 str[8]=false;
+                   
+                 str[7]=false;
                  
                 // rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students where Classes_Id = '" + id + "'");
                  rs2= statement2.executeQuery("select count(Students_Id) from classes_has_students,students where classes_has_students.Classes_Id='"+id+"' and classes_has_students.Students_Id=students.Id and students.isactive=1");
@@ -115,19 +108,31 @@ public class DataTable {
                       
                 data.add(str);
             }
-            Object [][] rowColumn = new Object[data.size()][];
-            for (int i = 0; i < data.size(); i++) {
+            if(data.size()==0)
+            {
+                Object[] str = new Object[12];
+                str[0]="";
+                str[1]="";
+                str[2]="";
+                str[3]="";
+                str[4]="";
+                str[5]="";
+                str[6]="";
+                str[7]=false;
+                data.add(str);
+                Object [][] rowColumn = new Object[data.size()][];
+                for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
-            model = new DefaultTableModel(rowColumn, nameColumn){
+                model = new DefaultTableModel(rowColumn, nameColumn){
                 boolean[] canEdit = new boolean [] {
-                false,false, false,false,false,false,false,false,true
+                false,false, false,false,false,false,false,true
                     };
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
                     }
                     
-            Class[] types = new Class [] {
-                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                Class[] types = new Class [] {
+                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -136,11 +141,42 @@ public class DataTable {
                 };
            
                 table.setModel(model);
-                statement.close();
-                statement2.close();
-                connect.close();
+                
             
+                }
+             
             }
+            else
+            {
+                Object [][] rowColumn = new Object[data.size()][];
+                for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+                model = new DefaultTableModel(rowColumn, nameColumn){
+                boolean[] canEdit = new boolean [] {
+                false,false, false,false,false,false,false,true
+                    };
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+                    }
+                    
+                Class[] types = new Class [] {
+                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                    };
+
+                    public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+                    }
+                };
+           
+                table.setModel(model);
+                
+            
+                }
+            }
+            
+            statement.close();
+            statement2.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -648,7 +684,7 @@ public class DataTable {
         }  
         return false;
     }
-    public boolean SuaLop(String oldnameclass,int idtrungtam,String trungtam,String kyhoc,String tenkhoi,String tenlop,String giaovien,String sohs,String trangthai)
+    public boolean SuaLop(String oldnameclass,int idtrungtam,String trungtam,String kyhoc,String tenkhoi,String tenlop,String giaovien,String sohs)
     {
         int id=0,test=0;
        try
@@ -666,7 +702,7 @@ public class DataTable {
             {
             id=rs1.getInt(1);
             }
-            String query = "update classes  set Faculties_Id = '" + ThongTin.trungtam + "' , Semesters='" + kyhoc + "' , Levels_Id = '" + tenkhoi + "', NameClass = '" + tenlop + "', TeacherClass='" + giaovien + "',MaxNumber='" + sohs + "' ,IsActive='" + trangthai + "' where Id='" + id + "'";
+            String query = "update classes  set Faculties_Id = '" + ThongTin.trungtam + "' , Semesters='" + kyhoc + "' , Levels_Id = '" + tenkhoi + "', NameClass = '" + tenlop + "', TeacherClass='" + giaovien + "',MaxNumber='" + sohs + "'  where Id='" + id + "'";
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
             

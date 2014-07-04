@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
-    
+    private int idhoche;
     private boolean button;
     private boolean themorsua;
     private int oldIdStudents;
@@ -60,6 +60,10 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         catch(Exception ex)
         {}
     
+    }
+    public void setIdhoche(int id)
+    {
+        this.idhoche=id;
     }
     public void setOldIdStudents(String nameStudent,String nameclass)
     {
@@ -183,6 +187,11 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 jButton2MouseClicked(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Cancle");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,16 +276,26 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
             {
                 if(kiemtratuanhoc(tuanhoc.getText()))
                 {
-                int idstudent;
-                String nameStudent,nameClass;
-                nameStudent=ten.getText();
-                nameClass= lop.getSelectedItem().toString();
-                DataBase.SQLkyhe data = new DataBase.SQLkyhe();
-                idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+                    int idstudent;
+                    String nameStudent,nameClass;
+                    nameStudent=ten.getText();
+                    nameClass= lop.getSelectedItem().toString();
+                    if((new DataBase.SQLkyhe().getIsActiveStudent(nameStudent,nameClass))==0)
+                    {
+                        DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                        idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+
+                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan);
+
+                        dispose();
+                    }
+                    else
+                    {
+                         JOptionPane.showMessageDialog(null,"Học sinh đã được đăng ký, làm ơn xóa đăng ký hoặc ấn sửa",null,JOptionPane.INFORMATION_MESSAGE);
+                         tongsotuan=0;
+                    }
+                    
                 
-                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan);
-                
-                dispose();
                 }
                 else
                 {
@@ -296,7 +315,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
                 if(idstudent!=0)
                 {
-                data.suadkhocbus(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan);
+                data.suadkhoche(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan,idhoche);
                 dispose();
                 }
                 else
@@ -326,6 +345,78 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                try{
+            if(themorsua)
+            {
+                if(kiemtratuanhoc(tuanhoc.getText()))
+                {
+                    int idstudent;
+                    String nameStudent,nameClass;
+                    nameStudent=ten.getText();
+                    nameClass= lop.getSelectedItem().toString();
+                    if((new DataBase.SQLkyhe().getIsActiveStudent(nameStudent,nameClass))==0)
+                    {
+                        DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                        idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+
+                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan);
+
+                        dispose();
+                    }
+                    else
+                    {
+                         JOptionPane.showMessageDialog(null,"Học sinh đã được đăng ký, làm ơn xóa đăng ký hoặc ấn sửa",null,JOptionPane.INFORMATION_MESSAGE);
+                         tongsotuan=0;
+                    }
+                    
+                
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tuần học bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                    tongsotuan=0;
+                }
+            }
+            else
+            {
+                if(kiemtratuanhoc(tuanhoc.getText()))
+                {
+                int idstudent;
+                String nameStudent,nameClass;
+                nameStudent=ten.getText();
+                nameClass= lop.getSelectedItem().toString();
+                DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+                if(idstudent!=0)
+                {
+                data.suadkhoche(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan,idhoche);
+                dispose();
+                }
+                else
+                {
+                    
+                
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tuần học bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                    tongsotuan=0;
+                
+                }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tuần học bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                    tongsotuan=0;
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+            tongsotuan=0;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -220,7 +220,6 @@ public class DSLop extends javax.swing.JPanel {
             vector.add(lop.getGiaoVien());
             vector.add(lop.getSoHS());
             vector.add(0);
-            vector.add(lop.getTrangThai());
             vector.add(false);
             model.addRow(vector);
             
@@ -244,7 +243,7 @@ public class DSLop extends javax.swing.JPanel {
         int count =1, row=0;
         model=(DefaultTableModel) jTable4.getModel();
         for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 8)==true){
+            if((Boolean)model.getValueAt(i, 7)==true){
                 count--;
                 row = i;
             }
@@ -256,7 +255,7 @@ public class DSLop extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
                 for(int i = model.getRowCount()-1;i>=0;i--){
-                    model.setValueAt(false,i,10);
+                    model.setValueAt(false,i,7);
                }
             }
             return;
@@ -327,7 +326,7 @@ public class DSLop extends javax.swing.JPanel {
         {
             boolean flags = true;
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 8) == true) {
+                if ((Boolean) model.getValueAt(i, 7) == true) {
                     flags = false;
                 }
             }
@@ -339,12 +338,19 @@ public class DSLop extends javax.swing.JPanel {
                 }
                 boolean xoaorkhong;
                 DataBase.DataTable data= new DataTable();
-                xoaorkhong=data.XoaLop(jTable4, 8);
+                xoaorkhong=data.XoaLop(jTable4, 7);
                 if(xoaorkhong)
                 {
                 EditTable edit= new EditTable();
-                edit.removeManyRowOfTable(jTable4, 8);
+                edit.removeManyRowOfTable(jTable4, 7);
+                try{
+                      new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
 
+                      model = (DefaultTableModel) jTable4.getModel();
+                      resize(jTable4);
+                      }
+                      catch(Exception ex)
+                      {}
                 listkoala.taoTree();
                 }
                 model=(DefaultTableModel) jTable4.getModel();

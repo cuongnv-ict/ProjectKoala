@@ -12,6 +12,7 @@ import DataBase.HocSinh.CostOfStudent;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Dialog.ChiTietNghiPhep;
 import edu.com.Dialog.HoaDon;
+import edu.com.ThongBaoKyHe.ThongBaoKyGeVer2;
 import edu.com.Dialog.LichSuDongTien2;
 import edu.com.Dialog.Themphi;
 import edu.com.Dialog.ThongBao;
@@ -565,13 +566,14 @@ public class HocSinhA extends javax.swing.JPanel {
     }//GEN-LAST:event_Panel_hocsinhAMouseEntered
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ThongBao.tenHS = edit_ten.getText();
-        ThongBao.tenNguoiDaiDien = cha.getText();
-        ThongBao.trungTam = idTrungTam;
-        ThongBao.idhs = id;
-        ThongBao.lop = Lop.getText();
-        ThongBao tb = new ThongBao(null, true);
-        tb.setLocation(360, 0);
+//        ThongBao.tenHS = edit_ten.getText();
+//        ThongBao.tenNguoiDaiDien = cha.getText();
+//        ThongBao.trungTam = idTrungTam;
+//        ThongBao.idhs = id;
+//        ThongBao.lop = Lop.getText();
+//        ThongBao tb = new ThongBao(null, true);
+        ThongBaoKyGeVer2 tb = new ThongBaoKyGeVer2(id,idTrungTam);
+        tb.setLocation(50, 50);
         tb.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -6,6 +6,9 @@
 
 package edu.com.ThongBaoKyHe;
         
+import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.RecieptManagerment;
+import static edu.com.Dialog.HoaDon.idhs;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -26,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
@@ -82,12 +86,13 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
     private int nCol;
     private Object[][] tableData;
     public int pageBreak;
+    public int idStudent;
     //int pageBreak[];
     
     /**
      * Creates new form ThongBaoKyGeVer2
      */
-    public ThongBaoKyGeVer2() {
+    public ThongBaoKyGeVer2(int idHS,int idTrungTam) {
         initComponents();
         //jComboBox1.setSelectedIndex(5);
         //jComboBox1.setSelectedItem("2015");
@@ -97,6 +102,15 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jComboBox5.setSelectedItem(year);
         jComboBox2.setSelectedItem(year);
         jComboBox1.setSelectedItem(year + 1);
+        idStudent = idHS;
+        AStudentAndLateDay a = new AStudentAndLateDay();
+            ArrayList info;
+            info = a.HocSinhA1(idStudent);
+        tenHS.setText((String) info.get(1));
+        tenChuongTrinh.setText((String) info.get(9));
+        tenLop.setText((String) info.get(10));
+        tenCoSo.setText((String) info.get(11));
+        new RecieptManagerment().BangDSPhiHoaDon(idStudent,idTrungTam, jTable1);
     }
 
     /**
@@ -127,10 +141,10 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        tenHS = new javax.swing.JTextField();
+        tenLop = new javax.swing.JTextField();
+        tenCoSo = new javax.swing.JTextField();
+        tenChuongTrinh = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jComboBox6 = new javax.swing.JComboBox();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -167,6 +181,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         btnPrint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/ThongBaoKyHe/Untitled.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -174,7 +189,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbTT1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        lbTT1.setText("THÔNG BÁO NỘP HỌC PHÍ KỲ HÈ");
+        lbTT1.setText(" THÔNG BÁO NỘP HỌC PHÍ");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("NĂM HỌC");
@@ -335,10 +350,10 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
                                                     .addComponent(jLabel10))))
                                         .addGap(23, 23, 23)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                                            .addComponent(jTextField2)
-                                            .addComponent(jTextField3)
-                                            .addComponent(jTextField4)))
+                                            .addComponent(tenHS, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                                            .addComponent(tenLop)
+                                            .addComponent(tenCoSo)
+                                            .addComponent(tenChuongTrinh)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel13)
                                         .addGap(0, 0, Short.MAX_VALUE))
@@ -437,19 +452,19 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12))
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -608,7 +623,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongBaoKyGeVer2().setVisible(true);
+                //ThongBaoKyGeVer2 tt = new ThongBaoKyGeVer2(, idStudent)
             }
         });
     }
@@ -656,21 +671,21 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbTT1;
+    private javax.swing.JTextField tenChuongTrinh;
+    private javax.swing.JTextField tenCoSo;
+    private javax.swing.JTextField tenHS;
+    private javax.swing.JTextField tenLop;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -691,7 +706,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         grphcs.setFont(font);
         //grphcs.drawImage(imageOfLabel, 0, 0, null);
         grphcs.drawImage(imageOfLabel, 50, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
-        grphcs.drawString(lbOfTT, 250, 40);
+        grphcs.drawString(lbOfTT, 280, 40);
         
         // ve cho nam hoc
         font = new Font("Serif", Font.PLAIN, 14);
@@ -737,11 +752,11 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         //System.out.println("table data : " + tableDataToString);
         //System.out.println("table data ver 2 : " + tableData[0][0]);
         
-        grphcs.drawString("STT", 70, 260);
-        grphcs.drawString("Nội dung", 100, 260);
-        grphcs.drawString("Thời gian", 300, 260);
-        grphcs.drawString("Số tiền", 400, 260);
-        grphcs.drawString("Ghi chú", 500, 260);
+        grphcs.drawString("Tên", 70, 260);
+        grphcs.drawString("Từ ngày", 300, 260);
+        grphcs.drawString("Đến ngày", 400, 260);
+        grphcs.drawString("Thành tiền", 500, 260);
+        //grphcs.drawString("Ghi chú", 500, 260);
         
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
@@ -756,59 +771,63 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 70, (260 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 100, (260 + (i + 1) * 20));
-                } else if(j == 2) {
                     grphcs.drawString(tableDataToString, 300, (260 + (i + 1) * 20));
-                } else if(j == 3) {
+                } else if(j == 2) {
                     grphcs.drawString(tableDataToString, 400, (260 + (i + 1) * 20));
-                } else if(j ==4) {
+                } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 500, (260 + (i + 1) * 20));
+               // } else if(j ==4) {
+                 //   grphcs.drawString(tableDataToString, 500, (260 + (i + 1) * 20));
                 }
             }
         }
-        
+        int line = 260 + (nRow)  * 20;
+        line = line + 20;
         // ve cac tuan hoc
-        grphcs.drawString(lbTuanHoc, 70, 450);
-        grphcs.drawString(lbTuan1, 70, 470);
-        grphcs.drawString(lbTuan2, 70, 490);
-        grphcs.drawString(lbTuan3, 70, 510);
-        grphcs.drawString(lbTuan4, 340, 470);
-        grphcs.drawString(lbTuan5, 340, 490);
-        grphcs.drawString(lbTuan6, 340, 510);
-        grphcs.drawString(tfTuan1, 130, 470);
-        grphcs.drawString(tfTuan2, 130, 490);
-        grphcs.drawString(tfTuan3, 130, 510);
-        grphcs.drawString(tfTuan4, 400, 470);
-        grphcs.drawString(tfTuan5, 400, 490);
-        grphcs.drawString(tfTuan6, 400, 510);
+        grphcs.drawString(lbTuanHoc, 70, line + 20);
+        grphcs.drawString(lbTuan1, 70, line + 40);
+        grphcs.drawString(lbTuan2, 70, line + 60);
+        grphcs.drawString(lbTuan3, 70, line + 80);
+        grphcs.drawString(lbTuan4, 340, line + 40);
+        grphcs.drawString(lbTuan5, 340, line + 60);
+        grphcs.drawString(lbTuan6, 340, line + 80);
+        grphcs.drawString(tfTuan1, 130, line + 40);
+        grphcs.drawString(tfTuan2, 130, line + 60);
+        grphcs.drawString(tfTuan3, 130, line + 80);
+        grphcs.drawString(tfTuan4, 400, line + 40);
+        grphcs.drawString(tfTuan5, 400, line + 60);
+        grphcs.drawString(tfTuan6, 400, line + 80);
         
+        line = line + 100;
         // ve luu y
         //int linesOfTextArea = jTextArea1.getLineCount();
       
         //grphcs.drawString(taLuuy, 70, 520);
         font = new Font("Serif", Font.BOLD, 13);
         grphcs.setFont(font);
-        grphcs.drawString(lbHannop + ": ", 70, 540);
-        grphcs.drawString(lbLoaiTien + ": ", 70, 560);
-        grphcs.drawString(lbHinhThuc + ": ", 70, 580);
-        grphcs.drawString(lbThongTin, 70, 600);
+        grphcs.drawString(lbHannop + ": ", 70, line + 20);
+        grphcs.drawString(lbLoaiTien + ": ", 70, line + 40);
+        grphcs.drawString(lbHinhThuc + ": ", 70, line + 60);
+        grphcs.drawString(lbThongTin, 70, line + 80);
         font = new Font("Serif", Font.PLAIN, 13);
         grphcs.setFont(font);
-        grphcs.drawString(lbTenTK + ": ", 100, 620);
-        grphcs.drawString(lbSTK + ": ", 100, 640);
-        grphcs.drawString(lbTenNH + ": ", 100, 660);
+        grphcs.drawString(lbTenTK + ": ", 100, line + 100);
+        grphcs.drawString(lbSTK + ": ", 100, line + 120);
+        grphcs.drawString(lbTenNH + ": ", 100, line + 140);
         
-        grphcs.drawString(tfHannop, 130, 540);
-        grphcs.drawString(tfLoaiTien, 200, 560);
-        grphcs.drawString(tfHinhThuc, 200, 580);
-        grphcs.drawString(tfTenTK, 190, 620);
-        grphcs.drawString(tfSTK, 190, 640);
-        grphcs.drawString(tfTenNH, 190, 660);
+        grphcs.drawString(tfHannop, 130, line + 20);
+        grphcs.drawString(tfLoaiTien, 200, line + 40);
+        grphcs.drawString(tfHinhThuc, 200, line + 60);
+        grphcs.drawString(tfTenTK, 190, line + 100);
+        grphcs.drawString(tfSTK, 190, line + 120);
+        grphcs.drawString(tfTenNH, 190, line + 140);
+        
+        line = line + 140;
         
         font = new Font("Serif", Font.BOLD, 13);
         grphcs.setFont(font);
-        grphcs.drawString(lbLuuy, 70, 700);
-        
+        grphcs.drawString(lbLuuy, 70, line + 40);
+        line = line + 40;
         font = new Font("Serif", Font.PLAIN, 13);
         grphcs.setFont(font);
         
@@ -817,7 +836,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
             if(page == 1) {
                 break;
             } else {
-                grphcs.drawString(linesOfLuuy[k], 80, (700 + (k + 1) * 20));
+                grphcs.drawString(linesOfLuuy[k], 80, (line + (k + 1) * 20));
             }
         }
         //if(page == 1) {
@@ -833,7 +852,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         } else {
             System.err.println("sfsdfsfs");
             for(int k = 0 ; k < linesOfLuuy.length ; k++) {
-                grphcs.drawString(linesOfLuuy[k], 80, (700 + (k + 1) * 20));
+                grphcs.drawString(linesOfLuuy[k], 80, (line + (k + 1) * 20));
             }
         }
         }
@@ -928,10 +947,10 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         lbLop = jLabel9.getText();
         lbCoSo = jLabel10.getText();
         lbChuongTrinh = jLabel11.getText();
-        tfHovaTen = jTextField1.getText();
-        tfLop = jTextField2.getText();
-        tfCoSo = jTextField3.getText();
-        tfChuongTrinh = jTextField4.getText();
+        tfHovaTen = tenHS.getText();
+        tfLop = tenLop.getText();
+        tfCoSo = tenCoSo.getText();
+        tfChuongTrinh = tenChuongTrinh.getText();
         lbDVT = jLabel12.getText();
         cbDVT = String.valueOf(jComboBox6.getSelectedItem());
         //tableData = new Object[nRow][nCol];
