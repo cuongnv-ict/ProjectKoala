@@ -1091,11 +1091,17 @@ public class ListKoala extends javax.swing.JFrame {
         } catch (NullPointerException e) {
 
         }
+        catch(Exception ex)
+        {
+            
+        }
 
     }//GEN-LAST:event_JtreeMouseClicked
 // xu ly su kien chuot phai
     private void JtreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseReleased
         // TODO add your handling code here:
+       try
+       {
         if (evt.isPopupTrigger()) {
             JTree node = (JTree) evt.getSource();
             TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
@@ -1107,6 +1113,9 @@ public class ListKoala extends javax.swing.JFrame {
             tree.show(this, evt.getXOnScreen() - this.getX(), evt.getYOnScreen() - this.getY());
 
         }
+       }
+       catch(Exception ex)
+       {}
     }//GEN-LAST:event_JtreeMouseReleased
 
     /*
@@ -1116,12 +1125,13 @@ public class ListKoala extends javax.swing.JFrame {
 */
     private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
         // TODO add your handling code here:
+        try
+        {
         if (nodex.getFirstChild().isLeaf()) {
             ThemSuaLop lop = new ThemSuaLop(null, true);
             lop.setThemSuaLop(true);//day la them
-            lop.setVisible(true);
             lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
-            lop.show();
+            lop.setVisible(true);
             String a = null;
             String b = nodex.toString();
             lop.setKhoiName(b);
@@ -1130,10 +1140,19 @@ public class ListKoala extends javax.swing.JFrame {
                 DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
                 model.insertNodeInto(new DefaultMutableTreeNode(a), nodex, nodex.getChildCount());
             }
+            
         } else {
 
             String message = String.format("Bạn Không Thể Tạo Lớp Ở Đây");
             JOptionPane.showMessageDialog(null, message);
+        }
+        taoTree();
+        }
+        catch(Exception ex)
+        {
+            String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đâu");
+            JOptionPane.showMessageDialog(null, message);
+       
         }
     }//GEN-LAST:event_AActionPerformed
 
@@ -1186,6 +1205,7 @@ public class ListKoala extends javax.swing.JFrame {
                     String message = String.format("trong lớp vẫn còn hs, bạn cần thực hiện chuyển lớp hoặc xóa hs để có thể xóa lớp");
                     JOptionPane.showMessageDialog(null, message);
                 }
+                taoTree();
             } catch (SQLException ex) {
 
             }
@@ -1198,6 +1218,8 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void RatruongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatruongActionPerformed
         // TODO add your handling code here:
+        try
+        {
         if (nodex.isLeaf()) {
             String tenlop = nodex.toString();
             int idtenlop;
@@ -1208,7 +1230,13 @@ public class ListKoala extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, message);
 
         }
-
+        }
+        catch(Exception ex)
+        {
+             String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
+            JOptionPane.showMessageDialog(null, message);
+       
+        }
     }//GEN-LAST:event_RatruongActionPerformed
 
     private void CapNhatNamHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CapNhatNamHocActionPerformed
@@ -1256,7 +1284,7 @@ public class ListKoala extends javax.swing.JFrame {
         }
         if (a == -1) {
             XeBus xebus= new XeBus();
-            
+            xebus.center= Panel_GDChinh;
             //DSLop dsl = new DSLop(idtrungtam);
             if (!ThongTin.isadmin) {
                 xebus.setNotAdmin();

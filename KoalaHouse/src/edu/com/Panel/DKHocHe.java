@@ -103,8 +103,6 @@ public class DKHocHe extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         Panel_DSLop = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -113,8 +111,6 @@ public class DKHocHe extends javax.swing.JPanel {
         xoa = new javax.swing.JLabel();
         xemlich = new javax.swing.JLabel();
         textfield_timkiem = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -190,20 +186,6 @@ public class DKHocHe extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -221,102 +203,240 @@ public class DKHocHe extends javax.swing.JPanel {
                 .addComponent(sua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xemlich)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 732, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
-            .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                    .addGap(542, 542, 542)
-                    .addComponent(jLabel1)
-                    .addContainerGap(542, Short.MAX_VALUE)))
-            .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_DSLopLayout.createSequentialGroup()
-                    .addContainerGap(552, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addGap(532, 532, 532)))
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
         );
         Panel_DSLopLayout.setVerticalGroup(
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
                 .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(them)
-                        .addComponent(sua)
-                        .addComponent(xoa)
-                        .addComponent(xemlich)
-                        .addComponent(textfield_timkiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3))
+                        .addComponent(textfield_timkiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                            .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(them)
+                                    .addComponent(sua))
+                                .addComponent(xoa))
+                            .addGap(3, 3, 3)))
+                    .addComponent(jLabel3)
+                    .addComponent(xemlich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
-            .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                    .addGap(242, 242, 242)
-                    .addComponent(jLabel1)
-                    .addContainerGap(242, Short.MAX_VALUE)))
-            .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_DSLopLayout.createSequentialGroup()
-                    .addContainerGap(252, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addGap(232, 232, 232)))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel_DSLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel_DSLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1148, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1148, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(Panel_DSLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(Panel_DSLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        textfield_timkiem.setText("Tìm Kiếm");
+        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+        resize(jTable4);
+
+        id_hoche = new ArrayList<Integer>();
+        try{
+            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                XuLy.setID(id_hoche, jTable4, 0);
+            }
+            else
+            {
+                resize(jTable4);
+            }
+        }
+        catch(Exception ex)
+        {
+            jTable4.setModel(modelgoc);
+            resize(jTable4);
+        }
+
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
+        // TODO add your handling code here:
+        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4,textfield_timkiem.getText());
+        id_hoche = new ArrayList<Integer>();
+        try{
+            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                XuLy.setID(id_hoche, jTable4, 0);
+                resize(jTable4);
+            }
+            else
+            {
+                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
+                resize(jTable4);
+            }
+        }
+        catch(Exception ex)
+        {
+            jTable4.setModel(modelgoc);
+            resize(jTable4);
+        }
+    }//GEN-LAST:event_textfield_timkiemActionPerformed
+
+    private void textfield_timkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfield_timkiemMouseClicked
+        // TODO add your handling code here:
+        textfield_timkiem.setText("");
+    }//GEN-LAST:event_textfield_timkiemMouseClicked
+
+    private void xemlichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xemlichMouseClicked
+        // TODO add your handling code here:
+        BangHienThiTuanHe banghoche= new BangHienThiTuanHe(null, true);
+        banghoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+        banghoche.setVisible(true);
+
+    }//GEN-LAST:event_xemlichMouseClicked
+
+    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
+        // TODO add your handling code here:
+
+        if(isadmin)
+        {
+            model= (DefaultTableModel) jTable4.getModel();
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i,5) == true) {
+                    flags = false;
+                }
+            }
+            if(!flags)
+            {
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                if(click==JOptionPane.NO_OPTION){
+                    return;
+                }
+
+                boolean xoaorkhong;
+                DataBase.SQLkyhe data= new DataBase.SQLkyhe();
+                xoaorkhong=data.xoaDkHe(jTable4, 5,id_hoche);
+
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                id_hoche = new ArrayList<Integer>();
+                try
+                {
+
+                    if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                        XuLy.setID(id_hoche, jTable4, 0);
+                        resize(jTable4);
+                    }
+                    else
+                    {
+                        resize(jTable4);
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+    }//GEN-LAST:event_xoaMouseClicked
+
+    private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
+        if(isadmin)
+        {
+            int count =1, row=0;
+            model=(DefaultTableModel) jTable4.getModel();
+            for(int i = model.getRowCount()-1;i>=0;i--){
+                if((Boolean)model.getValueAt(i, 5)==true){
+                    count--;
+                    row = i;
+                }
+            }
+            if(count!=0){
+                if(count==1){
+                    JOptionPane.showMessageDialog(null,"Bạn chưa chọn Học Sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
+                    for(int i = model.getRowCount()-1;i>=0;i--){
+                        model.setValueAt(false,i,10);
+                    }
+                }
+                return;
+            }
+            Vector vec =  (Vector) model.getDataVector().elementAt(row);
+            ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true,vec);
+            dkhoche.setIdhoche(id_hoche.get(row));
+            dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+            dkhoche.setThemSuaLop(false);
+            dkhoche.setVisible(true);
+
+            //dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+            id_hoche = new ArrayList<Integer>();
+            try
+            {
+                if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                    XuLy.setID(id_hoche, jTable4, 0);
+                    resize(jTable4);
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+            //ThemSuaLop lop = new ThemSuaLop(null, true, vec);
+            /*
+            if(lop.getButton()){
+                model.setValueAt(lop.getTenLop(), row, 0);
+                model.setValueAt(lop.getTrungTam(), row, 1);
+                model.setValueAt(lop.getKhoiHoc(), row, 2);
+                model.setValueAt(lop.getHocKy(), row, 3);
+                model.setValueAt(lop.getGiaoVien(), row, 4);
+                model.setValueAt(lop.getSoHS(), row, 5);
+                model.setValueAt(lop.getTrangThai(), row, 7);
+                model.setValueAt(false, row,8);
+            }
+            */
+        }
+    }//GEN-LAST:event_suaMouseClicked
+
+    private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
+        // TODO add your handling code here:
+
+        if(isadmin)
+        {
+            System.out.println("bawt dau tao dialog");
+            ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true);
+            dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+
+            dkhoche.setThemSuaLop(true);
+            dkhoche.setVisible(true);
+
+            //receipts.setLocation(420, 20);
+            //receipts.show();
+            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+            id_hoche = new ArrayList<Integer>();
+            try
+            {
+                if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                    XuLy.setID(id_hoche, jTable4, 0);
+                    resize(jTable4);
+                }
+            }
+            catch(Exception ex)
+            {}
+        }
+    }//GEN-LAST:event_themMouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
@@ -349,221 +469,10 @@ public class DKHocHe extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable4MouseClicked
 
-    private void themMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themMouseClicked
-        // TODO add your handling code here:
-        
-        if(isadmin)
-        {
-            System.out.println("bawt dau tao dialog");
-            ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true);
-            dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-            
-            dkhoche.setThemSuaLop(true);
-            dkhoche.setVisible(true);
-            
-            //receipts.setLocation(420, 20);
-            //receipts.show();
-            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-            id_hoche = new ArrayList<Integer>();
-            try
-            {
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-            XuLy.setID(id_hoche, jTable4, 0);
-            resize(jTable4);
-            }
-            }
-            catch(Exception ex)
-            {}
-        }
-    }//GEN-LAST:event_themMouseClicked
-
-    private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
-        if(isadmin)
-        {
-            int count =1, row=0;
-            model=(DefaultTableModel) jTable4.getModel();
-            for(int i = model.getRowCount()-1;i>=0;i--){
-                if((Boolean)model.getValueAt(i, 5)==true){
-                    count--;
-                    row = i;
-                }
-            }
-            if(count!=0){
-                if(count==1){
-                    JOptionPane.showMessageDialog(null,"Bạn chưa chọn Học Sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
-                    for(int i = model.getRowCount()-1;i>=0;i--){
-                        model.setValueAt(false,i,10);
-                    }
-                }
-                return;
-            }
-            Vector vec =  (Vector) model.getDataVector().elementAt(row);
-            ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true,vec);
-            
-            dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-            dkhoche.setThemSuaLop(false);
-            dkhoche.setVisible(true);
-
-            //dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-            id_hoche = new ArrayList<Integer>();
-            try
-            {
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-            XuLy.setID(id_hoche, jTable4, 0);
-            resize(jTable4);
-            }
-            }
-            catch(Exception ex)
-            {
-            }
-            //ThemSuaLop lop = new ThemSuaLop(null, true, vec);
-            /*
-            if(lop.getButton()){
-                model.setValueAt(lop.getTenLop(), row, 0);
-                model.setValueAt(lop.getTrungTam(), row, 1);
-                model.setValueAt(lop.getKhoiHoc(), row, 2);
-                model.setValueAt(lop.getHocKy(), row, 3);
-                model.setValueAt(lop.getGiaoVien(), row, 4);
-                model.setValueAt(lop.getSoHS(), row, 5);
-                model.setValueAt(lop.getTrangThai(), row, 7);
-                model.setValueAt(false, row,8);
-            }
-            */
-        }
-    }//GEN-LAST:event_suaMouseClicked
-
-    private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
-        // TODO add your handling code here:
-
-        if(isadmin)
-        {
-            model= (DefaultTableModel) jTable4.getModel();
-            boolean flags = true;
-            for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i,5) == true) {
-                    flags = false;
-                }
-            }
-            if(!flags)
-            {
-                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
-                if(click==JOptionPane.NO_OPTION){
-                    return;
-                }
-              
-                boolean xoaorkhong;
-                DataBase.SQLkyhe data= new DataBase.SQLkyhe();
-                xoaorkhong=data.xoaDkHe(jTable4, 5);
-
-                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-                id_hoche = new ArrayList<Integer>();
-                    try
-                    {
-
-
-                    if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                    XuLy.setID(id_hoche, jTable4, 0);
-                    resize(jTable4);
-                    }
-                    else
-                    {
-                    resize(jTable4);
-                    }
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-       
-            }
-        }
-    }//GEN-LAST:event_xoaMouseClicked
-
-    private void xemlichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xemlichMouseClicked
-        // TODO add your handling code here:
-        BangHienThiTuanHe banghoche= new BangHienThiTuanHe(null, true);
-        banghoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-        banghoche.setVisible(true);
-            
-    }//GEN-LAST:event_xemlichMouseClicked
-
-    private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
-        // TODO add your handling code here:
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4,textfield_timkiem.getText());
-        id_hoche = new ArrayList<Integer>();
-        try{
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-            XuLy.setID(id_hoche, jTable4, 0);
-                resize(jTable4);
-        }
-            else
-            {
-             //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
-                 resize(jTable4);
-            }
-        }
-        catch(Exception ex)
-        {
-            jTable4.setModel(modelgoc);
-            resize(jTable4);
-        }
-
-    }//GEN-LAST:event_textfield_timkiemActionPerformed
-
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here
-     
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-        textfield_timkiem.setText("Tìm Kiếm");
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-        resize(jTable4);
-      
-        id_hoche = new ArrayList<Integer>();
-        try{
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-            XuLy.setID(id_hoche, jTable4, 0);
-        }
-            else
-            {
-                resize(jTable4);
-            }
-        }
-        catch(Exception ex)
-        {
-            jTable4.setModel(modelgoc);
-            resize(jTable4);
-        }
-        
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void textfield_timkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfield_timkiemMouseClicked
-        // TODO add your handling code here:
-        textfield_timkiem.setText("");
-    }//GEN-LAST:event_textfield_timkiemMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_DSLop;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable4;
     private javax.swing.JLabel sua;
