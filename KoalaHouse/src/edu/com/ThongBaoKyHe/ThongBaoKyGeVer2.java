@@ -167,6 +167,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         btnPrint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/ThongBaoKyHe/Untitled.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -174,7 +175,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lbTT1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        lbTT1.setText("THÔNG BÁO NỘP HỌC PHÍ KỲ HÈ");
+        lbTT1.setText(" THÔNG BÁO NỘP HỌC PHÍ");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("NĂM HỌC");
@@ -691,7 +692,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         grphcs.setFont(font);
         //grphcs.drawImage(imageOfLabel, 0, 0, null);
         grphcs.drawImage(imageOfLabel, 50, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
-        grphcs.drawString(lbOfTT, 250, 40);
+        grphcs.drawString(lbOfTT, 280, 40);
         
         // ve cho nam hoc
         font = new Font("Serif", Font.PLAIN, 14);

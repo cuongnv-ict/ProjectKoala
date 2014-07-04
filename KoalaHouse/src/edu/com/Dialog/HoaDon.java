@@ -978,7 +978,7 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbMa, 180, 160);
         grphcs.drawString(tfMa, 200, 160);
         grphcs.drawString(lbCoso, 290, 160);
-        grphcs.drawString(tfCoso, 320, 160);
+        grphcs.drawString(tfCoso, 325, 160);
         grphcs.drawString(lbNguoiThanhToan, 20, 180);
         grphcs.drawString(tfNguoiThanhToan, 75, 180);
         grphcs.drawString(lbLop, 180, 180);
@@ -988,9 +988,9 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         
         String tableDataToString = "";
         grphcs.drawString("Tên Phí ", 30, 210);
-        grphcs.drawString("Kỳ học ", 130, 210);
-        grphcs.drawString("Năm học ", 230, 210);
-        grphcs.drawString("Giá ", 330, 210);
+        grphcs.drawString("Kỳ học ", 135, 210);
+        grphcs.drawString("Năm học ", 235, 210);
+        grphcs.drawString("Giá ", 335, 210);
         
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
@@ -1002,11 +1002,11 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 30, (210 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 130, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 135, (210 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 230, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 235, (210 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 330, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 335, (210 + (i + 1) * 20));
                 }
             }
         }
@@ -1151,6 +1151,6 @@ public void getComponentsOfReceived() {
     tfNguoiNop = nguoiNop.getText();
     tfNguoiThu = nguoiThu.getText();
     //lbStbc = stbc.getText();
-    lbStbc = "Số tiền bằng chữ: ";
+    lbStbc = stbc.getText();
 }
 }
