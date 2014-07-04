@@ -6,6 +6,9 @@
 
 package edu.com.ThongBaoKyHe;
         
+import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.RecieptManagerment;
+import static edu.com.Dialog.HoaDon.idhs;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -26,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
@@ -82,12 +86,13 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
     private int nCol;
     private Object[][] tableData;
     public int pageBreak;
+    public int idStudent;
     //int pageBreak[];
     
     /**
      * Creates new form ThongBaoKyGeVer2
      */
-    public ThongBaoKyGeVer2() {
+    public ThongBaoKyGeVer2(int idHS,int idTrungTam) {
         initComponents();
         //jComboBox1.setSelectedIndex(5);
         //jComboBox1.setSelectedItem("2015");
@@ -97,6 +102,15 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jComboBox5.setSelectedItem(year);
         jComboBox2.setSelectedItem(year);
         jComboBox1.setSelectedItem(year + 1);
+        idStudent = idHS;
+        AStudentAndLateDay a = new AStudentAndLateDay();
+            ArrayList info;
+            info = a.HocSinhA1(idStudent);
+        tenHS.setText((String) info.get(1));
+        tenChuongTrinh.setText((String) info.get(9));
+        tenLop.setText((String) info.get(10));
+        tenCoSo.setText((String) info.get(11));
+        new RecieptManagerment().BangDSPhiHoaDon(idStudent,idTrungTam, jTable1);
     }
 
     /**
@@ -127,10 +141,10 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        tenHS = new javax.swing.JTextField();
+        tenLop = new javax.swing.JTextField();
+        tenCoSo = new javax.swing.JTextField();
+        tenChuongTrinh = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jComboBox6 = new javax.swing.JComboBox();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -336,10 +350,10 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
                                                     .addComponent(jLabel10))))
                                         .addGap(23, 23, 23)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-                                            .addComponent(jTextField2)
-                                            .addComponent(jTextField3)
-                                            .addComponent(jTextField4)))
+                                            .addComponent(tenHS, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                                            .addComponent(tenLop)
+                                            .addComponent(tenCoSo)
+                                            .addComponent(tenChuongTrinh)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel13)
                                         .addGap(0, 0, Short.MAX_VALUE))
@@ -438,19 +452,19 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tenChuongTrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12))
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -609,7 +623,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongBaoKyGeVer2().setVisible(true);
+                
             }
         });
     }
@@ -657,21 +671,21 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbTT1;
+    private javax.swing.JTextField tenChuongTrinh;
+    private javax.swing.JTextField tenCoSo;
+    private javax.swing.JTextField tenHS;
+    private javax.swing.JTextField tenLop;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -929,10 +943,10 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         lbLop = jLabel9.getText();
         lbCoSo = jLabel10.getText();
         lbChuongTrinh = jLabel11.getText();
-        tfHovaTen = jTextField1.getText();
-        tfLop = jTextField2.getText();
-        tfCoSo = jTextField3.getText();
-        tfChuongTrinh = jTextField4.getText();
+        tfHovaTen = tenHS.getText();
+        tfLop = tenLop.getText();
+        tfCoSo = tenCoSo.getText();
+        tfChuongTrinh = tenChuongTrinh.getText();
         lbDVT = jLabel12.getText();
         cbDVT = String.valueOf(jComboBox6.getSelectedItem());
         //tableData = new Object[nRow][nCol];
