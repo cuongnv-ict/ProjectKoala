@@ -25,7 +25,7 @@ import edu.com.Panel.HS_Phi;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
 import edu.com.Panel.XeBus;
-import edu.com.ThongBaoKyHe.ThongBaoKyGeVer2;
+import edu.com.Dialog.ThongBaoKyGeVer2;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
