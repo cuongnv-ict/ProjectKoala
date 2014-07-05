@@ -235,6 +235,11 @@ public class DSXeBus extends javax.swing.JDialog {
                 jButton2MouseClicked(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Địa Chỉ:");
 
@@ -506,6 +511,94 @@ public class DSXeBus extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                try{
+        if(themorsua)
+        {
+            int idstudent;
+            String nameStudent,nameClass;
+            nameStudent=ten.getText();
+            nameClass= lop.getSelectedItem().toString();
+            String datebd = nambd.getSelectedItem().toString() +"-"+ thangbd.getSelectedItem().toString() +"-"+ngaybd.getSelectedItem().toString();
+            String datekt = namkt.getSelectedItem().toString() +"-"+ thangkt.getSelectedItem().toString() +"-"+ngaykt.getSelectedItem().toString();
+            if(sosanhngaythang(datebd, datekt))
+            {
+            idstudent=new DataBase.SQLXeBus().getIdStudent(nameStudent, nameClass);
+            System.out.println("ma so là:" +idstudent);
+            //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
+            if(idstudent!=0)
+            {
+                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
+                {
+                DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
+                button=true;
+                dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            }
+            else
+            {
+                
+                    JOptionPane.showMessageDialog(null,"Có Lỗi phần nhập tên học sinh bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+                
+            }
+            }
+            else
+            {
+                            JOptionPane.showMessageDialog(null,"Có Lỗi ngày tháng, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+        else
+        {
+            int idstudent;
+            String nameStudent,nameClass;
+            nameStudent=ten.getText();
+            nameClass= lop.getSelectedItem().toString();
+            
+            idstudent=new DataBase.SQLXeBus().getIdStudent(nameStudent, nameClass);
+            System.out.println("ma so là:" +idstudent);
+            String datebd = nambd.getSelectedItem().toString() +"-"+ thangbd.getSelectedItem().toString() +"-"+ngaybd.getSelectedItem().toString();
+            String datekt = namkt.getSelectedItem().toString() +"-"+ thangkt.getSelectedItem().toString() +"-"+ngaykt.getSelectedItem().toString();
+            if(sosanhngaythang(datebd, datekt))
+            {
+            if(idstudent!=0)
+            {
+            System.out.println("id xe bus la1:" +idxebus);
+            DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
+            button=true;
+            dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Có Lỗi thông tin học sinh, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+   
+            }
+            }
+            else
+            {
+                                JOptionPane.showMessageDialog(null,"Có Lỗi ngày tháng, bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+        }
+        
+        catch(Exception ex)
+        {
+                            JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

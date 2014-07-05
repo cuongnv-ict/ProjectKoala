@@ -160,6 +160,11 @@ public class ThemSuaLop extends javax.swing.JDialog {
                 DongYMouseClicked(evt);
             }
         });
+        DongY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DongYActionPerformed(evt);
+            }
+        });
 
         HuyBo.setText("Hủy bỏ");
         HuyBo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -331,6 +336,90 @@ public class ThemSuaLop extends javax.swing.JDialog {
         button=false;
         dispose();
     }//GEN-LAST:event_HuyBoMouseClicked
+
+    private void DongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DongYActionPerformed
+        // TODO add your handling code here:
+                DataBase.DataTable a = new DataTable();
+        String tenlop= ten.getText();
+        String tengiaovien=giaovien.getText();
+        String hocky=ky.getSelectedItem().toString();
+        String tentrinhdo=trinhdo.getSelectedItem().toString();
+        String tentrungtam=trungtam.getSelectedItem().toString();
+        String tonghs=sohs.getValue().toString();
+        //doi ten khoi thanh so
+        if(tentrinhdo.equals("NẮNG MAI (SUNSHINE)")) tentrinhdo="1";
+        else if(tentrinhdo.equals("TỔ ONG (BEEHEVE)")) tentrinhdo="2";
+        else if(tentrinhdo.equals("TỔ KÉN (CHRYSARYS)")) tentrinhdo="3";
+        else tentrinhdo="4";
+        //doi ten trung tam thanh so 
+        if(tentrungtam.equals("Koala House Bà Triệu")) tentrungtam="1";
+        else if (tentrungtam.equals("Koala House Hoàng Ngân")) tentrungtam="2";
+        else if (tentrungtam.equals("Koala House Phan Kế Bình")) tentrungtam="3";
+        else tentrungtam="4";
+        //doi ten trang thai sang so
+        this.idtrungtam=Integer.parseInt(tentrungtam);
+       // kiem tra xem la co cho nao chua dien khong 
+        if(tengiaovien!=null&&tenlop!=null)
+        {
+            if(themorsua==true)//them lop
+            {
+                  DataTable data= new DataTable();
+                  if(tenlop.equals(""))
+                  {
+                    JOptionPane.showMessageDialog(null,"Tên lớp không được để trống!",null,JOptionPane.INFORMATION_MESSAGE);
+          
+                  }
+                  else
+                  {
+                  if(data.ThemLop(tentrungtam, hocky, tentrinhdo, tenlop, tengiaovien, tonghs))
+                    {
+                        String message =String.format( "Bạn đã tạo thành công lớp mới");
+                        JOptionPane.showMessageDialog( null, message );
+                        button=true;
+                        dispose();
+                    }
+                  }
+            }
+            else
+            {
+                if(tenlop.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Tên lớp không được để trống!",null,JOptionPane.INFORMATION_MESSAGE);
+          
+                }
+                else
+                {
+                if(hshienco<=Integer.parseInt(tonghs))
+                {    
+                    DataTable data= new DataTable();
+                    if(data.SuaLop(oldName,idtrungtam ,tentrungtam, hocky, tentrinhdo, tenlop, tengiaovien, tonghs))
+                    {
+                        String message =String.format( "Bạn đã chinh sua thanh cong");
+                        JOptionPane.showMessageDialog( null, message );
+                        button=true;
+                        dispose();
+                    }
+                }
+                
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Số lượng tổng học sinh lớn hơn học sinh hiện có trong lớp, mời bạn sửa đổi",null,JOptionPane.INFORMATION_MESSAGE);
+        
+                }
+                }
+             
+            }
+        }    
+        else
+        {
+                String message =String.format( "lỗi tạo lớp, mời bạn xem lại dữ liệu");
+                JOptionPane.showMessageDialog( null, message );
+        }
+        
+       
+       
+
+    }//GEN-LAST:event_DongYActionPerformed
 
     /**
      * @param args the command line arguments
