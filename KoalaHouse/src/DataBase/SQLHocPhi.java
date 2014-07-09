@@ -63,8 +63,9 @@ public class SQLHocPhi {
                     str[7] = false;
                     data.add(str);
                 }
+                System.out.println(data.size());
             } else {
-                while (rs1.next()) {
+                do{
                     Object str[] = new Object[8];
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(2);
@@ -105,7 +106,7 @@ public class SQLHocPhi {
                     }
                     str[7] = false;
                     data.add(str);
-                }
+                }while (rs1.next()) ;
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
