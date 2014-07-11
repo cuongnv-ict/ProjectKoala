@@ -831,11 +831,13 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             for(int j=0;j<coldata.length;j++)
                 coldata[j] = 0;
             model.addColumn("Chiết Khấu(%)",coldata);
+            Total();
         }
         else{
           TableColumn tcol = jTable1.getColumnModel().getColumn(4);
           jTable1.getColumnModel().removeColumn(tcol);
           model.setColumnCount(4);
+          Total();
         }
     }//GEN-LAST:event_hienChietKhauActionPerformed
 

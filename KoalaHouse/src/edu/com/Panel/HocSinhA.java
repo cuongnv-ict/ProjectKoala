@@ -666,6 +666,7 @@ public class HocSinhA extends javax.swing.JPanel {
                         }
                         else ki = "5";
                         String nam = model.getValueAt(num -1, 3).toString().substring(0, 4);
+                        //update trong muon o day
                         new AStudentAndLateDay().UpdateTrongMuon(id,ki,nam);
                         totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
                         TimeTrongMuon.setText(String.valueOf(totalTime));
