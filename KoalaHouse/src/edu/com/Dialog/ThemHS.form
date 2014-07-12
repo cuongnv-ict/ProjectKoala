@@ -125,10 +125,8 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="sex" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="hinhthuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel10" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="hinhthuc" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="jLabel4" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -165,9 +163,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="DongY" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="HuyBo" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="DongY" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>

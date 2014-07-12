@@ -219,7 +219,8 @@ public class SQLLopX {
 
     public boolean xoaHocSinh(int id_student, String date) {
         try {
-            statement.execute("Update students set isactive = 0,NghiHoc  = "+date+" where id = " + id_student);
+            System.out.println(date);
+            statement.execute("Update students set isactive = 0,NghiHoc  = '"+date+"' where id = " + id_student);
             statement.close();
             connect.close();
             return true;

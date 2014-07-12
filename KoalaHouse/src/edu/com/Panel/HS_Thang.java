@@ -15,8 +15,11 @@ import edu.com.ListKoala;
 import edu.com.XuLy;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.List;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -38,26 +41,32 @@ public class HS_Thang extends javax.swing.JPanel {
     /**
      * Creates new form DSHS
      */
-    public JTabbedPane center;
-    ArrayList<Integer> id_students;
-    int[] arrRows;
     private boolean isadmin = true;
-    private ArrayList<Object[]> info;
-    private Object[] o;
-
+    public JTabbedPane center;
+    ArrayList<Integer> info;
     public HS_Thang() {
         initComponents();
+        String date[] = new SimpleDateFormat("dd-MM-yyyy").format((new Date()).getTime()).split("-");
+        setSelectComboBox(thang, date[1]);
+        setSelectComboBox(nam, date[2]);
+        this.getinfo();
+    }
 
-        o = new DataBase.SQLHocPhi().HS_Phi();
-        if (((ComboBoxModel) o[1]).getSize() == 0) {
-            JOptionPane.showMessageDialog(center, "Không có phí nào trong danh sách phí", TOOL_TIP_TEXT_KEY, JOptionPane.INFORMATION_MESSAGE);
-
-        } else {
-            LoaiPhi.setModel((ComboBoxModel) o[1]);
-            LoaiPhi.setSelectedIndex(0);
-            new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(0).toString()));
+    private void setSelectComboBox(JComboBox x, Object obj) {
+        for (int i = 0; i < x.getItemCount(); i++) {
+            if (x.getItemAt(i).toString().equals(obj.toString().trim())) {
+                x.setSelectedIndex(i);
+                break;
+            }
         }
+    }
 
+    private void getinfo() {
+        if (thang.getSelectedIndex() == 6 || thang.getSelectedIndex() == 7 || thang.getSelectedIndex() == 8) {
+            info = new DataBase.SQLHocSinhTheoThang().DanhSachHocSinhTrongKi(danhsach, Integer.valueOf(thang.getSelectedItem().toString()), Integer.valueOf(nam.getSelectedItem().toString()));
+        } else {
+            info = new DataBase.SQLHocSinhTheoThang().DanhSachHocSinhTrongKi(danhsach, Integer.valueOf(thang.getSelectedItem().toString()), Integer.valueOf(nam.getSelectedItem().toString()));
+        }
     }
 
     public void setNotAdmin() {
@@ -74,14 +83,29 @@ public class HS_Thang extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane8 = new javax.swing.JScrollPane();
-        BangPhi = new javax.swing.JTable();
-        LoaiPhi = new javax.swing.JComboBox();
+        danhsach = new javax.swing.JTable(){
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column){
+
+                Component c = super.prepareRenderer(renderer, row, column);
+                if(info.get(row)==-1){
+                    c.setBackground(Color.BLUE);
+                }
+                else{
+                    c.setForeground(Color.BLACK);
+                    c.setBackground(Color.WHITE);
+                }
+                return c;
+
+            }
+        };
+        thang = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        LoaiPhi1 = new javax.swing.JComboBox();
+        nam = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
 
-        BangPhi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        BangPhi.setModel(new javax.swing.table.DefaultTableModel(
+        danhsach.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        danhsach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -92,14 +116,15 @@ public class HS_Thang extends javax.swing.JPanel {
                 "ID", "Tên", "Trình Độ", "Lớp", "Hình Thức Học", "Ngay Sinh"
             }
         ));
-        BangPhi.setRowHeight(30);
-        jScrollPane8.setViewportView(BangPhi);
+        danhsach.setRowHeight(30);
+        jScrollPane8.setViewportView(danhsach);
 
-        LoaiPhi.setMinimumSize(new java.awt.Dimension(114, 25));
-        LoaiPhi.setPreferredSize(new java.awt.Dimension(114, 25));
-        LoaiPhi.addActionListener(new java.awt.event.ActionListener() {
+        thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        thang.setMinimumSize(new java.awt.Dimension(114, 25));
+        thang.setPreferredSize(new java.awt.Dimension(114, 25));
+        thang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoaiPhiActionPerformed(evt);
+                thangActionPerformed(evt);
             }
         });
 
@@ -114,13 +139,17 @@ public class HS_Thang extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("Danh sách học sinh theo tháng :");
 
-        LoaiPhi1.setMinimumSize(new java.awt.Dimension(114, 25));
-        LoaiPhi1.setPreferredSize(new java.awt.Dimension(114, 25));
-        LoaiPhi1.addActionListener(new java.awt.event.ActionListener() {
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.setMinimumSize(new java.awt.Dimension(114, 25));
+        nam.setPreferredSize(new java.awt.Dimension(114, 25));
+        nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoaiPhi1ActionPerformed(evt);
+                namActionPerformed(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("/");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,10 +160,12 @@ public class HS_Thang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LoaiPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LoaiPhi1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(thang, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -144,10 +175,11 @@ public class HS_Thang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LoaiPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LoaiPhi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
         );
@@ -156,28 +188,28 @@ public class HS_Thang extends javax.swing.JPanel {
      * setID dung de chuyen id hoc sinh sang so thu tu, từ số thứ tự thì chỉ số i-1 sẽ giúp truy suất trong mang id
      * giá trị Id_student tương ứng.
      */
-    private void LoaiPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoaiPhiActionPerformed
+    private void thangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thangActionPerformed
         // TODO add your handling code here:
-        if(((ComboBoxModel) o[1]).getSize()!=0){
-            new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(LoaiPhi.getSelectedIndex()).toString()));
-        }
-    }//GEN-LAST:event_LoaiPhiActionPerformed
+        getinfo();
+    }//GEN-LAST:event_thangActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        this.LoaiPhiActionPerformed(null);
+        getinfo();
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void LoaiPhi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoaiPhi1ActionPerformed
+    private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LoaiPhi1ActionPerformed
+        getinfo();
+    }//GEN-LAST:event_namActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BangPhi;
-    private javax.swing.JComboBox LoaiPhi;
-    private javax.swing.JComboBox LoaiPhi1;
+    private javax.swing.JTable danhsach;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JComboBox nam;
+    private javax.swing.JComboBox thang;
     // End of variables declaration//GEN-END:variables
 }

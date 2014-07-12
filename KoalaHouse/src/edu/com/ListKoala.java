@@ -22,6 +22,7 @@ import edu.com.Panel.DSHS;
 import edu.com.Panel.DSLop;
 import edu.com.Panel.DSNo;
 import edu.com.Panel.HS_Phi;
+import edu.com.Panel.HS_Thang;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
 import edu.com.Panel.XeBus;
@@ -342,6 +343,8 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        hs_thang = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -556,6 +559,15 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel2.setText("Trông Muộn");
 
+        hs_thang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/Save_as.png"))); // NOI18N
+        hs_thang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hs_thangMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("DSHS theo tháng");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -604,11 +616,15 @@ public class ListKoala extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addGap(56, 56, 56)
+                        .addComponent(hs_thang))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jLabel2)))
-                .addContainerGap(594, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel4)))
+                .addContainerGap(494, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,7 +641,8 @@ public class ListKoala extends javax.swing.JFrame {
                     .addComponent(jLabel48)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel49)))
+                        .addComponent(jLabel49)
+                        .addComponent(hs_thang)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -636,7 +653,8 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel32)
                         .addComponent(jLabel50)
                         .addComponent(jLabel51)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel4))
                     .addComponent(jLabel31))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -728,7 +746,7 @@ public class ListKoala extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1309, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1078,32 +1096,28 @@ public class ListKoala extends javax.swing.JFrame {
             }
         } catch (NullPointerException e) {
 
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
 
     }//GEN-LAST:event_JtreeMouseClicked
 // xu ly su kien chuot phai
     private void JtreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseReleased
         // TODO add your handling code here:
-       try
-       {
-        if (evt.isPopupTrigger()) {
-            JTree node = (JTree) evt.getSource();
-            TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
-            if (path == null) {
-                return;
-            }
-            node.setSelectionPath(path);
-            nodex = (DefaultMutableTreeNode) path.getLastPathComponent();
-            tree.show(this, evt.getXOnScreen() - this.getX(), evt.getYOnScreen() - this.getY());
+        try {
+            if (evt.isPopupTrigger()) {
+                JTree node = (JTree) evt.getSource();
+                TreePath path = node.getPathForLocation(evt.getX(), evt.getY());
+                if (path == null) {
+                    return;
+                }
+                node.setSelectionPath(path);
+                nodex = (DefaultMutableTreeNode) path.getLastPathComponent();
+                tree.show(this, evt.getXOnScreen() - this.getX(), evt.getYOnScreen() - this.getY());
 
+            }
+        } catch (Exception ex) {
         }
-       }
-       catch(Exception ex)
-       {}
     }//GEN-LAST:event_JtreeMouseReleased
 
     /*
@@ -1113,34 +1127,31 @@ public class ListKoala extends javax.swing.JFrame {
 */
     private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
         // TODO add your handling code here:
-        try
-        {
-        if (nodex.getFirstChild().isLeaf()) {
-            ThemSuaLop lop = new ThemSuaLop(null, true);
-            lop.setThemSuaLop(true);//day la them
-            lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
-            lop.setVisible(true);
-            String a = null;
-            String b = nodex.toString();
-            lop.setKhoiName(b);
-            if (lop.getButton()) {
-                a = lop.getTenLop();
-                DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
-                model.insertNodeInto(new DefaultMutableTreeNode(a), nodex, nodex.getChildCount());
-            }
-            
-        } else {
+        try {
+            if (nodex.getFirstChild().isLeaf()) {
+                ThemSuaLop lop = new ThemSuaLop(null, true);
+                lop.setThemSuaLop(true);//day la them
+                lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
+                lop.setVisible(true);
+                String a = null;
+                String b = nodex.toString();
+                lop.setKhoiName(b);
+                if (lop.getButton()) {
+                    a = lop.getTenLop();
+                    DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+                    model.insertNodeInto(new DefaultMutableTreeNode(a), nodex, nodex.getChildCount());
+                }
 
-            String message = String.format("Bạn Không Thể Tạo Lớp Ở Đây");
-            JOptionPane.showMessageDialog(null, message);
-        }
-        taoTree();
-        }
-        catch(Exception ex)
-        {
+            } else {
+
+                String message = String.format("Bạn Không Thể Tạo Lớp Ở Đây");
+                JOptionPane.showMessageDialog(null, message);
+            }
+            taoTree();
+        } catch (Exception ex) {
             String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đâu");
             JOptionPane.showMessageDialog(null, message);
-       
+
         }
     }//GEN-LAST:event_AActionPerformed
 
@@ -1206,24 +1217,21 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void RatruongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatruongActionPerformed
         // TODO add your handling code here:
-        try
-        {
-        if (nodex.isLeaf()) {
-            String tenlop = nodex.toString();
-            int idtenlop;
-            idtenlop = new DataBase.DataTable().LayIdTenLop(tenlop);
-            new DataBase.SQLJTree().ratruong(idtenlop);
-        } else {
+        try {
+            if (nodex.isLeaf()) {
+                String tenlop = nodex.toString();
+                int idtenlop;
+                idtenlop = new DataBase.DataTable().LayIdTenLop(tenlop);
+                new DataBase.SQLJTree().ratruong(idtenlop);
+            } else {
+                String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
+                JOptionPane.showMessageDialog(null, message);
+
+            }
+        } catch (Exception ex) {
             String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
             JOptionPane.showMessageDialog(null, message);
 
-        }
-        }
-        catch(Exception ex)
-        {
-             String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
-            JOptionPane.showMessageDialog(null, message);
-       
         }
     }//GEN-LAST:event_RatruongActionPerformed
 
@@ -1263,7 +1271,7 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jLabel48MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel48MouseClicked
         // TODO add your handling code here:
-                int a = -1;
+        int a = -1;
         for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
             if ("DS XeBus".equals(Panel_GDChinh.getTitleAt(i))) {
                 a += 1;
@@ -1271,8 +1279,8 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            XeBus xebus= new XeBus();
-            xebus.center= Panel_GDChinh;
+            XeBus xebus = new XeBus();
+            xebus.center = Panel_GDChinh;
             //DSLop dsl = new DSLop(idtrungtam);
             if (!ThongTin.isadmin) {
                 xebus.setNotAdmin();
@@ -1293,10 +1301,10 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            DKHocHe dkhoche= new DKHocHe();
+            DKHocHe dkhoche = new DKHocHe();
             //DSLop dsl = new DSLop(idtrungtam);
             dkhoche.center = Panel_GDChinh;
-           //dsl.listkoala = this;
+            //dsl.listkoala = this;
             if (!ThongTin.isadmin) {
                 dkhoche.setNotAdmin();
             }
@@ -1307,11 +1315,34 @@ public class ListKoala extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel49MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       NhapTrongMuon nhaptrongmuon = new NhapTrongMuon(null, rootPaneCheckingEnabled);
-       nhaptrongmuon.setLocation(300, 100);
-       nhaptrongmuon.center = Panel_GDChinh;
-       nhaptrongmuon.setVisible(true);
+        NhapTrongMuon nhaptrongmuon = new NhapTrongMuon(null, rootPaneCheckingEnabled);
+        nhaptrongmuon.setLocation(300, 100);
+        nhaptrongmuon.center = Panel_GDChinh;
+        nhaptrongmuon.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void hs_thangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hs_thangMouseClicked
+        // TODO add your handling code here:
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("HS_Thang".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
+                Panel_GDChinh.setSelectedIndex(i);
+            }
+        }
+        if (a == -1) {
+            HS_Thang  HsThang = new HS_Thang();
+            //DSLop dsl = new DSLop(idtrungtam);
+            HsThang.center = Panel_GDChinh;
+            //dsl.listkoala = this;
+            if (!ThongTin.isadmin) {
+                HsThang.setNotAdmin();
+            }
+            Panel_GDChinh.add("HS_Thang", HsThang);
+            Panel_GDChinh.setSelectedComponent(HsThang);
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+        }
+    }//GEN-LAST:event_hs_thangMouseClicked
 
     public void connectDataBase() {
         connectData = new ConnectData();
@@ -1366,6 +1397,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JPanel Panel_trungtam;
     private javax.swing.JMenuItem chitiet;
     private javax.swing.JMenuItem hs_phi;
+    private javax.swing.JLabel hs_thang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -1381,6 +1413,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel50;
