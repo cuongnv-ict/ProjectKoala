@@ -16,6 +16,7 @@ import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -136,11 +137,12 @@ public class DSHS extends javax.swing.JPanel {
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column){
 
                 Component c = super.prepareRenderer(renderer, row, column);
+                c.setFont(new Font("Arial", Font.PLAIN, 12));
                 if(info.get(column)[row].toString().charAt(0)=='x'){
-                    c.setForeground(Color.BLACK);
+                    c.setForeground(Color.RED);
 
                     if(LoaiHS.getSelectedIndex()==0){
-                        c.setBackground(Color.BLACK);
+                        c.setBackground(Color.RED);
                     }else{
                         c.setBackground(Color.WHITE);
                     }
@@ -152,7 +154,7 @@ public class DSHS extends javax.swing.JPanel {
                     }
                 }else if(info.get(column)[row].toString().charAt(0)=='0'){
                     c.setForeground(Color.RED);
-                    c.setBackground(Color.RED);
+                    c.setBackground(Color.WHITE);
                     if(isRowSelected(row)&&isColumnSelected(column)&&LoaiHS.getSelectedIndex()==0){
                         c.setBackground(Color.BLUE);
                     }
@@ -160,6 +162,7 @@ public class DSHS extends javax.swing.JPanel {
                     c.setForeground(Color.BLACK);
                     c.setBackground(Color.WHITE);
                 }else{
+                    c.setFont(new Font("Arial", Font.BOLD, 12));
                     c.setForeground(Color.BLACK);
                     c.setBackground(Color.WHITE);
                     if(isRowSelected(row)&&isColumnSelected(column)){
@@ -274,13 +277,13 @@ public class DSHS extends javax.swing.JPanel {
         } else if (info.get(col)[row].toString().charAt(0) == '-') {
             String arr[] = info.get(col)[row].toString().split("-");
             Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[1]));
-            ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(10).toString()));
+            ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(11).toString()));
             hs.setVisible(true);
             return hs.getButton();
-        } else if (info.get(col)[row].toString().charAt(0) != 'x'&&info.get(col)[row].toString().charAt(0) != 's') {
+        } else if (info.get(col)[row].toString().charAt(0) != 'x' && info.get(col)[row].toString().charAt(0) != 's') {
             String arr[] = info.get(col)[row].toString().split("-");
             Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[0]));
-            ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(10).toString()));
+            ThemHS hs = new ThemHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(11).toString()));
             hs.setVisible(true);
             return hs.getButton();
         }
@@ -296,13 +299,13 @@ public class DSHS extends javax.swing.JPanel {
         } else if (info.get(col)[row].toString().charAt(0) == '-') {
             String arr[] = info.get(col)[row].toString().split("-");
             Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[1]));
-            InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(10).toString()));
+            InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[1]), Integer.parseInt(v.get(11).toString()));
             hs.setVisible(true);
             return hs.getButton();
-        } else if (info.get(col)[row].toString().charAt(0) != 'x'&&info.get(col)[row].toString().charAt(0) != 's') {
+        } else if (info.get(col)[row].toString().charAt(0) != 'x' && info.get(col)[row].toString().charAt(0) != 's') {
             String arr[] = info.get(col)[row].toString().split("-");
             Vector v = new SQLDanhSachHocSinh().HocSinh(Integer.parseInt(arr[0]));
-            InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(10).toString()));
+            InfoHS hs = new InfoHS(ListKoala.frame, true, v, Integer.parseInt(arr[0]), Integer.parseInt(v.get(11).toString()));
             hs.setVisible(true);
             return hs.getButton();
         }
@@ -327,34 +330,7 @@ public class DSHS extends javax.swing.JPanel {
         // TODO add your handling code here:
         this.LoaiHSActionPerformed(null);
     }//GEN-LAST:event_jLabel1MouseClicked
-public static void resizeColumnWidth(JTable table,int size) {
-         int x = 0;
-        final TableColumnModel columnModel = table.getColumnModel();
-        for (int column = 0; column < table.getColumnCount(); column++) {
-            int width = 10; 
-            for (int row = 0; row < table.getRowCount(); row++) {
-                TableCellRenderer renderer = table.getCellRenderer(row, column);
-                Component comp = table.prepareRenderer(renderer, row, column);
-                width = Math.max(comp.getPreferredSize().width, width);
-            }
 
-            TableColumn tableColumn = table.getColumnModel().getColumn(column);
-            Object value = tableColumn.getHeaderValue();
-            TableCellRenderer renderer = tableColumn.getHeaderRenderer();
-            if (renderer == null) {
-                renderer = table.getTableHeader().getDefaultRenderer();
-            }
-            Component c = renderer.getTableCellRendererComponent(table, value, false, false, -1, column);
-            width = Math.max(c.getPreferredSize().width, width);
-            x += width;
-            columnModel.getColumn(column).setPreferredWidth(width+100);
-        }
-//        if(x>300){
-             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        }else{
-//             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-//        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DSHS;
     private javax.swing.JComboBox LoaiHS;

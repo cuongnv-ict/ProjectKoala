@@ -63,9 +63,8 @@ public class SQLHocPhi {
                     str[7] = false;
                     data.add(str);
                 }
-                System.out.println(data.size());
             } else {
-                do{
+                do {
                     Object str[] = new Object[8];
                     str[0] = rs1.getString(1);
                     str[1] = rs1.getString(2);
@@ -106,7 +105,7 @@ public class SQLHocPhi {
                     }
                     str[7] = false;
                     data.add(str);
-                }while (rs1.next()) ;
+                } while (rs1.next());
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
@@ -132,7 +131,6 @@ public class SQLHocPhi {
             XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
         } catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(null, "Lỗi nạp dữ liệu", null, JOptionPane.ERROR_MESSAGE);
-            System.out.println(ex.toString());
         }
     }
 
@@ -242,12 +240,12 @@ public class SQLHocPhi {
     public ArrayList<Integer> BangDanhSachHSDongDuPhi(int classes_id, JTable table) {
         try {
             ArrayList<Integer> arr = new ArrayList<Integer>();
-            Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", ""};
+            Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", "Người đại diện", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from students where  debt=0 and isactive = 1 and students.id in(select Students_Id from classes_has_students where classes_id = " + classes_id + " and Students_Id not in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id))");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
-                    Object[] str = new Object[12];
+                    Object[] str = new Object[13];
                     str[0] = "";
                     str[1] = "";
                     str[2] = "";
@@ -258,13 +256,14 @@ public class SQLHocPhi {
                     str[7] = "";
                     str[8] = "";
                     str[9] = "";
-                    str[10] = false;
-                    str[11] = 1;
+                    str[10] = "";
+                    str[11] = false;
+                    str[12] = 1;
                     data.add(str);
                 }
             } else {
                 do {
-                    Object[] str = new Object[12];
+                    Object[] str = new Object[13];
                     str[0] = rs1.getInt(1);
                     str[1] = rs1.getString(3);
                     str[2] = XuLy.getDate(rs1.getString(4));
@@ -279,11 +278,12 @@ public class SQLHocPhi {
                     str[7] = rs1.getString(11);
                     str[8] = rs1.getString(12);
                     str[9] = rs1.getString(14);
-                    str[10] = false;
+                    str[10] = rs1.getString(19);
+                    str[11] = false;
                     if (rs1.getString(15) == null) {
-                        str[11] = 1;
+                        str[12] = 1;
                     } else {
-                        str[11] = rs1.getInt(15);
+                        str[12] = rs1.getInt(15);
                     }
                     data.add(str);
                 } while (rs1.next());
@@ -291,24 +291,24 @@ public class SQLHocPhi {
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
-                Object[] str = new Object[11];
-                for (int j = 0; j < 11; j++) {
+                Object[] str = new Object[12];
+                for (int j = 0; j < 12; j++) {
                     str[j] = (data.get(i))[j];
                 }
-                arr.add((Integer) (data.get(i))[11]);
+                arr.add((Integer) (data.get(i))[12]);
                 rowColumn[i] = str;
 
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.Boolean.class
                 };
 
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false, false, true
+                    false, false, false, false, false, false, false, false, false, false, false, true
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -329,12 +329,12 @@ public class SQLHocPhi {
     public ArrayList<Integer> BangDanhSachHocSinhNoPhi(int classes_id, JTable table) {
         try {
             ArrayList<Integer> arr = new ArrayList<Integer>();
-            Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", ""};
+            Object[] nameColumn = {"STT", "Họ Tên", "Ngày Sinh", "Hình thức học", "Số điện thoại nhà", "Tên cha", "Số điện thoại", "Tên mẹ", "Số điện thoại", "Email", "Người đại diện", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select * from students where (isactive= 1 and students.id in(select students_has_cost.students_id from students_has_cost,classes_has_students where isdebt = 1 and students_has_cost.students_id=classes_has_students.students_id and classes_id = " + classes_id + " group by students_has_cost.students_id))or(isactive= 1 and debt!=0 and id in(SELECT Students_Id FROM projectkoala.classes_has_students where Classes_Id=" + classes_id + "))");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
-                    Object[] str = new Object[12];
+                    Object[] str = new Object[13];
                     str[0] = "";
                     str[1] = "";
                     str[2] = "";
@@ -345,13 +345,14 @@ public class SQLHocPhi {
                     str[7] = "";
                     str[8] = "";
                     str[9] = "";
-                    str[10] = false;
-                    str[11] = 1;
+                    str[10] = "";
+                    str[11] = false;
+                    str[12] = 1;
                     data.add(str);
                 }
             } else {
                 do {
-                    Object[] str = new Object[12];
+                    Object[] str = new Object[13];
                     str[0] = rs1.getInt(1);
                     str[1] = rs1.getString(3);
                     str[2] = XuLy.getDate(rs1.getString(4));
@@ -366,11 +367,12 @@ public class SQLHocPhi {
                     str[7] = rs1.getString(11);
                     str[8] = rs1.getString(12);
                     str[9] = rs1.getString(14);
-                    str[10] = false;
+                    str[10] = rs1.getString(19);
+                    str[11] = false;
                     if (rs1.getString(15) == null) {
-                        str[11] = 1;
+                        str[12] = 1;
                     } else {
-                        str[11] = rs1.getInt(15);
+                        str[12] = rs1.getInt(15);
                     }
                     data.add(str);
                 } while (rs1.next());
@@ -378,24 +380,24 @@ public class SQLHocPhi {
             }
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
-                Object[] str = new Object[11];
-                for (int j = 0; j < 11; j++) {
+                Object[] str = new Object[12];
+                for (int j = 0; j < 12; j++) {
                     str[j] = (data.get(i))[j];
                 }
-                arr.add((Integer) (data.get(i))[11]);
+                arr.add((Integer) (data.get(i))[12]);
                 rowColumn[i] = str;
 
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
                 };
 
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false, false, true
+                    false, false, false, false, false, false, false, false, false, false, false, true
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {

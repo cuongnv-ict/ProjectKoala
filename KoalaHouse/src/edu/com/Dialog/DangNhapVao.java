@@ -15,14 +15,16 @@ import javax.swing.UIManager;
  * @author Venus
  */
 public class DangNhapVao extends javax.swing.JDialog {
+
     static DangNhapVao dialog;
+
     /**
      * Creates new form DangNhapVao
      */
     public DangNhapVao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
     }
 
     /**
@@ -137,26 +139,29 @@ public class DangNhapVao extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String userName = getTfUserName();
-        String password = getPfPassword();
-        ConnectData connect = new ConnectData();
-        connect.setUser(userName);
-        connect.setPassword(password);
-        
-        ListKoala center = new ListKoala();
-        this.setVisible(false);
-        center.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        center.setVisible(true);
-        this.dispose();
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-        DataBase.DataTable.user = Textfield_userName.getText();
-        ThongTin.isadmin= new DataBase.SQLJTree().CheckAdmin(Textfield_userName.getText().toString());
-        
+        try {
+            String userName = getTfUserName();
+            String password = getPfPassword();
+            ConnectData connect = new ConnectData();
+            connect.setUser(userName);
+            connect.setPassword(password);
+
+            ListKoala center = new ListKoala();
+            this.setVisible(false);
+            center.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            center.setVisible(true);
+            this.dispose();
+            this.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            DataBase.DataTable.user = Textfield_userName.getText();
+            ThongTin.isadmin = new DataBase.SQLJTree().CheckAdmin(Textfield_userName.getText().toString());
+        } catch (Exception e) {
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -221,15 +226,15 @@ public class DangNhapVao extends javax.swing.JDialog {
     public String getTfUserName() {
         return Textfield_userName.getText();
     }
-    
+
     public String getPfPassword() {
         return Textfield_password.getText();
     }
-    
+
     public void setTfUserName(String str) {
         this.Textfield_userName.setText(str);
     }
-    
+
     public void setPfPassword(String str) {
         this.Textfield_password.setText(str);
     }

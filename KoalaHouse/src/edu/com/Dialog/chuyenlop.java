@@ -5,6 +5,8 @@
 package edu.com.Dialog;
 
 import java.awt.Toolkit;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,16 +18,26 @@ public class chuyenlop extends javax.swing.JDialog {
      * Creates new form chuyenlop
      */
     private Boolean button;
-    public chuyenlop(java.awt.Frame parent, boolean modal,int NameClass) {
+    private Boolean flags;
+
+    public chuyenlop(java.awt.Frame parent, boolean modal, int NameClass) {
         super(parent, modal);
         button = false;
+        flags = false;
         initComponents();
-        Lop.setModel(new DataBase.DataTable().DanhSachLop(NameClass));
+        DefaultComboBoxModel o = new DataBase.DataTable().DanhSachLop(NameClass);
+        if (o.getSize() == 0) {
+            JOptionPane.showMessageDialog(parent, "Không có lớp để chuyển", null, JOptionPane.INFORMATION_MESSAGE);
+            flags = true;
+        }
+        Lop.setModel(o);
         this.setResizable(false);
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 100);
-        
-    }
 
+    }
+    public boolean getFlags(){
+        return flags;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,8 +111,7 @@ public class chuyenlop extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public String getTenLop()
-    {
+    public String getTenLop() {
         return Lop.getSelectedItem().toString();
     }
     private void DongYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DongYMouseClicked
@@ -118,7 +129,7 @@ public class chuyenlop extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DongY;
     private javax.swing.JButton HuyBo;

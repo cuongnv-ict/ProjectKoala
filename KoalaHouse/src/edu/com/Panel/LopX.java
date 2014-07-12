@@ -5,23 +5,21 @@
  */
 package edu.com.Panel;
 
-import DataBase.DataTable;
 import DataBase.SQLLopX;
 import edu.com.CloseButton.CloseTabButton;
-import edu.com.Dialog.NghiPhep;
+import edu.com.Dialog.NgayHoc;
 import edu.com.Dialog.ThemHS;
 import edu.com.Dialog.chuyenlop;
-import edu.com.Dialog.trongmuon;
 import edu.com.ListKoala;
 import edu.com.ThongTin;
 import edu.com.XuLy;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -84,9 +82,11 @@ public class LopX extends javax.swing.JPanel {
                 Component c = super.prepareRenderer(renderer, row, column);
                 if(arr_sex.get(row)==0){
                     c.setForeground(Color.RED);
+                    c.setFont(new Font("Arial", Font.PLAIN, 12));
                 }
                 else{
                     c.setForeground(Color.BLACK);
+                    c.setFont(new Font("Arial", Font.BOLD, 12));
                 }
                 return c;
 
@@ -288,7 +288,7 @@ public class LopX extends javax.swing.JPanel {
             return;
         }
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 10) == true) {
+            if ((Boolean) model.getValueAt(i, 11) == true) {
                 count--;
                 row = i;
             }
@@ -299,12 +299,12 @@ public class LopX extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
                 for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                    model.setValueAt(false, i, 10);
+                    model.setValueAt(false, i, 11);
                 }
             }
             return;
         }
-        model.setValueAt(false, row, 10);
+        model.setValueAt(false, row, 11);
         Vector vec = (Vector) model.getDataVector().elementAt(row);
         ThemHS hs = new ThemHS(null, true, vec, id_students.get(row), arr_sex.get(row));
         hs.setVisible(true);
@@ -321,7 +321,7 @@ public class LopX extends javax.swing.JPanel {
             }
             boolean flags = true;
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 10) == true) {
+                if ((Boolean) model.getValueAt(i, 11) == true) {
                     flags = false;
                 }
             }
@@ -330,11 +330,14 @@ public class LopX extends javax.swing.JPanel {
                 return;
             }
             chuyenlop chuyen = new chuyenlop(null, true, malop);
+            if (chuyen.getFlags()) {
+                return;
+            }
             chuyen.setVisible(true);
             String tenlop = chuyen.getTenLop();
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 10) == true) {
-                    new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop);
+                if ((Boolean) model.getValueAt(i, 11) == true) {
+                    new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop, malop);
                 }
             }
             int a;
@@ -372,29 +375,53 @@ public class LopX extends javax.swing.JPanel {
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
         if (isadmin) {
+            int count = 1, row = 0;
             if (lopx.getValueAt(0, 0).toString().equals("")) {
                 return;
             }
-            boolean flags = true;
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 10) == true) {
-                    flags = false;
+                if ((Boolean) model.getValueAt(i, 11) == true) {
+                    count--;
+                    row = i;
                 }
             }
-            if (flags) {
-                JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh muốn xóa", null, JOptionPane.INFORMATION_MESSAGE);
+            if (count != 0) {
+                if (count == 1) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa chọn hoc sinh cần thôi học", null, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép thôi học một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
+                    for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                        model.setValueAt(false, i, 11);
+                    }
+                }
                 return;
             }
+//            if (lopx.getValueAt(0, 0).toString().equals("")) {
+//                return;
+//            }
+//            boolean flags = true;
+//            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+//                if ((Boolean) model.getValueAt(i, 11) == true) {
+//                    flags = false;
+//                }
+//            }
+//            if (flags) {
+//                JOptionPane.showMessageDialog(null, "Bạn chưa chọn học sinh muốn xóa", null, JOptionPane.INFORMATION_MESSAGE);
+//                return;
+//            }
             int click = JOptionPane.showConfirmDialog(center, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
             if (click == JOptionPane.NO_OPTION) {
                 return;
             }
-            for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 10) == true) {
-                    new DataBase.SQLLopX().xoaHocSinh(id_students.get(i));
-                }
+            if ((Boolean) model.getValueAt(row, 11) == true) {
+                NgayHoc ngayhoc = new NgayHoc(null, true, false);
+                ngayhoc.setVisible(true);
+                if (ngayhoc.getFlags()) {
+                    new DataBase.SQLLopX().xoaHocSinh(id_students.get(row),ngayhoc.getDate());
+                    locActionPerformed(null);
+                } 
             }
-            locActionPerformed(null);
+
         }
     }//GEN-LAST:event_xoaMouseClicked
 
@@ -444,7 +471,7 @@ public class LopX extends javax.swing.JPanel {
         if (thongtin.equals("")) {
             JOptionPane.showMessageDialog(null, "Bạn chưa nhập thông tin tìm kiếm", null, JOptionPane.INFORMATION_MESSAGE);
         } else {
-            arr_sex =  new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
+            arr_sex = new DataBase.SQLLopX().timhocsinh(thongtin, lopx, malop);
             model = (DefaultTableModel) lopx.getModel();
             if (lopx.getValueAt(0, 0).toString().equals("")) {
                 JOptionPane.showMessageDialog(null, "Không tìm thấy thông tin vừa nhận!", null, JOptionPane.INFORMATION_MESSAGE);

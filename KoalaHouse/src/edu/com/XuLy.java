@@ -165,6 +165,9 @@ public class XuLy {
             }
             Component c = renderer.getTableCellRendererComponent(table, value, false, false, -1, column);
             width = Math.max(c.getPreferredSize().width, width);
+            if(width>200){
+                width=200;
+            }
             x = x + width + 10;
             columnModel.getColumn(column).setPreferredWidth(width + 10);
         }

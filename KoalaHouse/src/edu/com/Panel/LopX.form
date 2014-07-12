@@ -89,6 +89,45 @@
                 <Column editable="true" title="&#x110;&#xe1;nh D&#x1ea5;u" type="java.lang.Boolean"/>
               </Table>
             </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
             <Property name="rowHeight" type="int" value="25"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -98,7 +137,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lopxMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column){&#xa;&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;        if(arr_sex.get(row)==0){&#xa;            c.setForeground(Color.RED);&#xa;        }&#xa;        else{&#xa;            c.setForeground(Color.BLACK);&#xa;        }&#xa;        return c;&#xa;&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column){&#xa;&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;        if(arr_sex.get(row)==0){&#xa;            c.setForeground(Color.RED);&#xa;            c.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 12));&#xa;        }&#xa;        else{&#xa;            c.setForeground(Color.BLACK);&#xa;            c.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 12));&#xa;        }&#xa;        return c;&#xa;&#xa;    }&#xa;}"/>
           </AuxValues>
         </Component>
       </SubComponents>

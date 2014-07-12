@@ -42,61 +42,62 @@
                           <Component id="jLabel11" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="email" min="-2" pref="216" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                                  <Component id="ten" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="ngay" min="-2" pref="59" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="thang" min="-2" pref="70" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="nam" min="-2" pref="68" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Component id="ten_me" alignment="1" min="-2" pref="216" max="-2" attributes="0"/>
-                                              <Component id="ten_cha" min="-2" pref="216" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="ten" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="ngay" min="-2" pref="59" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="thang" min="-2" pref="70" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="nam" min="-2" pref="68" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jLabel9" pref="77" max="32767" attributes="0"/>
-                                              <Component id="jLabel5" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="jLabel12" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="ten_me" alignment="1" min="-2" pref="216" max="-2" attributes="0"/>
+                                      <Component id="ten_cha" min="-2" pref="216" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="sex" min="-2" pref="93" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jLabel10" min="-2" pref="83" max="-2" attributes="0"/>
+                                  <Component id="email" alignment="1" min="-2" pref="216" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="1" min="-2" pref="216" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel9" pref="77" max="32767" attributes="0"/>
+                                      <Component id="jLabel5" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="jLabel12" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="So_cha" min="-2" pref="189" max="-2" attributes="0"/>
                                   <Component id="so_me" min="-2" pref="189" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="So_cha" min="-2" pref="189" max="-2" attributes="0"/>
-                                      <Component id="so_nha" alignment="1" min="-2" pref="189" max="-2" attributes="0"/>
-                                      <Component id="HuyBo" alignment="1" min="-2" pref="77" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="hinhthuc" min="-2" pref="93" max="-2" attributes="0"/>
+                                  <Component id="so_nha" min="-2" pref="189" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="sex" min="-2" pref="93" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                              <Component id="jLabel10" min="-2" pref="83" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="hinhthuc" min="-2" pref="93" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                               <Component id="DongY" min="-2" pref="111" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="HuyBo" min="-2" pref="77" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,7 +126,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="sex" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jLabel10" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="hinhthuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel4" max="32767" attributes="0"/>
@@ -153,16 +154,20 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
-                  <Component id="so_nha" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="email" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="so_nha" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel2" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="DongY" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="HuyBo" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="HuyBo" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
@@ -259,49 +264,39 @@
     <Component class="javax.swing.JComboBox" name="nam">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="42">
+          <StringArray count="32">
             <StringItem index="0" value="N&#x103;m"/>
-            <StringItem index="1" value="1990"/>
-            <StringItem index="2" value="1991"/>
-            <StringItem index="3" value="1992"/>
-            <StringItem index="4" value="1993"/>
-            <StringItem index="5" value="1994"/>
-            <StringItem index="6" value="1995"/>
-            <StringItem index="7" value="1996"/>
-            <StringItem index="8" value="1997"/>
-            <StringItem index="9" value="1998"/>
-            <StringItem index="10" value="1999"/>
-            <StringItem index="11" value="2000"/>
-            <StringItem index="12" value="2001"/>
-            <StringItem index="13" value="2002"/>
-            <StringItem index="14" value="2003"/>
-            <StringItem index="15" value="2004"/>
-            <StringItem index="16" value="2005"/>
-            <StringItem index="17" value="2006"/>
-            <StringItem index="18" value="2007"/>
-            <StringItem index="19" value="2008"/>
-            <StringItem index="20" value="2009"/>
-            <StringItem index="21" value="2010"/>
-            <StringItem index="22" value="2011"/>
-            <StringItem index="23" value="2012"/>
-            <StringItem index="24" value="2013"/>
-            <StringItem index="25" value="2014"/>
-            <StringItem index="26" value="2015"/>
-            <StringItem index="27" value="2016"/>
-            <StringItem index="28" value="2017"/>
-            <StringItem index="29" value="2018"/>
-            <StringItem index="30" value="2019"/>
-            <StringItem index="31" value="2020"/>
-            <StringItem index="32" value="2021"/>
-            <StringItem index="33" value="2022"/>
-            <StringItem index="34" value="2023"/>
-            <StringItem index="35" value="2024"/>
-            <StringItem index="36" value="2025"/>
-            <StringItem index="37" value="2026"/>
-            <StringItem index="38" value="2027"/>
-            <StringItem index="39" value="2028"/>
-            <StringItem index="40" value="2029"/>
-            <StringItem index="41" value="2030"/>
+            <StringItem index="1" value="2000"/>
+            <StringItem index="2" value="2001"/>
+            <StringItem index="3" value="2002"/>
+            <StringItem index="4" value="2003"/>
+            <StringItem index="5" value="2004"/>
+            <StringItem index="6" value="2005"/>
+            <StringItem index="7" value="2006"/>
+            <StringItem index="8" value="2007"/>
+            <StringItem index="9" value="2008"/>
+            <StringItem index="10" value="2009"/>
+            <StringItem index="11" value="2010"/>
+            <StringItem index="12" value="2011"/>
+            <StringItem index="13" value="2012"/>
+            <StringItem index="14" value="2013"/>
+            <StringItem index="15" value="2014"/>
+            <StringItem index="16" value="2015"/>
+            <StringItem index="17" value="2016"/>
+            <StringItem index="18" value="2017"/>
+            <StringItem index="19" value="2018"/>
+            <StringItem index="20" value="2019"/>
+            <StringItem index="21" value="2020"/>
+            <StringItem index="22" value="2021"/>
+            <StringItem index="23" value="2022"/>
+            <StringItem index="24" value="2023"/>
+            <StringItem index="25" value="2024"/>
+            <StringItem index="26" value="2025"/>
+            <StringItem index="27" value="2026"/>
+            <StringItem index="28" value="2027"/>
+            <StringItem index="29" value="2028"/>
+            <StringItem index="30" value="2029"/>
+            <StringItem index="31" value="2030"/>
           </StringArray>
         </Property>
       </Properties>
@@ -423,5 +418,25 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="so_nhaActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ng&#x1b0;&#x1edd;i &#x111;&#x1ea1;i di&#x1ec7;n"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="daidien">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
