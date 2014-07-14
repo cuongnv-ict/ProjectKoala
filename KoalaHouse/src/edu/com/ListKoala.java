@@ -25,6 +25,7 @@ import edu.com.Panel.HS_Phi;
 import edu.com.Panel.HS_Thang;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
+import edu.com.Panel.TongPhi;
 import edu.com.Panel.XeBus;
 import java.awt.Color;
 import java.awt.Component;
@@ -72,6 +73,7 @@ public class ListKoala extends javax.swing.JFrame {
     DSNo dsno;
     DSHS dshs;
     HS_Phi hsphi;
+    TongPhi dsTongPhi;
     ConnectData connectData;
     Connection connect;
     private JTable table;
@@ -345,6 +347,8 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         hs_thang = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -568,6 +572,15 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel4.setText("DSHS theo tháng");
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/DSHS.JPG"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setText("Tổng Phí");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -613,18 +626,22 @@ public class ListKoala extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
                     .addComponent(jLabel51))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jLabel1)
                         .addGap(56, 56, 56)
-                        .addComponent(hs_thang))
+                        .addComponent(hs_thang)
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel2)
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel4)))
-                .addContainerGap(494, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,7 +659,8 @@ public class ListKoala extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1)
                         .addComponent(jLabel49)
-                        .addComponent(hs_thang)))
+                        .addComponent(hs_thang)
+                        .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -654,7 +672,8 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel50)
                         .addComponent(jLabel51)
                         .addComponent(jLabel2)
-                        .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5))
                     .addComponent(jLabel31))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1344,6 +1363,24 @@ public class ListKoala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hs_thangMouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("DS Tong Phi".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
+                Panel_GDChinh.setSelectedIndex(i);
+            }
+        }
+        if (a == -1) {
+            dsTongPhi = new TongPhi();
+            Panel_GDChinh.add("DS Tong Phi", dsTongPhi);
+            Panel_GDChinh.setSelectedComponent(dsTongPhi);
+            dsTongPhi.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
@@ -1410,12 +1447,14 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JMenu jMenu1;
