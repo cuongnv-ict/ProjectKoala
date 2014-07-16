@@ -738,12 +738,16 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-        int a = Integer.parseInt(XuLy.getMoney(daThu.getText()));
-        if((a > 0)&& nguoiThu.getText().length()>0 && nguoiNop.getText().length() >0)
+        int soTienLuu = 0;
+        if(checkDaThu.isSelected())
+            soTienLuu = Integer.parseInt(XuLy.getMoney(daThu.getText()));
+        else
+            soTienLuu = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
+        if((soTienLuu > 0)&& nguoiThu.getText().length()>0 && nguoiNop.getText().length() >0)
         {
             //tinh no
         int can = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
-        int dong = Integer.parseInt(XuLy.getMoney(daThu.getText()));
+        int dong = soTienLuu;
         int debt = can - dong;
         if(debt<0){
             JOptionPane.showMessageDialog(rootPane, "Số Tiền Đóng Đã Nhiều Hơn Số Tiền Cần Thu");
@@ -784,7 +788,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         idFac = String.valueOf(idTrungTam);
         String nguoidong = nguoiNop.getText();
         String nguoithu = nguoiThu.getText();
-        String sotien = XuLy.getMoney(daThu.getText());
+        String sotien = XuLy.getMoney(String.valueOf(soTienLuu));
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String phantram = "0";
@@ -800,7 +804,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
            JOptionPane.showMessageDialog(rootPane, "Hãy Nhập Lại Số Tiền Đã Thu"); 
         }
         }catch(java.lang.NumberFormatException e){
-            
+            JOptionPane.showMessageDialog(rootPane, "Nhập Sai Số Tiền");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
