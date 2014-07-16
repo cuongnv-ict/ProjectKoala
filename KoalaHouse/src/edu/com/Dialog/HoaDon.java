@@ -149,22 +149,28 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         try{
         for(int i=0;i<model.getRowCount();i++){
             if(hienChietKhau.isSelected()){
+                String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
                 long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
                 int ck = 0;
                 if(model.getValueAt(i, 4).toString().length()>0){
                     ck = Integer.parseInt(model.getValueAt(i, 4).toString());
                 }
                 long ti = (t*(100-ck))/100;
-                Total += ti;
+                if(tenPhi.indexOf("hoàn")== -1)
+                    Total += ti;
+                else
+                    Total -= ti;
             }
             else{
             if(model.getValueAt(i, 3).toString().length()>0){
+                String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
+                if(tenPhi.indexOf("hoàn")== -1)
                     Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                else
+                    Total -= Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
             }
             }
         }
-        int phidatcoc = new RecieptManagerment().PhiDatCoc(idHocSinh);
-        Total = Total + 2*phidatcoc;
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
         daThu.setText(XuLy.setMoney(String.valueOf(Total)));
         int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
@@ -793,9 +799,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         else{
            JOptionPane.showMessageDialog(rootPane, "Hãy Nhập Lại Số Tiền Đã Thu"); 
         }
-        }
-        catch(java.lang.NumberFormatException e){
-            JOptionPane.showMessageDialog(rootPane, "Nhập Sai Số Tiền");
+        }catch(java.lang.NumberFormatException e){
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

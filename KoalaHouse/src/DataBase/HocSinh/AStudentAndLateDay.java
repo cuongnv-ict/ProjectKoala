@@ -48,11 +48,11 @@ public class AStudentAndLateDay {
     }
     public ArrayList HocSinhA1(int ID){
     ArrayList infoStudent = new ArrayList();
-    String str[] = new String[13];
+    String str[] = new String[14];
         try {
             rs1 = statement.executeQuery("select students.Id,fullname,brithday,Father,PhoneNumberFather,"
                     + "Mother,PhoneNumberMother,HomePhone,students.Email,isclient,nameclass,"
-                    + "faculties.name,students.isactive "
+                    + "faculties.name,students.isactive,DaiDien "
                     + "from students,classes,classes_has_students,faculties "
                     + "where students.id = students_id and classes.id=classes_id and students.id = "+ID+" "
                     + "and faculties.Id = students.Faculties_Id");
@@ -77,11 +77,12 @@ public class AStudentAndLateDay {
                     str[10] = rs1.getString(11);
                     str[11] = rs1.getString(12);
                     str[12] = rs1.getString(13);
+                    str[13] = rs1.getString(14);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i = 0;i<13;i++){
+        for(int i = 0;i<14;i++){
             infoStudent.add(str[i]);
             }
         
@@ -159,10 +160,10 @@ public class AStudentAndLateDay {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void UpdataInfoStudent(int id,int fac,String name,String birthDay,String father,String phoneF,String mother,String phoneM,String homePhone,String email){
+    public void UpdataInfoStudent(int id,int fac,String name,String birthDay,String father,String phoneF,String mother,String phoneM,String homePhone,String email,String ngDD){
         String query = "UPDATE `projectkoala`.`students` SET `FullName`='"+name+"', `BrithDay`='"+birthDay+"', `PhoneNumberFather`='"+phoneF+"',"
                 + " `Father`='"+father+"', `Mother`='"+mother+"', `PhoneNumberMother`='"+phoneM+"', `HomePhone`='"+homePhone+"',"
-                + " `Email`='"+email+"' WHERE `Id`='"+id+"' and`Faculties_Id`='"+fac+"';";
+                + " `Email`='"+email+"', `DaiDien`='"+ngDD+"' WHERE `Id`='"+id+"' and`Faculties_Id`='"+fac+"';";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

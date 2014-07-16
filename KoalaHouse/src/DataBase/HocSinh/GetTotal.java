@@ -134,7 +134,10 @@ public class GetTotal {
             for(int i=0;i<data.size();i++){
                 Object str[] = new Object[5];
                 str = data.get(i);
-                total += Integer.parseInt(XuLy.getMoney(str[3].toString()));
+                if(str[0].toString().toLowerCase().indexOf("hoàn")== -1)
+                    total += Integer.parseInt(XuLy.getMoney(str[3].toString()));
+                else
+                    total -= Integer.parseInt(XuLy.getMoney(str[3].toString()));
             }
         } catch (SQLException ex) {
             Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);

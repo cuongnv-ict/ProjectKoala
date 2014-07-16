@@ -129,7 +129,7 @@ public class TotalFeeManagerment {
                 }
                 tongPhi = tongPhi - 2*tongHoanHP;
                 tongPhi += tienxebus;
-                if(tongPhi>0)
+                if(tongPhi!=0)
                 str[ptongphi] = XuLy.setMoney(String.valueOf(tongPhi));
                 if(tongHoanHP>0)
                 str[ptonghoanphi] = XuLy.setMoney(String.valueOf(tongHoanHP));

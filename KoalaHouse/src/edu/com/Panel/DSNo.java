@@ -50,20 +50,17 @@ public class DSNo extends javax.swing.JPanel {
         DSHocSinhNo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         DSHocSinhNo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Tên Học Sinh", "Tên Lớp", "Trình Độ", "Số Tiền Nợ"
+                "Số TT", "Họ Tên", "Lớp", "Tổng Tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,6 +78,12 @@ public class DSNo extends javax.swing.JPanel {
             }
         });
         jScrollPane7.setViewportView(DSHocSinhNo);
+        if (DSHocSinhNo.getColumnModel().getColumnCount() > 0) {
+            DSHocSinhNo.getColumnModel().getColumn(0).setPreferredWidth(40);
+            DSHocSinhNo.getColumnModel().getColumn(1).setPreferredWidth(200);
+            DSHocSinhNo.getColumnModel().getColumn(2).setPreferredWidth(150);
+            DSHocSinhNo.getColumnModel().getColumn(3).setPreferredWidth(150);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

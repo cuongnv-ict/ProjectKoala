@@ -1367,14 +1367,14 @@ public class ListKoala extends javax.swing.JFrame {
         // TODO add your handling code here:
         int a = -1;
         for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
-            if ("DS Tong Phi".equals(Panel_GDChinh.getTitleAt(i))) {
+            if ("Danh Sách Tổng Phí".equals(Panel_GDChinh.getTitleAt(i))) {
                 a += 1;
                 Panel_GDChinh.setSelectedIndex(i);
             }
         }
         if (a == -1) {
             dsTongPhi = new TongPhi();
-            Panel_GDChinh.add("DS Tong Phi", dsTongPhi);
+            Panel_GDChinh.add("Danh Sách Tổng Phí", dsTongPhi);
             Panel_GDChinh.setSelectedComponent(dsTongPhi);
             dsTongPhi.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
