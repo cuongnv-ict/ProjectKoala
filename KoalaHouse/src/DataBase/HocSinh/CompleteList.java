@@ -50,7 +50,7 @@ public class CompleteList{
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select students.Id,fullname,NameClass,students.Faculties_Id\n" +
             "from students,classes,classes_has_students "
-            + "where (students.id in(select students_id from students_has_cost where isdebt = 0 \n" +
+            + "where (students.id not in(select students_id from students_has_cost where isdebt = 1 \n" +
             "group by students_id) and debt = 0) and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
             "and classes_has_students.Students_Id = students.Id");
             while (rs1.next()) {
