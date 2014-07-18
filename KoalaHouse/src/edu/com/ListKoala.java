@@ -5,6 +5,7 @@
 package edu.com;
 
 import DataBase.ConnectData;
+import DataBase.HocSinh.CompleteList;
 import DataBase.HocSinh.DebtList;
 import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDatCoc;
@@ -18,6 +19,7 @@ import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
 import edu.com.Panel.CacLoaiPhi;
 import edu.com.Panel.DKHocHe;
+import edu.com.Panel.DSDongDu;
 import edu.com.Panel.DSHS;
 import edu.com.Panel.DSLop;
 import edu.com.Panel.DSNo;
@@ -72,6 +74,7 @@ public class ListKoala extends javax.swing.JFrame {
     DefaultMutableTreeNode nodex;
     DSNo dsno;
     DSHS dshs;
+    DSDongDu dsdd;
     HS_Phi hsphi;
     TongPhi dsTongPhi;
     ConnectData connectData;
@@ -349,6 +352,8 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -581,6 +586,15 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel5.setText("Tổng Phí");
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/DSHS.JPG"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setText("Danh Sách Đóng Đủ");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -641,7 +655,14 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)))
-                .addContainerGap(426, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel7)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -660,7 +681,8 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel49)
                         .addComponent(hs_thang)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -673,7 +695,8 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel51)
                         .addComponent(jLabel2)
                         .addComponent(jLabel4)
-                        .addComponent(jLabel5))
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel7))
                     .addComponent(jLabel31))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -870,6 +893,9 @@ public class ListKoala extends javax.swing.JFrame {
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Chưa Đóng Phí")) {
                 new DebtList().BangDanhSachHocSinhNoPhi(dsno.BangDSNo);
                 dsno.ListId = new DebtList().GetIdStudent();
+            }
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Đóng Đủ Phí")) {
+                dsdd.ListId = new CompleteList().BangDanhSachHocSinhDuPhi(dsdd.BangDSDu);
             }
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")) {
                 int s = dshs.ChonLoai.getSelectedIndex();
@@ -1381,6 +1407,24 @@ public class ListKoala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+         int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("DS Đóng Đủ Phí".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
+                Panel_GDChinh.setSelectedIndex(i);
+            }
+        }
+        if (a == -1) {
+            dsdd = new DSDongDu();
+            Panel_GDChinh.add("DS Đóng Đủ Phí", dsdd);
+            Panel_GDChinh.setSelectedComponent(dsdd);
+            dsdd.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+        }
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
@@ -1457,6 +1501,8 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
