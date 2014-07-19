@@ -51,7 +51,7 @@ public class CompleteList{
             rs1 = statement.executeQuery("select students.Id,fullname,NameClass,students.Faculties_Id\n" +
             "from students,classes,classes_has_students "
             + "where (students.id not in(select students_id from students_has_cost where isdebt = 1 \n" +
-            "group by students_id) and debt = 0) and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
+            "group by students_id) and debt = 0 and students.id not in(SELECT idStudents FROM buslist where IsActive = 1)) and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
             "and classes_has_students.Students_Id = students.Id");
             while (rs1.next()) {
                 Object[] str = new Object[3];
@@ -97,7 +97,7 @@ public class CompleteList{
 public ArrayList GetIdStudent(){
     ArrayList data = new ArrayList();
         try {
-            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 0 group by students_id) and debt = 0) and isactive = 1");
+            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 0 group by students_id) and debt = 0 and students.id in(SELECT idStudents FROM buslist where IsActive = 1)) and isactive = 1");
             while (rs1.next()) {
                 Object str = new Object();
                 str = rs1.getString(1);

@@ -651,11 +651,20 @@ public class HocSinhA extends javax.swing.JPanel {
                     int num = model.getRowCount();
                     String ten = model.getValueAt(num - 1, 1).toString();
                     boolean check2 = false;
+                    boolean kiHe = false;
+                    boolean hoanHocPhi = false;
                     ten = ten.toLowerCase();
+                    System.out.println(ten);
                     if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
-                        check2 = true;
-                    }
-                    if(check2){
+                    check2 = true;
+                }
+                 if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
+                }
+                 if(ten.indexOf("hoan hoc phi")!= -1||ten.indexOf("hoàn học phí")!= -1){
+                    hoanHocPhi = true;
+                }
+                    
                         String ki = "0";
                         String kiHoc = model.getValueAt(num - 1, 2).toString();
                         if(kiHoc.equals("Kỳ 1")){
@@ -672,14 +681,22 @@ public class HocSinhA extends javax.swing.JPanel {
                         }
                         else ki = "5";
                         String nam = model.getValueAt(num -1, 3).toString().substring(0, 4);
+                        if(check2){
                         //update trong muon o day
                         new AStudentAndLateDay().UpdateTrongMuon(id,ki,nam);
+                            System.out.println("được thực hiện mà");
                         totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
                         TimeTrongMuon.setText(String.valueOf(totalTime));
                     }
                     else{
 
                     }
+                        if(kiHe){
+                            new AStudentAndLateDay().UpdateKiHe(id,ki,nam);
+                        }
+                         if(hoanHocPhi){
+                            new AStudentAndLateDay().UpdateHoanHocPhi(id,ki,nam);
+                        }
                 if(check){//neu ko bi trung voi row nao thi them vao bang
                     new CostOfStudent().InsertDSPhiCuaHS(id,idCost, idTrungTam);
                     new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
@@ -771,11 +788,19 @@ public class HocSinhA extends javax.swing.JPanel {
             int num = DanhSachPhi.getSelectedRow();
             String ten = model.getValueAt(num, 1).toString();
             boolean check2 = false;
+            boolean kiHe = false;
+            boolean hoanHocPhi = false;
             ten = ten.toLowerCase();
             if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
                 check2 = true;
             }
-            if(check2){
+                 if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
+                }
+                 if(ten.indexOf("hoan hoc phi")!= -1||ten.indexOf("hoàn học phí")!= -1){
+                    hoanHocPhi = true;
+                }
+            
                 String ki = "0";
                 String kiHoc = model.getValueAt(num, 2).toString();
                 if(kiHoc.equals("Kỳ 1")){
@@ -792,9 +817,16 @@ public class HocSinhA extends javax.swing.JPanel {
                 }
                 else ki = "5";
                 String nam = model.getValueAt(num, 3).toString().substring(0, 4);
+                if(check2){
                 TimeTrongMuon.setText("0");
                 new AStudentAndLateDay().XoaTrongMuon(id,ki,nam);
             }
+                if(kiHe){
+                    new AStudentAndLateDay().XoaPhiHocHe(id,ki,nam);
+                }
+                if(hoanHocPhi){
+                    new AStudentAndLateDay().XoaHoanHocPhi(id,ki,nam);
+                }
             new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
             EditTable edit = new EditTable();
             edit.removeRowOfTable(DanhSachPhi);

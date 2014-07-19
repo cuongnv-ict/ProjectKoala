@@ -48,8 +48,10 @@ public class DebtList {
             Object[] nameColumn = {"Số TT", "Họ Tên","Lớp", "Tổng Tiền"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("select students.Id,fullname,NameClass,students.Faculties_Id\n" +
-            "from students,classes,classes_has_students where (students.id in(select students_id from students_has_cost where isdebt = 1 \n" +
-            "group by students_id) or debt!=0) and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
+            "from students,classes,classes_has_students \n" +
+            "where (students.id in(select students_id from students_has_cost where isdebt = 1\n" +
+            "group by students_id) or debt!=0 or students.id in(SELECT idStudents FROM buslist where IsActive = 1)) \n" +
+            "and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
             "and classes_has_students.Students_Id = students.Id");
             while (rs1.next()) {
                 Object[] str = new Object[4];
@@ -98,7 +100,8 @@ public class DebtList {
 public ArrayList GetIdStudent(){
     ArrayList data = new ArrayList();
         try {
-            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost where isdebt = 1 group by students_id) or debt!=0) and isactive = 1");
+            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost "
+                    + "where isdebt = 1 group by students_id) or debt!=0 or students.id in(SELECT idStudents FROM buslist where IsActive = 1)) and isactive = 1");
             while (rs1.next()) {
                 Object str = new Object();
                 str = rs1.getString(1);

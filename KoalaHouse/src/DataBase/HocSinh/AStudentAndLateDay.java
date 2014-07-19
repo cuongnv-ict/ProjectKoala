@@ -196,6 +196,40 @@ public class AStudentAndLateDay {
 //            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
+    public void UpdateKiHe(int idStudent,String semester, String year){
+        String query = "UPDATE `projectkoala`.`learnsummer` SET `Semester`='"+semester+"', `year`="+year+", `isActive`='0' WHERE `idStudents`='"+idStudent+"' and `isActive`='1';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            System.out.println(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        String query = "UPDATE `projectkoala`.`lateday` SET `isActive`='0' WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year`="+year+";";
+//        try {
+//            PreparedStatement pstmt = connect.prepareStatement(query);
+//            pstmt.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+     public void UpdateHoanHocPhi(int idStudent,String semester, String year){
+        String query = "UPDATE `projectkoala`.`leaves` SET `Semester`='"+semester+"', `year`="+year+", `isActive`='0' WHERE `Students_Id`='"+idStudent+"' and `isActive`='1';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            System.out.println(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        String query = "UPDATE `projectkoala`.`lateday` SET `isActive`='0' WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year`="+year+";";
+//        try {
+//            PreparedStatement pstmt = connect.prepareStatement(query);
+//            pstmt.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
     public void InsertTrongMuon(int idStudent,int idFac,String date,int time,String semester, String year){
         int id = 0;
         try {
@@ -298,6 +332,24 @@ public class AStudentAndLateDay {
     }
     public void XoaTrongMuon(int idStudent,String semester, String year){
         String query = "UPDATE `projectkoala`.`lateday` SET `isActive`='1' WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year` = '"+year+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void XoaPhiHocHe(int idStudent,String semester, String year){
+        String query = "UPDATE `projectkoala`.`learnsummer` SET `isActive`='1' WHERE `idStudents`='"+idStudent+"' and `Semester`='"+semester+"' and `year` = '"+year+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void XoaHoanHocPhi(int idStudent,String semester, String year){
+        String query = "UPDATE `projectkoala`.`leaves` SET `isActive`='1' WHERE `Students_Id`='"+idStudent+"' and `Semester`='"+semester+"' and `year` = '"+year+"';";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

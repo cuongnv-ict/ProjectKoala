@@ -147,10 +147,10 @@ public class Get{
         
         return nameClasses;
 }
-    public int GetNumberSummerWeek(int idStudent){
+    public int GetNumberSummerWeek(int idStudent,String ki,String nam){
         int number = 0;
         try {
-            rs1 = statement.executeQuery("SELECT soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 1");
+            rs1 = statement.executeQuery("SELECT soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 0 and Semester = "+ki+" and year="+nam+"");
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
@@ -192,6 +192,7 @@ public class Get{
             while(rs2.next()){
                 String x = rs2.getString(1);
                 String[] b = x.split(",");
+                a.removeAll(a);
                 for(int j=0;j<b.length;j++){
                     a.add(b[j]);
                 }
@@ -225,19 +226,28 @@ public class Get{
                 int totalTime = 0;
                 boolean checkTrongMuon = false;
                 boolean checkHocHe = false;
+                boolean checkHoanHocPhi = false;
                 String tenp = str[0].toString().toLowerCase();
                 if(tenp.indexOf("thu")!= -1 && tenp.indexOf("khác")!= -1){
                     str[0] = "Thu Khác";
                 }
-                if(str[0].equals("Phí Trông Muộn")){
+                if(str[0].toString().toLowerCase().indexOf("phí trông muộn")!= -1){
                     checkTrongMuon = true;
                     String ki = rs1.getString(3);
                     String nam = rs1.getString(4).substring(0, 4);
                     totalTime = new AStudentAndLateDay().LateDay(idStudent,idTrungTam,ki,nam);
                 }
-                if(str[0].equals("Phí Học Hè")){
+                if(str[0].toString().toLowerCase().indexOf("phí học hè")!= -1){
                     checkHocHe = true;
-                    totalTime = new Get().GetNumberSummerWeek(idStudent);
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new Get().GetNumberSummerWeek(idStudent,ki,nam);
+                }
+                if(str[0].toString().toLowerCase().indexOf("hoàn học phí")!= -1){
+                    checkHoanHocPhi = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new Get().GetSoNgayNghiPhep(idStudent,ki,nam);
                 }
                 String thanhtien = rs1.getString(2);
                 if(thanhtien.charAt(0)== '-'){
@@ -247,6 +257,8 @@ public class Get{
                 if(checkTrongMuon)
                     money = money * totalTime;
                 if(checkHocHe)
+                    money = money * totalTime;
+                if(checkHoanHocPhi)
                     money = money * totalTime;
                 str[1] = money;
                 a.add(str);
@@ -271,5 +283,17 @@ public class Get{
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
+     }
+     public int GetSoNgayNghiPhep(int idStudent,String ki, String nam){
+         int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT NumberOfDay FROM projectkoala.leaves where Students_Id = "+idStudent+" and IsActive = 0 and Semester = "+ki+" and year = "+nam+"");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
      }
 }

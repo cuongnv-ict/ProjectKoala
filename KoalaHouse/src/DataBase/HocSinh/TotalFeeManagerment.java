@@ -158,7 +158,9 @@ public class TotalFeeManagerment {
             nameColumn.add("Lớp");
             int haveSummer =0;
         try {
-            rs1 = statement.executeQuery("SELECT count(*) FROM projectkoala.learnsummer where IsActive = 1; ");
+            rs1 = statement.executeQuery("SELECT count(Cost_ID) from students_has_cost,cost\n" +
+            "where students_has_cost.Cost_Id = cost.Id and students_has_cost.Students_Id = 2\n" +
+            " and cost.NameCost = \"Phí Học Hè\" and IsDebt = 1");
             if(rs1!= null)
             while(rs1.next()){
                 haveSummer = rs1.getInt(1);

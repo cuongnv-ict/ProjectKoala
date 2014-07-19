@@ -129,6 +129,7 @@ public class HistoryManagerment {
                 //kiem tra xem có phai trong muon hay ko
                 boolean check = false;
                 boolean kiHe = false;
+                boolean hoanHocPhi = false;
                 String ten = str[1].toString();
                 ten = ten.toLowerCase();
                  if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
@@ -136,6 +137,9 @@ public class HistoryManagerment {
                 }
                  if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
                     kiHe = true;
+                }
+                 if(ten.indexOf("hoan hoc phi")!= -1||ten.indexOf("hoàn học phí")!= -1){
+                    hoanHocPhi = true;
                 }
                 switch (rs1.getInt(3)) {
                     case 1:
@@ -171,7 +175,17 @@ public class HistoryManagerment {
                     str[4] = phi;
                 }
                 if(kiHe){
-                    int number = new Get().GetNumberSummerWeek(students_id);
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
+                    int number = new Get().GetNumberSummerWeek(students_id,ki,nam);
+                    int phi = Integer.parseInt((String) str[4]);
+                    phi = phi * number;
+                    str[4] = phi;
+                }
+                if(hoanHocPhi){
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
+                    int number = new Get().GetSoNgayNghiPhep(students_id,ki,nam);
                     int phi = Integer.parseInt((String) str[4]);
                     phi = phi * number;
                     str[4] = phi;
