@@ -51,24 +51,25 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="textfield_timkiem" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="them" min="-2" max="-2" attributes="0"/>
-                                      <Component id="sua" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="xoa" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="textfield_timkiem" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="them" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="xoa" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sua" min="-2" max="-2" attributes="0"/>
+                                  <Component id="xemlich" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="xemlich" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane6" pref="505" max="32767" attributes="0"/>
+                  <Component id="jScrollPane6" pref="497" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -87,17 +88,23 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="4">
+                  <Table columnCount="7" rowCount="4">
                     <Column editable="true" title="STT" type="java.lang.Object"/>
                     <Column editable="true" title="H&#x1ecd;c Sinh" type="java.lang.Object"/>
                     <Column editable="true" title="L&#x1edb;p" type="java.lang.Object"/>
                     <Column editable="true" title="Tu&#x1ea7;n H&#x1ecd;c" type="java.lang.Object"/>
                     <Column editable="true" title="T&#x1ed5;ng S&#x1ed1; Tu&#x1ea7;n" type="java.lang.Object"/>
+                    <Column editable="true" title="N&#x103;m H&#x1ecd;c" type="java.lang.Object"/>
                     <Column editable="true" title="&#x110;&#xe1;nh D&#x1ea5;u" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -200,7 +207,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Venus\Desktop\koala\ProjectKoala\KoalaHouse\src\edu\com\image\Very-Basic-Refresh-icon.png"/>
+              <Image iconType="3" name="/edu/com/image/refresh25.png"/>
             </Property>
           </Properties>
           <Events>

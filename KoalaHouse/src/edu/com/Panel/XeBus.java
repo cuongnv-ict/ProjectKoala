@@ -15,8 +15,11 @@ import edu.com.XuLy;
 import edu.com.upbang.EditTable;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -192,7 +195,7 @@ public class XeBus extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -219,13 +222,16 @@ public class XeBus extends javax.swing.JPanel {
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
                 .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(them)
-                    .addComponent(sua)
-                    .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addComponent(xoa)))
+                            .addComponent(sua)
+                            .addComponent(them)
+                            .addComponent(xoa)
+                            .addComponent(jLabel1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
         );
@@ -254,7 +260,7 @@ public class XeBus extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -300,7 +306,12 @@ public class XeBus extends javax.swing.JPanel {
         if(isadmin)
         {
             
-            DSXeBus  dsbus= new DSXeBus(null, true);
+            DSXeBus  dsbus = null;
+            try {
+                dsbus = new DSXeBus(null,true);
+            } catch (ParseException ex) {
+                Logger.getLogger(XeBus.class.getName()).log(Level.SEVERE, null, ex);
+            }
             dsbus.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
             
             dsbus.setThemSuaLop(true);
@@ -404,7 +415,7 @@ public class XeBus extends javax.swing.JPanel {
             }
             if(!flags)
             {
-                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
                 if(click==JOptionPane.NO_OPTION){
                     return;
                 }

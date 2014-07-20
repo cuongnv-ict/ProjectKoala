@@ -337,7 +337,7 @@ public class LopX extends javax.swing.JPanel {
             String tenlop = chuyen.getTenLop();
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
                 if ((Boolean) model.getValueAt(i, 11) == true) {
-                    new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop, malop);
+                    new SQLLopX().chuyenlopHocSinh(id_students.get(i), tenlop, new SQLLopX().getNameClass(malop));
                 }
             }
             int a;

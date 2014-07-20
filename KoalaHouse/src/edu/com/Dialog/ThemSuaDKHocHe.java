@@ -180,6 +180,11 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 tuanhocActionPerformed(evt);
             }
         });
+        tuanhoc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tuanhocFocusGained(evt);
+            }
+        });
 
         jButton2.setText("Ok");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -417,6 +422,11 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
             tongsotuan=0;
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tuanhocFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tuanhocFocusGained
+        // TODO add your handling code here:
+        tuanhoc.setText("");
+    }//GEN-LAST:event_tuanhocFocusGained
 
     /**
      * @param args the command line arguments

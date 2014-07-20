@@ -29,6 +29,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Timer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -189,7 +190,7 @@ public class DropBox extends javax.swing.JDialog {
                         upload.setEnabled(true);
                         download.setEnabled(true);
                     } catch (DbxException ex) {
-                        Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                       JOptionPane.showMessageDialog(rootPane, "Mã xác thực không chính xác", "Kết nối Internet", JOptionPane.ERROR_MESSAGE);
                     } finally {
                         jProgressBar1.setIndeterminate(false);
                     }
@@ -200,7 +201,7 @@ public class DropBox extends javax.swing.JDialog {
                         codeDrop.setText("Xác nhận");
 
                     } catch (IOException ex) {
-                        Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(rootPane, "Lỗi kết nối", "Kết nối Internet", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -223,16 +224,18 @@ public class DropBox extends javax.swing.JDialog {
                                 client.uploadFile("/" + NAME, DbxWriteMode.add(), inputFile.length(), inputStream);
                                 inputStream.close();
                             } catch (IOException ex) {
-                                Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                                 JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                             } catch (DbxException ex) {
-                                Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                                 JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                             }
                         }
+                    }else{
+                        JOptionPane.showMessageDialog(rootPane, "Không thể sao chép dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (URISyntaxException ex) {
-                    Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                   JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                     JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                 } finally {
                     jProgressBar1.setIndeterminate(false);
                 }
@@ -248,19 +251,19 @@ public class DropBox extends javax.swing.JDialog {
                     try {
                         client.getFile("/" + NAME, null, outputStream);
                         if (Import_ExportSQL.ImportSQL(jarDir + "\\" + NAME)) {
-                            System.out.println("ok");
+                           
                         } else {
-                            System.out.println("error");
+                             JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                         }
                     } catch (DbxException ex) {
-                        Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                         JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                     } catch (IOException ex) {
-                        Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                         JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                     } finally {
                         try {
                             outputStream.close();
                         } catch (IOException ex) {
-                            Logger.getLogger(DropBox.class.getName()).log(Level.SEVERE, null, ex);
+                             JOptionPane.showMessageDialog(rootPane, "Lỗi đồng bộ dữ liệu",null, JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 } catch (URISyntaxException ex) {

@@ -17,11 +17,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +34,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
@@ -44,12 +50,33 @@ public class HS_Thang extends javax.swing.JPanel {
     private boolean isadmin = true;
     public JTabbedPane center;
     ArrayList<Integer> info;
+    DefaultCellEditor combo;
+    JComboBox c;
+    int row_, col_;
+    boolean flags ;
     public HS_Thang() {
         initComponents();
         String date[] = new SimpleDateFormat("dd-MM-yyyy").format((new Date()).getTime()).split("-");
+        c = new DataBase.SQLHocSinhTheoThang().getNameClass();
+        combo = new DefaultCellEditor(c);
         setSelectComboBox(thang, date[1]);
         setSelectComboBox(nam, date[2]);
+        flags = true;
+        c.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(flags){
+                 
+                    new DataBase.SQLHocSinhTheoThang().update(Math.abs(info.get(row_)), c.getSelectedItem().toString());
+                    flags = false;
+                }else{
+                    flags = true;
+                }
+            }
+        });
         this.getinfo();
+
     }
 
     private void setSelectComboBox(JComboBox x, Object obj) {
@@ -62,8 +89,8 @@ public class HS_Thang extends javax.swing.JPanel {
     }
 
     private void getinfo() {
-        if (thang.getSelectedIndex() == 6 || thang.getSelectedIndex() == 7 || thang.getSelectedIndex() == 8) {
-            info = new DataBase.SQLHocSinhTheoThang().DanhSachHocSinhTrongKi(danhsach, Integer.valueOf(thang.getSelectedItem().toString()), Integer.valueOf(nam.getSelectedItem().toString()));
+        if (thang.getSelectedIndex() == 5 || thang.getSelectedIndex() == 6 || thang.getSelectedIndex() == 7) {
+            info = new DataBase.SQLHocSinhTheoThang().DanhSachHocSinhKiHe(danhsach, Integer.valueOf(thang.getSelectedItem().toString()), Integer.valueOf(nam.getSelectedItem().toString()));
         } else {
             info = new DataBase.SQLHocSinhTheoThang().DanhSachHocSinhTrongKi(danhsach, Integer.valueOf(thang.getSelectedItem().toString()), Integer.valueOf(nam.getSelectedItem().toString()));
         }
@@ -87,19 +114,27 @@ public class HS_Thang extends javax.swing.JPanel {
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column){
 
                 Component c = super.prepareRenderer(renderer, row, column);
-                if(info.get(row)==-1){
-                    c.setBackground(Color.BLUE);
+                if(info.get(row)>0){
+                    c.setFont(new Font("Arial", Font.BOLD, 12));
                 }
                 else{
-                    c.setForeground(Color.BLACK);
-                    c.setBackground(Color.WHITE);
+                    c.setFont(new Font("Arial", Font.PLAIN, 12));
                 }
                 return c;
 
             }
+            public TableCellEditor getCellEditor(int row, int column)
+            {
+                if (column==2&&(thang.getSelectedIndex() == 5 || thang.getSelectedIndex() == 6 || thang.getSelectedIndex() == 7)){
+                    row_ = row;
+                    col_ = column;
+                    return combo;
+                }else{
+                    return super.getCellEditor(row, column);
+                }
+            }
         };
         thang = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         nam = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
@@ -125,14 +160,6 @@ public class HS_Thang extends javax.swing.JPanel {
         thang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 thangActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        jLabel1.setToolTipText("Tải lại");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
             }
         });
 
@@ -165,19 +192,16 @@ public class HS_Thang extends javax.swing.JPanel {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
                         .addComponent(thang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
@@ -193,11 +217,6 @@ public class HS_Thang extends javax.swing.JPanel {
         getinfo();
     }//GEN-LAST:event_thangActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        getinfo();
-    }//GEN-LAST:event_jLabel1MouseClicked
-
     private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
         // TODO add your handling code here:
         getinfo();
@@ -205,7 +224,6 @@ public class HS_Thang extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable danhsach;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane8;

@@ -182,12 +182,14 @@ public class DSLop extends javax.swing.JPanel {
         Panel_DSLopLayout.setVerticalGroup(
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Button_DSLop_ThemLop)
-                    .addComponent(Button_DSLop_SuaLop)
+                .addContainerGap()
+                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Button_DSLop_ThemLop)
+                        .addComponent(Button_DSLop_SuaLop, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(Button_DSLop_Xoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

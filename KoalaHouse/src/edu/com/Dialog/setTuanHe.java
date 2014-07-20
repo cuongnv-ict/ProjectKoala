@@ -987,9 +987,12 @@ public class setTuanHe extends javax.swing.JDialog {
             String ngaykt6= yearE6.getSelectedItem().toString() + "-" + monthE6.getSelectedItem().toString() + "-" + dateE6.getSelectedItem().toString();
             String ngaykt7= yearE7.getSelectedItem().toString() + "-" + monthE7.getSelectedItem().toString() + "-" + dateE7.getSelectedItem().toString();
             String ngaykt8= yearE8.getSelectedItem().toString() + "-" + monthE8.getSelectedItem().toString() + "-" + dateE8.getSelectedItem().toString();
-            if(sosanhngaythang(ngaybd1, ngaykt1)&&sosanhngaythang(ngaybd2, ngaykt2)&&sosanhngaythang(ngaybd3, ngaykt3)
-                    &&sosanhngaythang(ngaybd4, ngaykt4)&&sosanhngaythang(ngaybd5, ngaykt5)&&sosanhngaythang(ngaybd6, ngaykt6)
-                    &&sosanhngaythang(ngaybd7, ngaykt7)&&sosanhngaythang(ngaybd8, ngaykt8))
+            if(sosanhngaythang(ngaybd1, ngaykt1)&&sosanhngaythang(ngaykt1, ngaybd2)&&sosanhngaythang(ngaybd2, ngaykt2)&&sosanhngaythang(ngaykt2, ngaybd3)
+                    &&sosanhngaythang(ngaybd3, ngaykt3)&&sosanhngaythang(ngaykt3, ngaybd4)
+                    &&sosanhngaythang(ngaybd4, ngaykt4)&&sosanhngaythang(ngaykt4, ngaybd5)&&sosanhngaythang(ngaybd5, ngaykt5)
+                    &&sosanhngaythang(ngaykt5, ngaybd6)
+                    &&sosanhngaythang(ngaybd6, ngaykt6)&&sosanhngaythang(ngaykt6, ngaybd7)
+                    &&sosanhngaythang(ngaybd7, ngaykt7)&&sosanhngaythang(ngaykt7, ngaybd8)&&sosanhngaythang(ngaybd8, ngaykt8))
             {
             new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, ngaybd7, ngaykt7, ngaybd8, ngaykt8);
             dispose();

@@ -26,8 +26,6 @@
               <Component id="jLabel3" min="-2" pref="12" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="nam" min="-2" pref="68" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -36,11 +34,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel3" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="thang" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="nam" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -114,7 +111,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column){&#xa;&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;        if(info.get(row)==-1){&#xa;            c.setBackground(Color.BLUE);&#xa;        }&#xa;        else{&#xa;            c.setForeground(Color.BLACK);         &#xa;            c.setBackground(Color.WHITE);&#xa;        }&#xa;        return c;&#xa;&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public Component prepareRenderer(TableCellRenderer renderer, int row, int column){&#xa;&#xa;        Component c = super.prepareRenderer(renderer, row, column);&#xa;        if(info.get(row)&gt;0){&#xa;            c.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 12));&#xa;        }&#xa;        else{&#xa;            c.setFont(new Font(&quot;Arial&quot;, Font.PLAIN, 12));&#xa;        }&#xa;        return c;&#xa;&#xa;    }&#xa;    public TableCellEditor getCellEditor(int row, int column)&#xa;    {&#xa;        if (column==2&amp;&amp;(thang.getSelectedIndex() == 5 || thang.getSelectedIndex() == 6 || thang.getSelectedIndex() == 7)){&#xa;            row_ = row;&#xa;            col_ = column;&#xa;            return combo;&#xa;        }else{&#xa;            return super.getCellEditor(row, column);&#xa;        }&#xa;    }&#xa;}"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -146,17 +143,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="thangActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/edu/com/image/refresh25.png"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="T&#x1ea3;i l&#x1ea1;i"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

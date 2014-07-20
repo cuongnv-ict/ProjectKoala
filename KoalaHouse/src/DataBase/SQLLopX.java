@@ -230,7 +230,7 @@ public class SQLLopX {
         }
     }
 
-    public boolean chuyenlopHocSinh(int id, String name_class,int old_class) {
+    public boolean chuyenlopHocSinh(int id, String name_class,String old_class) {
         try {
             int id_classes;
             id_classes = new DataTable().LayIdTenLop(name_class);
@@ -243,7 +243,17 @@ public class SQLLopX {
         }
         return true;
     }
-
+    public String getNameClass(int id){
+        try {
+            rs1 = statement.executeQuery("select NameClass from classes where id = "+id);
+            if(rs1.next()){
+                return rs1.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLLopX.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
     public ArrayList<Integer> timhocsinh(String tenhs, JTable table, int classes_id) {
         try {
             ArrayList<Integer> arr = new ArrayList<Integer>();

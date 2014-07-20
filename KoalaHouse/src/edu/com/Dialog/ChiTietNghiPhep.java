@@ -6,6 +6,7 @@
 
 package edu.com.Dialog;
 import DataBase.HocSinh.NghiPhep;
+import edu.com.upbang.XuLiXau;
 import javax.swing.JOptionPane;
 /**
  *
@@ -55,6 +56,8 @@ NghiPhep a;
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        songay = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -182,6 +185,8 @@ NghiPhep a;
             }
         });
 
+        jLabel11.setText("Số Ngày Nghỉ:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,10 +213,18 @@ NghiPhep a;
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(40, 40, 40))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(33, 33, 33))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(33, 33, 33))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(songay, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,15 +252,21 @@ NghiPhep a;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(songay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       try
+       {
         String batdau = ngay.getSelectedItem().toString();
         batdau += "-"+thang.getSelectedItem().toString();
         batdau += "-"+nam.getSelectedItem().toString();
@@ -255,8 +274,14 @@ NghiPhep a;
         ketthuc += "-"+thang1.getSelectedItem().toString();
         ketthuc += "-"+nam1.getSelectedItem().toString();
         System.out.println(""+batdau+" "+ketthuc);
-        a.InsertNghiPhep(idStudent, idTrungTam, batdau, ketthuc);
+        a.InsertNghiPhep(idStudent, idTrungTam, new XuLiXau().NamThangNgay(batdau),new XuLiXau().NamThangNgay(ketthuc),String.valueOf(Integer.parseInt(songay.getText())));
         a.NghiPhepInfo(idStudent, jTable1);
+       }
+       catch(Exception ex)
+       {
+           JOptionPane.showMessageDialog(null,"Bạn chưa nhập đúng dữ liệu đầu vào, xin mời xem lại",null,JOptionPane.INFORMATION_MESSAGE);
+       
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -317,6 +342,7 @@ NghiPhep a;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -333,6 +359,7 @@ NghiPhep a;
     private javax.swing.JComboBox nam1;
     private javax.swing.JComboBox ngay;
     private javax.swing.JComboBox ngay1;
+    private javax.swing.JTextField songay;
     private javax.swing.JComboBox thang;
     private javax.swing.JComboBox thang1;
     // End of variables declaration//GEN-END:variables

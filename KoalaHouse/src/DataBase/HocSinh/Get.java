@@ -12,6 +12,7 @@ package DataBase.HocSinh;
  */
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -146,10 +147,10 @@ public class Get{
         
         return nameClasses;
 }
-    public int GetNumberSummerWeek(int idStudent){
+    public int GetNumberSummerWeek(int idStudent,String ki,String nam){
         int number = 0;
         try {
-            rs1 = statement.executeQuery("SELECT soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 1");
+            rs1 = statement.executeQuery("SELECT soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 0 and Semester = "+ki+" and year="+nam+"");
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
@@ -183,4 +184,116 @@ public class Get{
         }
         return number;
     }
+     public ArrayList HocHe(int idStudent){
+            ArrayList a = new ArrayList();
+            try {
+            rs2 = statement.executeQuery("SELECT tuanhoc,soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+";");
+            if(rs2!= null)
+            while(rs2.next()){
+                String x = rs2.getString(1);
+                String[] b = x.split(",");
+                a.removeAll(a);
+                for(int j=0;j<b.length;j++){
+                    a.add(b[j]);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TotalFeeManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return a;
+        }
+     public int GetSoTienXeBus(int idStudent){
+         int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT TienXe FROM projectkoala.buslist where idStudents = "+idStudent+" and IsActive = 1;");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+     }
+     public ArrayList getPhiHocSinh(int idStudent,int idTrungTam){
+         ArrayList a =  new ArrayList();
+        try {
+            rs1 = statement.executeQuery("SELECT NameCost,Amount,cost.Semesters,cost.year FROM projectkoala.cost,students_has_cost\n" +
+            "where students_has_cost.Students_Id = "+idStudent+" and students_has_cost.IsDebt = 1\n" +
+            "and students_has_cost.Cost_Id = cost.Id");
+            while(rs1.next()){
+                Object[] str = new Object[2];
+                str[0] = rs1.getString(1);
+                int totalTime = 0;
+                boolean checkTrongMuon = false;
+                boolean checkHocHe = false;
+                boolean checkHoanHocPhi = false;
+                String tenp = str[0].toString().toLowerCase();
+                if(tenp.indexOf("thu")!= -1 && tenp.indexOf("khác")!= -1){
+                    str[0] = "Thu Khác";
+                }
+                if(str[0].toString().toLowerCase().indexOf("phí trông muộn")!= -1){
+                    checkTrongMuon = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new AStudentAndLateDay().LateDay(idStudent,idTrungTam,ki,nam);
+                }
+                if(str[0].toString().toLowerCase().indexOf("phí học hè")!= -1){
+                    checkHocHe = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new Get().GetNumberSummerWeek(idStudent,ki,nam);
+                }
+                if(str[0].toString().toLowerCase().indexOf("hoàn học phí")!= -1){
+                    checkHoanHocPhi = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new Get().GetSoNgayNghiPhep(idStudent,ki,nam);
+                }
+                String thanhtien = rs1.getString(2);
+                if(thanhtien.charAt(0)== '-'){
+                    thanhtien = thanhtien.substring(1);
+                }
+                int money = Integer.parseInt(thanhtien);
+                if(checkTrongMuon)
+                    money = money * totalTime;
+                if(checkHocHe)
+                    money = money * totalTime;
+                if(checkHoanHocPhi)
+                    money = money * totalTime;
+                str[1] = money;
+                a.add(str);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try{
+            rs2 = statement.executeQuery("SELECT NameCost,Amount,cost.Semesters,cost.year FROM projectkoala.cost,students_has_cost\n" +
+            "where students_has_cost.Students_Id = "+idStudent+" and students_has_cost.IsDebt = 0\n" +
+            "and students_has_cost.Cost_Id = cost.Id and cost.NameCost = \"Phí Đặt Cọc\"");
+            while(rs2.next()){
+                Object[] str = new Object[2];
+                str[0] = "Hoàn Phí Đặt Cọc";
+                if(rs2.getString(2).charAt(0)== '-')
+                    str[1] = rs2.getString(2).substring(1);
+                else
+                    str[1] = rs2.getString(2);
+                a.add(str);
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+     }
+     public int GetSoNgayNghiPhep(int idStudent,String ki, String nam){
+         int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT NumberOfDay FROM projectkoala.leaves where Students_Id = "+idStudent+" and IsActive = 0 and Semester = "+ki+" and year = "+nam+"");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+     }
 }
