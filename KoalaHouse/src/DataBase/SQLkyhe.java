@@ -61,7 +61,6 @@ public class SQLkyhe {
                 str[1]=new XuLiXau().NgayThangNam(rs3.getString(2));
                 
                 str[2]=new XuLiXau().NgayThangNam(rs3.getString(3));
-                System.out.println(str[0].toString()+str[1].toString()+str[2].toString());
                 data.add(str);
             }
             
@@ -139,6 +138,11 @@ public class SQLkyhe {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate(); 
             }
+            
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
         }
         catch(SQLException ex)
         {
@@ -157,14 +161,14 @@ public class SQLkyhe {
             
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
-                                    ,model.getColumnName(5)};
+                                    ,model.getColumnName(5),model.getColumnName(6)};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents order by s1.FullName ");
+            rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName,class FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents order by s1.FullName ");
 
             while(rs1.next()) 
             {       
                     
-                    Object[] str = new Object[6];
+                    Object[] str = new Object[7];
                     str[0]=rs1.getInt(1);
                     idstudent=rs1.getInt(2);
                     
@@ -189,18 +193,20 @@ public class SQLkyhe {
                     //str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     //str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     //str[9]=rs1.getString(4);
-                    str[5]=false;
+                    str[5]=rs1.getString(6);
+                    str[6]=false;
                     data.add(str);
             }     
             if(data.size()==0) 
             {
-                Object[] str = new Object[6];
+                Object[] str = new Object[7];
                     str[0]="";
                     str[1]="";
                     str[2]="";
                     str[3]="";
                     str[4]="";
-                    str[5]=false;
+                    str[5]="";
+                    str[6]=false;
                     data.add(str);
                Object[][] rowColumn = new Object[1][];
                 for (int i = 0; i < 1; i++) {
@@ -208,14 +214,14 @@ public class SQLkyhe {
                 rowColumn[i] = data.get(i);
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false,false,false,false,false,true
+                        false,false,false,false,false,false,true
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -234,14 +240,14 @@ public class SQLkyhe {
                 rowColumn[i] = data.get(i);
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false,false,false,false,false,true
+                        false,false,false,false,false,false,true
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -272,19 +278,34 @@ public class SQLkyhe {
     {
         try{
             int id=0;
+            String year="";
             rs1=statement.executeQuery("SELECT id FROM learnsummer ");
+            rs2= statement2.executeQuery("SELECT startDay FROM summerweek where id = 1");
             while(rs1.next())
             {
                 id= rs1.getInt(1);
             }
+            while(rs2.next())
+            {
+                year= rs2.getString(1);
+            }
+            String a[];
+            a= year.split("-");
+            
             id+=1;
-            String sb="duc son dep trai";
-            statement.executeUpdate("INSERT INTO learnsummer  VALUES "
-                        + "('" + id + "','" +idstudent+ "','"+tuanhoc +"','"+sotuanhoc+"','"+sb+"',1)");
+            statement.executeUpdate("INSERT INTO learnsummer (`id`, `idStudents`, `tuanhoc`, `soTuanHoc`, `class`,`IsActive`)  VALUES "
+                        + "('" + id + "','" +idstudent+ "','"+tuanhoc +"','"+sotuanhoc+"','"+a[0]+"',1)");
+            
+            
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
         }   
+        
         catch(SQLException ex)
         {
-            System.out.println("ban khong thanh cong tao them du lieu xebus");
+            System.out.println("ban khong thanh cong tao them đăng ký học hè");
         }
     }
     
@@ -295,6 +316,11 @@ public class SQLkyhe {
             System.out.println(query);
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate(); 
+            
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
         }
         catch(SQLException ex)
         {
@@ -311,6 +337,11 @@ public class SQLkyhe {
         {
             id=rs1.getInt(1);
         }
+        
+        statement.close();
+        statement2.close();
+        statement3.close();
+        connect.close();
         return id;
         }
         catch(SQLException ex)
@@ -374,12 +405,22 @@ public class SQLkyhe {
 
                          i++;  
                     }
+                    
+                statement.close();
+                statement2.close();
+                statement3.close();
+                connect.close();
                 return true;
             }
             else
             {
                 String message =String.format( "bạn chưa xóa thành công! xin mời thử lại");
                 JOptionPane.showMessageDialog( null, message );
+            
+                statement.close();
+                statement2.close();
+                statement3.close();
+                connect.close();
                 return false;
             }
         }
@@ -403,14 +444,14 @@ public class SQLkyhe {
             
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
-                                    ,model.getColumnName(5)};
+                                    ,model.getColumnName(5),model.getColumnName(6)};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents and s1.FullName like '%"+ten+"%' order by s1.FullName ");
+            rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName,class FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents and s1.FullName like '%"+ten+"%' order by s1.FullName ");
 
             while(rs1.next()) 
             {       
                     
-                    Object[] str = new Object[6];
+                    Object[] str = new Object[7];
                     str[0]=rs1.getInt(1);
                     idstudent=rs1.getInt(2);
                     
@@ -435,18 +476,20 @@ public class SQLkyhe {
                     //str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     //str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     //str[9]=rs1.getString(4);
-                    str[5]=false;
+                    str[5]=rs1.getString(6);
+                    str[6]=false;
                     data.add(str);
             }     
             if(data.size()==0) 
             {
-                Object[] str = new Object[6];
+                Object[] str = new Object[7];
                     str[0]="";
                     str[1]="";
                     str[2]="";
                     str[3]="";
                     str[4]="";
-                    str[5]=false;
+                    str[5]="";
+                    str[6]=false;
                     data.add(str);
                Object[][] rowColumn = new Object[1][];
                 for (int i = 0; i < 1; i++) {
@@ -454,14 +497,14 @@ public class SQLkyhe {
                 rowColumn[i] = data.get(i);
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false,false,false,false,false,true
+                        false,false,false,false,false,false,true
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -480,14 +523,14 @@ public class SQLkyhe {
                 rowColumn[i] = data.get(i);
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
                         return types[columnIndex];
                     }
                     boolean[] canEdit = new boolean[]{
-                        false,false,false,false,false,true
+                        false,false,false,false,false,false,true
                     };
 
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -531,6 +574,11 @@ public class SQLkyhe {
             isactive=rs1.getInt(1);
             
         }
+        
+        statement.close();
+        statement2.close();
+        statement3.close();
+        connect.close();
         return isactive;
         }
         catch(SQLException ex)

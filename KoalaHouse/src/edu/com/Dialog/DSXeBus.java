@@ -13,18 +13,24 @@ import DataBase.HocSinh.GetTotal;
 import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,6 +40,7 @@ import javax.swing.KeyStroke;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -48,7 +55,7 @@ public class DSXeBus extends javax.swing.JDialog {
     /**
      * Creates new form DSXeBus
      */
-    public DSXeBus(java.awt.Frame parent, boolean modal) {
+    public DSXeBus(java.awt.Frame parent, boolean modal) throws ParseException {
         super(parent, modal);
         initComponents();
         try
@@ -187,7 +194,6 @@ public class DSXeBus extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         diachi = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        tienxe = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lop = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
@@ -204,6 +210,7 @@ public class DSXeBus extends javax.swing.JDialog {
         ngaykt = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
         thangkt = new javax.swing.JComboBox();
+        tienxe = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -212,6 +219,8 @@ public class DSXeBus extends javax.swing.JDialog {
 
         jLabel2.setText("Học Sinh:");
 
+        ten.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
         jLabel3.setText("Số Lượt Đi:");
 
         luotdi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2" }));
@@ -219,6 +228,7 @@ public class DSXeBus extends javax.swing.JDialog {
         jLabel5.setText("Ghi Chú:");
 
         ghichu.setColumns(20);
+        ghichu.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         ghichu.setRows(5);
         jScrollPane1.setViewportView(ghichu);
 
@@ -243,6 +253,7 @@ public class DSXeBus extends javax.swing.JDialog {
 
         jLabel6.setText("Địa Chỉ:");
 
+        diachi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         diachi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diachiActionPerformed(evt);
@@ -250,12 +261,6 @@ public class DSXeBus extends javax.swing.JDialog {
         });
 
         jLabel7.setText("Tiền Xe:");
-
-        tienxe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tienxeActionPerformed(evt);
-            }
-        });
 
         jLabel8.setText("Tên Lớp:");
 
@@ -287,6 +292,13 @@ public class DSXeBus extends javax.swing.JDialog {
 
         thangkt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
+        tienxe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tienxe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tienxeKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,9 +322,9 @@ public class DSXeBus extends javax.swing.JDialog {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                             .addComponent(diachi)
-                            .addComponent(tienxe, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tienxe))
                         .addGap(87, 87, 87)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -398,11 +410,11 @@ public class DSXeBus extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tienxe, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -420,10 +432,6 @@ public class DSXeBus extends javax.swing.JDialog {
     private void diachiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diachiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_diachiActionPerformed
-
-    private void tienxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tienxeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tienxeActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
@@ -600,6 +608,15 @@ public class DSXeBus extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void tienxeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tienxeKeyReleased
+        // TODO add your handling code here:
+        
+                String text = tienxe.getText();
+                tienxe.setText(XuLy.setMoney(text));
+        
+    }//GEN-LAST:event_tienxeKeyReleased
+
+    
     /**
      * @param args the command line arguments
      */
@@ -630,7 +647,12 @@ public class DSXeBus extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DSXeBus dialog = new DSXeBus(new javax.swing.JFrame(), true);
+                DSXeBus dialog = null;
+                try {
+                    dialog = new DSXeBus(new javax.swing.JFrame(), true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(DSXeBus.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

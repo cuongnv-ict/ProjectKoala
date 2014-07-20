@@ -246,7 +246,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Venus\Desktop\koala\ProjectKoala\KoalaHouse\src\edu\com\image\Very-Basic-Refresh-icon.png"/>
+                  <Image iconType="3" name="/edu/com/image/refresh25.png"/>
                 </Property>
               </Properties>
               <Events>

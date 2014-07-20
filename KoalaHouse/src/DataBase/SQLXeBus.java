@@ -195,6 +195,11 @@ public class SQLXeBus
         
             statement.executeUpdate("INSERT INTO buslist  VALUES "
                         + "('" + id + "','" +idstudent+ "','" + Integer.toString(luotdi) + "','" + ghichu + "','" + Integer.toString(tienxe) + "','" + diachi + "',1,'"+datebd+"','"+datekt+"')");
+            
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
         }   
         catch(SQLException ex)
         {
@@ -204,11 +209,16 @@ public class SQLXeBus
     public void suaxebus(int oldIdStudent,int newIdStudent,int luotDi, String ghiChu,int tienXe,String diaChi,String datebd,String datekt,int idxebus)
     {
         try{
-              System.out.println("id xe bus la:3" +idxebus);
+            System.out.println("id xe bus la:3" +idxebus);
             String query = "update buslist  set idStudents = '" +newIdStudent+ "' , LuotDi='" + Integer.toString(luotDi) + "' , GhiChu = '" + ghiChu + "', TienXe = '" + Integer.toString(tienXe) + "', DiaChi='" + diaChi + "',StartDate='"+datebd+"',EndDate='"+datekt+"' where idStudents= '"+oldIdStudent+"' and idBusList='"+idxebus+"'";
             System.out.println(query);
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate(); 
+            
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
         }
         catch(SQLException ex)
         {
@@ -225,7 +235,13 @@ public class SQLXeBus
         {
             id=rs1.getInt(1);
         }
-        return id;
+        
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
+            return id;
+       
         }
         catch(SQLException ex)
         {
@@ -287,12 +303,22 @@ public class SQLXeBus
 
                          i++;  
                     }
+                    
+                statement.close();
+                statement2.close();
+                statement3.close();
+                connect.close();
                 return true;
             }
             else
             {
                 String message =String.format( "Trong các lớp chọn có lớp vẫn đang tồn tại hs, hoặc có hs đặt chỗ hay học sinh xin tạm nghỉ , bạn cần xóa hs trong lớp hoặc chuyển lớp cho các hs!");
                 JOptionPane.showMessageDialog( null, message );
+                
+                statement.close();
+                statement2.close();
+                statement3.close();
+                connect.close();
                 return false;
             }
         }
@@ -450,6 +476,11 @@ public class SQLXeBus
             isactive=rs1.getInt(1);
             
         }
+        
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
         return isactive;
         }
         catch(SQLException ex)

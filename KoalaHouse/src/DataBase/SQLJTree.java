@@ -50,7 +50,7 @@ public class SQLJTree {
     public boolean ratruong(int id_lop)
     {
         try{
-            String query = "update students set isactive = -1 where Id  in (select Students_Id from classes_has_students where Classes_Id='"+id_lop+"' ) and Faculties_Id='"+ThongTin.trungtam+"'" ;
+            String query = "update students set isactive = -1 where Id  in (select Students_Id from classes_has_students where Classes_Id='"+id_lop+"' ) and Faculties_Id='"+ThongTin.trungtam+"' and isactive = 1" ;
            
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

@@ -7,6 +7,8 @@
 package DataBase.HocSinh;
 import DataBase.ConnectData;
 import DataBase.DataTable;
+import edu.com.ThongTin;
+import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,13 +43,14 @@ public class NghiPhep {
     }
     public void NghiPhepInfo(int idStudent,JTable table){
         try {
-            Object [] nameColumn = {"Ngày Bắt Đầu","Ngày Kết Thúc"};
+            Object [] nameColumn = {"Ngày Bắt Đầu","Ngày Kết Thúc","Số Ngày"};
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("SELECT * FROM projectkoala.leaves where Students_Id = "+idStudent);
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.leaves where Students_Id = "+idStudent +" order by StartDate desc");
             while(rs1.next()){
-                Object str[] = new Object[2];
-                str[0]= rs1.getString(4);
-                str[1] = rs1.getString(5);
+                Object str[] = new Object[3];
+                str[0] = new XuLiXau().NgayThangNam( rs1.getString(4));
+                str[1] = new XuLiXau().NgayThangNam( rs1.getString(5));
+                str[2] = rs1.getString(6);
                 data.add(str);
             }
             Object [][] rowColumn = new Object[data.size()][];
@@ -65,7 +68,7 @@ public class NghiPhep {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void InsertNghiPhep(int idStudent,int idFac,String batdau,String ketthuc){
+    public void InsertNghiPhep(int idStudent,int idFac,String batdau,String ketthuc,String numberday){
         int id = 0;
         try {
             rs1 = statement.executeQuery("SELECT max(Id) FROM leaves");
@@ -76,7 +79,7 @@ public class NghiPhep {
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String query ="INSERT INTO `projectkoala`.`leaves` (`Id`, `Faculties_Id`, `Students_Id`, `StartDate`, `EndDate`) VALUES ('"+id+"', '"+idFac+"', '"+idStudent+"', '"+batdau+"', '"+ketthuc+"');";
+        String query ="INSERT INTO `projectkoala`.`leaves` (`Id`, `Faculties_Id`, `Students_Id`, `StartDate`, `EndDate`,`NumberOfDay`,`IsActive`) VALUES ('"+id+"', '"+ThongTin.trungtam+"', '"+idStudent+"', '"+batdau+"', '"+ketthuc+"','"+numberday+"',1);";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
@@ -86,7 +89,7 @@ public class NghiPhep {
         
     }
     public void XoaNghiPhep(int idStudent,String batdau,String ketthuc){
-        String query ="DELETE FROM `projectkoala`.`leaves` WHERE `Students_Id`='"+idStudent+"' and `StartDate`='"+batdau+"' and `EndDate` = '"+ketthuc+"';";
+        String query ="DELETE FROM `projectkoala`.`leaves` WHERE `Students_Id`='"+idStudent+"' and `StartDate`='"+new XuLiXau().NamThangNgay(batdau)+"' and `EndDate` = '"+new XuLiXau().NamThangNgay(ketthuc)+"';";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

@@ -116,17 +116,17 @@ public class DKHocHe extends javax.swing.JPanel {
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Học Sinh", "Lớp", "Tuần Học", "Tổng Số Tuần", "Đánh Dấu"
+                "STT", "Học Sinh", "Lớp", "Tuần Học", "Tổng Số Tuần", "Năm Học", "Đánh Dấu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -186,7 +186,7 @@ public class DKHocHe extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
@@ -309,7 +309,7 @@ public class DKHocHe extends javax.swing.JPanel {
             model= (DefaultTableModel) jTable4.getModel();
             boolean flags = true;
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i,5) == true) {
+                if ((Boolean) model.getValueAt(i,6) == true) {
                     flags = false;
                 }
             }
@@ -322,7 +322,7 @@ public class DKHocHe extends javax.swing.JPanel {
 
                 boolean xoaorkhong;
                 DataBase.SQLkyhe data= new DataBase.SQLkyhe();
-                xoaorkhong=data.xoaDkHe(jTable4, 5,id_hoche);
+                xoaorkhong=data.xoaDkHe(jTable4, 6,id_hoche);
 
                 new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
                 id_hoche = new ArrayList<Integer>();
@@ -357,7 +357,7 @@ public class DKHocHe extends javax.swing.JPanel {
             int count =1, row=0;
             model=(DefaultTableModel) jTable4.getModel();
             for(int i = model.getRowCount()-1;i>=0;i--){
-                if((Boolean)model.getValueAt(i, 5)==true){
+                if((Boolean)model.getValueAt(i, 6)==true){
                     count--;
                     row = i;
                 }
@@ -369,7 +369,7 @@ public class DKHocHe extends javax.swing.JPanel {
                 else{
                     JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
                     for(int i = model.getRowCount()-1;i>=0;i--){
-                        model.setValueAt(false,i,10);
+                        model.setValueAt(false,i,6);
                     }
                 }
                 return;

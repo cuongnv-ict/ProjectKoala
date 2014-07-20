@@ -15,8 +15,11 @@ import edu.com.XuLy;
 import edu.com.upbang.EditTable;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -192,7 +195,7 @@ public class XeBus extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Venus\\Desktop\\koala\\ProjectKoala\\KoalaHouse\\src\\edu\\com\\image\\Very-Basic-Refresh-icon.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -300,7 +303,12 @@ public class XeBus extends javax.swing.JPanel {
         if(isadmin)
         {
             
-            DSXeBus  dsbus= new DSXeBus(null, true);
+            DSXeBus  dsbus = null;
+            try {
+                dsbus = new DSXeBus(null,true);
+            } catch (ParseException ex) {
+                Logger.getLogger(XeBus.class.getName()).log(Level.SEVERE, null, ex);
+            }
             dsbus.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
             
             dsbus.setThemSuaLop(true);
@@ -404,7 +412,7 @@ public class XeBus extends javax.swing.JPanel {
             }
             if(!flags)
             {
-                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
                 if(click==JOptionPane.NO_OPTION){
                     return;
                 }
