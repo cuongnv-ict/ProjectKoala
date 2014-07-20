@@ -25,7 +25,13 @@ public class Nam extends javax.swing.JDialog {
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 300, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
         int h = new DataBase.SQLNam().getID();
-        setComBoBox(NamHoc, String.valueOf(h)+"-"+String.valueOf(h+1));
+        setComBoBox(NamHoc, String.valueOf(h) + "-" + String.valueOf(h + 1));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                dispose();
+            }
+        });
         Vector e[] = new DataBase.SQLNam().getNamHoc(h);
         if (e == null) {
             int x = NamHoc.getSelectedIndex();
@@ -423,13 +429,13 @@ public class Nam extends javax.swing.JDialog {
         boolean flags = false;
         Vector vector = new Vector();
         String begin, end;
-        if(!(XuLy.getTime(B_Nam1.getSelectedItem().toString() + "-" + B_Thang1.getSelectedItem().toString() + "-" + B_Ngay1.getSelectedItem().toString(),E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString())
-           &&XuLy.getTime(B_Nam2.getSelectedItem().toString() + "-" + B_Thang2.getSelectedItem().toString() + "-" + B_Ngay2.getSelectedItem().toString(),E_Nam2.getSelectedItem().toString() + "-" + E_Thang2.getSelectedItem().toString() + "-" + E_Ngay2.getSelectedItem().toString())
-           &&XuLy.getTime(B_Nam3.getSelectedItem().toString() + "-" + B_Thang3.getSelectedItem().toString() + "-" + B_Ngay3.getSelectedItem().toString(),E_Nam3.getSelectedItem().toString() + "-" + E_Thang3.getSelectedItem().toString() + "-" + E_Ngay3.getSelectedItem().toString())
-           &&XuLy.getTime(B_Nam4.getSelectedItem().toString() + "-" + B_Thang4.getSelectedItem().toString() + "-" + B_Ngay4.getSelectedItem().toString(),E_Nam4.getSelectedItem().toString() + "-" + E_Thang4.getSelectedItem().toString() + "-" + E_Ngay4.getSelectedItem().toString())
-           &&XuLy.getTime(E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString(),B_Nam2.getSelectedItem().toString() + "-" + B_Thang2.getSelectedItem().toString() + "-" + B_Ngay2.getSelectedItem().toString())
-           &&XuLy.getTime(E_Nam2.getSelectedItem().toString() + "-" + E_Thang2.getSelectedItem().toString() + "-" + E_Ngay2.getSelectedItem().toString(),B_Nam3.getSelectedItem().toString() + "-" + B_Thang3.getSelectedItem().toString() + "-" + B_Ngay3.getSelectedItem().toString())
-           &&XuLy.getTime(E_Nam3.getSelectedItem().toString() + "-" + E_Thang3.getSelectedItem().toString() + "-" + E_Ngay3.getSelectedItem().toString(),B_Nam4.getSelectedItem().toString() + "-" + B_Thang4.getSelectedItem().toString() + "-" + B_Ngay4.getSelectedItem().toString()))){
+        if (!(XuLy.getTime(B_Nam1.getSelectedItem().toString() + "-" + B_Thang1.getSelectedItem().toString() + "-" + B_Ngay1.getSelectedItem().toString(), E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString())
+                && XuLy.getTime(B_Nam2.getSelectedItem().toString() + "-" + B_Thang2.getSelectedItem().toString() + "-" + B_Ngay2.getSelectedItem().toString(), E_Nam2.getSelectedItem().toString() + "-" + E_Thang2.getSelectedItem().toString() + "-" + E_Ngay2.getSelectedItem().toString())
+                && XuLy.getTime(B_Nam3.getSelectedItem().toString() + "-" + B_Thang3.getSelectedItem().toString() + "-" + B_Ngay3.getSelectedItem().toString(), E_Nam3.getSelectedItem().toString() + "-" + E_Thang3.getSelectedItem().toString() + "-" + E_Ngay3.getSelectedItem().toString())
+                && XuLy.getTime(B_Nam4.getSelectedItem().toString() + "-" + B_Thang4.getSelectedItem().toString() + "-" + B_Ngay4.getSelectedItem().toString(), E_Nam4.getSelectedItem().toString() + "-" + E_Thang4.getSelectedItem().toString() + "-" + E_Ngay4.getSelectedItem().toString())
+                && XuLy.getTime(E_Nam1.getSelectedItem().toString() + "-" + E_Thang1.getSelectedItem().toString() + "-" + E_Ngay1.getSelectedItem().toString(), B_Nam2.getSelectedItem().toString() + "-" + B_Thang2.getSelectedItem().toString() + "-" + B_Ngay2.getSelectedItem().toString())
+                && XuLy.getTime(E_Nam2.getSelectedItem().toString() + "-" + E_Thang2.getSelectedItem().toString() + "-" + E_Ngay2.getSelectedItem().toString(), B_Nam3.getSelectedItem().toString() + "-" + B_Thang3.getSelectedItem().toString() + "-" + B_Ngay3.getSelectedItem().toString())
+                && XuLy.getTime(E_Nam3.getSelectedItem().toString() + "-" + E_Thang3.getSelectedItem().toString() + "-" + E_Ngay3.getSelectedItem().toString(), B_Nam4.getSelectedItem().toString() + "-" + B_Thang4.getSelectedItem().toString() + "-" + B_Ngay4.getSelectedItem().toString()))) {
             JOptionPane.showMessageDialog(rootPane, "Thiết lập thời gian không chính xác.\nHãy kiển tra lại thời gian bắt đầu và kết thúc của một kì\nvà thời gian kết thúc của kì trước và thời gian bắt đầu cảu kì sau.", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -474,7 +480,7 @@ public class Nam extends javax.swing.JDialog {
         vector.add(begin);
         vector.add(end);
         flags = new DataBase.SQLNam().setNamHoc(vector, Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), 5);
-         if (!flags) {
+        if (!flags) {
             return;
         }
         if (new DataBase.SQLNam().setIsActiveSemester(Integer.parseInt(NamHoc.getSelectedItem().toString().split("-")[0]), active.isSelected())) {

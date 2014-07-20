@@ -26,6 +26,7 @@ import edu.com.Panel.HS_Thang;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
 import edu.com.Panel.XeBus;
+import edu.com.dropbox.DropBox;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -353,6 +354,7 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_SuaTaiKhoan = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         Menu_DangXuat = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
@@ -707,6 +709,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(Menu_DangXuat);
+
+        jMenuItem1.setText("Đồng bộ dữ liệu");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem1);
 
         CapNhatNamHoc.setText("Cập nhật năm học");
         CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
@@ -1344,6 +1354,12 @@ public class ListKoala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hs_thangMouseClicked
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        DropBox db = new DropBox(frame, true);
+        db.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
@@ -1352,37 +1368,6 @@ public class ListKoala extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListKoala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListKoala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListKoala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListKoala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListKoala().setVisible(true);
-            }
-        });
-
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem A;
     private javax.swing.JMenuItem CapNhatNamHoc;
@@ -1420,6 +1405,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
