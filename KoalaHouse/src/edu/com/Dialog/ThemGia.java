@@ -154,6 +154,9 @@ public class ThemGia extends javax.swing.JDialog {
 
         Gia.setPreferredSize(new java.awt.Dimension(48, 25));
         Gia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                GiaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 GiaKeyTyped(evt);
             }
@@ -430,6 +433,11 @@ public class ThemGia extends javax.swing.JDialog {
             Ky.setEnabled(true);
         }
     }//GEN-LAST:event_hocHeActionPerformed
+
+    private void GiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GiaKeyReleased
+        // TODO add your handling code here:
+        Gia.setText(XuLy.setMoney(Gia.getText()));
+    }//GEN-LAST:event_GiaKeyReleased
     /**
      *
      * @param args the command line arguments

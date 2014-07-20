@@ -45,13 +45,16 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Button_DSLop_ThemLop" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="Button_DSLop_SuaLop" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="Button_DSLop_Xoa" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="Button_DSLop_ThemLop" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Button_DSLop_SuaLop" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="Button_DSLop_Xoa" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane6" pref="313" max="32767" attributes="0"/>
+                  <Component id="jScrollPane6" pref="302" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
