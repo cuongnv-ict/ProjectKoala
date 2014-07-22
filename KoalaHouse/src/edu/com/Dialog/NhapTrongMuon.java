@@ -11,6 +11,7 @@ import DataBase.HocSinh.Get;
 import DataBase.HocSinh.GetTotal;
 import edu.com.CloseButton.CloseTabButton;
 import edu.com.Panel.HocSinhA;
+import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -277,17 +278,17 @@ public void MakePopup(){
         int time = Integer.parseInt(soPhut.getText());
         int idSemester = new GetTotal().GetIdSemester(idTrungTam, nam.getSelectedItem().toString(), date);
         int year = new Get().GetYear(idTrungTam, date);
-        if(idSemester > 0){
+        if(idSemester==0 || idSemester==5){
+        int click = JOptionPane.showConfirmDialog(null, "Ngày "+ XuLy.getDate(date)+" Không Có Trong Lịch Học, Bạn Có Muốn Thêm?", "",JOptionPane.OK_CANCEL_OPTION);
+        if(click == JOptionPane.YES_OPTION){
         new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Ngày Bạn Chọn Không Có Trong Lịch Học");
         }
         //load lai bang trong muon
         new Get().BangTrongMuon(bangDSTrongMuon);
         }
         catch(java.lang.NumberFormatException e){
-            JOptionPane.showMessageDialog(rootPane, "Nhập sai số phút");
+            JOptionPane.showMessageDialog(rootPane, "Thông Tin Nhập Không Chính Xác, Xin Hãy Kiểm Tra Lại");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

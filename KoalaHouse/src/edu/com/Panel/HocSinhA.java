@@ -763,6 +763,7 @@ public class HocSinhA extends javax.swing.JPanel {
     private void Button_HS_LichSuDongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HS_LichSuDongTienActionPerformed
         //lichSuDongTien ls = new lichSuDongTien(this, rootPaneCheckingEnabled);
         LichSuDongTien2.idStudent = id;
+        LichSuDongTien2.idFac = idTrungTam;
         LichSuDongTien2 lic= new LichSuDongTien2(null,true);
         lic.setLocation(380, 130);
         lic.id = id;
