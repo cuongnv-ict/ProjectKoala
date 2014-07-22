@@ -3,6 +3,7 @@ package edu.com.Dialog;
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.Get;
 import DataBase.HocSinh.GetTotal;
+import edu.com.XuLy;
 import edu.com.upbang.EditTable;
 import edu.com.upbang.XuLiXau;
 import java.util.ArrayList;
@@ -206,12 +207,14 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
         int time = Integer.parseInt(soPhut.getText());
         int idSemester = new GetTotal().GetIdSemester(idTrungTam, nam.getSelectedItem().toString(), date);
         int year = new Get().GetYear(idTrungTam, date);
-        if(idSemester > 0){
+        //kiem tra ngay thang nam co trong lich hoc khong
+        if(idSemester==0 || idSemester==5){
+        int click = JOptionPane.showConfirmDialog(null, "Ngày "+ XuLy.getDate(date)+" Không Có Trong Lịch Học, Bạn Có Muốn Thêm?", "",JOptionPane.OK_CANCEL_OPTION);
+        if(click == JOptionPane.YES_OPTION){
         new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Ngày Bạn Chọn Không Có Trong Lịch Học");
         }
+        
         new AStudentAndLateDay().LateDayInfo(idStudent, bangTrongmuon);
         them = true; 
         }

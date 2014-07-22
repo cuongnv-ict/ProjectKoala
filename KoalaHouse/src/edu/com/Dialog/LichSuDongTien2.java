@@ -4,12 +4,15 @@
  */
 package edu.com.Dialog;
 
+import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.CostOfStudent;
 import DataBase.HocSinh.HistoryManagerment;
 import edu.com.Panel.HocSinhA;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
 public class LichSuDongTien2 extends javax.swing.JDialog {
     public DefaultTableModel model;
     public static int idStudent;
+    public static int idFac;
     public int id;
+    public int idTrungTam;
     public boolean check = true;
     
 
@@ -30,7 +35,8 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         id = idStudent;
-         new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id,1,jTable1);
+        idTrungTam = idFac;
+         new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id,idTrungTam,jTable1);
         model = (DefaultTableModel) jTable1.getModel();
     }
 
@@ -46,6 +52,7 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         ls = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,6 +73,13 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xoa.jpg"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,12 +89,17 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ls)
                 .addGap(285, 285, 285))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(ls)
                 .addContainerGap())
         );
@@ -95,11 +114,29 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         check=false;
         }
         else{
-            new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id,1, jTable1);
+            new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id,idTrungTam, jTable1);
             ls.setText("Xem Lịch Sử Hóa Đơn");
             check = true;
         }
     }//GEN-LAST:event_lsActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        if(check){
+        if(jTable1.getSelectedRow()==-1){
+            JOptionPane.showMessageDialog(null ,"Hãy chọn một dòng cần xóa");
+        }
+        else{
+            int row  = jTable1.getSelectedRow();
+            int idCost = Integer.parseInt(model.getValueAt(row, 0).toString());
+            int num = jTable1.getSelectedRow();
+            new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
+            EditTable edit = new EditTable();
+            edit.removeRowOfTable(jTable1);
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Không Được Xóa Lịch Sử Hóa Đơn");
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -143,6 +180,7 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton ls;
