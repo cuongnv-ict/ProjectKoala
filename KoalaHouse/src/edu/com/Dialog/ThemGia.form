@@ -29,69 +29,66 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="hocHe" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="DongY" min="-2" pref="94" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="Ky" min="-2" pref="81" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" pref="51" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="datcoc" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="HuyBo" max="32767" attributes="0"/>
-                          <Component id="trongmuon" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Nam" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Gia" max="32767" attributes="0"/>
+                          <Component id="Gia" pref="349" max="32767" attributes="0"/>
                           <Component id="TenPhi" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel5" pref="74" max="32767" attributes="0"/>
-                          <Component id="jLabel6" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel2" min="-2" pref="60" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="Ky" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="Nam" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="hocHe" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                                  <Component id="datcoc" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="trongmuon" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="DongY" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="HuyBo" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="E_ngay" pref="73" max="32767" attributes="0"/>
-                          <Component id="B_ngay" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="E_thang" max="32767" attributes="0"/>
-                          <Component id="B_thang" pref="73" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="B_nam" max="32767" attributes="0"/>
-                          <Component id="E_nam" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel5" pref="74" max="32767" attributes="0"/>
+                              <Component id="jLabel6" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="B_ngay" pref="90" max="32767" attributes="0"/>
+                              <Component id="E_ngay" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="B_thang" pref="83" max="32767" attributes="0"/>
+                              <Component id="E_thang" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="B_nam" pref="79" max="32767" attributes="0"/>
+                              <Component id="E_nam" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,26 +101,26 @@
                   <Component id="TenPhi" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="Gia" alignment="3" pref="30" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="B_ngay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="B_nam" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="B_thang" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="E_ngay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="E_thang" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="E_nam" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Ky" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -136,12 +133,12 @@
                   <Component id="trongmuon" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="hocHe" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="DongY" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="HuyBo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DongY" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -202,8 +199,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="GiaKeyReleased"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="GiaKeyTyped"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="GiaKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="HuyBo">
@@ -239,25 +236,7 @@
     <Component class="javax.swing.JComboBox" name="Nam">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="17">
-            <StringItem index="0" value="2013-2014"/>
-            <StringItem index="1" value="2014-2015"/>
-            <StringItem index="2" value="2015-2016"/>
-            <StringItem index="3" value="2016-2017"/>
-            <StringItem index="4" value="2017-2018"/>
-            <StringItem index="5" value="2018-2019"/>
-            <StringItem index="6" value="2019-2020"/>
-            <StringItem index="7" value="2020-2021"/>
-            <StringItem index="8" value="2021-2022"/>
-            <StringItem index="9" value="2022-2023"/>
-            <StringItem index="10" value="2023-2024"/>
-            <StringItem index="11" value="2024-2025"/>
-            <StringItem index="12" value="2025-2026"/>
-            <StringItem index="13" value="2026-2027"/>
-            <StringItem index="14" value="2027-2028"/>
-            <StringItem index="15" value="2028-2029"/>
-            <StringItem index="16" value="2029-2030"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
     </Component>
@@ -331,25 +310,8 @@
     <Component class="javax.swing.JComboBox" name="B_nam">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="18">
+          <StringArray count="1">
             <StringItem index="0" value="N&#x103;m"/>
-            <StringItem index="1" value="2014"/>
-            <StringItem index="2" value="2015"/>
-            <StringItem index="3" value="2016"/>
-            <StringItem index="4" value="2017"/>
-            <StringItem index="5" value="2018"/>
-            <StringItem index="6" value="2019"/>
-            <StringItem index="7" value="2020"/>
-            <StringItem index="8" value="2021"/>
-            <StringItem index="9" value="2022"/>
-            <StringItem index="10" value="2023"/>
-            <StringItem index="11" value="2024"/>
-            <StringItem index="12" value="2025"/>
-            <StringItem index="13" value="2026"/>
-            <StringItem index="14" value="2027"/>
-            <StringItem index="15" value="2028"/>
-            <StringItem index="16" value="2029"/>
-            <StringItem index="17" value="2030"/>
           </StringArray>
         </Property>
       </Properties>
@@ -403,6 +365,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="E_thangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="E_ngay">
       <Properties>
@@ -447,25 +412,8 @@
     <Component class="javax.swing.JComboBox" name="E_nam">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="18">
+          <StringArray count="1">
             <StringItem index="0" value="N&#x103;m"/>
-            <StringItem index="1" value="2014"/>
-            <StringItem index="2" value="2015"/>
-            <StringItem index="3" value="2016"/>
-            <StringItem index="4" value="2017"/>
-            <StringItem index="5" value="2018"/>
-            <StringItem index="6" value="2019"/>
-            <StringItem index="7" value="2020"/>
-            <StringItem index="8" value="2021"/>
-            <StringItem index="9" value="2022"/>
-            <StringItem index="10" value="2023"/>
-            <StringItem index="11" value="2024"/>
-            <StringItem index="12" value="2025"/>
-            <StringItem index="13" value="2026"/>
-            <StringItem index="14" value="2027"/>
-            <StringItem index="15" value="2028"/>
-            <StringItem index="16" value="2029"/>
-            <StringItem index="17" value="2030"/>
           </StringArray>
         </Property>
       </Properties>

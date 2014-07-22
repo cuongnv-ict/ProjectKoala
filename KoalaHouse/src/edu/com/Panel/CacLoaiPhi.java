@@ -24,7 +24,8 @@ public class CacLoaiPhi extends javax.swing.JPanel {
      */
     private DefaultTableModel model;
     ArrayList<Integer> id_cost;
-    private boolean isadmin=true;
+    private boolean isadmin = true;
+
     public CacLoaiPhi() {
         initComponents();
         new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
@@ -34,12 +35,12 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             XuLy.setID(id_cost, BangPhi, 0);
         }
     }
-    public void setNotAdmin()
-    {
+
+    public void setNotAdmin() {
         ThemPhi.setEnabled(false);
         Sua.setEnabled(false);
         Xoa.setEnabled(false);
-        isadmin= false;
+        isadmin = false;
     }
 
     /**
@@ -56,6 +57,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         ThemPhi = new javax.swing.JLabel();
         Sua = new javax.swing.JLabel();
         Xoa = new javax.swing.JLabel();
+        Xoa1 = new javax.swing.JLabel();
 
         BangPhi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BangPhi.setModel(new javax.swing.table.DefaultTableModel(
@@ -98,6 +100,13 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             }
         });
 
+        Xoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
+        Xoa1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Xoa1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,6 +117,8 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 .addComponent(Sua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Xoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Xoa1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
         );
@@ -117,9 +128,10 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ThemPhi)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Xoa)
-                        .addComponent(Sua)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Sua)
+                        .addComponent(Xoa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
         );
@@ -127,53 +139,56 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
     private void ThemPhiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThemPhiMouseClicked
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        ThemGia cost = new ThemGia(null, true);
-        cost.setVisible(true);
-        Vector vec = new Vector();
-        if (cost.getButton()) {
-            new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
-            model = (DefaultTableModel) BangPhi.getModel();
-            if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_cost, BangPhi, 0);
+        if (isadmin) {
+            ThemGia cost = new ThemGia(null, true);
+            if (cost.isFlags()) {
+                cost.setVisible(true);
+                Vector vec = new Vector();
+                if (cost.getButton()) {
+                    new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+                    model = (DefaultTableModel) BangPhi.getModel();
+                    if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+                        XuLy.setID(id_cost, BangPhi, 0);
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Bạn chưa tạo năm học cho hệ thống,không thể tạo học phí!", null, JOptionPane.INFORMATION_MESSAGE);
             }
-        }
+
         }
     }//GEN-LAST:event_ThemPhiMouseClicked
 
     private void SuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuaMouseClicked
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        int count = 1, row = 0;
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 7) == true) {
-                count--;
-                row = i;
-            }
-        }
-        if (count != 0) {
-            if (count == 1) {
-                JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần chỉnh sửa", null, JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
-                for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                    model.setValueAt(false, i, 7);
+        if (isadmin) {
+            int count = 1, row = 0;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 7) == true) {
+                    count--;
+                    row = i;
                 }
             }
-            return;
-        }
-        Vector vec = (Vector) model.getDataVector().elementAt(row);
-        ThemGia cost = new ThemGia(null, true, vec, id_cost.get(row));
-        cost.setVisible(true);
-        if (cost.getButton()) {
-            new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
-            model = (DefaultTableModel) BangPhi.getModel();
-            if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_cost, BangPhi, 0);
+            if (count != 0) {
+                if (count == 1) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần chỉnh sửa", null, JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm", null, JOptionPane.INFORMATION_MESSAGE);
+                    for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                        model.setValueAt(false, i, 7);
+                    }
+                }
+                return;
             }
-        }
+            Vector vec = (Vector) model.getDataVector().elementAt(row);
+            ThemGia cost = new ThemGia(null, true, vec, id_cost.get(row));
+            cost.setVisible(true);
+            if (cost.getButton()) {
+                new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+                model = (DefaultTableModel) BangPhi.getModel();
+                if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+                    XuLy.setID(id_cost, BangPhi, 0);
+                }
+            }
         }
     }//GEN-LAST:event_SuaMouseClicked
 
@@ -195,42 +210,53 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
     private void XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaMouseClicked
         // TODO add your handling code here:
-        if(isadmin)
-        {
-        if (BangPhi.getValueAt(0, 0).toString().equals("")) {
-           return;
-        }
-        boolean flags = true;
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 7) == true) {
-                flags = false;
+        if (isadmin) {
+            if (BangPhi.getValueAt(0, 0).toString().equals("")) {
+                return;
+            }
+            boolean flags = true;
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 7) == true) {
+                    flags = false;
+                }
+            }
+            if (flags) {
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa loại phí đã chọn không?", null, JOptionPane.YES_NO_OPTION);
+            if (click == JOptionPane.NO_OPTION) {
+                return;
+            }
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                if ((Boolean) model.getValueAt(i, 7) == true) {
+                    new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i));
+                }
+            }
+            new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+            model = (DefaultTableModel) BangPhi.getModel();
+            if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+                XuLy.setID(id_cost, BangPhi, 0);
             }
         }
-        if(flags){
-             JOptionPane.showMessageDialog(null, "Bạn chưa chọn phí cần xóa", null, JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        int click = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa loại phí đã chọn không?", null, JOptionPane.YES_NO_OPTION);
-        if (click == JOptionPane.NO_OPTION) {
-            return;
-        }
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            if ((Boolean) model.getValueAt(i, 7) == true) {
-                new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i));
-            }
-        }
+    }//GEN-LAST:event_XoaMouseClicked
+
+    private void Xoa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Xoa1MouseClicked
+        // TODO add your handling code here:
         new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
         model = (DefaultTableModel) BangPhi.getModel();
+        id_cost = new ArrayList<Integer>();
         if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
             XuLy.setID(id_cost, BangPhi, 0);
         }
-        }
-    }//GEN-LAST:event_XoaMouseClicked
+    }//GEN-LAST:event_Xoa1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable BangPhi;
     private javax.swing.JLabel Sua;
     private javax.swing.JLabel ThemPhi;
     private javax.swing.JLabel Xoa;
+    private javax.swing.JLabel Xoa1;
     private javax.swing.JScrollPane jScrollPane7;
     // End of variables declaration//GEN-END:variables
 }

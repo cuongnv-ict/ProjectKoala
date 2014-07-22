@@ -133,11 +133,11 @@ public class SQLNam {
             if (rs1.next()) {
                 return rs1.getInt(1);
             } else {
-                return 2013;
+                return -1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(SQLNam.class.getName()).log(Level.SEVERE, null, ex);
-            return 2013;
+            return -1;
         }
     }
 }

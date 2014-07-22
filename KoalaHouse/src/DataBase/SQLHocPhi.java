@@ -49,7 +49,7 @@ public class SQLHocPhi {
         try {
             Object[] nameColumn = {"STT", "Tên", "Kì học", "Năm học", "Ngày bắt đầu", "Ngày kết thúc", "Giá", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select Id,NameCost,Semesters,year,StartDate,EndDate,Amount from cost where cost.Faculties_Id = " + ThongTin.trungtam + " order by year,Semesters");
+            rs1 = statement.executeQuery("select Id,NameCost,cost.Semesters,cost.year,cost.StartDate,cost.EndDate,Amount from cost,semesters where cost.year = semesters.Year and IsActivity=1 group by  Id order by year,Semesters");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[8];
@@ -436,7 +436,7 @@ public class SQLHocPhi {
             Object[] o = new Object[2];
             Vector vector_1 = new Vector();
             Vector vector_2 = new Vector();
-            rs1 = statement.executeQuery("select Id,NameCost,semesters,year from cost where Faculties_Id= '" + ThongTin.trungtam + "' order by year,semesters");
+            rs1 = statement.executeQuery("select Id,NameCost,semesters,cost.year from cost,semesters where cost.year = semesters.Year and semesters.IsActivity=1 group by id order by cost.year,semesters");
             while (rs1.next()) {
                 vector_1.add(rs1.getString(1));
                 String str = rs1.getString(2);

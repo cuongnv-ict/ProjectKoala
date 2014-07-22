@@ -429,6 +429,8 @@ public class LopX extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (textfield_timkiem.getText().equals("")) {
             this.locActionPerformed(evt);
+        }else{
+            jButton1MouseClicked(null);
         }
     }//GEN-LAST:event_textfield_timkiemActionPerformed
 

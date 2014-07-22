@@ -6,6 +6,8 @@ package edu.com.Dialog;
 
 import edu.com.XuLy;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -25,6 +27,10 @@ public class Nam extends javax.swing.JDialog {
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 300, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
         this.setResizable(false);
         int h = new DataBase.SQLNam().getID();
+        if(h==-1){
+              String date[] = new SimpleDateFormat("dd-MM-yyyy").format((new Date()).getTime()).split("-");
+              h = Integer.parseInt(date[2]);
+        }
         setComBoBox(NamHoc, String.valueOf(h) + "-" + String.valueOf(h + 1));
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override

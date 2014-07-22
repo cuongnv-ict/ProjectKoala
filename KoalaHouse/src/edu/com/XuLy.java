@@ -72,7 +72,7 @@ public class XuLy {
         if (str == null) {
             return null;
         } else {
-            String arr[] = str.split("\\.");
+            String arr[] = str.split(",");
             try {
                 for (int i = 0; i < arr.length; i++) {
                     Integer.parseInt(arr[i]);
@@ -91,7 +91,7 @@ public class XuLy {
                 int count = 0;
                 StringBuilder msg = new StringBuilder(str);
                 for (int i = 0; i < q; i++) {
-                    msg.insert(i * 3 + r + count, '.');
+                    msg.insert(i * 3 + r + count, ',');
                     count++;
                 }
                 return msg.toString();
@@ -105,7 +105,7 @@ public class XuLy {
         if (str == null) {
             return null;
         } else {
-            String arr[] = str.split("\\.");
+            String arr[] = str.split(",");
             try {
                 for (int i = 0; i < arr.length; i++) {
                     Integer.parseInt(arr[i]);
