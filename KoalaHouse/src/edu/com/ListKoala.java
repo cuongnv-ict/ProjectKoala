@@ -7,6 +7,7 @@ package edu.com;
 import DataBase.ConnectData;
 import DataBase.HocSinh.CompleteList;
 import DataBase.HocSinh.DebtList;
+import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Dialog.DSChuaHoanThanhHocPhi;
 import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
@@ -375,6 +376,7 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_DangXuat = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
 
@@ -792,6 +794,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(CapNhatNamHoc);
+
+        jMenuItem2.setText("Reset hóa đơn");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem2);
 
         hs_phi.setText("Danh sách học sinh tính phí");
         hs_phi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1624,6 +1634,14 @@ public class ListKoala extends javax.swing.JFrame {
         nhapNghiPhep.setVisible(true);
     }//GEN-LAST:event_hs_thang1MouseClicked
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Xóa Hết Dữ Liệu Hóa Đơn?", "",JOptionPane.OK_CANCEL_OPTION);
+        if(click == JOptionPane.YES_OPTION){
+         new RecieptManagerment().ResetReciept();
+            JOptionPane.showMessageDialog(null, "Tất Cả Dữ Liệu Hóa Đơn Đã Bị Xóa");
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     public void connectDataBase() {
         connectData = new ConnectData();
@@ -1678,6 +1696,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;

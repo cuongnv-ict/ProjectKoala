@@ -147,6 +147,12 @@ public class TotalFeeManagerment {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            if(data.size()==0){
+                Object [][] o = new Object[][]{nameColumn};
+               XuLy.resizeColumnWidth(table, XuLy.getSize(o));
+            }else{
+                 XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(TotalFeeManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
