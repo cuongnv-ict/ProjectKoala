@@ -146,7 +146,7 @@ public class ThemSuaLop extends javax.swing.JDialog {
 
         jLabel6.setText("Khối Học");
 
-        sohs.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        sohs.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
         trinhdo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NẮNG MAI (SUNSHINE)", "TỔ ONG (BEEHEVE)", "TỔ KÉN (CHRYSARYS)", "MẪU GIÁO (KINDERGENTEN)" }));
 
