@@ -990,8 +990,10 @@ public class ListKoala extends javax.swing.JFrame {
         taoTaiKhoan.show();
     }//GEN-LAST:event_Menu_SuaTaiKhoanActionPerformed
 
+    private TableFix tableFix;
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
         // TODO add your handling code here:
+        tableFix = new TableFix();
         int a = -1;
         for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
             if ("Danh Sách HS".equals(Panel_GDChinh.getTitleAt(i))) {
@@ -1009,6 +1011,8 @@ public class ListKoala extends javax.swing.JFrame {
             dshs.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
+        
+        fixTable(table, 0, 8, tableFix.table, tableFix.table2);
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
@@ -1231,13 +1235,13 @@ public class ListKoala extends javax.swing.JFrame {
         MessageFormat headderField = new MessageFormat(label);
         MessageFormat footerField = null;
         JTable tableReturn = null;
-        TableFix tableFix = new TableFix();
+        //TableFix tableFix = new TableFix();
         //boolean multipleTable = false;
         
         if(table.getColumnCount() > 8) {
-            int i = 0;
-            int j = 8;
-            fixTable(table, i, j, tableFix.table, tableFix.table2);
+            //int i = 0;
+            //int j = 8;
+            //fixTable(table, i, j, tableFix.table, tableFix.table2);
             try {
             PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
             printRequest.add(MediaSizeName.ISO_A4);
@@ -1253,6 +1257,7 @@ public class ListKoala extends javax.swing.JFrame {
                 Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
+            tableFix = new TableFix();
             tableFix.table = table;
             try {
                 PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
