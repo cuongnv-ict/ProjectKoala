@@ -28,6 +28,7 @@ import edu.com.Panel.HS_Phi;
 import edu.com.Panel.HS_Thang;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
+import edu.com.Panel.TableFix;
 import edu.com.Panel.TongPhi;
 import edu.com.Panel.XeBus;
 import edu.com.dropbox.DropBox;
@@ -45,8 +46,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
@@ -61,6 +67,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.JViewport;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -1120,22 +1127,166 @@ public class ListKoala extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_Menu_thoatActionPerformed
 
+    private void fixTable(JTable table, int i, int j, JTable tableReturn, JTable tableReturn2) {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        //DefaultTableModel tableModelReturn = new DefaultTableModel(new Object[] {"Column 1", "Column 2", "Clomn 3",
+        //    "Column 4", "Column 5", "Column 6", "Column 7", "Column 8"}, 0);
+        DefaultTableModel tableModelReturn;
+        DefaultTableModel tableModelReturn2;
+        Object data = new Object(); 
+        Vector<String> rowsVector = new Vector<String>();
+        
+        //tableReturn = new JTable();
+        //tableReturn.setModel(tableModelReturn);
+        
+        tableModelReturn = (DefaultTableModel) tableReturn.getModel();
+        
+       // for(int rows = 0 ; rows < tableModel.getRowCount() ; rows++) {
+         //   rowsVector.clear();
+        int rows = 0;
+        while(rows < tableModel.getRowCount()) {
+            rowsVector = new Vector<String>();
+            for(int col = i ; col < j ; col++) {
+                data = (Object) tableModel.getValueAt(rows, col);
+                rowsVector.add(data.toString());
+            }
+            rows++;
+            tableModelReturn.addRow(rowsVector);
+        }
+        
+        tableModelReturn2 = (DefaultTableModel) tableReturn2.getModel();
+        rows = 0;
+        while(rows < tableModel.getRowCount()) {
+            rowsVector = new Vector<String>();
+            data = (Object) tableModel.getValueAt(rows, 0);
+            rowsVector.add(data.toString());
+            for(int col = j ; col < tableModel.getColumnCount() ; col++) {
+                data = (Object) tableModel.getValueAt(rows, col);
+                rowsVector.add(data.toString());
+            }
+            rowsVector.add("");
+            rowsVector.add("");
+            //rowsVector.add("");
+            
+            rows++;
+            tableModelReturn2.addRow(rowsVector);
+        }
+        //}
+//        rows = 0;
+//        while(rows < tableModel.getRowCount()) {
+//            rowsVector = new Vector<String>();
+//            for(int col = j ; col < tableModel.getColumnCount() ; col++) {
+//                data = (Object) tableModel.getValueAt(rows, col);
+//                rowsVector.add(data.toString());
+//            }
+//            rows++;
+//            tableModelReturn.addRow(rowsVector);
+//        }
+        
+        /*
+        for(int rows = 0 ; rows < tableModel.getRowCount() ; rows++) {
+            rowsVector.clear();
+            for(int col = i ; col < j ; col++) {
+                data = (Object) tableModel.getValueAt(rows, col);
+                System.out.println(data.toString());
+                rowsVector.add(data.toString());
+                //model.addRow(rowsVector);
+            }
+            tableModelReturn.addRow(rowsVector);
+            System.out.print(rowsVector.elementAt(0) + "    ");
+        }
+        */
+        
+        
+        for(int row = 0 ; row < tableReturn.getRowCount() ; row++) {
+            for(int col = 0 ; col < tableReturn.getColumnCount() ; col++) {
+                System.out.print(tableReturn.getModel().getValueAt(row, col) + " ");     
+            }
+            System.out.println();
+        }
+        //tableModelReturn.addRow(rowsVector);
+        //return tableReturn;
+    }
+    
     private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
+//        //JTextField headderFiled = new JTextField("Danh sach hoc sinh");
+//        int selectedInDex = Panel_GDChinh.getSelectedIndex();
+//        String label = Panel_GDChinh.getTitleAt(selectedInDex);
+//        MessageFormat headderField = new MessageFormat(label);
+//        MessageFormat footerField = null;
+//        try {
+//            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null);
+//            if (complete) {
+//                JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//        } catch (PrinterException ex) {
+//            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
         //JTextField headderFiled = new JTextField("Danh sach hoc sinh");
         int selectedInDex = Panel_GDChinh.getSelectedIndex();
         String label = Panel_GDChinh.getTitleAt(selectedInDex);
         MessageFormat headderField = new MessageFormat(label);
         MessageFormat footerField = null;
-        try {
-            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null);
+        JTable tableReturn = null;
+        TableFix tableFix = new TableFix();
+        //boolean multipleTable = false;
+        
+        if(table.getColumnCount() > 8) {
+            int i = 0;
+            int j = 8;
+            fixTable(table, i, j, tableFix.table, tableFix.table2);
+            try {
+            PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
+            printRequest.add(MediaSizeName.ISO_A4);
+            printRequest.add(OrientationRequested.LANDSCAPE);
+            boolean complete = tableFix.table2.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null) && 
+                    tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null);
             if (complete) {
                 JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (PrinterException ex) {
-            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
+                Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            tableFix.table = table;
+            try {
+                PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
+            printRequest.add(MediaSizeName.ISO_A4);
+            printRequest.add(OrientationRequested.LANDSCAPE);
+            boolean complete =  
+                    tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null);
+            if (complete) {
+                JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+            }
+            } catch (PrinterException ex) {
+                Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        System.out.println("Print table after fix");
+        for(int i = 0 ; i < tableFix.table.getRowCount() ; i++) {
+           for(int j = 0 ; j < tableFix.table.getColumnCount() ; j++) {
+                System.out.println(tableFix.table.getModel().getValueAt(i, j).toString());
+           }
+       }
+        
+//       try {
+//            boolean complete = tableFix.table2.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null) && 
+//                    tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null);
+//            if (complete) {
+//                JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//        } catch (PrinterException ex) {
+//            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jLabel28MouseClicked
 // xu ly su kien kick chuot vao tree
     private void JtreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtreeMouseClicked
