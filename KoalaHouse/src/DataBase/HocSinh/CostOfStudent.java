@@ -78,10 +78,12 @@ public class CostOfStudent {
         }
     }
     public void BangThemHocPhiChoHocSinh(JTable table,int students_id,int idFac){
+        int yearActive = 0;
+        yearActive = new Get().getYearActive(idFac);
         try {
             Object [] nameColumn = {"Mã","Tên","Kì học","Năm học","Giá","Đánh dấu" };
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" ");
+            rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" ");
             System.out.println(""+idFac);
             while(rs1.next()){
                 Object str[] = new Object[6];
