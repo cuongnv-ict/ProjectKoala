@@ -667,9 +667,15 @@ class AutoSuggestor {
            }
            else{//neu tu nhap vao chua dau cach
                 int x = type2.indexOf(type);
+                //neu tu dien khong chua tu nhap vao
                 if(x== -1)
-                fullymatches = false;
+                fullymatches = false; 
            }
+           //neu tu dien giong het tu nhap vao
+           String xauHienTai = textField.getText().toLowerCase();
+           if(type2.equals(xauHienTai))
+                    fullymatches = false;
+           //neu fullymatches == true thi se thuc hien add vao popup
             if (fullymatches){
                 addWordToSuggestions(word);
                 suggestionAdded = true;

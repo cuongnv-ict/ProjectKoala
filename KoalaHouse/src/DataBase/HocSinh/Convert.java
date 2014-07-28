@@ -14,7 +14,7 @@ public class Convert {
     public String chuyentien(String money){
         String Money = money;
         String result = null;
-        String[] a = Money.split("\\.");
+        String[] a = Money.split("\\,");
         int l = a.length;
         switch(a.length){
             case 1: result = DocSo(Money)+ " đồng";break;
