@@ -41,6 +41,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +62,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -68,12 +73,17 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.JViewport;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
@@ -366,6 +376,8 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         hs_thang1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Namhoc = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -473,7 +485,7 @@ public class ListKoala extends javax.swing.JFrame {
             Panel_trungtamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_trungtamLayout.createSequentialGroup()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 100, Short.MAX_VALUE))
+                .addGap(0, 111, Short.MAX_VALUE))
         );
         Panel_trungtamLayout.setVerticalGroup(
             Panel_trungtamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,6 +630,16 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel8.setText("Nghỉ Phép");
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/dkhoche.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+
+        jLabel10.setText("Xuất ra Excel");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -689,7 +711,14 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel10)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -704,13 +733,16 @@ public class ListKoala extends javax.swing.JFrame {
                     .addComponent(jLabel27)
                     .addComponent(jLabel28)
                     .addComponent(jLabel48)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel49)
-                        .addComponent(hs_thang)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel6)
-                        .addComponent(hs_thang1)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel49)
+                            .addComponent(hs_thang)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)
+                            .addComponent(hs_thang1)))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -726,7 +758,9 @@ public class ListKoala extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addComponent(jLabel7))
                     .addComponent(jLabel31)
-                    .addComponent(jLabel8))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel10)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -833,7 +867,7 @@ public class ListKoala extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1368, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1642,6 +1676,117 @@ public class ListKoala extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private int nRow;
+    private int nCol;
+    private Object[][] tableData;
+    private Object[] columnName;
+    public void getTableData(JTable table) {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        nRow = tableModel.getRowCount();
+        nCol = tableModel.getColumnCount();
+        tableData = new Object[nRow][nCol];
+        columnName = new Object[nCol];
+        
+        // get column name
+        for(int i =0; i < nCol; i++) {
+            columnName[i] = tableModel.getColumnName(i);
+        }
+        
+        for(int i = 0; i < nRow; i++) {
+            for(int j = 0; j < nCol; j++) {
+                tableData[i][j] = tableModel.getValueAt(i, j);
+            }
+        }
+    }
+    
+    public void excelUsingPOI() {
+        HSSFWorkbook workBook = new HSSFWorkbook();
+        HSSFSheet sheet = workBook.createSheet("SampleSheet");
+        getTableData(table);
+        
+        // lay ten cua bang
+        int selectedIndex = Panel_GDChinh.getSelectedIndex();
+        String label = Panel_GDChinh.getTitleAt(selectedIndex);
+        
+        // ghi ten bang vao excel
+        Row tenBang = sheet.createRow(0);
+        Cell hangBang = tenBang.createCell(2);
+        hangBang.setCellValue(label);
+        
+        int rowNum = 2;
+        // ghi ten cot
+        Row rows = sheet.createRow(rowNum++);
+        int cellNums = 0;
+        for(int i = 0; i < nCol; i++) {
+            //int cellNums = 0;
+            Cell cell = rows.createCell(cellNums++);
+            Object name = columnName[i];
+            System.out.println("Ten Cot  " + name.toString());
+            cell.setCellValue(name.toString());
+//            if(name instanceof Date) {
+//                    cell.setCellValue((Date)name);
+//                } else if(name instanceof Boolean) {
+//                    cell.setCellValue((Boolean)name);
+//                } else if(name instanceof String) {
+//                    cell.setCellValue((String)name);
+//                } else if(name instanceof Double) {
+//                    cell.setCellValue((Double) name);
+//                } else {
+//                    System.out.println("Không ghi được file");
+//                }
+        }
+        // ghi du lieu
+        //rowNum = 1;
+        for(int i = 0; i < nRow; i++) {
+            Row row = sheet.createRow(rowNum++);
+            int cellNum = 0;
+            for(int j = 0; j < nCol; j++) {
+                Cell cell = row.createCell(cellNum++);
+                Object data = tableData[i][j];
+                cell.setCellValue(data.toString());
+//                if(data instanceof Date) {
+//                    cell.setCellValue((Date)data);
+//                } else if(data instanceof Boolean) {
+//                    cell.setCellValue((Boolean)data);
+//                } else if(data instanceof String) {
+//                    cell.setCellValue((String)data);
+//                } else if(data instanceof Double) {
+//                    cell.setCellValue((Double) data);
+//                } else {
+//                    System.out.println("Không ghi được file");
+//                }
+            } 
+        }
+        
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Chọn thư mục lưu file");
+            //fileChooser.setFileFilter(new FileNameExtensionFilter(".xls"));
+            FileNameExtensionFilter excelType = new FileNameExtensionFilter("Excel Spreadshet (.xls)", "xls");
+            fileChooser.addChoosableFileFilter(excelType);
+            fileChooser.setFileFilter(excelType);
+            
+            File fileToSave = null;
+            int userSelection = fileChooser.showSaveDialog(this);
+            if(userSelection == JFileChooser.APPROVE_OPTION) {
+                fileToSave = fileChooser.getSelectedFile();
+                System.out.println(fileToSave.getAbsolutePath());
+            }
+            FileOutputStream out = new FileOutputStream(fileToSave + ".xls");
+            workBook.write(out);
+            out.close();
+            System.out.println("Ghi file thành công");
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        excelUsingPOI();
+    }//GEN-LAST:event_jLabel9MouseClicked
+
 
     public void connectDataBase() {
         connectData = new ConnectData();
@@ -1668,6 +1813,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel hs_thang;
     private javax.swing.JLabel hs_thang1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -1692,6 +1838,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
