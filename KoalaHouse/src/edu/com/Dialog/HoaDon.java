@@ -43,6 +43,7 @@ import javax.print.attribute.standard.Media;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.print.attribute.standard.MediaSize;
 import javax.print.attribute.standard.MediaSizeName;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -149,28 +150,22 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         try{
         for(int i=0;i<model.getRowCount();i++){
             if(hienChietKhau.isSelected()){
-                String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
                 long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
                 int ck = 0;
                 if(model.getValueAt(i, 4).toString().length()>0){
                     ck = Integer.parseInt(model.getValueAt(i, 4).toString());
                 }
                 long ti = (t*(100-ck))/100;
-                if(tenPhi.indexOf("hoàn")== -1)
-                    Total += ti;
-                else
-                    Total -= ti;
+                Total += ti;
             }
             else{
             if(model.getValueAt(i, 3).toString().length()>0){
-                String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
-                if(tenPhi.indexOf("hoàn")== -1)
                     Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
-                else
-                    Total -= Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
             }
             }
         }
+        int phidatcoc = new RecieptManagerment().PhiDatCoc(idHocSinh);
+        Total = Total + 2*phidatcoc;
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
         daThu.setText(XuLy.setMoney(String.valueOf(Total)));
         int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
@@ -738,16 +733,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-        int soTienLuu = 0;
-        if(checkDaThu.isSelected())
-            soTienLuu = Integer.parseInt(XuLy.getMoney(daThu.getText()));
-        else
-            soTienLuu = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
-        if((soTienLuu > 0)&& nguoiThu.getText().length()>0 && nguoiNop.getText().length() >0)
+        int a = Integer.parseInt(XuLy.getMoney(daThu.getText()));
+        if((a > 0)&& nguoiThu.getText().length()>0 && nguoiNop.getText().length() >0)
         {
             //tinh no
         int can = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
-        int dong = soTienLuu;
+        int dong = Integer.parseInt(XuLy.getMoney(daThu.getText()));
         int debt = can - dong;
         if(debt<0){
             JOptionPane.showMessageDialog(rootPane, "Số Tiền Đóng Đã Nhiều Hơn Số Tiền Cần Thu");
@@ -755,13 +746,20 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         //print
         PrinterJob pj = PrinterJob.getPrinterJob();
+        
+        //PageFormat pf = pj.defaultPage();
+        //pf.setOrientation(PageFormat.LANDSCAPE);
+        //pf.setPaper(Pa);
         //PageFormat pf = pj.pageDialog(pj.defaultPage());
         
         pj.setJobName("Print Details");
         //jButton1.setVisible(false);
         pj.setPrintable(this);
         PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
-        printRequest.add(MediaSizeName.ISO_A5);
+        printRequest.add(MediaSizeName.ISO_A4);
+        printRequest.add(OrientationRequested.LANDSCAPE);
+        //printRequest.add(M)
+        
         printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
         
         boolean toPrint = pj.printDialog(printRequest);
@@ -788,11 +786,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         idFac = String.valueOf(idTrungTam);
         String nguoidong = nguoiNop.getText();
         String nguoithu = nguoiThu.getText();
-        String sotien = XuLy.getMoney(String.valueOf(soTienLuu));
+        String sotien = XuLy.getMoney(daThu.getText());
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String phantram = "0";
-        new RecieptManagerment().UpdateXeBus(idStudent);
         new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
         dispose();
         }
@@ -804,7 +801,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         else{
            JOptionPane.showMessageDialog(rootPane, "Hãy Nhập Lại Số Tiền Đã Thu"); 
         }
-        }catch(java.lang.NumberFormatException e){
+        }
+        catch(java.lang.NumberFormatException e){
             JOptionPane.showMessageDialog(rootPane, "Nhập Sai Số Tiền");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -841,13 +839,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             for(int j=0;j<coldata.length;j++)
                 coldata[j] = 0;
             model.addColumn("Chiết Khấu(%)",coldata);
-            Total();
         }
         else{
           TableColumn tcol = jTable1.getColumnModel().getColumn(4);
           jTable1.getColumnModel().removeColumn(tcol);
           model.setColumnCount(4);
-          Total();
         }
     }//GEN-LAST:event_hienChietKhauActionPerformed
 
@@ -960,6 +956,7 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         
         Font font = new Font("Serif", Font.PLAIN, 12);
         Graphics2D g2d = (Graphics2D) grphcs;
+        //pf.setOrientation(PageFormat.LANDSCAPE);
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         grphcs.setFont(font);
         
@@ -1043,6 +1040,91 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         
         coorOfNguoiNop = 81 - lengthOfNguoiNop;
         coorOfNguoiThu = 327 - lengOfNguoiThu;
+        
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
+        
+        // print page 2.Cong them 400
+        grphcs.drawString(lbTitle, 550, 30);
+        // ve image
+        grphcs.drawImage(imageOfLabel, 410, 20, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
+        
+        grphcs.drawString(lbDiaChi, 510, 50);
+        grphcs.drawString(lbDienThoai, 510, 70);
+        grphcs.drawString(tfDiaChi, 580, 50);
+        grphcs.drawString(tfDienThoai, 580, 70);
+        font = new Font("Serif", Font.BOLD, 14);
+        grphcs.setFont(font);
+        grphcs.drawString(lbHoaDon, 550, 110);
+        font = new Font("Serif", Font.PLAIN, 11);
+        grphcs.setFont(font);
+        
+        grphcs.drawString(lbNgay, 420, 140);
+        grphcs.drawString(cbNgay, 450, 140);
+        grphcs.drawString(lbThang, 465, 140);
+        grphcs.drawString(cbThang, 500, 140);
+        grphcs.drawString(lbNam, 505, 140);
+        grphcs.drawString(cbNam, 535, 140);
+        grphcs.drawString(lbSo, 690, 140);
+        grphcs.drawString(tfSo, 705, 140);
+        grphcs.drawString(lbHoTen, 420, 160);
+        grphcs.drawString(tfHoTen, 475, 160);
+        grphcs.drawString(lbMa, 580, 160);
+        grphcs.drawString(tfMa, 600, 160);
+        grphcs.drawString(lbCoso, 690, 160);
+        grphcs.drawString(tfCoso, 725, 160);
+        grphcs.drawString(lbNguoiThanhToan, 420, 180);
+        grphcs.drawString(tfNguoiThanhToan, 475, 180);
+        grphcs.drawString(lbLop, 580, 180);
+        grphcs.drawString(tfLop, 605, 180);
+        grphcs.drawString(lbHinhThucThanhToan, 690, 180);
+        grphcs.drawString(tfHinhThucThanhToan, 765, 180);
+        
+        //String tableDataToString = "";
+        grphcs.drawString("Tên Phí ", 430, 210);
+        grphcs.drawString("Kỳ học ", 535, 210);
+        grphcs.drawString("Năm học ", 635, 210);
+        grphcs.drawString("Giá ", 735, 210);
+        
+        for(int i = 0 ; i < nRow ; i++) {
+            for(int j = 0 ; j < nCol ; j++) {
+                if(tableData[i][j] == null) {
+                    tableDataToString = "     ";
+                } else {
+                    tableDataToString = (String) tableData[i][j];
+                }
+                if(j == 0) {
+                    grphcs.drawString(tableDataToString, 430, (210 + (i + 1) * 20));
+                } else if(j == 1) {
+                    grphcs.drawString(tableDataToString, 535, (210 + (i + 1) * 20));
+                } else if(j == 2) {
+                    grphcs.drawString(tableDataToString, 635, (210 + (i + 1) * 20));
+                } else if(j == 3) {
+                    grphcs.drawString(tableDataToString, 735, (210 + (i + 1) * 20));
+                }
+            }
+        }
+        
+        grphcs.drawString(lbTongTien, 430, 500);
+        grphcs.drawString(tfTongTien, 490, 500);
+        grphcs.drawString(lbDathu, 690, 500);
+        grphcs.drawString(tfDaThu, 735, 500);
+        grphcs.drawString(lbStbc, 430, 520);
+        
+        grphcs.drawString(lbNguoiNop, 450, 550);
+        grphcs.drawString(lbNguoiThu, 680, 550);
+        //grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
+        //grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
+        
+        //FontMetrics fontMetrics = grphcs.getFontMetrics(font);
+        //int lengthOfNguoiNop = fontMetrics.stringWidth(tfNguoiNop);
+        //int lengOfNguoiThu = fontMetrics.stringWidth(tfNguoiThu);
+        
+        //lengthOfNguoiNop = lengthOfNguoiNop / 2;
+        //lengOfNguoiThu = lengOfNguoiThu / 2;
+        
+        coorOfNguoiNop = 481 - lengthOfNguoiNop;
+        coorOfNguoiThu = 727 - lengOfNguoiThu;
         
         grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
         grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);

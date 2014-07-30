@@ -206,4 +206,13 @@ public class RecieptManagerment {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void ResetReciept(){
+        String query = "DELETE FROM `projectkoala`.`receipts`";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

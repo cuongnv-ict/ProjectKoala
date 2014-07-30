@@ -172,6 +172,18 @@ public class Get{
         }
         return number;
     }
+     public int getYearActive(int idFac){
+         int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT min(Year) FROM projectkoala.semesters where Faculties_Id = "+idFac+" and IsActivity= 1");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+     }
      public int GetIsDatCoc(int idStudent,int idFac){
         int number = 0;
         try {
