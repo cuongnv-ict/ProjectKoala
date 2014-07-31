@@ -62,6 +62,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -123,7 +124,8 @@ public class ListKoala extends javax.swing.JFrame {
         Panel_GDChinh.add("Trung Tâm", Panel_trungtam);
         new CloseTabButton(Panel_GDChinh, 0);
         frame = this;
-
+        jLabel28.setVisible(false);
+        jLabel32.setVisible(false);
     }// khoi tao
 
     public void taoTree()// tao ra tree dung co so vao
@@ -464,7 +466,7 @@ public class ListKoala extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
         );
 
         jSplitPane2.setLeftComponent(jPanel3);
@@ -670,54 +672,53 @@ public class ListKoala extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel32))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel48))
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel48)
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel50)))
-                .addGap(29, 29, 29)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel50)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel49)
-                    .addComponent(jLabel51))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addGap(46, 46, 46)
                         .addComponent(jLabel1)
-                        .addGap(56, 56, 56)
+                        .addGap(71, 71, 71)
                         .addComponent(hs_thang)
-                        .addGap(73, 73, 73)
+                        .addGap(71, 71, 71)
                         .addComponent(jLabel3))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel2)
-                        .addGap(21, 21, 21)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
                         .addComponent(jLabel5)))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(62, 62, 62)
                         .addComponent(jLabel6)
-                        .addGap(74, 74, 74)
+                        .addGap(71, 71, 71)
                         .addComponent(hs_thang1))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel51)
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel32))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabel49)
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel28)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -725,42 +726,50 @@ public class ListKoala extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel48)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel26)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel48)
+                                .addComponent(jLabel27)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel1)
+                                .addComponent(hs_thang)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel6)
+                                .addComponent(hs_thang1)
+                                .addComponent(jLabel49)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel23)
+                                        .addComponent(jLabel25)
+                                        .addComponent(jLabel29)
+                                        .addComponent(jLabel30))
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel31)
+                                        .addComponent(jLabel50)
+                                        .addComponent(jLabel10)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel8))))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel51))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel49)
-                            .addComponent(hs_thang)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)
-                            .addComponent(hs_thang1)))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23)
-                        .addComponent(jLabel25)
-                        .addComponent(jLabel29)
-                        .addComponent(jLabel30)
-                        .addComponent(jLabel32)
-                        .addComponent(jLabel50)
-                        .addComponent(jLabel51)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel7))
-                    .addComponent(jLabel31)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel32)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -875,7 +884,7 @@ public class ListKoala extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
         );
 
         pack();
@@ -953,6 +962,25 @@ public class ListKoala extends javax.swing.JFrame {
                                 scrollPane = (JScrollPane) item;
                                 JViewport viewPort = scrollPane.getViewport();
                                 table = (JTable) viewPort.getView();
+                            } else if(item instanceof JPanel) {
+                                //System.out.println("Phai");
+                                itemPanel = (JPanel) item;
+                                itemComponents = itemPanel.getComponents();
+                                for(int k = 0; k < itemComponents.length; k++) {
+                                    item = itemComponents[k];
+                                    System.out.println(item.toString());
+                                    if(item instanceof JScrollPane) {
+                                        scrollPane = (JScrollPane) item;
+                                        JViewport viewPort = scrollPane.getViewport();
+                                        table = (JTable) viewPort.getView();
+                                        System.out.println("Phai");
+                                    } else {
+                                        //S/ystem.out.println("khong phai");
+                                        //System.out.println(item.toString());
+                                    }
+                                }
+                            } else {
+                                //System.out.println("khong lay dc bang");
                             }
                         }
                     } else if (item instanceof JScrollPane) {
@@ -1691,12 +1719,24 @@ public class ListKoala extends javax.swing.JFrame {
         for(int i =0; i < nCol; i++) {
             columnName[i] = tableModel.getColumnName(i);
         }
-        
-        for(int i = 0; i < nRow; i++) {
-            for(int j = 0; j < nCol; j++) {
-                tableData[i][j] = tableModel.getValueAt(i, j);
+        int selectedIndex = Panel_GDChinh.getSelectedIndex();
+        String label = Panel_GDChinh.getTitleAt(selectedIndex);
+        if(label.equals("Danh Sách Lớp") || label.equals("Các Loại Phí") || label.equals("DS XeBus"))
+        {
+            for(int i = 0; i < nRow; i++) {
+                for(int j = 0; j < nCol - 1; j++) {
+                    tableData[i][j] = tableModel.getValueAt(i, j);
+                }
             }
-        }
+            nCol = nCol - 1;
+        } else {
+           for(int i = 0; i < nRow; i++) {
+                for(int j = 0; j < nCol; j++) {
+                    tableData[i][j] = tableModel.getValueAt(i, j);
+                }
+            }    
+       }
+        
     }
     
     public void excelUsingPOI() {
@@ -1707,7 +1747,30 @@ public class ListKoala extends javax.swing.JFrame {
         // lay ten cua bang
         int selectedIndex = Panel_GDChinh.getSelectedIndex();
         String label = Panel_GDChinh.getTitleAt(selectedIndex);
-        
+        String extend = "";
+        if(label.equals("Danh Sách HS")) {
+            JPanel panel, panelItem;
+            Component component, item;
+            Component[] components;
+            JComboBox comBoBox;
+            
+            int selectIndex = Panel_GDChinh.getSelectedIndex();
+            if(selectIndex >= 0) {
+                component = Panel_GDChinh.getComponentAt(selectIndex);
+                if(component instanceof JPanel) {
+                    panel = (JPanel) component;
+                    components = panel.getComponents();
+                    for(int i = 0; i < components.length; i++) {
+                        item = components[i];
+                        if(item instanceof JComboBox) {
+                            comBoBox = (JComboBox) item;
+                            extend = comBoBox.getSelectedItem().toString();
+                            label = label + ": " + extend;
+                        }
+                    }
+                }
+            }
+        }
         // ghi ten bang vao excel
         Row tenBang = sheet.createRow(0);
         Cell hangBang = tenBang.createCell(2);
