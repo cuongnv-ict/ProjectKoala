@@ -69,6 +69,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="nam" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="textfield_timkiem" min="-2" pref="179" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane6" pref="1110" max="32767" attributes="0"/>
@@ -79,10 +81,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="textfield_timkiem" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="sua" min="-2" max="-2" attributes="0"/>
@@ -91,6 +89,11 @@
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="textfield_timkiem" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="nam" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane6" pref="500" max="32767" attributes="0"/>
@@ -245,6 +248,7 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="textfield_timkiemMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_timkiemActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textfield_timkiemKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -255,6 +259,35 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="nam">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="18">
+                    <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
+                    <StringItem index="1" value="2013"/>
+                    <StringItem index="2" value="2014"/>
+                    <StringItem index="3" value="2015"/>
+                    <StringItem index="4" value="2016"/>
+                    <StringItem index="5" value="2017"/>
+                    <StringItem index="6" value="2018"/>
+                    <StringItem index="7" value="2019"/>
+                    <StringItem index="8" value="2020"/>
+                    <StringItem index="9" value="2021"/>
+                    <StringItem index="10" value="2022"/>
+                    <StringItem index="11" value="2023"/>
+                    <StringItem index="12" value="2024"/>
+                    <StringItem index="13" value="2025"/>
+                    <StringItem index="14" value="2026"/>
+                    <StringItem index="15" value="2027"/>
+                    <StringItem index="16" value="2028"/>
+                    <StringItem index="17" value="2029"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

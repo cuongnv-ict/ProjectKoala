@@ -62,7 +62,7 @@ public class DKHocHe extends javax.swing.JPanel {
    public void resize(JTable table)
    {
         table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
-        int minwidth=150;
+        int minwidth=80;
         for (int column = 0; column < table.getColumnCount(); column++)
         {
             TableColumn tableColumn = table.getColumnModel().getColumn(column);
@@ -112,21 +112,22 @@ public class DKHocHe extends javax.swing.JPanel {
         xemlich = new javax.swing.JLabel();
         textfield_timkiem = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        nam = new javax.swing.JComboBox();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Học Sinh", "Lớp", "Tuần Học", "Tổng Số Tuần", "Năm Học", "Đánh Dấu"
+                "STT", "Học Sinh", "Lớp", "Tuần Học", "Tổng Số Tuần", "Năm Học", "Trạng Thái", "Đánh Dấu"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -185,11 +186,23 @@ public class DKHocHe extends javax.swing.JPanel {
                 textfield_timkiemActionPerformed(evt);
             }
         });
+        textfield_timkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textfield_timkiemKeyReleased(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
+            }
+        });
+
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namActionPerformed(evt);
             }
         });
 
@@ -208,25 +221,25 @@ public class DKHocHe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
         );
         Panel_DSLopLayout.setVerticalGroup(
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(them)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(xoa)
-                                .addComponent(sua)
-                                .addComponent(xemlich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))))
+                    .addComponent(them)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(xoa)
+                        .addComponent(sua)
+                        .addComponent(xemlich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(nam, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textfield_timkiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
         );
@@ -316,7 +329,7 @@ public class DKHocHe extends javax.swing.JPanel {
             }
             if(!flags)
             {
-                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
                 if(click==JOptionPane.NO_OPTION){
                     return;
                 }
@@ -416,7 +429,6 @@ public class DKHocHe extends javax.swing.JPanel {
 
         if(isadmin)
         {
-            System.out.println("bawt dau tao dialog");
             ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true);
             dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
 
@@ -470,12 +482,67 @@ public class DKHocHe extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable4MouseClicked
 
+    private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
+        // TODO add your handling code here:
+        String year= nam.getSelectedItem().toString();
+        if(year.equals("Tất Cả"))
+        {
+            
+            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+        }
+        else
+        {
+            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
+        }
+        
+        id_hoche = new ArrayList<Integer>();
+        try{
+            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                XuLy.setID(id_hoche, jTable4, 0);
+                resize(jTable4);
+            }
+            else
+            {
+                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
+                resize(jTable4);
+            }
+        }
+        catch(Exception ex)
+        {
+            jTable4.setModel(modelgoc);
+            resize(jTable4);
+        }
+    }//GEN-LAST:event_namActionPerformed
+
+    private void textfield_timkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_timkiemKeyReleased
+        // TODO add your handling code here:
+         new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4,textfield_timkiem.getText());
+        id_hoche = new ArrayList<Integer>();
+        try{
+            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                XuLy.setID(id_hoche, jTable4, 0);
+                resize(jTable4);
+            }
+            else
+            {
+                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
+                resize(jTable4);
+            }
+        }
+        catch(Exception ex)
+        {
+            jTable4.setModel(modelgoc);
+            resize(jTable4);
+        }
+    }//GEN-LAST:event_textfield_timkiemKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_DSLop;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable4;
+    private javax.swing.JComboBox nam;
     private javax.swing.JLabel sua;
     private javax.swing.JTextField textfield_timkiem;
     private javax.swing.JLabel them;

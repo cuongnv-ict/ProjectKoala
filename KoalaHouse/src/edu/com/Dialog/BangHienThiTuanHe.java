@@ -8,8 +8,11 @@ package edu.com.Dialog;
 
 import edu.com.XuLy;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +23,7 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
     private boolean isadmin=true;
     ArrayList<Integer> id_hoche;
     DefaultTableModel model,modelgoc;
+    String yearnow;
     
     /**
      * Creates new form BangHienThiTuanHe
@@ -27,8 +31,14 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
     public BangHienThiTuanHe(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Calendar calendar = Calendar.getInstance();
+        calendar.getTime();
+        SimpleDateFormat form=new SimpleDateFormat("yyyy");
+        String yearnow=form.format(calendar.getTime());
+        this.yearnow=yearnow;
+        nam.setSelectedItem(yearnow);
         //modelgoc = (DefaultTableModel) jTable1.getModel();
-        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1);
+        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1,yearnow);
        
     }
 
@@ -44,6 +54,8 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
         sua = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        nam = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thời Gian Các Tuần Hè");
@@ -69,19 +81,45 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/them.jpg"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sua)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(sua)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(sua)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(nam))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -98,12 +136,40 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
            a[i][0]=jTable1.getValueAt(i, 1).toString();
            a[i][1]= jTable1.getValueAt(i, 2).toString();
        }
+       String b[];
+       b= jTable1.getValueAt(0, 1).toString().split("-");
+       if(b[2].equals(this.yearnow))
+       {
        setTuanHe tuanhe=  new setTuanHe(null, true,a);
+       tuanhe.setUpdateOfInsert(false);
        tuanhe.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
         
        tuanhe.setVisible(true);
-       new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1);
+       new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1,yearnow);
+       }
+       else
+       {
+                   JOptionPane.showMessageDialog(null,"Bạn chỉ có thể đăng ký kỳ học năm hiện tại! ",null,JOptionPane.INFORMATION_MESSAGE);
+
+       }
     }//GEN-LAST:event_suaMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+           model = (DefaultTableModel) jTable1.getModel();
+      // Vector v= new  Vector();
+       setTuanHe tuanhe=  new setTuanHe(null, true);
+       tuanhe.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+        tuanhe.setUpdateOfInsert(true);
+       tuanhe.setVisible(true);
+       new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1,yearnow);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
+        // TODO add your handling code here:
+        String year = nam.getSelectedItem().toString();
+        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1, year);
+    }//GEN-LAST:event_namActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,8 +214,10 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox nam;
     private javax.swing.JLabel sua;
     // End of variables declaration//GEN-END:variables
 }

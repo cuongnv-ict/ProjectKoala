@@ -17,9 +17,11 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -66,7 +68,7 @@ public class XeBus extends javax.swing.JPanel {
    public void resize(JTable table)
    {
         table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
-        int minwidth=80;
+        int minwidth=85;
         for (int column = 0; column < table.getColumnCount(); column++)
         {
             TableColumn tableColumn = table.getColumnModel().getColumn(column);
@@ -112,6 +114,7 @@ public class XeBus extends javax.swing.JPanel {
         xoa = new javax.swing.JLabel();
         textfield_timkiem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        nam = new javax.swing.JComboBox();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -194,11 +197,23 @@ public class XeBus extends javax.swing.JPanel {
                 textfield_timkiemActionPerformed(evt);
             }
         });
+        textfield_timkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textfield_timkiemKeyReleased(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
+            }
+        });
+
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029" }));
+        nam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namActionPerformed(evt);
             }
         });
 
@@ -215,6 +230,8 @@ public class XeBus extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
         );
@@ -223,15 +240,16 @@ public class XeBus extends javax.swing.JPanel {
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
                 .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sua)
                             .addComponent(them)
                             .addComponent(xoa)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1)))
+                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
         );
@@ -490,6 +508,57 @@ public class XeBus extends javax.swing.JPanel {
         textfield_timkiem.setText("");
     }//GEN-LAST:event_textfield_timkiemMouseClicked
 
+    private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
+        // TODO add your handling code here:
+       try{
+           if(nam.getSelectedItem().toString().equals("Tất Cả"))
+           {}
+           else
+           {
+              
+               
+            new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString());
+           }
+            id_xebus = new ArrayList<Integer>();
+        
+        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_xebus, jTable4, 0);
+            resize(jTable4);
+        
+        }
+        
+                        else
+                        {
+                            resize(jTable4);
+                        }
+        }
+        
+        catch(Exception ex)
+        {}
+    }//GEN-LAST:event_namActionPerformed
+
+    private void textfield_timkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_timkiemKeyReleased
+        // TODO add your handling code here:
+        new DataBase.SQLXeBus().BandDanhSachXeBus_timkiem(jTable4,textfield_timkiem.getText());
+        id_xebus = new ArrayList<Integer>();
+        try{
+        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_xebus, jTable4, 0);
+            resize(jTable4);
+        
+        }
+        
+                        else
+                        {
+                            resize(jTable4);
+                        }
+        }
+        
+        catch(Exception ex)
+        {}
+        
+    }//GEN-LAST:event_textfield_timkiemKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_DSLop;
@@ -497,6 +566,7 @@ public class XeBus extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable4;
+    private javax.swing.JComboBox nam;
     private javax.swing.JLabel sua;
     private javax.swing.JTextField textfield_timkiem;
     private javax.swing.JLabel them;

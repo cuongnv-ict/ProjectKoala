@@ -8,7 +8,9 @@ package edu.com.Dialog;
 
 import DataBase.HocSinh.Get;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -289,8 +291,11 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                     {
                         DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                         idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-
-                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan);
+                        Calendar calendar= Calendar.getInstance();
+                        calendar.getTime();
+                        SimpleDateFormat form= new SimpleDateFormat("yyyy");
+                        String year= form.format(calendar.getTime());
+                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
 
                         dispose();
                     }
@@ -366,8 +371,11 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                     {
                         DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                         idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-
-                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan);
+                        Calendar calendar= Calendar.getInstance();
+                        calendar.getTime();
+                        SimpleDateFormat form= new SimpleDateFormat("yyyy");
+                        String year= form.format(calendar.getTime());
+                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
 
                         dispose();
                     }
