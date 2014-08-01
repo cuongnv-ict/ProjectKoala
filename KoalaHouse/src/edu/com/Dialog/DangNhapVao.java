@@ -5,10 +5,24 @@
 package edu.com.Dialog;
 
 import DataBase.ConnectData;
+import static DataBase.ConnectData.user;
 import edu.com.ListKoala;
 import edu.com.ThongTin;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import sun.security.action.OpenFileInputStreamAction;
 
 /**
  *
@@ -17,14 +31,38 @@ import javax.swing.UIManager;
 public class DangNhapVao extends javax.swing.JDialog {
 
     static DangNhapVao dialog;
-
+    String FILENAME = "Login.txt";
+    public boolean canLogin = false;
+    public boolean check = true;
     /**
      * Creates new form DangNhapVao
      */
-    public DangNhapVao(java.awt.Frame parent, boolean modal) {
+    public DangNhapVao(java.awt.Frame parent, boolean modal,boolean check1) {
         super(parent, modal);
         initComponents();
-
+        check = check1;
+        if(check)
+            readFile();
+        System.out.println("check: "+check+" can:"+canLogin);
+        if(canLogin && check){
+            String userName = getTfUserName();
+            String password = getPfPassword();
+            ConnectData connect = new ConnectData();
+            connect.setUser(userName);
+            connect.setPassword(password);
+            ListKoala center = new ListKoala();
+            center.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            center.setVisible(true);
+            DataBase.DataTable.user = Textfield_userName.getText();
+            ThongTin.isadmin = new DataBase.SQLJTree().CheckAdmin(Textfield_userName.getText().toString());
+        }
+        addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        writeFileClose();
+                        System.exit(0);
+                    }
+                });
     }
 
     /**
@@ -135,6 +173,7 @@ public class DangNhapVao extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+         writeFileClose();
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -199,7 +238,7 @@ public class DangNhapVao extends javax.swing.JDialog {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception e) {
                 }
-                dialog = new DangNhapVao(new javax.swing.JFrame(), true);
+                dialog = new DangNhapVao(new javax.swing.JFrame(), true,true);
                 dialog.setLocation(420, 130);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -237,5 +276,46 @@ public class DangNhapVao extends javax.swing.JDialog {
 
     public void setPfPassword(String str) {
         this.Textfield_password.setText(str);
+    }
+    public void close(){
+        this.setVisible(false);
+        this.dispose();
+    }
+    private void readFile(){
+        try{
+            FileReader fr = new FileReader(FILENAME);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            line = br.readLine();
+            if(line.length()>1){
+                String[] x = line.split(" ");
+                String user = x[0];
+                String pass = x[1];
+                Textfield_userName.setText(user);
+                Textfield_password.setText(pass);
+                canLogin = true;
+            }
+            br.close();
+            fr.close();
+        }
+        catch(Exception e){
+        }
+    }
+    private void writeFileClose(){
+        try{
+            System.out.println("xoa mat khau pass");
+            File file = new File("Login.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter br = new BufferedWriter(fw);
+            String xau = "";
+            String xaucon = new String(xau);
+            br.write(xaucon);
+            br.close();
+            fw.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error to save file");
+        }
     }
 }

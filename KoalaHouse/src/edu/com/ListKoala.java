@@ -5,6 +5,7 @@
 package edu.com;
 
 import DataBase.ConnectData;
+import static DataBase.ConnectData.user;
 import DataBase.HocSinh.CompleteList;
 import DataBase.HocSinh.DebtList;
 import DataBase.HocSinh.RecieptManagerment;
@@ -41,9 +42,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -1190,12 +1193,18 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void Menu_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DangXuatActionPerformed
         // TODO add your handling code here:
-        DangNhapVao d = new DangNhapVao(this, rootPaneCheckingEnabled);
+        writeFile();
+        DangNhapVao d = new DangNhapVao(this, rootPaneCheckingEnabled,false);
         this.dispose();
         d.setLocation(420, 20);
         d.show();
-
-
+        d.check = false;
+        d.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
     }//GEN-LAST:event_Menu_DangXuatActionPerformed
 
     private void Menu_thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_thoatActionPerformed
@@ -1850,7 +1859,23 @@ public class ListKoala extends javax.swing.JFrame {
         excelUsingPOI();
     }//GEN-LAST:event_jLabel9MouseClicked
 
-
+    private void writeFile(){
+        try{
+            System.out.println("xoa mk lisstkoala");
+            File file = new File("Login.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter br = new BufferedWriter(fw);
+            String xau = "";
+            String xaucon = new String(xau);
+            br.write(xaucon);
+            br.close();
+            fw.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error to save file");
+        }
+    }
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();
