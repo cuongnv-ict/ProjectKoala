@@ -91,7 +91,8 @@ public class DKHocHe extends javax.swing.JPanel {
         }
         TableColumn tableColumn = table.getColumnModel().getColumn(4);
         tableColumn.setPreferredWidth(150);
-            
+        tableColumn = table.getColumnModel().getColumn(0);
+        tableColumn.setPreferredWidth(30);
    }
 
     /**
@@ -323,7 +324,7 @@ public class DKHocHe extends javax.swing.JPanel {
             model= (DefaultTableModel) jTable4.getModel();
             boolean flags = true;
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i,6) == true) {
+                if ((Boolean) model.getValueAt(i,7) == true) {
                     flags = false;
                 }
             }
@@ -336,7 +337,7 @@ public class DKHocHe extends javax.swing.JPanel {
 
                 boolean xoaorkhong;
                 DataBase.SQLkyhe data= new DataBase.SQLkyhe();
-                xoaorkhong=data.xoaDkHe(jTable4, 6,id_hoche);
+                xoaorkhong=data.xoaDkHe(jTable4, 7,id_hoche);
 
                 new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
                 id_hoche = new ArrayList<Integer>();
@@ -371,7 +372,7 @@ public class DKHocHe extends javax.swing.JPanel {
             int count =1, row=0;
             model=(DefaultTableModel) jTable4.getModel();
             for(int i = model.getRowCount()-1;i>=0;i--){
-                if((Boolean)model.getValueAt(i, 6)==true){
+                if((Boolean)model.getValueAt(i, 7)==true){
                     count--;
                     row = i;
                 }
@@ -383,7 +384,7 @@ public class DKHocHe extends javax.swing.JPanel {
                 else{
                     JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
                     for(int i = model.getRowCount()-1;i>=0;i--){
-                        model.setValueAt(false,i,6);
+                        model.setValueAt(false,i,7);
                     }
                 }
                 return;
@@ -484,7 +485,10 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
         // TODO add your handling code here:
-        String year= nam.getSelectedItem().toString();
+        
+        id_hoche = new ArrayList<Integer>();
+        try{
+            String year= nam.getSelectedItem().toString();
         if(year.equals("Tất Cả"))
         {
             
@@ -495,17 +499,6 @@ public class DKHocHe extends javax.swing.JPanel {
             new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
         }
         
-        id_hoche = new ArrayList<Integer>();
-        try{
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                XuLy.setID(id_hoche, jTable4, 0);
-                resize(jTable4);
-            }
-            else
-            {
-                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
-                resize(jTable4);
-            }
         }
         catch(Exception ex)
         {
@@ -516,18 +509,19 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void textfield_timkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_timkiemKeyReleased
         // TODO add your handling code here:
-         new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4,textfield_timkiem.getText());
-        id_hoche = new ArrayList<Integer>();
+         id_hoche = new ArrayList<Integer>();
         try{
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                XuLy.setID(id_hoche, jTable4, 0);
-                resize(jTable4);
+            if(nam.getSelectedItem().toString().equals("Tất Cả"))
+            {
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4, textfield_timkiem.getText()+"");
+        
             }
             else
             {
-                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
-                resize(jTable4);
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNamVaTen(jTable4,nam.getSelectedItem().toString() , textfield_timkiem.getText()+"");
             }
+            
+            resize(jTable4);
         }
         catch(Exception ex)
         {

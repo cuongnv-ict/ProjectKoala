@@ -94,6 +94,9 @@ public class XeBus extends javax.swing.JPanel {
             tableColumn.setPreferredWidth( preferredWidth );
             
         }
+        TableColumn tableColumn;
+        tableColumn = table.getColumnModel().getColumn(0);
+        tableColumn.setPreferredWidth(30);
    }
 
     /**
@@ -512,25 +515,15 @@ public class XeBus extends javax.swing.JPanel {
         // TODO add your handling code here:
        try{
            if(nam.getSelectedItem().toString().equals("Tất Cả"))
-           {}
+           {
+             new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+           }
            else
            {
-              
-               
-            new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString());
+            new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString());
            }
             id_xebus = new ArrayList<Integer>();
-        
-        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_xebus, jTable4, 0);
             resize(jTable4);
-        
-        }
-        
-                        else
-                        {
-                            resize(jTable4);
-                        }
         }
         
         catch(Exception ex)
@@ -539,22 +532,22 @@ public class XeBus extends javax.swing.JPanel {
 
     private void textfield_timkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_timkiemKeyReleased
         // TODO add your handling code here:
-        new DataBase.SQLXeBus().BandDanhSachXeBus_timkiem(jTable4,textfield_timkiem.getText());
-        id_xebus = new ArrayList<Integer>();
         try{
-        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_xebus, jTable4, 0);
+            if (nam.getSelectedItem().toString().equals("Tất Cả"))
+            {
+                new DataBase.SQLXeBus().BandDanhSachXeBus_timkiem(jTable4,textfield_timkiem.getText()+"");
+                
+            }
+            else        
+            {
+                
+                new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNamVaTen(jTable4, nam.getSelectedItem().toString(),textfield_timkiem.getText()+"");
+            }
+            
+            id_xebus = new ArrayList<Integer>();
             resize(jTable4);
-        
         }
-        
-                        else
-                        {
-                            resize(jTable4);
-                        }
-        }
-        
-        catch(Exception ex)
+         catch(Exception ex)
         {}
         
     }//GEN-LAST:event_textfield_timkiemKeyReleased
