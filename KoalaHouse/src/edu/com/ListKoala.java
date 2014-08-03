@@ -1056,7 +1056,7 @@ public class ListKoala extends javax.swing.JFrame {
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
         
-        fixTable(table, 0, 8, tableFix.table, tableFix.table2);
+//        fixTable(table, 0, 8, tableFix.table, tableFix.table2);
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
@@ -1175,7 +1175,7 @@ public class ListKoala extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_Menu_thoatActionPerformed
 
-    private void fixTable(JTable table, int i, int j, JTable tableReturn, JTable tableReturn2) {
+    private void fixTabmle(JTable table, int i, int j, JTable tableReturn, JTable tableReturn2) {
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         //DefaultTableModel tableModelReturn = new DefaultTableModel(new Object[] {"Column 1", "Column 2", "Clomn 3",
         //    "Column 4", "Column 5", "Column 6", "Column 7", "Column 8"}, 0);
