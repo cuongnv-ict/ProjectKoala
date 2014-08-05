@@ -4,6 +4,11 @@
  */
 package DataBase;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,6 +42,7 @@ public class ConnectData {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url + "?user=" + user + "&password=" + password); 
             Statement statement = conn.createStatement();
+            writeFile();
         } catch (ClassNotFoundException ex) {
             //Logger.getLogger(ConnectData.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Đăng nhập không thành công !!! \n Xem lại user name hoặc password", "ERROR !!!", 
@@ -50,5 +56,20 @@ public class ConnectData {
             }
         return conn;
     }
-    
+    private void writeFile(){
+        try{
+            File file = new File("Login.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter br = new BufferedWriter(fw);
+            String xau = user+" "+password;
+            String xaucon = new String(xau);
+            br.write(xaucon);
+            br.close();
+            fw.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error to save file");
+        }
+    }
 }

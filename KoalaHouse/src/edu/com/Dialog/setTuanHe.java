@@ -7,26 +7,57 @@
 package edu.com.Dialog;
 
 import DataBase.DataTable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Venus
  */
 public class setTuanHe extends javax.swing.JDialog {
-
+    private boolean updateOrInsert;
+    private String YearOld;
     /**
      * Creates new form setTuanHe
      */
     public setTuanHe(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Calendar calendar = Calendar.getInstance();
+        calendar.getTime();
+        SimpleDateFormat form=new SimpleDateFormat("yyyy");
+        String yearnow=form.format(calendar.getTime());
+        yearS1.setSelectedItem(yearnow);
+        yearS2.setSelectedItem(yearnow);
+        yearS3.setSelectedItem(yearnow);
+         yearS4.setSelectedItem(yearnow);
+         yearS5.setSelectedItem(yearnow);
+        yearS6.setSelectedItem(yearnow);
+        yearS7.setSelectedItem(yearnow);
+        yearS8.setSelectedItem(yearnow);
+        yearE1.setSelectedItem(yearnow);
+        yearE2.setSelectedItem(yearnow);
+        yearE3.setSelectedItem(yearnow);
+        yearE4.setSelectedItem(yearnow);
+        yearE5.setSelectedItem(yearnow);
+        yearE6.setSelectedItem(yearnow);
+        yearE7.setSelectedItem(yearnow);
+        yearE8.setSelectedItem(yearnow);
+        
     }
+    
     public setTuanHe(java.awt.Frame parent, boolean modal,String [][]a) {
         super(parent, modal);
         initComponents();
+        Calendar calendar = Calendar.getInstance();
+        calendar.getTime();
+        SimpleDateFormat form=new SimpleDateFormat("yyyy");
+        String yearnow=form.format(calendar.getTime());
         String [] ngaybd;
         String [] ngaykt;
         ngaybd=a[0][0].split("-");
@@ -34,6 +65,7 @@ public class setTuanHe extends javax.swing.JDialog {
         monthS1.setSelectedItem(ngaybd[1]);
         yearS1.setSelectedItem(ngaybd[2]);
         
+        this.YearOld= ngaybd[2];
         ngaybd=a[1][0].split("-");
         dateS2.setSelectedItem(ngaybd[0]);
         monthS2.setSelectedItem(ngaybd[1]);
@@ -78,7 +110,7 @@ public class setTuanHe extends javax.swing.JDialog {
         ngaykt=a[0][1].split("-");
         dateE1.setSelectedItem(ngaykt[0]);
         monthE1.setSelectedItem(ngaykt[1]);
-        yearE1.setSelectedItem(ngaykt[2]);
+        yearE1.setSelectedItem(ngaybd[2]);
         
         ngaykt=a[1][1].split("-");
         dateE2.setSelectedItem(ngaykt[0]);
@@ -115,6 +147,10 @@ public class setTuanHe extends javax.swing.JDialog {
         monthE8.setSelectedItem(ngaykt[1]);
         yearE8.setSelectedItem(ngaykt[2]);
     }
+    public void setUpdateOfInsert(boolean a)
+    {
+        this.updateOrInsert=a; //true = insert, false = update
+    }
     public boolean sosanhngaythang( String ngaybd, String ngaykt)
     {
         String []bd;
@@ -131,6 +167,34 @@ public class setTuanHe extends javax.swing.JDialog {
         else if(yearkt==yearbd&&monthkt>monthbd) return true;
         else if(yearkt==yearbd&&monthkt==monthbd&&datekt>datebd) return true;
         else return false;
+    }
+    public boolean sosanhnam()
+    {
+        String y1=yearS1.getSelectedItem().toString();
+        String y2=yearS2.getSelectedItem().toString();
+        String y3=yearS3.getSelectedItem().toString();
+        String y4=yearS4.getSelectedItem().toString();
+        String y5=yearS5.getSelectedItem().toString();
+        String y6=yearS6.getSelectedItem().toString();
+        String y7=yearS7.getSelectedItem().toString();
+        String y8=yearS8.getSelectedItem().toString();
+        String e1=yearE1.getSelectedItem().toString();
+        String e2=yearE2.getSelectedItem().toString();
+        String e3=yearE3.getSelectedItem().toString();
+        String e4=yearE4.getSelectedItem().toString();
+        String e5=yearE5.getSelectedItem().toString();
+        String e6=yearE6.getSelectedItem().toString();
+        String e7=yearE7.getSelectedItem().toString();
+        String e8=yearE8.getSelectedItem().toString();
+        
+        
+        if(y1.equals(y2)&&y1.equals(y3)&&y1.equals(y4)&&y1.equals(y5)&&y1.equals(y6)&&y1.equals(y7)&&y1.equals(y8)
+                &&y1.equals(e1)&&y1.equals(e2)&&y1.equals(e3)&&y1.equals(e4)&&y1.equals(e5)&&y1.equals(e6)&&y1.equals(e7)
+                &&y1.equals(e8)
+                )
+            return true;
+                
+        return false;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -970,7 +1034,7 @@ public class setTuanHe extends javax.swing.JDialog {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        try{
+        //try{
             String ngaybd1= yearS1.getSelectedItem().toString() + "-" + monthS1.getSelectedItem().toString() + "-" + dateS1.getSelectedItem().toString();
             String ngaybd2= yearS2.getSelectedItem().toString() + "-" + monthS2.getSelectedItem().toString() + "-" + dateS2.getSelectedItem().toString();
             String ngaybd3= yearS3.getSelectedItem().toString() + "-" + monthS3.getSelectedItem().toString() + "-" + dateS3.getSelectedItem().toString();
@@ -992,22 +1056,52 @@ public class setTuanHe extends javax.swing.JDialog {
                     &&sosanhngaythang(ngaybd4, ngaykt4)&&sosanhngaythang(ngaykt4, ngaybd5)&&sosanhngaythang(ngaybd5, ngaykt5)
                     &&sosanhngaythang(ngaykt5, ngaybd6)
                     &&sosanhngaythang(ngaybd6, ngaykt6)&&sosanhngaythang(ngaykt6, ngaybd7)
-                    &&sosanhngaythang(ngaybd7, ngaykt7)&&sosanhngaythang(ngaykt7, ngaybd8)&&sosanhngaythang(ngaybd8, ngaykt8))
+                    &&sosanhngaythang(ngaybd7, ngaykt7)&&sosanhngaythang(ngaykt7, ngaybd8)&&sosanhngaythang(ngaybd8, ngaykt8)
+                    &&sosanhnam())
             {
-            new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, ngaybd7, ngaykt7, ngaybd8, ngaykt8);
-            dispose();
+              
+                    
+                    if(updateOrInsert)
+                    {
+                            if(!  new DataBase.SQLkyhe().CheckYearToSetUp(yearS1.getSelectedItem().toString()))
+                            {
+                                new DataBase.SQLkyhe().InsertToDK(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, ngaybd7, ngaykt7, ngaybd8, ngaykt8);
+                                dispose();
+                                }
+                            else
+                            {
+                                 JOptionPane.showMessageDialog(null,"Năm muốn thêm đã có trong hệ thống không thể thêm ",null,JOptionPane.INFORMATION_MESSAGE);
+
+                            }
+                    }
+                    
+                    else
+                    {
+                        if(this.YearOld.equals(yearE8.getSelectedItem().toString()))
+                        {
+                            new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, ngaybd7, ngaykt7, ngaybd8, ngaykt8,yearS1.getSelectedItem().toString());
+                            dispose();
+                        }
+                         else
+                        {
+                            JOptionPane.showMessageDialog(null,"Năm chỉnh sửa phải trùng năm cần chỉnh ",null,JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    }
+            
+                    
             }
             else
             {
-                 JOptionPane.showMessageDialog(null,"Có Lỗi hệ ngày tháng! bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+                 JOptionPane.showMessageDialog(null,"Có Lỗi hệ ngày tháng! bạn làm ơn kiểm tra lại thông số đầu vào,Năm được cài đặt phải giống nhau ",null,JOptionPane.INFORMATION_MESSAGE);
 
             }
-        }
-        catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
+       // }
+        //catch(Exception ex)
+        //{
+          //  JOptionPane.showMessageDialog(null,"Có Lỗi hệ thống bạn làm ơn kiểm tra lại thông số đầu vào",null,JOptionPane.INFORMATION_MESSAGE);
 
-        }
+        //}
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

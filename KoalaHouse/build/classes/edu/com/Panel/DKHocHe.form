@@ -42,6 +42,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="nam" min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="textfield_timkiem" min="-2" pref="186" max="-2" attributes="0"/>
               </Group>
               <Component id="jScrollPane6" alignment="0" pref="1134" max="32767" attributes="0"/>
@@ -50,21 +52,17 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="textfield_timkiem" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="them" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="xoa" min="-2" max="-2" attributes="0"/>
-                                  <Component id="sua" min="-2" max="-2" attributes="0"/>
-                                  <Component id="xemlich" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                      <Component id="them" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="xoa" min="-2" max="-2" attributes="0"/>
+                          <Component id="sua" min="-2" max="-2" attributes="0"/>
+                          <Component id="xemlich" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="nam" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textfield_timkiem" alignment="0" pref="30" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -88,18 +86,24 @@
                   <Font name="Times New Roman" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="4">
+                  <Table columnCount="8" rowCount="4">
                     <Column editable="true" title="STT" type="java.lang.Object"/>
                     <Column editable="true" title="H&#x1ecd;c Sinh" type="java.lang.Object"/>
                     <Column editable="true" title="L&#x1edb;p" type="java.lang.Object"/>
                     <Column editable="true" title="Tu&#x1ea7;n H&#x1ecd;c" type="java.lang.Object"/>
                     <Column editable="true" title="T&#x1ed5;ng S&#x1ed1; Tu&#x1ea7;n" type="java.lang.Object"/>
                     <Column editable="true" title="N&#x103;m H&#x1ecd;c" type="java.lang.Object"/>
+                    <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
                     <Column editable="true" title="&#x110;&#xe1;nh D&#x1ea5;u" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -202,6 +206,7 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="textfield_timkiemMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_timkiemActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textfield_timkiemKeyReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -212,6 +217,36 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="nam">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="19">
+                <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
+                <StringItem index="1" value="2013"/>
+                <StringItem index="2" value="2014"/>
+                <StringItem index="3" value="2015"/>
+                <StringItem index="4" value="2016"/>
+                <StringItem index="5" value="2017"/>
+                <StringItem index="6" value="2018"/>
+                <StringItem index="7" value="2019"/>
+                <StringItem index="8" value="2020"/>
+                <StringItem index="9" value="2021"/>
+                <StringItem index="10" value="2022"/>
+                <StringItem index="11" value="2023"/>
+                <StringItem index="12" value="2024"/>
+                <StringItem index="13" value="2025"/>
+                <StringItem index="14" value="2026"/>
+                <StringItem index="15" value="2027"/>
+                <StringItem index="16" value="2028"/>
+                <StringItem index="17" value="2029"/>
+                <StringItem index="18" value="2030"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
