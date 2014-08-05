@@ -791,6 +791,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String phantram = "0";
         new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
+        //update xe bus
+        new RecieptManagerment().UpdateXeBus(idStudent);
         dispose();
         }
         jButton1.setVisible(true);
@@ -1049,6 +1051,8 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         // ve image
         grphcs.drawImage(imageOfLabel, 430, 20, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
         
+        font = new Font("Serif", Font.PLAIN, 12);
+        grphcs.setFont(font);
         grphcs.drawString(lbDiaChi, 530, 50);
         grphcs.drawString(lbDienThoai, 530, 70);
         grphcs.drawString(tfDiaChi, 600, 50);

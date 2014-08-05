@@ -12,7 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -383,11 +385,14 @@ public class SQLkyhe {
         int id=0;
         try 
         {
-        rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
+        rs1 = statement.executeQuery("Select  Students_Id ,FullName From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
                 + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
         while(rs1.next())
         {
+            if(ten.equals(rs1.getString(2)))
+            {
             id=rs1.getInt(1);
+            }
         }
         
         statement.close();
@@ -437,13 +442,16 @@ public class SQLkyhe {
                     while(vector.get(i) !=null)
                     {
                         
-                    rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+vector.get(i).toString()+"' and c.NameClass= '"+vector2.get(i).toString()+"'"
+                    rs1 = statement.executeQuery("Select  Students_Id ,FullName From students s, classes c, classes_has_students h where s.FullName= '"+vector.get(i).toString()+"' and c.NameClass= '"+vector2.get(i).toString()+"'"
                     + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
                         System.out.println("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+vector.get(i).toString()+"' and c.NameClass= '"+vector2.get(i).toString()+"'"
                     + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
                         while(rs1.next())
                         {
-                        id=rs1.getInt(1);
+                            if(vector.get(i).toString().equals(rs1.getString(2)))
+                            {
+                                id=rs1.getInt(1);
+                            }
                         }
 
                         query="delete from learnsummer  where idStudents = '"+id+"' and id = '"+vector3.get(i)+"'";
@@ -617,11 +625,14 @@ public class SQLkyhe {
         int id=0;
         try 
         {
-        rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
+        rs1 = statement.executeQuery("Select  Students_Id, FullName From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
                 + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
         while(rs1.next())
         {
+            if(ten.equals(rs1.getString(2)))
+            {
             id=rs1.getInt(1);
+            }
         }
         rs1 = statement.executeQuery("Select IsActive From learnsummer where idStudents = '"+id+"' and isActive = 1 ");
         while(rs1.next())
@@ -910,5 +921,24 @@ public class SQLkyhe {
                    
         }
         
+    }
+    public boolean checkSemester()
+    {
+        try
+        {
+            int i=0;
+            Calendar cal= Calendar.getInstance();
+            SimpleDateFormat form= new SimpleDateFormat("yyyy");
+            String year= form.format(cal.getTime());
+            rs1=statement.executeQuery("select startDay from summerweek where startDay like '%"+year+"%' ");
+            while(rs1.next())
+            {
+                i++;
+            }
+            if(i>1) return true;
+        }catch(SQLException ex)
+        {
+        }
+        return false;
     }
 }

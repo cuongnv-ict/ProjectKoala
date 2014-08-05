@@ -7,6 +7,7 @@
 package edu.com;
 
 import edu.com.Dialog.DangNhapVao;
+import javax.swing.UIManager;
 
 /**
  *
@@ -16,7 +17,14 @@ public class AutoLogin {
     static DangNhapVao dialog;
     public static void main(String[] args) {
         
-            dialog = new DangNhapVao(new javax.swing.JFrame(), true,true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                UIManager.put("swing.boldMetal", false);
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                }
+                dialog = new DangNhapVao(new javax.swing.JFrame(), true,false);
                 dialog.setLocation(420, 130);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -27,5 +35,7 @@ public class AutoLogin {
                 if(!dialog.canLogin){
                     dialog.setVisible(true);
                 }
+            }
+        });
     }
 }

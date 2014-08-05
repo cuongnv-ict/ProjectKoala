@@ -289,15 +289,24 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                     nameClass= lop.getSelectedItem().toString();
                     if((new DataBase.SQLkyhe().getIsActiveStudent(nameStudent,nameClass))==0)
                     {
-                        DataBase.SQLkyhe data = new DataBase.SQLkyhe();
-                        idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                        Calendar calendar= Calendar.getInstance();
-                        calendar.getTime();
-                        SimpleDateFormat form= new SimpleDateFormat("yyyy");
-                        String year= form.format(calendar.getTime());
-                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
+                        
+                        if(new DataBase.SQLkyhe().checkSemester())
+                        {
+                            DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                            idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+                            Calendar calendar= Calendar.getInstance();
+                            calendar.getTime();
+                            SimpleDateFormat form= new SimpleDateFormat("yyyy");
+                            String year= form.format(calendar.getTime());
+                            data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
 
-                        dispose();
+                            dispose();
+                        }
+                        else
+                        {
+                             JOptionPane.showMessageDialog(null,"Bạn chưa cung cấp tuần hè của năm học này, làm ơn cài đặt tuần hè!",null,JOptionPane.INFORMATION_MESSAGE);
+                        
+                        }
                     }
                     else
                     {
@@ -369,15 +378,19 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                     nameClass= lop.getSelectedItem().toString();
                     if((new DataBase.SQLkyhe().getIsActiveStudent(nameStudent,nameClass))==0)
                     {
-                        DataBase.SQLkyhe data = new DataBase.SQLkyhe();
-                        idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                        Calendar calendar= Calendar.getInstance();
-                        calendar.getTime();
-                        SimpleDateFormat form= new SimpleDateFormat("yyyy");
-                        String year= form.format(calendar.getTime());
-                        data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
+                        
+                        if(new DataBase.SQLkyhe().checkSemester())
+                        {
+                            DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                            idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+                            Calendar calendar= Calendar.getInstance();
+                            calendar.getTime();
+                            SimpleDateFormat form= new SimpleDateFormat("yyyy");
+                            String year= form.format(calendar.getTime());
+                            data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
 
-                        dispose();
+                            dispose();
+                        }
                     }
                     else
                     {
