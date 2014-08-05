@@ -97,11 +97,18 @@ public class ListKoala extends javax.swing.JFrame {
 
     DefaultMutableTreeNode nodex;
     DSNo dsno;
-    DSHS dshs;
+
     DSDongDu dsdd;
-    HS_Phi hsphi;
     TongPhi dsTongPhi;
     ConnectData connectData;
+
+    DSHS dshs;
+    HS_Thang hsThang;
+    CacLoaiPhi loaiPhi;
+    HS_Phi hsPhi;
+    LopX lop;
+    
+    
     Connection connect;
     private JTable table;
     private String nameadmin = "admin";
@@ -965,14 +972,14 @@ public class ListKoala extends javax.swing.JFrame {
                                 scrollPane = (JScrollPane) item;
                                 JViewport viewPort = scrollPane.getViewport();
                                 table = (JTable) viewPort.getView();
-                            } else if(item instanceof JPanel) {
+                            } else if (item instanceof JPanel) {
                                 //System.out.println("Phai");
                                 itemPanel = (JPanel) item;
                                 itemComponents = itemPanel.getComponents();
-                                for(int k = 0; k < itemComponents.length; k++) {
+                                for (int k = 0; k < itemComponents.length; k++) {
                                     item = itemComponents[k];
                                     System.out.println(item.toString());
-                                    if(item instanceof JScrollPane) {
+                                    if (item instanceof JScrollPane) {
                                         scrollPane = (JScrollPane) item;
                                         JViewport viewPort = scrollPane.getViewport();
                                         table = (JTable) viewPort.getView();
@@ -1008,20 +1015,16 @@ public class ListKoala extends javax.swing.JFrame {
                 dsdd.ListId = new CompleteList().BangDanhSachHocSinhDuPhi(dsdd.BangDSDu);
             }
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")) {
-                int s = dshs.ChonLoai.getSelectedIndex();
-                switch (s) {
-                    case 0:
-                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh(dshs.BangHS);
-                        break;
-                    case 1:
-                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(dshs.BangHS, 0);
-                        break;
-                    case 2:
-                        new DataBase.SQLDanhSachHocSinh().DanhSachHocSinh_Stype(dshs.BangHS, -1);
-                        ;
-                        break;
-                }
                 dshs.reload();
+            }
+            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh sách học sinh tính phí")){
+                hsPhi.reload();
+            }
+            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("HS_Thang")){
+                hsThang.reload();
+            }
+            if(Panel_GDChinh.getTitleAt(selectedIndex).equals("Các Loại Phí")){
+                loaiPhi.reload();
             }
         } else {
         }
@@ -1086,7 +1089,7 @@ public class ListKoala extends javax.swing.JFrame {
             dshs.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
-        
+
 //        fixTable(table, 0, 8, tableFix.table, tableFix.table2);
     }//GEN-LAST:event_jLabel21MouseClicked
 
@@ -1124,12 +1127,12 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            CacLoaiPhi loaiphi = new CacLoaiPhi();
+            loaiPhi = new CacLoaiPhi();
             if (!ThongTin.isadmin) {
-                loaiphi.setNotAdmin();
+                loaiPhi.setNotAdmin();
             }
-            Panel_GDChinh.add("Các Loại Phí", loaiphi);
-            Panel_GDChinh.setSelectedComponent(loaiphi);
+            Panel_GDChinh.add("Các Loại Phí", loaiPhi);
+            Panel_GDChinh.setSelectedComponent(loaiPhi);
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
     }//GEN-LAST:event_jLabel24MouseClicked
@@ -1194,17 +1197,17 @@ public class ListKoala extends javax.swing.JFrame {
     private void Menu_DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_DangXuatActionPerformed
         // TODO add your handling code here:
         writeFile();
-        DangNhapVao d = new DangNhapVao(this, rootPaneCheckingEnabled,false);
+        DangNhapVao d = new DangNhapVao(this, rootPaneCheckingEnabled, false);
         this.dispose();
         d.setLocation(420, 20);
         d.show();
         d.check = false;
         d.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }//GEN-LAST:event_Menu_DangXuatActionPerformed
 
     private void Menu_thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_thoatActionPerformed
@@ -1218,41 +1221,40 @@ public class ListKoala extends javax.swing.JFrame {
         //    "Column 4", "Column 5", "Column 6", "Column 7", "Column 8"}, 0);
         DefaultTableModel tableModelReturn;
         DefaultTableModel tableModelReturn2;
-        Object data = new Object(); 
+        Object data = new Object();
         Vector<String> rowsVector = new Vector<String>();
-        
+
         //tableReturn = new JTable();
         //tableReturn.setModel(tableModelReturn);
-        
         tableModelReturn = (DefaultTableModel) tableReturn.getModel();
-        
+
        // for(int rows = 0 ; rows < tableModel.getRowCount() ; rows++) {
-         //   rowsVector.clear();
+        //   rowsVector.clear();
         int rows = 0;
-        while(rows < tableModel.getRowCount()) {
+        while (rows < tableModel.getRowCount()) {
             rowsVector = new Vector<String>();
-            for(int col = i ; col < j ; col++) {
+            for (int col = i; col < j; col++) {
                 data = (Object) tableModel.getValueAt(rows, col);
                 rowsVector.add(data.toString());
             }
             rows++;
             tableModelReturn.addRow(rowsVector);
         }
-        
+
         tableModelReturn2 = (DefaultTableModel) tableReturn2.getModel();
         rows = 0;
-        while(rows < tableModel.getRowCount()) {
+        while (rows < tableModel.getRowCount()) {
             rowsVector = new Vector<String>();
             data = (Object) tableModel.getValueAt(rows, 0);
             rowsVector.add(data.toString());
-            for(int col = j ; col < tableModel.getColumnCount() ; col++) {
+            for (int col = j; col < tableModel.getColumnCount(); col++) {
                 data = (Object) tableModel.getValueAt(rows, col);
                 rowsVector.add(data.toString());
             }
             rowsVector.add("");
             rowsVector.add("");
             //rowsVector.add("");
-            
+
             rows++;
             tableModelReturn2.addRow(rowsVector);
         }
@@ -1267,32 +1269,30 @@ public class ListKoala extends javax.swing.JFrame {
 //            rows++;
 //            tableModelReturn.addRow(rowsVector);
 //        }
-        
+
         /*
-        for(int rows = 0 ; rows < tableModel.getRowCount() ; rows++) {
-            rowsVector.clear();
-            for(int col = i ; col < j ; col++) {
-                data = (Object) tableModel.getValueAt(rows, col);
-                System.out.println(data.toString());
-                rowsVector.add(data.toString());
-                //model.addRow(rowsVector);
-            }
-            tableModelReturn.addRow(rowsVector);
-            System.out.print(rowsVector.elementAt(0) + "    ");
-        }
-        */
-        
-        
-        for(int row = 0 ; row < tableReturn.getRowCount() ; row++) {
-            for(int col = 0 ; col < tableReturn.getColumnCount() ; col++) {
-                System.out.print(tableReturn.getModel().getValueAt(row, col) + " ");     
+         for(int rows = 0 ; rows < tableModel.getRowCount() ; rows++) {
+         rowsVector.clear();
+         for(int col = i ; col < j ; col++) {
+         data = (Object) tableModel.getValueAt(rows, col);
+         System.out.println(data.toString());
+         rowsVector.add(data.toString());
+         //model.addRow(rowsVector);
+         }
+         tableModelReturn.addRow(rowsVector);
+         System.out.print(rowsVector.elementAt(0) + "    ");
+         }
+         */
+        for (int row = 0; row < tableReturn.getRowCount(); row++) {
+            for (int col = 0; col < tableReturn.getColumnCount(); col++) {
+                System.out.print(tableReturn.getModel().getValueAt(row, col) + " ");
             }
             System.out.println();
         }
         //tableModelReturn.addRow(rowsVector);
         //return tableReturn;
     }
-    
+
     private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
 //        //JTextField headderFiled = new JTextField("Danh sach hoc sinh");
 //        int selectedInDex = Panel_GDChinh.getSelectedIndex();
@@ -1309,7 +1309,7 @@ public class ListKoala extends javax.swing.JFrame {
 //        } catch (PrinterException ex) {
 //            Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
+
         //JTextField headderFiled = new JTextField("Danh sach hoc sinh");
         int selectedInDex = Panel_GDChinh.getSelectedIndex();
         String label = Panel_GDChinh.getTitleAt(selectedInDex);
@@ -1318,22 +1318,22 @@ public class ListKoala extends javax.swing.JFrame {
         JTable tableReturn = null;
         //TableFix tableFix = new TableFix();
         //boolean multipleTable = false;
-        
-        if(table.getColumnCount() > 8) {
+
+        if (table.getColumnCount() > 8) {
             //int i = 0;
             //int j = 8;
             //fixTable(table, i, j, tableFix.table, tableFix.table2);
             try {
-            PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
-            printRequest.add(MediaSizeName.ISO_A4);
-            printRequest.add(OrientationRequested.LANDSCAPE);
-            boolean complete = tableFix.table2.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null) && 
-                    tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null);
-            if (complete) {
-                JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
-            }
+                PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
+                printRequest.add(MediaSizeName.ISO_A4);
+                printRequest.add(OrientationRequested.LANDSCAPE);
+                boolean complete = tableFix.table2.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null)
+                        && tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null);
+                if (complete) {
+                    JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+                }
             } catch (PrinterException ex) {
                 Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1342,26 +1342,26 @@ public class ListKoala extends javax.swing.JFrame {
             tableFix.table = table;
             try {
                 PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
-            printRequest.add(MediaSizeName.ISO_A4);
-            printRequest.add(OrientationRequested.LANDSCAPE);
-            boolean complete =  
-                    tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null);
-            if (complete) {
-                JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
-            }
+                printRequest.add(MediaSizeName.ISO_A4);
+                printRequest.add(OrientationRequested.LANDSCAPE);
+                boolean complete
+                        = tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, printRequest, true, null);
+                if (complete) {
+                    JOptionPane.showMessageDialog(this, "Printting complete", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Printting Cancel", "Printting Result", JOptionPane.INFORMATION_MESSAGE);
+                }
             } catch (PrinterException ex) {
                 Logger.getLogger(ListKoala.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         System.out.println("Print table after fix");
-        for(int i = 0 ; i < tableFix.table.getRowCount() ; i++) {
-           for(int j = 0 ; j < tableFix.table.getColumnCount() ; j++) {
+        for (int i = 0; i < tableFix.table.getRowCount(); i++) {
+            for (int j = 0; j < tableFix.table.getColumnCount(); j++) {
                 System.out.println(tableFix.table.getModel().getValueAt(i, j).toString());
-           }
-       }
-        
+            }
+        }
+
 //       try {
 //            boolean complete = tableFix.table2.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null) && 
 //                    tableFix.table.print(JTable.PrintMode.FIT_WIDTH, headderField, footerField, true, null, true, null);
@@ -1532,7 +1532,7 @@ public class ListKoala extends javax.swing.JFrame {
                 String tenlop = nodex.toString();
                 int idtenlop;
                 int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn cho lớp đã chọn ra trường không", null, JOptionPane.YES_NO_OPTION);
-                if(click==JOptionPane.NO_OPTION){
+                if (click == JOptionPane.NO_OPTION) {
                     return;
                 }
                 idtenlop = new DataBase.DataTable().LayIdTenLop(tenlop);
@@ -1578,10 +1578,10 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            hsphi = new HS_Phi();
-            Panel_GDChinh.add("Danh sách học sinh tính phí", hsphi);
-            Panel_GDChinh.setSelectedComponent(hsphi);
-            hsphi.center = Panel_GDChinh;
+            hsPhi = new HS_Phi();
+            Panel_GDChinh.add("Danh sách học sinh tính phí", hsPhi);
+            Panel_GDChinh.setSelectedComponent(hsPhi);
+            hsPhi.center = Panel_GDChinh;
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
     }//GEN-LAST:event_hs_phiActionPerformed
@@ -1648,15 +1648,15 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            HS_Thang  HsThang = new HS_Thang();
+            hsThang = new HS_Thang();
             //DSLop dsl = new DSLop(idtrungtam);
-            HsThang.center = Panel_GDChinh;
+            hsThang.center = Panel_GDChinh;
             //dsl.listkoala = this;
             if (!ThongTin.isadmin) {
-                HsThang.setNotAdmin();
+                hsThang.setNotAdmin();
             }
-            Panel_GDChinh.add("HS_Thang", HsThang);
-            Panel_GDChinh.setSelectedComponent(HsThang);
+            Panel_GDChinh.add("HS_Thang", hsThang);
+            Panel_GDChinh.setSelectedComponent(hsThang);
             new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
         }
     }//GEN-LAST:event_hs_thangMouseClicked
@@ -1688,7 +1688,7 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-         int a = -1;
+        int a = -1;
         for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
             if ("DS Đóng Đủ Phí".equals(Panel_GDChinh.getTitleAt(i))) {
                 a += 1;
@@ -1706,16 +1706,16 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void hs_thang1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hs_thang1MouseClicked
         // TODO add your handling code here:
-            NhapNghiPhep nhapNghiPhep = new NhapNghiPhep(null, rootPaneCheckingEnabled);
+        NhapNghiPhep nhapNghiPhep = new NhapNghiPhep(null, rootPaneCheckingEnabled);
         nhapNghiPhep.setLocation(300, 100);
         nhapNghiPhep.center = Panel_GDChinh;
         nhapNghiPhep.setVisible(true);
     }//GEN-LAST:event_hs_thang1MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Xóa Hết Dữ Liệu Hóa Đơn?", "",JOptionPane.OK_CANCEL_OPTION);
-        if(click == JOptionPane.YES_OPTION){
-         new RecieptManagerment().ResetReciept();
+        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Xóa Hết Dữ Liệu Hóa Đơn?", "", JOptionPane.OK_CANCEL_OPTION);
+        if (click == JOptionPane.YES_OPTION) {
+            new RecieptManagerment().ResetReciept();
             JOptionPane.showMessageDialog(null, "Tất Cả Dữ Liệu Hóa Đơn Đã Bị Xóa");
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -1724,61 +1724,61 @@ public class ListKoala extends javax.swing.JFrame {
     private int nCol;
     private Object[][] tableData;
     private Object[] columnName;
+
     public void getTableData(JTable table) {
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         nRow = tableModel.getRowCount();
         nCol = tableModel.getColumnCount();
         tableData = new Object[nRow][nCol];
         columnName = new Object[nCol];
-        
+
         // get column name
-        for(int i =0; i < nCol; i++) {
+        for (int i = 0; i < nCol; i++) {
             columnName[i] = tableModel.getColumnName(i);
         }
         int selectedIndex = Panel_GDChinh.getSelectedIndex();
         String label = Panel_GDChinh.getTitleAt(selectedIndex);
-        if(label.equals("Danh Sách Lớp") || label.equals("Các Loại Phí") || label.equals("DS XeBus"))
-        {
-            for(int i = 0; i < nRow; i++) {
-                for(int j = 0; j < nCol - 1; j++) {
+        if (label.equals("Danh Sách Lớp") || label.equals("Các Loại Phí") || label.equals("DS XeBus")) {
+            for (int i = 0; i < nRow; i++) {
+                for (int j = 0; j < nCol - 1; j++) {
                     tableData[i][j] = tableModel.getValueAt(i, j);
                 }
             }
             nCol = nCol - 1;
         } else {
-           for(int i = 0; i < nRow; i++) {
-                for(int j = 0; j < nCol; j++) {
+            for (int i = 0; i < nRow; i++) {
+                for (int j = 0; j < nCol; j++) {
                     tableData[i][j] = tableModel.getValueAt(i, j);
                 }
-            }    
-       }
-        
+            }
+        }
+
     }
-    
+
     public void excelUsingPOI() {
         HSSFWorkbook workBook = new HSSFWorkbook();
         HSSFSheet sheet = workBook.createSheet("SampleSheet");
         getTableData(table);
-        
+
         // lay ten cua bang
         int selectedIndex = Panel_GDChinh.getSelectedIndex();
         String label = Panel_GDChinh.getTitleAt(selectedIndex);
         String extend = "";
-        if(label.equals("Danh Sách HS")) {
+        if (label.equals("Danh Sách HS")) {
             JPanel panel, panelItem;
             Component component, item;
             Component[] components;
             JComboBox comBoBox;
-            
+
             int selectIndex = Panel_GDChinh.getSelectedIndex();
-            if(selectIndex >= 0) {
+            if (selectIndex >= 0) {
                 component = Panel_GDChinh.getComponentAt(selectIndex);
-                if(component instanceof JPanel) {
+                if (component instanceof JPanel) {
                     panel = (JPanel) component;
                     components = panel.getComponents();
-                    for(int i = 0; i < components.length; i++) {
+                    for (int i = 0; i < components.length; i++) {
                         item = components[i];
-                        if(item instanceof JComboBox) {
+                        if (item instanceof JComboBox) {
                             comBoBox = (JComboBox) item;
                             extend = comBoBox.getSelectedItem().toString();
                             label = label + ": " + extend;
@@ -1791,12 +1791,12 @@ public class ListKoala extends javax.swing.JFrame {
         Row tenBang = sheet.createRow(0);
         Cell hangBang = tenBang.createCell(2);
         hangBang.setCellValue(label);
-        
+
         int rowNum = 2;
         // ghi ten cot
         Row rows = sheet.createRow(rowNum++);
         int cellNums = 0;
-        for(int i = 0; i < nCol; i++) {
+        for (int i = 0; i < nCol; i++) {
             //int cellNums = 0;
             Cell cell = rows.createCell(cellNums++);
             Object name = columnName[i];
@@ -1816,10 +1816,10 @@ public class ListKoala extends javax.swing.JFrame {
         }
         // ghi du lieu
         //rowNum = 1;
-        for(int i = 0; i < nRow; i++) {
+        for (int i = 0; i < nRow; i++) {
             Row row = sheet.createRow(rowNum++);
             int cellNum = 0;
-            for(int j = 0; j < nCol; j++) {
+            for (int j = 0; j < nCol; j++) {
                 Cell cell = row.createCell(cellNum++);
                 Object data = tableData[i][j];
                 cell.setCellValue(data.toString());
@@ -1834,9 +1834,9 @@ public class ListKoala extends javax.swing.JFrame {
 //                } else {
 //                    System.out.println("Không ghi được file");
 //                }
-            } 
+            }
         }
-        
+
         try {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Chọn thư mục lưu file");
@@ -1844,10 +1844,10 @@ public class ListKoala extends javax.swing.JFrame {
             FileNameExtensionFilter excelType = new FileNameExtensionFilter("Excel Spreadshet (.xls)", "xls");
             fileChooser.addChoosableFileFilter(excelType);
             fileChooser.setFileFilter(excelType);
-            
+
             File fileToSave = null;
             int userSelection = fileChooser.showSaveDialog(this);
-            if(userSelection == JFileChooser.APPROVE_OPTION) {
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
                 fileToSave = fileChooser.getSelectedFile();
                 System.out.println(fileToSave.getAbsolutePath());
             }
@@ -1855,19 +1855,19 @@ public class ListKoala extends javax.swing.JFrame {
             workBook.write(out);
             out.close();
             System.out.println("Ghi file thành công");
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         excelUsingPOI();
     }//GEN-LAST:event_jLabel9MouseClicked
 
-    private void writeFile(){
-        try{
+    private void writeFile() {
+        try {
             System.out.println("xoa mk lisstkoala");
             File file = new File("Login.txt");
             file.createNewFile();
@@ -1878,11 +1878,11 @@ public class ListKoala extends javax.swing.JFrame {
             br.write(xaucon);
             br.close();
             fw.close();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error to save file");
         }
     }
+
     public void connectDataBase() {
         connectData = new ConnectData();
         connect = connectData.connectionDatabase();

@@ -51,7 +51,7 @@ public class HS_Thang extends javax.swing.JPanel {
     public JTabbedPane center;
     ArrayList<Integer> info;
     DefaultCellEditor combo;
-    JComboBox c;
+    JComboBox c = null;
     int row_, col_;
     boolean flags ;
     public HS_Thang() {
@@ -78,7 +78,12 @@ public class HS_Thang extends javax.swing.JPanel {
         this.getinfo();
 
     }
-
+    public void reload(){
+        if(c==null){
+            
+        }
+        getinfo();
+    }
     private void setSelectComboBox(JComboBox x, Object obj) {
         for (int i = 0; i < x.getItemCount(); i++) {
             if (x.getItemAt(i).toString().equals(obj.toString().trim())) {
@@ -138,6 +143,8 @@ public class HS_Thang extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         nam = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+
+        jScrollPane8.setBackground(new java.awt.Color(255, 255, 255));
 
         danhsach.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         danhsach.setModel(new javax.swing.table.DefaultTableModel(

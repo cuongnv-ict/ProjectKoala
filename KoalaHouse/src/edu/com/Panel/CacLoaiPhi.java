@@ -43,6 +43,15 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         isadmin = false;
     }
 
+    public void reload() {
+        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+        model = (DefaultTableModel) BangPhi.getModel();
+        id_cost = new ArrayList<Integer>();
+        if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_cost, BangPhi, 0);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +66,6 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         ThemPhi = new javax.swing.JLabel();
         Sua = new javax.swing.JLabel();
         Xoa = new javax.swing.JLabel();
-        Xoa1 = new javax.swing.JLabel();
 
         BangPhi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BangPhi.setModel(new javax.swing.table.DefaultTableModel(
@@ -100,13 +108,6 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             }
         });
 
-        Xoa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        Xoa1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Xoa1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,8 +118,6 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 .addComponent(Sua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Xoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Xoa1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
         );
@@ -128,10 +127,9 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ThemPhi)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(Xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Sua)
-                        .addComponent(Xoa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Xoa)
+                        .addComponent(Sua)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
         );
@@ -151,7 +149,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                         XuLy.setID(id_cost, BangPhi, 0);
                     }
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Bạn chưa tạo năm học cho hệ thống,không thể tạo học phí!", null, JOptionPane.INFORMATION_MESSAGE);
             }
 
@@ -241,22 +239,11 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_XoaMouseClicked
 
-    private void Xoa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Xoa1MouseClicked
-        // TODO add your handling code here:
-        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
-        model = (DefaultTableModel) BangPhi.getModel();
-        id_cost = new ArrayList<Integer>();
-        if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_cost, BangPhi, 0);
-        }
-    }//GEN-LAST:event_Xoa1MouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable BangPhi;
     private javax.swing.JLabel Sua;
     private javax.swing.JLabel ThemPhi;
     private javax.swing.JLabel Xoa;
-    private javax.swing.JLabel Xoa1;
     private javax.swing.JScrollPane jScrollPane7;
     // End of variables declaration//GEN-END:variables
 }

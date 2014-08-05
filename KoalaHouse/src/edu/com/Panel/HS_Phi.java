@@ -50,7 +50,7 @@ public class HS_Phi extends javax.swing.JPanel {
 
         o = new DataBase.SQLHocPhi().HS_Phi();
         if (((ComboBoxModel) o[1]).getSize() == 0) {
-            JOptionPane.showMessageDialog(center, "Không có phí nào trong danh sách phí", TOOL_TIP_TEXT_KEY, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(center, "Không có phí nào trong danh sách phí trong năm học hiện tại", TOOL_TIP_TEXT_KEY, JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             LoaiPhi.setModel((ComboBoxModel) o[1]);
@@ -58,6 +58,24 @@ public class HS_Phi extends javax.swing.JPanel {
             new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(0).toString()));
         }
 
+    }
+
+    public void reload() {
+        String str = null;
+        if (((ComboBoxModel) o[1]).getSize() != 0) {
+            str = ((Vector) o[0]).get(LoaiPhi.getSelectedIndex()).toString();
+            new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(LoaiPhi.getSelectedIndex()).toString()));
+        }
+        o = new DataBase.SQLHocPhi().HS_Phi();
+        
+        if (((ComboBoxModel) o[1]).getSize() == 0) {
+//            JOptionPane.showMessageDialog(center, "Không có phí nào trong danh sách phí trong năm học hiện tại", TOOL_TIP_TEXT_KEY, JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            LoaiPhi.setModel((ComboBoxModel) o[1]);
+            LoaiPhi.setSelectedItem(str);
+            new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(LoaiPhi.getSelectedIndex()).toString()));
+        }
     }
 
     public void setNotAdmin() {
@@ -76,7 +94,6 @@ public class HS_Phi extends javax.swing.JPanel {
         jScrollPane8 = new javax.swing.JScrollPane();
         BangPhi = new javax.swing.JTable();
         LoaiPhi = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
 
         BangPhi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BangPhi.setModel(new javax.swing.table.DefaultTableModel(
@@ -101,14 +118,6 @@ public class HS_Phi extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        jLabel1.setToolTipText("Tải lại");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,17 +126,13 @@ public class HS_Phi extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LoaiPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LoaiPhi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(LoaiPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
@@ -138,20 +143,14 @@ public class HS_Phi extends javax.swing.JPanel {
      */
     private void LoaiPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoaiPhiActionPerformed
         // TODO add your handling code here:
-        if(((ComboBoxModel) o[1]).getSize()!=0){
+        if (((ComboBoxModel) o[1]).getSize() != 0) {
             new DataBase.SQLHocPhi().HocSinhTinhPhi(BangPhi, Integer.parseInt(((Vector) o[0]).get(LoaiPhi.getSelectedIndex()).toString()));
         }
     }//GEN-LAST:event_LoaiPhiActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        this.LoaiPhiActionPerformed(null);
-    }//GEN-LAST:event_jLabel1MouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable BangPhi;
     private javax.swing.JComboBox LoaiPhi;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane8;
     // End of variables declaration//GEN-END:variables
 }

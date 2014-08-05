@@ -32,7 +32,6 @@ public class SQLHocSinhTheoThang {
     PreparedStatement Pstate;
     DefaultTableModel model;
 
-
     public SQLHocSinhTheoThang() {
         ConnectData c = new ConnectData();
 
@@ -235,6 +234,12 @@ public class SQLHocSinhTheoThang {
                     return false;
                 }
             };
+            if (data.size() == 0) {
+                Object[][] name = new Object[][]{nameColumn};
+                XuLy.resizeColumnWidth(table, XuLy.getSize(name));
+            } else {
+                XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+            }
             table.setModel(model);
             return info;
 //            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
@@ -418,6 +423,12 @@ public class SQLHocSinhTheoThang {
                 }
             };
             table.setModel(model);
+            if (data.size() == 0) {
+                Object[][] name = new Object[][]{nameColumn};
+                XuLy.resizeColumnWidth(table, XuLy.getSize(name));
+            } else {
+                XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+            }
             return info;
 //            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
         } catch (SQLException ex) {
@@ -454,9 +465,10 @@ public class SQLHocSinhTheoThang {
             return c;
         }
     }
-    public void update(int id,String name){
+
+    public void update(int id, String name) {
         try {
-            Pstate = connect.prepareStatement("update classes_has_students set Class_Id_Old = '"+name+"' where students_id = "+id);
+            Pstate = connect.prepareStatement("update classes_has_students set Class_Id_Old = '" + name + "' where students_id = " + id);
             Pstate.execute();
         } catch (SQLException ex) {
             Logger.getLogger(SQLHocSinhTheoThang.class.getName()).log(Level.SEVERE, null, ex);

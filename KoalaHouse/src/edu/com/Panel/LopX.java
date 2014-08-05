@@ -50,6 +50,34 @@ public class LopX extends javax.swing.JPanel {
         }
     }
 
+    public void reload() {
+        switch (loc.getSelectedIndex()) {
+            case 0:
+                arr_sex = new DataBase.SQLLopX().BangDanhHSLop(malop, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 1:
+                arr_sex = new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 0);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 2:
+                arr_sex = new DataBase.SQLLopX().BangDanhHSLop_iType(malop, lopx, 1);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 3:
+                arr_sex = new DataBase.SQLHocPhi().BangDanhSachHSDongDuPhi(malop, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+            case 4:
+                arr_sex = new DataBase.SQLHocPhi().BangDanhSachHocSinhNoPhi(malop, lopx);
+                model = (DefaultTableModel) lopx.getModel();
+                break;
+        }
+        if (!lopx.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_students, lopx, 0);
+        }
+    }
+
     public void setMaLop(int malop) {
         this.malop = malop;
     }
@@ -417,9 +445,9 @@ public class LopX extends javax.swing.JPanel {
                 NgayHoc ngayhoc = new NgayHoc(null, true, false);
                 ngayhoc.setVisible(true);
                 if (ngayhoc.getFlags()) {
-                    new DataBase.SQLLopX().xoaHocSinh(id_students.get(row),ngayhoc.getDate());
+                    new DataBase.SQLLopX().xoaHocSinh(id_students.get(row), ngayhoc.getDate());
                     locActionPerformed(null);
-                } 
+                }
             }
 
         }
@@ -429,7 +457,7 @@ public class LopX extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (textfield_timkiem.getText().equals("")) {
             this.locActionPerformed(evt);
-        }else{
+        } else {
             jButton1MouseClicked(null);
         }
     }//GEN-LAST:event_textfield_timkiemActionPerformed

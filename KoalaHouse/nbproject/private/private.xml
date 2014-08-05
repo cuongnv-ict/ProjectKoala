@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/ListKoala.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Dialog/ThemGia.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Dialog/NhapNghiPhep.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Dialog/ChiTietNghiPhep.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/XuLy.java</file>
-            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/DataBase/SQLHocSinhTheoThang.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/CacLoaiPhi.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/HS_Phi.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/LopX.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/DSHS.java</file>
+            <file>file:/C:/Users/nguyenvan/Desktop/ProjectKoala/KoalaHouse/src/edu/com/Panel/HS_Thang.java</file>
         </group>
     </open-files>
 </project-private>
