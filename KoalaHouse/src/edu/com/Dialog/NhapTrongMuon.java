@@ -273,7 +273,9 @@ public void MakePopup(){
         ArrayList infoHS = new Get().GetIdAndFacStudent(name, classes);
         int idStudent = Integer.parseInt(infoHS.get(0).toString());
         int idTrungTam = Integer.parseInt(infoHS.get(1).toString());
+        System.out.println(idStudent+" "+idTrungTam);
         //them du lieu
+        if(idStudent!=0 && idTrungTam!=0){
         try{
         String date = nam.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+ngay.getSelectedItem().toString();
         int time = Integer.parseInt(soPhut.getText());
@@ -285,11 +287,18 @@ public void MakePopup(){
         new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
         }
         }
+        else{
+            new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
+        }
         //load lai bang trong muon
         new Get().BangTrongMuon(bangDSTrongMuon);
         }
         catch(java.lang.NumberFormatException e){
             JOptionPane.showMessageDialog(rootPane, "Thông Tin Nhập Không Chính Xác, Xin Hãy Kiểm Tra Lại");
+        }
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Nhập Sai Tên Học Sinh");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -751,6 +760,7 @@ class SuggestionLabel extends JLabel {
         String typedWord = autoSuggestor.getCurrentlyTypedWord();
         String t = text.substring(0, text.lastIndexOf(typedWord));
         String tmp = t + text.substring(text.lastIndexOf(typedWord)).replace(typedWord, suggestedWord);
+        textField.setText("");
         textField.setText(tmp);
     }
 }

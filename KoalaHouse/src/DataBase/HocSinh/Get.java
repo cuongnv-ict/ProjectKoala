@@ -79,12 +79,13 @@ public class Get{
             while(rs1.next()){
                 idClass = rs1.getInt(1);
             }
-            System.out.println(""+name+" "+idClass);
-            rs1 = statement.executeQuery("SELECT students.Id,students.Faculties_Id FROM students,classes_has_students where FullName = \""+name+"\" and Classes_Id = "+idClass+" and Id = Students_Id");
+            rs1 = statement.executeQuery("SELECT students.Id,students.Faculties_Id,students.FullName FROM students,classes_has_students where FullName = \""+name+"\" and Classes_Id = "+idClass+" and Id = Students_Id");
             if(rs1!= null)
             while(rs1.next()){
+                if(name.equals(rs1.getString(3))){
                 idStudent = rs1.getInt(1);
                 idTrungTam = rs1.getInt(2);
+                }
             }
             info.add(idStudent);
             info.add(idTrungTam);
