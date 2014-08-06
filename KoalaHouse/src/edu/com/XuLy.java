@@ -155,8 +155,8 @@ public class XuLy {
         final TableColumnModel columnModel = table.getColumnModel();
         int x = 0;
         for (int column = 0; column < table.getColumnCount(); column++) {
-            int width = 40;
-            width = Math.max(arr[column] * 8, width);
+            int width = 0;
+            width = Math.max(arr[column] * 10, width);
             TableColumn tableColumn = table.getColumnModel().getColumn(column);
             Object value = tableColumn.getHeaderValue();
             TableCellRenderer renderer = tableColumn.getHeaderRenderer();
@@ -165,10 +165,9 @@ public class XuLy {
             }
             Component c = renderer.getTableCellRendererComponent(table, value, false, false, -1, column);
             width = Math.max(c.getPreferredSize().width, width);
-            if (width > 200) {
-                width = 200;
+            if (width > 400) {
+                width = 400;
             }
-            x = x + width + 10;
             columnModel.getColumn(column).setPreferredWidth(width + 10);
         }
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

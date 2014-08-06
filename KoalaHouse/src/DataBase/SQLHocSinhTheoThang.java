@@ -234,13 +234,13 @@ public class SQLHocSinhTheoThang {
                     return false;
                 }
             };
-            if (data.size() == 0) {
+            table.setModel(model);
+             if (data.size() == 0) {
                 Object[][] name = new Object[][]{nameColumn};
                 XuLy.resizeColumnWidth(table, XuLy.getSize(name));
             } else {
                 XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             }
-            table.setModel(model);
             return info;
 //            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
         } catch (SQLException ex) {

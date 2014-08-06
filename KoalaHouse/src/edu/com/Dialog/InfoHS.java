@@ -379,7 +379,7 @@ public class InfoHS extends javax.swing.JDialog {
             dispose();
         } else {
             button = false;
-            JOptionPane.showMessageDialog(null, "Xóa thất bại !", null, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Xóa thất bại !", null, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_DongYMouseClicked
 

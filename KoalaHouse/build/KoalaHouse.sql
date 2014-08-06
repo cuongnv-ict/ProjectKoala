@@ -45,7 +45,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1000,1,'admin','admin','admin','admin','adimn',1,0,NULL),(1054812280,1,'cuong','cuong','123','LeTung@yahoo.com','0123456789',NULL,1,'Kế Toán');
+INSERT INTO `accounts` VALUES (-1001739493,1,'cuongnvy','cuongnvy','qwe','LeTung@yahoo.com','0123456789',NULL,1,'Kế Toán'),(1000,1,'admin','admin','admin','admin','adimn',0,0,NULL),(1054812280,1,'root','root','hoalan93','LeTung@yahoo.com','0123456789',0,1,'Kế Toán');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +66,9 @@ CREATE TABLE `buslist` (
   `IsActive` int(11) DEFAULT NULL,
   `StartDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
-  PRIMARY KEY (`idBusList`)
+  PRIMARY KEY (`idBusList`),
+  KEY `idStudents_idx` (`idStudents`),
+  CONSTRAINT `idStudents` FOREIGN KEY (`idStudents`) REFERENCES `students` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,7 +78,6 @@ CREATE TABLE `buslist` (
 
 LOCK TABLES `buslist` WRITE;
 /*!40000 ALTER TABLE `buslist` DISABLE KEYS */;
-INSERT INTO `buslist` VALUES (1,2,'1','aaaa','100000','aaa',1,'2014-01-01','2014-02-01');
 /*!40000 ALTER TABLE `buslist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +114,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,1,1,1,2014,'SB','Tạ Thị Bích Loan',20,0),(2,1,1,1,2014,'ICT','as',2,0);
+INSERT INTO `classes` VALUES (1,1,1,1,2014,'DS','Nien',5,0);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +146,6 @@ CREATE TABLE `classes_has_students` (
 
 LOCK TABLES `classes_has_students` WRITE;
 /*!40000 ALTER TABLE `classes_has_students` DISABLE KEYS */;
-INSERT INTO `classes_has_students` VALUES (1,2,1,'ICT'),(1,3,1,'ICT'),(1,4,1,'ICT');
 /*!40000 ALTER TABLE `classes_has_students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `cost` (
 
 LOCK TABLES `cost` WRITE;
 /*!40000 ALTER TABLE `cost` DISABLE KEYS */;
-INSERT INTO `cost` VALUES (1,1,1,'học phí',5000000,2013,'2014-01-01','2015-01-01'),(2,1,5,'Phí Đặt Cọc',-7000000,2013,'2014-01-01','2015-01-01'),(3,1,1,'Hoàn cờ vua',15000000,2013,'2014-01-01','2015-01-01'),(4,1,1,'học nhạc',1000000,2013,'2014-01-01','2015-01-01'),(5,1,1,'học múa',5000000,2013,'2014-01-01','2014-01-01'),(6,1,1,'học nhảy',2000000,2013,'2014-01-01','2014-01-01'),(7,1,1,'học xx',20000000,2013,'2014-01-01','2014-02-01'),(8,1,1,'Phí Trông Muộn',20000,2013,'2014-01-02','2015-01-01'),(9,1,1,'hoàn Học Phí',10000,2013,'2014-01-01','2015-01-01'),(10,1,4,'Phí Học Hè',30000,2013,'2014-01-01','2015-01-01'),(11,1,2,'Phí Trông Muộn',50000,2013,'2014-01-01','2014-01-01'),(12,1,4,'Phí Học Hè',50000,2014,'2014-01-01','2014-01-01'),(13,1,2,'Hoàn Học Phí',20000,2014,'2014-01-01','2015-01-01'),(14,1,4,'Phí Học Hè',100000,2015,'2014-01-01','2015-01-01');
+INSERT INTO `cost` VALUES (1,1,1,'học phí',5000000,2013,'2014-01-01','2015-01-01'),(2,1,5,'Phí Đặt Cọc',-7000000,2013,'2014-01-01','2015-01-01'),(3,1,1,'Hoàn cờ vua',15000000,2013,'2014-01-01','2015-01-01'),(4,1,1,'học nhạc',1000000,2013,'2014-01-01','2015-01-01'),(5,1,1,'học múa',5000000,2013,'2014-01-01','2014-01-01'),(6,1,1,'học nhảy',2000000,2013,'2014-01-01','2014-01-01'),(7,1,1,'học xx',20000000,2013,'2014-01-01','2014-02-01'),(8,1,1,'Phí Trông Muộn',20000,2013,'2014-01-02','2015-01-01'),(9,1,1,'hoàn Học Phí',10000,2013,'2014-01-01','2015-01-01'),(10,1,4,'Phí Học Hè',30000,2013,'2014-01-01','2015-01-01'),(11,1,2,'Phí Trông Muộn',50000,2013,'2014-01-01','2014-01-01'),(14,1,4,'Phí Học Hè',100000,2015,'2014-01-01','2015-01-01'),(15,1,1,'Học Phí',4000000,2014,'2014-01-01','2014-02-02'),(16,1,1,'abc',400000,2014,'2014-02-02','2014-02-02');
 /*!40000 ALTER TABLE `cost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +268,6 @@ CREATE TABLE `lateday` (
 
 LOCK TABLES `lateday` WRITE;
 /*!40000 ALTER TABLE `lateday` DISABLE KEYS */;
-INSERT INTO `lateday` VALUES (1,1,2,'2014-01-04',20,0,1,2013),(2,1,2,'2014-01-07',10,0,2,2013),(3,1,2,'2014-01-08',10,0,2,2013);
 /*!40000 ALTER TABLE `lateday` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +287,9 @@ CREATE TABLE `learnsummer` (
   `IsActive` int(11) NOT NULL,
   `Semester` int(11) DEFAULT NULL,
   `year` year(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_idStudents_idx` (`idStudents`),
+  CONSTRAINT `fk_idStudents` FOREIGN KEY (`idStudents`) REFERENCES `students` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -298,7 +299,6 @@ CREATE TABLE `learnsummer` (
 
 LOCK TABLES `learnsummer` WRITE;
 /*!40000 ALTER TABLE `learnsummer` DISABLE KEYS */;
-INSERT INTO `learnsummer` VALUES (1,2,'4,5',2,'sb',0,4,2014),(2,2,'2,3,4',3,'sb',0,4,2013),(3,2,'5,6',2,'sb',0,4,2015);
 /*!40000 ALTER TABLE `learnsummer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +333,6 @@ CREATE TABLE `leaves` (
 
 LOCK TABLES `leaves` WRITE;
 /*!40000 ALTER TABLE `leaves` DISABLE KEYS */;
-INSERT INTO `leaves` VALUES (1,1,2,'2014-8-8','2014-8-8','5','0',1,2013),(2,1,2,'2014-8-8','2014-8-8','10','0',2,2014);
 /*!40000 ALTER TABLE `leaves` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,7 +398,6 @@ CREATE TABLE `receipts` (
 
 LOCK TABLES `receipts` WRITE;
 /*!40000 ALTER TABLE `receipts` DISABLE KEYS */;
-INSERT INTO `receipts` VALUES (1,1,1000,2,1,'hgg','gg',9000,NULL,NULL,'2014-07-16',0,0,'Không Có'),(2,1,1000,2,2,'hhhhh','hhh',990000,NULL,NULL,'2014-07-16',0,0,'Không Có'),(3,1,1000,2,3,'fff','ffff',1000002,NULL,NULL,'2014-07-18',0,0,'Không Có'),(4,1,1000,2,4,'aaa','aaaa',540000,NULL,NULL,'2014-07-19',0,0,'Không Có'),(5,1,1000,2,5,'aa','aaaa',1000000,NULL,NULL,'2014-07-19',0,0,'Không Có'),(6,1,1000,2,6,'sdgasd','asdgsa',300000,NULL,NULL,'2014-07-19',0,0,'Không Có');
 /*!40000 ALTER TABLE `receipts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +455,7 @@ CREATE TABLE `semesters` (
 
 LOCK TABLES `semesters` WRITE;
 /*!40000 ALTER TABLE `semesters` DISABLE KEYS */;
-INSERT INTO `semesters` VALUES (1,1,2013,'2013-01-01','2013-01-01',0),(1,1,2014,'2014-01-01','2014-02-01',0),(1,1,2015,'2015-01-01','2015-02-01',0),(2,1,2013,'2013-01-01','2013-01-01',0),(2,1,2014,'2014-02-02','2014-03-01',0),(2,1,2015,'2015-03-01','2015-04-01',0),(3,1,2013,'2013-01-01','2013-01-01',0),(3,1,2014,'2014-03-02','2014-04-01',0),(3,1,2015,'2015-05-01','2015-06-01',0),(4,1,2013,'2013-01-01','2013-01-01',0),(4,1,2014,'2014-05-01','2015-03-01',0),(4,1,2015,'2015-07-01','2015-08-01',0),(5,1,2013,'2013-01-01','2013-01-01',0),(5,1,2014,'2014-01-01','2015-03-01',0),(5,1,2015,'2015-01-01','2015-08-01',0);
+INSERT INTO `semesters` VALUES (1,1,2013,'2013-01-01','2013-01-01',0),(1,1,2014,'2014-01-01','2014-02-01',1),(1,1,2015,'2015-01-01','2015-02-01',0),(2,1,2013,'2013-01-01','2013-01-01',0),(2,1,2014,'2014-02-02','2014-03-01',1),(2,1,2015,'2015-03-01','2015-04-01',0),(3,1,2013,'2013-01-01','2013-01-01',0),(3,1,2014,'2014-03-02','2014-04-01',1),(3,1,2015,'2015-05-01','2015-06-01',0),(4,1,2013,'2013-01-01','2013-01-01',0),(4,1,2014,'2014-05-01','2015-05-01',1),(4,1,2015,'2015-07-01','2015-08-01',0),(5,1,2013,'2013-01-01','2013-01-01',0),(5,1,2014,'2014-01-01','2015-05-01',1),(5,1,2015,'2015-01-01','2015-08-01',0);
 /*!40000 ALTER TABLE `semesters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -500,7 +498,6 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (1,1,'Nguyến Đức Sơn','2000-12-21','0988749407','Nguyễn Văn Hào',0,NULL,0,-1,'Nguyễn Thị Thúy Hướng','0998989899','0491231233','dycsoaosdf',1,NULL,'2014-07-15',NULL,'Bà Nguyễn Thị Lan'),(2,1,'Nguyễn Đức Sơn','2000-12-21','098888888888','Nguyễn Văn Hào',0,NULL,0,1,'Nguyễn THị Thúy Hường','099999999999','0343514145','ducson.bkhn.k56',1,1,'2014-07-15',NULL,'Bà Nguyễn Thị La'),(3,1,'LE ngoc','2001-01-02','','',0,NULL,0,0,'','','','',0,NULL,'2014-07-20','2014-07-20',''),(4,1,'dsf','2001-02-03','','',0,NULL,0,1,'','','','',0,NULL,'2014-06-20',NULL,'');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -532,7 +529,6 @@ CREATE TABLE `students_has_cost` (
 
 LOCK TABLES `students_has_cost` WRITE;
 /*!40000 ALTER TABLE `students_has_cost` DISABLE KEYS */;
-INSERT INTO `students_has_cost` VALUES (2,1,1,0),(2,3,1,0),(2,4,1,0);
 /*!40000 ALTER TABLE `students_has_cost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -558,7 +554,7 @@ CREATE TABLE `summerweek` (
 
 LOCK TABLES `summerweek` WRITE;
 /*!40000 ALTER TABLE `summerweek` DISABLE KEYS */;
-INSERT INTO `summerweek` VALUES (1,1,'2015-1-2','2016-1-6'),(2,2,'2014-2-3','2014-2-4'),(3,3,'2014-2-3','2014-2-4'),(4,4,'2014-2-3','2014-2-4'),(5,5,'2014-2-3','2014-2-4'),(6,6,'2014-2-3','2014-2-4'),(7,7,'2014-2-3','2014-2-4'),(8,8,'2014-2-3','2014-2-4');
+INSERT INTO `summerweek` VALUES (1,1,'2014-1-1','2014-1-4'),(2,2,'2014-1-7','2014-1-8'),(3,3,'2014-1-11','2014-1-13'),(4,4,'2014-1-19','2014-1-20'),(5,5,'2014-1-21','2014-1-26'),(6,6,'2014-2-1','2014-2-5'),(7,7,'2014-2-6','2014-2-7'),(8,8,'2014-2-13','2014-2-15');
 /*!40000 ALTER TABLE `summerweek` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -571,4 +567,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-20 22:19:19
+-- Dump completed on 2014-08-07  0:33:10
