@@ -228,11 +228,14 @@ public class SQLXeBus
         int id=0;
         try 
         {
-        rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
+        rs1 = statement.executeQuery("Select  Students_Id, FullName From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
                 + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
         while(rs1.next())
         {
+            if(ten.equals(rs1.getString(2)))
+            {
             id=rs1.getInt(1);
+            }
         }
         
             statement.close();
@@ -284,11 +287,14 @@ public class SQLXeBus
                     while(vector.get(i) !=null)
                     {
                         
-                    rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+vector.get(i).toString()+"' and c.NameClass= '"+vector2.get(i).toString()+"'"
+                    rs1 = statement.executeQuery("Select  Students_Id,FullName From students s, classes c, classes_has_students h where s.FullName= '"+vector.get(i).toString()+"' and c.NameClass= '"+vector2.get(i).toString()+"'"
                     + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
                         while(rs1.next())
                         {
-                        id=rs1.getInt(1);
+                            if(vector.get(i).toString().equals(rs1.getString(2)))
+                            {
+                            id=rs1.getInt(1);
+                            }
                         }
 
                         query="delete from buslist  where idStudents = '"+id+"' and idBusList = '"+vector3.get(i)+"' ";
@@ -462,11 +468,14 @@ public class SQLXeBus
         int id=0;
         try 
         {
-        rs1 = statement.executeQuery("Select  Students_Id From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
+        rs1 = statement.executeQuery("Select  Students_Id , FullName From students s, classes c, classes_has_students h where s.FullName= '"+ten+"' and c.NameClass= '"+nameclasses+"'"
                 + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
         while(rs1.next())
         {
+            if(ten.equals(rs1.getString(2)))
+            {
             id=rs1.getInt(1);
+            }
         }
         rs1 = statement.executeQuery("Select IsActive From buslist where idStudents = '"+id+"' and isActive = 1 ");
         while(rs1.next())

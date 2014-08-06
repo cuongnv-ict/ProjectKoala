@@ -37,6 +37,8 @@
                   <Component id="Button_DSLop_SuaLop" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="Button_DSLop_Xoa" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="reload" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Component id="jScrollPane6" alignment="0" pref="929" max="32767" attributes="0"/>
@@ -46,12 +48,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          <Component id="reload" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Component id="Button_DSLop_ThemLop" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Button_DSLop_SuaLop" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="Button_DSLop_Xoa" min="-2" max="-2" attributes="0"/>
+                      <Component id="Button_DSLop_Xoa" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane6" pref="302" max="32767" attributes="0"/>
@@ -182,6 +188,16 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Button_DSLop_XoaMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reload">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/edu/com/image/refresh25.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reloadMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

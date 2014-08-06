@@ -298,7 +298,7 @@ public class XeBus extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             int row = jTable4.getSelectedRow();
             model=(DefaultTableModel) jTable4.getModel();
-            model.setValueAt(false, row, 5);
+            model.setValueAt(false, row,11);
             //map cac truong
             int a = -1;
             int id = 0;

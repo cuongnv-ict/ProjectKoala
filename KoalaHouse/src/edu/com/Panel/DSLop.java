@@ -116,6 +116,7 @@ public class DSLop extends javax.swing.JPanel {
         Button_DSLop_ThemLop = new javax.swing.JLabel();
         Button_DSLop_SuaLop = new javax.swing.JLabel();
         Button_DSLop_Xoa = new javax.swing.JLabel();
+        reload = new javax.swing.JLabel();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -166,6 +167,13 @@ public class DSLop extends javax.swing.JPanel {
             }
         });
 
+        reload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
+        reload.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reloadMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_DSLopLayout = new javax.swing.GroupLayout(Panel_DSLop);
         Panel_DSLop.setLayout(Panel_DSLopLayout);
         Panel_DSLopLayout.setHorizontalGroup(
@@ -176,6 +184,8 @@ public class DSLop extends javax.swing.JPanel {
                 .addComponent(Button_DSLop_SuaLop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Button_DSLop_Xoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reload, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
         );
@@ -183,11 +193,14 @@ public class DSLop extends javax.swing.JPanel {
             Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(reload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(Button_DSLop_ThemLop)
                         .addComponent(Button_DSLop_SuaLop, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(Button_DSLop_Xoa))
+                    .addComponent(Button_DSLop_Xoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
@@ -240,56 +253,56 @@ public class DSLop extends javax.swing.JPanel {
     private void Button_DSLop_SuaLopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_SuaLopMouseClicked
         try
         {
-        if(isadmin)
-        {
-        int count =1, row=0;
-        model=(DefaultTableModel) jTable4.getModel();
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 7)==true){
-                count--;
-                row = i;
+            if(isadmin)
+            {
+            int count =1, row=0;
+            model=(DefaultTableModel) jTable4.getModel();
+            for(int i = model.getRowCount()-1;i>=0;i--){
+                if((Boolean)model.getValueAt(i, 7)==true){
+                    count--;
+                    row = i;
+                }
             }
-        }
-        if(count!=0){
-            if(count==1){
-                JOptionPane.showMessageDialog(null,"Bạn chưa chọn lớp cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+            if(count!=0){
+                if(count==1){
+                    JOptionPane.showMessageDialog(null,"Bạn chưa chọn lớp cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
+                    for(int i = model.getRowCount()-1;i>=0;i--){
+                        model.setValueAt(false,i,7);
+                   }
+                }
+                return;
             }
-            else{
-                JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
-                for(int i = model.getRowCount()-1;i>=0;i--){
-                    model.setValueAt(false,i,7);
-               }
+            System.out.println(row);
+            Vector vec =  (Vector) model.getDataVector().elementAt(row);
+            System.out.println("goi duoc ca vector1");
+            ThemSuaLop lop = new ThemSuaLop(null, true, vec);
+            String oldname=model.getValueAt(row, 0).toString();
+            String khoiname=model.getValueAt(row, 2).toString();
+            System.out.println(khoiname);
+            lop.setOldName(oldname);
+            lop.setKhoiName(khoiname);
+            lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+            lop.setVisible(true);
+            lop.setThemSuaLop(false);
+            /*
+            if(lop.getButton()){
+                model.setValueAt(lop.getTenLop(), row, 0);
+                model.setValueAt(lop.getTrungTam(), row, 1);
+                model.setValueAt(lop.getKhoiHoc(), row, 2);
+                model.setValueAt(lop.getHocKy(), row, 3);
+                model.setValueAt(lop.getGiaoVien(), row, 4);
+                model.setValueAt(lop.getSoHS(), row, 5);
+                model.setValueAt(lop.getTrangThai(), row, 7);
+                model.setValueAt(false, row,8);
             }
-            return;
-        }
-        System.out.println(row);
-        Vector vec =  (Vector) model.getDataVector().elementAt(row);
-        System.out.println("goi duoc ca vector1");
-        ThemSuaLop lop = new ThemSuaLop(null, true, vec);
-        String oldname=model.getValueAt(row, 0).toString();
-        String khoiname=model.getValueAt(row, 2).toString();
-        System.out.println(khoiname);
-        lop.setOldName(oldname);
-        lop.setKhoiName(khoiname);
-        lop.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-        lop.setVisible(true);
-        lop.setThemSuaLop(false);
-        /*
-        if(lop.getButton()){
-            model.setValueAt(lop.getTenLop(), row, 0);
-            model.setValueAt(lop.getTrungTam(), row, 1);
-            model.setValueAt(lop.getKhoiHoc(), row, 2);
-            model.setValueAt(lop.getHocKy(), row, 3);
-            model.setValueAt(lop.getGiaoVien(), row, 4);
-            model.setValueAt(lop.getSoHS(), row, 5);
-            model.setValueAt(lop.getTrangThai(), row, 7);
-            model.setValueAt(false, row,8);
-        }
-        */
-        new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
-        model=(DefaultTableModel) jTable4.getModel();
-        resize(jTable4);
-        }
+            */
+            new DataBase.DataTable().BangDanhSachLop(jTable4,ThongTin.trungtam);
+            model=(DefaultTableModel) jTable4.getModel();
+            resize(jTable4);
+            }
         }
         catch(Exception ex)
         {}
@@ -323,7 +336,8 @@ public class DSLop extends javax.swing.JPanel {
 
     private void Button_DSLop_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_DSLop_XoaMouseClicked
         // TODO add your handling code here:
-        
+        try
+        {
         if(isadmin)
         {
             boolean flags = true;
@@ -363,7 +377,22 @@ public class DSLop extends javax.swing.JPanel {
    
             }
         }
+        }
+        catch(Exception ex)
+        {}
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
+
+    private void reloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadMouseClicked
+        // TODO add your handling code here:
+        try{
+        new DataBase.DataTable().BangDanhSachLop(jTable4,idtrungtams);
+        
+        model = (DefaultTableModel) jTable4.getModel();
+        resize(jTable4);
+        }
+        catch(Exception ex)
+        {}
+    }//GEN-LAST:event_reloadMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,5 +402,6 @@ public class DSLop extends javax.swing.JPanel {
     private javax.swing.JPanel Panel_DSLop;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable4;
+    private javax.swing.JLabel reload;
     // End of variables declaration//GEN-END:variables
 }

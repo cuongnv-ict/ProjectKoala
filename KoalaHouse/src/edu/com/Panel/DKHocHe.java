@@ -460,7 +460,7 @@ public class DKHocHe extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             int row = jTable4.getSelectedRow();
             model=(DefaultTableModel) jTable4.getModel();
-            model.setValueAt(false, row, 5);
+            model.setValueAt(false, row, 7);
             //map cac truong
             int a = -1;
             int id = 0;
@@ -498,7 +498,7 @@ public class DKHocHe extends javax.swing.JPanel {
         {
             new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
         }
-        
+            resize(jTable4);
         }
         catch(Exception ex)
         {
