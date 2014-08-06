@@ -34,7 +34,9 @@ public class TongPhi extends javax.swing.JPanel {
 //        ListId = new DebtList().GetIdStudent();
         new TotalFeeManagerment().BangDanhSachTongPhi(1, tongPhi);
     }
-
+    public void reLoad(){
+        new TotalFeeManagerment().BangDanhSachTongPhi(1, tongPhi);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

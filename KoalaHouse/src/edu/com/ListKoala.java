@@ -1014,6 +1014,9 @@ public class ListKoala extends javax.swing.JFrame {
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS Đóng Đủ Phí")) {
                 dsdd.ListId = new CompleteList().BangDanhSachHocSinhDuPhi(dsdd.BangDSDu);
             }
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách Tổng Phí")) {
+                dsTongPhi.reLoad();
+            }
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách HS")) {
                 dshs.reload();
             }
