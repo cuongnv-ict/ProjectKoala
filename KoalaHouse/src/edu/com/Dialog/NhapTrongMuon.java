@@ -16,11 +16,16 @@ import edu.com.upbang.XuLiXau;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -45,18 +50,29 @@ public class NhapTrongMuon extends javax.swing.JDialog {
      * Creates new form NewJDialog
      */
     public JTabbedPane center;
+    public AutoSuggestor autoSuggestor1;
+    public AutoSuggestor autoSuggestor;
     public NhapTrongMuon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         new Get().BangTrongMuon(bangDSTrongMuon);
-        MakePopup();
         //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
         for(int i=0;i<nameClasses.size();i++)
             lop.addItem(nameClasses.get(i));
+        addComponentListener(new ComponentAdapter() {
+               
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                autoSuggestor.showPopUpWindow2();
+                super.componentMoved(e); //To change body of generated methods, choose Tools | Templates.
+            }
+                
+});
+        MakePopup();
     }
 public void MakePopup(){
-         AutoSuggestor autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+         autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
             @Override
             boolean wordTyped(String typedWord) {
 
@@ -101,6 +117,11 @@ public void MakePopup(){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
 
         bangDSTrongMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,6 +143,11 @@ public void MakePopup(){
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nhập Danh Sách Trông Muộn");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         lop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +267,9 @@ public void MakePopup(){
                                 .addGap(231, 231, 231)
                                 .addComponent(jButton1)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -303,7 +331,7 @@ public void MakePopup(){
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void lopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lopActionPerformed
-        MakePopup();
+        
     }//GEN-LAST:event_lopActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
@@ -352,6 +380,15 @@ public void MakePopup(){
         }
         }
     }//GEN-LAST:event_bangDSTrongMuonMouseClicked
+    
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formMouseReleased
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -421,13 +458,14 @@ class AutoSuggestor {
     private final JTextField textField;
     private final Window container;
     private JPanel suggestionsPanel;
-    private JWindow autoSuggestionPopUpWindow;
+    public JWindow autoSuggestionPopUpWindow;
+    public SuggestionLabel suggestionLabel1;
     private String typedWord;
     private final ArrayList dictionary = new ArrayList();
     private int currentIndexOfSpace, tW, tH;
     private DocumentListener documentListener = new DocumentListener() {
         @Override
-        public void insertUpdate(DocumentEvent de) {
+        public void insertUpdate(DocumentEvent de) {  
             checkForAndShowSuggestions();
         }
 
@@ -548,9 +586,8 @@ class AutoSuggestor {
         return sls;
     }
 
-    private void checkForAndShowSuggestions() {        
+    public void checkForAndShowSuggestions() {        
         typedWord = getCurrentlyTypedWord();
-
         suggestionsPanel.removeAll();//remove previos words/jlabels that were added
 
         //used to calcualte size of JWindow as new Jlabels are added
@@ -558,10 +595,9 @@ class AutoSuggestor {
         tH = 0;
 
         boolean added = wordTyped(typedWord);
-
         if (!added) {
             if (autoSuggestionPopUpWindow.isVisible()) {
-                autoSuggestionPopUpWindow.setVisible(false);
+                autoSuggestionPopUpWindow.setVisible(false);   
             }
         } else {
             showPopUpWindow();
@@ -569,9 +605,9 @@ class AutoSuggestor {
         }
     }
 
-    protected void addWordToSuggestions(String word) {       
+    protected void addWordToSuggestions(String word) {
         SuggestionLabel suggestionLabel = new SuggestionLabel(word, suggestionFocusedColor, suggestionsTextColor, this);
-
+        suggestionLabel1 = suggestionLabel;
         calculatePopUpWindowSize(suggestionLabel);
 
         suggestionsPanel.add(suggestionLabel);
@@ -622,7 +658,20 @@ class AutoSuggestor {
         autoSuggestionPopUpWindow.repaint();
 
     }
+    public void showPopUpWindow2() {      
+        int windowX = 0;
+        int windowY = 0;
 
+        windowX = container.getX() + textField.getX() + 5;
+        if (suggestionsPanel.getHeight() > autoSuggestionPopUpWindow.getMinimumSize().height) {
+            windowY = container.getY() + textField.getY() + textField.getHeight() + autoSuggestionPopUpWindow.getMinimumSize().height;
+        } else {
+            windowY = container.getY() + textField.getY() + textField.getHeight() + autoSuggestionPopUpWindow.getHeight();
+        }
+
+        autoSuggestionPopUpWindow.setLocation(windowX, windowY);
+
+    }
     public void setDictionary(ArrayList<String> words) {    
         dictionary.clear();
         if (words == null) {
@@ -693,12 +742,27 @@ class AutoSuggestor {
         }
         return suggestionAdded;
     }
+    public void showPopup(){
+        typedWord = getCurrentlyTypedWord();
+        suggestionsPanel.removeAll();//remove previos words/jlabels that were added
+
+        //used to calcualte size of JWindow as new Jlabels are added
+        tW = 0;
+        tH = 0;
+
+        boolean added = wordTyped(typedWord);
+       if (autoSuggestionPopUpWindow.isVisible()) {
+                autoSuggestionPopUpWindow.setVisible(false);
+                System.out.println("2");
+            }
+    }
 }
 
 class SuggestionLabel extends JLabel {
     
     private boolean focused = false;
     private final JWindow autoSuggestionsPopUpWindow;
+    public JWindow autoSuggestionsPopUpWindow1;
     private final JTextField textField;
     private final AutoSuggestor autoSuggestor;
     private Color suggestionsTextColor, suggestionBorderColor;
@@ -711,7 +775,6 @@ class SuggestionLabel extends JLabel {
         this.textField = autoSuggestor.getTextField();
         this.suggestionBorderColor = borderColor;
         this.autoSuggestionsPopUpWindow = autoSuggestor.getAutoSuggestionPopUpWindow();
-
         initComponent();
     }
 
@@ -725,7 +788,6 @@ class SuggestionLabel extends JLabel {
                 super.mouseClicked(me);
 
                 replaceWithSuggestedText();
-
                 autoSuggestionsPopUpWindow.setVisible(false);
             }
         });
@@ -753,7 +815,7 @@ class SuggestionLabel extends JLabel {
     public boolean isFocused() {
         return focused;
     }
-
+    
     private void replaceWithSuggestedText() {
         String suggestedWord = getText();
         String text = textField.getText();
