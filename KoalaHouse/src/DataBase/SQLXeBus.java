@@ -255,8 +255,6 @@ public class SQLXeBus
     {
         try
         {
-        Vector vector= new Vector();
-            Vector vector2=new Vector();
             Vector vector3= new Vector();
             DefaultTableModel tableModel;
             tableModel = (DefaultTableModel) table.getModel();
@@ -270,34 +268,21 @@ public class SQLXeBus
                     {
                         if(Boolean.parseBoolean(table.getValueAt(a-1,columncheck).toString())== true)
                         {
-                            vector.add(table.getValueAt(a-1, 1).toString());
-                         
-                            vector2.add(table.getValueAt(a-1, 2).toString());
                             vector3.add(idxebus.get(a-1));
                         }
                     }
                     //vector.add("hoasung");
-                    vector.add(null);
+                    vector3.add(null);
                     i=0;
                     int id=0;
                     String name;
                     String idtrungtam;
                     String query;
                     PreparedStatement pstmt;
-                    while(vector.get(i) !=null)
+                    while(vector3.get(i) !=null)
                     {
                         
-                    rs1 = statement.executeQuery("Select  Students_Id,FullName From students s, classes c, classes_has_students h where s.FullName= '"+vector.get(i).toString()+"' and c.NameClass= '"+vector2.get(i).toString()+"'"
-                    + " and  s.Id = h.Students_Id and h.Classes_Id = c.Id ");
-                        while(rs1.next())
-                        {
-                            if(vector.get(i).toString().equals(rs1.getString(2)))
-                            {
-                            id=rs1.getInt(1);
-                            }
-                        }
-
-                        query="delete from buslist  where idStudents = '"+id+"' and idBusList = '"+vector3.get(i)+"' ";
+                        query="delete from buslist  where  idBusList = '"+vector3.get(i)+"' ";
                         System.out.println(query);
                         pstmt = connect.prepareStatement(query);
                         pstmt.executeUpdate();
