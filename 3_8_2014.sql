@@ -1,4 +1,6 @@
--- MySQL dump 10.13  Distrib 5.6.14, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `projectkoala` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `projectkoala`;
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
 -- Host: localhost    Database: projectkoala
 -- ------------------------------------------------------
@@ -45,7 +47,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (-1352385146,1,'123','123','asd','LeTung@yahoo.com','0123456789',NULL,1,'Kế Toán'),(1000,1,'admin','admin','admin','admin','adimn',0,0,NULL),(1054812280,1,'root','root','hoalan93','LeTung@yahoo.com','0123456789',0,1,'Kế Toán');
+INSERT INTO `accounts` VALUES (1000,1,'admin','admin','admin','admin','adimn',0,0,NULL),(1054812280,1,'root','root','hoalan93','LeTung@yahoo.com','0123456789',0,1,'Kế Toán');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -569,4 +571,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-07 15:04:05
+-- Dump completed on 2014-08-07 14:52:44
