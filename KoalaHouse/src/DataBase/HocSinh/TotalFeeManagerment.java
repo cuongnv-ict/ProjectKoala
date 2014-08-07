@@ -65,7 +65,7 @@ public class TotalFeeManagerment {
             //doan lay cac truong.
             rs3 = statement.executeQuery("SELECT students.Id,students.FullName,classes.NameClass \n" +
             "FROM projectkoala.students,classes,classes_has_students\n" +
-            "where students.Id = classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id");
+            "where students.isactive = 1 and students.Id = classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id");
             if(rs3!= null)
             while (rs3.next()){
                 Object[] str = new Object[nameCol.size()];
