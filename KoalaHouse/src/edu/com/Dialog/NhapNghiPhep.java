@@ -365,8 +365,15 @@ public class NhapNghiPhep extends javax.swing.JDialog {
             String datekt = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 4).toString();
             System.out.println(String.valueOf(idNghiPhep.get(bangDSNghỉPhep.getSelectedRow())));
             int idStudent = new DataBase.SQLXeBus().getIdStudent(name, classes);
-            a.XoaNghiPhep(idStudent, datebd, datekt,idNghiPhep.get(bangDSNghỉPhep.getSelectedRow()));
-                    
+            int b[] = null;
+            for(int i=0;i<bangDSNghỉPhep.getSelectedRowCount();i++)
+            {
+                b=bangDSNghỉPhep.getSelectedRows();
+            }
+            for(int i=0;i<b.length;i++)
+            {
+            a.XoaNghiPhep(idStudent, datebd, datekt,idNghiPhep.get(b[i]));
+            }       
             new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
             idNghiPhep = new ArrayList<Integer>();
                     try{

@@ -291,7 +291,15 @@ NghiPhep a;
         }
         String batdau = jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString();
         String ketthuc = jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString();
-        a.XoaNghiPhep(idStudent, batdau, ketthuc,idNghiPhep.get(jTable1.getSelectedRow()));
+        int b[]=null;
+        for(int i=0;i<jTable1.getSelectedRowCount();i++)
+            {
+                b=jTable1.getSelectedRows();
+            }
+            for(int i=0;i<b.length;i++)
+            {
+            a.XoaNghiPhep(idStudent, batdau, ketthuc,idNghiPhep.get(b[i]));
+            }
         a.NghiPhepInfo(idStudent, jTable1);
         XuLy.setID(idNghiPhep, jTable1, 0);
         }
