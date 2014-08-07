@@ -278,7 +278,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        try{
+          try{
             if(themorsua)
             {
                 if(kiemtratuanhoc(tuanhoc.getText()))
@@ -292,20 +292,24 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                         
                         if(new DataBase.SQLkyhe().checkSemester())
                         {
-                            DataBase.SQLkyhe data = new DataBase.SQLkyhe();
-                            idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                            Calendar calendar= Calendar.getInstance();
-                            calendar.getTime();
-                            SimpleDateFormat form= new SimpleDateFormat("yyyy");
-                            String year= form.format(calendar.getTime());
-                            data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
+                            if(new DataBase.SQLkyhe().getIdStudent(ten.getText()+"", lop.getSelectedItem().toString())>0)
+                            {
+                                DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                                idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+                                Calendar calendar= Calendar.getInstance();
+                                calendar.getTime();
+                                SimpleDateFormat form= new SimpleDateFormat("yyyy");
+                                String year= form.format(calendar.getTime());
+                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
 
-                            dispose();
-                        }
-                        else
-                        {
-                             JOptionPane.showMessageDialog(null,"Bạn chưa cung cấp tuần hè của năm học này, làm ơn cài đặt tuần hè!",null,JOptionPane.INFORMATION_MESSAGE);
-                        
+                                dispose();
+                            }
+                            else
+                            {
+                                 JOptionPane.showMessageDialog(null,"Học sinh trên không có trong danh sách lớp",null,JOptionPane.INFORMATION_MESSAGE);
+                                 tongsotuan=0;
+                    
+                            }
                         }
                     }
                     else
@@ -326,6 +330,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
             {
                 if(kiemtratuanhoc(tuanhoc.getText()))
                 {
+                    
                 int idstudent;
                 String nameStudent,nameClass;
                 nameStudent=ten.getText();
@@ -334,8 +339,18 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
                 if(idstudent!=0)
                 {
-                data.suadkhoche(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan,idhoche);
-                dispose();
+                    if(new DataBase.SQLkyhe().getIdStudent(ten.getText()+"", lop.getSelectedItem().toString())>0)
+                    {
+                    data.suadkhoche(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan,idhoche);
+                    dispose();
+                    }
+                    else
+                    {
+                                 JOptionPane.showMessageDialog(null,"Học sinh trên không có trong danh sách lớp",null,JOptionPane.INFORMATION_MESSAGE);
+                                 tongsotuan=0;
+                    
+                    }
+                            
                 }
                 else
                 {
@@ -381,15 +396,24 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                         
                         if(new DataBase.SQLkyhe().checkSemester())
                         {
-                            DataBase.SQLkyhe data = new DataBase.SQLkyhe();
-                            idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                            Calendar calendar= Calendar.getInstance();
-                            calendar.getTime();
-                            SimpleDateFormat form= new SimpleDateFormat("yyyy");
-                            String year= form.format(calendar.getTime());
-                            data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
+                            if(new DataBase.SQLkyhe().getIdStudent(ten.getText()+"", lop.getSelectedItem().toString())>0)
+                            {
+                                DataBase.SQLkyhe data = new DataBase.SQLkyhe();
+                                idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
+                                Calendar calendar= Calendar.getInstance();
+                                calendar.getTime();
+                                SimpleDateFormat form= new SimpleDateFormat("yyyy");
+                                String year= form.format(calendar.getTime());
+                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
 
-                            dispose();
+                                dispose();
+                            }
+                            else
+                            {
+                                 JOptionPane.showMessageDialog(null,"Học sinh trên không có trong danh sách lớp",null,JOptionPane.INFORMATION_MESSAGE);
+                                 tongsotuan=0;
+                    
+                            }
                         }
                     }
                     else
@@ -410,6 +434,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
             {
                 if(kiemtratuanhoc(tuanhoc.getText()))
                 {
+                    
                 int idstudent;
                 String nameStudent,nameClass;
                 nameStudent=ten.getText();
@@ -418,8 +443,18 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
                 if(idstudent!=0)
                 {
-                data.suadkhoche(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan,idhoche);
-                dispose();
+                    if(new DataBase.SQLkyhe().getIdStudent(ten.getText()+"", lop.getSelectedItem().toString())>0)
+                    {
+                    data.suadkhoche(oldIdStudents, idstudent, tuanhoc.getText(),tongsotuan,idhoche);
+                    dispose();
+                    }
+                    else
+                    {
+                                 JOptionPane.showMessageDialog(null,"Học sinh trên không có trong danh sách lớp",null,JOptionPane.INFORMATION_MESSAGE);
+                                 tongsotuan=0;
+                    
+                    }
+                            
                 }
                 else
                 {

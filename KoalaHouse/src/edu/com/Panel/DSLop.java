@@ -45,7 +45,7 @@ public class DSLop extends javax.swing.JPanel {
    private int idtrungtams;
    public ListKoala listkoala;
    public JTabbedPane center;
-   private DefaultTableModel model;
+   public  DefaultTableModel model;
    private boolean isadmin=true;
    public DSLop(int idtrungtam) {
         initComponents();
@@ -116,7 +116,6 @@ public class DSLop extends javax.swing.JPanel {
         Button_DSLop_ThemLop = new javax.swing.JLabel();
         Button_DSLop_SuaLop = new javax.swing.JLabel();
         Button_DSLop_Xoa = new javax.swing.JLabel();
-        reload = new javax.swing.JLabel();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -167,13 +166,6 @@ public class DSLop extends javax.swing.JPanel {
             }
         });
 
-        reload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        reload.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reloadMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout Panel_DSLopLayout = new javax.swing.GroupLayout(Panel_DSLop);
         Panel_DSLop.setLayout(Panel_DSLopLayout);
         Panel_DSLopLayout.setHorizontalGroup(
@@ -184,8 +176,6 @@ public class DSLop extends javax.swing.JPanel {
                 .addComponent(Button_DSLop_SuaLop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Button_DSLop_Xoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reload, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
         );
@@ -194,9 +184,6 @@ public class DSLop extends javax.swing.JPanel {
             .addGroup(Panel_DSLopLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(Panel_DSLopLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(reload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(Button_DSLop_ThemLop)
                         .addComponent(Button_DSLop_SuaLop, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -382,18 +369,6 @@ public class DSLop extends javax.swing.JPanel {
         {}
     }//GEN-LAST:event_Button_DSLop_XoaMouseClicked
 
-    private void reloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadMouseClicked
-        // TODO add your handling code here:
-        try{
-        new DataBase.DataTable().BangDanhSachLop(jTable4,idtrungtams);
-        
-        model = (DefaultTableModel) jTable4.getModel();
-        resize(jTable4);
-        }
-        catch(Exception ex)
-        {}
-    }//GEN-LAST:event_reloadMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Button_DSLop_SuaLop;
@@ -401,7 +376,6 @@ public class DSLop extends javax.swing.JPanel {
     private javax.swing.JLabel Button_DSLop_Xoa;
     private javax.swing.JPanel Panel_DSLop;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JLabel reload;
+    public javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
 }

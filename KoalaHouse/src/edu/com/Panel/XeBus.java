@@ -37,7 +37,7 @@ public class XeBus extends javax.swing.JPanel {
 
     private boolean isadmin=true;
     private DefaultTableModel model;
-    ArrayList<Integer> id_xebus;
+    public ArrayList<Integer> id_xebus;
     public JTabbedPane center;
     /**
      * Creates new form XeBus
@@ -116,7 +116,6 @@ public class XeBus extends javax.swing.JPanel {
         sua = new javax.swing.JLabel();
         xoa = new javax.swing.JLabel();
         textfield_timkiem = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         nam = new javax.swing.JComboBox();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -190,6 +189,7 @@ public class XeBus extends javax.swing.JPanel {
 
         textfield_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textfield_timkiem.setText("Tìm Kiếm ");
+        textfield_timkiem.setToolTipText("Tìm Kiếm Theo Tên");
         textfield_timkiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 textfield_timkiemMouseClicked(evt);
@@ -206,14 +206,8 @@ public class XeBus extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
         nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029" }));
+        nam.setToolTipText("Lựa Chọn Năm Học");
         nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namActionPerformed(evt);
@@ -230,8 +224,6 @@ public class XeBus extends javax.swing.JPanel {
                 .addComponent(sua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,8 +239,7 @@ public class XeBus extends javax.swing.JPanel {
                         .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sua)
                             .addComponent(them)
-                            .addComponent(xoa)
-                            .addComponent(jLabel1)))
+                            .addComponent(xoa)))
                     .addGroup(Panel_DSLopLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -491,21 +482,6 @@ public class XeBus extends javax.swing.JPanel {
         
     }//GEN-LAST:event_textfield_timkiemActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here
-        textfield_timkiem.setText("Tìm Kiếm");
-        new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
-        id_xebus = new ArrayList<Integer>();
-        try{
-        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-            XuLy.setID(id_xebus, jTable4, 0);
-            resize(jTable4);
-        }
-        }
-        catch(Exception ex)
-        {}
-    }//GEN-LAST:event_jLabel1MouseClicked
-
     private void textfield_timkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfield_timkiemMouseClicked
         // TODO add your handling code here:
         textfield_timkiem.setText("");
@@ -555,10 +531,9 @@ public class XeBus extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_DSLop;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable4;
+    public javax.swing.JTable jTable4;
     private javax.swing.JComboBox nam;
     private javax.swing.JLabel sua;
     private javax.swing.JTextField textfield_timkiem;

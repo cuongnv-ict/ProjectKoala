@@ -27,8 +27,8 @@ import javax.swing.table.TableColumn;
  */
 public class DKHocHe extends javax.swing.JPanel {
     private boolean isadmin=true;
-    ArrayList<Integer> id_hoche;
-    DefaultTableModel model,modelgoc;
+    public ArrayList<Integer> id_hoche;
+    public DefaultTableModel model,modelgoc;
     public JTabbedPane center;
     
     /**
@@ -112,7 +112,6 @@ public class DKHocHe extends javax.swing.JPanel {
         xoa = new javax.swing.JLabel();
         xemlich = new javax.swing.JLabel();
         textfield_timkiem = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         nam = new javax.swing.JComboBox();
 
         jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -177,6 +176,7 @@ public class DKHocHe extends javax.swing.JPanel {
 
         textfield_timkiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textfield_timkiem.setText("Tìm Kiếm");
+        textfield_timkiem.setToolTipText("Tìm kiếm theo tên");
         textfield_timkiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 textfield_timkiemMouseClicked(evt);
@@ -193,14 +193,8 @@ public class DKHocHe extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
         nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.setToolTipText("Hiển Thị Theo Năm");
         nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namActionPerformed(evt);
@@ -219,8 +213,6 @@ public class DKHocHe extends javax.swing.JPanel {
                 .addComponent(xoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xemlich)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,7 +229,6 @@ public class DKHocHe extends javax.swing.JPanel {
                         .addComponent(xoa)
                         .addComponent(sua)
                         .addComponent(xemlich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
                         .addGroup(Panel_DSLopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(nam, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textfield_timkiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))))
@@ -256,30 +247,6 @@ public class DKHocHe extends javax.swing.JPanel {
             .addComponent(Panel_DSLop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-        textfield_timkiem.setText("Tìm Kiếm");
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-        resize(jTable4);
-
-        id_hoche = new ArrayList<Integer>();
-        try{
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                XuLy.setID(id_hoche, jTable4, 0);
-            }
-            else
-            {
-                resize(jTable4);
-            }
-        }
-        catch(Exception ex)
-        {
-            jTable4.setModel(modelgoc);
-            resize(jTable4);
-        }
-
-    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
         // TODO add your handling code here:
@@ -533,12 +500,11 @@ public class DKHocHe extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_DSLop;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable4;
+    public javax.swing.JTable jTable4;
     private javax.swing.JComboBox nam;
     private javax.swing.JLabel sua;
-    private javax.swing.JTextField textfield_timkiem;
+    public javax.swing.JTextField textfield_timkiem;
     private javax.swing.JLabel them;
     private javax.swing.JLabel xemlich;
     private javax.swing.JLabel xoa;

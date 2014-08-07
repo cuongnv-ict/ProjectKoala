@@ -54,6 +54,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,6 +98,10 @@ public class ListKoala extends javax.swing.JFrame {
 
     DefaultMutableTreeNode nodex;
     DSNo dsno;
+    XeBus xebus;
+    DSLop dsl;
+    DKHocHe dkhoche;
+    
 
     DSDongDu dsdd;
     TongPhi dsTongPhi;
@@ -578,15 +583,15 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel32.setText("Print");
 
         jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/xebus.png"))); // NOI18N
-        jLabel48.setToolTipText("Print");
+        jLabel48.setToolTipText("Xe Bus");
         jLabel48.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel48MouseClicked(evt);
             }
         });
 
-        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/dkhoche.png"))); // NOI18N
-        jLabel49.setToolTipText("Print");
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/hoche.png"))); // NOI18N
+        jLabel49.setToolTipText("Học Hè");
         jLabel49.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel49MouseClicked(evt);
@@ -598,6 +603,7 @@ public class ListKoala extends javax.swing.JFrame {
         jLabel51.setText("Học Hè");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/Save_as.png"))); // NOI18N
+        jLabel1.setToolTipText("Trông Muộn");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -606,7 +612,8 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel2.setText("Trông Muộn");
 
-        hs_thang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/Save_as.png"))); // NOI18N
+        hs_thang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/alm.png"))); // NOI18N
+        hs_thang.setToolTipText("DS Học Sinh Tháng");
         hs_thang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 hs_thangMouseClicked(evt);
@@ -615,7 +622,8 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel4.setText("DSHS theo tháng");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/DSHS.JPG"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/hoadon.png"))); // NOI18N
+        jLabel3.setToolTipText("Tổng Phí");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
@@ -624,7 +632,8 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel5.setText("Tổng Phí");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/DSHS.JPG"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/anh3.png"))); // NOI18N
+        jLabel6.setToolTipText("Danh Sách Đóng Đủ");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
@@ -633,7 +642,8 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel7.setText("Danh Sách Đóng Đủ");
 
-        hs_thang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/Save_as.png"))); // NOI18N
+        hs_thang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/leave.png"))); // NOI18N
+        hs_thang1.setToolTipText("Nghỉ Phép");
         hs_thang1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 hs_thang1MouseClicked(evt);
@@ -644,6 +654,7 @@ public class ListKoala extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/dkhoche.png"))); // NOI18N
         jLabel9.setText("jLabel9");
+        jLabel9.setToolTipText("Xuất ra Excel");
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -1029,6 +1040,54 @@ public class ListKoala extends javax.swing.JFrame {
             if(Panel_GDChinh.getTitleAt(selectedIndex).equals("Các Loại Phí")){
                 loaiPhi.reload();
             }
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS XeBus"))
+            {
+                new DataBase.SQLXeBus().BandDanhSachXeBus(xebus.jTable4);
+                xebus.id_xebus = new ArrayList<Integer>();
+                    try{
+                    if (!xebus.jTable4.getValueAt(0, 0).toString().equals("")) {
+                        XuLy.setID(xebus.id_xebus, xebus.jTable4, 0);
+                        xebus.resize(xebus.jTable4);
+                    }
+                    }
+                    catch(Exception ex)
+                    {}
+            }
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Danh Sách Lớp"))
+            {
+                try{
+                    new DataBase.DataTable().BangDanhSachLop(dsl.jTable4,ThongTin.trungtam);
+                    dsl.model = (DefaultTableModel) dsl.jTable4.getModel();
+                    dsl.resize(dsl.jTable4);
+                    }
+                    catch(Exception ex)
+                    {}
+                
+                
+            }
+            if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Đăng Ký Học Hè"))
+            {
+                        dkhoche.textfield_timkiem.setText("Tìm Kiếm");
+                        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(dkhoche.jTable4);
+                        dkhoche.resize(dkhoche.jTable4);
+
+                        dkhoche.id_hoche = new ArrayList<Integer>();
+                        try{
+                            if (!dkhoche.jTable4.getValueAt(0, 1).toString().equals("")) {
+                                XuLy.setID(dkhoche.id_hoche, dkhoche.jTable4, 0);
+                            }
+                            else
+                            {
+                                dkhoche.resize(dkhoche.jTable4);
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            dkhoche.jTable4.setModel(dkhoche.modelgoc);
+                            dkhoche.resize(dkhoche.jTable4);
+                        }
+                
+            }
         } else {
         }
     }
@@ -1105,7 +1164,7 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            DSLop dsl = new DSLop(idtrungtam);
+            dsl = new DSLop(idtrungtam);
             if (!ThongTin.isadmin) {
                 dsl.setNotAdmin();
             }
@@ -1460,6 +1519,14 @@ public class ListKoala extends javax.swing.JFrame {
                 String message = String.format("Bạn Không Thể Tạo Lớp Ở Đây");
                 JOptionPane.showMessageDialog(null, message);
             }
+            try{
+                    new DataBase.DataTable().BangDanhSachLop(dsl.jTable4,ThongTin.trungtam);
+                    dsl.model = (DefaultTableModel) dsl.jTable4.getModel();
+                    dsl.resize(dsl.jTable4);
+                    }
+                    catch(Exception ex)
+                    {}
+            
             taoTree();
         } catch (Exception ex) {
             String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đâu");
@@ -1473,6 +1540,11 @@ public class ListKoala extends javax.swing.JFrame {
         if (nodex.isLeaf()) {
             int id = 0;
             int sohs = 0;
+            int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa Lớp đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                if(click==JOptionPane.NO_OPTION){
+                    return;
+                }
+
             try {
                 ConnectData connectData = new ConnectData();
                 Connection connect;
@@ -1517,6 +1589,14 @@ public class ListKoala extends javax.swing.JFrame {
                     String message = String.format("trong lớp vẫn còn hs, bạn cần thực hiện chuyển lớp hoặc xóa hs để có thể xóa lớp");
                     JOptionPane.showMessageDialog(null, message);
                 }
+                try{
+                    new DataBase.DataTable().BangDanhSachLop(dsl.jTable4,ThongTin.trungtam);
+                    dsl.model = (DefaultTableModel) dsl.jTable4.getModel();
+                    dsl.resize(dsl.jTable4);
+                    }
+                    catch(Exception ex)
+                    {}
+            
                 taoTree();
             } catch (SQLException ex) {
 
@@ -1599,9 +1679,9 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            XeBus xebus = new XeBus();
+                    xebus = new XeBus();
             xebus.center = Panel_GDChinh;
-            //DSLop dsl = new DSLop(idtrungtam);
+    //DSLop dsl = new DSLop(idtrungtam);
             if (!ThongTin.isadmin) {
                 xebus.setNotAdmin();
             }
@@ -1621,7 +1701,7 @@ public class ListKoala extends javax.swing.JFrame {
             }
         }
         if (a == -1) {
-            DKHocHe dkhoche = new DKHocHe();
+            dkhoche = new DKHocHe();
             //DSLop dsl = new DSLop(idtrungtam);
             dkhoche.center = Panel_GDChinh;
             //dsl.listkoala = this;

@@ -619,7 +619,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/edu/com/image/xebus.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Print"/>
+            <Property name="toolTipText" type="java.lang.String" value="Xe Bus"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel48MouseClicked"/>
@@ -628,9 +628,9 @@
         <Component class="javax.swing.JLabel" name="jLabel49">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/dkhoche.png"/>
+              <Image iconType="3" name="/edu/com/image/hoche.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Print"/>
+            <Property name="toolTipText" type="java.lang.String" value="H&#x1ecd;c H&#xe8;"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel49MouseClicked"/>
@@ -651,6 +651,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/edu/com/image/Save_as.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Tr&#xf4;ng Mu&#x1ed9;n"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
@@ -664,8 +665,9 @@
         <Component class="javax.swing.JLabel" name="hs_thang">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/Save_as.png"/>
+              <Image iconType="3" name="/edu/com/image/alm.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="DS H&#x1ecd;c Sinh Th&#xe1;ng"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="hs_thangMouseClicked"/>
@@ -679,8 +681,9 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/DSHS.JPG"/>
+              <Image iconType="3" name="/edu/com/image/hoadon.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="T&#x1ed5;ng Ph&#xed;"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseClicked"/>
@@ -694,8 +697,9 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/DSHS.JPG"/>
+              <Image iconType="3" name="/edu/com/image/anh3.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Danh S&#xe1;ch &#x110;&#xf3;ng &#x110;&#x1ee7;"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel6MouseClicked"/>
@@ -709,8 +713,9 @@
         <Component class="javax.swing.JLabel" name="hs_thang1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/com/image/Save_as.png"/>
+              <Image iconType="3" name="/edu/com/image/leave.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Ngh&#x1ec9; Ph&#xe9;p"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="hs_thang1MouseClicked"/>
@@ -727,6 +732,7 @@
               <Image iconType="3" name="/edu/com/image/dkhoche.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel9"/>
+            <Property name="toolTipText" type="java.lang.String" value="Xu&#x1ea5;t ra Excel"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel9MouseClicked"/>
