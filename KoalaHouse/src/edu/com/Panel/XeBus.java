@@ -499,6 +499,16 @@ public class XeBus extends javax.swing.JPanel {
             new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString());
            }
             id_xebus = new ArrayList<Integer>();
+            try{
+                if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                XuLy.setID(id_xebus, jTable4, 0);
+                    resize(jTable4);
+            }
+            }
+            catch(Exception ex)
+            {
+            }
+
             resize(jTable4);
         }
         
@@ -521,6 +531,18 @@ public class XeBus extends javax.swing.JPanel {
             }
             
             id_xebus = new ArrayList<Integer>();
+            
+            id_xebus = new ArrayList<Integer>();
+            try{
+                if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                XuLy.setID(id_xebus, jTable4, 0);
+                    resize(jTable4);
+            }
+            }
+            catch(Exception ex)
+            {
+            //    jTable4.setModel(modelgoc);
+            }
             resize(jTable4);
         }
          catch(Exception ex)

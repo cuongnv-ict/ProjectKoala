@@ -453,18 +453,32 @@ public class DKHocHe extends javax.swing.JPanel {
     private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
         // TODO add your handling code here:
         
-        id_hoche = new ArrayList<Integer>();
         try{
             String year= nam.getSelectedItem().toString();
         if(year.equals("Tất Cả"))
         {
             
             new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                    id_hoche = new ArrayList<Integer>();
+
         }
         else
         {
             new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
+                    id_hoche = new ArrayList<Integer>();
+
         }
+                    try{
+                            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                            XuLy.setID(id_hoche, jTable4, 0);
+                                resize(jTable4);
+                        }
+                        }
+                        catch(Exception ex)
+                        {
+                            jTable4.setModel(modelgoc);
+                        }
+
             resize(jTable4);
         }
         catch(Exception ex)
@@ -476,22 +490,35 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void textfield_timkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_timkiemKeyReleased
         // TODO add your handling code here:
-         id_hoche = new ArrayList<Integer>();
         try{
             if(nam.getSelectedItem().toString().equals("Tất Cả"))
             {
                 new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4, textfield_timkiem.getText()+"");
+             id_hoche = new ArrayList<Integer>();
         
             }
             else
             {
                 new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNamVaTen(jTable4,nam.getSelectedItem().toString() , textfield_timkiem.getText()+"");
+                         id_hoche = new ArrayList<Integer>();
+
             }
-            
+                try{
+                    if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                    XuLy.setID(id_hoche, jTable4, 0);
+                        resize(jTable4);
+                }
+                }
+                catch(Exception ex)
+                {
+                    jTable4.setModel(modelgoc);
+                }
+
             resize(jTable4);
         }
         catch(Exception ex)
         {
+            
             jTable4.setModel(modelgoc);
             resize(jTable4);
         }
