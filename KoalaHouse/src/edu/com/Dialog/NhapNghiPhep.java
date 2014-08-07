@@ -13,6 +13,8 @@ import edu.com.ThongTin;
 import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
 import java.awt.Color;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -23,6 +25,8 @@ import javax.swing.JTabbedPane;
  */
 public class NhapNghiPhep extends javax.swing.JDialog {
 
+    public AutoSuggestor autoSuggestor1;
+    public AutoSuggestor autoSuggestor;
     public JTabbedPane center;
     ArrayList<Integer> idNghiPhep;
     DataBase.HocSinh.NghiPhep a;
@@ -32,6 +36,20 @@ public class NhapNghiPhep extends javax.swing.JDialog {
     public NhapNghiPhep(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ArrayList nameClasses = new Get().GetNameClass();
+        for(int i=0;i<nameClasses.size();i++)
+            lop.addItem(nameClasses.get(i));
+        addComponentListener(new ComponentAdapter() {
+               
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                autoSuggestor.showPopUpWindow2();
+                super.componentMoved(e); //To change body of generated methods, choose Tools | Templates.
+            }
+                
+        });
+        
+        MakePopup();
         a= new DataBase.HocSinh.NghiPhep();
         new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
         idNghiPhep = new ArrayList<Integer>();
@@ -43,13 +61,26 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         }
         catch(Exception ex)
         {}
-        MakePopup();
         //add ten lop vao combobox
-        ArrayList nameClasses = new Get().GetNameClass();
-        for(int i=0;i<nameClasses.size();i++)
-            lop.addItem(nameClasses.get(i));
+        
     }
-    
+
+    public void MakePopup(){
+             autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+                @Override
+                boolean wordTyped(String typedWord) {
+
+                    //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+                    Get get = new Get();
+                    String tenlop = lop.getSelectedItem().toString();
+                    ArrayList words = get.GetNameStudent(tenlop);
+                    setDictionary(words);
+                    //addToDictionary("bye");//adds a single word
+
+                    return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+                }
+            };
+    }
     public boolean sosanhngaythang( String ngaybd, String ngaykt)
     {
         String []bd;
@@ -68,23 +99,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         else return false;
     }
     
-    public void MakePopup(){
-         AutoSuggestor autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
-            @Override
-            boolean wordTyped(String typedWord) {
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                Get get = new Get();
-                String tenlop = lop.getSelectedItem().toString();
-                ArrayList words = get.GetNameStudent(tenlop);
-                setDictionary(words);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -8,6 +8,8 @@ package edu.com.Dialog;
 
 import DataBase.HocSinh.Get;
 import java.awt.Color;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,6 +23,8 @@ import javax.swing.JOptionPane;
  */
 public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
+    public AutoSuggestor autoSuggestor1;
+    public AutoSuggestor autoSuggestor;
     private int idhoche;
     private boolean button;
     private boolean themorsua;
@@ -33,11 +37,19 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         try{
-        MakePopup();
-        //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
         for(int i=0;i<nameClasses.size();i++)
             lop.addItem(nameClasses.get(i));
+        addComponentListener(new ComponentAdapter() {
+               
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                autoSuggestor.showPopUpWindow2();
+                super.componentMoved(e); //To change body of generated methods, choose Tools | Templates.
+            }
+                
+        });
+        MakePopup();
         }
         catch(Exception ex)
         {}
@@ -47,13 +59,19 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
         initComponents();
    //            new Get().BangTrongMuon(bangDSTrongMuon);
         try{
-        
-        MakePopup();
-        //add ten lop vao combobox
         ArrayList nameClasses = new Get().GetNameClass();
         for(int i=0;i<nameClasses.size();i++)
             lop.addItem(nameClasses.get(i));
-        
+        addComponentListener(new ComponentAdapter() {
+               
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                autoSuggestor.showPopUpWindow2();
+                super.componentMoved(e); //To change body of generated methods, choose Tools | Templates.
+            }
+                
+        });
+        MakePopup();
         setOldIdStudents(vector.get(1).toString(),vector.get(2).toString());
         ten.setText(vector.get(1).toString());
         lop.setSelectedItem(vector.get(2).toString());
@@ -136,21 +154,22 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
     {
         this.themorsua=a;
     }
+
     public void MakePopup(){
-         AutoSuggestor autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
-            @Override
-            boolean wordTyped(String typedWord) {
+             autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+                @Override
+                boolean wordTyped(String typedWord) {
 
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                Get get = new Get();
-                String tenlop = lop.getSelectedItem().toString();
-                ArrayList words = get.GetNameStudent(tenlop);
-                setDictionary(words);
-                //addToDictionary("bye");//adds a single word
+                    //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+                    Get get = new Get();
+                    String tenlop = lop.getSelectedItem().toString();
+                    ArrayList words = get.GetNameStudent(tenlop);
+                    setDictionary(words);
+                    //addToDictionary("bye");//adds a single word
 
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
+                    return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+                }
+            };
     }
     /**
      * This method is called from within the constructor to initialize the form.

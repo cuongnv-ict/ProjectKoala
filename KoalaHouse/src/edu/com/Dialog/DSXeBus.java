@@ -18,6 +18,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -48,6 +50,8 @@ import javax.swing.text.MaskFormatter;
  */
 public class DSXeBus extends javax.swing.JDialog {
 
+    public AutoSuggestor autoSuggestor1;
+    public AutoSuggestor autoSuggestor;
     private boolean button;
     private boolean themorsua;
     private int oldIdStudents;
@@ -61,11 +65,19 @@ public class DSXeBus extends javax.swing.JDialog {
         try
         {
    //            new Get().BangTrongMuon(bangDSTrongMuon);
-        MakePopup();
-        //add ten lop vao combobox
-        ArrayList nameClasses = new Get().GetNameClass();
-        for(int i=0;i<nameClasses.size();i++)
-            lop.addItem(nameClasses.get(i));
+                ArrayList nameClasses = new Get().GetNameClass();
+                 for(int i=0;i<nameClasses.size();i++)
+                     lop.addItem(nameClasses.get(i));
+                 addComponentListener(new ComponentAdapter() {
+
+                     @Override
+                     public void componentMoved(ComponentEvent e) {
+                         autoSuggestor.showPopUpWindow2();
+                         super.componentMoved(e); //To change body of generated methods, choose Tools | Templates.
+                     }
+
+                });
+                 MakePopup();
         }
         catch(Exception ex)
         {}
@@ -78,11 +90,20 @@ public class DSXeBus extends javax.swing.JDialog {
    //            new Get().BangTrongMuon(bangDSTrongMuon);
         try
         {
-        MakePopup();
         //add ten lop vao combobox
-        ArrayList nameClasses = new Get().GetNameClass();
-        for(int i=0;i<nameClasses.size();i++)
-            lop.addItem(nameClasses.get(i));
+                ArrayList nameClasses = new Get().GetNameClass();
+                 for(int i=0;i<nameClasses.size();i++)
+                     lop.addItem(nameClasses.get(i));
+                 addComponentListener(new ComponentAdapter() {
+
+                     @Override
+                     public void componentMoved(ComponentEvent e) {
+                         autoSuggestor.showPopUpWindow2();
+                         super.componentMoved(e); //To change body of generated methods, choose Tools | Templates.
+                     }
+
+                });
+                 MakePopup();
         ten.setText(vector.get(1).toString());
         setSelectComboBox(lop, vector.get(2));
         setSelectComboBox(luotdi, vector.get(5));
@@ -139,21 +160,22 @@ public class DSXeBus extends javax.swing.JDialog {
             } 
         }     
     }
+
     public void MakePopup(){
-         AutoSuggestor autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
-            @Override
-            boolean wordTyped(String typedWord) {
+             autoSuggestor = new AutoSuggestor(ten, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+                @Override
+                boolean wordTyped(String typedWord) {
 
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                Get get = new Get();
-                String tenlop = lop.getSelectedItem().toString();
-                ArrayList words = get.GetNameStudent(tenlop);
-                setDictionary(words);
-                //addToDictionary("bye");//adds a single word
+                    //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+                    Get get = new Get();
+                    String tenlop = lop.getSelectedItem().toString();
+                    ArrayList words = get.GetNameStudent(tenlop);
+                    setDictionary(words);
+                    //addToDictionary("bye");//adds a single word
 
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
+                    return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+                }
+            };
     }
     public boolean sosanhngaythang( String ngaybd, String ngaykt)
     {
