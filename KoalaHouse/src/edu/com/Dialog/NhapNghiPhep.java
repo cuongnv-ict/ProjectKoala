@@ -208,7 +208,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         jLabel7.setText("Ngày:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 46, 35, -1));
 
-        jLabel9.setText("Ngày bắt đầu:");
+        jLabel9.setText("Ngày kết thúc:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 77, 80, -1));
 
         jLabel10.setText("Ngày:");
