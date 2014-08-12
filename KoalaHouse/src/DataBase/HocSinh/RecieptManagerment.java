@@ -55,7 +55,7 @@ public class RecieptManagerment {
     }
     public void BangDSPhiHoaDon(int students_id,int idFac,JTable table){
        try {
-            Object [] nameColumn = {"Tên", "Từ Ngày", "Đến Ngày", "Thành Tiền"};
+            Object [] nameColumn = {"Tên Phí", "Từ Ngày", "Đến Ngày", "Thành Tiền"};
             ArrayList<Object []> data = new ArrayList<Object []>();
             rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+" and IsDebt =1)");
             while(rs1.next()){
