@@ -760,7 +760,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         printRequest.add(OrientationRequested.LANDSCAPE);
         //printRequest.add(M)
         
-        printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
+        //printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
         
         boolean toPrint = pj.printDialog(printRequest);
         
@@ -962,47 +962,48 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         grphcs.setFont(font);
         
-        grphcs.drawString(lbTitle, 150, 30);
+        grphcs.drawString(lbTitle, 140, 10);
         // ve image
-        grphcs.drawImage(imageOfLabel, 10, 20, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
+        grphcs.drawImage(imageOfLabel, 0, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
         
-        grphcs.drawString(lbDiaChi, 110, 50);
-        grphcs.drawString(lbDienThoai, 110, 70);
-        grphcs.drawString(tfDiaChi, 180, 50);
-        grphcs.drawString(tfDienThoai, 180, 70);
+        grphcs.drawString(lbDiaChi, 100, 30);
+        grphcs.drawString(lbDienThoai, 100, 50);
+        grphcs.drawString(tfDiaChi, 170, 30);
+        grphcs.drawString(tfDienThoai, 170, 50);
         font = new Font("Serif", Font.BOLD, 14);
         grphcs.setFont(font);
-        grphcs.drawString(lbHoaDon, 150, 110);
+        grphcs.drawString(lbHoaDon, 140, 90);
         font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
         
-        grphcs.drawString(lbNgay, 20, 140);
-        grphcs.drawString(cbNgay, 50, 140);
-        grphcs.drawString(lbThang, 65, 140);
-        grphcs.drawString(cbThang, 100, 140);
-        grphcs.drawString(lbNam, 105, 140);
-        grphcs.drawString(cbNam, 135, 140);
-        grphcs.drawString(lbSo, 290, 140);
-        grphcs.drawString(tfSo, 305, 140);
-        grphcs.drawString(lbHoTen, 20, 160);
-        grphcs.drawString(tfHoTen, 75, 160);
-        grphcs.drawString(lbMa, 180, 160);
-        grphcs.drawString(tfMa, 200, 160);
-        grphcs.drawString(lbCoso, 290, 160);
-        grphcs.drawString(tfCoso, 325, 160);
-        grphcs.drawString(lbNguoiThanhToan, 20, 180);
-        grphcs.drawString(tfNguoiThanhToan, 75, 180);
-        grphcs.drawString(lbLop, 180, 180);
-        grphcs.drawString(tfLop, 205, 180);
-        grphcs.drawString(lbHinhThucThanhToan, 290, 180);
-        grphcs.drawString(tfHinhThucThanhToan, 365, 180);
+        grphcs.drawString(lbNgay, 10, 120);
+        grphcs.drawString(cbNgay, 40, 120);
+        grphcs.drawString(lbThang, 55, 120);
+        grphcs.drawString(cbThang, 90, 120);
+        grphcs.drawString(lbNam, 95, 120);
+        grphcs.drawString(cbNam, 125, 120);
+        grphcs.drawString(lbSo, 280, 120);
+        grphcs.drawString(tfSo, 295, 120);
+        grphcs.drawString(lbHoTen, 10, 140);
+        grphcs.drawString(tfHoTen, 65, 140);
+        grphcs.drawString(lbMa, 170, 140);
+        grphcs.drawString(tfMa, 190, 140);
+        grphcs.drawString(lbCoso, 280, 140);
+        grphcs.drawString(tfCoso, 315, 140);
+        grphcs.drawString(lbNguoiThanhToan, 10, 160);
+        grphcs.drawString(tfNguoiThanhToan, 65, 160);
+        grphcs.drawString(lbLop, 170, 160);
+        grphcs.drawString(tfLop, 195, 160);
+        grphcs.drawString(lbHinhThucThanhToan, 280, 160);
+        grphcs.drawString(tfHinhThucThanhToan, 355, 160);
         
         String tableDataToString = "";
-        grphcs.drawString("Tên Phí ", 30, 210);
-        grphcs.drawString("Kỳ học ", 135, 210);
-        grphcs.drawString("Năm học ", 235, 210);
-        grphcs.drawString("Giá ", 335, 210);
+        grphcs.drawString("Tên Phí ", 20, 190);
+        grphcs.drawString("Kỳ học ", 125, 190);
+        grphcs.drawString("Năm học ", 225, 190);
+        grphcs.drawString("Giá ", 325, 190);
         
+        //int rowIndex = 190;
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
                 if(tableData[i][j] == null) {
@@ -1011,25 +1012,30 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     tableDataToString = (String) tableData[i][j];
                 }
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 30, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 135, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 125, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 235, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 225, (190 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 335, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 325, (190 + (i + 1) * 20));
                 }
             }
         }
         
-        grphcs.drawString(lbTongTien, 30, 500);
-        grphcs.drawString(tfTongTien, 90, 500);
-        grphcs.drawString(lbDathu, 290, 500);
-        grphcs.drawString(tfDaThu, 335, 500);
-        grphcs.drawString(lbStbc, 30, 520);
+        grphcs.drawRect(10, 180, 370, (nRow + 1) * 20);
         
-        grphcs.drawString(lbNguoiNop, 50, 550);
-        grphcs.drawString(lbNguoiThu, 280, 550);
+        int rowIndex = 190 + nRow * 20;
+        rowIndex = rowIndex + 20;
+        System.out.println(rowIndex);
+        grphcs.drawString(lbTongTien, 20, rowIndex + 20);
+        grphcs.drawString(tfTongTien, 80, rowIndex + 20);
+        grphcs.drawString(lbDathu, 280, rowIndex + 20);
+        grphcs.drawString(tfDaThu, 325, rowIndex + 20);
+        grphcs.drawString(lbStbc, 20, rowIndex + 40);
+        
+        grphcs.drawString(lbNguoiNop, 40, rowIndex + 70);
+        grphcs.drawString(lbNguoiThu, 270, rowIndex + 70);
         //grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
         //grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
         
@@ -1043,52 +1049,52 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         coorOfNguoiNop = 81 - lengthOfNguoiNop;
         coorOfNguoiThu = 327 - lengOfNguoiThu;
         
-        grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
-        grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndex + 110);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndex + 110);
         
         // print page 2.Cong them 400
-        grphcs.drawString(lbTitle, 570, 30);
+        grphcs.drawString(lbTitle, 560, 10);
         // ve image
-        grphcs.drawImage(imageOfLabel, 430, 20, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
+        grphcs.drawImage(imageOfLabel, 420, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
         
         font = new Font("Serif", Font.PLAIN, 12);
         grphcs.setFont(font);
-        grphcs.drawString(lbDiaChi, 530, 50);
-        grphcs.drawString(lbDienThoai, 530, 70);
-        grphcs.drawString(tfDiaChi, 600, 50);
-        grphcs.drawString(tfDienThoai, 600, 70);
+        grphcs.drawString(lbDiaChi, 520, 30);
+        grphcs.drawString(lbDienThoai, 520, 50);
+        grphcs.drawString(tfDiaChi, 590, 30);
+        grphcs.drawString(tfDienThoai, 590, 50);
         font = new Font("Serif", Font.BOLD, 14);
         grphcs.setFont(font);
-        grphcs.drawString(lbHoaDon, 570, 110);
+        grphcs.drawString(lbHoaDon, 560, 90);
         font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
         
-        grphcs.drawString(lbNgay, 440, 140);
-        grphcs.drawString(cbNgay, 470, 140);
-        grphcs.drawString(lbThang, 485, 140);
-        grphcs.drawString(cbThang, 520, 140);
-        grphcs.drawString(lbNam, 525, 140);
-        grphcs.drawString(cbNam, 555, 140);
-        grphcs.drawString(lbSo, 710, 140);
-        grphcs.drawString(tfSo, 725, 140);
-        grphcs.drawString(lbHoTen, 440, 160);
-        grphcs.drawString(tfHoTen, 495, 160);
-        grphcs.drawString(lbMa, 600, 160);
-        grphcs.drawString(tfMa, 620, 160);
-        grphcs.drawString(lbCoso, 710, 160);
-        grphcs.drawString(tfCoso, 745, 160);
-        grphcs.drawString(lbNguoiThanhToan, 440, 180);
-        grphcs.drawString(tfNguoiThanhToan, 495, 180);
-        grphcs.drawString(lbLop, 600, 180);
-        grphcs.drawString(tfLop, 625, 180);
-        grphcs.drawString(lbHinhThucThanhToan, 710, 180);
-        grphcs.drawString(tfHinhThucThanhToan, 785, 180);
+        grphcs.drawString(lbNgay, 430, 120);
+        grphcs.drawString(cbNgay, 460, 120);
+        grphcs.drawString(lbThang, 475, 120);
+        grphcs.drawString(cbThang, 510, 120);
+        grphcs.drawString(lbNam, 515, 120);
+        grphcs.drawString(cbNam, 545, 120);
+        grphcs.drawString(lbSo, 690, 120);
+        grphcs.drawString(tfSo, 705, 120);
+        grphcs.drawString(lbHoTen, 430, 140);
+        grphcs.drawString(tfHoTen, 485, 140);
+        grphcs.drawString(lbMa, 590, 140);
+        grphcs.drawString(tfMa, 610, 140);
+        grphcs.drawString(lbCoso, 690, 140);
+        grphcs.drawString(tfCoso, 725, 140);
+        grphcs.drawString(lbNguoiThanhToan, 430, 160);
+        grphcs.drawString(tfNguoiThanhToan, 485, 160);
+        grphcs.drawString(lbLop, 590, 160);
+        grphcs.drawString(tfLop, 615, 160);
+        grphcs.drawString(lbHinhThucThanhToan, 690, 160);
+        grphcs.drawString(tfHinhThucThanhToan, 765, 160);
         
         //String tableDataToString = "";
-        grphcs.drawString("Tên Phí ", 450, 210);
-        grphcs.drawString("Kỳ học ", 555, 210);
-        grphcs.drawString("Năm học ", 655, 210);
-        grphcs.drawString("Giá ", 755, 210);
+        grphcs.drawString("Tên Phí ", 440, 190);
+        grphcs.drawString("Kỳ học ", 545, 190);
+        grphcs.drawString("Năm học ", 645, 190);
+        grphcs.drawString("Giá ", 745, 190);
         
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
@@ -1098,25 +1104,30 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     tableDataToString = (String) tableData[i][j];
                 }
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 450, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 555, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 545, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 655, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 645, (190 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 755, (210 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 745, (190 + (i + 1) * 20));
                 }
             }
         }
         
-        grphcs.drawString(lbTongTien, 450, 500);
-        grphcs.drawString(tfTongTien, 510, 500);
-        grphcs.drawString(lbDathu, 710, 500);
-        grphcs.drawString(tfDaThu, 755, 500);
-        grphcs.drawString(lbStbc, 450, 520);
+        grphcs.drawRect(430, 180, 370, (nRow + 1) * 20);
         
-        grphcs.drawString(lbNguoiNop, 470, 550);
-        grphcs.drawString(lbNguoiThu, 700, 550);
+        int rowIndexLeft = 190 + nRow * 20;
+        rowIndexLeft = rowIndexLeft + 20;
+        
+        grphcs.drawString(lbTongTien, 440, rowIndexLeft + 20);
+        grphcs.drawString(tfTongTien, 500, rowIndexLeft + 20);
+        grphcs.drawString(lbDathu, 700, rowIndexLeft + 20);
+        grphcs.drawString(tfDaThu, 745, rowIndexLeft + 20);
+        grphcs.drawString(lbStbc, 440, rowIndexLeft + 40);
+        
+        grphcs.drawString(lbNguoiNop, 460, rowIndexLeft + 70);
+        grphcs.drawString(lbNguoiThu, 690, rowIndexLeft + 70);
         //grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
         //grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
         
@@ -1130,8 +1141,8 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         coorOfNguoiNop = 501 - lengthOfNguoiNop;
         coorOfNguoiThu = 747 - lengOfNguoiThu;
         
-        grphcs.drawString(tfNguoiNop, coorOfNguoiNop, 580);
-        grphcs.drawString(tfNguoiThu, coorOfNguoiThu, 580);
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndexLeft + 110);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndexLeft + 110);
         
         return Printable.PAGE_EXISTS;
     }
