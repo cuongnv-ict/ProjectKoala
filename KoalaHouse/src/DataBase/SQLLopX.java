@@ -204,10 +204,10 @@ public class SQLLopX {
     public boolean suaHocSinh(Vector vector, int id_student) {
         try {
             rs1 = statement.executeQuery("select students.id from classes_has_students,students where students.id = classes_has_students.Students_Id and  FullName= '" + vector.get(0).toString()+ "' and students.isactive = 1");
-            if(rs1.next()){
-                 JOptionPane.showMessageDialog(null, "Học sinh được thêm trung tên với 1 học sinh khác trong lớp\nhãy thêm ký tự đặc biệt để phân biệt", null, JOptionPane.INFORMATION_MESSAGE);
-                return false;
-            }
+//            if(rs1.next()&& rs1.getInt(1)!=id_student){
+//                 JOptionPane.showMessageDialog(null, "Học sinh được thêm trung tên với 1 học sinh khác trong lớp\nhãy thêm ký tự đặc biệt để phân biệt", null, JOptionPane.INFORMATION_MESSAGE);
+//                return false;
+//            }
 //            Pstate = connect.prepareStatement("update students set FullName=?,BrithDay=?,PhoneNumber=?,Representative=?,IsClient=? where id = " + id_student);
             Pstate = connect.prepareStatement("update students set FullName=?,BrithDay=?,PhoneNumberFather=?,Father=?,IsClient=?,Mother=?,PhoneNumberMother=?,HomePhone=?,Email=?,Sex=?, DaiDien=? where id = " + id_student);
             Pstate.setString(1, vector.get(0).toString());

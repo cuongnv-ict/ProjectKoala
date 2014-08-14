@@ -67,10 +67,10 @@ public class AStudentAndLateDay {
                     str[7] = rs1.getString(8);
                     str[8] = rs1.getString(9);
                     switch(rs1.getInt(10)){
-                       case 1:
+                       case 0:
                            str[9] = "Chính Quy";
                            break;
-                       case 0:
+                       case 1:
                             str[9] = "Chương Trình Bạn Là Khách";
                            break;
                  }

@@ -105,9 +105,11 @@ public class DangNhapVao extends javax.swing.JDialog {
 
         jLabel5.setText("Password:");
 
-        Textfield_userName.setText("root");
-
-        Textfield_password.setText("123456");
+        Textfield_userName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Textfield_userNameActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Đăng Nhập");
@@ -202,6 +204,10 @@ public class DangNhapVao extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void Textfield_userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Textfield_userNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Textfield_userNameActionPerformed
 
     /**
      * @param args the command line arguments
