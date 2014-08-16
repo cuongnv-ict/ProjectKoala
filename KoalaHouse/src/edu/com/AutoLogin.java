@@ -24,7 +24,7 @@ public class AutoLogin {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception e) {
                 }
-                dialog = new DangNhapVao(new javax.swing.JFrame(), true,true);
+                dialog = new DangNhapVao(new javax.swing.JFrame(), true,false);
                 dialog.setLocation(420, 130);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override

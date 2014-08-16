@@ -114,7 +114,7 @@ public class SQLkyhe {
     
     public void UpdateDk(String ngaybd1,String ngaykt1,String ngaybd2, String ngaykt2, String ngaybd3, String ngaykt3,
                             String ngaybd4,String ngaykt4,String ngaybd5,String ngaykt5,String ngaybd6,String ngaykt6,
-                            String ngaybd7,String ngaykt7, String ngaybd8,String ngaykt8,String year)
+                            String year)
     {
         try
         {
@@ -131,11 +131,7 @@ public class SQLkyhe {
             ngaythang[1][4]= ngaykt5;
             ngaythang[0][5]= ngaybd6;
             ngaythang[1][5]= ngaykt6;
-            ngaythang[0][6]= ngaybd7;
-            ngaythang[1][6]= ngaykt7;
-            ngaythang[0][7]= ngaybd8;
-            ngaythang[1][7]= ngaykt8;
-            for(int i=1;i<9;i++)
+            for(int i=1;i<7;i++)
             {
             String query = "update summerweek  set startDay = '" +ngaythang[0][i-1]+ "',endDay = '"+ngaythang[1][i-1]+"'  where tuanHoc= '"+i+"' and startDay like '%"+year+"%' ";
             PreparedStatement pstmt = connect.prepareStatement(query);
@@ -154,8 +150,8 @@ public class SQLkyhe {
         
     }
     public void InsertToDK(String ngaybd1,String ngaykt1,String ngaybd2, String ngaykt2, String ngaybd3, String ngaykt3,
-                            String ngaybd4,String ngaykt4,String ngaybd5,String ngaykt5,String ngaybd6,String ngaykt6,
-                            String ngaybd7,String ngaykt7, String ngaybd8,String ngaykt8)
+                            String ngaybd4,String ngaykt4,String ngaybd5,String ngaykt5,String ngaybd6,String ngaykt6
+                            )
     {
         try
         {
@@ -172,10 +168,6 @@ public class SQLkyhe {
             ngaythang[1][4]= ngaykt5;
             ngaythang[0][5]= ngaybd6;
             ngaythang[1][5]= ngaykt6;
-            ngaythang[0][6]= ngaybd7;
-            ngaythang[1][6]= ngaykt7;
-            ngaythang[0][7]= ngaybd8;
-            ngaythang[1][7]= ngaykt8;
             int id=0;
                 rs1= statement.executeQuery("select id from summerweek");
                 while(rs1.next())
@@ -183,7 +175,7 @@ public class SQLkyhe {
                     id=rs1.getInt(1);
                 }
                 id+=1;
-            for(int i=1;i<9;i++)
+            for(int i=1;i<7;i++)
             {
                 
                 String query = "insert into projectkoala.summerweek (`id`,`tuanhoc`,`startDay`,`endDay`) Values ('"+id+"','"+i+"','"+ngaythang[0][i-1]+"','"+ngaythang[1][i-1]+"')";
@@ -333,7 +325,8 @@ public class SQLkyhe {
     {
         try{
             int id=0;
-            rs1=statement.executeQuery("SELECT id FROM learnsummer ");
+            rs1=statement.
+                    executeQuery("SELECT id FROM learnsummer ");
             rs2= statement2.executeQuery("SELECT startDay FROM summerweek where startDay like '%"+year+"%' ");
             while(rs1.next())
             {

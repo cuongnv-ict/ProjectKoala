@@ -127,16 +127,15 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                 if(i>8) return false;
                 if(chuoi[i].equals("/")) break;
                 try{
-                       System.out.println(Integer.parseInt(chuoi[i]));
+                      
                     int so=Integer.parseInt(chuoi[i]);
                     for(int j=0;j<i;j++)
                     {
                        if (chuoi[i].equals(chuoi[j])) return false;
                     }
-                    if(so>8||so<1)
+                    if(so>6||so<1)
                     {
-                        System.out.println(Integer.parseInt(chuoi[i]));
-                     
+                        
                         return false;
                     }
                     

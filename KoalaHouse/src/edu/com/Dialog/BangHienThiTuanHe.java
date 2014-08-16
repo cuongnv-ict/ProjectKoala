@@ -131,7 +131,7 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
       // Vector v= new  Vector();
        String a[][]=new String [8][2];
       
-       for(int i=0; i< 8; i++)
+       for(int i=0; i< 6; i++)
        {
            a[i][0]=jTable1.getValueAt(i, 1).toString();
            a[i][1]= jTable1.getValueAt(i, 2).toString();

@@ -38,16 +38,12 @@ public class setTuanHe extends javax.swing.JDialog {
          yearS4.setSelectedItem(yearnow);
          yearS5.setSelectedItem(yearnow);
         yearS6.setSelectedItem(yearnow);
-        yearS7.setSelectedItem(yearnow);
-        yearS8.setSelectedItem(yearnow);
         yearE1.setSelectedItem(yearnow);
         yearE2.setSelectedItem(yearnow);
         yearE3.setSelectedItem(yearnow);
         yearE4.setSelectedItem(yearnow);
         yearE5.setSelectedItem(yearnow);
         yearE6.setSelectedItem(yearnow);
-        yearE7.setSelectedItem(yearnow);
-        yearE8.setSelectedItem(yearnow);
         
     }
     
@@ -95,18 +91,6 @@ public class setTuanHe extends javax.swing.JDialog {
         monthS6.setSelectedItem(ngaybd[1]);
         yearS6.setSelectedItem(ngaybd[2]);
         
-        
-        ngaybd=a[6][0].split("-");
-        dateS7.setSelectedItem(ngaybd[0]);
-        monthS7.setSelectedItem(ngaybd[1]);
-        yearS7.setSelectedItem(ngaybd[2]);
-        
-        
-        ngaybd=a[7][0].split("-");
-        dateS8.setSelectedItem(ngaybd[0]);
-        monthS8.setSelectedItem(ngaybd[1]);
-        yearS8.setSelectedItem(ngaybd[2]);
-        
         ngaykt=a[0][1].split("-");
         dateE1.setSelectedItem(ngaykt[0]);
         monthE1.setSelectedItem(ngaykt[1]);
@@ -137,15 +121,6 @@ public class setTuanHe extends javax.swing.JDialog {
         monthE6.setSelectedItem(ngaykt[1]);
         yearE6.setSelectedItem(ngaykt[2]);
         
-        ngaykt=a[6][1].split("-");
-        dateE7.setSelectedItem(ngaykt[0]);
-        monthE7.setSelectedItem(ngaykt[1]);
-        yearE7.setSelectedItem(ngaykt[2]);
-        
-        ngaykt=a[7][1].split("-");
-        dateE8.setSelectedItem(ngaykt[0]);
-        monthE8.setSelectedItem(ngaykt[1]);
-        yearE8.setSelectedItem(ngaykt[2]);
     }
     public void setUpdateOfInsert(boolean a)
     {
@@ -176,21 +151,16 @@ public class setTuanHe extends javax.swing.JDialog {
         String y4=yearS4.getSelectedItem().toString();
         String y5=yearS5.getSelectedItem().toString();
         String y6=yearS6.getSelectedItem().toString();
-        String y7=yearS7.getSelectedItem().toString();
-        String y8=yearS8.getSelectedItem().toString();
         String e1=yearE1.getSelectedItem().toString();
         String e2=yearE2.getSelectedItem().toString();
         String e3=yearE3.getSelectedItem().toString();
         String e4=yearE4.getSelectedItem().toString();
         String e5=yearE5.getSelectedItem().toString();
         String e6=yearE6.getSelectedItem().toString();
-        String e7=yearE7.getSelectedItem().toString();
-        String e8=yearE8.getSelectedItem().toString();
         
         
-        if(y1.equals(y2)&&y1.equals(y3)&&y1.equals(y4)&&y1.equals(y5)&&y1.equals(y6)&&y1.equals(y7)&&y1.equals(y8)
-                &&y1.equals(e1)&&y1.equals(e2)&&y1.equals(e3)&&y1.equals(e4)&&y1.equals(e5)&&y1.equals(e6)&&y1.equals(e7)
-                &&y1.equals(e8)
+        if(y1.equals(y2)&&y1.equals(y3)&&y1.equals(y4)&&y1.equals(y5)&&y1.equals(y6)
+                &&y1.equals(e1)&&y1.equals(e2)&&y1.equals(e3)&&y1.equals(e4)&&y1.equals(e5)&&y1.equals(e6)
                 )
             return true;
                 
@@ -296,36 +266,6 @@ public class setTuanHe extends javax.swing.JDialog {
         yearS6 = new javax.swing.JComboBox();
         jLabel57 = new javax.swing.JLabel();
         yearE4 = new javax.swing.JComboBox();
-        jLabel58 = new javax.swing.JLabel();
-        monthS7 = new javax.swing.JComboBox();
-        jLabel59 = new javax.swing.JLabel();
-        dateE7 = new javax.swing.JComboBox();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        dateE8 = new javax.swing.JComboBox();
-        jLabel63 = new javax.swing.JLabel();
-        dateS7 = new javax.swing.JComboBox();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        monthE7 = new javax.swing.JComboBox();
-        jLabel67 = new javax.swing.JLabel();
-        jLabel68 = new javax.swing.JLabel();
-        yearE8 = new javax.swing.JComboBox();
-        jLabel69 = new javax.swing.JLabel();
-        dateS8 = new javax.swing.JComboBox();
-        monthE8 = new javax.swing.JComboBox();
-        jLabel70 = new javax.swing.JLabel();
-        monthS8 = new javax.swing.JComboBox();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        yearS7 = new javax.swing.JComboBox();
-        jLabel73 = new javax.swing.JLabel();
-        jLabel74 = new javax.swing.JLabel();
-        yearE7 = new javax.swing.JComboBox();
-        yearS8 = new javax.swing.JComboBox();
-        jLabel75 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -520,68 +460,6 @@ public class setTuanHe extends javax.swing.JDialog {
 
         yearE4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
-        jLabel58.setText("Ngày Bắt Đầu:");
-
-        monthS7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        jLabel59.setText("Ngày Kết Thúc:");
-
-        dateE7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        jLabel60.setText("Ngày");
-
-        jLabel61.setText("Ngày");
-
-        jLabel62.setText("Ngày");
-
-        dateE8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        jLabel63.setText("Năm");
-
-        dateS7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        jLabel64.setText("Tháng");
-
-        jLabel65.setText("Năm");
-
-        jLabel66.setText("Tháng");
-
-        monthE7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        jLabel67.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel67.setText("Tuần 8:");
-
-        jLabel68.setText("Ngày");
-
-        yearE8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-
-        jLabel69.setText("Ngày Bắt Đầu:");
-
-        dateS8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        monthE8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        jLabel70.setText("Tháng");
-
-        monthS8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        jLabel71.setText("Tháng");
-
-        jLabel72.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel72.setText("Tuần 7:");
-
-        yearS7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-
-        jLabel73.setText("Ngày Kết Thúc:");
-
-        jLabel74.setText("Năm");
-
-        yearE7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-
-        yearS8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-
-        jLabel75.setText("Năm");
-
         jButton1.setText("Cancle");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -719,34 +597,6 @@ public class setTuanHe extends javax.swing.JDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(yearE5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel59)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel62)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(dateE8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel71)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(monthE8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel75)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(yearE8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel73)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel60)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(dateE7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel66)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(monthE7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel65)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(yearE7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jButton1)))))
@@ -836,40 +686,7 @@ public class setTuanHe extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel37)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(yearS4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel58)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel61)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(dateS7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel64)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(monthS7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel74)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(yearS7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel69)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel68)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(dateS8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel70)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(monthS8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel63)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(yearS8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(yearS4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -978,47 +795,7 @@ public class setTuanHe extends javax.swing.JDialog {
                     .addComponent(yearE6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel54)
                     .addComponent(jLabel48))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel61)
-                            .addComponent(dateS7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel64)
-                            .addComponent(monthS7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearS7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel74)
-                            .addComponent(jLabel72)
-                            .addComponent(jLabel58))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel68)
-                            .addComponent(dateS8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel70)
-                            .addComponent(monthS8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearS8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel63)
-                            .addComponent(jLabel67)
-                            .addComponent(jLabel69)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel60)
-                            .addComponent(dateE7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel66)
-                            .addComponent(monthE7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearE7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel65)
-                            .addComponent(jLabel73))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel62)
-                            .addComponent(dateE8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel71)
-                            .addComponent(monthE8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearE8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel75)
-                            .addComponent(jLabel59))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)))
@@ -1041,22 +818,17 @@ public class setTuanHe extends javax.swing.JDialog {
             String ngaybd4= yearS4.getSelectedItem().toString() + "-" + monthS4.getSelectedItem().toString() + "-" + dateS4.getSelectedItem().toString();
             String ngaybd5= yearS5.getSelectedItem().toString() + "-" + monthS5.getSelectedItem().toString() + "-" + dateS5.getSelectedItem().toString();
             String ngaybd6= yearS6.getSelectedItem().toString() + "-" + monthS6.getSelectedItem().toString() + "-" + dateS6.getSelectedItem().toString();
-            String ngaybd7= yearS7.getSelectedItem().toString() + "-" + monthS7.getSelectedItem().toString() + "-" + dateS7.getSelectedItem().toString();
-            String ngaybd8= yearS8.getSelectedItem().toString() + "-" + monthS8.getSelectedItem().toString() + "-" + dateS8.getSelectedItem().toString();
-            String ngaykt1= yearE1.getSelectedItem().toString() + "-" + monthE1.getSelectedItem().toString() + "-" + dateE1.getSelectedItem().toString();
+           String ngaykt1= yearE1.getSelectedItem().toString() + "-" + monthE1.getSelectedItem().toString() + "-" + dateE1.getSelectedItem().toString();
             String ngaykt2= yearE2.getSelectedItem().toString() + "-" + monthE2.getSelectedItem().toString() + "-" + dateE2.getSelectedItem().toString();
             String ngaykt3= yearE3.getSelectedItem().toString() + "-" + monthE3.getSelectedItem().toString() + "-" + dateE3.getSelectedItem().toString();
             String ngaykt4= yearE4.getSelectedItem().toString() + "-" + monthE4.getSelectedItem().toString() + "-" + dateE4.getSelectedItem().toString();
             String ngaykt5= yearE5.getSelectedItem().toString() + "-" + monthE5.getSelectedItem().toString() + "-" + dateE5.getSelectedItem().toString();
             String ngaykt6= yearE6.getSelectedItem().toString() + "-" + monthE6.getSelectedItem().toString() + "-" + dateE6.getSelectedItem().toString();
-            String ngaykt7= yearE7.getSelectedItem().toString() + "-" + monthE7.getSelectedItem().toString() + "-" + dateE7.getSelectedItem().toString();
-            String ngaykt8= yearE8.getSelectedItem().toString() + "-" + monthE8.getSelectedItem().toString() + "-" + dateE8.getSelectedItem().toString();
             if(sosanhngaythang(ngaybd1, ngaykt1)&&sosanhngaythang(ngaykt1, ngaybd2)&&sosanhngaythang(ngaybd2, ngaykt2)&&sosanhngaythang(ngaykt2, ngaybd3)
                     &&sosanhngaythang(ngaybd3, ngaykt3)&&sosanhngaythang(ngaykt3, ngaybd4)
                     &&sosanhngaythang(ngaybd4, ngaykt4)&&sosanhngaythang(ngaykt4, ngaybd5)&&sosanhngaythang(ngaybd5, ngaykt5)
                     &&sosanhngaythang(ngaykt5, ngaybd6)
-                    &&sosanhngaythang(ngaybd6, ngaykt6)&&sosanhngaythang(ngaykt6, ngaybd7)
-                    &&sosanhngaythang(ngaybd7, ngaykt7)&&sosanhngaythang(ngaykt7, ngaybd8)&&sosanhngaythang(ngaybd8, ngaykt8)
+                    &&sosanhngaythang(ngaybd6, ngaykt6)
                     &&sosanhnam())
             {
               
@@ -1065,7 +837,7 @@ public class setTuanHe extends javax.swing.JDialog {
                     {
                             if(!  new DataBase.SQLkyhe().CheckYearToSetUp(yearS1.getSelectedItem().toString()))
                             {
-                                new DataBase.SQLkyhe().InsertToDK(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, ngaybd7, ngaykt7, ngaybd8, ngaykt8);
+                                new DataBase.SQLkyhe().InsertToDK(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6);
                                 dispose();
                                 }
                             else
@@ -1077,9 +849,9 @@ public class setTuanHe extends javax.swing.JDialog {
                     
                     else
                     {
-                        if(this.YearOld.equals(yearE8.getSelectedItem().toString()))
+                        if(this.YearOld.equals(yearE6.getSelectedItem().toString()))
                         {
-                            new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, ngaybd7, ngaykt7, ngaybd8, ngaykt8,yearS1.getSelectedItem().toString());
+                            new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, yearS1.getSelectedItem().toString());
                             dispose();
                         }
                          else
@@ -1158,16 +930,12 @@ public class setTuanHe extends javax.swing.JDialog {
     private javax.swing.JComboBox dateE4;
     private javax.swing.JComboBox dateE5;
     private javax.swing.JComboBox dateE6;
-    private javax.swing.JComboBox dateE7;
-    private javax.swing.JComboBox dateE8;
     private javax.swing.JComboBox dateS1;
     private javax.swing.JComboBox dateS2;
     private javax.swing.JComboBox dateS3;
     private javax.swing.JComboBox dateS4;
     private javax.swing.JComboBox dateS5;
     private javax.swing.JComboBox dateS6;
-    private javax.swing.JComboBox dateS7;
-    private javax.swing.JComboBox dateS8;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -1221,26 +989,8 @@ public class setTuanHe extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox monthE1;
@@ -1249,31 +999,23 @@ public class setTuanHe extends javax.swing.JDialog {
     private javax.swing.JComboBox monthE4;
     private javax.swing.JComboBox monthE5;
     private javax.swing.JComboBox monthE6;
-    private javax.swing.JComboBox monthE7;
-    private javax.swing.JComboBox monthE8;
     private javax.swing.JComboBox monthS1;
     private javax.swing.JComboBox monthS2;
     private javax.swing.JComboBox monthS3;
     private javax.swing.JComboBox monthS4;
     private javax.swing.JComboBox monthS5;
     private javax.swing.JComboBox monthS6;
-    private javax.swing.JComboBox monthS7;
-    private javax.swing.JComboBox monthS8;
     private javax.swing.JComboBox yearE1;
     private javax.swing.JComboBox yearE2;
     private javax.swing.JComboBox yearE3;
     private javax.swing.JComboBox yearE4;
     private javax.swing.JComboBox yearE5;
     private javax.swing.JComboBox yearE6;
-    private javax.swing.JComboBox yearE7;
-    private javax.swing.JComboBox yearE8;
     private javax.swing.JComboBox yearS1;
     private javax.swing.JComboBox yearS2;
     private javax.swing.JComboBox yearS3;
     private javax.swing.JComboBox yearS4;
     private javax.swing.JComboBox yearS5;
     private javax.swing.JComboBox yearS6;
-    private javax.swing.JComboBox yearS7;
-    private javax.swing.JComboBox yearS8;
     // End of variables declaration//GEN-END:variables
 }
