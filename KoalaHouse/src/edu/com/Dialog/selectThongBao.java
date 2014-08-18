@@ -6,7 +6,10 @@
 
 package edu.com.Dialog;
 
+import edu.com.ThongBaoKyHe.ThongBaoKy2;
+import edu.com.ThongBaoKyHe.ThongBaoKy3;
 import edu.com.ThongBaoKyHe.ThongBaoKyGeVer2;
+import edu.com.ThongBaoKyHe.ThongBaoKyI;
 
 /**
  *
@@ -49,12 +52,27 @@ public class selectThongBao extends javax.swing.JDialog {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Kỳ II");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Kỳ III");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Đầu Năm (Kỳ I)");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("Kỳ Hè");
@@ -126,6 +144,31 @@ public class selectThongBao extends javax.swing.JDialog {
         tb.setAlwaysOnTop(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ThongBaoKyI tb = new ThongBaoKyI(idStudent, idFac);
+        tb.setLocation(50, 50);
+        tb.setVisible(true);
+        tb.setAlwaysOnTop(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ThongBaoKy2 tb = new ThongBaoKy2(idStudent, idFac);
+        tb.setLocation(50, 50);
+        tb.setVisible(true);
+        tb.setAlwaysOnTop(true);
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ThongBaoKy3 tb = new ThongBaoKy3(idStudent, idFac);
+        tb.setLocation(50, 50);
+        tb.setVisible(true);
+        tb.setAlwaysOnTop(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
