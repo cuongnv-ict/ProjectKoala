@@ -131,7 +131,7 @@ public class TotalFeeManagerment {
                 tongPhi += tienxebus;
                 if(tongPhi!=0)
                 str[ptongphi] = XuLy.setMoney(String.valueOf(tongPhi));
-                if(tongHoanHP>0)
+                if(tongHoanHP>=0)
                 str[ptonghoanphi] = XuLy.setMoney(String.valueOf(tongHoanHP));
                 data.add(str);
             }
@@ -219,6 +219,8 @@ public class TotalFeeManagerment {
             }
         }
         if(checkHoanPhi)
+            nameColumn.add("Tổng Hoàn HP");
+        else
             nameColumn.add("Tổng Hoàn HP");
         nameColumn.remove("Phí Học Hè");
         nameColumn.remove("Phí Trông Muộn");
