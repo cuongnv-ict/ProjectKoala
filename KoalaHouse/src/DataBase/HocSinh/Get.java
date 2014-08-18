@@ -309,4 +309,22 @@ public class Get{
         }
         return number;
      }
+     public ArrayList getTimeSummer(int year){
+         ArrayList a = new ArrayList();
+         String temp1 = null;
+         String temp2;
+         String ntm;
+         try {
+            rs1 = statement.executeQuery("SELECT startDay,endDay FROM summerweek where startDay like '%2014%'");
+            while(rs1.next()){
+                temp1 = new XuLiXau().NgayThangNam(rs1.getString(1));
+                temp2 = new XuLiXau().NgayThangNam(rs1.getString(2));
+                ntm = " từ "+temp1+" đến "+temp2;
+                a.add(ntm);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return a;
+     }
 }

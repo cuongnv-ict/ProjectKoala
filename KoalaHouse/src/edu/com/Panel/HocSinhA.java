@@ -17,6 +17,7 @@ import edu.com.Dialog.LichSuDongTien2;
 import edu.com.Dialog.Themphi;
 import edu.com.Dialog.ThongBao;
 import edu.com.Dialog.chiTietTrongMuon2;
+import edu.com.Dialog.selectThongBao;
 import edu.com.XuLy;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
@@ -578,9 +579,16 @@ public class HocSinhA extends javax.swing.JPanel {
 //        ThongBao.idhs = id;
 //        ThongBao.lop = Lop.getText();
 //        ThongBao tb = new ThongBao(null, true);
-        ThongBaoKyGeVer2 tb = new ThongBaoKyGeVer2(id,idTrungTam);
-        tb.setLocation(50, 50);
-        tb.setVisible(true);
+//        ThongBaoKyGeVer2 tb = new ThongBaoKyGeVer2(id,idTrungTam);
+//        tb.setLocation(50, 50);
+//        tb.setVisible(true);
+//        selectThongBao chonTB = new selectThongBao(id, idTrungTam);
+//        chonTB.setLocation(50, 50);
+//        chonTB.setVisible(true);
+        selectThongBao chonTb = new selectThongBao(null, true, id, idTrungTam);
+        chonTb.setLocation(170, 145);
+        chonTb.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Button_HocSinh_ThemPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HocSinh_ThemPhiActionPerformed

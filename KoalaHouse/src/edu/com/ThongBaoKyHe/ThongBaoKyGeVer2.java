@@ -7,6 +7,7 @@
 package edu.com.ThongBaoKyHe;
         
 import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.RecieptManagerment;
 import static edu.com.Dialog.HoaDon.idhs;
 import java.awt.Component;
@@ -89,12 +90,12 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
     public int idStudent;
     public static String hanNop_sta = "";
     public static String luuY_sta = "";
-    public static String tuan1_sta = "Tuần 1:";
-    public static String tuan2_sta = "Tuần 2:";
-    public static String tuan3_sta = "Tuần 3:";
-    public static String tuan4_sta = "Tuần 4:";
-    public static String tuan5_sta = "Tuần 5:";
-    public static String tuan6_sta = "Tuần 6:";
+    public String tuan1_sta = "Tuần 1:";
+    public String tuan2_sta = "Tuần 2:";
+    public String tuan3_sta = "Tuần 3:";
+    public String tuan4_sta = "Tuần 4:";
+    public String tuan5_sta = "Tuần 5:";
+    public String tuan6_sta = "Tuần 6:";
          
     //int pageBreak[];
     
@@ -116,11 +117,21 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
             ArrayList info;
             info = a.HocSinhA1(idStudent);
         tenHS.setText((String) info.get(1));
-        tenChuongTrinh.setText((String) info.get(9));
+        //tenChuongTrinh.setText((String) info.get(9));
         tenLop.setText((String) info.get(10));
         tenCoSo.setText((String) info.get(11));
         jTextField11.setText(hanNop_sta);
-        jTextArea1.setText(luuY_sta);
+        if(luuY_sta.length()>0)
+            jTextArea1.setText(luuY_sta);
+        //thoi gian hoc he
+        int yearCurrent = new Get().getYearActive(idTrungTam);
+        ArrayList tgHoche = new Get().getTimeSummer(yearCurrent);
+        tuan1_sta += (String) tgHoche.get(0);
+        tuan2_sta += (String) tgHoche.get(1);
+        tuan3_sta += (String) tgHoche.get(2);
+        tuan4_sta += (String) tgHoche.get(3);
+        tuan5_sta += (String) tgHoche.get(4);
+        tuan6_sta += (String) tgHoche.get(5);
         jTextField5.setText(tuan1_sta);
         jTextField6.setText(tuan2_sta);
         jTextField7.setText(tuan3_sta);
@@ -273,6 +284,8 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
 
         jLabel11.setText("Chương trình");
 
+        tenChuongTrinh.setText("Cả ngày - 5 ngày/tuần");
+
         jLabel12.setText("Đơn vị tính");
 
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VND", "USD" }));
@@ -316,6 +329,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jTextArea1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setText("* Học phí kỳ hè sẽ được tính theo số tuần đăng ký của phụ huynh. Khi học sinh đã đăng ký và đóng học phí thì việc thay đổi thời gian học sẽ không được chấp nhận. Trong trường hợp học sinh nghỉ học vì bất cứ lý do gì thì những ngày nghỉ này đều không được bảo lưu hay hoàn lại học phí.\n* Nhà trường sẽ không gửi thông báo học phí lần thứ hai. Nếu học phí không được nộp đúng hạn, việc giữ chỗ cho con em quý vị trong kỳ học sau sẽ không được bảo đảm.\n* Nhà trường áp dụng mức phạt lãi suất 0,5%/ tuần trên tổng chi phí chưa thanh toán khi quá thời hạn nộp ghi trong thông báo này nhưng cũng không được quá 1 tháng kể từ ngày đến hạn. Quá thời hạn trên, Nhà trường bảo lưu quyền xem xét tạm ngừng cung cấp dịch vụ nếu phía phụ huynh không có lý do giải trình chính đáng được nhà trường chấp thuận xin lùi thời hạn thanh toán.\n* Trong trường hợp thanh toán bằng chuyển khoản, đề nghị Quý vị cung cấp cho văn phòng nhà trường bản sao Ủy nhiệm chi của Ngân hàng ngay sau khi tiền được chuyển. Đề nghị ghi rõ họ tên học sinh, lớp, cơ sở, và chi tiết học phí. \n\n\n\n\t(Quý vị vui lòng mang theo thông báo này khi nộp tiền tại Văn phòng)\n");
         jTextArea1.setToolTipText("");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane4.setViewportView(jTextArea1);
@@ -336,6 +350,12 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jTextField9.setText("Tuần 5:");
 
         jTextField10.setText("Tuần 6:");
+
+        jTextField15.setText("Công ty Cổ phần mầm non Koala House");
+
+        jTextField16.setText("0021002010183");
+
+        jTextField17.setText("Vietcombank Hà Nội");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VND", "USD" }));
 
@@ -583,12 +603,6 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         //luu thong tin cho thong bao sau
         hanNop_sta = jTextField11.getText();
-        tuan1_sta = jTextField5.getText();
-        tuan2_sta = jTextField6.getText();
-        tuan3_sta = jTextField7.getText();
-        tuan4_sta = jTextField8.getText();
-        tuan5_sta = jTextField9.getText();
-        tuan6_sta = jTextField10.getText();
         luuY_sta = jTextArea1.getText();
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Printting detailt");

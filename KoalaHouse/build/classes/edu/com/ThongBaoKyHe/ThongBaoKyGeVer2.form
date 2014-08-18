@@ -635,6 +635,9 @@
             <Component class="javax.swing.JTextField" name="tenCoSo">
             </Component>
             <Component class="javax.swing.JTextField" name="tenChuongTrinh">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#x1ea3; ng&#xe0;y - 5 ng&#xe0;y/tu&#x1ea7;n"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
@@ -795,6 +798,7 @@
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="* H&#x1ecd;c ph&#xed; k&#x1ef3; h&#xe8; s&#x1ebd; &#x111;&#x1b0;&#x1ee3;c t&#xed;nh theo s&#x1ed1; tu&#x1ea7;n &#x111;&#x103;ng k&#xfd; c&#x1ee7;a ph&#x1ee5; huynh. Khi h&#x1ecd;c sinh &#x111;&#xe3; &#x111;&#x103;ng k&#xfd; v&#xe0; &#x111;&#xf3;ng h&#x1ecd;c ph&#xed; th&#xec; vi&#x1ec7;c thay &#x111;&#x1ed5;i th&#x1edd;i gian h&#x1ecd;c s&#x1ebd; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c ch&#x1ea5;p nh&#x1ead;n. Trong tr&#x1b0;&#x1edd;ng h&#x1ee3;p h&#x1ecd;c sinh ngh&#x1ec9; h&#x1ecd;c v&#xec; b&#x1ea5;t c&#x1ee9; l&#xfd; do g&#xec; th&#xec; nh&#x1eef;ng ng&#xe0;y ngh&#x1ec9; n&#xe0;y &#x111;&#x1ec1;u kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c b&#x1ea3;o l&#x1b0;u hay ho&#xe0;n l&#x1ea1;i h&#x1ecd;c ph&#xed;.&#xa;* Nh&#xe0; tr&#x1b0;&#x1edd;ng s&#x1ebd; kh&#xf4;ng g&#x1eed;i th&#xf4;ng b&#xe1;o h&#x1ecd;c ph&#xed; l&#x1ea7;n th&#x1ee9; hai. N&#x1ebf;u h&#x1ecd;c ph&#xed; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c n&#x1ed9;p &#x111;&#xfa;ng h&#x1ea1;n, vi&#x1ec7;c gi&#x1eef; ch&#x1ed7; cho con em qu&#xfd; v&#x1ecb; trong k&#x1ef3; h&#x1ecd;c sau s&#x1ebd; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c b&#x1ea3;o &#x111;&#x1ea3;m.&#xa;* Nh&#xe0; tr&#x1b0;&#x1edd;ng &#xe1;p d&#x1ee5;ng m&#x1ee9;c ph&#x1ea1;t l&#xe3;i su&#x1ea5;t 0,5%/ tu&#x1ea7;n tr&#xea;n t&#x1ed5;ng chi ph&#xed; ch&#x1b0;a thanh to&#xe1;n khi qu&#xe1; th&#x1edd;i h&#x1ea1;n n&#x1ed9;p ghi trong th&#xf4;ng b&#xe1;o n&#xe0;y nh&#x1b0;ng c&#x169;ng kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c qu&#xe1; 1 th&#xe1;ng k&#x1ec3; t&#x1eeb; ng&#xe0;y &#x111;&#x1ebf;n h&#x1ea1;n. Qu&#xe1; th&#x1edd;i h&#x1ea1;n tr&#xea;n, Nh&#xe0; tr&#x1b0;&#x1edd;ng b&#x1ea3;o l&#x1b0;u quy&#x1ec1;n xem x&#xe9;t t&#x1ea1;m ng&#x1eeb;ng cung c&#x1ea5;p d&#x1ecb;ch v&#x1ee5; n&#x1ebf;u ph&#xed;a ph&#x1ee5; huynh kh&#xf4;ng c&#xf3; l&#xfd; do gi&#x1ea3;i tr&#xec;nh ch&#xed;nh &#x111;&#xe1;ng &#x111;&#x1b0;&#x1ee3;c nh&#xe0; tr&#x1b0;&#x1edd;ng ch&#x1ea5;p thu&#x1ead;n xin l&#xf9;i th&#x1edd;i h&#x1ea1;n thanh to&#xe1;n.&#xa;* Trong tr&#x1b0;&#x1edd;ng h&#x1ee3;p thanh to&#xe1;n b&#x1eb1;ng chuy&#x1ec3;n kho&#x1ea3;n, &#x111;&#x1ec1; ngh&#x1ecb; Qu&#xfd; v&#x1ecb; cung c&#x1ea5;p cho v&#x103;n ph&#xf2;ng nh&#xe0; tr&#x1b0;&#x1edd;ng b&#x1ea3;n sao &#x1ee6;y nhi&#x1ec7;m chi c&#x1ee7;a Ng&#xe2;n h&#xe0;ng ngay sau khi ti&#x1ec1;n &#x111;&#x1b0;&#x1ee3;c chuy&#x1ec3;n. &#x110;&#x1ec1; ngh&#x1ecb; ghi r&#xf5; h&#x1ecd; t&#xea;n h&#x1ecd;c sinh, l&#x1edb;p, c&#x1a1; s&#x1edf;, v&#xe0; chi ti&#x1ebf;t h&#x1ecd;c ph&#xed;. &#xa;&#xa;&#xa;&#xa;&#x9;(Qu&#xfd; v&#x1ecb; vui l&#xf2;ng mang theo th&#xf4;ng b&#xe1;o n&#xe0;y khi n&#x1ed9;p ti&#x1ec1;n t&#x1ea1;i V&#x103;n ph&#xf2;ng)&#xa;"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                   </Properties>
@@ -837,10 +841,19 @@
             <Component class="javax.swing.JTextField" name="jTextField11">
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField15">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf4;ng ty C&#x1ed5; ph&#x1ea7;n m&#x1ea7;m non Koala House"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0021002010183"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vietcombank H&#xe0; N&#x1ed9;i"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox7">
               <Properties>
