@@ -760,7 +760,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         printRequest.add(OrientationRequested.LANDSCAPE);
         //printRequest.add(M)
         
-        //printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
+        printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
         
         boolean toPrint = pj.printDialog(printRequest);
         

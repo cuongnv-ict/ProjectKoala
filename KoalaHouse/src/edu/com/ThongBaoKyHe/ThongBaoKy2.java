@@ -583,7 +583,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         pj.setPrintable(this);
         PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
         printRequest.add(MediaSizeName.ISO_A4);
-        //printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
+        printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
         
         boolean toPrint = pj.printDialog(printRequest);
         

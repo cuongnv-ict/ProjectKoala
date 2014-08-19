@@ -552,7 +552,7 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
         pj.setPrintable(this);
         PrintRequestAttributeSet printRequest = new HashPrintRequestAttributeSet();
         printRequest.add(MediaSizeName.ISO_A4);
-        //printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
+        printRequest.add(new MediaPrintableArea((float)0.0, (float)0.0, 350, 500, MediaPrintableArea.MM));
         
         boolean toPrint = pj.printDialog(printRequest);
         
@@ -752,21 +752,21 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
         int line = 260 + (nRow)  * 20;
         line = line + 20;
         // ve cac tuan hoc
-        grphcs.drawString(lbTuanHoc, 20, line + 20);
-        grphcs.drawString(lbTuan1, 20, line + 40);
-        grphcs.drawString(lbTuan2, 20, line + 60);
-        grphcs.drawString(lbTuan3, 20, line + 80);
-        grphcs.drawString(lbTuan4, 290, line + 40);
-        grphcs.drawString(lbTuan5, 290, line + 60);
-        grphcs.drawString(lbTuan6, 290, line + 80);
-        grphcs.drawString(tfTuan1, 80, line + 40);
-        grphcs.drawString(tfTuan2, 80, line + 60);
-        grphcs.drawString(tfTuan3, 80, line + 80);
-        grphcs.drawString(tfTuan4, 350, line + 40);
-        grphcs.drawString(tfTuan5, 350, line + 60);
-        grphcs.drawString(tfTuan6, 350, line + 80);
+//        grphcs.drawString(lbTuanHoc, 20, line + 20);
+//        grphcs.drawString(lbTuan1, 20, line + 40);
+//        grphcs.drawString(lbTuan2, 20, line + 60);
+//        grphcs.drawString(lbTuan3, 20, line + 80);
+//        grphcs.drawString(lbTuan4, 290, line + 40);
+//        grphcs.drawString(lbTuan5, 290, line + 60);
+//        grphcs.drawString(lbTuan6, 290, line + 80);
+//        grphcs.drawString(tfTuan1, 80, line + 40);
+//        grphcs.drawString(tfTuan2, 80, line + 60);
+//        grphcs.drawString(tfTuan3, 80, line + 80);
+//        grphcs.drawString(tfTuan4, 350, line + 40);
+//        grphcs.drawString(tfTuan5, 350, line + 60);
+//        grphcs.drawString(tfTuan6, 350, line + 80);
         
-        line = line + 100;
+//        line = line + 100;
         // ve luu y
         //int linesOfTextArea = jTextArea1.getLineCount();
       
