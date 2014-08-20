@@ -122,7 +122,7 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
         jTextField11.setText(hanNop_sta);
         if(luuY_sta.length()>0)
             jTextArea1.setText(luuY_sta);
-        //new RecieptManagerment().BangDSPhiHoaDon(idStudent,idTrungTam, jTable1);
+        new RecieptManagerment().BangDSPhiThongBaoDauNam(idStudent,idTrungTam, jTable1);
     }
 
     /**
