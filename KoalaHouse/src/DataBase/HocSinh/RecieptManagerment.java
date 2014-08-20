@@ -164,6 +164,150 @@ public class RecieptManagerment {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    public void BangDSPhiThongBaoTrongNam(int students_id,int idFac,JTable table,boolean isHe){
+        int stt = 1;
+       try {
+            Object [] nameColumn = {"STT", "Nội dung", "Thời gian","Số Tiền"};
+            ArrayList<Object []> data = new ArrayList<Object []>();
+            if(isHe){
+            Object str[] = new Object[4];
+            str[0] = stt;
+            str[1] = "Học phí kỳ hè";
+            int phi = 0;
+            int year = new Get().getYearActive(idFac);
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where year = "+year+" and NameCost = \"Phí Học Hè\";");
+            while(rs1.next()){
+                phi = rs1.getInt(5);
+                phi = phi * 6;
+                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str[2] = tu +" -> "+den;
+            }
+            str[3] = XuLy.setMoney(String.valueOf(phi));
+            stt++;
+            data.add(str);
+        }
+            rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+" and IsDebt =1)");
+            while(rs1.next()){
+                Object str[] = new Object[4];
+                str[0] = stt;
+                str[1] = rs1.getString(4);
+                //kiem tra xem có phai trong muon hay ko
+                boolean check = false;
+                boolean kiHe = false;
+                boolean hoanHocPhi = false;
+                String ten = str[1].toString();
+                ten = ten.toLowerCase();
+                 if(((ten.indexOf("trong")!= -1)&&(ten.indexOf("muon")!= -1))||((ten.indexOf("trông")!= -1)&&(ten.indexOf("muộn")!= -1))){
+                    check = true;
+                }
+                if(((ten.indexOf("hoc")!= -1)&&(ten.indexOf("he")!= -1))||((ten.indexOf("học")!= -1)&&(ten.indexOf("hè")!= -1))){
+                    kiHe = true;
+                }
+                if(ten.indexOf("hoàn học phí")!=-1 || ten.indexOf("hoan hoc phi")!= -1){
+                    hoanHocPhi = true;
+                }
+                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str[2] = tu +" -> "+den;
+                str[3] = rs1.getString(5);
+                if(((String)str[3]).charAt(0)=='-'){
+                    str[3] = ((String)str[3]).substring(1);
+                }
+                if(check){
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
+                    int phi = Integer.parseInt((String) str[3]);
+                    int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
+                    phi = totalTime *phi;
+                    str[3] = phi;
+                }
+                if(kiHe){
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
+                    int number = new Get().GetNumberSummerWeek(students_id,ki,nam);
+                    int phi = Integer.parseInt((String) str[3]);
+                    phi = phi * number;
+                    str[3] = phi;
+                }
+                if(hoanHocPhi){
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(6).substring(0, 4);
+                    int number = new Get().GetSoNgayNghiPhep(students_id,ki,nam);
+                    int phi = Integer.parseInt((String) str[3]);
+                    phi = phi * number;
+                    str[3] = phi;
+                }
+                str[3] = XuLy.setMoney(str[3].toString());
+                data.add(str);
+                stt++;
+            }
+            //xem xem hoc sinh co bi no khong
+            rs1 = statement.executeQuery("SELECT Debt FROM projectkoala.students where Id = "+students_id+" ");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0]= stt;
+                str1[1] = "Nợ";
+                str1[2] = "";
+                str1[3] = XuLy.setMoney(rs1.getString(1));
+                data.add(str1);
+                stt++;
+                }
+            }
+            //xem co dong hoc phi dat coc khong
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0] = stt;
+                str1[1]= rs1.getString(4)+" (Hoàn Trả)";
+                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str1[2] = tu +" -> "+den;
+                str1[3] = rs1.getString(5);        
+                if(((String)str1[3]).charAt(0)=='-'){
+                    str1[3] = ((String)str1[3]).substring(1);
+                }
+                str1[3] = XuLy.setMoney(str1[3].toString());
+                data.add(str1);
+                stt++;
+                }
+            }
+            //xem co phi xe bus không
+            rs1 = statement.executeQuery("SELECT TienXe,StartDate,EndDate FROM projectkoala.buslist where idStudents = "+students_id+" and IsActive = 1;");
+            while(rs1.next()){
+                Object str1[] = new Object[5];
+                if(rs1.getInt(1)>0){
+                str1[0]= stt;
+                str1[1]= "Phí Xe Buýt";
+                String tu = new XuLiXau().NamThangNgay(rs1.getString(2));
+                String den = new XuLiXau().NamThangNgay(rs1.getString(3));
+                str1[2] = tu +" -> "+den;
+                str1[3] = XuLy.setMoney(rs1.getString(1));
+                data.add(str1);
+                stt++;
+                }
+            }
+            Object str3[] = new Object[5];
+            str3[0] = "";
+            str3[1] = "Tổng";
+            data.add(str3);
+            Object [][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+            rowColumn[i] = data.get(i);
+            model = new DefaultTableModel(rowColumn, nameColumn){
+            };
+            table.setModel(model);
+        }
+            if(data.size() ==0){
+                model = new DefaultTableModel(nameColumn, 0);
+                table.setModel(model);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
     public void BangDSPhiThongBaoDauNam(int students_id,int idFac,JTable table){
         int stt = 1;
        try {

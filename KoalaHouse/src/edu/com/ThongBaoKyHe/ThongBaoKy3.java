@@ -9,6 +9,7 @@ package edu.com.ThongBaoKyHe;
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.RecieptManagerment;
 import static edu.com.Dialog.HoaDon.idhs;
+import edu.com.XuLy;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -17,6 +18,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -35,6 +37,7 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.print.attribute.standard.MediaSizeName;
+import javax.swing.JOptionPane;
 import javax.swing.RepaintManager;
 //import org.apache.poi.;
 
@@ -123,9 +126,23 @@ public class ThongBaoKy3 extends javax.swing.JFrame implements Printable {
         if(luuY_sta.length()>0)
             jTextArea1.setText(luuY_sta);
         
-        //new RecieptManagerment().BangDSPhiHoaDon(idStudent,idTrungTam, jTable1);
+        new RecieptManagerment().BangDSPhiThongBaoTrongNam(idStudent,idTrungTam, jTable1,false);
+        Total();
     }
-
+public void Total(){
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        long Total = 0;
+        try{
+            for(int i=0;i<model.getRowCount()-1;i++){
+                Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+            }
+            String tongphi = XuLy.setMoney(String.valueOf(Total));
+            model.setValueAt(tongphi,model.getRowCount()-1 , 3);
+        }catch(java.lang.NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -284,6 +301,16 @@ public class ThongBaoKy3 extends javax.swing.JFrame implements Printable {
                 "STT", "Nội dung", "Thời gian", "Số tiền"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(1).setMinWidth(120);
@@ -599,6 +626,16 @@ public class ThongBaoKy3 extends javax.swing.JFrame implements Printable {
             }
         }
     }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            Total();
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Total();
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
