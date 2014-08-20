@@ -116,7 +116,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
             ArrayList info;
             info = a.HocSinhA1(idStudent);
         tenHS.setText((String) info.get(1));
-        tenChuongTrinh.setText((String) info.get(9));
+        tenChuongTrinh.setText("Cả ngày - 5 ngày/tuần");
         tenLop.setText((String) info.get(10));
         tenCoSo.setText((String) info.get(11));
         jTextField11.setText(hanNop_sta);

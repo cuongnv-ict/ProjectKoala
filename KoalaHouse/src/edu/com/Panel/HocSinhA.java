@@ -17,6 +17,7 @@ import edu.com.Dialog.LichSuDongTien2;
 import edu.com.Dialog.Themphi;
 import edu.com.Dialog.ThongBao;
 import edu.com.Dialog.chiTietTrongMuon2;
+import edu.com.Dialog.chonThongBao;
 import edu.com.Dialog.selectThongBao;
 import edu.com.XuLy;
 import edu.com.upbang.AddRowOfTable;
@@ -573,22 +574,10 @@ public class HocSinhA extends javax.swing.JPanel {
     }//GEN-LAST:event_Panel_hocsinhAMouseEntered
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        ThongBao.tenHS = edit_ten.getText();
-//        ThongBao.tenNguoiDaiDien = cha.getText();
-//        ThongBao.trungTam = idTrungTam;
-//        ThongBao.idhs = id;
-//        ThongBao.lop = Lop.getText();
-//        ThongBao tb = new ThongBao(null, true);
-//        ThongBaoKyGeVer2 tb = new ThongBaoKyGeVer2(id,idTrungTam);
-//        tb.setLocation(50, 50);
-//        tb.setVisible(true);
-//        selectThongBao chonTB = new selectThongBao(id, idTrungTam);
-//        chonTB.setLocation(50, 50);
-//        chonTB.setVisible(true);
-        selectThongBao chonTb = new selectThongBao(null, true, id, idTrungTam);
+
+        chonThongBao chonTb = new chonThongBao(id, idTrungTam);
         chonTb.setLocation(170, 145);
         chonTb.setVisible(true);
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Button_HocSinh_ThemPhiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HocSinh_ThemPhiActionPerformed
