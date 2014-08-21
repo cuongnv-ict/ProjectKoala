@@ -499,7 +499,7 @@ public class SQLHocSinhTheoThang {
                         str[0] = count;
                         str[1] = rs1.getString(1);
                         str[2] = rs1.getString(2);
-                        str[3] = rs1.getString(3);
+                        str[3] = XuLy.getDate(rs1.getString(3));
                         data.add(str);
                     }
 

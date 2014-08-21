@@ -66,7 +66,7 @@ public static void SapXepThang(ArrayList data, final int column) {
             public int compare(Object[] o1, Object[] o2) {
                 String[] StrArr_1 = o1[column].toString().toUpperCase().split("-");
                 String[] StrArr_2 = o2[column].toString().toUpperCase().split("-");
-                return StrArr_1[2].compareTo(StrArr_2[2]);
+                return StrArr_1[0].compareTo(StrArr_2[0]);
             }
         });
     }
