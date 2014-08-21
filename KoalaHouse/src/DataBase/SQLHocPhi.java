@@ -49,7 +49,7 @@ public class SQLHocPhi {
         try {
             Object[] nameColumn = {"STT", "Tên", "Kì học", "Năm học", "Ngày bắt đầu", "Ngày kết thúc", "Giá", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select Id,NameCost,cost.Semesters,cost.year,cost.StartDate,cost.EndDate,Amount from cost,semesters where cost.year = semesters.Year and IsActivity=1 group by  Id order by year,Semesters");
+            rs1 = statement.executeQuery("select Id,NameCost,cost.Semesters,cost.year,cost.StartDate,cost.EndDate,Amount from cost,semesters where cost.year = semesters.Year and IsActivity=1 group by  Id order by year,Semesters,NameCost");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[8];

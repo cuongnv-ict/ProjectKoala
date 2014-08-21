@@ -58,6 +58,8 @@ public class SQLJTree {
            
             connect.prepareStatement(query);
             pstmt.executeUpdate();
+            statement.close();
+            connect.close();
         }
         catch(SQLException ex){
             
@@ -67,7 +69,6 @@ public class SQLJTree {
     public boolean CheckAdmin(String user){
         boolean isAdmin = false;
         int isRoot=0;
-        System.out.println(user);
         if(user.equals("root")){
             isAdmin = true;
         }
@@ -81,12 +82,35 @@ public class SQLJTree {
             }
             if(isRoot == 1)
                 isAdmin = true;
+            statement.close();
+            connect.close();
         }
         catch (SQLException ex) {
             Logger.getLogger(DataTable.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         return isAdmin;
+    }
+    public String NameOfFaculity(int idfaculity)
+    {
+        try
+        {
+            String name="";
+            rs1= statement.executeQuery("SELECT  l1.name from projectkoala.faculties l1 where Id = '"+idfaculity+"' ");
+            while(rs1.next())
+            {
+                name=rs1.getString(1);
+            }
+            
+            statement.close();
+            connect.close();
+            return name;
+        }
+        catch(SQLException ex)
+        {
+            
+        }
+        return "khongco";
     }
 
 }

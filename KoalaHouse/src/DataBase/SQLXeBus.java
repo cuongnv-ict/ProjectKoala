@@ -7,6 +7,7 @@
 package DataBase;
 
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
+import edu.com.DataOfTableBus;
 import edu.com.ThongTin;
 import edu.com.XuLy;
 import edu.com.upbang.XuLiXau;
@@ -16,6 +17,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,34 +64,46 @@ public class SQLXeBus
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
             rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id order by  s1.FullName");
             
             
             while(rs1.next()) 
             {
+                DataOfTableBus onerow= new DataOfTableBus();
+                /*
                     Object[] str = new Object[12];
                     str[0]=rs1.getInt(1);
                     idstudent=rs1.getInt(2);
-                    /*
-                    rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' ");
-            
-                    while(rs2.next())
-                    {
-                        str[1]= rs2.getString(1);
-                        str[4]= rs2.getString(2);
-                    }
-                    */
                     str[1]= rs1.getString(10);
                     str[4]= rs1.getString(11);
-                    
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
-                    
-            
+                */  
+                    onerow.setId(rs1.getInt(1));
+                    onerow.setIdStudents(rs1.getInt(2));
+                    onerow.setFullname( rs1.getString(10));
+                    String namegia="";
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+onerow.getIdStudents()+"'");
+                   
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        onerow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
                     }
+                    onerow.setDiaChi(rs1.getString(6));
+                    onerow.setDienThoai(rs1.getString(11));
+                    onerow.setLuotDi(rs1.getInt(3));
+                    onerow.setTienXe(XuLy.setMoney(rs1.getString(5)));
+                    onerow.setDanhDau(false);
+                    onerow.setGhiChu(rs1.getString(4));
+                    onerow.setNgayBatDau(new XuLiXau().NgayThangNam(rs1.getString(7)));
+                    onerow.setNgayKetThuc(new XuLiXau().NgayThangNam(rs1.getString(8)));
+                     if(rs1.getInt(9)==1) onerow.setTinhTrang("Chưa Thanh Toán");
+                    else onerow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=onerow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+onerow.getFullname();
+                    onerow.setNameGia(namegia);
+                    data.add(onerow);
+                    /*
                     str[3]=rs1.getString(6);
                     str[5]=rs1.getString(3);
                     str[6]=XuLy.setMoney(rs1.getString(5));
@@ -98,26 +114,26 @@ public class SQLXeBus
                     if(rs1.getInt(9)==1) str[10]="Chưa Thanh Toán";
                     else str[10]="Đã Thanh Toán";
                     data.add(str);
+                    */
             }
+            
             if(data.size()==0)
             {
-                Object[] str = new Object[12];
-                str[0]="";
-                str[1]="";
-                str[2]="";
-                str[3]="";
-                str[4]="";
-                str[5]="";
-                str[6]="";
-                str[7]="";
-                str[8]="";
-                str[9]="";
-                str[10]="";
-                str[11]=false;
-                data.add(str);
-                Object[][] rowColumn = new Object[data.size()][];
-                for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                
+                Object[][] rowColumn = new Object[1][12];
+                for (int i = 0; i < 1; i++) {
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = "";
+                rowColumn[i][8] = "";
+                rowColumn[i][9] = "";
+                rowColumn[i][10] = "";
+                rowColumn[i][11] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -141,9 +157,29 @@ public class SQLXeBus
             }
             else
             {
-            Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableBus>() {
+
+                    @Override
+                    public int compare(DataOfTableBus dt1, DataOfTableBus dt2) {
+                        return (dt1.getNameGia().compareTo(dt2.getNameGia()));
+                    }
+                });
+            Object[][] rowColumn = new Object[data.size()][12];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getDiaChi();
+                rowColumn[i][4] = data.get(i).getDienThoai();
+                rowColumn[i][5] = data.get(i).getLuotDi();
+                rowColumn[i][6] = data.get(i).getTienXe();
+                rowColumn[i][7] = data.get(i).getNgayBatDau();
+                rowColumn[i][8] = data.get(i).getNgayKetThuc();
+                rowColumn[i][9] = data.get(i).getGhiChu();
+                rowColumn[i][10] = data.get(i).getTinhTrang();
+                rowColumn[i][11] = data.get(i).getDanhDau();
+                
+                
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -189,9 +225,7 @@ public class SQLXeBus
                 id= rs1.getInt(1);
             }
             id+=1;
-            System.out.println("INSERT INTO buslist  VALUES "
-                        + "('" + id + "','" +idstudent+ "','" + Integer.toString(luotdi) + "','" + ghichu + "','" + Integer.toString(tienxe) + "','" + diachi + "',1,'"+datebd+"','"+datekt+"')");
-        
+         
             statement.executeUpdate("INSERT INTO buslist  VALUES "
                         + "('" + id + "','" +idstudent+ "','" + Integer.toString(luotdi) + "','" + ghichu + "','" + Integer.toString(tienxe) + "','" + diachi + "',1,'"+datebd+"','"+datekt+"')");
             
@@ -208,9 +242,7 @@ public class SQLXeBus
     public void suaxebus(int oldIdStudent,int newIdStudent,int luotDi, String ghiChu,int tienXe,String diaChi,String datebd,String datekt,int idxebus)
     {
         try{
-            System.out.println("id xe bus la:3" +idxebus);
             String query = "update buslist  set idStudents = '" +newIdStudent+ "' , LuotDi='" + Integer.toString(luotDi) + "' , GhiChu = '" + ghiChu + "', TienXe = '" + Integer.toString(tienXe) + "', DiaChi='" + diaChi + "',StartDate='"+datebd+"',EndDate='"+datekt+"' where idStudents= '"+oldIdStudent+"' and idBusList='"+idxebus+"'";
-            System.out.println(query);
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate(); 
             
@@ -283,7 +315,6 @@ public class SQLXeBus
                     {
                         
                         query="delete from buslist  where  idBusList = '"+vector3.get(i)+"' ";
-                        System.out.println(query);
                         pstmt = connect.prepareStatement(query);
                         pstmt.executeUpdate();
                        // query = "delete from classes where `Id`='" + id + "' and Faculties_Id= '" + idtrungtam + "'";
@@ -329,64 +360,62 @@ public class SQLXeBus
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
             rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and s1.FullName like '%"+ten+"%' order by  s1.FullName");
             
             
             while(rs1.next()) 
-            {
+            {   DataOfTableBus onerow= new DataOfTableBus();
+                /*
                     Object[] str = new Object[12];
                     str[0]=rs1.getInt(1);
                     idstudent=rs1.getInt(2);
-                    /*
-                    rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' ");
-            
-                    while(rs2.next())
-                    {
-                        str[1]= rs2.getString(1);
-                        str[4]= rs2.getString(2);
-                    }
-                    */
                     str[1]= rs1.getString(10);
                     str[4]= rs1.getString(11);
-                    
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
-                    
-            
+                */  
+                    onerow.setId(rs1.getInt(1));
+                    onerow.setIdStudents(rs1.getInt(2));
+                    onerow.setFullname( rs1.getString(10));
+                    String namegia="";
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+onerow.getIdStudents()+"'");
+                   
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        onerow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
                     }
-                    str[3]=rs1.getString(6);
-                    str[5]=rs1.getString(3);
-                    str[6]=XuLy.setMoney(rs1.getString(5));
-                    str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
-                    str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
-                    str[9]=rs1.getString(4);
-                    str[11]=false;
-                    if(rs1.getInt(9)==1) str[10]="Chưa Thanh Toán";
-                    else str[10]="Đã Thanh Toán";
-                    data.add(str);
+                    onerow.setDiaChi(rs1.getString(6));
+                    onerow.setDienThoai(rs1.getString(11));
+                    onerow.setLuotDi(rs1.getInt(3));
+                    onerow.setTienXe(XuLy.setMoney(rs1.getString(5)));
+                    onerow.setDanhDau(false);
+                    onerow.setGhiChu(rs1.getString(4));
+                    onerow.setNgayBatDau(new XuLiXau().NgayThangNam(rs1.getString(7)));
+                    onerow.setNgayKetThuc(new XuLiXau().NgayThangNam(rs1.getString(8)));
+                     if(rs1.getInt(9)==1) onerow.setTinhTrang("Chưa Thanh Toán");
+                    else onerow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=onerow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+onerow.getFullname();
+                    onerow.setNameGia(namegia);
+                    data.add(onerow);
             }
-            if(data.size()==0)
+           if(data.size()==0)
             {
-                Object[] str = new Object[12];
-                str[0]="";
-                str[1]="";
-                str[2]="";
-                str[3]="";
-                str[4]="";
-                str[5]="";
-                str[6]="";
-                str[7]="";
-                str[8]="";
-                str[9]="";
-                str[10]="";
-                str[11]=false;
-                data.add(str);
-                Object[][] rowColumn = new Object[data.size()][];
-                for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                
+                Object[][] rowColumn = new Object[1][12];
+                for (int i = 0; i < 1; i++) {
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = "";
+                rowColumn[i][8] = "";
+                rowColumn[i][9] = "";
+                rowColumn[i][10] = "";
+                rowColumn[i][11] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -410,9 +439,29 @@ public class SQLXeBus
             }
             else
             {
-            Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableBus>() {
+
+                    @Override
+                    public int compare(DataOfTableBus dt1, DataOfTableBus dt2) {
+                        return (dt1.getNameGia().compareTo(dt2.getNameGia()));
+                    }
+                });
+            Object[][] rowColumn = new Object[data.size()][12];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getDiaChi();
+                rowColumn[i][4] = data.get(i).getDienThoai();
+                rowColumn[i][5] = data.get(i).getLuotDi();
+                rowColumn[i][6] = data.get(i).getTienXe();
+                rowColumn[i][7] = data.get(i).getNgayBatDau();
+                rowColumn[i][8] = data.get(i).getNgayKetThuc();
+                rowColumn[i][9] = data.get(i).getGhiChu();
+                rowColumn[i][10] = data.get(i).getTinhTrang();
+                rowColumn[i][11] = data.get(i).getDanhDau();
+                
+                
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -491,65 +540,63 @@ public class SQLXeBus
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
             rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and ( b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%') order by  s1.FullName");
             String querry = "SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%' order by  s1.FullName" ;
-                System.out.println(querry);
-            
+              
             while(rs1.next()) 
             {
+                     DataOfTableBus onerow= new DataOfTableBus();
+                /*
                     Object[] str = new Object[12];
                     str[0]=rs1.getInt(1);
                     idstudent=rs1.getInt(2);
-                    /*
-                    rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' ");
-            
-                    while(rs2.next())
-                    {
-                        str[1]= rs2.getString(1);
-                        str[4]= rs2.getString(2);
-                    }
-                    */
                     str[1]= rs1.getString(10);
                     str[4]= rs1.getString(11);
-                    
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
-                    
-            
+                */  
+                    onerow.setId(rs1.getInt(1));
+                    onerow.setIdStudents(rs1.getInt(2));
+                    onerow.setFullname( rs1.getString(10));
+                    String namegia="";
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+onerow.getIdStudents()+"'");
+                   
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        onerow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
                     }
-                    str[3]=rs1.getString(6);
-                    str[5]=rs1.getString(3);
-                    str[6]=XuLy.setMoney(rs1.getString(5));
-                    str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
-                    str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
-                    str[9]=rs1.getString(4);
-                    str[11]=false;
-                    if(rs1.getInt(9)==1) str[10]="Chưa Thanh Toán";
-                    else str[10]="Đã Thanh Toán";
-                    data.add(str);
+                    onerow.setDiaChi(rs1.getString(6));
+                    onerow.setDienThoai(rs1.getString(11));
+                    onerow.setLuotDi(rs1.getInt(3));
+                    onerow.setTienXe(XuLy.setMoney(rs1.getString(5)));
+                    onerow.setDanhDau(false);
+                    onerow.setGhiChu(rs1.getString(4));
+                    onerow.setNgayBatDau(new XuLiXau().NgayThangNam(rs1.getString(7)));
+                    onerow.setNgayKetThuc(new XuLiXau().NgayThangNam(rs1.getString(8)));
+                     if(rs1.getInt(9)==1) onerow.setTinhTrang("Chưa Thanh Toán");
+                    else onerow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=onerow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+onerow.getFullname();
+                    onerow.setNameGia(namegia);
+                    data.add(onerow);
             }
-            if(data.size()==0)
+           if(data.size()==0)
             {
-                Object[] str = new Object[12];
-                str[0]="";
-                str[1]="";
-                str[2]="";
-                str[3]="";
-                str[4]="";
-                str[5]="";
-                str[6]="";
-                str[7]="";
-                str[8]="";
-                str[9]="";
-                str[10]="";
-                str[11]=false;
-                data.add(str);
-                Object[][] rowColumn = new Object[data.size()][];
-                for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                
+                Object[][] rowColumn = new Object[1][12];
+                for (int i = 0; i < 1; i++) {
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = "";
+                rowColumn[i][8] = "";
+                rowColumn[i][9] = "";
+                rowColumn[i][10] = "";
+                rowColumn[i][11] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -573,9 +620,29 @@ public class SQLXeBus
             }
             else
             {
-            Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableBus>() {
+
+                    @Override
+                    public int compare(DataOfTableBus dt1, DataOfTableBus dt2) {
+                        return (dt1.getNameGia().compareTo(dt2.getNameGia()));
+                    }
+                });
+            Object[][] rowColumn = new Object[data.size()][12];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getDiaChi();
+                rowColumn[i][4] = data.get(i).getDienThoai();
+                rowColumn[i][5] = data.get(i).getLuotDi();
+                rowColumn[i][6] = data.get(i).getTienXe();
+                rowColumn[i][7] = data.get(i).getNgayBatDau();
+                rowColumn[i][8] = data.get(i).getNgayKetThuc();
+                rowColumn[i][9] = data.get(i).getGhiChu();
+                rowColumn[i][10] = data.get(i).getTinhTrang();
+                rowColumn[i][11] = data.get(i).getDanhDau();
+                
+                
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -620,64 +687,63 @@ public class SQLXeBus
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
             rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and (b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%') and s1.FullName like '%"+name+"%'  order by  s1.FullName");
             
             
             while(rs1.next()) 
             {
+                     DataOfTableBus onerow= new DataOfTableBus();
+                /*
                     Object[] str = new Object[12];
                     str[0]=rs1.getInt(1);
                     idstudent=rs1.getInt(2);
-                    /*
-                    rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' ");
-            
-                    while(rs2.next())
-                    {
-                        str[1]= rs2.getString(1);
-                        str[4]= rs2.getString(2);
-                    }
-                    */
                     str[1]= rs1.getString(10);
                     str[4]= rs1.getString(11);
-                    
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
-                    
-            
+                */  
+                    onerow.setId(rs1.getInt(1));
+                    onerow.setIdStudents(rs1.getInt(2));
+                    onerow.setFullname( rs1.getString(10));
+                    String namegia="";
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+onerow.getIdStudents()+"'");
+                   
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        onerow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
                     }
-                    str[3]=rs1.getString(6);
-                    str[5]=rs1.getString(3);
-                    str[6]=XuLy.setMoney(rs1.getString(5));
-                    str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
-                    str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
-                    str[9]=rs1.getString(4);
-                    str[11]=false;
-                    if(rs1.getInt(9)==1) str[10]="Chưa Thanh Toán";
-                    else str[10]="Đã Thanh Toán";
-                    data.add(str);
+                    onerow.setDiaChi(rs1.getString(6));
+                    onerow.setDienThoai(rs1.getString(11));
+                    onerow.setLuotDi(rs1.getInt(3));
+                    onerow.setTienXe(XuLy.setMoney(rs1.getString(5)));
+                    onerow.setDanhDau(false);
+                    onerow.setGhiChu(rs1.getString(4));
+                    onerow.setNgayBatDau(new XuLiXau().NgayThangNam(rs1.getString(7)));
+                    onerow.setNgayKetThuc(new XuLiXau().NgayThangNam(rs1.getString(8)));
+                     if(rs1.getInt(9)==1) onerow.setTinhTrang("Chưa Thanh Toán");
+                    else onerow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=onerow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+onerow.getFullname();
+                    onerow.setNameGia(namegia);
+                    data.add(onerow);
             }
-            if(data.size()==0)
+           if(data.size()==0)
             {
-                Object[] str = new Object[12];
-                str[0]="";
-                str[1]="";
-                str[2]="";
-                str[3]="";
-                str[4]="";
-                str[5]="";
-                str[6]="";
-                str[7]="";
-                str[8]="";
-                str[9]="";
-                str[10]="";
-                str[11]=false;
-                data.add(str);
-                Object[][] rowColumn = new Object[data.size()][];
-                for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                
+                Object[][] rowColumn = new Object[1][12];
+                for (int i = 0; i < 1; i++) {
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = "";
+                rowColumn[i][8] = "";
+                rowColumn[i][9] = "";
+                rowColumn[i][10] = "";
+                rowColumn[i][11] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 
@@ -701,9 +767,29 @@ public class SQLXeBus
             }
             else
             {
-            Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableBus>() {
+
+                    @Override
+                    public int compare(DataOfTableBus dt1, DataOfTableBus dt2) {
+                        return (dt1.getNameGia().compareTo(dt2.getNameGia()));
+                    }
+                });
+            Object[][] rowColumn = new Object[data.size()][12];
             for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getDiaChi();
+                rowColumn[i][4] = data.get(i).getDienThoai();
+                rowColumn[i][5] = data.get(i).getLuotDi();
+                rowColumn[i][6] = data.get(i).getTienXe();
+                rowColumn[i][7] = data.get(i).getNgayBatDau();
+                rowColumn[i][8] = data.get(i).getNgayKetThuc();
+                rowColumn[i][9] = data.get(i).getGhiChu();
+                rowColumn[i][10] = data.get(i).getTinhTrang();
+                rowColumn[i][11] = data.get(i).getDanhDau();
+                
+                
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, 

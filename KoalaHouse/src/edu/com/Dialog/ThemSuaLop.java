@@ -5,12 +5,14 @@
 package edu.com.Dialog;
 
 import DataBase.DataTable;
+import DataBase.SQLJTree;
 import edu.com.ThongTin;
 import java.awt.TextField;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Vector;
+import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -31,14 +33,16 @@ public class ThemSuaLop extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-        trungtam.setSelectedIndex(ThongTin.trungtam-1);
+        //trungtam.setSelectedIndex(ThongTin.trungtam-1);
+        String nameOfFacu=new SQLJTree().NameOfFaculity(ThongTin.trungtam);
+        trungtam.addItem(nameOfFacu);
+        trungtam.setSelectedItem(nameOfFacu);
         trungtam.setEnabled(false);
 
     }
      public ThemSuaLop(java.awt.Frame parent, boolean modal,Vector vector) {
         super(parent, modal);
         initComponents();
-        System.out.println("goi duoc ca vector2");
         ten.setText(vector.get(0).toString());
         giaovien.setText(vector.get(4).toString());
         sohs.setValue(Integer.parseInt(vector.get(6).toString()));
@@ -47,7 +51,13 @@ public class ThemSuaLop extends javax.swing.JDialog {
         setSelectComboBox(trinhdo, vector.get(2)); 
         DongY.setText("Chỉnh sửa");
         title.setText("Chỉnh sửa thông tin lớp");
+        String nameOfFacu=new SQLJTree().NameOfFaculity(ThongTin.trungtam);
+        trungtam.addItem(nameOfFacu);
+        trungtam.setSelectedItem(nameOfFacu);
+        trungtam.setEnabled(false);
         this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+        
+
      }
     private void setSelectComboBox(JComboBox x,Object obj){
         for(int i =0;i<x.getItemCount();i++){
@@ -152,8 +162,6 @@ public class ThemSuaLop extends javax.swing.JDialog {
 
         ky.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
 
-        trungtam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Koala House Bà Triệu", "Koala House Hoàng Ngân", "Koala House Phan Kế Bình", "Koala House Nguyễn Huy Tự" }));
-
         DongY.setText("Thêm lớp");
         DongY.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -192,28 +200,29 @@ public class ThemSuaLop extends javax.swing.JDialog {
                 .addGap(10, 10, 10)
                 .addComponent(trinhdo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(giaovien, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(ky, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(sohs, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(209, 209, 209)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(trungtam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(411, 411, 411)
                 .addComponent(DongY, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(HuyBo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(sohs, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(209, 209, 209)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(trungtam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(giaovien, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(ky, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -60,7 +60,7 @@ public class DataTable {
             if (idtrungtam == 5) {
                 rs1 = statement.executeQuery("select * from classes order by Faculties_Id ");
             } else {
-                rs1 = statement.executeQuery("select * from classes where Faculties_Id= '" + idtrungtam + "' order by Faculties_Id ");
+                rs1 = statement.executeQuery("select * from classes where Faculties_Id= '" + idtrungtam + "' order by  NameClass ");
             }
             while (rs1.next()) {
 
@@ -81,6 +81,7 @@ public class DataTable {
                         str[2] = "MẪU GIÁO (KINDERGARTEN)";
                         break;
                 }
+                /*
                 switch (rs1.getInt(2)) {
                     case 1:
                         str[1] = "Koala House Bà Triệu";
@@ -95,6 +96,8 @@ public class DataTable {
                         str[1] = "Koala House Nguyễn Huy Tưởng";
                         break;
                 }
+                */
+                str[1] = new SQLJTree().NameOfFaculity(ThongTin.trungtam);
                 str[3] = rs1.getString(3);
                 str[4] = rs1.getString(7);
                 /*str[5] = rs1.getString(8);

@@ -6,6 +6,7 @@
 
 package DataBase;
 
+import edu.com.DataOfTableHocHe;
 import edu.com.upbang.XuLiXau;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +16,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -206,59 +209,71 @@ public class SQLkyhe {
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableHocHe> data = new ArrayList<DataOfTableHocHe>();
             rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName,class,l1.IsActive FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents order by s1.FullName ");
 
             while(rs1.next()) 
             {       
-                    
-                    Object[] str = new Object[8];
-                    str[0]=rs1.getInt(1);
-                    idstudent=rs1.getInt(2);
+                
+                    DataOfTableHocHe newrow= new DataOfTableHocHe();
+                    newrow.setId(rs1.getInt(1));
+                    newrow.setIdStudents(rs1.getInt(2));
+                    newrow.setFullname(rs1.getString(5));
+                    String namegia="";
+                    //Object[] str = new Object[8];
+                    //str[0]=rs1.getInt(1);
+                    //idstudent=rs1.getInt(2);
                     
                     //rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' order by FullName ");
             
                     //while(rs2.next())
                     //{
-                        str[1]= rs1.getString(5);
+                    //    str[1]= rs1.getString(5);
                         //str[4]= rs2.getString(2);
                     //}
                     
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+newrow.getIdStudents()+"'");
                     
             
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        newrow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
+                  
+                        //str[2]= rs2.getString(1);
                     }
                     //str[2]=rs1.getString(2);
-                    str[3]=rs1.getString(3);
-                    str[4]=rs1.getString(4);
+                    newrow.setTuanHoc(rs1.getString(3));
+                    newrow.setTongSoTuan(rs1.getInt(4));
+                    newrow.setNam(rs1.getString(6));
+                    newrow.setDanhDau(false);
+                    if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
+                    else newrow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=newrow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+newrow.getFullname();
+                    newrow.setNameGia(namegia);
+                  
+                    //str[3]=rs1.getString(3);
+                    //str[4]=rs1.getString(4);
                     //str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     //str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     //str[9]=rs1.getString(4);
-                    str[5]=rs1.getString(6);
-                    if(rs1.getInt(7)==1) str[6]="Chưa Thanh Toán";
-                    else str[6]="Đã Thanh Toán";
-                    str[7]=false;
-                    data.add(str);
+                    //str[5]=rs1.getString(6);
+                    //str[7]=false;
+                    data.add(newrow);
             }     
             if(data.size()==0) 
             {
-                Object[] str = new Object[8];
-                    str[0]="";
-                    str[1]="";
-                    str[2]="";
-                    str[3]="";
-                    str[4]="";
-                    str[5]="";
-                    str[6]="";
-                    str[7]=false;
-                    data.add(str);
-               Object[][] rowColumn = new Object[1][];
+               Object[][] rowColumn = new Object[1][8];
                 for (int i = 0; i < 1; i++) {
-                    
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
@@ -282,9 +297,24 @@ public class SQLkyhe {
             }
             else
             {
-                Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableHocHe>() {
+
+                    @Override
+                    public int compare(DataOfTableHocHe o1, DataOfTableHocHe o2) {
+                        return o1.getNameGia().compareTo(o2.getNameGia());
+                    }
+                });
+                Object[][] rowColumn = new Object[data.size()][8];
                 for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getTuanHoc();
+                rowColumn[i][4] = data.get(i).getTongSoTuan();
+                rowColumn[i][5] = data.get(i).getNam();
+                rowColumn[i][6] = data.get(i).getTinhTrang();
+                rowColumn[i][7] = data.get(i).getDanhDau();
+               
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
                         java.lang.Integer.class, java.lang.String.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
@@ -485,62 +515,74 @@ public class SQLkyhe {
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableHocHe> data = new ArrayList<DataOfTableHocHe>();
             rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName,class,l1.IsActive FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents and s1.FullName like '%"+ten+"%' order by s1.FullName ");
 
             while(rs1.next()) 
             {       
-                    
-                    Object[] str = new Object[8];
-                    str[0]=rs1.getInt(1);
-                    idstudent=rs1.getInt(2);
+                
+                    DataOfTableHocHe newrow= new DataOfTableHocHe();
+                    newrow.setId(rs1.getInt(1));
+                    newrow.setIdStudents(rs1.getInt(2));
+                    newrow.setFullname(rs1.getString(5));
+                    String namegia="";
+                    //Object[] str = new Object[8];
+                    //str[0]=rs1.getInt(1);
+                    //idstudent=rs1.getInt(2);
                     
                     //rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' order by FullName ");
             
                     //while(rs2.next())
                     //{
-                        str[1]= rs1.getString(5);
+                    //    str[1]= rs1.getString(5);
                         //str[4]= rs2.getString(2);
                     //}
                     
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+newrow.getIdStudents()+"'");
                     
             
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        newrow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
+                  
+                        //str[2]= rs2.getString(1);
                     }
                     //str[2]=rs1.getString(2);
-                    str[3]=rs1.getString(3);
-                    str[4]=rs1.getString(4);
+                    newrow.setTuanHoc(rs1.getString(3));
+                    newrow.setTongSoTuan(rs1.getInt(4));
+                    newrow.setNam(rs1.getString(6));
+                    newrow.setDanhDau(false);
+                    if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
+                    else newrow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=newrow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+newrow.getFullname();
+                    newrow.setNameGia(namegia);
+                  
+                    //str[3]=rs1.getString(3);
+                    //str[4]=rs1.getString(4);
                     //str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     //str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     //str[9]=rs1.getString(4);
-                    str[5]=rs1.getString(6);
-                    if(rs1.getInt(7)==1) str[6]="Chưa Thanh Toán";
-                    else str[6]="Đã Thanh Toán";
-                    str[7]=false;
-                    data.add(str);
+                    //str[5]=rs1.getString(6);
+                    //str[7]=false;
+                    data.add(newrow);
             }     
             if(data.size()==0) 
             {
-                Object[] str = new Object[8];
-                    str[0]="";
-                    str[1]="";
-                    str[2]="";
-                    str[3]="";
-                    str[4]="";
-                    str[5]="";
-                    str[6]="";
-                    str[7]=false;
-                    data.add(str);
-               Object[][] rowColumn = new Object[1][];
+               Object[][] rowColumn = new Object[1][8];
                 for (int i = 0; i < 1; i++) {
-                    
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class,java.lang.Integer.class,java.lang.String.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -561,12 +603,27 @@ public class SQLkyhe {
             }
             else
             {
-                Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableHocHe>() {
+
+                    @Override
+                    public int compare(DataOfTableHocHe o1, DataOfTableHocHe o2) {
+                        return o1.getNameGia().compareTo(o2.getNameGia());
+                    }
+                });
+                Object[][] rowColumn = new Object[data.size()][8];
                 for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getTuanHoc();
+                rowColumn[i][4] = data.get(i).getTongSoTuan();
+                rowColumn[i][5] = data.get(i).getNam();
+                rowColumn[i][6] = data.get(i).getTinhTrang();
+                rowColumn[i][7] = data.get(i).getDanhDau();
+               
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -663,62 +720,74 @@ public class SQLkyhe {
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableHocHe> data = new ArrayList<DataOfTableHocHe>();
             rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName,class,l1.IsActive FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents and l1.class like '%"+year+"%' order by s1.FullName ");
 
             while(rs1.next()) 
             {       
-                    
-                    Object[] str = new Object[8];
-                    str[0]=rs1.getInt(1);
-                    idstudent=rs1.getInt(2);
+                
+                    DataOfTableHocHe newrow= new DataOfTableHocHe();
+                    newrow.setId(rs1.getInt(1));
+                    newrow.setIdStudents(rs1.getInt(2));
+                    newrow.setFullname(rs1.getString(5));
+                    String namegia="";
+                    //Object[] str = new Object[8];
+                    //str[0]=rs1.getInt(1);
+                    //idstudent=rs1.getInt(2);
                     
                     //rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' order by FullName ");
             
                     //while(rs2.next())
                     //{
-                        str[1]= rs1.getString(5);
+                    //    str[1]= rs1.getString(5);
                         //str[4]= rs2.getString(2);
                     //}
                     
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+newrow.getIdStudents()+"'");
                     
             
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        newrow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
+                  
+                        //str[2]= rs2.getString(1);
                     }
                     //str[2]=rs1.getString(2);
-                    str[3]=rs1.getString(3);
-                    str[4]=rs1.getString(4);
+                    newrow.setTuanHoc(rs1.getString(3));
+                    newrow.setTongSoTuan(rs1.getInt(4));
+                    newrow.setNam(rs1.getString(6));
+                    newrow.setDanhDau(false);
+                    if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
+                    else newrow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=newrow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+newrow.getFullname();
+                    newrow.setNameGia(namegia);
+                  
+                    //str[3]=rs1.getString(3);
+                    //str[4]=rs1.getString(4);
                     //str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     //str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     //str[9]=rs1.getString(4);
-                    str[5]=rs1.getString(6);
-                    if(rs1.getInt(7)==1) str[6]="Chưa Thanh Toán";
-                    else str[6]="Đã Thanh Toán";
-                    str[7]=false;
-                    data.add(str);
+                    //str[5]=rs1.getString(6);
+                    //str[7]=false;
+                    data.add(newrow);
             }     
             if(data.size()==0) 
             {
-                Object[] str = new Object[8];
-                    str[0]="";
-                    str[1]="";
-                    str[2]="";
-                    str[3]="";
-                    str[4]="";
-                    str[5]="";
-                    str[6]="";
-                    str[7]=false;
-                    data.add(str);
-               Object[][] rowColumn = new Object[1][];
+               Object[][] rowColumn = new Object[1][8];
                 for (int i = 0; i < 1; i++) {
-                    
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -739,12 +808,27 @@ public class SQLkyhe {
             }
             else
             {
-                Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableHocHe>() {
+
+                    @Override
+                    public int compare(DataOfTableHocHe o1, DataOfTableHocHe o2) {
+                        return o1.getNameGia().compareTo(o2.getNameGia());
+                    }
+                });
+                Object[][] rowColumn = new Object[data.size()][8];
                 for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getTuanHoc();
+                rowColumn[i][4] = data.get(i).getTongSoTuan();
+                rowColumn[i][5] = data.get(i).getNam();
+                rowColumn[i][6] = data.get(i).getTinhTrang();
+                rowColumn[i][7] = data.get(i).getDanhDau();
+               
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -788,62 +872,74 @@ public class SQLkyhe {
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7)};
-            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            ArrayList<DataOfTableHocHe> data = new ArrayList<DataOfTableHocHe>();
             rs1 = statement.executeQuery("SELECT l1.id,idStudents,tuanhoc,soTuanHoc,s1.FullName,class,l1.IsActive FROM projectkoala.learnsummer l1,projectkoala.students s1 where s1.Id=l1.idStudents and l1.class like '%"+year+"%' and s1.FullName like '%"+name+"%' order by s1.FullName ");
 
             while(rs1.next()) 
             {       
-                    
-                    Object[] str = new Object[8];
-                    str[0]=rs1.getInt(1);
-                    idstudent=rs1.getInt(2);
+                
+                    DataOfTableHocHe newrow= new DataOfTableHocHe();
+                    newrow.setId(rs1.getInt(1));
+                    newrow.setIdStudents(rs1.getInt(2));
+                    newrow.setFullname(rs1.getString(5));
+                    String namegia="";
+                    //Object[] str = new Object[8];
+                    //str[0]=rs1.getInt(1);
+                    //idstudent=rs1.getInt(2);
                     
                     //rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' order by FullName ");
             
                     //while(rs2.next())
                     //{
-                        str[1]= rs1.getString(5);
+                    //    str[1]= rs1.getString(5);
                         //str[4]= rs2.getString(2);
                     //}
                     
-                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+idstudent+"'");
+                    rs2 = statement2.executeQuery("Select NameClass,semesters From classes c1, classes_has_students c2 where c1.Id=c2.Classes_Id And c2.Students_Id= '"+newrow.getIdStudents()+"'");
                     
             
                     while(rs2.next())
                     {
-                        str[2]= rs2.getString(1);
+                        newrow.setClasses(rs2.getString(1));
+                        namegia=rs2.getString(1);
+                  
+                        //str[2]= rs2.getString(1);
                     }
                     //str[2]=rs1.getString(2);
-                    str[3]=rs1.getString(3);
-                    str[4]=rs1.getString(4);
+                    newrow.setTuanHoc(rs1.getString(3));
+                    newrow.setTongSoTuan(rs1.getInt(4));
+                    newrow.setNam(rs1.getString(6));
+                    newrow.setDanhDau(false);
+                    if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
+                    else newrow.setTinhTrang("Đã Thanh Toán");
+                    String temp[]=newrow.getFullname().split(" ");
+                    namegia+= temp[temp.length-1]+newrow.getFullname();
+                    newrow.setNameGia(namegia);
+                  
+                    //str[3]=rs1.getString(3);
+                    //str[4]=rs1.getString(4);
                     //str[7]=new XuLiXau().NgayThangNam(rs1.getString(7));
                     //str[8]=new XuLiXau().NgayThangNam(rs1.getString(8));
                     //str[9]=rs1.getString(4);
-                    str[5]=rs1.getString(6);
-                    if(rs1.getInt(7)==1) str[6]="Chưa Thanh Toán";
-                    else str[6]="Đã Thanh Toán";
-                    str[7]=false;
-                    data.add(str);
+                    //str[5]=rs1.getString(6);
+                    //str[7]=false;
+                    data.add(newrow);
             }     
             if(data.size()==0) 
             {
-                Object[] str = new Object[8];
-                    str[0]="";
-                    str[1]="";
-                    str[2]="";
-                    str[3]="";
-                    str[4]="";
-                    str[5]="";
-                    str[6]="";
-                    str[7]=false;
-                    data.add(str);
-               Object[][] rowColumn = new Object[1][];
+               Object[][] rowColumn = new Object[1][8];
                 for (int i = 0; i < 1; i++) {
-                    
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = "";
+                rowColumn[i][1] = "";
+                rowColumn[i][2] = "";
+                rowColumn[i][3] = "";
+                rowColumn[i][4] = "";
+                rowColumn[i][5] = "";
+                rowColumn[i][6] = "";
+                rowColumn[i][7] = false;
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class,java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -864,12 +960,27 @@ public class SQLkyhe {
             }
             else
             {
-                Object[][] rowColumn = new Object[data.size()][];
+                Collections.sort(data,new Comparator<DataOfTableHocHe>() {
+
+                    @Override
+                    public int compare(DataOfTableHocHe o1, DataOfTableHocHe o2) {
+                        return o1.getNameGia().compareTo(o2.getNameGia());
+                    }
+                });
+                Object[][] rowColumn = new Object[data.size()][8];
                 for (int i = 0; i < data.size(); i++) {
-                rowColumn[i] = data.get(i);
+                rowColumn[i][0] = data.get(i).getId();
+                rowColumn[i][1] = data.get(i).getFullname();
+                rowColumn[i][2] = data.get(i).getClasses();
+                rowColumn[i][3] = data.get(i).getTuanHoc();
+                rowColumn[i][4] = data.get(i).getTongSoTuan();
+                rowColumn[i][5] = data.get(i).getNam();
+                rowColumn[i][6] = data.get(i).getTinhTrang();
+                rowColumn[i][7] = data.get(i).getDanhDau();
+               
                 model = new DefaultTableModel(rowColumn, nameColumn) {
                     Class[] types = new Class[]{
-                        java.lang.Integer.class,java.lang.Integer.class, java.lang.String.class,java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
+                        java.lang.Integer.class, java.lang.String.class, java.lang.String.class,java.lang.String.class, java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.Boolean.class
                     };
 
                     public Class getColumnClass(int columnIndex) {
@@ -896,6 +1007,7 @@ public class SQLkyhe {
             connect.close();
 
         }
+
         catch(SQLException exception)
         {
                    

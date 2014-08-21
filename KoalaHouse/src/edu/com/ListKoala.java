@@ -158,17 +158,8 @@ public class ListKoala extends javax.swing.JFrame {
         idfali = data.LayTenTrungTam(nameadmin);
         ThongTin.trungtam = idfali;
         this.idtrungtam = idfali;
-        if (idfali == 1) {
-            tentrungtam = "Koala House Bà Triệu";
-        } else if (idfali == 2) {
-            tentrungtam = "Koala House Hoàng Ngân";
-        } else if (idfali == 3) {
-            tentrungtam = "Koala House Phan Kế Bính";
-        } else if (idfali == 4) {
-            tentrungtam = "Koala House Nguyễn Huy Tự";
-        } else if (idfali == 0) {
-            tentrungtam = "Koala House Nguyễn Đức Sơn";
-        }
+              tentrungtam=new DataBase.SQLJTree().NameOfFaculity(idfali);
+
         if (idfali != 5) {
             treeNode2 = new javax.swing.tree.DefaultMutableTreeNode(tentrungtam);
             treeNode1.add(treeNode2);

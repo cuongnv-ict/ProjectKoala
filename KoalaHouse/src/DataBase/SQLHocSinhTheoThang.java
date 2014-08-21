@@ -254,7 +254,7 @@ public class SQLHocSinhTheoThang {
             ArrayList<Integer> info = new ArrayList<Integer>();
             Object[] nameColumn = {"STT", "Tên học sinh", "Lớp cũ", "Lớp hè", "Ngày nhập học", "Ngày nghỉ học", "Số tuần học hè"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("SELECT students.FullName,Class_Id_Old,classes.NameClass,students.isactive,students.NhapHoc,students.NghiHoc,sex,students.Id from students,classes,classes_has_students where students.Id = classes_has_students.Students_Id and classes_has_students.Classes_Id = classes.Id and students.isactive != -1 order by classes.Levels_Id,Class_Id_Old ASC");
+            rs1 = statement.executeQuery("SELECT students.FullName,Class_Id_Old,classes.NameClass,students.isactive,students.NhapHoc,students.NghiHoc,sex,students.Id from students,classes,classes_has_students where students.Id = classes_has_students.Students_Id and classes_has_students.Classes_Id = classes.Id and students.isactive != -1 order by classes.Levels_Id,classes.NameClass ASC");
             int count_stt = 1;
             String temp = "a-b-c-b-a";
             String old = "a-b-c-b-a";

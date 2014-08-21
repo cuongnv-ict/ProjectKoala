@@ -21,6 +21,7 @@ import javax.swing.table.TableColumnModel;
  * @author nguyen van cuong
  */
 public class XuLy {
+    public static ArrayList temp;
     /*
      * Sử dụng để xắp xếp dữ liệu
      * Đầu vào gồm bảng sắp xếp và vị trí cột muốn sắp xếp tính từ 1;
@@ -205,4 +206,6 @@ public class XuLy {
         }
         return arrSize;
     }
+   
+        
 }
