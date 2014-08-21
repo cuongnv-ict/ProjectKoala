@@ -20,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -113,6 +115,7 @@ public class Get{
                 str[3] = rs1.getInt(4);
                 data.add(str);
             }
+            Collections.sort(data,new TrongMuonComparator());
             Object [][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++){
             rowColumn[i] = data.get(i);
@@ -327,4 +330,30 @@ public class Get{
         }
          return a;
      }
+}
+class TrongMuonComparator implements Comparator<Object[]> {
+
+ public int compare(Object[] o1, Object[] o2) {
+  if(!o1[1].equals(o2[1])){
+      return 0;
+  }
+  String age1 = (String) o1[0];
+  String[] x= age1.split(" ");
+  String age2 = (String) o2[0];
+  String[] y = age2.split(" ");
+  String name1 = x[x.length-1];
+  String name2 = y[y.length-1];
+  if(name1.compareTo(name2)>=1){
+   return 1;
+  }else if(name1.compareTo(name2)==0){
+      if(age1.compareTo(age2)>=1)
+          return 1;
+      else if(age1.compareTo(age2)==0)
+          return 0;
+      else
+          return -1;
+  }else{
+   return -1;
+  }
+ }
 }

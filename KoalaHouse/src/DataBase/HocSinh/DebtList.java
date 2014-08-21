@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,6 +70,14 @@ public class DebtList {
                     data.add(str);
                 }
             }
+            //sap xep lai
+            Collections.sort(data,new DebtListComparator());
+            for(int i=0;i<data.size();i++){
+            Object[] st;
+            st = (Object[]) data.get(i);
+            st[0] = i+1;
+            }
+            
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
@@ -98,22 +108,62 @@ public class DebtList {
         }
     }
 public ArrayList GetIdStudent(){
-    ArrayList data = new ArrayList();
+   ArrayList<Object[]> data = new ArrayList<Object[]>();
         try {
-            rs1 = statement.executeQuery("select * from students where (students.id in(select students_id from students_has_cost "
-                    + "where isdebt = 1 group by students_id) or debt!=0 or students.id in(SELECT idStudents FROM buslist where IsActive = 1)) and isactive = 1");
+        rs1 = statement.executeQuery("select students.Id,fullname,NameClass,students.Faculties_Id\n" +
+            "from students,classes,classes_has_students \n" +
+            "where (students.id in(select students_id from students_has_cost where isdebt = 1\n" +
+            "group by students_id) or debt!=0 or students.id in(SELECT idStudents FROM buslist where IsActive = 1)) \n" +
+            "and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
+            "and classes_has_students.Students_Id = students.Id");    
             while (rs1.next()) {
-                Object str = new Object();
-                str = rs1.getString(1);
+                Object[] str = new Object[4];
+                str[0] = rs1.getString(1);
+                str[1] = rs1.getString(2);
+                str[2] = rs1.getString(3);
                 int idHS = rs1.getInt(1);
-                int idFac = rs1.getInt(2);
+                int idFac = rs1.getInt(4);
                 int tongtien = new GetTotal().GetTotalMoney(idHS, idFac);
                 if(tongtien!=0)
                     data.add(str);
             }
+            Collections.sort(data,new DebtListComparator());
         } catch (SQLException ex) {
             Logger.getLogger(DebtList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return data;
+        ArrayList a= new ArrayList();
+        for(int i=0;i<data.size();i++){
+            Object[] str = new Object[3];
+            str = data.get(i);
+            int x = Integer.parseInt(str[0].toString());
+            a.add(x);
+        }
+        return a;
     }
+}
+class DebtListComparator implements Comparator<Object[]> {
+
+ public int compare(Object[] o1, Object[] o2) {
+  if(!o1[2].equals(o2[2])){
+      return 0;
+  }
+  String age1 = (String) o1[1];
+  String[] x= age1.split(" ");
+  String age2 = (String) o2[1];
+  String[] y = age2.split(" ");
+  String name1 = x[x.length-1];
+  String name2 = y[y.length-1];
+  if(name1.compareTo(name2)>=1){
+   return 1;
+  }else if(name1.compareTo(name2)==0){
+      if(age1.compareTo(age2)>=1)
+          return 1;
+      else if(age1.compareTo(age2)==0)
+          return 0;
+      else
+          return -1;
+  }else{
+   return -1;
+  }
+ }
 }
