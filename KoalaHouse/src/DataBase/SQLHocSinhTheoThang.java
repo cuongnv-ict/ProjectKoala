@@ -235,7 +235,7 @@ public class SQLHocSinhTheoThang {
                 }
             };
             table.setModel(model);
-             if (data.size() == 0) {
+            if (data.size() == 0) {
                 Object[][] name = new Object[][]{nameColumn};
                 XuLy.resizeColumnWidth(table, XuLy.getSize(name));
             } else {
@@ -472,6 +472,72 @@ public class SQLHocSinhTheoThang {
             Pstate.execute();
         } catch (SQLException ex) {
             Logger.getLogger(SQLHocSinhTheoThang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void DanhSachSinhNhat(JTable table, int thang) {
+        try {
+            int count = 0;
+            Object[] nameColumn = {"STT", "Tên", "Lớp học", "Ngày sinh"};
+            ArrayList<Object[]> data = new ArrayList<Object[]>();
+            rs1 = statement.executeQuery("SELECT students.FullName,classes.NameClass,students.BrithDay FROM students,classes_has_students,classes where students.id= classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id and students.isactive= 1");
+            if (!rs1.next()) {
+                for (int i = 0; i < 1; i++) {
+                    Object[] str = new Object[4];
+                    str[0] = "";
+                    str[1] = "";
+                    str[2] = "";
+                    str[3] = "";
+                    data.add(str);
+                }
+            } else {
+                do {
+                    String m[] = rs1.getString(3).split("-");
+                    if (Integer.parseInt(m[1]) == thang) {
+                        Object str[] = new Object[4];
+                        count++;
+                        str[0] = count;
+                        str[1] = rs1.getString(1);
+                        str[2] = rs1.getString(2);
+                        str[3] = rs1.getString(3);
+                        data.add(str);
+                    }
+
+                } while (rs1.next());
+                if (count == 0) {
+                    for (int i = 0; i < 1; i++) {
+                        Object[] str = new Object[4];
+                        str[0] = "";
+                        str[1] = "";
+                        str[2] = "";
+                        str[3] = "";
+                        data.add(str);
+                    }
+                }else{
+                     XuLy.SapXepThang(data, 3);
+                }
+            }
+            Object[][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+                rowColumn[i] = data.get(i);
+                if(count!=0){
+                    rowColumn[i][0]=i+1;
+                }
+            }
+            model = new DefaultTableModel(rowColumn, nameColumn) {
+
+                public Class getColumnClass(int columnIndex) {
+                    return java.lang.String.class;
+                }
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return false;
+                }
+            };
+            table.setModel(model);
+            XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Lỗi nạp dữ liệu", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 }

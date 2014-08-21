@@ -60,7 +60,16 @@ public class XuLy {
             }
         });
     }
-
+public static void SapXepThang(ArrayList data, final int column) {
+        Collections.sort(data, new Comparator<Object[]>() {
+            @Override
+            public int compare(Object[] o1, Object[] o2) {
+                String[] StrArr_1 = o1[column].toString().toUpperCase().split("-");
+                String[] StrArr_2 = o2[column].toString().toUpperCase().split("-");
+                return StrArr_1[2].compareTo(StrArr_2[2]);
+            }
+        });
+    }
     public static void setID(ArrayList id, JTable table, int column) {
         id.removeAll(id);
         for (int i = 0; i < table.getRowCount(); i++) {

@@ -30,6 +30,7 @@ import edu.com.Panel.HS_Phi;
 import edu.com.Panel.HS_Thang;
 import edu.com.Panel.HocSinhA;
 import edu.com.Panel.LopX;
+import edu.com.Panel.SinhNhat;
 import edu.com.Panel.TableFix;
 import edu.com.Panel.TongPhi;
 import edu.com.Panel.XeBus;
@@ -397,6 +398,7 @@ public class ListKoala extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
 
@@ -857,6 +859,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(jMenuItem2);
+
+        jMenuItem3.setText("Sinh nhật");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem3);
 
         hs_phi.setText("Danh sách học sinh tính phí");
         hs_phi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1940,6 +1950,25 @@ public class ListKoala extends javax.swing.JFrame {
         excelUsingPOI();
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        int a = -1;
+        for (int i = 0; i < Panel_GDChinh.getTabCount(); i++) {
+            if ("Sinh nhật".equals(Panel_GDChinh.getTitleAt(i))) {
+                a += 1;
+                Panel_GDChinh.setSelectedIndex(i);
+            }
+        }
+        if (a == -1) {
+            SinhNhat sn = new SinhNhat();
+            Panel_GDChinh.add("Sinh nhật",sn);
+            Panel_GDChinh.setSelectedComponent(sn);
+            sn.center = Panel_GDChinh;
+            new CloseTabButton(Panel_GDChinh, Panel_GDChinh.getComponentCount() - 2);
+        }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     private void writeFile() {
         try {
             System.out.println("xoa mk lisstkoala");
@@ -2013,6 +2042,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
