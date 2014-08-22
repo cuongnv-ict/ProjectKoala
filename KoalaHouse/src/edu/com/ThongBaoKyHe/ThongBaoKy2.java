@@ -726,11 +726,15 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
     private javax.swing.JTextField tenLop;
     // End of variables declaration//GEN-END:variables
 
+    private static int number = 0;
     @Override
     public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterException {
         getComponenets();
         editTextArea();
         //pageBreak = new int[4];
+        double pageHeight = pf.getImageableHeight();
+        int linePerPage = ((int)pageHeight/20);
+        int lines = 0;
         
         if(page > 1) {
             return NO_SUCH_PAGE;
@@ -744,14 +748,14 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         grphcs.setFont(font);
         //grphcs.drawImage(imageOfLabel, 0, 0, null);
         grphcs.drawImage(imageOfLabel, 0, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
-        grphcs.drawString(lbOfTT, 230, 40);
+        grphcs.drawString(lbOfTT, 200, 40);
         
         // ve cho nam hoc
         font = new Font("Serif", Font.PLAIN, 14);
         grphcs.setFont(font);
         grphcs.drawString(lbOfNamhoc, 250, 65);
         grphcs.drawString(lbNamHoc1, 330, 65);
-        grphcs.drawString(" - ", 350, 65);
+        grphcs.drawString(" - ", 355, 65);
         grphcs.drawString(lbNamHoc2, 365, 65);
         
         // ve o ben ngoai
@@ -785,35 +789,42 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         
         // ve bang
         String tableDataToString = "";
-        tableDataToString = (String) tableData[0][0];
+        tableDataToString = tableData[0][0].toString();
        // grphcs.drawString(tableDataToString, 450, 250);
         //System.out.println("table data : " + tableDataToString);
         //System.out.println("table data ver 2 : " + tableData[0][0]);
-        
-        grphcs.drawString("Tên Phí", 20, 260);
-        grphcs.drawString("Từ ngày", 250, 260);
-        grphcs.drawString("�?ến ngày", 350, 260);
-        grphcs.drawString("Thành ti�?n", 450, 260);
+        font = new Font("Serif", Font.BOLD, 14);
+        grphcs.setFont(font);
+        grphcs.drawString("STT", 20, 260);
+        grphcs.drawString("Nội dung", 70, 260);
+        grphcs.drawString("Thời gian", 300, 260);
+        grphcs.drawString("Số tiền", 450, 260);
         //grphcs.drawString("Ghi chú", 500, 260);
-        
+        font = new Font("Serif", Font.PLAIN, 13);
+        grphcs.setFont(font);
+        lines = 11;
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
                 if(tableData[i][j] == null) {
                     tableDataToString = "     ";
                 } else {
-                    tableDataToString = (String) tableData[i][j];
+                    tableDataToString = tableData[i][j].toString();
                 }
                 //tableDataToString = (String) tableData[i][j];
                 //grphcs.drawString(tableDataToString, (70 + ((j + 1) * 110)), (240 + (i + 1) * 20));
                 //System.out.println("TableData : " + tableDataToString);
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 20, (260 + (i + 1) * 20));
+                    lines++;
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 250, (260 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 70, (260 + (i + 1) * 20));
+                    lines++;
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 350, (260 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 300, (260 + (i + 1) * 20));
+                    lines++;
                 } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 450, (260 + (i + 1) * 20));
+                    lines++;
                // } else if(j ==4) {
                  //   grphcs.drawString(tableDataToString, 500, (260 + (i + 1) * 20));
                 }
@@ -837,7 +848,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         grphcs.drawString(tfTuan5, 350, line + 60);
         grphcs.drawString(tfTuan6, 350, line + 80);
         */
-        line = line + 100;
+        //line = line + 100;
         // ve luu y
         //int linesOfTextArea = jTextArea1.getLineCount();
       
@@ -857,55 +868,91 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         grphcs.drawString(tfHannop, 80, line + 20);
         grphcs.drawString(tfLoaiTien, 150, line + 40);
         grphcs.drawString(tfHinhThuc, 150, line + 60);
+        lines = lines + 7;
+        font = new Font("Serif", Font.BOLD, 13);
+        grphcs.setFont(font);
         grphcs.drawString(tfTenTK, 140, line + 100);
         grphcs.drawString(tfSTK, 140, line + 120);
         grphcs.drawString(tfTenNH, 140, line + 140);
-        
+        font = new Font("Serif", Font.PLAIN, 13);
+        grphcs.setFont(font);
         line = line + 140;
         
         font = new Font("Serif", Font.BOLD, 13);
         grphcs.setFont(font);
         grphcs.drawString(lbLuuy, 20, line + 40);
         line = line + 40;
+        lines++;
         font = new Font("Serif", Font.PLAIN, 13);
         grphcs.setFont(font);
-        
-        if(linesOfLuuy.length >= 6) {
-        for(int k = 0 ; k < 6 ; k++) {
-            if(page == 1) {
-                break;
+        linePerPage = 48;
+        lines = linePerPage - lines;
+            System.out.println("LINE PER PAGE" + linePerPage);
+            System.out.println("LINE " + lines);
+        if(lines > 0) {
+            if(lines < linesOfLuuy.length) {
+            for(int k = 0; k < lines; k++ ){
+                grphcs.drawString(linesOfLuuy[k], 30, (line + (k + 1) * 20));
+            }
+            number = lines;
             } else {
+                for(int k = 0; k < linesOfLuuy.length; k++ ){
                 grphcs.drawString(linesOfLuuy[k], 30, (line + (k + 1) * 20));
+                number = lines;
+            }
             }
         }
-        //if(page == 1) {
-          //  font = new Font("Serif", Font.PLAIN, 13);
-            //grphcs.setFont(font);
-            //System.out.println("Page break :  " + pageBreak);
-            //int line = 0;
-            //for(int k = 6 ; k < linesOfLuuy.length ; k++) {
-              //  grphcs.drawString(linesOfLuuy[k], 80, (40 + (line+ 1) * 20));
-               // line++;
-           // }
-        //}
-        } else {
-            System.err.println("sfsdfsfs");
-            for(int k = 0 ; k < linesOfLuuy.length ; k++) {
-                grphcs.drawString(linesOfLuuy[k], 30, (line + (k + 1) * 20));
-            }
-        }
+//        if(linesOfLuuy.length >= 6) {
+//        for(int k = 0 ; k < lines ; k++) {
+//            
+//            if(page == 1) {
+//                break;
+//            } else {
+//                grphcs.drawString(linesOfLuuy[k], 30, (line + (k + 1) * 20));
+//            }
+//            
+//        }
+//        //if(page == 1) {
+//          //  font = new Font("Serif", Font.PLAIN, 13);
+//            //grphcs.setFont(font);
+//            //System.out.println("Page break :  " + pageBreak);
+//            //int line = 0;
+//            //for(int k = 6 ; k < linesOfLuuy.length ; k++) {
+//              //  grphcs.drawString(linesOfLuuy[k], 80, (40 + (line+ 1) * 20));
+//               // line++;
+//           // }
+//        //}
+//        } else {
+//            System.err.println("sfsdfsfs");
+//            for(int k = 0 ; k < linesOfLuuy.length ; k++) {
+//                grphcs.drawString(linesOfLuuy[k], 30, (line + (k + 1) * 20));
+//            }
+//        }
         }
         if(page == 1) {
         Graphics2D g2d = (Graphics2D) grphcs;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
+        lines = number;
+           System.err.println("LINE " + lines);
         Font font = new Font("Serif", Font.PLAIN, 13);
             grphcs.setFont(font);
             System.out.println("Page break :  " + pageBreak);
             int line = 0;
-            for(int m = 6 ; m < linesOfLuuy.length ; m++) {
+            if(lines < 0) {
+                System.err.println("LINE " + lines);
+                for(int k = 0; k < linesOfLuuy.length; k++) {
+                    grphcs.drawString(linesOfLuuy[k], 30, (40 + (line + 1) * 20));
+                    line++;
+                }
+            } else {
+                if(lines < linesOfLuuy.length) {
+            for(int m = lines ; m < linesOfLuuy.length ; m++) {
                 grphcs.drawString(linesOfLuuy[m], 30, (40 + (line+ 1) * 20));
                 line++;
             }
+                }
+            }
+           
         }
         return PAGE_EXISTS;
     }
@@ -1028,7 +1075,11 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         tfTenNH = jTextField17.getText();
         // luu y
         //int linesOfLuuy = jTextArea1.getLineCount();
-        linesOfLuuy = jTextArea1.getText().split("\\n");
+        String area2 = jTextArea2.getText();
+        String area1 = jTextArea1.getText();
+        String area = area2 + "\n" + area1;
+        //linesOfLuuy = jTextArea1.getText().split("\\n");
+        linesOfLuuy = area.split("\\n");    
         //taLuuy = jTextArea1.getText();
     }
     
