@@ -55,7 +55,7 @@ public class CompleteList{
             "from students,classes,classes_has_students "
             + "where (students.id not in(select students_id from students_has_cost where isdebt = 1 \n" +
             "group by students_id) and debt = 0 and students.id not in(SELECT idStudents FROM buslist where IsActive = 1)) and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
-            "and classes_has_students.Students_Id = students.Id");
+            "and classes_has_students.Students_Id = students.Id Order by NameClass");
             while (rs1.next()) {
                 Object[] str = new Object[3];
                 Object[] str1 = new Object[3];
@@ -126,7 +126,7 @@ public ArrayList GetIdStudent(){
             "from students,classes,classes_has_students "
             + "where (students.id not in(select students_id from students_has_cost where isdebt = 1 \n" +
             "group by students_id) and debt = 0 and students.id not in(SELECT idStudents FROM buslist where IsActive = 1)) and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
-            "and classes_has_students.Students_Id = students.Id");
+            "and classes_has_students.Students_Id = students.Id Order by NameClass");
             while (rs1.next()) {
                 Object[] str = new Object[3];
                 str[0] = rs1.getString(1);

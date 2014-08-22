@@ -54,7 +54,7 @@ public class DebtList {
             "where (students.id in(select students_id from students_has_cost where isdebt = 1\n" +
             "group by students_id) or debt!=0 or students.id in(SELECT idStudents FROM buslist where IsActive = 1)) \n" +
             "and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
-            "and classes_has_students.Students_Id = students.Id");
+            "and classes_has_students.Students_Id = students.Id Order by NameClass");
             while (rs1.next()) {
                 Object[] str = new Object[4];
                 str[0] = stt;
@@ -115,7 +115,7 @@ public ArrayList GetIdStudent(){
             "where (students.id in(select students_id from students_has_cost where isdebt = 1\n" +
             "group by students_id) or debt!=0 or students.id in(SELECT idStudents FROM buslist where IsActive = 1)) \n" +
             "and students.isactive = 1 and classes.Id = classes_has_students.Classes_Id\n" +
-            "and classes_has_students.Students_Id = students.Id");    
+            "and classes_has_students.Students_Id = students.Id Order by NameClass");    
             while (rs1.next()) {
                 Object[] str = new Object[4];
                 str[0] = rs1.getString(1);
