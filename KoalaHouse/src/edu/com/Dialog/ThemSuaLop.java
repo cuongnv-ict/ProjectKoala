@@ -282,8 +282,8 @@ public class ThemSuaLop extends javax.swing.JDialog {
         String tonghs=sohs.getValue().toString();
         //doi ten khoi thanh so
         if(tentrinhdo.equals("NẮNG MAI (SUNSHINE)")) tentrinhdo="1";
-        else if(tentrinhdo.equals("TỔ ONG (BEEHEVE)")) tentrinhdo="2";
-        else if(tentrinhdo.equals("TỔ KÉN (CHRYSARYS)")) tentrinhdo="3";
+        else if(tentrinhdo.equals("TỔ ONG (BEEHIVE)")) tentrinhdo="2";
+        else if(tentrinhdo.equals("TỔ KÉN (CHRYSALIS)")) tentrinhdo="3";
         else tentrinhdo="4";
         //doi ten trung tam thanh so 
         if(tentrungtam.equals("Koala House Bà Triệu")) tentrungtam="1";
@@ -371,10 +371,9 @@ public class ThemSuaLop extends javax.swing.JDialog {
         String tonghs=sohs.getValue().toString();
         //doi ten khoi thanh so
         if(tentrinhdo.equals("NẮNG MAI (SUNSHINE)")) tentrinhdo="1";
-        else if(tentrinhdo.equals("TỔ ONG (BEEHEVE)")) tentrinhdo="2";
-        else if(tentrinhdo.equals("TỔ KÉN (CHRYSARYS)")) tentrinhdo="3";
-        else tentrinhdo="4";
-        //doi ten trung tam thanh so 
+        else if(tentrinhdo.equals("TỔ ONG (BEEHIVE)")) tentrinhdo="2";
+        else if(tentrinhdo.equals("TỔ KÉN (CHRYSALIS)")) tentrinhdo="3";
+        else tentrinhdo="4";        //doi ten trung tam thanh so 
         if(tentrungtam.equals("Koala House Bà Triệu")) tentrungtam="1";
         else if (tentrungtam.equals("Koala House Hoàng Ngân")) tentrungtam="2";
         else if (tentrungtam.equals("Koala House Phan Kế Bình")) tentrungtam="3";
