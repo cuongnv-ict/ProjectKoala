@@ -998,18 +998,52 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(tfHinhThucThanhToan, 355, 160);
         
         String tableDataToString = "";
+        if(hienChietKhau.isSelected()) {
+            font = new Font("Serif", Font.BOLD, 10);
+        grphcs.setFont(font);
+            grphcs.drawString("Tên Phí ", 20, 190);
+            grphcs.drawString("Từ ngày ", 125, 190);
+            grphcs.drawString("Đến ngày ", 195, 190);
+            grphcs.drawString("Thành tiền ", 265, 190);
+            grphcs.drawString("Chiết khấu (%)", 335, 190);
+            font = new Font("Serif", Font.PLAIN, 10);
+        grphcs.setFont(font);
+            for(int i = 0 ; i < nRow ; i++) {
+            for(int j = 0 ; j < nCol ; j++) {
+                if(tableData[i][j] == null) {
+                    tableDataToString = "     ";
+                } else {
+                    tableDataToString = tableData[i][j].toString();
+                }
+                if(j == 0) {
+                    grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
+                } else if(j == 1) {
+                    grphcs.drawString(tableDataToString, 125, (190 + (i + 1) * 20));
+                } else if(j == 2) {
+                    grphcs.drawString(tableDataToString, 195, (190 + (i + 1) * 20));
+                } else if(j == 3) {
+                    grphcs.drawString(tableDataToString, 265, (190 + (i + 1) * 20));
+                } else if(j == 4) {
+                    grphcs.drawString(tableDataToString, 335, (190 + (i + 1) * 20));
+                }
+            }
+        }
+        } else {
+            font = new Font("Serif", Font.BOLD, 10);
+        grphcs.setFont(font);
         grphcs.drawString("Tên Phí ", 20, 190);
-        grphcs.drawString("Kỳ học ", 125, 190);
-        grphcs.drawString("Năm học ", 225, 190);
-        grphcs.drawString("Giá ", 325, 190);
-        
+        grphcs.drawString("Từ ngày ", 125, 190);
+        grphcs.drawString("Đến ngày ", 225, 190);
+        grphcs.drawString("Thành tiền ", 325, 190);
+        font = new Font("Serif", Font.PLAIN, 10);
+        grphcs.setFont(font);
         //int rowIndex = 190;
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
                 if(tableData[i][j] == null) {
                     tableDataToString = "     ";
                 } else {
-                    tableDataToString = (String) tableData[i][j];
+                    tableDataToString = tableData[i][j].toString();
                 }
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
@@ -1022,16 +1056,18 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 }
             }
         }
-        
-        grphcs.drawRect(10, 180, 370, (nRow + 1) * 20);
+        }
+        grphcs.drawRect(10, 180, 373, (nRow + 1) * 20);
         
         int rowIndex = 190 + nRow * 20;
         rowIndex = rowIndex + 20;
         System.out.println(rowIndex);
         grphcs.drawString(lbTongTien, 20, rowIndex + 20);
         grphcs.drawString(tfTongTien, 80, rowIndex + 20);
+        if(checkDaThu.isSelected()) {
         grphcs.drawString(lbDathu, 280, rowIndex + 20);
         grphcs.drawString(tfDaThu, 325, rowIndex + 20);
+        }
         grphcs.drawString(lbStbc, 20, rowIndex + 40);
         
         grphcs.drawString(lbNguoiNop, 40, rowIndex + 70);
@@ -1089,19 +1125,52 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(tfLop, 615, 160);
         grphcs.drawString(lbHinhThucThanhToan, 690, 160);
         grphcs.drawString(tfHinhThucThanhToan, 765, 160);
-        
+        if(hienChietKhau.isSelected()) {
+            font = new Font("Serif", Font.BOLD, 10);
+            grphcs.setFont(font);
+            grphcs.drawString("Tên Phí ", 440, 190);
+            grphcs.drawString("Từ ngày ", 545, 190);
+            grphcs.drawString("Đến ngày ", 615, 190);
+            grphcs.drawString("Thành tiền ", 685, 190);
+            grphcs.drawString("Chiết khấu (%)", 755, 190);
+            font = new Font("Serif", Font.PLAIN, 10);
+            grphcs.setFont(font);
+            for(int i = 0 ; i < nRow ; i++) {
+            for(int j = 0 ; j < nCol ; j++) {
+                if(tableData[i][j] == null) {
+                    tableDataToString = "     ";
+                } else {
+                    tableDataToString = tableData[i][j].toString();
+                }
+                if(j == 0) {
+                    grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
+                } else if(j == 1) {
+                    grphcs.drawString(tableDataToString, 545, (190 + (i + 1) * 20));
+                } else if(j == 2) {
+                    grphcs.drawString(tableDataToString, 615, (190 + (i + 1) * 20));
+                } else if(j == 3) {
+                    grphcs.drawString(tableDataToString, 685, (190 + (i + 1) * 20));
+                } else if(j == 4) {
+                    grphcs.drawString(tableDataToString, 755, (190 + (i + 1) * 20));
+                }
+            }
+        }
+        } else {
+            font = new Font("Serif", Font.BOLD, 10);
+        grphcs.setFont(font);
         //String tableDataToString = "";
-        grphcs.drawString("Tên Phí ", 440, 190);
-        grphcs.drawString("Kỳ học ", 545, 190);
-        grphcs.drawString("Năm học ", 645, 190);
-        grphcs.drawString("Giá ", 745, 190);
-        
+        grphcs.drawString("Tên phí ", 440, 190);
+        grphcs.drawString("Từ ngày ", 545, 190);
+        grphcs.drawString("Đến ngày ", 645, 190);
+        grphcs.drawString("Thành tiền ", 745, 190);
+        font = new Font("Serif", Font.PLAIN, 10);
+        grphcs.setFont(font);
         for(int i = 0 ; i < nRow ; i++) {
             for(int j = 0 ; j < nCol ; j++) {
                 if(tableData[i][j] == null) {
                     tableDataToString = "     ";
                 } else {
-                    tableDataToString = (String) tableData[i][j];
+                    tableDataToString = tableData[i][j].toString();
                 }
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
@@ -1114,16 +1183,18 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 }
             }
         }
-        
-        grphcs.drawRect(430, 180, 370, (nRow + 1) * 20);
+        }
+        grphcs.drawRect(430, 180, 373, (nRow + 1) * 20);
         
         int rowIndexLeft = 190 + nRow * 20;
         rowIndexLeft = rowIndexLeft + 20;
         
         grphcs.drawString(lbTongTien, 440, rowIndexLeft + 20);
         grphcs.drawString(tfTongTien, 500, rowIndexLeft + 20);
+        if(checkDaThu.isSelected()) {
         grphcs.drawString(lbDathu, 700, rowIndexLeft + 20);
         grphcs.drawString(tfDaThu, 745, rowIndexLeft + 20);
+        }
         grphcs.drawString(lbStbc, 440, rowIndexLeft + 40);
         
         grphcs.drawString(lbNguoiNop, 460, rowIndexLeft + 70);

@@ -784,8 +784,8 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         grphcs.drawString(lbChuongTrinh, 20, 200);
         grphcs.drawString(tfChuongTrinh, 150, 200);
         
-        grphcs.drawString(lbDVT + ": ", 320, 240);
-        grphcs.drawString(cbDVT, 390, 240);
+        grphcs.drawString(lbDVT + ": ", 320, 230);
+        grphcs.drawString(cbDVT, 390, 230);
         
         // ve bang
         String tableDataToString = "";
@@ -830,6 +830,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
                 }
             }
         }
+        grphcs.drawRect(15, 245, 500, (nRow + 1) * 20);
         int line = 260 + (nRow)  * 20;
         line = line + 20;
         // ve cac tuan hoc

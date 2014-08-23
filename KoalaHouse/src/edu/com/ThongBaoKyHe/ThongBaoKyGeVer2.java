@@ -815,8 +815,8 @@ public void Total(){
         grphcs.drawString(lbChuongTrinh, 20, 200);
         grphcs.drawString(tfChuongTrinh, 150, 200);
         
-        grphcs.drawString(lbDVT + ": ", 320, 240);
-        grphcs.drawString(cbDVT, 390, 240);
+        grphcs.drawString(lbDVT + ": ", 320, 230);
+        grphcs.drawString(cbDVT, 390, 230);
         
         // ve bang
         String tableDataToString = "";
@@ -860,6 +860,7 @@ public void Total(){
                 }
             }
         }
+        grphcs.drawRect(15, 245, 500, (nRow + 1) * 20);
         lines++;
         int line = 260 + (nRow)  * 20;
         line = line + 20;
@@ -919,6 +920,7 @@ public void Total(){
         font = new Font("Serif", Font.PLAIN, 13);
         grphcs.setFont(font);
         linePerPage = 48;
+        lines = lines + 4;
         lines = linePerPage - lines;
         System.out.println("LINE " + lines);
 //        int start = (lines < 0) ? 0 : lines;
