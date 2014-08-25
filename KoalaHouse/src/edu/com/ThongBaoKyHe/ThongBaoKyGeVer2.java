@@ -129,12 +129,17 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         //thoi gian hoc he
         int yearCurrent = new Get().getYearActive(idTrungTam);
         ArrayList tgHoche = new Get().getTimeSummer(yearCurrent);
+        if(tgHoche.size()>1){
         tuan1_sta += (String) tgHoche.get(0);
         tuan2_sta += (String) tgHoche.get(1);
         tuan3_sta += (String) tgHoche.get(2);
         tuan4_sta += (String) tgHoche.get(3);
         tuan5_sta += (String) tgHoche.get(4);
         tuan6_sta += (String) tgHoche.get(5);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Thời Gian Học Hè !");
+        }
         jTextField5.setText(tuan1_sta);
         jTextField6.setText(tuan2_sta);
         jTextField7.setText(tuan3_sta);

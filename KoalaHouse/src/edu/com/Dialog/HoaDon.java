@@ -68,6 +68,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public int idTrungTam;
     public int sott;
     public int idHocSinh = 0;
+    String[] str;
     Convert convert = new Convert();
     
     /**
@@ -81,7 +82,14 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         NguoiDaiDien.setText(tenNguoiDaiDien);
         tenLop.setText(lop);
         sott = new RecieptManagerment().GetNumberReceipt();
-        stt.setText(String.valueOf(sott));
+        String soHoaDon = null;
+        switch(HoaDon.idTT){
+            case 1: soHoaDon = "BT"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 2: soHoaDon = "HN"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
+        }
+        stt.setText(String.valueOf(soHoaDon));
         tenTrungTam.setText(trungTam);
         idTrungTam = HoaDon.idTT;
         idHocSinh = HoaDon.idhs;
@@ -139,6 +147,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }
         }
+        //luu lai trang thai bang ban dau
+        str = new String[model.getRowCount()];
+        for(int i=0;i<model.getRowCount();i++){
+            str[i] = model.getValueAt(i, 3).toString();
+        }
     }
     public boolean getButton()//lay xem la create hay cancle
     {
@@ -182,6 +195,23 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         catch(java.lang.NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
         }
+        //tinh lai so tien
+        if(hienChietKhau.isSelected()){
+            for(int i=0;i<model.getRowCount();i++){
+                long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                int ck = 0;
+                if(model.getValueAt(i, 4).toString().length()>0){
+                    ck = Integer.parseInt(model.getValueAt(i, 4).toString());
+                }
+                long ti = (t*(100-ck))/100;
+                String sotien = XuLy.setMoney(String.valueOf(ti));
+                model.setValueAt(sotien, i, 3);
+            }
+        }
+        else{
+            
+        }
+        
     }
     }
 
@@ -562,7 +592,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 11, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -653,23 +683,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ThongTinCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(NgayThangNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ThongTinHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ThongTinHocSinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ThongTinHocSinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -685,6 +700,22 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addGap(10, 10, 10)
                 .addComponent(hienChietKhau)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ThongTinCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(NgayThangNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ThongTinHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -818,6 +849,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+         for(int i=0;i<model.getRowCount();i++){
+                model.setValueAt(str[i], i, 3);
+            }
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             Total();
         }
@@ -843,14 +877,21 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             model.addColumn("Chiết Khấu(%)",coldata);
         }
         else{
+          for(int i=0;i<model.getRowCount();i++){
+                model.setValueAt(str[i], i, 3);
+            }
           TableColumn tcol = jTable1.getColumnModel().getColumn(4);
           jTable1.getColumnModel().removeColumn(tcol);
           model.setColumnCount(4);
         }
+        Total();
     }//GEN-LAST:event_hienChietKhauActionPerformed
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         // TODO add your handling code here:
+         for(int i=0;i<model.getRowCount();i++){
+                model.setValueAt(str[i], i, 3);
+            }
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             Total();
         }

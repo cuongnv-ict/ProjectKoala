@@ -215,6 +215,18 @@ public static void SapXepThang(ArrayList data, final int column) {
         }
         return arrSize;
     }
-   
+   public static String getNumber4(String x){
+       String y = new String(x);
+       if(x.length()==1){
+           y = "000"+x;
+       }
+       else if(x.length()==2){
+           y = "00"+x;
+       }
+       else if(x.length()==3){
+           y= "0" + x;
+       }
+       return y;
+   }
         
 }
