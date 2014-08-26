@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,7 +47,7 @@ public class SQLHocSinhTheoThang {
     public ArrayList<Integer> DanhSachHocSinhTrongKi(JTable table, int thang, int nam) {
         try {
             ArrayList<Integer> info = new ArrayList<Integer>();
-            Object[] nameColumn = {"STT", "SS", "Tên học sinh", "Lớp", "Ngày nhập học", "Ngày nghỉ học", "Chú ý"};
+            Object[] nameColumn = {"STT", "SS", "Tên học sinh", "Lớp", "Ngày nhập học", "Ngày nghỉ học"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("SELECT students.FullName,classes.NameClass,students.isactive,students.NhapHoc,students.NghiHoc,sex,students.id from students,classes,classes_has_students where students.Id = classes_has_students.Students_Id and classes_has_students.Classes_Id = classes.Id and students.isactive != -1 order by classes.Levels_Id,classes.NameClass ASC");
             int count_stt = 1, count_ss = 1;
@@ -60,9 +61,8 @@ public class SQLHocSinhTheoThang {
                     str[3] = "";
                     str[4] = "";
                     str[5] = "";
-                    str[6] = "";
-                    data.add(str);
-                    info.add(0);
+                    str[6] = 0;
+                    data.add(str);                   
                 }
             } else {
                 do {
@@ -75,11 +75,10 @@ public class SQLHocSinhTheoThang {
                         str1[3] = "";
                         str1[4] = "";
                         str1[5] = "";
-                        str1[6] = "";
+                        str1[6] = 0;
                         data.add(str1);
                         temp = rs1.getString(2);
                         count_ss = 1;
-                        info.add(0);
 
                     }
                     if (rs1.getInt(3) == 1) {
@@ -91,20 +90,18 @@ public class SQLHocSinhTheoThang {
                             str[3] = rs1.getString(2);
                             str[4] = "";
                             str[5] = "";
-                            str[6] = "";
                             data.add(str);
                             count_ss++;
                             count_stt++;
                             temp = rs1.getString(2);
                             if (rs1.getString(6) == null) {
-                                info.add(0);
+                               str[6] = 0;
                             } else {
-                                if (rs1.getInt(6) == 1) {
-                                    info.add(rs1.getInt(7));
+                                if (rs1.getInt(6) == 1) {                                    
+                                    str[6] = rs1.getInt(7);
                                 } else {
-                                    info.add(-rs1.getInt(7));
+                                    str[6] = -rs1.getInt(7);
                                 }
-
                             }
                         } else if (Integer.parseInt(date[0]) == nam && Integer.parseInt(date[0]) != 0 && Integer.parseInt(date[1]) <= thang && Integer.parseInt(date[1]) != 0) {
                             str[0] = count_stt;
@@ -117,20 +114,18 @@ public class SQLHocSinhTheoThang {
                                 str[4] = "";
                             }
                             str[5] = "";
-                            str[6] = "";
                             data.add(str);
                             count_ss++;
                             count_stt++;
                             temp = rs1.getString(2);
                             if (rs1.getString(6) == null) {
-                                info.add(0);
+                               str[6] = 0;
                             } else {
-                                if (rs1.getInt(6) == 1) {
-                                    info.add(rs1.getInt(7));
+                                if (rs1.getInt(6) == 1) {                                    
+                                    str[6] = rs1.getInt(7);
                                 } else {
-                                    info.add(-rs1.getInt(7));
+                                    str[6] = -rs1.getInt(7);
                                 }
-
                             }
                         }
                     } else {
@@ -148,17 +143,15 @@ public class SQLHocSinhTheoThang {
                                 str[4] = "";
                             }
                             str[5] = XuLy.getDate(rs1.getString(5));
-                            str[6] = "";
                             data.add(str);
-                            if (rs1.getString(6) == null) {
-                                info.add(0);
+                             if (rs1.getString(6) == null) {
+                               str[6] = 0;
                             } else {
-                                if (rs1.getInt(6) == 1) {
-                                    info.add(rs1.getInt(7));
+                                if (rs1.getInt(6) == 1) {                                    
+                                    str[6] = rs1.getInt(7);
                                 } else {
-                                    info.add(-rs1.getInt(7));
+                                    str[6] = -rs1.getInt(7);
                                 }
-
                             }
                             temp = rs1.getString(2);
                         }
@@ -175,21 +168,19 @@ public class SQLHocSinhTheoThang {
                                 str[3] = rs1.getString(2);
                                 str[4] = "";
                                 str[5] = "";
-                                str[6] = "";
                                 data.add(str);
                                 count_ss++;
                                 count_stt++;
                                 temp = rs1.getString(2);
                                 if (rs1.getString(6) == null) {
-                                    info.add(0);
+                                   str[6] = 0;
+                            } else {
+                                if (rs1.getInt(6) == 1) {                                    
+                                    str[6] = rs1.getInt(7);
                                 } else {
-                                    if (rs1.getInt(6) == 1) {
-                                        info.add(rs1.getInt(7));
-                                    } else {
-                                        info.add(-rs1.getInt(7));
-                                    }
-
+                                    str[6] = -rs1.getInt(7);
                                 }
+                            }
                             } else if (Integer.parseInt(date1[0]) == nam && Integer.parseInt(date1[0]) != 0 && Integer.parseInt(date1[1]) <= thang && Integer.parseInt(date1[1]) != 0) {
                                 str[0] = count_stt;
                                 str[1] = count_ss;
@@ -201,30 +192,47 @@ public class SQLHocSinhTheoThang {
                                     str[4] = "";
                                 }
                                 str[5] = "";
-                                str[6] = "";
                                 data.add(str);
                                 count_ss++;
                                 count_stt++;
                                 temp = rs1.getString(2);
-                                if (rs1.getString(6) == null) {
-                                    info.add(0);
+                                data.add(str);
+                             if (rs1.getString(6) == null) {
+                               str[6] = 0;
+                            } else {
+                                if (rs1.getInt(6) == 1) {                                    
+                                    str[6] = rs1.getInt(7);
                                 } else {
-                                    if (rs1.getInt(6) == 1) {
-                                        info.add(rs1.getInt(7));
-                                    } else {
-                                        info.add(-rs1.getInt(7));
-                                    }
-
+                                    str[6] = -rs1.getInt(7);
                                 }
+                            }
                             }
                         }
                     }
                 } while (rs1.next());
             }
+            XuLy.SapXepTen(data, 2, 3);
+            info.removeAll(info);
             Object[][] rowColumn = new Object[data.size()][];
+            count_stt = 1;
+            count_ss = 1;
+            temp =  "";
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
+                info.add((Integer)rowColumn[i][6]);
+                 if(rowColumn[i][2].toString().equals("")&&rowColumn[i][3].toString().equals("")){
+                    count_ss = 1;
+                    continue;
+                }
+                rowColumn[i][1] = count_ss;
+                count_ss++;
+                if(!rowColumn[i][5].toString().equals("")){
+                    continue;
+                }
+                rowColumn[i][0] = count_stt;
+                count_stt++;               
             }
+            
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 public Class getColumnClass(int columnIndex) {
                     return java.lang.String.class;
@@ -237,6 +245,7 @@ public class SQLHocSinhTheoThang {
             table.setModel(model);
             if (data.size() == 0) {
                 Object[][] name = new Object[][]{nameColumn};
+                int arr[] = XuLy.getSize(name);
                 XuLy.resizeColumnWidth(table, XuLy.getSize(name));
             } else {
                 XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
@@ -260,7 +269,7 @@ public class SQLHocSinhTheoThang {
             String old = "a-b-c-b-a";
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
-                    Object[] str = new Object[7];
+                    Object[] str = new Object[8];
                     str[0] = "";
                     str[1] = "";
                     str[2] = "";
@@ -268,12 +277,13 @@ public class SQLHocSinhTheoThang {
                     str[4] = "";
                     str[5] = "";
                     str[6] = "";
+                    str[7] = 1;
                     data.add(str);
-                    info.add(1);
+
                 }
             } else {
                 do {
-                    Object[] str = new Object[7];
+                    Object[] str = new Object[8];
                     if (rs1.getInt(4) == 1) {
                         String date[] = rs1.getString(5).split("-");
                         if (Integer.parseInt(date[0]) < nam && Integer.parseInt(date[0]) != 0) {
@@ -287,12 +297,12 @@ public class SQLHocSinhTheoThang {
                             data.add(str);
                             count_stt++;
                             if (rs1.getString(7) == null) {
-                                info.add(0);
+                                str[7] = 0;
                             } else {
                                 if (rs1.getInt(7) == 1) {
-                                    info.add(rs1.getInt(8));
+                                    str[7] = rs1.getInt(8);
                                 } else {
-                                    info.add(-rs1.getInt(8));
+                                    str[7] = -rs1.getInt(8);
                                 }
 
                             }
@@ -311,14 +321,13 @@ public class SQLHocSinhTheoThang {
                             data.add(str);
                             count_stt++;
                             if (rs1.getString(7) == null) {
-                                info.add(0);
+                                str[7] = 0;
                             } else {
                                 if (rs1.getInt(7) == 1) {
-                                    info.add(rs1.getInt(8));
+                                    str[7] = rs1.getInt(8);
                                 } else {
-                                    info.add(-rs1.getInt(8));
+                                    str[7] = -rs1.getInt(8);
                                 }
-
                             }
                         }
                     } else {
@@ -335,22 +344,17 @@ public class SQLHocSinhTheoThang {
                             } else {
                                 str[4] = "";
                             }
-                            if (Integer.parseInt(date[1]) == thang) {
-                                str[5] = XuLy.getDate(rs1.getString(6));
-                            } else {
-                                str[5] = "";
-                            }
+                            str[5] = XuLy.getDate(rs1.getString(6));
                             str[6] = "Không học hè";
                             data.add(str);
-                            if (rs1.getString(7) == null) {
-                                info.add(0);
+                             if (rs1.getString(7) == null) {
+                                 str[7] = 0;
                             } else {
                                 if (rs1.getInt(7) == 1) {
-                                    info.add(rs1.getInt(8));
+                                     str[7] = rs1.getInt(8);
                                 } else {
-                                    info.add(-rs1.getInt(8));
+                                    str[7] = -rs1.getInt(8);
                                 }
-
                             }
                         }
                         if ((Integer.parseInt(date[1]) == thang && Integer.parseInt(date[0]) > nam) || (Integer.parseInt(date[1]) > thang && Integer.parseInt(date[0]) == nam)) {
@@ -391,23 +395,30 @@ public class SQLHocSinhTheoThang {
                                 data.add(str);
                                 count_stt++;
                                 if (rs1.getString(7) == null) {
-                                    info.add(0);
+                                    str[7] = 0;
                                 } else {
                                     if (rs1.getInt(7) == 1) {
-                                        info.add(rs1.getInt(8));
+                                        str[7] = rs1.getInt(8);
                                     } else {
-                                        info.add(-rs1.getInt(8));
+                                        str[7] = -rs1.getInt(8);
                                     }
-
                                 }
                             }
                         }
                     }
                 } while (rs1.next());
             }
+            XuLy.SapXepTen(data, 1, 3);
             Object[][] rowColumn = new Object[data.size()][];
+            info.removeAll(info);
+            count_stt = 1;
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
+                info.add((Integer)rowColumn[i][7]);
+                if (rowColumn[i][5].toString().equalsIgnoreCase("")) {
+                    rowColumn[i][0] = count_stt;
+                    count_stt++;
+                }
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 public Class getColumnClass(int columnIndex) {
@@ -513,15 +524,16 @@ public class SQLHocSinhTheoThang {
                         str[3] = "";
                         data.add(str);
                     }
-                }else{
-                     XuLy.SapXepThang(data, 3);
+                } else {
+                    XuLy.SapXepThang(data, 3);
                 }
             }
+            
             Object[][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
                 rowColumn[i] = data.get(i);
-                if(count!=0){
-                    rowColumn[i][0]=i+1;
+                if (count != 0) {
+                    rowColumn[i][0] = i + 1;
                 }
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {

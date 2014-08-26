@@ -60,6 +60,42 @@ public class XuLy {
             }
         });
     }
+    public static void SapXepTen(ArrayList data, final int column,final int column1) {
+        Collections.sort(data, new Comparator<Object[]>() {
+            @Override
+            public int compare(Object[] o1, Object[] o2) {
+                if(!o1[column1].toString().equalsIgnoreCase(o2[column1].toString())){
+                    return 1;
+                }
+                String[] StrArr_1 = o1[column].toString().toUpperCase().split(" ");
+                String[] StrArr_2 = o2[column].toString().toUpperCase().split(" ");
+                int x, y;
+                String tr_x = "";
+                String tr_y = "";
+                x = StrArr_1.length - 1;
+                y = StrArr_2.length - 1;
+                if (StrArr_1[x].charAt(0) == '(') {
+                    for (int i = x - 1; i >= 0; i--) {
+                        tr_x += StrArr_1[i];
+                    }
+                } else {
+                    for (int i = x; i >= 0; i--) {
+                        tr_x += StrArr_1[i];
+                    }
+                }
+                if (StrArr_2[y].charAt(0) == '(') {
+                    for (int i = y - 1; i >= 0; i--) {
+                        tr_y += StrArr_2[i];
+                    }
+                } else {
+                    for (int i = y; i >= 0; i--) {
+                        tr_y += StrArr_2[i];
+                    }
+                }
+                return tr_x.compareTo(tr_y);
+            }
+        });
+    }
 public static void SapXepThang(ArrayList data, final int column) {
         Collections.sort(data, new Comparator<Object[]>() {
             @Override
