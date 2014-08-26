@@ -14,6 +14,7 @@ import edu.com.Dialog.DSDatCoc;
 import edu.com.Dialog.DSTaiKhoan;
 import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
+import edu.com.Dialog.InfoFac;
 import edu.com.Dialog.Nam;
 import edu.com.Dialog.NhapNghiPhep;
 import edu.com.Dialog.NhapTrongMuon;
@@ -400,6 +401,7 @@ public class ListKoala extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
 
         them.setText("them");
@@ -880,6 +882,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(hs_phi);
+
+        jMenuItem4.setText("Thông tin trung tâm");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem4);
 
         Menu_thoat.setText("Thoát");
         Menu_thoat.addActionListener(new java.awt.event.ActionListener() {
@@ -1969,6 +1979,12 @@ public class ListKoala extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        InfoFac infofac = new InfoFac();
+        infofac.setLocation(200, 200);
+        infofac.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     private void writeFile() {
         try {
             System.out.println("xoa mk lisstkoala");
@@ -2043,6 +2059,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;

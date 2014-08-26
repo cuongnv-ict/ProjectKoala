@@ -330,6 +330,36 @@ public class Get{
         }
          return a;
      }
+     public ArrayList getInFoFac(){
+         ArrayList a = new ArrayList();
+         String temp1 = null;
+         String temp2 = null;
+         int idFac = 0;
+         try {
+            rs1 = statement.executeQuery("SELECT Faculties_Id FROM projectkoala.accounts;");
+            while(rs1.next()){
+                idFac = rs1.getInt(1);
+            }
+            rs1 = statement.executeQuery("SELECT Address,PhoneNumbers FROM projectkoala.faculties where Id = "+idFac+"; ");
+            while(rs1.next()){
+                temp1 = rs1.getString(1);
+                temp2 = rs1.getString(2);
+            }
+            a.add(temp1);a.add(temp2);a.add(idFac);
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return a;
+     }
+     public void UpdateInfoFac(int idFac,String addr, String sdt){
+        String query = "UPDATE `projectkoala`.`faculties` SET `Address`='"+addr+"', `PhoneNumbers`='"+sdt+"' WHERE `Id`='"+idFac+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
 class TrongMuonComparator implements Comparator<Object[]> {
 
