@@ -132,11 +132,14 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }
         }
-        //luu lai trang thai bang ban dau
+        if(idHocSinh>0){
+            //luu lai trang thai bang ban dau
         str = new String[model.getRowCount()];
         for(int i=0;i<model.getRowCount();i++){
             str[i] = model.getValueAt(i, 3).toString();
         }
+        }
+        
     }
     public boolean getButton()//lay xem la create hay cancle
     {
