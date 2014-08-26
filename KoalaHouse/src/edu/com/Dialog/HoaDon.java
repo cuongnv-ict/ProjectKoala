@@ -8,6 +8,7 @@ package edu.com.Dialog;
 
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.Convert;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.HistoryManagerment;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Panel.HocSinhA;
@@ -101,25 +102,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             thang.setSelectedIndex(calendar.get(Calendar.MONTH));
             nam.setSelectedIndex(calendar.get(Calendar.YEAR)-2012);
             
-        switch(idTrungTam){
-            case 1: {DiaChi.setText("340 Bà triệu, Quận Hai Bà Trưng");
-                    DienThoaiTrungTam.setText("+(84.4) 3772.3060");
-                    break;
-            }
-            case 2: {DiaChi.setText("261 Hoàng Ngân, Quận Cầu Giấy");
-                    DienThoaiTrungTam.setText("+(84.4) 3772.3060");
-                    break;
-            }
-            case 3: {DiaChi.setText("5 Phan Kế Bính, Quận Ba Đình");
-                    DienThoaiTrungTam.setText("+(84.4) 3974.7617");
-                    break;
-            }
-            case 4: {DiaChi.setText("3 Nguyễn Huy Tự, Quận Hai Bà Trưng");
-                    DienThoaiTrungTam.setText("+ (84.4) 3972.8913");
-                    break;
-            }
-                
-        }
+            ArrayList infoFac = new Get().getInFoFac();
+            DiaChi.setText(infoFac.get(0).toString());
+            DienThoaiTrungTam.setText(infoFac.get(1).toString());
         //tinh tong tien 
         if(idHocSinh>0){
         new RecieptManagerment().BangDSPhiHoaDon(idhs,idTrungTam, jTable1);
@@ -147,11 +132,14 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }
         }
-        //luu lai trang thai bang ban dau
+        if(idHocSinh>0){
+            //luu lai trang thai bang ban dau
         str = new String[model.getRowCount()];
         for(int i=0;i<model.getRowCount();i++){
             str[i] = model.getValueAt(i, 3).toString();
         }
+        }
+        
     }
     public boolean getButton()//lay xem la create hay cancle
     {
@@ -421,7 +409,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         ThongTinHoaDonLayout.setVerticalGroup(
             ThongTinHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThongTinHoaDonLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(ThongTinHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
@@ -509,17 +497,26 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel5.setText("HÓA ĐƠN (Receipt)");
 
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel14.setText("NGƯỜI NỘP");
+        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 51, -1, -1));
 
         daThu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 daThuActionPerformed(evt);
             }
         });
+        jPanel4.add(daThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 3, 169, -1));
+        jPanel4.add(TongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 3, 190, -1));
 
         jLabel23.setText("Tổng Tiền :");
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, -1, -1));
+        jPanel4.add(nguoiNop, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 66, 258, -1));
 
         jLabel9.setText("NGƯỜI THU TIỀN");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 51, -1, -1));
+        jPanel4.add(nguoiThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 66, 250, -1));
 
         checkDaThu.setSelected(true);
         checkDaThu.setText("Đã Thu :");
@@ -528,8 +525,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 checkDaThuActionPerformed(evt);
             }
         });
+        jPanel4.add(checkDaThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 2, -1, -1));
 
         stbc.setText("Số Tiền Bằng Chữ: ");
+<<<<<<< HEAD
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -578,6 +577,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                     .addComponent(nguoiThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1))
         );
+=======
+        jPanel4.add(stbc, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 29, -1, -1));
+>>>>>>> 71638b484f734a578c84ad0690d45b22d192c711
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
