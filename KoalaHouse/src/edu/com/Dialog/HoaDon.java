@@ -8,6 +8,7 @@ package edu.com.Dialog;
 
 import DataBase.HocSinh.AStudentAndLateDay;
 import DataBase.HocSinh.Convert;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.HistoryManagerment;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Panel.HocSinhA;
@@ -101,25 +102,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             thang.setSelectedIndex(calendar.get(Calendar.MONTH));
             nam.setSelectedIndex(calendar.get(Calendar.YEAR)-2012);
             
-        switch(idTrungTam){
-            case 1: {DiaChi.setText("340 Bà triệu, Quận Hai Bà Trưng");
-                    DienThoaiTrungTam.setText("+(84.4) 3772.3060");
-                    break;
-            }
-            case 2: {DiaChi.setText("261 Hoàng Ngân, Quận Cầu Giấy");
-                    DienThoaiTrungTam.setText("+(84.4) 3772.3060");
-                    break;
-            }
-            case 3: {DiaChi.setText("5 Phan Kế Bính, Quận Ba Đình");
-                    DienThoaiTrungTam.setText("+(84.4) 3974.7617");
-                    break;
-            }
-            case 4: {DiaChi.setText("3 Nguyễn Huy Tự, Quận Hai Bà Trưng");
-                    DienThoaiTrungTam.setText("+ (84.4) 3972.8913");
-                    break;
-            }
-                
-        }
+            ArrayList infoFac = new Get().getInFoFac();
+            DiaChi.setText(infoFac.get(0).toString());
+            DienThoaiTrungTam.setText(infoFac.get(1).toString());
         //tinh tong tien 
         if(idHocSinh>0){
         new RecieptManagerment().BangDSPhiHoaDon(idhs,idTrungTam, jTable1);
