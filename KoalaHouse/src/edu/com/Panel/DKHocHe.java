@@ -285,7 +285,7 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-        if(!jTable4.getValueAt(0, 10).equals(""))
+        if(!jTable4.getValueAt(0, 4).equals(""))
         {    
 
             if(isadmin)
@@ -337,7 +337,7 @@ public class DKHocHe extends javax.swing.JPanel {
     }//GEN-LAST:event_xoaMouseClicked
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
-        if(!jTable4.getValueAt(0, 10).equals(""))
+        if(!jTable4.getValueAt(0, 4).equals(""))
         {    
         
             if(isadmin)
