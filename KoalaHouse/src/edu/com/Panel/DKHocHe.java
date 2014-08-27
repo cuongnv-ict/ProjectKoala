@@ -285,96 +285,103 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
+        if(!jTable4.getValueAt(0, 10).equals(""))
+        {    
 
-        if(isadmin)
-        {
-            model= (DefaultTableModel) jTable4.getModel();
-            boolean flags = true;
-            for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i,7) == true) {
-                    flags = false;
-                }
-            }
-            if(!flags)
+            if(isadmin)
             {
-                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-                if(click==JOptionPane.NO_OPTION){
-                    return;
-                }
-
-                boolean xoaorkhong;
-                DataBase.SQLkyhe data= new DataBase.SQLkyhe();
-                xoaorkhong=data.xoaDkHe(jTable4, 7,id_hoche);
-
-                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-                id_hoche = new ArrayList<Integer>();
-                try
-                {
-
-                    if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                        XuLy.setID(id_hoche, jTable4, 0);
-                        resize(jTable4);
+                model= (DefaultTableModel) jTable4.getModel();
+                boolean flags = true;
+                for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                    if ((Boolean) model.getValueAt(i,7) == true) {
+                        flags = false;
                     }
-                    else
+                }
+                if(!flags)
+                {
+                    int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                    if(click==JOptionPane.NO_OPTION){
+                        return;
+                    }
+
+                    boolean xoaorkhong;
+                    DataBase.SQLkyhe data= new DataBase.SQLkyhe();
+                    xoaorkhong=data.xoaDkHe(jTable4, 7,id_hoche);
+
+                    new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                    id_hoche = new ArrayList<Integer>();
+                    try
                     {
-                        resize(jTable4);
+
+                        if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                            XuLy.setID(id_hoche, jTable4, 0);
+                            resize(jTable4);
+                        }
+                        else
+                        {
+                            resize(jTable4);
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+
                     }
                 }
-                catch(Exception ex)
+                else
                 {
+                    JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
 
                 }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-
             }
         }
     }//GEN-LAST:event_xoaMouseClicked
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
-        if(isadmin)
-        {
-            int count =1, row=0;
-            model=(DefaultTableModel) jTable4.getModel();
-            for(int i = model.getRowCount()-1;i>=0;i--){
-                if((Boolean)model.getValueAt(i, 7)==true){
-                    count--;
-                    row = i;
-                }
-            }
-            if(count!=0){
-                if(count==1){
-                    JOptionPane.showMessageDialog(null,"Bạn chưa chọn Học Sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
-                    for(int i = model.getRowCount()-1;i>=0;i--){
-                        model.setValueAt(false,i,7);
+        if(!jTable4.getValueAt(0, 10).equals(""))
+        {    
+        
+            if(isadmin)
+            {
+                int count =1, row=0;
+                model=(DefaultTableModel) jTable4.getModel();
+                for(int i = model.getRowCount()-1;i>=0;i--){
+                    if((Boolean)model.getValueAt(i, 7)==true){
+                        count--;
+                        row = i;
                     }
                 }
-                return;
-            }
-            Vector vec =  (Vector) model.getDataVector().elementAt(row);
-            ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true,vec);
-            dkhoche.setIdhoche(id_hoche.get(row));
-            dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-            dkhoche.setThemSuaLop(false);
-            dkhoche.setVisible(true);
-
-            //dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
-            id_hoche = new ArrayList<Integer>();
-            try
-            {
-                if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                    XuLy.setID(id_hoche, jTable4, 0);
-                    resize(jTable4);
+                if(count!=0){
+                    if(count==1){
+                        JOptionPane.showMessageDialog(null,"Bạn chưa chọn Học Sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
+                        for(int i = model.getRowCount()-1;i>=0;i--){
+                            model.setValueAt(false,i,7);
+                        }
+                    }
+                    return;
                 }
-            }
-            catch(Exception ex)
-            {
+                Vector vec =  (Vector) model.getDataVector().elementAt(row);
+                ThemSuaDKHocHe dkhoche= new ThemSuaDKHocHe(null, true,vec);
+                dkhoche.setIdhoche(id_hoche.get(row));
+                dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+                dkhoche.setThemSuaLop(false);
+                dkhoche.setVisible(true);
+
+                //dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                id_hoche = new ArrayList<Integer>();
+                try
+                {
+                    if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                        XuLy.setID(id_hoche, jTable4, 0);
+                        resize(jTable4);
+                    }
+                }
+                catch(Exception ex)
+                {
+                }
             }
             //ThemSuaLop lop = new ThemSuaLop(null, true, vec);
             /*

@@ -342,61 +342,63 @@ public class XeBus extends javax.swing.JPanel {
     }//GEN-LAST:event_themMouseClicked
 
     private void suaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaMouseClicked
-        
-        if(isadmin)
-        {
-        int count =1, row=0;
-        model=(DefaultTableModel) jTable4.getModel();
-        try{
-        for(int i = model.getRowCount()-1;i>=0;i--){
-            if((Boolean)model.getValueAt(i, 11)==true){
-                count--;
-                row = i;
-            }
-        }
-        }
-        catch(Exception ex)
-        {
-        
-        }
-        if(count!=0){
-            if(count==1){
-                JOptionPane.showMessageDialog(null,"Bạn chưa chọn Học Sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
-                for(int i = model.getRowCount()-1;i>=0;i--){
-                    model.setValueAt(false,i,11);
-               }
-            }
-            return;
-        }
-        if(jTable4.getValueAt(row, 10).equals("Chưa Thanh Toán"))
-        {
-        Vector vec =  (Vector) model.getDataVector().elementAt(row);
-        DSXeBus  dsbus= new DSXeBus(null, true,vec);
-        dsbus.setidxebus(id_xebus.get(row));
-        dsbus.setThemSuaLop(false);
-        dsbus.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-        
-        dsbus.setVisible(true);
-        
-        new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
-            id_xebus = new ArrayList<Integer>();
+        if(!jTable4.getValueAt(0, 10).equals(""))
+        {    
+            if(isadmin)
+            {
+            int count =1, row=0;
+            model=(DefaultTableModel) jTable4.getModel();
             try{
-            if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-                XuLy.setID(id_xebus, jTable4, 0);
-                resize(jTable4);
+            for(int i = model.getRowCount()-1;i>=0;i--){
+                if((Boolean)model.getValueAt(i, 11)==true){
+                    count--;
+                    row = i;
+                }
             }
             }
             catch(Exception ex)
-            {}
-            
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Đã \"Thanh Toán \" không thể sửa đổi",null,JOptionPane.INFORMATION_MESSAGE);
-            
+            {
+
+            }
+            if(count!=0){
+                if(count==1){
+                    JOptionPane.showMessageDialog(null,"Bạn chưa chọn Học Sinh cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Hệ thống chỉ cho phép chỉnh sửa một đối tượng tại một thời điểm",null,JOptionPane.INFORMATION_MESSAGE);
+                    for(int i = model.getRowCount()-1;i>=0;i--){
+                        model.setValueAt(false,i,11);
+                   }
+                }
+                return;
+            }
+            if(jTable4.getValueAt(row, 10).equals("Chưa Thanh Toán"))
+            {
+            Vector vec =  (Vector) model.getDataVector().elementAt(row);
+            DSXeBus  dsbus= new DSXeBus(null, true,vec);
+            dsbus.setidxebus(id_xebus.get(row));
+            dsbus.setThemSuaLop(false);
+            dsbus.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
+
+            dsbus.setVisible(true);
+
+            new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+                id_xebus = new ArrayList<Integer>();
+                try{
+                if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+                    XuLy.setID(id_xebus, jTable4, 0);
+                    resize(jTable4);
+                }
+                }
+                catch(Exception ex)
+                {}
+
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Đã \"Thanh Toán \" không thể sửa đổi",null,JOptionPane.INFORMATION_MESSAGE);
+
+            }
         }
         //ThemSuaLop lop = new ThemSuaLop(null, true, vec);
         /*
@@ -416,48 +418,52 @@ public class XeBus extends javax.swing.JPanel {
 
     private void xoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMouseClicked
         // TODO add your handling code here:
-       if(isadmin)
-       {
-            model= (DefaultTableModel) jTable4.getModel();
-            boolean flags = true;
-            for (int i = model.getRowCount() - 1; i >= 0; i--) {
-                if ((Boolean) model.getValueAt(i, 11) == true) {
-                    flags = false;
-                }
-            }
-            if(!flags)
-            {
-                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-                if(click==JOptionPane.NO_OPTION){
-                    return;
-                }
-                
-                boolean xoaorkhong;
-                DataBase.SQLXeBus data= new DataBase.SQLXeBus();
-                xoaorkhong=data.xoaxebus(jTable4, 11,id_xebus);
+       if(!jTable4.getValueAt(0, 10).equals(""))
+        {    
+        
+                if(isadmin)
+               {
+                    model= (DefaultTableModel) jTable4.getModel();
+                    boolean flags = true;
+                    for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                        if ((Boolean) model.getValueAt(i, 11) == true) {
+                            flags = false;
+                        }
+                    }
+                    if(!flags)
+                    {
+                        int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
+                        if(click==JOptionPane.NO_OPTION){
+                            return;
+                        }
 
-                  new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
-                    id_xebus = new ArrayList<Integer>();
-                    try{
-                        if (!jTable4.getValueAt(0, 0).toString().equals("")) {
-                        XuLy.setID(id_xebus, jTable4, 0);
-                        resize(jTable4);
-                        }
-                        else
-                        {
-                            resize(jTable4);
-                        }
-                        }
-                    catch(Exception ex)
-                    {}
-                    
-            }
-            else
-            {
-                 JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
-               
-            }
-       }
+                        boolean xoaorkhong;
+                        DataBase.SQLXeBus data= new DataBase.SQLXeBus();
+                        xoaorkhong=data.xoaxebus(jTable4, 11,id_xebus);
+
+                          new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+                            id_xebus = new ArrayList<Integer>();
+                            try{
+                                if (!jTable4.getValueAt(0, 0).toString().equals("")) {
+                                XuLy.setID(id_xebus, jTable4, 0);
+                                resize(jTable4);
+                                }
+                                else
+                                {
+                                    resize(jTable4);
+                                }
+                                }
+                            catch(Exception ex)
+                            {}
+
+                    }
+                    else
+                    {
+                         JOptionPane.showMessageDialog(null,"Bạn chưa chọn đối tượng cần chỉnh sửa",null,JOptionPane.INFORMATION_MESSAGE);
+
+                    }
+               }
+        }
     }//GEN-LAST:event_xoaMouseClicked
 
     private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed

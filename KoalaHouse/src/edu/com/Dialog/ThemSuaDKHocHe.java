@@ -329,6 +329,12 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                     
                             }
                         }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null,"Bạn cần thiết lập tuần trong năm nay trước khi thêm học sinh!",null,JOptionPane.INFORMATION_MESSAGE);
+                            tongsotuan=0;
+                    
+                        }
                     }
                     else
                     {
@@ -432,6 +438,12 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                                  tongsotuan=0;
                     
                             }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null,"Bạn cần thiết lập tuần trong năm nay trước khi thêm học sinh!",null,JOptionPane.INFORMATION_MESSAGE);
+                            tongsotuan=0;
+                    
                         }
                     }
                     else
