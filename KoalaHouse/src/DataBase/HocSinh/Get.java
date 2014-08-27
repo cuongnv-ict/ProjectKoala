@@ -330,6 +330,18 @@ public class Get{
         }
          return a;
      }
+     public int GetIDFac(){
+         int idFac = 0;
+         try {
+            rs1 = statement.executeQuery("SELECT Faculties_Id FROM projectkoala.accounts;");
+            while(rs1.next()){
+                idFac = rs1.getInt(1);
+            }
+            } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return idFac;
+     }
      public ArrayList getInFoFac(){
          ArrayList a = new ArrayList();
          String temp1 = null;

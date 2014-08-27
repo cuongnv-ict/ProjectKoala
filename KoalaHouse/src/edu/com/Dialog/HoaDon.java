@@ -84,7 +84,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         tenLop.setText(lop);
         sott = new RecieptManagerment().GetNumberReceipt();
         String soHoaDon = null;
-        switch(HoaDon.idTT){
+        int id_Fac = HoaDon.idTT;
+        if(HoaDon.idhs==0){
+            id_Fac = new Get().GetIDFac();
+        }
+        switch(id_Fac){
             case 1: soHoaDon = "BT"+XuLy.getNumber4(String.valueOf(sott));break;
             case 2: soHoaDon = "HN"+XuLy.getNumber4(String.valueOf(sott));break;
             case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
@@ -577,7 +581,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 {null, null, null, null}
             },
             new String [] {
-                "Tên Phí", "Kì Học", "Năm Học", "Giá"
+                "Tên Phí", "Từ Ngày", "Đến Ngày", "Thành Tiền"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
