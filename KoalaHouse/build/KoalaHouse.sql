@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.14, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: projectkoala
 -- ------------------------------------------------------
--- Server version	5.6.14
+-- Server version	5.6.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +45,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (-1352385146,1,'123','123','asd','LeTung@yahoo.com','0123456789',NULL,1,'Kế Toán'),(1000,1,'admin','admin','admin','admin','adimn',0,0,NULL),(1054812280,1,'root','root','hoalan93','LeTung@yahoo.com','0123456789',0,1,'Kế Toán');
+INSERT INTO `accounts` VALUES (1000,1,'admin','admin','admin','admin','adimn',0,0,NULL),(357080579,1,'cuong','cuong','`12345','LeTung@yahoo.com','0123456789',NULL,1,'Kế Toán'),(1054812280,1,'root','root','hoalan93','LeTung@yahoo.com','0123456789',0,1,'Kế Toán');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,1,1,1,2014,'DS','Nien',5,0);
+INSERT INTO `classes` VALUES (1,1,1,1,2014,'ICT','CuongNV',20,0);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `cost` (
 
 LOCK TABLES `cost` WRITE;
 /*!40000 ALTER TABLE `cost` DISABLE KEYS */;
-INSERT INTO `cost` VALUES (1,1,1,'học phí',5000000,2013,'2014-01-01','2015-01-01'),(2,1,5,'Phí Đặt Cọc',-7000000,2013,'2014-01-01','2015-01-01'),(3,1,1,'Hoàn cờ vua',15000000,2013,'2014-01-01','2015-01-01'),(4,1,1,'học nhạc',1000000,2013,'2014-01-01','2015-01-01'),(5,1,1,'học múa',5000000,2013,'2014-01-01','2014-01-01'),(6,1,1,'học nhảy',2000000,2013,'2014-01-01','2014-01-01'),(7,1,1,'học xx',20000000,2013,'2014-01-01','2014-02-01'),(8,1,1,'Phí Trông Muộn',20000,2013,'2014-01-02','2015-01-01'),(9,1,1,'hoàn Học Phí',10000,2013,'2014-01-01','2015-01-01'),(10,1,4,'Phí Học Hè',30000,2013,'2014-01-01','2015-01-01'),(11,1,2,'Phí Trông Muộn',50000,2013,'2014-01-01','2014-01-01'),(14,1,4,'Phí Học Hè',100000,2015,'2014-01-01','2015-01-01'),(15,1,1,'Học Phí',4000000,2014,'2014-01-01','2014-02-02'),(16,1,1,'abc',400000,2014,'2014-02-02','2014-02-02');
+INSERT INTO `cost` VALUES (1,1,4,'Phí Học Hè',123123,2014,'2014-02-01','2015-04-02');
 /*!40000 ALTER TABLE `cost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,7 +456,7 @@ CREATE TABLE `semesters` (
 
 LOCK TABLES `semesters` WRITE;
 /*!40000 ALTER TABLE `semesters` DISABLE KEYS */;
-INSERT INTO `semesters` VALUES (1,1,2013,'2013-01-01','2013-01-01',0),(1,1,2014,'2014-01-01','2014-02-01',1),(1,1,2015,'2015-01-01','2015-02-01',0),(2,1,2013,'2013-01-01','2013-01-01',0),(2,1,2014,'2014-02-02','2014-03-01',1),(2,1,2015,'2015-03-01','2015-04-01',0),(3,1,2013,'2013-01-01','2013-01-01',0),(3,1,2014,'2014-03-02','2014-04-01',1),(3,1,2015,'2015-05-01','2015-06-01',0),(4,1,2013,'2013-01-01','2013-01-01',0),(4,1,2014,'2014-05-01','2015-05-01',1),(4,1,2015,'2015-07-01','2015-08-01',0),(5,1,2013,'2013-01-01','2013-01-01',0),(5,1,2014,'2014-01-01','2015-05-01',1),(5,1,2015,'2015-01-01','2015-08-01',0);
+INSERT INTO `semesters` VALUES (1,1,2014,'2014-01-01','2014-01-05',1),(2,1,2014,'2014-03-01','2014-05-01',1),(3,1,2014,'2014-06-06','2014-07-08',1),(4,1,2014,'2014-08-01','2014-09-01',1),(5,1,2014,'2014-01-01','2014-09-01',1);
 /*!40000 ALTER TABLE `semesters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -499,7 +499,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (1,1,'q','2003-03-02','','',0,NULL,0,1,'','','','',0,NULL,'2014-08-07',NULL,'');
+INSERT INTO `students` VALUES (1,1,'Nguyễn Văn Cương','2000-01-01','','',0,NULL,0,1,'','','','',0,NULL,'2014-08-27',NULL,'');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -556,7 +556,6 @@ CREATE TABLE `summerweek` (
 
 LOCK TABLES `summerweek` WRITE;
 /*!40000 ALTER TABLE `summerweek` DISABLE KEYS */;
-INSERT INTO `summerweek` VALUES (1,1,'2014-1-1','2014-1-4'),(2,2,'2014-1-7','2014-1-8'),(3,3,'2014-1-11','2014-1-13'),(4,4,'2014-1-19','2014-1-20'),(5,5,'2014-1-21','2014-1-26'),(6,6,'2014-2-1','2014-2-5'),(7,7,'2014-2-6','2014-2-7'),(8,8,'2014-2-13','2014-2-15');
 /*!40000 ALTER TABLE `summerweek` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -569,4 +568,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-07 15:04:05
+-- Dump completed on 2014-08-27 23:56:07
