@@ -154,6 +154,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         long Total = 0;
         try{
         for(int i=0;i<model.getRowCount();i++){
+            String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
             if(hienChietKhau.isSelected()){
                 long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
                 int ck = 0;
@@ -161,11 +162,17 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                     ck = Integer.parseInt(model.getValueAt(i, 4).toString());
                 }
                 long ti = (t*(100-ck))/100;
-                Total += ti;
+                if(tenPhi.indexOf("hoàn")== -1)
+                    Total += ti;
+                else
+                    Total -= ti;
             }
             else{
             if(model.getValueAt(i, 3).toString().length()>0){
+                if(tenPhi.indexOf("hoàn")== -1)
                     Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                else
+                    Total -= Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
             }
             }
         }
@@ -180,7 +187,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             TongTien.setText(XuLy.setMoney(String.valueOf(x)));
             checkDaThu.setText("Hoàn Trả :");
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
-        }
+        }     
         String tienbc = convert.chuyentien(TongTien.getText());
         stbc.setText("Số tiền bằng chữ: "+tienbc);
         }

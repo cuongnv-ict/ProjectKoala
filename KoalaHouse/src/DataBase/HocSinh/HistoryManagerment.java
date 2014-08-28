@@ -52,10 +52,20 @@ public class HistoryManagerment {
          try {
             Object [] nameColumn = {"Số Hóa Đơn", "Người Đóng", "Người Thu", "Số Tiền Thu","Ngày Đóng", "Hình Thức Đóng","Chiết Khấu","Lí Do CK"};
             ArrayList<Object []> data = new ArrayList<Object []>();
+            int idFac = new Get().GetIDFac();
+            
             rs1 = statement.executeQuery("select * from receipts where Students_Id ="+students_id);
             while(rs1.next()){
                 Object str[] = new Object[8];
-                str[0] = rs1.getString(1);
+                int sott = rs1.getInt(1);
+                String soHoaDon = null;
+                switch(idFac){
+            case 1: soHoaDon = "BT"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 2: soHoaDon = "HN"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
+            }
+                str[0] = soHoaDon;
                 str[1] = rs1.getString(6);
                 str[2] = rs1.getString(7);
                 str[3] = XuLy.setMoney(rs1.getString(8));  
