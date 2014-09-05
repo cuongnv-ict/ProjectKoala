@@ -79,6 +79,8 @@ public class AStudentAndLateDay {
                     str[12] = rs1.getString(13);
                     str[13] = rs1.getString(14);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,6 +102,8 @@ public class AStudentAndLateDay {
                     str[count] = rs1.getString(5);
                     count++;
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,6 +124,8 @@ public class AStudentAndLateDay {
                     str[count] = rs1.getString(5);
                     count++;
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,6 +162,8 @@ public class AStudentAndLateDay {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -167,6 +175,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,6 +186,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,6 +197,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -202,6 +216,8 @@ public class AStudentAndLateDay {
             PreparedStatement pstmt = connect.prepareStatement(query);
             System.out.println(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -219,6 +235,8 @@ public class AStudentAndLateDay {
             PreparedStatement pstmt = connect.prepareStatement(query);
             System.out.println(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -256,6 +274,9 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -296,6 +317,8 @@ public class AStudentAndLateDay {
             };
             table.setModel(model);
         }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -305,6 +328,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -316,6 +341,8 @@ public class AStudentAndLateDay {
              while(rs1.next()){
                  debt = rs1.getInt(1);
              }
+             statement.close();
+            connect.close();
          } catch (SQLException ex) {
              Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -326,6 +353,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -335,6 +364,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -344,6 +375,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -353,6 +386,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -362,6 +397,8 @@ public class AStudentAndLateDay {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }

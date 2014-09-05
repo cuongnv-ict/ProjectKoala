@@ -100,6 +100,8 @@ public class HistoryManagerment {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,6 +125,9 @@ public class HistoryManagerment {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            statement.close();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -221,6 +226,8 @@ public class HistoryManagerment {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         } 

@@ -153,6 +153,8 @@ public class GetTotal {
                 else
                     total -= Integer.parseInt(XuLy.getMoney(str[3].toString()));
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -166,6 +168,8 @@ public class GetTotal {
             while(rs1.next()){
                 idSemester = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);
         }

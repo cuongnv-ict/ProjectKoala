@@ -55,6 +55,8 @@ public class CostOfStudent {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,6 +66,8 @@ public class CostOfStudent {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +77,8 @@ public class CostOfStudent {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,6 +157,8 @@ public class CostOfStudent {
             };
             table.setModel(model);
         }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -292,6 +300,8 @@ public class CostOfStudent {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }

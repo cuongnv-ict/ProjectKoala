@@ -48,6 +48,8 @@ public class RecieptManagerment {
                 num = rs1.getInt(1);
                 num++;
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -160,6 +162,8 @@ public class RecieptManagerment {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -304,6 +308,8 @@ public class RecieptManagerment {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -715,6 +721,8 @@ public class RecieptManagerment {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -726,6 +734,8 @@ public class RecieptManagerment {
             while(rs1.next()){
                 total = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -738,6 +748,8 @@ public class RecieptManagerment {
             while(rs1.next()){
                 id = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -748,6 +760,8 @@ public class RecieptManagerment {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -757,6 +771,8 @@ public class RecieptManagerment {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -766,6 +782,8 @@ public class RecieptManagerment {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }

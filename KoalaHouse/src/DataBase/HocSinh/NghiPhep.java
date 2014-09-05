@@ -85,6 +85,8 @@ public class NghiPhep {
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
               
@@ -103,6 +105,8 @@ public class NghiPhep {
             String query ="INSERT INTO `projectkoala`.`leaves` (`Id`, `Faculties_Id`, `Students_Id`, `StartDate`, `EndDate`,`NumberOfDay`,`IsActive`) VALUES ('"+id+"', '"+ThongTin.trungtam+"', '"+idStudent+"', '"+batdau+"', '"+ketthuc+"','"+numberday+"',1);";
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
                
@@ -114,6 +118,8 @@ public class NghiPhep {
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }

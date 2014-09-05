@@ -114,7 +114,7 @@ public class HocSinhA extends javax.swing.JPanel {
             case 24: idTrungTam = 3;break;
             case 25: idTrungTam = 4;break;
         }
-        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
+        totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
         TimeTrongMuon.setText(String.valueOf(totalTime));
         new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
         model = (DefaultTableModel) DanhSachPhi.getModel();
@@ -869,7 +869,7 @@ public class HocSinhA extends javax.swing.JPanel {
         // TODO add your handling code here:
          AStudentAndLateDay a = new AStudentAndLateDay();
         ArrayList info;
-        info = a.HocSinhA1(id);
+        info = new AStudentAndLateDay().HocSinhA1(id);
         ten = (String) info.get(1);
         ngaySinh = (String) info.get(2);
         father = (String) info.get(3);
@@ -903,7 +903,7 @@ public class HocSinhA extends javax.swing.JPanel {
             case 24: idTrungTam = 3;break;
             case 25: idTrungTam = 4;break;
         }
-        totalTime = a.LateDay(id, idTrungTam);//1 la ma Trung tam
+        totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
         TimeTrongMuon.setText(String.valueOf(totalTime));
         new CostOfStudent().BangHocPhiCuaHocSinh(id, idTrungTam, DanhSachPhi);
         Total();

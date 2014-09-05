@@ -202,7 +202,7 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ThêmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThêmActionPerformed
-        try{
+    try{
         String date = nam.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+ngay.getSelectedItem().toString();
         int time = Integer.parseInt(soPhut.getText());
         int idSemester = new GetTotal().GetIdSemester(idTrungTam, nam.getSelectedItem().toString(), date);
@@ -214,7 +214,9 @@ public class chiTietTrongMuon2 extends javax.swing.JDialog {
         new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
         }
         }
-        
+        else{
+            new AStudentAndLateDay().InsertTrongMuon(idStudent, idTrungTam, date, time,String.valueOf(idSemester),String.valueOf(year));
+        }
         new AStudentAndLateDay().LateDayInfo(idStudent, bangTrongmuon);
         them = true; 
         }

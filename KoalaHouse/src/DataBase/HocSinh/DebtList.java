@@ -112,6 +112,8 @@ public class DebtList {
             } else {
                 XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(DebtList.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -139,6 +141,8 @@ public class DebtList {
                 }
             }
             Collections.sort(data, new DebtListComparator());
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(DebtList.class.getName()).log(Level.SEVERE, null, ex);
         }

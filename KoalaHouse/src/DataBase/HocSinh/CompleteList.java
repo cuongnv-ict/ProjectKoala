@@ -122,6 +122,8 @@ public class CompleteList {
             } else {
                 XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CompleteList.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,7 +131,6 @@ public class CompleteList {
     }
 
     public ArrayList GetIdStudent() {
-        System.out.println("the eo nao");
         ArrayList<Object[]> data = new ArrayList<Object[]>();
         try {
             rs1 = statement.executeQuery("select students.Id,fullname,NameClass,students.Faculties_Id\n"
@@ -157,6 +158,8 @@ public class CompleteList {
 
             }
             Collections.sort(data, new DebtListComparator());
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CompleteList.class.getName()).log(Level.SEVERE, null, ex);
         }

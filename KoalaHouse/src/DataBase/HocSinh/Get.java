@@ -64,6 +64,8 @@ public class Get{
                 String name = rs1.getString(1);
                 names.add(name);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -91,6 +93,8 @@ public class Get{
             }
             info.add(idStudent);
             info.add(idTrungTam);
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -133,6 +137,8 @@ public class Get{
                 model = new DefaultTableModel(nameColumn, 0);
                 table.setModel(model);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,6 +151,8 @@ public class Get{
                 String name = rs1.getString(1);
                 nameClasses.add(name);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,6 +166,8 @@ public class Get{
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -171,6 +181,8 @@ public class Get{
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,6 +195,8 @@ public class Get{
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -195,6 +209,8 @@ public class Get{
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -213,6 +229,8 @@ public class Get{
                     a.add(b[j]);
                 }
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(TotalFeeManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -225,6 +243,8 @@ public class Get{
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -295,6 +315,8 @@ public class Get{
                     str[1] = rs2.getString(2);
                 a.add(str);
             }
+            statement.close();
+            connect.close();
         }catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -307,6 +329,8 @@ public class Get{
             while(rs1.next()){
                 number = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -325,6 +349,8 @@ public class Get{
                 ntm = " từ "+temp1+" đến "+temp2;
                 a.add(ntm);
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -337,6 +363,8 @@ public class Get{
             while(rs1.next()){
                 idFac = rs1.getInt(1);
             }
+            statement.close();
+            connect.close();
             } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -358,6 +386,8 @@ public class Get{
                 temp2 = rs1.getString(2);
             }
             a.add(temp1);a.add(temp2);a.add(idFac);
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -368,6 +398,8 @@ public class Get{
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }

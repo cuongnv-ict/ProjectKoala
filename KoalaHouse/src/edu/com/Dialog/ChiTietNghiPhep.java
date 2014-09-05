@@ -27,8 +27,7 @@ NghiPhep a;
         super(parent, modal);
         initComponents();
         idNghiPhep = new ArrayList<Integer>();
-        a = new NghiPhep();
-        a.NghiPhepInfo(idStudent, jTable1);
+        new NghiPhep().NghiPhepInfo(idStudent, jTable1);
         XuLy.setID(idNghiPhep, jTable1, 0);
     }
 
@@ -252,7 +251,8 @@ NghiPhep a;
                         .addComponent(jLabel11))
                     .addComponent(songay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addComponent(jButton1))
+                .addComponent(jButton1)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -268,8 +268,8 @@ NghiPhep a;
         ketthuc += "-"+thang1.getSelectedItem().toString();
         ketthuc += "-"+nam1.getSelectedItem().toString();
         System.out.println(""+batdau+" "+ketthuc);
-        a.InsertNghiPhep(idStudent, idTrungTam, new XuLiXau().NamThangNgay(batdau),new XuLiXau().NamThangNgay(ketthuc),String.valueOf(Integer.parseInt(songay.getText())));
-        a.NghiPhepInfo(idStudent, jTable1);
+        new NghiPhep().InsertNghiPhep(idStudent, idTrungTam, new XuLiXau().NamThangNgay(batdau),new XuLiXau().NamThangNgay(ketthuc),String.valueOf(Integer.parseInt(songay.getText())));
+        new NghiPhep().NghiPhepInfo(idStudent, jTable1);
         XuLy.setID(idNghiPhep, jTable1, 0);
        }
        catch(Exception ex)
@@ -298,9 +298,9 @@ NghiPhep a;
             }
             for(int i=0;i<b.length;i++)
             {
-            a.XoaNghiPhep(idStudent, batdau, ketthuc,idNghiPhep.get(b[i]));
+            new NghiPhep().XoaNghiPhep(idStudent, batdau, ketthuc,idNghiPhep.get(b[i]));
             }
-        a.NghiPhepInfo(idStudent, jTable1);
+        new NghiPhep().NghiPhepInfo(idStudent, jTable1);
         XuLy.setID(idNghiPhep, jTable1, 0);
         }
     }//GEN-LAST:event_jLabel10MouseClicked
