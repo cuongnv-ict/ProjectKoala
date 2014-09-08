@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -65,7 +67,7 @@ public class TotalFeeManagerment {
             //doan lay cac truong.
             rs3 = statement.executeQuery("SELECT students.Id,students.FullName,classes.NameClass \n" +
             "FROM projectkoala.students,classes,classes_has_students\n" +
-            "where students.isactive = 1 and students.Id = classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id");
+            "where students.isactive = 1 and students.Id = classes_has_students.Students_Id and classes.Id = classes_has_students.Classes_Id Order by classes.NameClass");
             if(rs3!= null)
             while (rs3.next()){
                 Object[] str = new Object[nameCol.size()];
@@ -135,7 +137,14 @@ public class TotalFeeManagerment {
                 str[ptonghoanphi] = XuLy.setMoney(String.valueOf(tongHoanHP));
                 data.add(str);
             }
-            System.out.println(data.size());
+            //sap xep ten o day
+            Collections.sort(data, new TotalFreeComparator());
+            for (int i = 0; i < data.size(); i++) {
+                Object[] st;
+                st = (Object[]) data.get(i);
+                st[0] = i + 1;
+            }
+            //------------------------
             Object [][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++){
             rowColumn[i] = data.get(i);
@@ -153,6 +162,8 @@ public class TotalFeeManagerment {
             }else{
                  XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
             }
+            statement.close();
+            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(TotalFeeManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -238,4 +249,31 @@ public class TotalFeeManagerment {
         nameColumn.add("Ghi Chú");
         return nameColumn;
         }
+}
+class TotalFreeComparator implements Comparator<Object[]> {
+
+    public int compare(Object[] o1, Object[] o2) {
+        if (!o1[2].equals(o2[2])) {
+            return 0;
+        }
+        String age1 = (String) o1[1];
+        String[] x = age1.split(" ");
+        String age2 = (String) o2[1];
+        String[] y = age2.split(" ");
+        String name1 = x[x.length - 1];
+        String name2 = y[y.length - 1];
+        if (name1.compareTo(name2) >= 1) {
+            return 1;
+        } else if (name1.compareTo(name2) == 0) {
+            if (age1.compareTo(age2) >= 1) {
+                return 1;
+            } else if (age1.compareTo(age2) == 0) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    }
 }
