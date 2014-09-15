@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/DataBase/HocSinh/DebtList.java</file>
-            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/DataBase/HocSinh/TotalFeeManagerment.java</file>
-            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/edu/com/Dialog/ChiTietNghiPhep.java</file>
+            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/edu/com/Dialog/NhapTrongMuon.java</file>
+            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/DataBase/HocSinh/FeePayedManagerment.java</file>
+            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/DataBase/HocSinh/GetTotal.java</file>
+            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/edu/com/Panel/TongPhi.java</file>
+            <file>file:/C:/Users/Pham%20The%20Quyen/Desktop/repairt/ProjectKoala/KoalaHouse/src/DataBase/HocSinh/Get.java</file>
         </group>
     </open-files>
 </project-private>

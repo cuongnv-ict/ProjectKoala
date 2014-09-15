@@ -250,6 +250,30 @@ public class Get{
         }
         return number;
      }
+     public int GetSoTienXeBusDaThu(int idStudent,int idFac,int idSem,int year){
+         int number = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT EndDate FROM projectkoala.buslist where idStudents = "+idStudent+" and IsActive = 0;");
+            String date = null;
+            while(rs1.next()){
+                date = rs1.getString(1);
+            }
+            if(date!=null){
+            int idSemester = new GetTotal().GetIdSemesterCheckYear(idFac,String.valueOf(year), date);
+            if(idSemester!= idSem)
+                return number;
+            }
+            rs1 = statement.executeQuery("SELECT TienXe FROM projectkoala.buslist where idStudents = "+idStudent+" and IsActive = 0;");
+            while(rs1.next()){
+                number = rs1.getInt(1);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+     }
      public ArrayList getPhiHocSinh(int idStudent,int idTrungTam){
          ArrayList a =  new ArrayList();
         try {
@@ -318,6 +342,70 @@ public class Get{
             statement.close();
             connect.close();
         }catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return a;
+     }
+     public ArrayList getPhiHocSinhDaThu(int idStudent,int idTrungTam,int idSem,int year){
+         ArrayList a =  new ArrayList();
+        try {
+            if(idSem==1){
+                rs1 = statement.executeQuery("SELECT NameCost,Amount,cost.Semesters,cost.year FROM projectkoala.cost,students_has_cost\n" +
+"where students_has_cost.Students_Id = "+idStudent+" and students_has_cost.IsDebt = 0 and students_has_cost.Faculties_Id = "+idTrungTam+"\n" +
+"and students_has_cost.Cost_Id = cost.Id and (cost.Semesters = 1 or cost.Semesters = 5) and cost.year ="+year+" ");
+            }else
+            {
+                rs1 = statement.executeQuery("SELECT NameCost,Amount,cost.Semesters,cost.year FROM projectkoala.cost,students_has_cost\n" +
+"where students_has_cost.Students_Id = "+idStudent+" and students_has_cost.IsDebt = 0 and students_has_cost.Faculties_Id = "+idTrungTam+"\n" +
+"and students_has_cost.Cost_Id = cost.Id and cost.Semesters = "+idSem+" and cost.year ="+year+" ");
+            }
+            
+            while(rs1.next()){
+                Object[] str = new Object[2];
+                str[0] = rs1.getString(1);
+                int totalTime = 0;
+                boolean checkTrongMuon = false;
+                boolean checkHocHe = false;
+                boolean checkHoanHocPhi = false;
+                String tenp = str[0].toString().toLowerCase();
+                if(tenp.indexOf("thu")!= -1 && tenp.indexOf("khác")!= -1){
+                    str[0] = "Thu Khác";
+                }
+                if(str[0].toString().toLowerCase().indexOf("phí trông muộn")!= -1){
+                    checkTrongMuon = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new AStudentAndLateDay().LateDay(idStudent,idTrungTam,ki,nam);
+                }
+                if(str[0].toString().toLowerCase().indexOf("phí học hè")!= -1){
+                    checkHocHe = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new Get().GetNumberSummerWeek(idStudent,ki,nam);
+                }
+                if(str[0].toString().toLowerCase().indexOf("hoàn học phí")!= -1){
+                    checkHoanHocPhi = true;
+                    String ki = rs1.getString(3);
+                    String nam = rs1.getString(4).substring(0, 4);
+                    totalTime = new Get().GetSoNgayNghiPhep(idStudent,ki,nam);
+                }
+                String thanhtien = rs1.getString(2);
+                if(thanhtien.charAt(0)== '-'){
+                    thanhtien = thanhtien.substring(1);
+                }
+                int money = Integer.parseInt(thanhtien);
+                if(checkTrongMuon)
+                    money = money * totalTime;
+                if(checkHocHe)
+                    money = money * totalTime;
+                if(checkHoanHocPhi)
+                    money = money * totalTime;
+                str[1] = money;
+                a.add(str);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;

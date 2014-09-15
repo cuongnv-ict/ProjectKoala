@@ -176,4 +176,20 @@ public class GetTotal {
         
         return idSemester;
 }
+    public int GetIdSemesterCheckYear(int idFac,String nam,String date){
+    int idSemester =0;
+        try {
+            rs1 = statement.executeQuery("SELECT min(SemesterNumber) FROM projectkoala.semesters where Faculties_Id = "+idFac+" and StartDate <= '"+date+"' and EndDate >= '"+date+"' and Year = "+nam+";");
+            if(rs1!= null)
+            while(rs1.next()){
+                idSemester = rs1.getInt(1);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetTotal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return idSemester;
+}
 }

@@ -8,6 +8,8 @@ package edu.com.Panel;
 
 import DataBase.DataTable;
 import DataBase.HocSinh.DebtList;
+import DataBase.HocSinh.FeePayedManagerment;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.TotalFeeManagerment;
 import edu.com.CloseButton.CloseTabButton;
 import java.sql.SQLException;
@@ -29,13 +31,20 @@ public class TongPhi extends javax.swing.JPanel {
     public ArrayList ListId;
     public JTabbedPane center;
     public JTable BangDSNo;
+    int idFac;
     public TongPhi() {
+        idFac = new Get().GetIDFac();
         initComponents();
 //        ListId = new DebtList().GetIdStudent();
-        new TotalFeeManagerment().BangDanhSachTongPhi(1, tongPhi);
+        new TotalFeeManagerment().BangDanhSachTongPhi(idFac, tongPhi);
     }
     public void reLoad(){
-        new TotalFeeManagerment().BangDanhSachTongPhi(1, tongPhi);
+        int semme = sem.getSelectedIndex();
+        int year = chonNam.getSelectedIndex()+ 2013;
+        if(semme >0 && year > 2013)
+            new FeePayedManagerment().BangDanhSachTongPhi(idFac,semme,year,tongPhi);
+        if(semme==0)
+            new TotalFeeManagerment().BangDanhSachTongPhi(idFac, tongPhi);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +57,9 @@ public class TongPhi extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tongPhi = new javax.swing.JTable();
+        sem = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        chonNam = new javax.swing.JComboBox();
 
         tongPhi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,21 +74,55 @@ public class TongPhi extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tongPhi);
 
+        sem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chưa Đóng", "Đã Đóng Kì 1", "Đã Đóng Kì 2", "Đã Đóng Kì 3", "Đã Đóng Kì Hè" }));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
+        chonNam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chonNam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1772, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chonNam, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(chonNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        reLoad();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox chonNam;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox sem;
     private javax.swing.JTable tongPhi;
     // End of variables declaration//GEN-END:variables
 }

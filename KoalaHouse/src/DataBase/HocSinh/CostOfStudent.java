@@ -89,7 +89,7 @@ public class CostOfStudent {
         try {
             Object [] nameColumn = {"Mã","Tên","Kì học","Năm học","Giá","Đánh dấu" };
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" ");
+            rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" Order by cost.Semesters;");
             System.out.println(""+idFac);
             while(rs1.next()){
                 Object str[] = new Object[6];
@@ -157,6 +157,12 @@ public class CostOfStudent {
             };
             table.setModel(model);
         }
+            if (data.size() == 0) {
+                Object[][] name = new Object[][]{nameColumn};
+                XuLy.resizeColumnWidth(table, XuLy.getSize(name));
+            } else {
+                XuLy.resizeColumnWidth(table, XuLy.getSize(rowColumn));
+            }
             statement.close();
             connect.close();
         } catch (SQLException ex) {
