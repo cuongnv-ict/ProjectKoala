@@ -982,15 +982,15 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbNgay, 10, 120);
         grphcs.drawString(cbNgay, 40, 120);
         grphcs.drawString(lbThang, 55, 120);
-        grphcs.drawString(cbThang, 90, 120);
+        grphcs.drawString(cbThang, 85, 120);
         grphcs.drawString(lbNam, 95, 120);
         grphcs.drawString(cbNam, 125, 120);
         grphcs.drawString(lbSo, 280, 120);
         grphcs.drawString(tfSo, 295, 120);
         grphcs.drawString(lbHoTen, 10, 140);
         grphcs.drawString(tfHoTen, 65, 140);
-        grphcs.drawString(lbMa, 170, 140);
-        grphcs.drawString(tfMa, 190, 140);
+        //grphcs.drawString(lbMa, 170, 140);
+        //grphcs.drawString(tfMa, 190, 140);
         grphcs.drawString(lbCoso, 280, 140);
         grphcs.drawString(tfCoso, 315, 140);
         grphcs.drawString(lbNguoiThanhToan, 10, 160);
@@ -1061,7 +1061,10 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         }
         }
         grphcs.drawRect(10, 180, 373, (nRow + 1) * 20);
-        
+        grphcs.drawLine(10, 195, 383, 195);
+        grphcs.drawLine(120, 180, 120, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(220, 180, 220, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(320, 180, 320, 180 + (nRow + 1) * 20);
         int rowIndex = 190 + nRow * 20;
         rowIndex = rowIndex + 20;
         System.out.println(rowIndex);
@@ -1111,15 +1114,15 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbNgay, 430, 120);
         grphcs.drawString(cbNgay, 460, 120);
         grphcs.drawString(lbThang, 475, 120);
-        grphcs.drawString(cbThang, 510, 120);
+        grphcs.drawString(cbThang, 505, 120);
         grphcs.drawString(lbNam, 515, 120);
         grphcs.drawString(cbNam, 545, 120);
         grphcs.drawString(lbSo, 690, 120);
         grphcs.drawString(tfSo, 705, 120);
         grphcs.drawString(lbHoTen, 430, 140);
         grphcs.drawString(tfHoTen, 485, 140);
-        grphcs.drawString(lbMa, 590, 140);
-        grphcs.drawString(tfMa, 610, 140);
+        //grphcs.drawString(lbMa, 590, 140);
+        //grphcs.drawString(tfMa, 610, 140);
         grphcs.drawString(lbCoso, 690, 140);
         grphcs.drawString(tfCoso, 725, 140);
         grphcs.drawString(lbNguoiThanhToan, 430, 160);
@@ -1188,7 +1191,10 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         }
         }
         grphcs.drawRect(430, 180, 373, (nRow + 1) * 20);
-        
+        grphcs.drawLine(430, 195, 803, 195);
+        grphcs.drawLine(540, 180, 540, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(640, 180, 640, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(740, 180, 740, 180 + (nRow + 1) * 20);
         int rowIndexLeft = 190 + nRow * 20;
         rowIndexLeft = rowIndexLeft + 20;
         
