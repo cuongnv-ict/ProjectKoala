@@ -57,8 +57,8 @@
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="410" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="424" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btnPrint" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -859,7 +859,7 @@
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="H&#x1ecd;c ph&#xed; v&#xe0; c&#xe1;c kho&#x1ea3;n ph&#x1ee5; ph&#xed; kh&#xe1;c ph&#x1ee5; huynh &#x111;&#xf2;ng b&#x1eb1;ng ti&#x1ec1;n VND. H&#xec;nh th&#x1ee9;c thanh to&#xe1;nb&#x1eb1;ng chuy&#x1ec3;n kho&#x1ea3;n qua ng&#xe2;n h&#xe0;ng ho&#x1eb7;c n&#x1ed9;p ti&#x1ec1;n m&#x1eb7;t t&#x1ea1;i v&#x103;n ph&#xf2;ng tr&#x1b0;&#x1edd;ng.&#xa;&#xa;Nh&#xe0; tr&#x1b0;&#x1edd;ng s&#x1ebd; kh&#xf4;ng g&#x1eed;i th&#xf4;ng b&#xe1;o h&#x1ecd;c ph&#xed; l&#x1ea7;n th&#x1ee9; hai. n&#x1ebf;u h&#x1ecd;c ph&#xed; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c n&#x1ed9;p &#xa;&#x111;&#xfa;ng h&#x1ea1;n, vi&#x1ec7;c gi&#x1eef; ch&#x1ed7; cho con em v&#x1ecb; trong k&#x1ef3; h&#x1ecd;c s&#x1ebd; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c b&#x1ea3;o &#x111;&#x1ea3;m&#xa;&#xa;"/>
+                    <Property name="text" type="java.lang.String" value="* H&#x1ecd;c ph&#xed; v&#xe0; c&#xe1;c kho&#x1ea3;n ph&#x1ee5; ph&#xed; kh&#xe1;c ph&#x1ee5; huynh &#x111;&#xf2;ng b&#x1eb1;ng ti&#x1ec1;n VND. H&#xec;nh th&#x1ee9;c thanh to&#xe1;nb&#x1eb1;ng chuy&#x1ec3;n kho&#x1ea3;n qua ng&#xe2;n h&#xe0;ng ho&#x1eb7;c n&#x1ed9;p ti&#x1ec1;n m&#x1eb7;t t&#x1ea1;i v&#x103;n ph&#xf2;ng tr&#x1b0;&#x1edd;ng.&#xa;&#xa;* Nh&#xe0; tr&#x1b0;&#x1edd;ng s&#x1ebd; kh&#xf4;ng g&#x1eed;i th&#xf4;ng b&#xe1;o h&#x1ecd;c ph&#xed; l&#x1ea7;n th&#x1ee9; hai. n&#x1ebf;u h&#x1ecd;c ph&#xed; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c n&#x1ed9;p &#xa;&#x111;&#xfa;ng h&#x1ea1;n, vi&#x1ec7;c gi&#x1eef; ch&#x1ed7; cho con em v&#x1ecb; trong k&#x1ef3; h&#x1ecd;c s&#x1ebd; kh&#xf4;ng &#x111;&#x1b0;&#x1ee3;c b&#x1ea3;o &#x111;&#x1ea3;m&#xa;"/>
                   </Properties>
                 </Component>
               </SubComponents>

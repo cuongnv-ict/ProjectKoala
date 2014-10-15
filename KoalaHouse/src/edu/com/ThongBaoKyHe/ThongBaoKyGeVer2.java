@@ -866,6 +866,10 @@ public void Total(){
             }
         }
         grphcs.drawRect(15, 245, 500, (nRow + 1) * 20);
+        grphcs.drawLine(15, 265, 515, 265);
+        grphcs.drawLine(65, 245, 65, 245 + (nRow + 1) * 20);
+        grphcs.drawLine(295, 245, 295, 245 + (nRow + 1) * 20);
+        grphcs.drawLine(445, 245, 445, 245 + (nRow + 1) * 20);
         lines++;
         int line = 260 + (nRow)  * 20;
         line = line + 20;

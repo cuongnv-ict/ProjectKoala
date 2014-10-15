@@ -1,2 +1,0 @@
-DataBase.HocSinh.CompleteComparator
-DataBase.HocSinh.CompleteList

@@ -355,7 +355,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("Học phí và các khoản phụ phí khác phụ huynh đòng bằng tiền VND. Hình thức thanh toánbằng chuyển khoản qua ngân hàng hoặc nộp tiền mặt tại văn phòng trường.\n\nNhà trường sẽ không gửi thông báo học phí lần thứ hai. nếu học phí không được nộp \nđúng hạn, việc giữ chỗ cho con em vị trong kỳ học sẽ không được bảo đảm\n\n");
+        jTextArea2.setText("* Học phí và các khoản phụ phí khác phụ huynh đòng bằng tiền VND. Hình thức thanh toánbằng chuyển khoản qua ngân hàng hoặc nộp tiền mặt tại văn phòng trường.\n\n* Nhà trường sẽ không gửi thông báo học phí lần thứ hai. nếu học phí không được nộp \nđúng hạn, việc giữ chỗ cho con em vị trong kỳ học sẽ không được bảo đảm");
         jScrollPane1.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -592,8 +592,8 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrint)
                 .addContainerGap())
         );
@@ -831,6 +831,10 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
             }
         }
         grphcs.drawRect(15, 245, 500, (nRow + 1) * 20);
+        grphcs.drawLine(15, 265, 515, 265);
+        grphcs.drawLine(65, 245, 65, 245 + (nRow + 1) * 20);
+        grphcs.drawLine(295, 245, 295, 245 + (nRow + 1) * 20);
+        grphcs.drawLine(445, 245, 445, 245 + (nRow + 1) * 20);
         int line = 260 + (nRow)  * 20;
         line = line + 20;
         // ve cac tuan hoc
