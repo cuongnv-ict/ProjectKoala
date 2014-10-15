@@ -189,6 +189,13 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }     
         String tienbc = convert.chuyentien(TongTien.getText());
+        //viet hoa chu cai dau
+        char[] head = new char[1];
+        head[0] = tienbc.charAt(0);
+        String h = new String(head);
+        h = h.toUpperCase();
+        tienbc = tienbc.substring(1);
+        tienbc = h + tienbc;
         stbc.setText("Số tiền bằng chữ: "+tienbc);
         }
         catch(java.lang.NumberFormatException e){
@@ -356,11 +363,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
         });
 
-        jLabel7.setText("Tháng");
+        jLabel7.setText("tháng");
 
         thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
-        jLabel8.setText(" Năm");
+        jLabel8.setText(" năm");
 
         nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
         nam.addActionListener(new java.awt.event.ActionListener() {
@@ -437,7 +444,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jLabel18.setText("Lớp:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Người TT:");
+        jLabel17.setText("Người ĐD:");
 
         NguoiDaiDien.setText("Nguyễn Ngọc Lan");
 
