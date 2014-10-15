@@ -89,6 +89,7 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
     public int idStudent;
     public static String hanNop_sta = "";
     public static String luuY_sta = "";
+    public static String luuY1_sta = "";
     public static String tuan1_sta = "Tuần 1:";
     public static String tuan2_sta = "Tuần 2:";
     public static String tuan3_sta = "Tuần 3:";
@@ -122,6 +123,8 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
         jTextField11.setText(hanNop_sta);
         if(luuY_sta.length()>0)
             jTextArea1.setText(luuY_sta);
+        if(luuY1_sta.length()>0)
+            jTextArea2.setText(luuY1_sta);
         new RecieptManagerment().BangDSPhiThongBaoDauNam(idStudent,idTrungTam, jTable1);
     }
 
@@ -547,6 +550,7 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
         //luu thong tin cho thong bao sau
         hanNop_sta = jTextField11.getText();
         luuY_sta = jTextArea1.getText();
+        luuY1_sta = jTextArea2.getText();
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Printting detailt");
         pj.setPrintable(this);

@@ -165,7 +165,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
             bangDSNghỉPhep.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 267, 564, 251));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 267, 840, 251));
 
         jButton1.setText("Thêm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +173,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 185, -1, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, 30));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -233,11 +233,11 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 108, 80, -1));
         jPanel1.add(songayngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 105, 229, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 49, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nhập Ngày Nghỉ Phép");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
 
         ten.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         getContentPane().add(ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 49, 172, -1));
@@ -251,7 +251,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
                 jLabel8MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 229, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

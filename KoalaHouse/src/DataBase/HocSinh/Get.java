@@ -492,6 +492,21 @@ public class Get{
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public String getNgayNhapHoc(int idStudent){
+         String a = null;
+         try {
+            rs1 = statement.executeQuery("SELECT NhapHoc FROM projectkoala.students where Id = "+idStudent+";");
+            while(rs1.next()){
+                a = rs1.getString(1);
+            }
+            statement.close();
+            connect.close();
+            a = new XuLiXau().NgayThangNam(a);
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return a;
+     }
 }
 class TrongMuonComparator implements Comparator<Object[]> {
 
