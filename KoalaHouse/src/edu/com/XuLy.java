@@ -64,12 +64,13 @@ public class XuLy {
         Collections.sort(data, new Comparator<Object[]>() {
             @Override
             public int compare(Object[] o1, Object[] o2) {
-                if(!o1[column1].toString().equalsIgnoreCase(o2[column1].toString())){
+               
+                if((o2[column1].toString()=="")||!o1[column1].toString().equalsIgnoreCase(o2[column1].toString())||(""==o1[column1].toString())){
                     return 1;
-                }
-                String[] StrArr_1 = o1[column].toString().toUpperCase().split(" ");
-                String[] StrArr_2 = o2[column].toString().toUpperCase().split(" ");
-                int x, y;
+                }            
+                String[] StrArr_1 = o1[column].toString().trim().toUpperCase().split(" ");
+                String[] StrArr_2 = o2[column].toString().trim().toUpperCase().split(" ");
+                int x=0, y=0;
                 String tr_x = "";
                 String tr_y = "";
                 x = StrArr_1.length - 1;
@@ -92,7 +93,8 @@ public class XuLy {
                         tr_y += StrArr_2[i];
                     }
                 }
-                return tr_x.compareTo(tr_y);
+                //System.out.println(StrArr_1.length+"-"+StrArr_2.length);
+               return tr_x.compareTo(tr_y);
             }
         });
     }
