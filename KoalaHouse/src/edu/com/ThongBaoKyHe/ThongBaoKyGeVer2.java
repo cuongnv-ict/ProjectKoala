@@ -146,6 +146,11 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jTextField8.setText(tuan4_sta);
         jTextField9.setText(tuan5_sta);
         jTextField10.setText(tuan6_sta);
+        int CurrentYear = new Get().getYearActive(idTrungTam);
+        if(CurrentYear > 2012){
+            jComboBox1.setSelectedIndex(CurrentYear - 2013);
+            jComboBox2.setSelectedIndex(CurrentYear - 2012);
+        }
         new RecieptManagerment().BangDSPhiThongBaoTrongNam(idStudent,idTrungTam, jTable1,true);
         Total();
     }

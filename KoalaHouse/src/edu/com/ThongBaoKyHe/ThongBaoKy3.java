@@ -7,6 +7,7 @@
 package edu.com.ThongBaoKyHe;
         
 import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.RecieptManagerment;
 import static edu.com.Dialog.HoaDon.idhs;
 import edu.com.XuLy;
@@ -128,6 +129,11 @@ public class ThongBaoKy3 extends javax.swing.JFrame implements Printable {
             jTextArea1.setText(luuY_sta);
         if(luuY1_sta.length()>0)
             jTextArea2.setText(luuY1_sta);
+        int CurrentYear = new Get().getYearActive(idTrungTam);
+        if(CurrentYear > 2012){
+            jComboBox1.setSelectedIndex(CurrentYear - 2013);
+            jComboBox2.setSelectedIndex(CurrentYear - 2012);
+        }
         new RecieptManagerment().BangDSPhiThongBaoTrongNam(idStudent,idTrungTam, jTable1,false);
         Total();
     }
