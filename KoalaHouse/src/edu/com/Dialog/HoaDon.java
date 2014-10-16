@@ -78,7 +78,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public HoaDon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        idHS.setText(String.valueOf(idhs));
         TenHocSinh.setText(tenHS);
         NguoiDaiDien.setText(tenNguoiDaiDien);
         tenLop.setText(lop);
@@ -256,8 +255,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         NguoiDaiDien = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         HinhThucDong = new javax.swing.JComboBox();
-        idHS = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         tenLop = new javax.swing.JTextField();
         tenTrungTam = new javax.swing.JTextField();
@@ -435,7 +432,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         );
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Họ tên hs:");
+        jLabel11.setText("Họ tên học sinh:");
 
         TenHocSinh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TenHocSinh.setText("Nguyễn Hải Anh");
@@ -453,11 +450,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
         HinhThucDong.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Chuyển khoản" }));
 
-        idHS.setText("123");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Mã:");
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Cơ Sở:");
 
@@ -469,12 +461,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addGroup(ThongTinHocSinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ThongTinHocSinhLayout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addGap(2, 2, 2)
-                        .addComponent(TenHocSinh, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(idHS))
+                        .addComponent(TenHocSinh))
                     .addGroup(ThongTinHocSinhLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -498,8 +486,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addGroup(ThongTinHocSinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(TenHocSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(tenTrungTam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -781,7 +767,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         button = true;
         //insert to database
-        int idStudent = Integer.parseInt(idHS.getText());
+        int idStudent = idHocSinh;
         String idFac;
         idFac = String.valueOf(idTrungTam);
         String nguoidong = nguoiNop.getText();
@@ -923,12 +909,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JCheckBox checkDaThu;
     private javax.swing.JTextField daThu;
     private javax.swing.JCheckBox hienChietKhau;
-    private javax.swing.JTextField idHS;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
@@ -1322,10 +1306,10 @@ public void getComponentsOfReceived() {
     lbSo = jLabel10.getText();
     tfSo = stt.getText();
     lbHoTen = jLabel11.getText();
-    lbMa = jLabel12.getText();
+    lbMa = "";
     lbCoso = jLabel13.getText();
     tfHoTen = TenHocSinh.getText();
-    tfMa = idHS.getText();
+    tfMa = "";
     tfCoso = tenTrungTam.getText();
     lbNguoiThanhToan = jLabel17.getText();
     lbLop = jLabel18.getText();

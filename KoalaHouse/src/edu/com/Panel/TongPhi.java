@@ -5,7 +5,6 @@
  */
 
 package edu.com.Panel;
-
 import DataBase.DataTable;
 import DataBase.HocSinh.DebtList;
 import DataBase.HocSinh.FeePayedManagerment;
@@ -18,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-
 /**
  *
  * @author Pham The Quyen
@@ -26,25 +24,32 @@ import javax.swing.JTable;
 public class TongPhi extends javax.swing.JPanel {
 
     /**
-     * Creates new form DSNo
+     * Creates new form TongPhi2
      */
     public ArrayList ListId;
     public JTabbedPane center;
     public JTable BangDSNo;
     int idFac;
+    int currentYear = 0;
     public TongPhi() {
         idFac = new Get().GetIDFac();
+        currentYear = new Get().getYearActive(idFac);
+        if(currentYear>2013)
+            currentYear = currentYear - 2013;
         initComponents();
 //        ListId = new DebtList().GetIdStudent();
         new TotalFeeManagerment().BangDanhSachTongPhi(idFac, tongPhi);
+        chonNam.setSelectedIndex(currentYear);
     }
     public void reLoad(){
         int semme = sem.getSelectedIndex();
         int year = chonNam.getSelectedIndex()+ 2013;
         if(semme >0 && year > 2013)
             new FeePayedManagerment().BangDanhSachTongPhi(idFac,semme,year,tongPhi);
-        if(semme==0)
+        if(semme==0){
             new TotalFeeManagerment().BangDanhSachTongPhi(idFac, tongPhi);
+            chonNam.setSelectedIndex(currentYear);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,11 +60,24 @@ public class TongPhi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sem = new javax.swing.JComboBox();
+        chonNam = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tongPhi = new javax.swing.JTable();
-        sem = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        chonNam = new javax.swing.JComboBox();
+
+        sem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chưa Đóng", "Đã Đóng Kì 1", "Đã Đóng Kì 2", "Đã Đóng Kì 3", "Đã Đóng Kì Hè" }));
+
+        chonNam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chonNam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030", "2030-2031", "2031-2032", "2032-2033", "2033-2034", "2034-2035", "2035-2036", "2036-2037", "2037-2038", "2038-2039", "2039-2040", "2040-2041", "2041-2042", "2042-2043", "2043-2044", "2044-2045", "2045-2046", "2046-2047", "2047-2048", "2048-2049", "2049-2050" }));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         tongPhi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,49 +92,36 @@ public class TongPhi extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tongPhi);
 
-        sem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chưa Đóng", "Đã Đóng Kì 1", "Đã Đóng Kì 2", "Đã Đóng Kì 3", "Đã Đóng Kì Hè" }));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/com/image/refresh25.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        chonNam.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chonNam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030", "2030-2031", "2031-2032", "2032-2033", "2033-2034", "2034-2035", "2035-2036", "2036-2037", "2037-2038", "2038-2039", "2039-2040", "2040-2041", "2041-2042", "2042-2043", "2043-2044", "2044-2045", "2045-2046", "2046-2047", "2047-2048", "2048-2049", "2049-2050" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1772, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chonNam, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(chonNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1730, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(chonNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chonNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         reLoad();
     }//GEN-LAST:event_jLabel1MouseClicked
-
+                                  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox chonNam;

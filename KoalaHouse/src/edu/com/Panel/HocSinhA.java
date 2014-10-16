@@ -113,7 +113,7 @@ public class HocSinhA extends javax.swing.JPanel {
         String[] NTN = nhaphoc.split("-");
         NHDay.setSelectedIndex(Integer.parseInt(NTN[0])-1);
         NHMonth.setSelectedIndex(Integer.parseInt(NTN[1])-1);
-        NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2014);
+        NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2010);
         int noPhi = new AStudentAndLateDay().GetDebt(id);
         debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
         switch(TrungTam.getText().length()){
@@ -449,7 +449,7 @@ public class HocSinhA extends javax.swing.JPanel {
 
         NHDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        NHYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
+        NHYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040" }));
 
         NHMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
@@ -978,7 +978,7 @@ public class HocSinhA extends javax.swing.JPanel {
         String[] NTN = nhaphoc.split("-");
         NHDay.setSelectedIndex(Integer.parseInt(NTN[0])-1);
         NHMonth.setSelectedIndex(Integer.parseInt(NTN[1])-1);
-        NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2014);
+        NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2010);
         totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
         TimeTrongMuon.setText(String.valueOf(totalTime));
         new CostOfStudent().BangHocPhiCuaHocSinh(id, idTrungTam, DanhSachPhi);
