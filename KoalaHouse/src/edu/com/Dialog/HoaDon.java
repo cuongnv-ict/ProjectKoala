@@ -979,15 +979,15 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbSo, 280, 120);
         grphcs.drawString(tfSo, 295, 120);
         grphcs.drawString(lbHoTen, 10, 140);
-        grphcs.drawString(tfHoTen, 65, 140);
+        grphcs.drawString(tfHoTen, 80, 140);
         //grphcs.drawString(lbMa, 170, 140);
         //grphcs.drawString(tfMa, 190, 140);
         grphcs.drawString(lbCoso, 280, 140);
         grphcs.drawString(tfCoso, 315, 140);
         grphcs.drawString(lbNguoiThanhToan, 10, 160);
         grphcs.drawString(tfNguoiThanhToan, 65, 160);
-        grphcs.drawString(lbLop, 170, 160);
-        grphcs.drawString(tfLop, 195, 160);
+        grphcs.drawString(lbLop, 160, 160);
+        grphcs.drawString(tfLop, 185, 160);
         grphcs.drawString(lbHinhThucThanhToan, 280, 160);
         grphcs.drawString(tfHinhThucThanhToan, 355, 160);
         
@@ -995,11 +995,11 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         if(hienChietKhau.isSelected()) {
             font = new Font("Serif", Font.BOLD, 10);
         grphcs.setFont(font);
-            grphcs.drawString("Tên Phí ", 20, 190);
-            grphcs.drawString("Từ ngày ", 125, 190);
-            grphcs.drawString("Đến ngày ", 195, 190);
-            grphcs.drawString("Thành tiền ", 265, 190);
-            grphcs.drawString("Chiết khấu (%)", 335, 190);
+            grphcs.drawString("STT ", 15, 190);
+            grphcs.drawString("Tên phí ", 45, 190);
+            grphcs.drawString("Thời gian ", 190, 190);
+            grphcs.drawString("Thành tiền ", 280, 190);
+            grphcs.drawString("Chiết khấu", 340, 190);
             font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
             for(int i = 0 ; i < nRow ; i++) {
@@ -1010,24 +1010,31 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     tableDataToString = tableData[i][j].toString();
                 }
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 15, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 125, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 45, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 195, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 160, (190 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 265, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 280, (190 + (i + 1) * 20));
                 } else if(j == 4) {
-                    grphcs.drawString(tableDataToString, 335, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString + " (%)", 340, (190 + (i + 1) * 20));
                 }
             }
         }
+            grphcs.drawRect(10, 180, 383, (nRow + 1) * 20);
+            grphcs.drawLine(10, 195, 393, 195);
+            grphcs.drawLine(40, 180, 40, 180 + (nRow + 1) * 20);
+            grphcs.drawLine(155, 180, 155, 180 + (nRow + 1) * 20);
+            grphcs.drawLine(275, 180, 275, 180 + (nRow + 1) * 20);
+            grphcs.drawLine(335, 180, 335, 180 + (nRow + 1) * 20);
         } else {
             font = new Font("Serif", Font.BOLD, 10);
         grphcs.setFont(font);
-        grphcs.drawString("Tên Phí ", 20, 190);
-        grphcs.drawString("Từ ngày ", 125, 190);
-        grphcs.drawString("Đến ngày ", 225, 190);
+        grphcs.drawString("STT ", 20, 190);
+        grphcs.drawString("Tên phí", 50, 190);
+        grphcs.drawString("Thời gian", 230, 190);
+        //grphcs.drawString("Đến ngày ", 225, 190);
         grphcs.drawString("Thành tiền ", 325, 190);
         font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
@@ -1042,20 +1049,22 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 125, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 50, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 225, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 200, (190 + (i + 1) * 20));
                 } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 325, (190 + (i + 1) * 20));
                 }
             }
         }
-        }
         grphcs.drawRect(10, 180, 373, (nRow + 1) * 20);
         grphcs.drawLine(10, 195, 383, 195);
-        grphcs.drawLine(120, 180, 120, 180 + (nRow + 1) * 20);
-        grphcs.drawLine(220, 180, 220, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(45, 180, 45, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(195, 180, 195, 180 + (nRow + 1) * 20);
         grphcs.drawLine(320, 180, 320, 180 + (nRow + 1) * 20);
+        }
+        
+        
         int rowIndex = 190 + nRow * 20;
         rowIndex = rowIndex + 20;
         System.out.println(rowIndex);
@@ -1082,8 +1091,8 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         coorOfNguoiNop = 81 - lengthOfNguoiNop;
         coorOfNguoiThu = 327 - lengOfNguoiThu;
         
-        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndex + 110);
-        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndex + 110);
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndex + 140);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndex + 140);
         
         // print page 2.Cong them 400
         grphcs.drawString(lbTitle, 560, 10);
@@ -1111,25 +1120,25 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbSo, 690, 120);
         grphcs.drawString(tfSo, 705, 120);
         grphcs.drawString(lbHoTen, 430, 140);
-        grphcs.drawString(tfHoTen, 485, 140);
+        grphcs.drawString(tfHoTen, 500, 140);
         //grphcs.drawString(lbMa, 590, 140);
         //grphcs.drawString(tfMa, 610, 140);
         grphcs.drawString(lbCoso, 690, 140);
         grphcs.drawString(tfCoso, 725, 140);
         grphcs.drawString(lbNguoiThanhToan, 430, 160);
         grphcs.drawString(tfNguoiThanhToan, 485, 160);
-        grphcs.drawString(lbLop, 590, 160);
-        grphcs.drawString(tfLop, 615, 160);
+        grphcs.drawString(lbLop, 580, 160);
+        grphcs.drawString(tfLop, 605, 160);
         grphcs.drawString(lbHinhThucThanhToan, 690, 160);
         grphcs.drawString(tfHinhThucThanhToan, 765, 160);
         if(hienChietKhau.isSelected()) {
             font = new Font("Serif", Font.BOLD, 10);
             grphcs.setFont(font);
-            grphcs.drawString("Tên Phí ", 440, 190);
-            grphcs.drawString("Từ ngày ", 545, 190);
-            grphcs.drawString("Đến ngày ", 615, 190);
-            grphcs.drawString("Thành tiền ", 685, 190);
-            grphcs.drawString("Chiết khấu (%)", 755, 190);
+            grphcs.drawString("STT ", 435, 190);
+            grphcs.drawString("Tên phí ", 465, 190);
+            grphcs.drawString("Thời gian ", 610, 190);
+            grphcs.drawString("Thành tiền ", 700, 190);
+            grphcs.drawString("Chiết khấu", 760, 190);
             font = new Font("Serif", Font.PLAIN, 10);
             grphcs.setFont(font);
             for(int i = 0 ; i < nRow ; i++) {
@@ -1140,25 +1149,31 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     tableDataToString = tableData[i][j].toString();
                 }
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 435, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 545, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 465, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 615, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 580, (190 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 685, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 700, (190 + (i + 1) * 20));
                 } else if(j == 4) {
-                    grphcs.drawString(tableDataToString, 755, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString + " (%)", 760, (190 + (i + 1) * 20));
                 }
             }
         }
+            grphcs.drawRect(430, 180, 383, (nRow + 1) * 20);
+        grphcs.drawLine(430, 195, 813, 195);
+        grphcs.drawLine(460, 180, 460, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(575, 180, 575, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(695, 180, 695, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(755, 180, 755, 180 + (nRow + 1) * 20);
         } else {
             font = new Font("Serif", Font.BOLD, 10);
         grphcs.setFont(font);
         //String tableDataToString = "";
-        grphcs.drawString("Tên phí ", 440, 190);
-        grphcs.drawString("Từ ngày ", 545, 190);
-        grphcs.drawString("Đến ngày ", 645, 190);
+        grphcs.drawString("STT ", 440, 190);
+        grphcs.drawString("Tên phí ", 470, 190);
+        grphcs.drawString("Thời gian ", 650, 190);
         grphcs.drawString("Thành tiền ", 745, 190);
         font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
@@ -1172,20 +1187,21 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 545, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 470, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 645, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 620, (190 + (i + 1) * 20));
                 } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 745, (190 + (i + 1) * 20));
                 }
             }
         }
-        }
         grphcs.drawRect(430, 180, 373, (nRow + 1) * 20);
         grphcs.drawLine(430, 195, 803, 195);
-        grphcs.drawLine(540, 180, 540, 180 + (nRow + 1) * 20);
-        grphcs.drawLine(640, 180, 640, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(465, 180, 465, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(615, 180, 615, 180 + (nRow + 1) * 20);
         grphcs.drawLine(740, 180, 740, 180 + (nRow + 1) * 20);
+        }
+        
         int rowIndexLeft = 190 + nRow * 20;
         rowIndexLeft = rowIndexLeft + 20;
         
@@ -1212,8 +1228,8 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         coorOfNguoiNop = 501 - lengthOfNguoiNop;
         coorOfNguoiThu = 747 - lengOfNguoiThu;
         
-        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndexLeft + 110);
-        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndexLeft + 110);
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndexLeft + 140);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndexLeft + 140);
         
         return Printable.PAGE_EXISTS;
     }
