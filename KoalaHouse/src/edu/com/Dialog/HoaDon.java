@@ -153,7 +153,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         long Total = 0;
         try{
         for(int i=0;i<model.getRowCount();i++){
-            String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
+            String tenPhi = model.getValueAt(i, 1).toString().toLowerCase();
             if(hienChietKhau.isSelected()){
                 long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
                 int ck = 0;
