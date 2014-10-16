@@ -136,7 +136,7 @@ public class HistoryManagerment {
        try {
             Object [] nameColumn = {"Mã",  "Tên", "Kì học", "Năm học", "Giá" };
             ArrayList<Object []> data = new ArrayList<Object []>();
-            rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+"  and IsDebt =0)");
+            rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+"  and IsDebt =0)order by cost.year,cost.Semesters;");
             while(rs1.next()){
                 Object str[] = new Object[5];
                 str[0]= rs1.getString(1);
