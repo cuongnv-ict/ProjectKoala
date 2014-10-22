@@ -45,7 +45,9 @@ public class XeBus extends javax.swing.JPanel {
     public XeBus() {
         initComponents();
        // System.out.println("da den doan nay");
-        new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+        String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        nam.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
+        new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,String.valueOf(nam.getSelectedItem()));
         id_xebus = new ArrayList<Integer>();
         try{
         if (!jTable4.getValueAt(0, 0).toString().equals("")) {
@@ -206,7 +208,7 @@ public class XeBus extends javax.swing.JPanel {
             }
         });
 
-        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029" }));
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030", "2030-2031" }));
         nam.setToolTipText("Lựa Chọn Năm Học");
         nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +227,7 @@ public class XeBus extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)

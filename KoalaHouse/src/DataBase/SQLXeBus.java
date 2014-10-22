@@ -535,13 +535,13 @@ public class SQLXeBus
         try
         {
              
-           
+           String inputyear[]=year.split("-");
             int idstudent=-1;
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
             ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
-            rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and ( b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%') order by  s1.FullName");
+            rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and ( b1.StartDate like '%"+inputyear[0]+"%' or b1.EndDate like '%"+inputyear[1]+"%') order by  s1.FullName");
             String querry = "SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%' order by  s1.FullName" ;
               
             while(rs1.next()) 
@@ -683,12 +683,12 @@ public class SQLXeBus
              
            
             int idstudent=-1;
-            
+            String inputyear[]=year.split("-");
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
             ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
-            rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and (b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%') and s1.FullName like '%"+name+"%'  order by  s1.FullName");
+            rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and (b1.StartDate like '%"+inputyear[0]+"%' or b1.EndDate like '%"+inputyear[1]+"%') and s1.FullName like '%"+name+"%'  order by  s1.FullName");
             
             
             while(rs1.next()) 
