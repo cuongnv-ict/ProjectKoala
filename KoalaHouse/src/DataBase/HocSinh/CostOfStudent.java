@@ -89,6 +89,7 @@ public class CostOfStudent {
         try {
             Object [] nameColumn = {"Mã","Tên","Kì học","Năm học","Giá","Đánh dấu" };
             ArrayList<Object []> data = new ArrayList<Object []>();
+            System.out.println(students_id+" "+idFac);
             rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" Order by cost.year,cost.Semesters;");
             System.out.println(""+idFac);
             while(rs1.next()){

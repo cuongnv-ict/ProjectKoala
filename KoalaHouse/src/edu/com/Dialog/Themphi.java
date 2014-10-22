@@ -30,6 +30,7 @@ public class Themphi extends javax.swing.JDialog {
         initComponents();
         ids = idStudent;
         idf = idFac;
+        System.out.println("trung tam: "+idFac);
         new CostOfStudent().BangThemHocPhiChoHocSinh(jTable1, ids,idf);
         jTable2 = jTable1;
         idStudent = 0;

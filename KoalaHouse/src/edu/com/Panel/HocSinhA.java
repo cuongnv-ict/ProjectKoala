@@ -116,12 +116,7 @@ public class HocSinhA extends javax.swing.JPanel {
         NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2010);
         int noPhi = new AStudentAndLateDay().GetDebt(id);
         debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
-        switch(TrungTam.getText().length()){
-            case 20: idTrungTam = 1;break;
-            case 22: idTrungTam = 2;break;
-            case 24: idTrungTam = 3;break;
-            case 25: idTrungTam = 4;break;
-        }
+        idTrungTam = new Get().GetIDFac();
         totalTime = new AStudentAndLateDay().LateDay(id, idTrungTam);//1 la ma Trung tam
         TimeTrongMuon.setText(String.valueOf(totalTime));
         new CostOfStudent().BangHocPhiCuaHocSinh(id,idTrungTam,DanhSachPhi);
@@ -968,12 +963,7 @@ public class HocSinhA extends javax.swing.JPanel {
         NguoiDaiDien.setText(ngDaiDien);
         int noPhi = new AStudentAndLateDay().GetDebt(id);
         debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
-        switch(TrungTam.getText().length()){
-            case 20: idTrungTam = 1;break;
-            case 22: idTrungTam = 2;break;
-            case 24: idTrungTam = 3;break;
-            case 25: idTrungTam = 4;break;
-        }
+        idTrungTam = new Get().GetIDFac();
          //nhapHoc.setText(nhaphoc);
         String[] NTN = nhaphoc.split("-");
         NHDay.setSelectedIndex(Integer.parseInt(NTN[0])-1);
