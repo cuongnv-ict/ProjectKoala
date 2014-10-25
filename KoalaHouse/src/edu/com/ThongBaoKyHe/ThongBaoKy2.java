@@ -7,6 +7,7 @@
 package edu.com.ThongBaoKyHe;
         
 import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.Get;
 import DataBase.HocSinh.RecieptManagerment;
 import static edu.com.Dialog.HoaDon.idhs;
 import edu.com.XuLy;
@@ -92,6 +93,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
     public int idStudent;
     public static String hanNop_sta = "";
     public static String luuY_sta = "";
+    public static String luuY1_sta = "";
     public static String tuan1_sta = "Tuần 1:";
     public static String tuan2_sta = "Tuần 2:";
     public static String tuan3_sta = "Tuần 3:";
@@ -125,6 +127,13 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         jTextField11.setText(hanNop_sta);
         if(luuY_sta.length()>0)
             jTextArea1.setText(luuY_sta);
+        if(luuY1_sta.length()>0)
+            jTextArea2.setText(luuY1_sta);
+        int CurrentYear = new Get().getYearActive(idTrungTam);
+        if(CurrentYear > 2012){
+            jComboBox1.setSelectedIndex(CurrentYear - 2013);
+            jComboBox2.setSelectedIndex(CurrentYear - 2012);
+        }
         new RecieptManagerment().BangDSPhiThongBaoTrongNam(idStudent,idTrungTam, jTable1,false);
         Total();
     }
@@ -134,7 +143,11 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         long Total = 0;
         try{
             for(int i=0;i<model.getRowCount()-1;i++){
-                Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                String tenPhi = model.getValueAt(i, 1).toString().toLowerCase();
+                if(tenPhi.indexOf("hoàn")== -1)
+                    Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                else
+                    Total -= Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
             }
             String tongphi = XuLy.setMoney(String.valueOf(Total));
             model.setValueAt(tongphi,model.getRowCount()-1 , 3);
@@ -605,6 +618,7 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
         //luu thong tin cho thong bao sau
         hanNop_sta = jTextField11.getText();
         luuY_sta = jTextArea1.getText();
+        luuY1_sta = jTextArea2.getText();
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Printting detailt");
         pj.setPrintable(this);

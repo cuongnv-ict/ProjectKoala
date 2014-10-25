@@ -36,10 +36,11 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
         SimpleDateFormat form=new SimpleDateFormat("yyyy");
         String yearnow=form.format(calendar.getTime());
         this.yearnow=yearnow;
-        nam.setSelectedItem(yearnow);
         //modelgoc = (DefaultTableModel) jTable1.getModel();
-        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1,yearnow);
-       
+        String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1,year);
+        
+        nam.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
     }
 
     /**
@@ -88,7 +89,7 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
             }
         });
 
-        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030", "2030-2031" }));
         nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namActionPerformed(evt);
@@ -106,7 +107,7 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -168,7 +169,8 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
     private void namActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namActionPerformed
         // TODO add your handling code here:
         String year = nam.getSelectedItem().toString();
-        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1, year);
+        String a[]=year.split("-");
+        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1, a[0]);
     }//GEN-LAST:event_namActionPerformed
 
     /**

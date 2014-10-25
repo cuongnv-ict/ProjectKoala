@@ -49,6 +49,30 @@ public class SQLkyhe {
             //Loi truy nhap db
         }
     }    
+    public int getYearActiv()
+    {
+        int i=0;
+        try{
+            
+            rs1=statement.executeQuery("SELECT DISTINCT  Year FROM projectkoala.semesters where IsActivity= '1' ");
+            while(rs1.next())
+            {
+                i=rs1.getInt(1);
+            }
+            rs1.close();
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
+            
+            return i;
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        return i;
+    }
     public void BangDanhSachDanKyTuanHe(JTable table,String year)
     {
         try
@@ -245,7 +269,7 @@ public class SQLkyhe {
                     //str[2]=rs1.getString(2);
                     newrow.setTuanHoc(rs1.getString(3));
                     newrow.setTongSoTuan(rs1.getInt(4));
-                    newrow.setNam(rs1.getString(6));
+                    newrow.setNam(rs1.getString(6)+"-"+String.valueOf(rs1.getInt(6)+1));
                     newrow.setDanhDau(false);
                     if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
                     else newrow.setTinhTrang("Đã Thanh Toán");
@@ -383,6 +407,9 @@ public class SQLkyhe {
         catch(SQLException ex)
         {
             System.out.println("ban khong thanh cong tao them đăng ký học hè");
+            String message =String.format( "bạn cần tạo tuần hè trước khi đăng ký học hè. Chú ý bạn chỉ có thể đăng ký học hè cho học sinh tại năm trùng năm của hệ thống.");
+            JOptionPane.showMessageDialog( null, message );
+                
         }
     }
     
@@ -551,7 +578,7 @@ public class SQLkyhe {
                     //str[2]=rs1.getString(2);
                     newrow.setTuanHoc(rs1.getString(3));
                     newrow.setTongSoTuan(rs1.getInt(4));
-                    newrow.setNam(rs1.getString(6));
+                    newrow.setNam(rs1.getString(6)+"-"+String.valueOf(rs1.getInt(6)+1));
                     newrow.setDanhDau(false);
                     if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
                     else newrow.setTinhTrang("Đã Thanh Toán");
@@ -756,7 +783,7 @@ public class SQLkyhe {
                     //str[2]=rs1.getString(2);
                     newrow.setTuanHoc(rs1.getString(3));
                     newrow.setTongSoTuan(rs1.getInt(4));
-                    newrow.setNam(rs1.getString(6));
+                    newrow.setNam(rs1.getString(6)+"-"+String.valueOf(rs1.getInt(6)+1));
                     newrow.setDanhDau(false);
                     if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
                     else newrow.setTinhTrang("Đã Thanh Toán");
@@ -908,7 +935,7 @@ public class SQLkyhe {
                     //str[2]=rs1.getString(2);
                     newrow.setTuanHoc(rs1.getString(3));
                     newrow.setTongSoTuan(rs1.getInt(4));
-                    newrow.setNam(rs1.getString(6));
+                    newrow.setNam(rs1.getString(6)+"-"+String.valueOf(rs1.getInt(6)+1));
                     newrow.setDanhDau(false);
                     if(rs1.getInt(7)==1) newrow.setTinhTrang("Chưa Thanh Toán");
                     else newrow.setTinhTrang("Đã Thanh Toán");

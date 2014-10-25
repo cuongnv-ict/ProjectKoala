@@ -137,6 +137,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         ten = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        search_year = new javax.swing.JComboBox();
 
         jScrollPane2.setViewportView(jTextPane1);
 
@@ -165,7 +166,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
             bangDSNghỉPhep.getColumnModel().getColumn(0).setPreferredWidth(20);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 267, 564, 251));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 267, 840, 251));
 
         jButton1.setText("Thêm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +174,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 185, -1, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, 30));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -233,11 +234,11 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 108, 80, -1));
         jPanel1.add(songayngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 105, 229, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 49, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nhập Ngày Nghỉ Phép");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
 
         ten.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         getContentPane().add(ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 49, 172, -1));
@@ -251,7 +252,15 @@ public class NhapNghiPhep extends javax.swing.JDialog {
                 jLabel8MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 229, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, -1, -1));
+
+        search_year.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030", "2030-2031" }));
+        search_year.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_yearActionPerformed(evt);
+            }
+        });
+        getContentPane().add(search_year, new org.netbeans.lib.awtextra.AbsoluteConstraints(727, 230, 90, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -395,6 +404,41 @@ public class NhapNghiPhep extends javax.swing.JDialog {
         MakePopup();
     }//GEN-LAST:event_lopActionPerformed
 
+    private void search_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_yearActionPerformed
+        // TODO add your handling code here:
+         try{
+            String year= search_year.getSelectedItem().toString();
+        if(year.equals("Tất Cả"))
+        {
+            new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
+            idNghiPhep = new ArrayList<Integer>();
+            XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
+        }
+        else
+        {
+            
+            new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep, year);
+                   idNghiPhep = new ArrayList<Integer>();
+                   XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
+        }
+                    try{
+                            if (!bangDSNghỉPhep.getValueAt(0, 1).toString().equals("")) {
+                            XuLy.setID(idNghiPhep,bangDSNghỉPhep, 0);
+                                
+                        }
+                        }
+                        catch(Exception ex)
+                        {
+                        }
+
+            
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }//GEN-LAST:event_search_yearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -462,6 +506,7 @@ public class NhapNghiPhep extends javax.swing.JDialog {
     private javax.swing.JComboBox nam1;
     private javax.swing.JComboBox ngay;
     private javax.swing.JComboBox ngay1;
+    private javax.swing.JComboBox search_year;
     private javax.swing.JTextField songayngay;
     private javax.swing.JTextField ten;
     private javax.swing.JComboBox thang;

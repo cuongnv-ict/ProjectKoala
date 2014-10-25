@@ -37,7 +37,8 @@ public class DKHocHe extends javax.swing.JPanel {
     public DKHocHe() {
         initComponents();
         modelgoc = (DefaultTableModel) jTable4.getModel();
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+        String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
         id_hoche = new ArrayList<Integer>();
         try{
             if (!jTable4.getValueAt(0, 1).toString().equals("")) {
@@ -49,7 +50,7 @@ public class DKHocHe extends javax.swing.JPanel {
         {
             jTable4.setModel(modelgoc);
         }
-        
+        nam.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
         
     }
      public void setNotAdmin()
@@ -193,7 +194,7 @@ public class DKHocHe extends javax.swing.JPanel {
             }
         });
 
-        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất Cả", "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020", "2020-2021", "2021-2022", "2022-2023", "2023-2024", "2024-2025", "2025-2026", "2026-2027", "2027-2028", "2028-2029", "2029-2030", "2030-2031" }));
         nam.setToolTipText("Hiển Thị Theo Năm");
         nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +215,7 @@ public class DKHocHe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xemlich)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nam, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textfield_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
@@ -471,7 +472,9 @@ public class DKHocHe extends javax.swing.JPanel {
         }
         else
         {
-            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
+            String a[]= year.split("-");
+            
+            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,a[0]);
                     id_hoche = new ArrayList<Integer>();
 
         }
@@ -506,7 +509,9 @@ public class DKHocHe extends javax.swing.JPanel {
             }
             else
             {
-                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNamVaTen(jTable4,nam.getSelectedItem().toString() , textfield_timkiem.getText()+"");
+                String year= nam.getSelectedItem().toString();
+                String a[]= year.split("-");
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNamVaTen(jTable4,a[0] , textfield_timkiem.getText()+"");
                          id_hoche = new ArrayList<Integer>();
 
             }

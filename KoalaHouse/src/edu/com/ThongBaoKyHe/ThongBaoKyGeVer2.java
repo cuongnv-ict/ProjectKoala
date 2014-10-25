@@ -146,6 +146,11 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         jTextField8.setText(tuan4_sta);
         jTextField9.setText(tuan5_sta);
         jTextField10.setText(tuan6_sta);
+        int CurrentYear = new Get().getYearActive(idTrungTam);
+        if(CurrentYear > 2012){
+            jComboBox1.setSelectedIndex(CurrentYear - 2013);
+            jComboBox2.setSelectedIndex(CurrentYear - 2012);
+        }
         new RecieptManagerment().BangDSPhiThongBaoTrongNam(idStudent,idTrungTam, jTable1,true);
         Total();
     }
@@ -155,7 +160,11 @@ public void Total(){
         long Total = 0;
         try{
             for(int i=0;i<model.getRowCount()-1;i++){
-                Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                String tenPhi = model.getValueAt(i, 1).toString().toLowerCase();
+                if(tenPhi.indexOf("hoàn")== -1)
+                    Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                else
+                    Total -= Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
             }
             String tongphi = XuLy.setMoney(String.valueOf(Total));
             model.setValueAt(tongphi,model.getRowCount()-1 , 3);

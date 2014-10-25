@@ -78,7 +78,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public HoaDon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        idHS.setText(String.valueOf(idhs));
         TenHocSinh.setText(tenHS);
         NguoiDaiDien.setText(tenNguoiDaiDien);
         tenLop.setText(lop);
@@ -154,7 +153,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         long Total = 0;
         try{
         for(int i=0;i<model.getRowCount();i++){
-            String tenPhi = model.getValueAt(i, 0).toString().toLowerCase();
+            String tenPhi = model.getValueAt(i, 1).toString().toLowerCase();
             if(hienChietKhau.isSelected()){
                 long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
                 int ck = 0;
@@ -189,6 +188,13 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText(XuLy.setMoney(String.valueOf(x)));
         }     
         String tienbc = convert.chuyentien(TongTien.getText());
+        //viet hoa chu cai dau
+        char[] head = new char[1];
+        head[0] = tienbc.charAt(0);
+        String h = new String(head);
+        h = h.toUpperCase();
+        tienbc = tienbc.substring(1);
+        tienbc = h + tienbc;
         stbc.setText("Số tiền bằng chữ: "+tienbc);
         }
         catch(java.lang.NumberFormatException e){
@@ -249,8 +255,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         NguoiDaiDien = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         HinhThucDong = new javax.swing.JComboBox();
-        idHS = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         tenLop = new javax.swing.JTextField();
         tenTrungTam = new javax.swing.JTextField();
@@ -356,11 +360,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
         });
 
-        jLabel7.setText("Tháng");
+        jLabel7.setText("tháng");
 
         thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
-        jLabel8.setText(" Năm");
+        jLabel8.setText(" năm");
 
         nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
         nam.addActionListener(new java.awt.event.ActionListener() {
@@ -428,7 +432,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         );
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Họ tên hs:");
+        jLabel11.setText("Họ tên học sinh:");
 
         TenHocSinh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TenHocSinh.setText("Nguyễn Hải Anh");
@@ -437,7 +441,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jLabel18.setText("Lớp:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Người TT:");
+        jLabel17.setText("Người ĐD:");
 
         NguoiDaiDien.setText("Nguyễn Ngọc Lan");
 
@@ -445,11 +449,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jLabel19.setText("Hình Thức TT:");
 
         HinhThucDong.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Chuyển khoản" }));
-
-        idHS.setText("123");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Mã:");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Cơ Sở:");
@@ -462,12 +461,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addGroup(ThongTinHocSinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ThongTinHocSinhLayout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addGap(2, 2, 2)
-                        .addComponent(TenHocSinh, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(idHS))
+                        .addComponent(TenHocSinh))
                     .addGroup(ThongTinHocSinhLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -491,8 +486,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addGroup(ThongTinHocSinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(TenHocSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idHS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(tenTrungTam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -774,7 +767,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         button = true;
         //insert to database
-        int idStudent = Integer.parseInt(idHS.getText());
+        int idStudent = idHocSinh;
         String idFac;
         idFac = String.valueOf(idTrungTam);
         String nguoidong = nguoiNop.getText();
@@ -916,12 +909,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JCheckBox checkDaThu;
     private javax.swing.JTextField daThu;
     private javax.swing.JCheckBox hienChietKhau;
-    private javax.swing.JTextField idHS;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
@@ -988,15 +979,15 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbSo, 280, 120);
         grphcs.drawString(tfSo, 295, 120);
         grphcs.drawString(lbHoTen, 10, 140);
-        grphcs.drawString(tfHoTen, 65, 140);
+        grphcs.drawString(tfHoTen, 80, 140);
         //grphcs.drawString(lbMa, 170, 140);
         //grphcs.drawString(tfMa, 190, 140);
         grphcs.drawString(lbCoso, 280, 140);
         grphcs.drawString(tfCoso, 315, 140);
         grphcs.drawString(lbNguoiThanhToan, 10, 160);
         grphcs.drawString(tfNguoiThanhToan, 65, 160);
-        grphcs.drawString(lbLop, 170, 160);
-        grphcs.drawString(tfLop, 195, 160);
+        grphcs.drawString(lbLop, 160, 160);
+        grphcs.drawString(tfLop, 185, 160);
         grphcs.drawString(lbHinhThucThanhToan, 280, 160);
         grphcs.drawString(tfHinhThucThanhToan, 355, 160);
         
@@ -1004,11 +995,11 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         if(hienChietKhau.isSelected()) {
             font = new Font("Serif", Font.BOLD, 10);
         grphcs.setFont(font);
-            grphcs.drawString("Tên Phí ", 20, 190);
-            grphcs.drawString("Từ ngày ", 125, 190);
-            grphcs.drawString("Đến ngày ", 195, 190);
-            grphcs.drawString("Thành tiền ", 265, 190);
-            grphcs.drawString("Chiết khấu (%)", 335, 190);
+            grphcs.drawString("STT ", 15, 190);
+            grphcs.drawString("Tên phí ", 45, 190);
+            grphcs.drawString("Thời gian ", 190, 190);
+            grphcs.drawString("Thành tiền ", 280, 190);
+            grphcs.drawString("Chiết khấu", 340, 190);
             font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
             for(int i = 0 ; i < nRow ; i++) {
@@ -1019,24 +1010,31 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     tableDataToString = tableData[i][j].toString();
                 }
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 15, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 125, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 45, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 195, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 160, (190 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 265, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 280, (190 + (i + 1) * 20));
                 } else if(j == 4) {
-                    grphcs.drawString(tableDataToString, 335, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString + " (%)", 340, (190 + (i + 1) * 20));
                 }
             }
         }
+            grphcs.drawRect(10, 180, 383, (nRow + 1) * 20);
+            grphcs.drawLine(10, 195, 393, 195);
+            grphcs.drawLine(40, 180, 40, 180 + (nRow + 1) * 20);
+            grphcs.drawLine(155, 180, 155, 180 + (nRow + 1) * 20);
+            grphcs.drawLine(275, 180, 275, 180 + (nRow + 1) * 20);
+            grphcs.drawLine(335, 180, 335, 180 + (nRow + 1) * 20);
         } else {
             font = new Font("Serif", Font.BOLD, 10);
         grphcs.setFont(font);
-        grphcs.drawString("Tên Phí ", 20, 190);
-        grphcs.drawString("Từ ngày ", 125, 190);
-        grphcs.drawString("Đến ngày ", 225, 190);
+        grphcs.drawString("STT ", 20, 190);
+        grphcs.drawString("Tên phí", 50, 190);
+        grphcs.drawString("Thời gian", 230, 190);
+        //grphcs.drawString("Đến ngày ", 225, 190);
         grphcs.drawString("Thành tiền ", 325, 190);
         font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
@@ -1051,20 +1049,22 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 20, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 125, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 50, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 225, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 200, (190 + (i + 1) * 20));
                 } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 325, (190 + (i + 1) * 20));
                 }
             }
         }
-        }
         grphcs.drawRect(10, 180, 373, (nRow + 1) * 20);
         grphcs.drawLine(10, 195, 383, 195);
-        grphcs.drawLine(120, 180, 120, 180 + (nRow + 1) * 20);
-        grphcs.drawLine(220, 180, 220, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(45, 180, 45, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(195, 180, 195, 180 + (nRow + 1) * 20);
         grphcs.drawLine(320, 180, 320, 180 + (nRow + 1) * 20);
+        }
+        
+        
         int rowIndex = 190 + nRow * 20;
         rowIndex = rowIndex + 20;
         System.out.println(rowIndex);
@@ -1091,8 +1091,8 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         coorOfNguoiNop = 81 - lengthOfNguoiNop;
         coorOfNguoiThu = 327 - lengOfNguoiThu;
         
-        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndex + 110);
-        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndex + 110);
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndex + 140);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndex + 140);
         
         // print page 2.Cong them 400
         grphcs.drawString(lbTitle, 560, 10);
@@ -1120,25 +1120,25 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawString(lbSo, 690, 120);
         grphcs.drawString(tfSo, 705, 120);
         grphcs.drawString(lbHoTen, 430, 140);
-        grphcs.drawString(tfHoTen, 485, 140);
+        grphcs.drawString(tfHoTen, 500, 140);
         //grphcs.drawString(lbMa, 590, 140);
         //grphcs.drawString(tfMa, 610, 140);
         grphcs.drawString(lbCoso, 690, 140);
         grphcs.drawString(tfCoso, 725, 140);
         grphcs.drawString(lbNguoiThanhToan, 430, 160);
         grphcs.drawString(tfNguoiThanhToan, 485, 160);
-        grphcs.drawString(lbLop, 590, 160);
-        grphcs.drawString(tfLop, 615, 160);
+        grphcs.drawString(lbLop, 580, 160);
+        grphcs.drawString(tfLop, 605, 160);
         grphcs.drawString(lbHinhThucThanhToan, 690, 160);
         grphcs.drawString(tfHinhThucThanhToan, 765, 160);
         if(hienChietKhau.isSelected()) {
             font = new Font("Serif", Font.BOLD, 10);
             grphcs.setFont(font);
-            grphcs.drawString("Tên Phí ", 440, 190);
-            grphcs.drawString("Từ ngày ", 545, 190);
-            grphcs.drawString("Đến ngày ", 615, 190);
-            grphcs.drawString("Thành tiền ", 685, 190);
-            grphcs.drawString("Chiết khấu (%)", 755, 190);
+            grphcs.drawString("STT ", 435, 190);
+            grphcs.drawString("Tên phí ", 465, 190);
+            grphcs.drawString("Thời gian ", 610, 190);
+            grphcs.drawString("Thành tiền ", 700, 190);
+            grphcs.drawString("Chiết khấu", 760, 190);
             font = new Font("Serif", Font.PLAIN, 10);
             grphcs.setFont(font);
             for(int i = 0 ; i < nRow ; i++) {
@@ -1149,25 +1149,31 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                     tableDataToString = tableData[i][j].toString();
                 }
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 435, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 545, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 465, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 615, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 580, (190 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 685, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 700, (190 + (i + 1) * 20));
                 } else if(j == 4) {
-                    grphcs.drawString(tableDataToString, 755, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString + " (%)", 760, (190 + (i + 1) * 20));
                 }
             }
         }
+            grphcs.drawRect(430, 180, 383, (nRow + 1) * 20);
+        grphcs.drawLine(430, 195, 813, 195);
+        grphcs.drawLine(460, 180, 460, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(575, 180, 575, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(695, 180, 695, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(755, 180, 755, 180 + (nRow + 1) * 20);
         } else {
             font = new Font("Serif", Font.BOLD, 10);
         grphcs.setFont(font);
         //String tableDataToString = "";
-        grphcs.drawString("Tên phí ", 440, 190);
-        grphcs.drawString("Từ ngày ", 545, 190);
-        grphcs.drawString("Đến ngày ", 645, 190);
+        grphcs.drawString("STT ", 440, 190);
+        grphcs.drawString("Tên phí ", 470, 190);
+        grphcs.drawString("Thời gian ", 650, 190);
         grphcs.drawString("Thành tiền ", 745, 190);
         font = new Font("Serif", Font.PLAIN, 10);
         grphcs.setFont(font);
@@ -1181,20 +1187,21 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
                 if(j == 0) {
                     grphcs.drawString(tableDataToString, 440, (190 + (i + 1) * 20));
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 545, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 470, (190 + (i + 1) * 20));
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 645, (190 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 620, (190 + (i + 1) * 20));
                 } else if(j == 3) {
                     grphcs.drawString(tableDataToString, 745, (190 + (i + 1) * 20));
                 }
             }
         }
-        }
         grphcs.drawRect(430, 180, 373, (nRow + 1) * 20);
         grphcs.drawLine(430, 195, 803, 195);
-        grphcs.drawLine(540, 180, 540, 180 + (nRow + 1) * 20);
-        grphcs.drawLine(640, 180, 640, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(465, 180, 465, 180 + (nRow + 1) * 20);
+        grphcs.drawLine(615, 180, 615, 180 + (nRow + 1) * 20);
         grphcs.drawLine(740, 180, 740, 180 + (nRow + 1) * 20);
+        }
+        
         int rowIndexLeft = 190 + nRow * 20;
         rowIndexLeft = rowIndexLeft + 20;
         
@@ -1221,8 +1228,8 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         coorOfNguoiNop = 501 - lengthOfNguoiNop;
         coorOfNguoiThu = 747 - lengOfNguoiThu;
         
-        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndexLeft + 110);
-        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndexLeft + 110);
+        grphcs.drawString(tfNguoiNop, coorOfNguoiNop - 10, rowIndexLeft + 140);
+        grphcs.drawString(tfNguoiThu, coorOfNguoiThu - 10, rowIndexLeft + 140);
         
         return Printable.PAGE_EXISTS;
     }
@@ -1315,10 +1322,10 @@ public void getComponentsOfReceived() {
     lbSo = jLabel10.getText();
     tfSo = stt.getText();
     lbHoTen = jLabel11.getText();
-    lbMa = jLabel12.getText();
+    lbMa = "";
     lbCoso = jLabel13.getText();
     tfHoTen = TenHocSinh.getText();
-    tfMa = idHS.getText();
+    tfMa = "";
     tfCoso = tenTrungTam.getText();
     lbNguoiThanhToan = jLabel17.getText();
     lbLop = jLabel18.getText();

@@ -408,7 +408,7 @@ public class SQLHocSinhTheoThang {
                     }
                 } while (rs1.next());
             }
-            XuLy.SapXepTen(data, 1, 3);
+            //XuLy.SapXepTen(data, 1, 3);
             Object[][] rowColumn = new Object[data.size()][];
             info.removeAll(info);
             count_stt = 1;

@@ -57,7 +57,7 @@ public class RecieptManagerment {
     }
     public void BangDSPhiHoaDon(int students_id,int idFac,JTable table){
        try {
-            Object [] nameColumn = {"Tên Phí", "Từ Ngày", "Đến Ngày", "Thành Tiền"};
+            Object [] nameColumn = {"STT","Tên Phí", "Thời Gian", "Thành Tiền"};
             ArrayList<Object []> data = new ArrayList<Object []>();
             rs1 = statement.executeQuery("select * from cost where id in(select cost_id from students_has_cost where students_id = "+students_id+" and IsDebt =1)");
             while(rs1.next()){
@@ -150,6 +150,14 @@ public class RecieptManagerment {
                 str1[3] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 }
+            }
+            //sap xep lai ten phi
+            for(int j=0;j<data.size();j++){
+                Object[] s = data.get(j);
+                String thoigian = s[1].toString()+" -> "+s[2].toString();
+                s[1] = s[0].toString();
+                s[2] = thoigian;
+                s[0] = j+1;
             }
             Object [][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {

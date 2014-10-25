@@ -82,7 +82,6 @@ public class ThemGia extends javax.swing.JDialog {
         hoanhocphi.setSelected(vector.get(1).toString().equals("Hoàn Học Phí"));
         if (hoanhocphi.isSelected()) {
             TenPhi.setEditable(false);
-            Ky.setEnabled(false);
         }
         Gia.setText(vector.get(6).toString());
         setComboBox(Ky, vector.get(2).toString());
@@ -506,7 +505,7 @@ public class ThemGia extends javax.swing.JDialog {
             TenPhi.setText("Hoàn Học Phí");
             TenPhi.setEditable(false);
             Ky.setSelectedIndex(4);
-            Ky.setEnabled(false);
+            
         } else {
             TenPhi.setEditable(true);
             Ky.setEnabled(true);

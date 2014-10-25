@@ -1758,6 +1758,10 @@ public class ListKoala extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        if(!ThongTin.isadmin){
+            JOptionPane.showMessageDialog(null, "Tài khoản này không thể thao tác chức năng này.",null,JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         DropBox db = new DropBox(frame, true);
         db.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
