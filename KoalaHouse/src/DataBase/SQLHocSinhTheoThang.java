@@ -211,7 +211,7 @@ public class SQLHocSinhTheoThang {
                     }
                 } while (rs1.next());
             }
-            XuLy.SapXepTen(data, 2, 3);
+//            XuLy.SapXepTen(data, 2, 3);
             info.removeAll(info);
             Object[][] rowColumn = new Object[data.size()][];
             count_stt = 1;

@@ -851,19 +851,19 @@ public class DataTable {
 
     public String[] getUser() {
         String str[] = new String[2];
-        try {
-            rs1 = statement.executeQuery("SELECT UserName,PassWord FROM projectkoala.accounts where IsRoot = 1 limit 1");
-            if (rs1.next()) {
-                str[0] = rs1.getString(1);
-                str[1] = rs1.getString(2);
-            } else {
-                str[0] = "root";
-                str[1] = "123456";
-            }
-        } catch (SQLException ex) {
+//        try {
+//            rs1 = statement.executeQuery("SELECT UserName,PassWord FROM projectkoala.accounts where IsRoot = 1 limit 1");
+//            if (rs1.next()) {
+//                str[0] = rs1.getString(1);
+//                str[1] = rs1.getString(2);
+//            } else {
+//                str[0] = "root";
+//                str[1] = "123456";
+//            }
+//        } catch (SQLException ex) {
             str[0] = "root";
             str[1] = "123456";
-        }
+//        }
         return str;
     }
 }
