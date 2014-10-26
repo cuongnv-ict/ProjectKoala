@@ -89,7 +89,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         switch(id_Fac){
             case 1: soHoaDon = "BT"+XuLy.getNumber4(String.valueOf(sott));break;
-            case 2: soHoaDon = "HN"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 2: soHoaDon = "DQ"+XuLy.getNumber4(String.valueOf(sott));break;
             case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
             case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
         }

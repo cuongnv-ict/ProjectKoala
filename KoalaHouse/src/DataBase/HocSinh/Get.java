@@ -430,7 +430,7 @@ public class Get{
          String temp2;
          String ntm;
          try {
-            rs1 = statement.executeQuery("SELECT startDay,endDay FROM summerweek where startDay like '%2014%'");
+            rs1 = statement.executeQuery("SELECT startDay,endDay FROM summerweek where startDay like '%"+year+"%'");
             while(rs1.next()){
                 temp1 = new XuLiXau().NgayThangNam(rs1.getString(1));
                 temp2 = new XuLiXau().NgayThangNam(rs1.getString(2));

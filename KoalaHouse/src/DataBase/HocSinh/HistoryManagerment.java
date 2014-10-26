@@ -61,7 +61,7 @@ public class HistoryManagerment {
                 String soHoaDon = null;
                 switch(idFac){
             case 1: soHoaDon = "BT"+XuLy.getNumber4(String.valueOf(sott));break;
-            case 2: soHoaDon = "HN"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 2: soHoaDon = "DQ"+XuLy.getNumber4(String.valueOf(sott));break;
             case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
             case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
             }
@@ -121,7 +121,18 @@ public class HistoryManagerment {
         } catch (SQLException ex) {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String query ="INSERT INTO `projectkoala`.`receipts` (`Id`, `Faculties_Id`, `Accounts_Id`, `Students_Id`, `No`, `NamePayer`, `NameCasher`, `Number`, `CreateDate`, `IsTransfer`, `Percent`, `Reason`) VALUES ('"+i+"', '"+idFac+"', '1000', '"+idStudent+"', '"+i+"', '"+NguoiDong+"', '"+NguoiThu+"', '"+SoTien+"', '"+Date+"', '"+HinhThucDong+"', '"+PhanTram+"', '"+LiDo+"');";
+        //get id account
+        int idAccount=0;
+        try {
+            rs1 = statement.executeQuery("SELECT Id FROM projectkoala.accounts where UserName = \"admin\";");
+            while(rs1.next()){
+                idAccount = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //update
+        String query ="INSERT INTO `projectkoala`.`receipts` (`Id`, `Faculties_Id`, `Accounts_Id`, `Students_Id`, `No`, `NamePayer`, `NameCasher`, `Number`, `CreateDate`, `IsTransfer`, `Percent`, `Reason`) VALUES ('"+i+"', '"+idFac+"', '"+idAccount+"', '"+idStudent+"', '"+i+"', '"+NguoiDong+"', '"+NguoiThu+"', '"+SoTien+"', '"+Date+"', '"+HinhThucDong+"', '"+PhanTram+"', '"+LiDo+"');";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
