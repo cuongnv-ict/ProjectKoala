@@ -1,2 +1,0 @@
-DataBase.HocSinh.TotalFeeManagerment
-DataBase.HocSinh.TotalFreeComparator

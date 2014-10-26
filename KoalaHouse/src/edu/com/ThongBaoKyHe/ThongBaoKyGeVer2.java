@@ -792,33 +792,33 @@ public void Total(){
         // ve cho tieu de
         grphcs.setFont(font);
         //grphcs.drawImage(imageOfLabel, 0, 0, null);
-        grphcs.drawImage(imageOfLabel, 0, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
-        grphcs.drawString(lbOfTT, 200, 40);
+        grphcs.drawImage(imageOfLabel, 10, 0, imageOfLabel.getWidth(this), imageOfLabel.getHeight(this), null);
+        grphcs.drawString(lbOfTT, 220, 40);
         
         // ve cho nam hoc
         font = new Font("Serif", Font.PLAIN, 14);
         grphcs.setFont(font);
-        grphcs.drawString(lbOfNamhoc, 250, 65);
-        grphcs.drawString(lbNamHoc1, 330, 65);
-        grphcs.drawString(" - ", 355, 65);
-        grphcs.drawString(lbNamHoc2, 365, 65);
+        grphcs.drawString(lbOfNamhoc, 270, 65);
+        grphcs.drawString(lbNamHoc1, 350, 65);
+        grphcs.drawString(" - ", 375, 65);
+        grphcs.drawString(lbNamHoc2, 385, 65);
         
         // ve o ben ngoai
         font = new Font("Serif", Font.PLAIN, 14);
         grphcs.setFont(font);
-        grphcs.drawRect(180, 20, 290, 60);
+        grphcs.drawRect(195, 20, 305, 60);
         font = new Font("Serif", Font.BOLD, 14);
         grphcs.setFont(font);
-        grphcs.drawRect(178, 18, 294, 64);
+        grphcs.drawRect(193, 18, 309, 64);
         
         font = new Font("Serif", Font.PLAIN, 13);
         grphcs.setFont(font);
-        grphcs.drawString(lbNgay, 320, 100);
-        grphcs.drawString(cbNgay, 350, 100);
-        grphcs.drawString(lbThang, 365, 100);
-        grphcs.drawString(cbThang, 395, 100);
-        grphcs.drawString(lbNam, 410, 100);
-        grphcs.drawString(cbNam, 440, 100);
+        grphcs.drawString(lbNgay, 340, 100);
+        grphcs.drawString(cbNgay, 370, 100);
+        grphcs.drawString(lbThang, 385, 100);
+        grphcs.drawString(cbThang, 415, 100);
+        grphcs.drawString(lbNam, 430, 100);
+        grphcs.drawString(cbNam, 455, 100);
         
         grphcs.drawString(lbHovaTen + ": ", 20, 140);
         grphcs.drawString(tfHovaTen, 150, 140);
@@ -840,10 +840,10 @@ public void Total(){
         //System.out.println("table data ver 2 : " + tableData[0][0]);
         font = new Font("Serif", Font.BOLD, 14);
         grphcs.setFont(font);
-        grphcs.drawString("STT", 20, 260);
-        grphcs.drawString("Nội dung", 70, 260);
-        grphcs.drawString("Thời Gian", 300, 260);
-        grphcs.drawString("Số tiền", 450, 260);
+        grphcs.drawString("STT", 25, 260);
+        grphcs.drawString("Nội dung", 75, 260);
+        grphcs.drawString("Thời Gian", 305, 260);
+        grphcs.drawString("Số tiền", 455, 260);
         //grphcs.drawString("Ghi chú", 500, 260);
         font = new Font("Serif", Font.PLAIN, 13);
         grphcs.setFont(font);
@@ -859,26 +859,27 @@ public void Total(){
                 //grphcs.drawString(tableDataToString, (70 + ((j + 1) * 110)), (240 + (i + 1) * 20));
                 //System.out.println("TableData : " + tableDataToString);
                 if(j == 0) {
-                    grphcs.drawString(tableDataToString, 20, (260 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 25, (260 + (i + 1) * 20));
                     lines++;
                 } else if(j == 1) {
-                    grphcs.drawString(tableDataToString, 70, (260 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 75, (260 + (i + 1) * 20));
                     lines++;
                 } else if(j == 2) {
-                    grphcs.drawString(tableDataToString, 300, (260 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 305, (260 + (i + 1) * 20));
                 } else if(j == 3) {
-                    grphcs.drawString(tableDataToString, 450, (260 + (i + 1) * 20));
+                    grphcs.drawString(tableDataToString, 455, (260 + (i + 1) * 20));
                     lines++;
                // } else if(j ==4) {
                  //   grphcs.drawString(tableDataToString, 500, (260 + (i + 1) * 20));
                 }
             }
+            grphcs.drawLine(20, (260 + (i + 1) * 20 + 5), 525, (260 + (i + 1) * 20 + 5));
         }
-        grphcs.drawRect(15, 245, 500, (nRow + 1) * 20);
-        grphcs.drawLine(15, 265, 515, 265);
-        grphcs.drawLine(65, 245, 65, 245 + (nRow + 1) * 20);
-        grphcs.drawLine(295, 245, 295, 245 + (nRow + 1) * 20);
-        grphcs.drawLine(445, 245, 445, 245 + (nRow + 1) * 20);
+        grphcs.drawRect(20, 245, 505, (nRow + 1) * 20);
+        grphcs.drawLine(20, 265, 525, 265);
+        grphcs.drawLine(70, 245, 70, 245 + (nRow + 1) * 20);
+        grphcs.drawLine(300, 245, 300, 245 + (nRow + 1) * 20);
+        grphcs.drawLine(450, 245, 450, 245 + (nRow + 1) * 20);
         lines++;
         int line = 260 + (nRow)  * 20;
         line = line + 20;
