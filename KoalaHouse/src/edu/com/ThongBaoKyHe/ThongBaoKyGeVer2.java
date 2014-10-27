@@ -25,6 +25,9 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -32,6 +35,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -153,6 +158,7 @@ public class ThongBaoKyGeVer2 extends javax.swing.JFrame implements Printable {
         }
         new RecieptManagerment().BangDSPhiThongBaoTrongNam(idStudent,idTrungTam, jTable1,true);
         Total();
+        readFile();
     }
 public void Total(){
         DefaultTableModel model;
@@ -170,6 +176,70 @@ public void Total(){
             model.setValueAt(tongphi,model.getRowCount()-1 , 3);
         }catch(java.lang.NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
+        }
+    }
+private void readFile(){
+        try{
+            FileReader fr = new FileReader("thongbaokyhe.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            line = br.readLine();jTextField11.setText(line);
+            line = br.readLine();
+            jTextArea1.setText("");
+            while((line = br.readLine())!=null){
+                if(line.equals("#00$#")) break;
+                jTextArea1.append(line + "\n");
+            }
+            br.close();
+            fr.close();
+        }
+        catch(Exception e){
+        }
+    }
+    private void writeFileClose(){
+        try{
+            File file = new File("thongbaokyhe.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter br = new BufferedWriter(fw);
+            //----------bat dau ghi file-------------- 
+            //dau tien la ghi han nop
+            String hannop = jTextField11.getText()+ "\r\n";
+            br.write(hannop);
+            br.write("#00$#"+"\r\n");
+            //sau di ghi luu y 1
+            String xau = jTextArea1.getText();
+            String[] line;
+            int size = xau.length() - 1;
+            if(xau.charAt(size)=='\n'){
+                xau = xau.substring(0, size);
+            }
+            int count= jTextArea1.getLineCount();
+            int i=1;
+            int vitri;
+            while(i != count){
+                vitri=xau.indexOf('\n');
+                if(vitri==-1) {
+                    break;
+                }
+                String xaucon= xau.substring(0, vitri);
+                br.write(xaucon + "\r\n");
+                xau = xau.substring(vitri + 1);
+                i++;
+            }
+            vitri=xau.indexOf('\n');
+            if(vitri==-1){
+                String xaucon = new String(xau);
+                br.write(xaucon);
+            }
+            else{ 
+            }
+        //--------ket thuc ghi file----------------    
+            br.close();
+            fw.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error to save file");
         }
     }
     /**
@@ -642,6 +712,7 @@ public void Total(){
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         //luu thong tin cho thong bao sau
+        writeFileClose();
         hanNop_sta = jTextField11.getText();
         luuY_sta = jTextArea1.getText();
         PrinterJob pj = PrinterJob.getPrinterJob();

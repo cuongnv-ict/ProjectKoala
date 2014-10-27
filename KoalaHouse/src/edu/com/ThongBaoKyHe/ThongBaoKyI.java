@@ -23,6 +23,9 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -30,12 +33,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.print.attribute.standard.MediaSizeName;
+import javax.swing.JOptionPane;
 import javax.swing.RepaintManager;
 //import org.apache.poi.;
 
@@ -132,6 +138,102 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
             jComboBox2.setSelectedIndex(CurrentYear - 2012);
         }
         new RecieptManagerment().BangDSPhiThongBaoDauNam(idStudent,idTrungTam, jTable1);
+        readFile();
+    }
+    private void readFile(){
+        try{
+            FileReader fr = new FileReader("thongbaoky.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            line = br.readLine();jTextField11.setText(line);
+            line = br.readLine();
+            jTextArea1.setText("");
+            while((line = br.readLine())!=null){
+                if(line.equals("#00$#")) break;
+                jTextArea1.append(line + "\n");
+            }
+            jTextArea2.setText("");
+            while((line = br.readLine())!=null){
+                if(line.equals("#00$#")) break;
+                jTextArea2.append(line + "\n");
+            }
+            br.close();
+            fr.close();
+        }
+        catch(Exception e){
+        }
+    }
+    private void writeFileClose(){
+        try{
+            File file = new File("thongbaoky.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter br = new BufferedWriter(fw);
+            //----------bat dau ghi file-------------- 
+            //dau tien la ghi han nop
+            String hannop = jTextField11.getText()+ "\r\n";
+            br.write(hannop);
+            br.write("#00$#"+"\r\n");
+            //sau di ghi luu y 1
+            String xau = jTextArea1.getText();
+            String[] line;
+            int size = xau.length() - 1;
+            if(xau.charAt(size)=='\n'){
+                xau = xau.substring(0, size);
+            }
+            int count= jTextArea1.getLineCount();
+            int i=1;
+            int vitri;
+            while(i != count){
+                vitri=xau.indexOf('\n');
+                if(vitri==-1) {
+                    break;
+                }
+                String xaucon= xau.substring(0, vitri);
+                br.write(xaucon + "\r\n");
+                xau = xau.substring(vitri + 1);
+                i++;
+            }
+            vitri=xau.indexOf('\n');
+            if(vitri==-1){
+                String xaucon = new String(xau);
+                br.write(xaucon);
+            }
+            else{ 
+            }
+            br.write("\r\n"+"#00$#"+"\r\n");
+            //sau do ghi luu y 2
+            xau = jTextArea2.getText();
+            size = xau.length() - 1;
+            if(xau.charAt(size)=='\n'){
+                xau = xau.substring(0, size);
+            }
+            count= jTextArea2.getLineCount();
+            i=1;
+            while(i != count){
+                vitri=xau.indexOf('\n');
+                if(vitri==-1) {
+                    break;
+                }
+                String xaucon= xau.substring(0, vitri);
+                br.write(xaucon + "\r\n");
+                xau = xau.substring(vitri + 1);
+                i++;
+            }
+            vitri=xau.indexOf('\n');
+            if(vitri==-1){
+                String xaucon = new String(xau);
+                br.write(xaucon);
+            }
+            else{ 
+            }
+        //--------ket thuc ghi file----------------    
+            br.close();
+            fw.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error to save file");
+        }
     }
 
     /**
@@ -554,6 +656,7 @@ public class ThongBaoKyI extends javax.swing.JFrame implements Printable {
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         //luu thong tin cho thong bao sau
+        writeFileClose();
         hanNop_sta = jTextField11.getText();
         luuY_sta = jTextArea1.getText();
         luuY1_sta = jTextArea2.getText();

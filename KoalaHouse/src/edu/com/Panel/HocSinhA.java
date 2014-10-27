@@ -111,9 +111,13 @@ public class HocSinhA extends javax.swing.JPanel {
         NguoiDaiDien.setText(ngDaiDien);
         //nhapHoc.setText(nhaphoc);
         String[] NTN = nhaphoc.split("-");
-        NHDay.setSelectedIndex(Integer.parseInt(NTN[0])-1);
-        NHMonth.setSelectedIndex(Integer.parseInt(NTN[1])-1);
-        NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2010);
+        try{
+            NHDay.setSelectedIndex(Integer.parseInt(NTN[0])-1);
+            NHMonth.setSelectedIndex(Integer.parseInt(NTN[1])-1);
+            NHYear.setSelectedIndex(Integer.parseInt(NTN[2])-2010);
+        }catch(Exception e){
+            
+        }
         int noPhi = new AStudentAndLateDay().GetDebt(id);
         debt.setText(XuLy.setMoney(String.valueOf(noPhi)));
         idTrungTam = new Get().GetIDFac();
