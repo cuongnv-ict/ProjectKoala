@@ -266,5 +266,22 @@ public static void SapXepThang(ArrayList data, final int column) {
        }
        return y;
    }
+       public static boolean sosanhngaythang( String ngaybd, String ngaykt)
+    {
+        String []bd;
+        String []kt;
+        kt = ngaykt.split("-");
+        bd = ngaybd.split("-");
+        int datebd= Integer.parseInt(bd[2]);
+        int monthbd= Integer.parseInt(bd[1]);
+        int yearbd= Integer.parseInt(bd[0]);
+        int datekt = Integer.parseInt(kt[2]);
+        int monthkt= Integer.parseInt(kt[1]);
+        int yearkt= Integer.parseInt(kt[0]);
+        if(yearkt>yearbd) return true;
+        else if(yearkt==yearbd&&monthkt>monthbd) return true;
+        else if(yearkt==yearbd&&monthkt==monthbd&&datekt>=datebd) return true;
+        else return false;
+    }
         
 }

@@ -35,6 +35,7 @@ public class SQLBangNghiPhep {
             //Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void BangNghiPhep(JTable table)
     {
         try
@@ -53,8 +54,10 @@ public class SQLBangNghiPhep {
             
             while(rs1.next()) 
             {
+                  
                     Object[] str = new Object[7];
                     str[0]=rs1.getInt(1);
+                      
                     /*
                     rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' ");
             
@@ -68,6 +71,7 @@ public class SQLBangNghiPhep {
                     str[2]= rs1.getString(3);
                     str[3]= new XuLiXau().NgayThangNam (rs1.getString(4));
                     str[4]=new XuLiXau().NgayThangNam( rs1.getString(5));
+                  
                     str[5]=(rs1.getString(6));
                     if(rs1.getInt(7)==0)
                         str[6]="Đã Hoàn Phí";
@@ -143,7 +147,7 @@ public class SQLBangNghiPhep {
             
         }
     }
-     public void BangNghiPhep_year(JTable table,String year)
+     public void BangNghiPhep_year(JTable table,String year,String yearbegin,String yearend)
     {
         try
         {
@@ -159,30 +163,27 @@ public class SQLBangNghiPhep {
             "projectkoala.leaves l1,projectkoala.classes c1, projectkoala.students s1, projectkoala.classes_has_students h1\n" +
             "where l1.Students_Id=s1.Id and s1.Id=h1.Students_Id and h1.Classes_Id=c1.Id and (l1.StartDate like '%"+input_year[0]+"%' or l1.EndDate like '%"+input_year[1]+"%' ) order by l1.StartDate desc");
             
-            
-            while(rs1.next()) 
+            if(yearbegin!=null)
             {
-                    Object[] str = new Object[7];
-                    str[0]=rs1.getInt(1);
-                    /*
-                    rs2 = statement2.executeQuery("SELECT FullName,PhoneNumberFather FROM students where id ='"+ idstudent+"' ");
-            
-                    while(rs2.next())
-                    {
-                        str[1]= rs2.getString(1);
-                        str[4]= rs2.getString(2);
-                    }
-                    */
-                    str[1]= rs1.getString(2);
-                    str[2]= rs1.getString(3);
-                    str[3]= new XuLiXau().NgayThangNam (rs1.getString(4));
-                    str[4]=new XuLiXau().NgayThangNam( rs1.getString(5));
-                    str[5]=(rs1.getString(6));
-                    if(rs1.getInt(7)==0)
-                        str[6]="Đã Hoàn Phí";
-                    else 
-                        str[6]="Chưa Hoàn Phí";
-                    data.add(str);
+                while(rs1.next()) 
+                {
+                        if(XuLy.sosanhngaythang(rs1.getString(5),yearend)&&XuLy.sosanhngaythang(yearbegin, rs1.getString(4)))
+                        {
+                            System.out.print(rs1.getString(5)+yearend);
+                            Object[] str = new Object[7];
+                            str[0]=rs1.getInt(1);
+                            str[1]= rs1.getString(2);
+                            str[2]= rs1.getString(3);
+                            str[3]= new XuLiXau().NgayThangNam (rs1.getString(4));
+                            str[4]=new XuLiXau().NgayThangNam( rs1.getString(5));
+                            str[5]=(rs1.getString(6));
+                            if(rs1.getInt(7)==0)
+                                str[6]="Đã Hoàn Phí";
+                            else 
+                                str[6]="Chưa Hoàn Phí";
+                            data.add(str);
+                        }
+                }
             }
             if(data.size()==0)
             {
@@ -252,4 +253,5 @@ public class SQLBangNghiPhep {
             
         }
     }
+     
 }

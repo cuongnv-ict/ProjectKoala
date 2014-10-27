@@ -424,11 +424,8 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                             {
                                 DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                                Calendar calendar= Calendar.getInstance();
-                                calendar.getTime();
-                                SimpleDateFormat form= new SimpleDateFormat("yyyy");
-                                String year= form.format(calendar.getTime());
-                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
+                                
+                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,String.valueOf(new DataBase.SQLkyhe().getYearActiv()));
 
                                 dispose();
                             }

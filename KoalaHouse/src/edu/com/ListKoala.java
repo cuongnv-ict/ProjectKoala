@@ -1053,7 +1053,10 @@ public class ListKoala extends javax.swing.JFrame {
             }
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("DS XeBus"))
             {
-                new DataBase.SQLXeBus().BandDanhSachXeBus(xebus.jTable4);
+                String year= String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+                String yearbegin = new DataBase.SQLkyhe().getYearBegin(year);
+                String yearend = new DataBase.SQLkyhe().getYearEnd(year);
+                new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(xebus.jTable4,year+"-"+String.valueOf(Integer.parseInt(year)+1),yearbegin,yearend);
                 xebus.id_xebus = new ArrayList<Integer>();
                     try{
                     if (!xebus.jTable4.getValueAt(0, 0).toString().equals("")) {
@@ -1078,8 +1081,10 @@ public class ListKoala extends javax.swing.JFrame {
             }
             if (Panel_GDChinh.getTitleAt(selectedIndex).equals("Đăng Ký Học Hè"))
             {
+                
                         dkhoche.textfield_timkiem.setText("Tìm Kiếm");
-                        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(dkhoche.jTable4);
+                        String year= String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+                        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(dkhoche.jTable4,year);
                         dkhoche.resize(dkhoche.jTable4);
 
                         dkhoche.id_hoche = new ArrayList<Integer>();

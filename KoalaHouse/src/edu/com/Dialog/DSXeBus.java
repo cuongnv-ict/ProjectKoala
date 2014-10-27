@@ -56,6 +56,8 @@ public class DSXeBus extends javax.swing.JDialog {
     private boolean themorsua;
     private int oldIdStudents;
     private int idxebus;
+    private String yearstart;
+    private String yearend;
     /**
      * Creates new form DSXeBus
      */
@@ -130,6 +132,14 @@ public class DSXeBus extends javax.swing.JDialog {
         catch(Exception ex)
         {}
     
+    }
+    public void setyearstart(String yearstart)
+    {
+        this.yearstart=yearstart;
+    }
+    public void setyearend(String yearend)
+    {
+        this.yearend=yearend;
     }
     public void setidxebus(int id)
     {
@@ -495,10 +505,17 @@ public class DSXeBus extends javax.swing.JDialog {
             {
                 if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
                 {
-                DataBase.SQLXeBus data = new DataBase.SQLXeBus();
-                data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
-                button=true;
-                dispose();
+                    if(XuLy.sosanhngaythang(yearstart, datebd)&&XuLy.sosanhngaythang(datekt, yearend))
+                    {
+                        DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                        data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
+                        button=true;
+                        dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"ngày tháng bắt đầu và kết thúc phải nằm trong năm học hiện tại",null,JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 else
                 {
@@ -535,11 +552,18 @@ public class DSXeBus extends javax.swing.JDialog {
             {
             if(idstudent!=0)
             {
-            System.out.println("id xe bus la1:" +idxebus);
-            DataBase.SQLXeBus data = new DataBase.SQLXeBus();
-            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
-            button=true;
-            dispose();
+                 if(XuLy.sosanhngaythang(yearstart, datebd)&&XuLy.sosanhngaythang(datekt, yearend))
+                 {
+                  
+                    DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                    data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
+                    button=true;
+                    dispose();
+                 }
+                 else
+                 {
+                     JOptionPane.showMessageDialog(null,"ngày tháng bắt đầu và kết thúc phải nằm trong năm học hiện tại",null,JOptionPane.INFORMATION_MESSAGE);
+                 }
             }
             else
             {
@@ -582,10 +606,17 @@ public class DSXeBus extends javax.swing.JDialog {
             {
                 if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
                 {
-                DataBase.SQLXeBus data = new DataBase.SQLXeBus();
-                data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
-                button=true;
-                dispose();
+                     if(XuLy.sosanhngaythang(yearstart, datebd)&&XuLy.sosanhngaythang(datekt, yearend))
+                    {
+                        DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                        data.themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt);
+                        button=true;
+                        dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"ngày tháng bắt đầu và kết thúc phải nằm trong năm học hiện tại",null,JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 else
                 {
@@ -622,11 +653,17 @@ public class DSXeBus extends javax.swing.JDialog {
             {
             if(idstudent!=0)
             {
-            System.out.println("id xe bus la1:" +idxebus);
-            DataBase.SQLXeBus data = new DataBase.SQLXeBus();
-            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
-            button=true;
-            dispose();
+                   if(XuLy.sosanhngaythang(yearstart, datebd)&&XuLy.sosanhngaythang(datekt, yearend))
+                       {
+                            DataBase.SQLXeBus data = new DataBase.SQLXeBus();
+                            data.suaxebus(oldIdStudents,idstudent ,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(XuLy.getMoney(tienxe.getText())),diachi.getText(),datebd,datekt,idxebus);
+                            button=true;
+                            dispose();
+                         }
+                         else
+                         {
+                             JOptionPane.showMessageDialog(null,"ngày tháng bắt đầu và kết thúc phải nằm trong năm học hiện tại",null,JOptionPane.INFORMATION_MESSAGE);
+                         }
             }
             else
             {

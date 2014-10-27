@@ -39,6 +39,8 @@ public class XeBus extends javax.swing.JPanel {
     private DefaultTableModel model;
     public ArrayList<Integer> id_xebus;
     public JTabbedPane center;
+    String yearstart;
+    String yearend;
     /**
      * Creates new form XeBus
      */
@@ -46,8 +48,10 @@ public class XeBus extends javax.swing.JPanel {
         initComponents();
        // System.out.println("da den doan nay");
         String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        yearstart = new DataBase.SQLkyhe().getYearBegin(year);
+        yearend = new DataBase.SQLkyhe().getYearEnd(year);
         nam.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
-        new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,String.valueOf(nam.getSelectedItem()));
+        new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,String.valueOf(nam.getSelectedItem()),yearstart,yearend);
         id_xebus = new ArrayList<Integer>();
         try{
         if (!jTable4.getValueAt(0, 0).toString().equals("")) {
@@ -326,11 +330,12 @@ public class XeBus extends javax.swing.JPanel {
             } catch (ParseException ex) {
                 Logger.getLogger(XeBus.class.getName()).log(Level.SEVERE, null, ex);
             }
+            dsbus.setyearstart(yearstart);
+            dsbus.setyearend(yearend);
             dsbus.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-            
             dsbus.setThemSuaLop(true);
             dsbus.setVisible(true);
-            new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+            new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString(),yearstart,yearend);
             id_xebus = new ArrayList<Integer>();
             try{
                 if (!jTable4.getValueAt(0, 0).toString().equals("")) {
@@ -378,13 +383,15 @@ public class XeBus extends javax.swing.JPanel {
             {
             Vector vec =  (Vector) model.getDataVector().elementAt(row);
             DSXeBus  dsbus= new DSXeBus(null, true,vec);
+            dsbus.setyearstart(yearstart);
+            dsbus.setyearend(yearend);
             dsbus.setidxebus(id_xebus.get(row));
             dsbus.setThemSuaLop(false);
             dsbus.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
 
             dsbus.setVisible(true);
-
-            new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+ 
+                new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString(),yearstart,yearend);
                 id_xebus = new ArrayList<Integer>();
                 try{
                 if (!jTable4.getValueAt(0, 0).toString().equals("")) {
@@ -443,7 +450,7 @@ public class XeBus extends javax.swing.JPanel {
                         DataBase.SQLXeBus data= new DataBase.SQLXeBus();
                         xoaorkhong=data.xoaxebus(jTable4, 11,id_xebus);
 
-                          new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+                           new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString(),yearstart,yearend);
                             id_xebus = new ArrayList<Integer>();
                             try{
                                 if (!jTable4.getValueAt(0, 0).toString().equals("")) {
@@ -500,11 +507,16 @@ public class XeBus extends javax.swing.JPanel {
        try{
            if(nam.getSelectedItem().toString().equals("Tất Cả"))
            {
-             new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
+                new DataBase.SQLXeBus().BandDanhSachXeBus(jTable4);
            }
            else
            {
-            new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString());
+               
+                String year[]= nam.getSelectedItem().toString().split("-");
+                yearend  =  new DataBase.SQLkyhe().getYearEnd(year[0]);
+                yearstart = new DataBase.SQLkyhe().getYearBegin(year[0]);
+                new  DataBase.SQLXeBus().BandDanhSachXeBus_TheoNam(jTable4,nam.getSelectedItem().toString(),yearstart,yearend);
+           
            }
             id_xebus = new ArrayList<Integer>();
             try{
@@ -534,8 +546,10 @@ public class XeBus extends javax.swing.JPanel {
             }
             else        
             {
-                
-                new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNamVaTen(jTable4, nam.getSelectedItem().toString(),textfield_timkiem.getText()+"");
+                String year[]= nam.getSelectedItem().toString().split("-");
+                yearend  =  new DataBase.SQLkyhe().getYearEnd(year[0]);
+                yearstart = new DataBase.SQLkyhe().getYearBegin(year[0]);
+                new DataBase.SQLXeBus().BandDanhSachXeBus_TheoNamVaTen(jTable4, nam.getSelectedItem().toString(),textfield_timkiem.getText()+"",yearstart,yearend);
             }
             
             id_xebus = new ArrayList<Integer>();

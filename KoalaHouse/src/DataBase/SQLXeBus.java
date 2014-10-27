@@ -530,22 +530,26 @@ public class SQLXeBus
         }
         return isactive;
     }
-    public void BandDanhSachXeBus_TheoNam(JTable table,String year)
+    public void BandDanhSachXeBus_TheoNam(JTable table,String year,String yearstart,String yearend)
     {
         try
         {
              
-           String inputyear[]=year.split("-");
+            String inputyear[]=year.split("-");
             int idstudent=-1;
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7),model.getColumnName(8),model.getColumnName(9),model.getColumnName(10),model.getColumnName(11)};
             ArrayList<DataOfTableBus> data = new ArrayList<DataOfTableBus>();
+            if(yearstart!=null)
+            {  
             rs1 = statement.executeQuery("SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and ( b1.StartDate like '%"+inputyear[0]+"%' or b1.EndDate like '%"+inputyear[1]+"%') order by  s1.FullName");
             String querry = "SELECT b1.idBusList,idStudents,LuotDi,GhiChu,TienXe,DiaChi,StartDate,EndDate,b1.IsActive,FullName,PhoneNumberFather FROM buslist b1,students  s1 where b1.idStudents=s1.Id and b1.StartDate like '%"+year+"%' or b1.EndDate like '%"+year+"%' order by  s1.FullName" ;
               
             while(rs1.next()) 
             {
+                if(XuLy.sosanhngaythang(yearstart,rs1.getString(7))&&XuLy.sosanhngaythang(rs1.getString(8), yearend))
+                {
                      DataOfTableBus onerow= new DataOfTableBus();
                 /*
                     Object[] str = new Object[12];
@@ -579,6 +583,8 @@ public class SQLXeBus
                     namegia+= temp[temp.length-1]+onerow.getFullname();
                     onerow.setNameGia(namegia);
                     data.add(onerow);
+                }
+                }
             }
            if(data.size()==0)
             {
@@ -676,7 +682,7 @@ public class SQLXeBus
             
         }
     }
-    public void BandDanhSachXeBus_TheoNamVaTen(JTable table,String year,String name)
+    public void BandDanhSachXeBus_TheoNamVaTen(JTable table,String year,String name,String yearstart,String yearend)
     {
         try
         {
@@ -693,6 +699,8 @@ public class SQLXeBus
             
             while(rs1.next()) 
             {
+                if(XuLy.sosanhngaythang(yearstart,rs1.getString(7) )&&XuLy.sosanhngaythang(rs1.getString(8), yearend))
+                {
                      DataOfTableBus onerow= new DataOfTableBus();
                 /*
                     Object[] str = new Object[12];
@@ -726,6 +734,7 @@ public class SQLXeBus
                     namegia+= temp[temp.length-1]+onerow.getFullname();
                     onerow.setNameGia(namegia);
                     data.add(onerow);
+                }
             }
            if(data.size()==0)
             {

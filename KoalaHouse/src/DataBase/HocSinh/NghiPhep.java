@@ -86,7 +86,7 @@ public class NghiPhep {
                 table.setModel(model);
             }
             statement.close();
-            connect.close();
+//            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
               
@@ -97,16 +97,17 @@ public class NghiPhep {
     public void InsertNghiPhep(int idStudent,int idFac,String batdau,String ketthuc,String numberday){
         int id = 0;
         try {
-            rs1 = statement.executeQuery("SELECT max(Id) FROM leaves");
+            rs1 = statement.executeQuery("SELECT max(Id) FROM projectkoala.leaves");
             while(rs1.next()){
                 id = rs1.getInt(1);
                 id++;
             }
+            System.out.println("id la:" +id);
             String query ="INSERT INTO `projectkoala`.`leaves` (`Id`, `Faculties_Id`, `Students_Id`, `StartDate`, `EndDate`,`NumberOfDay`,`IsActive`) VALUES ('"+id+"', '"+ThongTin.trungtam+"', '"+idStudent+"', '"+batdau+"', '"+ketthuc+"','"+numberday+"',1);";
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
             pstmt.close();
-            connect.close();
+//            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
                
@@ -116,13 +117,25 @@ public class NghiPhep {
     public void XoaNghiPhep(int idStudent,String batdau,String ketthuc,int id){
         String query ="DELETE FROM `projectkoala`.`leaves` WHERE `Students_Id`='"+idStudent+"' and `Id`= '"+id+"' and `StartDate`='"+new XuLiXau().NamThangNgay(batdau)+"' and `EndDate` = '"+new XuLiXau().NamThangNgay(ketthuc)+"';";
         try {
+            System.out.println("id la:" +id + "idstudent:"+idStudent);
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
             pstmt.close();
-            connect.close();
+//            connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    public void Disconnect()
+    {
+        try
+        {
+            connect.close();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

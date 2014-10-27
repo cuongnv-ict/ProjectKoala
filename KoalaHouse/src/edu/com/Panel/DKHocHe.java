@@ -30,15 +30,17 @@ public class DKHocHe extends javax.swing.JPanel {
     public ArrayList<Integer> id_hoche;
     public DefaultTableModel model,modelgoc;
     public JTabbedPane center;
-    
+    private String yearnow;
     /**
      * Creates new form DKHocHe
      */
     public DKHocHe() {
         initComponents();
         modelgoc = (DefaultTableModel) jTable4.getModel();
-        String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,year);
+        this.yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        nam.setSelectedItem(yearnow+"-"+String.valueOf(Integer.valueOf(yearnow)+1));
+        String a[]= nam.getSelectedItem().toString().split("-");
+        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,"2014");
         id_hoche = new ArrayList<Integer>();
         try{
             if (!jTable4.getValueAt(0, 1).toString().equals("")) {
@@ -50,7 +52,6 @@ public class DKHocHe extends javax.swing.JPanel {
         {
             jTable4.setModel(modelgoc);
         }
-        nam.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
         
     }
      public void setNotAdmin()
@@ -251,24 +252,24 @@ public class DKHocHe extends javax.swing.JPanel {
 
     private void textfield_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_timkiemActionPerformed
         // TODO add your handling code here:
-        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4,textfield_timkiem.getText());
-        id_hoche = new ArrayList<Integer>();
-        try{
-            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                XuLy.setID(id_hoche, jTable4, 0);
-                resize(jTable4);
-            }
-            else
-            {
-                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
-                resize(jTable4);
-            }
-        }
-        catch(Exception ex)
-        {
-            jTable4.setModel(modelgoc);
-            resize(jTable4);
-        }
+//        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiem(jTable4,textfield_timkiem.getText());
+//        id_hoche = new ArrayList<Integer>();
+//        try{
+//            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+//                XuLy.setID(id_hoche, jTable4, 0);
+//                resize(jTable4);
+//            }
+//            else
+//            {
+//                //       jTable4.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
+//                resize(jTable4);
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            jTable4.setModel(modelgoc);
+//            resize(jTable4);
+//        }
     }//GEN-LAST:event_textfield_timkiemActionPerformed
 
     private void textfield_timkiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textfield_timkiemMouseClicked
@@ -308,8 +309,10 @@ public class DKHocHe extends javax.swing.JPanel {
                     boolean xoaorkhong;
                     DataBase.SQLkyhe data= new DataBase.SQLkyhe();
                     xoaorkhong=data.xoaDkHe(jTable4, 7,id_hoche);
-
-                    new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                    
+                    String year = nam.getSelectedItem().toString();
+                    String a[]=year.split("-");
+                    new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,a[0]); 
                     id_hoche = new ArrayList<Integer>();
                     try
                     {
@@ -371,7 +374,8 @@ public class DKHocHe extends javax.swing.JPanel {
                 dkhoche.setVisible(true);
 
                 //dkhoche.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-200);
-                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+                this.yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+                new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,yearnow);
                 id_hoche = new ArrayList<Integer>();
                 try
                 {
@@ -413,7 +417,8 @@ public class DKHocHe extends javax.swing.JPanel {
 
             //receipts.setLocation(420, 20);
             //receipts.show();
-            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe(jTable4);
+            this.yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+            new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,yearnow);
             id_hoche = new ArrayList<Integer>();
             try
             {

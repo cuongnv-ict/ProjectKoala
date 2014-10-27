@@ -31,10 +31,10 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
     public BangHienThiTuanHe(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Calendar calendar = Calendar.getInstance();
-        calendar.getTime();
-        SimpleDateFormat form=new SimpleDateFormat("yyyy");
-        String yearnow=form.format(calendar.getTime());
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.getTime();
+//        SimpleDateFormat form=new SimpleDateFormat("yyyy");
+        String yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
         this.yearnow=yearnow;
         //modelgoc = (DefaultTableModel) jTable1.getModel();
         String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());

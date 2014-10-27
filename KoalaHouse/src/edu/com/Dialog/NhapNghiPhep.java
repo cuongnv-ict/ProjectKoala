@@ -30,6 +30,8 @@ public class NhapNghiPhep extends javax.swing.JDialog {
     public JTabbedPane center;
     ArrayList<Integer> idNghiPhep;
     DataBase.HocSinh.NghiPhep a;
+    String yearbegin;
+    String yearend;
     /**
      * Creates new form NhapNghiPhep
      */
@@ -48,10 +50,13 @@ public class NhapNghiPhep extends javax.swing.JDialog {
             }
                 
         });
-        
+        String year = String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        yearbegin = new DataBase.SQLkyhe().getYearBegin(year);
+        yearend = new DataBase.SQLkyhe().getYearEnd(year);
+        search_year.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
         MakePopup();
         a= new DataBase.HocSinh.NghiPhep();
-        new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
+        new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep,search_year.getSelectedItem().toString(),yearbegin,yearend);
         idNghiPhep = new ArrayList<Integer>();
         try{
         if (!bangDSNghỉPhep.getValueAt(0, 0).toString().equals("")) {
@@ -301,6 +306,8 @@ public class NhapNghiPhep extends javax.swing.JDialog {
 //        int idStudent = Integer.parseInt(infoHS.get(0).toString());
         int idTrungTam = Integer.parseInt(infoHS.get(1).toString());
         int idStudent = new DataBase.SQLXeBus().getIdStudent(name, classes);
+        String year []= search_year.getSelectedItem().toString().split("-");
+        
         //them du lieu
             try{
                 String datebd = ngay.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+nam.getSelectedItem().toString();
@@ -312,21 +319,33 @@ public class NhapNghiPhep extends javax.swing.JDialog {
                     {
                         if(new DataBase.SQLXeBus().getIdStudent(ten.getText()+"", lop.getSelectedItem().toString())>0)
                         {
-                        a.InsertNghiPhep(idStudent, idTrungTam,new XuLiXau().NamThangNgay(datebd),new XuLiXau().NamThangNgay(datekt),String.valueOf(Integer.parseInt(songayngay.getText())));
-                        //load lai bang trong muon
-                        new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
-                        
-                        idNghiPhep = new ArrayList<Integer>();
-                        try{
-                        if (!bangDSNghỉPhep.getValueAt(0, 0).toString().equals("")) {
-                        XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
-                        //resize(jTable4);
-                        }
-                        }
-                        catch(Exception ex)
-                        {
-                            JOptionPane.showMessageDialog(rootPane, "Nhập sai Số ngày");
-                        }
+                            if(XuLy.sosanhngaythang(nam1.getSelectedItem().toString() +"-"+ thang1.getSelectedItem().toString() +"-"+ngay1.getSelectedItem().toString(), yearend)&&XuLy.sosanhngaythang(yearbegin,nam.getSelectedItem().toString() +"-"+ thang.getSelectedItem().toString() +"-"+ngay.getSelectedItem().toString()))
+                            {
+                                a.InsertNghiPhep(idStudent, idTrungTam,new XuLiXau().NamThangNgay(datebd),new XuLiXau().NamThangNgay(datekt),String.valueOf(Integer.parseInt(songayngay.getText())));
+                                //load lai bang trong muon
+
+
+                                 yearend=new DataBase.SQLkyhe().getYearEnd(year[0]);
+                                  new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep,  search_year.getSelectedItem().toString(),yearbegin,yearend);
+
+                                idNghiPhep = new ArrayList<Integer>();
+                                try{
+                                if (!bangDSNghỉPhep.getValueAt(0, 0).toString().equals("")) {
+                                XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
+                                //resize(jTable4);
+                                    }
+                                
+                                }
+
+                                catch(Exception ex)
+                                {
+                                    JOptionPane.showMessageDialog(rootPane, "Nhập sai Số ngày");
+                                }
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(rootPane, "chú ý! ngày kết thúc và ngày bắt đầu phải nằm trong năm  đang lựa chọn");
+                            }
                         }
                         else 
                         {
@@ -383,7 +402,9 @@ public class NhapNghiPhep extends javax.swing.JDialog {
             {
             a.XoaNghiPhep(idStudent, datebd, datekt,idNghiPhep.get(b[i]));
             }       
-            new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
+             String year []= search_year.getSelectedItem().toString().split("-");
+             yearend=new DataBase.SQLkyhe().getYearEnd(year[0]);
+            new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep,  search_year.getSelectedItem().toString(),yearbegin,yearend);
             idNghiPhep = new ArrayList<Integer>();
                     try{
                      if (!bangDSNghỉPhep.getValueAt(0, 0).toString().equals("")) {
@@ -406,18 +427,21 @@ public class NhapNghiPhep extends javax.swing.JDialog {
 
     private void search_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_yearActionPerformed
         // TODO add your handling code here:
-         try{
-            String year= search_year.getSelectedItem().toString();
-        if(year.equals("Tất Cả"))
+        try{
+            String year []= search_year.getSelectedItem().toString().split("-");
+            
+        if(search_year.getSelectedItem().equals("Tất Cả"))
         {
+            System.out.print("Niencun");
             new DataBase.SQLBangNghiPhep().BangNghiPhep(bangDSNghỉPhep);
             idNghiPhep = new ArrayList<Integer>();
             XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
         }
         else
         {
-            
-            new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep, year);
+            yearend=new DataBase.SQLkyhe().getYearEnd(year[0]);
+            yearbegin= new DataBase.SQLkyhe().getYearBegin(year[0]);
+            new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep,  search_year.getSelectedItem().toString(),yearbegin,yearend);
                    idNghiPhep = new ArrayList<Integer>();
                    XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
         }

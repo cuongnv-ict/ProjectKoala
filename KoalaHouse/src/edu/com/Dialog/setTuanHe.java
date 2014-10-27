@@ -7,6 +7,7 @@
 package edu.com.Dialog;
 
 import DataBase.DataTable;
+import edu.com.XuLy;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,16 +23,17 @@ import javax.swing.JOptionPane;
 public class setTuanHe extends javax.swing.JDialog {
     private boolean updateOrInsert;
     private String YearOld;
+    private String yearnow;
     /**
      * Creates new form setTuanHe
      */
     public setTuanHe(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Calendar calendar = Calendar.getInstance();
-        calendar.getTime();
-        SimpleDateFormat form=new SimpleDateFormat("yyyy");
-        String yearnow=form.format(calendar.getTime());
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.getTime();
+//        SimpleDateFormat form=new SimpleDateFormat("yyyy");
+        this.yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
         yearS1.setSelectedItem(yearnow);
         yearS2.setSelectedItem(yearnow);
         yearS3.setSelectedItem(yearnow);
@@ -50,10 +52,8 @@ public class setTuanHe extends javax.swing.JDialog {
     public setTuanHe(java.awt.Frame parent, boolean modal,String [][]a) {
         super(parent, modal);
         initComponents();
-        Calendar calendar = Calendar.getInstance();
-        calendar.getTime();
-        SimpleDateFormat form=new SimpleDateFormat("yyyy");
-        String yearnow=form.format(calendar.getTime());
+       
+         this.yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
         String [] ngaybd;
         String [] ngaykt;
         ngaybd=a[0][0].split("-");
@@ -824,12 +824,13 @@ public class setTuanHe extends javax.swing.JDialog {
             String ngaykt4= yearE4.getSelectedItem().toString() + "-" + monthE4.getSelectedItem().toString() + "-" + dateE4.getSelectedItem().toString();
             String ngaykt5= yearE5.getSelectedItem().toString() + "-" + monthE5.getSelectedItem().toString() + "-" + dateE5.getSelectedItem().toString();
             String ngaykt6= yearE6.getSelectedItem().toString() + "-" + monthE6.getSelectedItem().toString() + "-" + dateE6.getSelectedItem().toString();
+            System.out.print(new DataBase.SQLkyhe().getYearBegin(yearnow));
             if(sosanhngaythang(ngaybd1, ngaykt1)&&sosanhngaythang(ngaykt1, ngaybd2)&&sosanhngaythang(ngaybd2, ngaykt2)&&sosanhngaythang(ngaykt2, ngaybd3)
                     &&sosanhngaythang(ngaybd3, ngaykt3)&&sosanhngaythang(ngaykt3, ngaybd4)
                     &&sosanhngaythang(ngaybd4, ngaykt4)&&sosanhngaythang(ngaykt4, ngaybd5)&&sosanhngaythang(ngaybd5, ngaykt5)
                     &&sosanhngaythang(ngaykt5, ngaybd6)
                     &&sosanhngaythang(ngaybd6, ngaykt6)
-                    &&sosanhnam())
+                    &&sosanhnam()&&XuLy.sosanhngaythang(new DataBase.SQLkyhe().getYearBegin(yearnow), ngaybd1)&&XuLy.sosanhngaythang(ngaykt6,new DataBase.SQLkyhe().getYearEnd(yearnow)))
             {
               
                     

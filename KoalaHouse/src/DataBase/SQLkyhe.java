@@ -73,6 +73,54 @@ public class SQLkyhe {
         }
         return i;
     }
+    public String getYearBegin(String year)
+    {
+        String yearbegin=null;
+        try{
+            
+            rs1=statement.executeQuery("Select StartDate  from projectkoala.semesters where Year = '"+year+"' and SemesterNumber ='1' ");
+            while(rs1.next())
+            {
+                yearbegin=rs1.getString(1);
+            }
+            rs1.close();
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
+            
+            return yearbegin;
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        return yearbegin;
+    }
+     public String getYearEnd(String year)
+    {
+        String yearend=null;
+        try{
+            
+            rs1=statement.executeQuery("select EndDate from projectKoala.semesters where Year = '"+year+"' and SemesterNumber = '5'");
+            while(rs1.next())
+            {
+                yearend=rs1.getString(1);
+            }
+            rs1.close();
+            statement.close();
+            statement2.close();
+            statement3.close();
+            connect.close();
+            
+            return yearend;
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        return yearend;
+    }
     public void BangDanhSachDanKyTuanHe(JTable table,String year)
     {
         try
