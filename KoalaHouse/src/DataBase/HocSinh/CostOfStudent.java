@@ -53,7 +53,7 @@ public class CostOfStudent {
      public void InsertDSPhiCuaHS(int idStudent,String idCost,int idFac){
         String query ="INSERT INTO `projectkoala`.`students_has_cost` (`Students_Id`, `Cost_Id`, `Faculties_Id`, `IsDebt`) VALUES ('"+String.valueOf(idStudent)+"', '"+idCost+"', '"+String.valueOf(idFac)+"', '1');";
         try {
-            PreparedStatement pstmt = connect.prepareStatement(query);
+            PreparedStatement pstmt = connect.prepareStatement(query);            
             pstmt.executeUpdate();
             pstmt.close();
             connect.close();
@@ -61,6 +61,50 @@ public class CostOfStudent {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void InsertPhiToAll(int idStudent,String idCost,int idFac){
+        String query ="INSERT INTO `projectkoala`.`students_has_cost` (`Students_Id`, `Cost_Id`, `Faculties_Id`, `IsDebt`) VALUES ('"+String.valueOf(idStudent)+"', '"+idCost+"', '"+String.valueOf(idFac)+"', '1');";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);            
+            pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     public boolean InsertPhiChoTatCaHocSinh(String idCost,int idFac){
+         boolean check = false;
+         try{
+            rs1 = statement.executeQuery("SELECT count(*) FROM projectkoala.students_has_cost where Cost_Id = "+idCost+";");
+            while(rs1.next()){
+                if(rs1.getInt(1)==0)
+                    check = true;
+            }
+            } catch (SQLException ex) {
+            Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         if(check){
+             ArrayList<Integer> listIDStudent = new ArrayList<Integer>();
+             try{
+            rs1 = statement.executeQuery("SELECT Id FROM projectkoala.students where isactive = 1;");
+            while(rs1.next()){
+                listIDStudent.add(rs1.getInt(1));
+            }
+            statement.close();
+            if(listIDStudent.size()>0){
+                 for(int i=0;i<listIDStudent.size();i++){
+                     InsertPhiToAll(listIDStudent.get(i),idCost, idFac);
+                 }
+             }
+            connect.close();
+            } catch (SQLException ex) {
+            Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         }
+         else{
+             JOptionPane.showMessageDialog(null, "Phí này đã áp dụng cho học sinh nào đó! Không thành công!");
+         }
+         return check;
+     }
     public void DeleteDSPhiCuaHs(int idStudent,int idCost, int idFac){
         String query = "DELETE FROM `projectkoala`.`students_has_cost` WHERE `Students_Id`='"+String.valueOf(idStudent)+"' and`Cost_Id`='"+idCost+"' and`Faculties_Id`='"+idFac+"'";
         try {
@@ -91,7 +135,6 @@ public class CostOfStudent {
             ArrayList<Object []> data = new ArrayList<Object []>();
             System.out.println(students_id+" "+idFac);
             rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" Order by cost.year,cost.Semesters;");
-            System.out.println(""+idFac);
             while(rs1.next()){
                 Object str[] = new Object[6];
                 str[0] = rs1.getString(1);

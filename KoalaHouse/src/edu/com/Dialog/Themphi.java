@@ -8,6 +8,7 @@ import DataBase.HocSinh.CostOfStudent;
 import edu.com.upbang.EditTable;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,6 +54,7 @@ public boolean getButton()//lay xem la create hay cancle
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,13 +94,22 @@ public boolean getButton()//lay xem la create hay cancle
             }
         });
 
+        jButton3.setText("Áp dụng cho tất cả học sinh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
@@ -112,7 +123,8 @@ public boolean getButton()//lay xem la create hay cancle
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(20, 20, 20))
         );
 
@@ -128,6 +140,31 @@ public boolean getButton()//lay xem la create hay cancle
         button= false;
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int count = 0;
+        boolean check = false;
+        for(int i=0;i< jTable1.getRowCount();i++){
+            if(jTable1.getValueAt(i,5).toString().equals("true"))
+                count++;
+        }
+        if(count!=1){
+            JOptionPane.showMessageDialog(null, "Hãy chọn một phí!");
+        }
+        else{
+            for(int i=0;i< jTable1.getRowCount();i++){
+            if(jTable1.getValueAt(i,5).toString().equals("true")){
+                check = new CostOfStudent().InsertPhiChoTatCaHocSinh(jTable1.getValueAt(i,0).toString(), idf);
+                if(check)
+                JOptionPane.showMessageDialog(null,jTable1.getValueAt(i, 1).toString()+ " đã được thêm cho tất cả học sinh.");
+                break;
+            }
+        }
+        }
+        if(check)
+            this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +210,7 @@ public boolean getButton()//lay xem la create hay cancle
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
