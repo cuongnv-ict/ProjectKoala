@@ -142,8 +142,9 @@ public boolean getButton()//lay xem la create hay cancle
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        int count = 0;
+     int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Áp Dụng Phí Này Cho Toàn Bộ?", "",JOptionPane.OK_CANCEL_OPTION);
+        if(click == JOptionPane.YES_OPTION){
+            int count = 0;
         boolean check = false;
         for(int i=0;i< jTable1.getRowCount();i++){
             if(jTable1.getValueAt(i,5).toString().equals("true"))
@@ -164,6 +165,8 @@ public boolean getButton()//lay xem la create hay cancle
         }
         if(check)
             this.dispose();
+        }   
+    // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
