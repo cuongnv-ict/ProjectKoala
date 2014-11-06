@@ -15,6 +15,7 @@ import edu.com.Dialog.DSTaiKhoan;
 import edu.com.Dialog.DangNhapVao;
 import edu.com.Dialog.HoaDon;
 import edu.com.Dialog.InfoFac;
+import edu.com.Dialog.LichSuHoaDon;
 import edu.com.Dialog.Nam;
 import edu.com.Dialog.NhapNghiPhep;
 import edu.com.Dialog.NhapTrongMuon;
@@ -398,6 +399,7 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_DangXuat = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
@@ -854,6 +856,19 @@ public class ListKoala extends javax.swing.JFrame {
         });
         Namhoc.add(CapNhatNamHoc);
 
+        jMenuItem5.setText("Lịch sử hóa đơn");
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem5MouseClicked(evt);
+            }
+        });
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem5);
+
         jMenuItem2.setText("Reset hóa đơn");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1236,7 +1251,6 @@ public class ListKoala extends javax.swing.JFrame {
     private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
         // TODO add your handling code here:
         HoaDon receipts = new HoaDon(this, rootPaneCheckingEnabled);
-        receipts.setAlwaysOnTop(rootPaneCheckingEnabled);
         receipts.setLocation(420, 20);
         receipts.show();
     }//GEN-LAST:event_jLabel27MouseClicked
@@ -1994,6 +2008,18 @@ public class ListKoala extends javax.swing.JFrame {
         infofac.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+
+        
+    }//GEN-LAST:event_jMenuItem5MouseClicked
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        LichSuHoaDon l = new LichSuHoaDon();
+        l.setLocation(200, 100);
+        l.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     private void writeFile() {
         try {
             System.out.println("xoa mk lisstkoala");
@@ -2069,6 +2095,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;

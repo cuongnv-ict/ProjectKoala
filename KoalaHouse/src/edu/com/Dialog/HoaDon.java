@@ -96,6 +96,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         stt.setText(String.valueOf(soHoaDon));
         tenTrungTam.setText(trungTam);
         idTrungTam = HoaDon.idTT;
+        if(idTrungTam==0){
+            idTrungTam = new Get().GetIDFac();
+        }
         idHocSinh = HoaDon.idhs;
         //lay ngay thang nam
             Date aDate = new Date(System.currentTimeMillis());
@@ -776,7 +779,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
         String phantram = "0";
-        new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
+        if(idStudent>0)
+            new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
+        else
+            new HistoryManagerment().InsertLSHoaDonNoIDStudent(idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
         //update xe bus
         new RecieptManagerment().UpdateXeBus(idStudent);
         dispose();

@@ -106,6 +106,66 @@ public class HistoryManagerment {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void BangLichSuHoaDon(JTable table,int nam){
+         try {
+            Object [] nameColumn = {"Số Hóa Đơn", "Người Đóng", "Người Thu", "Số Tiền Thu","Ngày Đóng", "Hình Thức Đóng","Chiết Khấu","Lí Do CK"};
+            ArrayList<Object []> data = new ArrayList<Object []>();
+            int idFac = new Get().GetIDFac();
+            if(nam == 0)
+                rs1 = statement.executeQuery("select * from receipts");
+            else
+                rs1 = statement.executeQuery("select * from receipts");
+            while(rs1.next()){
+                Object str[] = new Object[8];
+                int sott = rs1.getInt(1);
+                String soHoaDon = null;
+                switch(idFac){
+            case 1: soHoaDon = "BT"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 2: soHoaDon = "DQ"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
+            case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
+            }
+                str[0] = soHoaDon;
+                str[1] = rs1.getString(6);
+                str[2] = rs1.getString(7);
+                str[3] = XuLy.setMoney(rs1.getString(8));  
+                str[4] = new XuLiXau().NamThangNgay(rs1.getString(11));
+                switch(rs1.getInt(12)){
+                    case 0:
+                        str[5] = "Tiền mặt";
+                        break;
+                    case 1:
+                        str[5] = "Chuyển khoản";
+                        break;
+                }
+                str[6]= rs1.getString(13);
+                str[7]= rs1.getString(14);
+                data.add(str);
+            }
+            Object [][] rowColumn = new Object[data.size()][];
+            for (int i = 0; i < data.size(); i++) {
+            rowColumn[i] = data.get(i);
+            model = new DefaultTableModel(rowColumn, nameColumn){
+                boolean[] canEdit = new boolean [] {
+                false, false, false, false, false,false,false,false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+            };
+            table.setModel(model);
+        }
+            if(data.size() ==0){
+                model = new DefaultTableModel(nameColumn, 0);
+                table.setModel(model);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void InsertLSHoaDon(int idStudent,String idFac, String NguoiDong,String NguoiThu,String SoTien,String Date,int HinhThucDong,String PhanTram,String LiDo){
         int i = 0;
         try {
@@ -133,6 +193,43 @@ public class HistoryManagerment {
         }
         //update
         String query ="INSERT INTO `projectkoala`.`receipts` (`Id`, `Faculties_Id`, `Accounts_Id`, `Students_Id`, `No`, `NamePayer`, `NameCasher`, `Number`, `CreateDate`, `IsTransfer`, `Percent`, `Reason`) VALUES ('"+i+"', '"+idFac+"', '"+idAccount+"', '"+idStudent+"', '"+i+"', '"+NguoiDong+"', '"+NguoiThu+"', '"+SoTien+"', '"+Date+"', '"+HinhThucDong+"', '"+PhanTram+"', '"+LiDo+"');";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+            statement.close();
+            pstmt.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public void InsertLSHoaDonNoIDStudent(String idFac, String NguoiDong,String NguoiThu,String SoTien,String Date,int HinhThucDong,String PhanTram,String LiDo){
+        int i = 0;
+        try {
+            rs1 = statement.executeQuery("SELECT max(id) FROM receipts;");
+            while(rs1.next()){
+                try{
+                i= Integer.parseInt(rs1.getString(1));
+                i++;
+                }catch(java.lang.NumberFormatException e){
+                    i=1;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //get id account
+        int idAccount=0;
+        try {
+            rs1 = statement.executeQuery("SELECT Id FROM projectkoala.accounts where UserName = \"admin\";");
+            while(rs1.next()){
+                idAccount = rs1.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //update
+        String query ="INSERT INTO `projectkoala`.`receipts` (`Id`, `Faculties_Id`, `Accounts_Id`, `No`, `NamePayer`, `NameCasher`, `Number`, `CreateDate`, `IsTransfer`, `Percent`, `Reason`) VALUES ('"+i+"', '"+idFac+"', '"+idAccount+"', '"+i+"', '"+NguoiDong+"', '"+NguoiThu+"', '"+SoTien+"', '"+Date+"', '"+HinhThucDong+"', '"+PhanTram+"', '"+LiDo+"');";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();
