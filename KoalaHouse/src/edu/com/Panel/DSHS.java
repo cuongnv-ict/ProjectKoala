@@ -42,6 +42,7 @@ public class DSHS extends javax.swing.JPanel {
             Count.setText(String.valueOf(DSHS.getRowCount()));
             XuLy.setID(id_students, DSHS, 0);
         }
+        System.err.println(id_students.get(2));
         arrRows = null;
     }
 
@@ -164,8 +165,19 @@ public class DSHS extends javax.swing.JPanel {
 
     private void DSHSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DSHSMouseClicked
         // TODO add your handling code here:
+
         if (evt.getClickCount() == 2 && LoaiHS.getSelectedIndex() == 0) {
+            int row = DSHS.getSelectedRow();
             //map cac truong
+            
+            int id = id_students.get(row);
+            String tenHocSinh = DSHS.getValueAt(DSHS.getSelectedRow(), 1).toString();
+            //HocSinhA.idTemp = id;
+            HocSinhA aa = new HocSinhA(id);
+            center.add(DSHS.getModel().getValueAt(row, 1).toString(), aa);
+            center.setSelectedComponent(aa);
+            new CloseTabButton(center, center.getComponentCount() - 2);
+            
         } else {
             arrRows = DSHS.getSelectedRows();
         }

@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import DataBase.HocSinh.HistoryManagerment;
 import edu.com.Panel.HocSinhA;
 import edu.com.upbang.AddRowOfTable;
 import edu.com.upbang.EditTable;
@@ -16,9 +17,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Venus
  */
 public class LichSuDongTien2 extends javax.swing.JDialog {
-    public static ArrayList ls = new ArrayList();
-    public static ArrayList temp = new ArrayList();
     public DefaultTableModel model;
+    public static int idStudent;
+    public int id;
+    public boolean check = true;
+    
 
     /**
      * Creates new form LichSuDongTien2
@@ -26,16 +29,9 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
     public LichSuDongTien2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        new DataBase.DataTable().BangLichSuDongTienCuaHocSinh(1, jTable1);
+        id = idStudent;
+         new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id, jTable1);
         model = (DefaultTableModel) jTable1.getModel();
-        for(int i=0;i<ls.size();i++){
-            Vector v= new Vector();
-            v = (Vector) ls.get(i);
-            AddRowOfTable a= new AddRowOfTable();
-            a.addRowOfTable(model, v);
-        }
-        temp.clear();
-        
     }
 
     /**
@@ -49,6 +45,7 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        ls = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,19 +59,47 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        ls.setText("Xem Lịch Sử Hóa Đơn");
+        ls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ls)
+                .addGap(285, 285, 285))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(ls)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lsActionPerformed
+        if(check){
+        new HistoryManagerment().BangLichSuDongTienCuaHocSinh(id, jTable1);
+        ls.setText("Xem Lịch Sử Đóng Phí");
+        check=false;
+        }
+        else{
+            new HistoryManagerment().BangLichSuPhiDongCuaHocSinh(id, jTable1);
+            ls.setText("Xem Lịch Sử Hóa Đơn");
+            check = true;
+        }
+    }//GEN-LAST:event_lsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,5 +145,6 @@ public class LichSuDongTien2 extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton ls;
     // End of variables declaration//GEN-END:variables
 }

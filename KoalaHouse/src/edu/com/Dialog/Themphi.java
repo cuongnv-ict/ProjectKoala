@@ -4,6 +4,7 @@
  */
 package edu.com.Dialog;
 
+import DataBase.HocSinh.CostOfStudent;
 import edu.com.upbang.EditTable;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -17,14 +18,22 @@ import javax.swing.table.DefaultTableModel;
 public class Themphi extends javax.swing.JDialog {
     private boolean button;
     public JTable jTable2;
+    public static int idStudent;
+    public static int idFac;
+    public int ids;
+    public int idf;
     /**
      * Creates new form Themphi
      */
     public Themphi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        new DataBase.DataTable().BangThemHocPhiChoHocSinh(jTable1, 1);
+        ids = idStudent;
+        idf = idFac;
+        new CostOfStudent().BangThemHocPhiChoHocSinh(jTable1, ids,idf);
         jTable2 = jTable1;
+        idStudent = 0;
+        idFac = 0;
     }
 public boolean getButton()//lay xem la create hay cancle
     {

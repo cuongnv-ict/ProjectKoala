@@ -229,25 +229,10 @@ public class LopX extends javax.swing.JPanel {
             int row = lopx.getSelectedRow();
             model.setValueAt(false, row, 6);
             //map cac truong
-            String idStudent = lopx.getValueAt(row, 0).toString();
-            int id = Integer.parseInt(idStudent);
-            DataTable a = new DataTable();
-            ArrayList info, lateday;
-            info = a.HocSinhA1(id);
-            lateday = a.LateDay(id);
-            HocSinhA.tenHS = (String) info.get(1);
-            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
-            HocSinhA.ngaySinh = (String) info.get(2);
-            HocSinhA.SDT = (String) info.get(3);
-            HocSinhA.hinhThucHoc = (String) info.get(7);
-            HocSinhA.lop = (String) info.get(6);
-            HocSinhA.trinhDo = (String) info.get(5);
-            HocSinhA.trungTam = (String) info.get(8);
-            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
-            //add tab
-            HocSinhA aa = new HocSinhA();
-            aa.id = id;
-            aa.lateday = lateday;
+            int id = id_students.get(row);
+            String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
+            //HocSinhA.idTemp = id;
+            HocSinhA aa = new HocSinhA(id);
             center.add(model.getValueAt(row, 1).toString(), aa);
             center.setSelectedComponent(aa);
             new CloseTabButton(center, center.getComponentCount() - 2);
@@ -344,25 +329,10 @@ public class LopX extends javax.swing.JPanel {
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             if ((Boolean) model.getValueAt(i, 6) == true) {
                 model.setValueAt(false, i, 6);
-                String idStudent = lopx.getValueAt(i, 0).toString();
-                int id = Integer.parseInt(idStudent);
-                DataTable a = new DataTable();
-                ArrayList info, lateday;
-                info = a.HocSinhA1(id);
-                lateday = a.LateDay(id);
-                HocSinhA.tenHS = (String) info.get(1);
-                HocSinhA.tenNguoiDaiDien = (String) info.get(4);
-                HocSinhA.ngaySinh = (String) info.get(2);
-                HocSinhA.SDT = (String) info.get(3);
-                HocSinhA.hinhThucHoc = (String) info.get(7);
-                HocSinhA.lop = (String) info.get(6);
-                HocSinhA.trinhDo = (String) info.get(5);
-                HocSinhA.trungTam = (String) info.get(8);
-                HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
-                //add tab
-                HocSinhA aa = new HocSinhA();
-                aa.id = id;
-                aa.lateday = lateday;
+                int id = id_students.get(i);
+                String tenHocSinh = lopx.getValueAt(lopx.getSelectedRow(), 1).toString();
+            //HocSinhA.idTemp = id;
+            HocSinhA aa = new HocSinhA(id);
                 center.add(model.getValueAt(i, 1).toString(), aa);
                 center.setSelectedComponent(aa);
                 new CloseTabButton(center, center.getComponentCount() - 2);

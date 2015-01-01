@@ -109,7 +109,7 @@ public class EditTable {
         for(int i=0;i< tableModel.getRowCount();i++){
             Vector v = new Vector();
             v = (Vector) tableModel.getDataVector().elementAt(i);
-            if((v.get(4).toString())=="true"){
+            if((v.get(5).toString())=="true"){
                a.add(v); 
             }
         }

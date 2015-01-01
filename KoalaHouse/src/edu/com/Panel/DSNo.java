@@ -113,24 +113,11 @@ public class DSNo extends javax.swing.JPanel {
             //map cac truong
             String idStudent = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 0).toString();
             int id = Integer.parseInt(idStudent);
-            DataTable a = new DataTable();
-            ArrayList info,lateday;
-            info = a.HocSinhA1(id);
-            lateday = a.LateDay(id);
-            HocSinhA.tenHS = (String) info.get(1);
-            HocSinhA.tenNguoiDaiDien = (String) info.get(4);
-            HocSinhA.ngaySinh = (String) info.get(2);
-            HocSinhA.SDT = (String) info.get(3);
-            HocSinhA.hinhThucHoc = (String) info.get(7);
-            HocSinhA.lop = (String) info.get(6);
-            HocSinhA.trinhDo = (String) info.get(5);
-            HocSinhA.trungTam = (String) info.get(8);
-            HocSinhA.soNgayTrongMuon = String.valueOf(lateday.size());
-            HocSinhA aa = new HocSinhA();
-            aa.id = id;
-            aa.lateday = lateday;
+            String tenHocSinh = DSHocSinhNo.getValueAt(DSHocSinhNo.getSelectedRow(), 1).toString();
+            //HocSinhA.idTemp = id;
+            HocSinhA aa = new HocSinhA(id);
             //add tab
-            center.add((String) info.get(1), aa);
+            center.add(tenHocSinh, aa);
             center.setSelectedComponent(aa);
         new CloseTabButton(center,center.getComponentCount()-2);
         }

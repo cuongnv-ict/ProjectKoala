@@ -4,6 +4,8 @@
  */
 package edu.com.Dialog;
 
+import DataBase.HocSinh.AStudentAndLateDay;
+
 /**
  *
  * @author Venus
@@ -16,7 +18,7 @@ public class trongmuon extends javax.swing.JDialog {
     public trongmuon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        new DataBase.DataTable().DanhSachTrongMuon(1, BangMuon);
+        new AStudentAndLateDay().DanhSachTrongMuon(1, BangMuon);
     }
 
     /**
