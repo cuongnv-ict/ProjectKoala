@@ -129,6 +129,7 @@ public class SQLHocSinhTheoThang {
                             }
                         }
                     } else {
+                        String sadg = rs1.getString(5);
                         String date[] = rs1.getString(5).split("-");
                         if (Integer.parseInt(date[1]) == thang && Integer.parseInt(date[0]) == nam) {
                             //them hoc sinh nghi

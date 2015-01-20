@@ -81,7 +81,19 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         TenHocSinh.setText(tenHS);
         NguoiDaiDien.setText(tenNguoiDaiDien);
         tenLop.setText(lop);
-        sott = new RecieptManagerment().GetNumberReceipt();
+        //lay ngay thang nam
+            Date aDate = new Date(System.currentTimeMillis());
+            Calendar calendar = GregorianCalendar.getInstance();
+            calendar.setTime(aDate);
+            ngay.setSelectedIndex(calendar.get(Calendar.DATE) -1);
+            thang.setSelectedIndex(calendar.get(Calendar.MONTH));
+            nam.setSelectedIndex(calendar.get(Calendar.YEAR)-2012);
+            nam.setEnabled(false);
+            ArrayList infoFac = new Get().getInFoFac();
+            DiaChi.setText(infoFac.get(0).toString());
+            DienThoaiTrungTam.setText(infoFac.get(1).toString());
+        //set so hoa don
+        sott = new RecieptManagerment().GetNextNumberReceipt(aDate.toString());
         String soHoaDon = null;
         int id_Fac = HoaDon.idTT;
         if(HoaDon.idhs==0){
@@ -100,17 +112,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             idTrungTam = new Get().GetIDFac();
         }
         idHocSinh = HoaDon.idhs;
-        //lay ngay thang nam
-            Date aDate = new Date(System.currentTimeMillis());
-            Calendar calendar = GregorianCalendar.getInstance();
-            calendar.setTime(aDate);
-            ngay.setSelectedIndex(calendar.get(Calendar.DATE) -1);
-            thang.setSelectedIndex(calendar.get(Calendar.MONTH));
-            nam.setSelectedIndex(calendar.get(Calendar.YEAR)-2012);
-            
-            ArrayList infoFac = new Get().getInFoFac();
-            DiaChi.setText(infoFac.get(0).toString());
-            DienThoaiTrungTam.setText(infoFac.get(1).toString());
         //tinh tong tien 
         if(idHocSinh>0){
         new RecieptManagerment().BangDSPhiHoaDon(idhs,idTrungTam, jTable1);
@@ -119,7 +120,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         daThu.setText(TongTien.getText());
         }
         else{
-            
+            model = (DefaultTableModel) jTable1.getModel();
+            daThu.setText("0");
         }
         //xoa du lieu static
         HoaDon.tenHS = "";
@@ -369,7 +371,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
         jLabel8.setText(" năm");
 
-        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050" }));
         nam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namActionPerformed(evt);
@@ -773,16 +775,20 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         int idStudent = idHocSinh;
         String idFac;
         idFac = String.valueOf(idTrungTam);
-        String nguoidong = nguoiNop.getText();
+        String nguoidong = TenHocSinh.getText();
         String nguoithu = nguoiThu.getText();
         String sotien = XuLy.getMoney(daThu.getText());
         String date = nam.getSelectedItem().toString()+"-"+thang.getSelectedItem().toString()+"-"+ngay.getSelectedItem().toString();
         int hinhthucdong = HinhThucDong.getSelectedIndex();
-        String phantram = "0";
-        if(idStudent>0)
-            new HistoryManagerment().InsertLSHoaDon(idStudent, idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
+        String phantram = "";
+        if(hienChietKhau.isSelected())
+            phantram = "1";
         else
-            new HistoryManagerment().InsertLSHoaDonNoIDStudent(idFac, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, lido);
+            phantram = "0";
+        if(idStudent>0)
+            new HistoryManagerment().InsertLSHoaDon(idStudent, idFac,sott, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, tenLop.getText());
+        else
+            new HistoryManagerment().InsertLSHoaDonNoIDStudent(idFac,sott, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, tenLop.getText());
         //update xe bus
         new RecieptManagerment().UpdateXeBus(idStudent);
         dispose();
@@ -831,6 +837,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
     private void hienChietKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hienChietKhauActionPerformed
         //co cho xuat hien chiet khau hay khong
+        try{
         if(hienChietKhau.isSelected()){
             Object[] coldata = new Object[model.getRowCount()];
             for(int j=0;j<coldata.length;j++)
@@ -846,6 +853,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
           model.setColumnCount(4);
         }
         Total();
+        }catch(Exception e){
+            
+        }
     }//GEN-LAST:event_hienChietKhauActionPerformed
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased

@@ -40,12 +40,14 @@ public class RecieptManagerment {
             //Logger.getLogger(RecieptManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public int GetNumberReceipt(){
+    public int GetNextNumberReceipt(String date){
         int num = 0;
         try {
-            rs1 = statement.executeQuery("SELECT max(id) FROM receipts;");
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.receipts where Id = (SELECT max(id) FROM receipts);");
             while(rs1.next()){
-                num = rs1.getInt(1);
+                if(date.substring(0, 4).equals(rs1.getString(11).substring(0, 4))){
+                    num = rs1.getInt(5);
+                }
                 num++;
             }
             statement.close();
