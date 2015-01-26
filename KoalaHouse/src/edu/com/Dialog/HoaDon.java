@@ -224,7 +224,69 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         
     }
     }
-
+    public void totalWhenNoStudent(){
+        model = (DefaultTableModel) jTable1.getModel();
+                long Total = 0;
+        try{
+        for(int i=0;i<model.getRowCount();i++){
+            String tenPhi = "";
+            if(model.getValueAt(i, 1)!=null)
+                tenPhi = model.getValueAt(i, 1).toString();
+            if(tenPhi.length()==0)
+                break;
+            tenPhi = tenPhi.toLowerCase();
+            if(hienChietKhau.isSelected()){
+                long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                int ck = 0;
+                if(model.getValueAt(i, 4).toString().length()>0){
+                    ck = Integer.parseInt(model.getValueAt(i, 4).toString());
+                }
+                long ti = (t*(100-ck))/100;
+                if(tenPhi.indexOf("hoàn")== -1)
+                    Total += ti;
+                else
+                    Total -= ti;
+            }
+            else{
+            if(model.getValueAt(i, 3).toString().length()>0){
+                if(tenPhi.indexOf("hoàn")== -1)
+                    Total += Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                else
+                    Total -= Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+            }
+            }
+        }
+        TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
+        String tienbc = convert.chuyentien(TongTien.getText());
+        //viet hoa chu cai dau
+        char[] head = new char[1];
+        head[0] = tienbc.charAt(0);
+        String h = new String(head);
+        h = h.toUpperCase();
+        tienbc = tienbc.substring(1);
+        tienbc = h + tienbc;
+        stbc.setText("Số tiền bằng chữ: "+tienbc);
+        }
+        catch(java.lang.NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Gặp Vấn Đề Khi Tính Tổng Số Tiền");
+        }
+        //tinh lai so tien
+        if(hienChietKhau.isSelected()){
+            for(int i=0;i<model.getRowCount();i++){
+                long t = Integer.parseInt(XuLy.getMoney(model.getValueAt(i, 3).toString()));
+                int ck = 0;
+                if(model.getValueAt(i, 4).toString().length()>0){
+                    ck = Integer.parseInt(model.getValueAt(i, 4).toString());
+                }
+                long ti = (t*(100-ck))/100;
+                String sotien = XuLy.setMoney(String.valueOf(ti));
+                model.setValueAt(sotien, i, 3);
+            }
+        }
+        else{
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -582,7 +644,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -816,12 +877,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
-         for(int i=0;i<model.getRowCount();i++){
-                model.setValueAt(str[i], i, 3);
-            }
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            Total();
-        }
+//         for(int i=0;i<model.getRowCount();i++){
+//                model.setValueAt(str[i], i, 3);
+//            }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            Total();
+//        }
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void daThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daThuActionPerformed
@@ -860,11 +921,16 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         // TODO add your handling code here:
-         for(int i=0;i<model.getRowCount();i++){
+        if(idHocSinh>0){
+           for(int i=0;i<model.getRowCount();i++){
                 model.setValueAt(str[i], i, 3);
-            }
+            } 
+        }
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             Total();
+            if(idHocSinh==0){
+                totalWhenNoStudent();
+            }
         }
     }//GEN-LAST:event_jTable1KeyReleased
 

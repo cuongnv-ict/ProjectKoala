@@ -158,7 +158,9 @@ public boolean getButton()//lay xem la create hay cancle
             if(jTable1.getValueAt(i,5).toString().equals("true")){
                 check = new CostOfStudent().InsertPhiChoTatCaHocSinh(jTable1.getValueAt(i,0).toString(), idf);
                 if(check)
-                JOptionPane.showMessageDialog(null,jTable1.getValueAt(i, 1).toString()+ " đã được thêm cho tất cả học sinh.");
+                    JOptionPane.showMessageDialog(null,jTable1.getValueAt(i, 1).toString()+ " đã được thêm cho tất cả học sinh.");
+                else
+                    JOptionPane.showMessageDialog(null, "Không có học sinh nào chưa đóng phí này!");
                 break;
             }
         }

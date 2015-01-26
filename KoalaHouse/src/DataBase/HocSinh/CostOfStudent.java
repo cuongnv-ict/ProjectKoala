@@ -73,24 +73,17 @@ public class CostOfStudent {
     }
      public boolean InsertPhiChoTatCaHocSinh(String idCost,int idFac){
          boolean check = false;
-         try{
-            rs1 = statement.executeQuery("SELECT count(*) FROM projectkoala.students_has_cost where Cost_Id = "+idCost+";");
-            while(rs1.next()){
-                if(rs1.getInt(1)==0)
-                    check = true;
-            }
-            } catch (SQLException ex) {
-            Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         if(check){
              ArrayList<Integer> listIDStudent = new ArrayList<Integer>();
              try{
-            rs1 = statement.executeQuery("SELECT Id FROM projectkoala.students where isactive = 1;");
+            rs1 = statement.executeQuery("SELECT Id FROM projectkoala.students where isactive = 1 and Id not in\n" +
+"(SELECT Students_Id FROM projectkoala.students_has_cost\n" +
+"where Faculties_Id = "+idFac+" and Cost_Id ="+idCost+" );");
             while(rs1.next()){
                 listIDStudent.add(rs1.getInt(1));
             }
             statement.close();
             if(listIDStudent.size()>0){
+                check = true;
                  for(int i=0;i<listIDStudent.size();i++){
                      InsertPhiToAll(listIDStudent.get(i),idCost, idFac);
                  }
@@ -99,10 +92,6 @@ public class CostOfStudent {
             } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
-         }
-         else{
-             JOptionPane.showMessageDialog(null, "Phí này đã áp dụng cho học sinh nào đó! Không thành công!");
-         }
          return check;
      }
     public void DeleteDSPhiCuaHs(int idStudent,int idCost, int idFac){

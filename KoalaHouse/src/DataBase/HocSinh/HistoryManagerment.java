@@ -109,7 +109,8 @@ public class HistoryManagerment {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void BangLichSuHoaDon(JTable table,int nam){
+    public ArrayList BangLichSuHoaDon(JTable table,int nam){
+        ArrayList listId = new ArrayList();
           try {
             Object [] nameColumn = {"Số Hóa Đơn", "Học sinh","Lớp", "Người Thu", "Số Tiền Thu","Ngày Đóng", "Hình Thức Đóng","Chiết Khấu"};
             ArrayList<Object []> data = new ArrayList<Object []>();
@@ -117,9 +118,10 @@ public class HistoryManagerment {
           if(nam == 0)  
             rs1 = statement.executeQuery("select * from receipts order by Id DESC;");
           else
-            rs1 = statement.executeQuery("select * from receipts order by Id DESC;");
+            rs1 = statement.executeQuery("select * from receipts where CreateDate >'"+(nam-1)+"-12-31' and CreateDate < '"+(nam+1)+"-01-01' order by Id DESC;");
             while(rs1.next()){
                 Object str[] = new Object[8];
+                listId.add(rs1.getInt(1));
                 int sott = rs1.getInt(5);
                 String soHoaDon = null;
                 switch(idFac){
@@ -171,6 +173,7 @@ public class HistoryManagerment {
         } catch (SQLException ex) {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
+          return listId;
     }
     public void InsertLSHoaDon(int idStudent,String idFac,int NOofReciept, String tenHS,String NguoiThu,String SoTien,String Date,int HinhThucDong,String PhanTram,String lop){
         int i = 0;

@@ -15,6 +15,7 @@ import edu.com.Dialog.ChiTietNghiPhep;
 import edu.com.Dialog.HoaDon;
 import edu.com.ThongBaoKyHe.ThongBaoKyGeVer2;
 import edu.com.Dialog.LichSuDongTien2;
+import edu.com.Dialog.NgayHoc;
 import edu.com.Dialog.Themphi;
 import edu.com.Dialog.ThongBao;
 import edu.com.Dialog.chiTietTrongMuon2;
@@ -919,10 +920,15 @@ public class HocSinhA extends javax.swing.JPanel {
 
         int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Cho Học Sinh Này Thôi Học?", "",JOptionPane.OK_CANCEL_OPTION);
         if(click == JOptionPane.YES_OPTION){
-            new AStudentAndLateDay().ThoiHoc(id, idTrungTam);
-            JOptionPane.showMessageDialog(Panel_hocsinhA, "Học Sinh Này Đã Bị Thôi Học");
-            thoiHoc.setText("Đã Thôi Học");
-            thoiHoc.setEnabled(false);
+//            new AStudentAndLateDay().ThoiHoc(id, idTrungTam);
+//            JOptionPane.showMessageDialog(Panel_hocsinhA, "Học Sinh Này Đã Bị Thôi Học");
+            NgayHoc ngayhoc = new NgayHoc(null, true, false);
+                ngayhoc.setVisible(true);
+                if (ngayhoc.getFlags()) {
+                    new DataBase.SQLLopX().xoaHocSinh(id, ngayhoc.getDate());
+                    thoiHoc.setText("Đã Thôi Học");
+                    thoiHoc.setEnabled(false);
+                }
         }
     }//GEN-LAST:event_thoiHocActionPerformed
 

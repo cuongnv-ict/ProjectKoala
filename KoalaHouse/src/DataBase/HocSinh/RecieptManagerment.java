@@ -48,8 +48,8 @@ public class RecieptManagerment {
                 if(date.substring(0, 4).equals(rs1.getString(11).substring(0, 4))){
                     num = rs1.getInt(5);
                 }
-                num++;
             }
+            num++;
             statement.close();
             connect.close();
         } catch (SQLException ex) {
@@ -787,8 +787,8 @@ public class RecieptManagerment {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public void ResetReciept(){
-        String query = "DELETE FROM `projectkoala`.`receipts`";
+     public void ResetReciept(int id){
+        String query = "DELETE FROM `projectkoala`.`receipts` where Id = "+id+"";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

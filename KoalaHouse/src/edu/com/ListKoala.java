@@ -22,6 +22,7 @@ import edu.com.Dialog.NhapTrongMuon;
 import edu.com.Dialog.TaoTaiKhoan;
 import edu.com.Dialog.ThemKhoi;
 import edu.com.Dialog.ThemSuaLop;
+import edu.com.Dialog.ThongKe;
 import edu.com.Panel.CacLoaiPhi;
 import edu.com.Panel.DKHocHe;
 import edu.com.Panel.DSDongDu;
@@ -396,14 +397,14 @@ public class ListKoala extends javax.swing.JFrame {
         Menu_ThemTaiKhoan = new javax.swing.JMenuItem();
         Menu_SuaTaiKhoan = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        Menu_DangXuat = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        CapNhatNamHoc = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        CapNhatNamHoc = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        Menu_DangXuat = new javax.swing.JMenuItem();
         Menu_thoat = new javax.swing.JMenuItem();
 
         them.setText("them");
@@ -832,29 +833,13 @@ public class ListKoala extends javax.swing.JFrame {
 
         Namhoc.add(Menu_TaiKhoan);
 
-        Menu_DangXuat.setText("Đăng xuất");
-        Menu_DangXuat.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem6.setText("Thống kê hóa đơn theo ngày");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_DangXuatActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        Namhoc.add(Menu_DangXuat);
-
-        jMenuItem1.setText("Đồng bộ dữ liệu");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        Namhoc.add(jMenuItem1);
-
-        CapNhatNamHoc.setText("Cập nhật năm học");
-        CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CapNhatNamHocActionPerformed(evt);
-            }
-        });
-        Namhoc.add(CapNhatNamHoc);
+        Namhoc.add(jMenuItem6);
 
         jMenuItem5.setText("Lịch sử hóa đơn");
         jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -869,13 +854,13 @@ public class ListKoala extends javax.swing.JFrame {
         });
         Namhoc.add(jMenuItem5);
 
-        jMenuItem2.setText("Reset hóa đơn");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        CapNhatNamHoc.setText("Cập nhật năm học");
+        CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                CapNhatNamHocActionPerformed(evt);
             }
         });
-        Namhoc.add(jMenuItem2);
+        Namhoc.add(CapNhatNamHoc);
 
         jMenuItem3.setText("Sinh nhật");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -898,6 +883,14 @@ public class ListKoala extends javax.swing.JFrame {
         });
         Namhoc.add(hs_phi);
 
+        jMenuItem1.setText("Đồng bộ dữ liệu");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem1);
+
         jMenuItem4.setText("Thông tin trung tâm");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -905,6 +898,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(jMenuItem4);
+
+        Menu_DangXuat.setText("Đăng xuất");
+        Menu_DangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_DangXuatActionPerformed(evt);
+            }
+        });
+        Namhoc.add(Menu_DangXuat);
 
         Menu_thoat.setText("Thoát");
         Menu_thoat.addActionListener(new java.awt.event.ActionListener() {
@@ -1829,14 +1830,6 @@ public class ListKoala extends javax.swing.JFrame {
         nhapNghiPhep.setVisible(true);
     }//GEN-LAST:event_hs_thang1MouseClicked
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Xóa Hết Dữ Liệu Hóa Đơn?", "", JOptionPane.OK_CANCEL_OPTION);
-        if (click == JOptionPane.YES_OPTION) {
-            new RecieptManagerment().ResetReciept();
-            JOptionPane.showMessageDialog(null, "Tất Cả Dữ Liệu Hóa Đơn Đã Bị Xóa");
-        }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private int nRow;
     private int nCol;
     private Object[][] tableData;
@@ -2020,6 +2013,12 @@ public class ListKoala extends javax.swing.JFrame {
         l.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        ThongKe tk = new ThongKe(null,true);
+        tk.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     private void writeFile() {
         try {
             System.out.println("xoa mk lisstkoala");
@@ -2092,10 +2091,10 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
