@@ -503,8 +503,8 @@ public class DSXeBus extends javax.swing.JDialog {
             //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
             if(idstudent!=0)
             {
-                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
-                {
+//                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
+//                {
                     if(XuLy.sosanhngaythang(yearstart, datebd)&&XuLy.sosanhngaythang(datekt, yearend))
                     {
                         DataBase.SQLXeBus data = new DataBase.SQLXeBus();
@@ -516,12 +516,12 @@ public class DSXeBus extends javax.swing.JDialog {
                     {
                         JOptionPane.showMessageDialog(null,"ngày tháng bắt đầu và kết thúc phải nằm trong năm học hiện tại",null,JOptionPane.INFORMATION_MESSAGE);
                     }
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
-
-                }
+//                }
+//                else
+//                {
+//                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
+//
+//                }
             }
             else
             {
@@ -604,8 +604,8 @@ public class DSXeBus extends javax.swing.JDialog {
             //new DataBase.SQLXeBus().themxebus(idstudent,Integer.parseInt(luotdi.getSelectedItem().toString()),ghichu.getText() ,Integer.parseInt(tienxe.getText()),diachi.getText());
             if(idstudent!=0)
             {
-                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
-                {
+//                if((new DataBase.SQLXeBus().getIsActiveStudent(nameStudent, nameClass))==0)
+//                {
                      if(XuLy.sosanhngaythang(yearstart, datebd)&&XuLy.sosanhngaythang(datekt, yearend))
                     {
                         DataBase.SQLXeBus data = new DataBase.SQLXeBus();
@@ -617,12 +617,12 @@ public class DSXeBus extends javax.swing.JDialog {
                     {
                         JOptionPane.showMessageDialog(null,"ngày tháng bắt đầu và kết thúc phải nằm trong năm học hiện tại",null,JOptionPane.INFORMATION_MESSAGE);
                     }
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
-
-                }
+//                }
+//                else
+//                {
+//                    JOptionPane.showMessageDialog(null,"Bạn không thể thêm học sinh đã có trong danh sách và chưa được thanh toán. \n Để thêm học sinh này cần xóa học sinh cũ hoặc thanh toán tiền còn đang nợ!",null,JOptionPane.INFORMATION_MESSAGE);
+//
+//                }
             }
             else
             {
