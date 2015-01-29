@@ -120,7 +120,7 @@ public class LichSuHoaDon extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String mk = matKhau.getText();
-        if(mk.equals("matkhau")){
+        if(mk.equals("koalahouse123")){
             int nam = chonNam.getSelectedIndex()+2012;
             if(nam==2012){
                 JOptionPane.showMessageDialog(null, "Không được xóa tất cả các năm!");
