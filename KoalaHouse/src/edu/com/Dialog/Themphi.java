@@ -6,6 +6,7 @@ package edu.com.Dialog;
 
 import DataBase.HocSinh.CostOfStudent;
 import edu.com.upbang.EditTable;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -31,8 +32,7 @@ public class Themphi extends javax.swing.JDialog {
         initComponents();
         ids = idStudent;
         idf = idFac;
-        System.out.println("trung tam: "+idFac);
-        new CostOfStudent().BangThemHocPhiChoHocSinh(jTable1, ids,idf);
+        new CostOfStudent().BangThemHocPhiChoHocSinh(jTable1, ids,idf,"");
         jTable2 = jTable1;
         idStudent = 0;
         idFac = 0;
@@ -55,6 +55,7 @@ public boolean getButton()//lay xem la create hay cancle
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        searchTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -101,6 +102,19 @@ public boolean getButton()//lay xem la create hay cancle
             }
         });
 
+        searchTF.setText("Nhập nội dung và ấn Enter...");
+        searchTF.setToolTipText("Nếu không muốn tìm kiếm thì xóa hết kí tự và Enter");
+        searchTF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchTFMouseClicked(evt);
+            }
+        });
+        searchTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchTFKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,6 +123,8 @@ public boolean getButton()//lay xem la create hay cancle
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton3)
+                .addGap(65, 65, 65)
+                .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -124,7 +140,8 @@ public boolean getButton()//lay xem la create hay cancle
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -170,6 +187,18 @@ public boolean getButton()//lay xem la create hay cancle
         }   
     // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void searchTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTFKeyReleased
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            new CostOfStudent().BangThemHocPhiChoHocSinh(jTable1, ids,idf,searchTF.getText());
+        }
+    }//GEN-LAST:event_searchTFKeyReleased
+
+    private void searchTFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTFMouseClicked
+        if(searchTF.getText().equals("Nhập nội dung và ấn Enter...")){
+            searchTF.setText("");
+        }
+    }//GEN-LAST:event_searchTFMouseClicked
 
     /**
      * @param args the command line arguments
@@ -218,5 +247,6 @@ public boolean getButton()//lay xem la create hay cancle
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField searchTF;
     // End of variables declaration//GEN-END:variables
 }

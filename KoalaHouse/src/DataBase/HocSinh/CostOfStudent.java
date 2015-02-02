@@ -20,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,14 +118,17 @@ public class CostOfStudent {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void BangThemHocPhiChoHocSinh(JTable table,int students_id,int idFac){
+    public void BangThemHocPhiChoHocSinh(JTable table,int students_id,int idFac,String search){
         int yearActive = 0;
         yearActive = new Get().getYearActive(idFac);
         try {
             Object [] nameColumn = {"Mã","Tên","Kì học","Năm học","Giá","Đánh dấu" };
             ArrayList<Object []> data = new ArrayList<Object []>();
             System.out.println(students_id+" "+idFac);
-            rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" Order by cost.year,cost.Semesters;");
+            if(search.equals(""))
+                rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" Order by cost.year,cost.Semesters;");
+            else
+                rs1 = statement.executeQuery("select * from cost where id not in(select cost_id from students_has_cost where students_id = "+students_id+") and Faculties_Id = "+idFac+" and cost.year >= "+yearActive+" and NameCost like '%"+search+"%' Order by cost.year,cost.Semesters;");
             while(rs1.next()){
                 Object str[] = new Object[6];
                 str[0] = rs1.getString(1);
@@ -168,6 +173,9 @@ public class CostOfStudent {
                 str[5] = false;
                 data.add(str);
             }
+            //sap xep lai theo ten
+            Collections.sort(data, new AddCostComparator());
+            //----------------
             Object [][] rowColumn = new Object[data.size()][];
             for (int i = 0; i < data.size(); i++) {
             rowColumn[i] = data.get(i);
@@ -343,6 +351,38 @@ public class CostOfStudent {
             connect.close();
         } catch (SQLException ex) {
             Logger.getLogger(CostOfStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+class AddCostComparator implements Comparator<Object[]> {
+
+    public int compare(Object[] o1, Object[] o2) {
+        if (!o1[2].equals(o2[2])) {
+            return 0;
+        }
+        if (!o1[3].equals(o2[3])) {
+            return 0;
+        }
+        String age1 = (String) o1[1];
+        age1 = age1.toLowerCase();
+        String[] x = age1.split(" ");
+        String age2 = (String) o2[1];
+        age2 = age2.toLowerCase();
+        String[] y = age2.split(" ");
+        String name1 = x[0];
+        String name2 = y[0];
+        if (name1.compareTo(name2) >= 1) {
+            return 1;
+        } else if (name1.compareTo(name2) == 0) {
+            if (age1.compareTo(age2) >= 1) {
+                return 1;
+            } else if (age1.compareTo(age2) == 0) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
         }
     }
 }
