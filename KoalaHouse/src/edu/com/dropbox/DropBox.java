@@ -286,13 +286,21 @@ public class DropBox extends javax.swing.JDialog {
     }//GEN-LAST:event_codeDropActionPerformed
 
     private void uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadActionPerformed
-        f_up = true;
-        jProgressBar1.setIndeterminate(true);
+
+        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Lưu Dữ Liệu Lên Dropbox Không?", "", JOptionPane.OK_CANCEL_OPTION);
+                if (click == JOptionPane.YES_OPTION) {
+                    f_up = true;
+                    jProgressBar1.setIndeterminate(true);
+                }
     }//GEN-LAST:event_uploadActionPerformed
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadActionPerformed
-        f_dow = true;
-        jProgressBar1.setIndeterminate(true);
+        
+        int click = JOptionPane.showConfirmDialog(null, "Bạn Chắc Muốn Đồng Bộ Dữ Liệu Từ Dropbox Không?", "", JOptionPane.OK_CANCEL_OPTION);
+                if (click == JOptionPane.YES_OPTION) {
+                    f_dow = true;
+                    jProgressBar1.setIndeterminate(true);
+                }
     }//GEN-LAST:event_downloadActionPerformed
 
     /**
