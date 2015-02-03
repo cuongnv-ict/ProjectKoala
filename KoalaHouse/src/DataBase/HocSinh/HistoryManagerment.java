@@ -65,6 +65,14 @@ public class HistoryManagerment {
             case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
             case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
             }
+                if(rs1.getInt(12)==1){
+                    switch(idFac){
+                        case 1: soHoaDon = "BT_CK";break;
+                        case 2: soHoaDon = "DQ_CK";break;
+                        case 3: soHoaDon = "KB_CK";break;
+                        case 4: soHoaDon = "HT_CK";break;
+                    }
+                }
                 str[0] = soHoaDon;
                 str[1] = rs1.getString(6);
                 str[2] = rs1.getString(14);
@@ -130,6 +138,14 @@ public class HistoryManagerment {
             case 3: soHoaDon = "KB"+XuLy.getNumber4(String.valueOf(sott));break;
             case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
             }
+                if(rs1.getInt(12)==1){
+                    switch(idFac){
+                        case 1: soHoaDon = "BT_CK";break;
+                        case 2: soHoaDon = "DQ_CK";break;
+                        case 3: soHoaDon = "KB_CK";break;
+                        case 4: soHoaDon = "HT_CK";break;
+                    }
+                }
                 str[0] = soHoaDon;
                 str[1] = rs1.getString(6);
                 str[2] = rs1.getString(14);

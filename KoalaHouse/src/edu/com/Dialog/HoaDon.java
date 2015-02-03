@@ -846,6 +846,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             phantram = "1";
         else
             phantram = "0";
+        if(HinhThucDong.getSelectedIndex()==1){
+            sott = sott - 1;
+        }
         if(idStudent>0)
             new HistoryManagerment().InsertLSHoaDon(idStudent, idFac,sott, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, tenLop.getText());
         else

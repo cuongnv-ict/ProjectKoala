@@ -68,6 +68,14 @@ public class ThongKeHoaDon {
                             str[0] = "HT" + XuLy.getNumber4(String.valueOf(rs1.getString(1)));
                             break;
                     }
+                    if(rs1.getInt(5)==1){
+                    switch(ThongTin.trungtam){
+                        case 1: str[0] = "BT_CK";break;
+                        case 2: str[0] = "DQ_CK";break;
+                        case 3: str[0] = "KB_CK";break;
+                        case 4: str[0] = "HT_CK";break;
+                    }
+                }
                     str[1] = rs1.getString(2);
                     str[2] = rs1.getString(6);
                     str[3] = rs1.getString(3);
