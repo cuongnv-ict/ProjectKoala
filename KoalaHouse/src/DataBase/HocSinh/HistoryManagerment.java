@@ -117,6 +117,22 @@ public class HistoryManagerment {
             Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public int GetSoHoaDon(String year){
+    int nam = Integer.parseInt(year);
+    int soHoaDon =0;
+        try {
+            rs1 = statement.executeQuery("select count(Id) from receipts where CreateDate >'"+(nam-1)+"-12-31' and CreateDate < '"+(nam+1)+"-01-01';");
+            if(rs1!= null)
+            while(rs1.next()){
+                soHoaDon = rs1.getInt(1);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryManagerment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return soHoaDon;
+}
     public ArrayList BangLichSuHoaDon(JTable table,int nam){
         ArrayList listId = new ArrayList();
           try {

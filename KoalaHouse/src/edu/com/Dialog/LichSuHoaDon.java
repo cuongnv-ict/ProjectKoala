@@ -69,6 +69,11 @@ public class LichSuHoaDon extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Xóa lịch sử hóa đơn năm này");
@@ -138,6 +143,22 @@ public class LichSuHoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Mật khẩu không chính xác!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount()==2){
+            if(chonNam.getSelectedIndex()==0){
+                return;
+            }
+            HoaDon receipts = new HoaDon(this, rootPaneCheckingEnabled);
+            int count = 0;
+            count = new HistoryManagerment().GetSoHoaDon(chonNam.getSelectedItem().toString());
+            receipts.readFile(chonNam.getSelectedItem().toString(), count - jTable1.getSelectedRow()-1);
+            receipts.setLocation(420, 20);
+            this.dispose();
+            receipts.show();
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

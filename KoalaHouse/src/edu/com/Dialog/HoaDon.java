@@ -30,6 +30,13 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -70,6 +77,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public int sott;
     public int idHocSinh = 0;
     String[] str;
+    public boolean inLai = false;
     Convert convert = new Convert();
     
     /**
@@ -285,6 +293,107 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         else{
             
+        }
+    }
+    private void writeFileSave(){
+        try{
+            File dir1 = new File("storageHD");
+            if(!dir1.exists()){
+                dir1.mkdir();
+            }
+            File dir2 = new File("storageHD/"+nam.getSelectedItem().toString());
+            if(!dir2.exists()){
+                dir2.mkdir();
+            }
+            int count = 0;
+            count = new HistoryManagerment().GetSoHoaDon(nam.getSelectedItem().toString());
+            File file = new File("storageHD/"+nam.getSelectedItem().toString()+"/el"+count+".rep");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter br = new BufferedWriter(fw);
+            //----------bat dau ghi file-------------- 
+            //dau tien ghi thong tin linh tinh
+            String conten1 = ngay.getSelectedIndex()+ "#00#" + thang.getSelectedIndex()+ "#00#" + nam.getSelectedIndex()+ "#00#";
+            conten1 = conten1 +stt.getText()+"#00#"+TenHocSinh.getText()+"#00#"+ tenTrungTam.getText()+ "#00#" +NguoiDaiDien.getText()+ "#00#" +tenLop.getText()+ "#00#";
+            conten1 = conten1 + HinhThucDong.getSelectedIndex()+"#00#"+TongTien.getText()+"#00#"+daThu.getText()+"#00#"+nguoiNop.getText()+"#00#"+nguoiThu.getText()+"#00#"+stbc.getText()+"\r\n";
+            br.write(conten1);
+            br.write("#000000$#"+"\r\n");
+            //bay gio la ghi du lieu cua bang
+            for(int i=0;i<jTable1.getRowCount();i++){
+                String dong = "";
+                for(int j=0;j<jTable1.getColumnCount();j++){
+                    dong = dong + jTable1.getValueAt(i, j)+"#00#";
+                }
+                if(dong.equals("null#00#null#00#null#00#null#00#")||dong.equals("null#00#null#00#null#00#null#00#null#00#"))
+                    continue;
+                else
+                    br.write(dong +"\r\n");
+            }
+            br.write("#000000$#"+"\r\n");
+        //--------ket thuc ghi file----------------    
+            br.close();
+            fw.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error to save file");
+        }
+    }
+    public void readFile(String year,int soHoaDon){
+        try{
+            FileReader fr = new FileReader("storageHD\\"+year+"\\el"+soHoaDon+".rep");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            //doc thong tin linh tinh
+            line = br.readLine();
+            String[] thongTin = line.split("\\#00\\#");
+            ngay.setSelectedIndex(Integer.parseInt(thongTin[0]));ngay.setEnabled(false);
+            thang.setSelectedIndex(Integer.parseInt(thongTin[1]));thang.setEnabled(false);
+            nam.setSelectedIndex(Integer.parseInt(thongTin[2]));
+            stt.setText(thongTin[3]);
+            TenHocSinh.setText(thongTin[4]);TenHocSinh.setEnabled(false);
+            tenTrungTam.setText(thongTin[5]);tenTrungTam.setEnabled(false);
+            NguoiDaiDien.setText(thongTin[6]);NguoiDaiDien.setEnabled(false);
+            tenLop.setText(thongTin[7]);tenLop.setEnabled(false);
+            HinhThucDong.setSelectedIndex(Integer.parseInt(thongTin[8]));
+            TongTien.setText(thongTin[9]);TongTien.setEnabled(false);
+            daThu.setText(thongTin[10]);daThu.setEnabled(false);
+            nguoiNop.setText(thongTin[11]);nguoiNop.setEnabled(false);
+            nguoiThu.setText(thongTin[12]);nguoiThu.setEnabled(false);
+            stbc.setText(thongTin[13]);
+            line = br.readLine();
+            int rowIndex = 0;
+            ArrayList cot5 = new ArrayList();
+            while((line = br.readLine())!=null){
+                if(line.equals("#000000$#")) break;
+                String[] dong = line.split("\\#00\\#");
+                System.out.println(line);
+                System.out.println(dong[0]);
+                jTable1.setValueAt(dong[0], rowIndex,0);
+                jTable1.setValueAt(dong[1], rowIndex,1);
+                jTable1.setValueAt(dong[2], rowIndex,2);
+                jTable1.setValueAt(dong[3], rowIndex,3);
+                rowIndex++;
+                if(dong.length==5){
+                    cot5.add(dong[4]);
+                }
+            }
+            hienChietKhau.setEnabled(false);
+            if(cot5.size()>0){
+               hienChietKhau.setSelected(true);
+                model = (DefaultTableModel) jTable1.getModel();
+                Object[] coldata = new Object[rowIndex];
+                for(int j=0;j<coldata.length;j++)
+                    coldata[j] = cot5.get(j).toString();
+                model.addColumn("Chiết Khấu(%)",coldata);
+            }
+            jTable1.setEnabled(false);
+            br.close();
+            fr.close();
+            inLai = true;
+        }
+        catch(Exception e){
+            System.out.println("Error!!");
+            JOptionPane.showMessageDialog(null, "Hóa đơn này chưa được lưu lại!");
         }
     }
     /**
@@ -827,7 +936,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         }
         
         if(toPrint){
-        
+        if(!inLai){
+        writeFileSave();
         if(debt>=0){
             new AStudentAndLateDay().InsertDebt(idHocSinh, idTrungTam, debt);
         }
@@ -855,6 +965,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             new HistoryManagerment().InsertLSHoaDonNoIDStudent(idFac,sott, nguoidong, nguoithu, sotien, date, hinhthucdong, phantram, tenLop.getText());
         //update xe bus
         new RecieptManagerment().UpdateXeBus(idStudent);
+        }
         dispose();
         }
         jButton1.setVisible(true);
