@@ -28,6 +28,7 @@ import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -37,6 +38,8 @@ import javax.swing.table.DefaultTableModel;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -163,8 +166,8 @@ public class ThongBaoKy2 extends javax.swing.JFrame implements Printable {
     }
 private void readFile(){
         try{
-            FileReader fr = new FileReader("thongbaoky.txt");
-            BufferedReader br = new BufferedReader(fr);
+            File fr = new File("thongbaoky.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF8"));
             String line;
             line = br.readLine();jTextField11.setText(line);
             line = br.readLine();
@@ -179,7 +182,6 @@ private void readFile(){
                 jTextArea2.append(line + "\n");
             }
             br.close();
-            fr.close();
         }
         catch(Exception e){
         }
@@ -189,7 +191,7 @@ private void readFile(){
             File file = new File("thongbaoky.txt");
             file.createNewFile();
             FileWriter fw = new FileWriter(file);
-            BufferedWriter br = new BufferedWriter(fw);
+            BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF8"));
             //----------bat dau ghi file-------------- 
             //dau tien la ghi han nop
             String hannop = jTextField11.getText()+ "\r\n";
@@ -249,6 +251,7 @@ private void readFile(){
             else{ 
             }
         //--------ket thuc ghi file----------------    
+            br.flush();
             br.close();
             fw.close();
         }

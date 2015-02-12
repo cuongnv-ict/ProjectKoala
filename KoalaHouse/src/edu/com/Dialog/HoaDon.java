@@ -33,9 +33,12 @@ import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -310,7 +313,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             File file = new File(System.getProperty("user.dir")+"/storageHD/"+nam.getSelectedItem().toString()+"/el"+count+".rep");
             file.createNewFile();
             FileWriter fw = new FileWriter(file);
-            BufferedWriter br = new BufferedWriter(fw);
+            BufferedWriter br = new BufferedWriter(new OutputStreamWriter(
+			new FileOutputStream(file), "UTF8"));
             //----------bat dau ghi file-------------- 
             //dau tien ghi thong tin linh tinh
             String conten1 = ngay.getSelectedIndex()+ "#00#" + thang.getSelectedIndex()+ "#00#" + nam.getSelectedIndex()+ "#00#";
@@ -331,6 +335,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
             br.write("#000000$#"+"\r\n");
         //--------ket thuc ghi file----------------    
+            br.flush();
             br.close();
             fw.close();
         }
@@ -340,8 +345,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }
     public void readFile(String year,int soHoaDon){
         try{
-            FileReader fr = new FileReader(System.getProperty("user.dir")+"\\storageHD\\"+year+"\\el"+soHoaDon+".rep");
-            BufferedReader br = new BufferedReader(fr);
+            //FileReader fr = new FileReader(System.getProperty("user.dir")+"\\storageHD\\"+year+"\\el"+soHoaDon+".rep");
+            File fileDir = new File(System.getProperty("user.dir")+"\\storageHD\\"+year+"\\el"+soHoaDon+".rep");
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir),"UTF8"));
             String line;
             //doc thong tin linh tinh
             line = br.readLine();
@@ -388,7 +394,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
             jTable1.setEnabled(false);
             br.close();
-            fr.close();
             inLai = true;
         }
         catch(Exception e){
