@@ -297,17 +297,17 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }
     private void writeFileSave(){
         try{
-            File dir1 = new File("storageHD");
+            File dir1 = new File(System.getProperty("user.dir")+"/storageHD");
             if(!dir1.exists()){
                 dir1.mkdir();
             }
-            File dir2 = new File("storageHD/"+nam.getSelectedItem().toString());
+            File dir2 = new File(System.getProperty("user.dir")+"/storageHD/"+nam.getSelectedItem().toString());
             if(!dir2.exists()){
                 dir2.mkdir();
             }
             int count = 0;
             count = new HistoryManagerment().GetSoHoaDon(nam.getSelectedItem().toString());
-            File file = new File("storageHD/"+nam.getSelectedItem().toString()+"/el"+count+".rep");
+            File file = new File(System.getProperty("user.dir")+"/storageHD/"+nam.getSelectedItem().toString()+"/el"+count+".rep");
             file.createNewFile();
             FileWriter fw = new FileWriter(file);
             BufferedWriter br = new BufferedWriter(fw);
@@ -340,7 +340,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }
     public void readFile(String year,int soHoaDon){
         try{
-            FileReader fr = new FileReader("storageHD\\"+year+"\\el"+soHoaDon+".rep");
+            FileReader fr = new FileReader(System.getProperty("user.dir")+"\\storageHD\\"+year+"\\el"+soHoaDon+".rep");
             BufferedReader br = new BufferedReader(fr);
             String line;
             //doc thong tin linh tinh
