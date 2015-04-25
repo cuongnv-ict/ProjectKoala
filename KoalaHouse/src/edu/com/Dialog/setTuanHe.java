@@ -852,7 +852,7 @@ public class setTuanHe extends javax.swing.JDialog {
                     {
                         if(this.YearOld.equals(yearE6.getSelectedItem().toString()))
                         {
-                            new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6, yearS1.getSelectedItem().toString());
+                            new DataBase.SQLkyhe().UpdateDk(ngaybd1, ngaykt1, ngaybd2, ngaykt2, ngaybd3, ngaykt3, ngaybd4, ngaykt4, ngaybd5, ngaykt5, ngaybd6, ngaykt6);
                             dispose();
                         }
                          else

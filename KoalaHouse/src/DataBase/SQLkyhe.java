@@ -137,7 +137,6 @@ public class SQLkyhe {
                 Object[] str = new Object[3];
                 str[0]=rs3.getInt(1);
                 str[1]=new XuLiXau().NgayThangNam(rs3.getString(2));
-                
                 str[2]=new XuLiXau().NgayThangNam(rs3.getString(3));
                 data.add(str);
             }
@@ -188,8 +187,7 @@ public class SQLkyhe {
     }
     
     public void UpdateDk(String ngaybd1,String ngaykt1,String ngaybd2, String ngaykt2, String ngaybd3, String ngaykt3,
-                            String ngaybd4,String ngaykt4,String ngaybd5,String ngaykt5,String ngaybd6,String ngaykt6,
-                            String year)
+                            String ngaybd4,String ngaykt4,String ngaybd5,String ngaykt5,String ngaybd6,String ngaykt6)
     {
         try
         {
@@ -208,7 +206,7 @@ public class SQLkyhe {
             ngaythang[1][5]= ngaykt6;
             for(int i=1;i<7;i++)
             {
-            String query = "update summerweek  set startDay = '" +ngaythang[0][i-1]+ "',endDay = '"+ngaythang[1][i-1]+"'  where tuanHoc= '"+i+"' and startDay like '%"+year+"%' ";
+            String query = "update summerweek  set startDay = '" +ngaythang[0][i-1]+ "',endDay = '"+ngaythang[1][i-1]+"'  where tuanHoc= '"+i+"'  ";
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate(); 
             }
@@ -443,7 +441,7 @@ public class SQLkyhe {
             
             id+=1;
             statement.executeUpdate("INSERT INTO learnsummer (`id`, `idStudents`, `tuanhoc`, `soTuanHoc`, `class`,`IsActive`)  VALUES "
-                        + "('" + id + "','" +idstudent+ "','"+tuanhoc +"','"+sotuanhoc+"','"+a[0]+"',1)");
+                        + "('" + id + "','" +idstudent+ "','"+tuanhoc +"','"+sotuanhoc+"','"+String.valueOf(Integer.parseInt(a[0])-1)+"',1)");
             
             
             statement.close();
@@ -791,7 +789,6 @@ public class SQLkyhe {
              
            
             int idstudent=-1;
-            
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7)};
@@ -944,6 +941,7 @@ public class SQLkyhe {
            
             int idstudent=-1;
             
+//            year=String.valueOf(Integer.parseInt(year)+1);
             model=(DefaultTableModel) table.getModel();
             Object[] nameColumn = {model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),model.getColumnName(4)
                                     ,model.getColumnName(5),model.getColumnName(6),model.getColumnName(7)};
@@ -1094,9 +1092,10 @@ public class SQLkyhe {
         try
         {
             int i=0;
-            Calendar cal= Calendar.getInstance();
-            SimpleDateFormat form= new SimpleDateFormat("yyyy");
-            String year= form.format(cal.getTime());
+//            Calendar cal= Calendar.getInstance();
+//            SimpleDateFormat form= new SimpleDateFormat("yyyy");
+//            String year= form.format(cal.getTime());
+            String year  = String.valueOf (new DataBase.SQLkyhe().getYearActiv()+1);
             rs1=statement.executeQuery("select startDay from summerweek where startDay like '%"+year+"%' ");
             while(rs1.next())
             {

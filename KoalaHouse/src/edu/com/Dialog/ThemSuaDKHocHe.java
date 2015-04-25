@@ -296,7 +296,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-          try{
+         try{
             if(themorsua)
             {
                 if(kiemtratuanhoc(tuanhoc.getText()))
@@ -314,11 +314,8 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                             {
                                 DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
-                                Calendar calendar= Calendar.getInstance();
-                                calendar.getTime();
-                                SimpleDateFormat form= new SimpleDateFormat("yyyy");
-                                String year= form.format(calendar.getTime());
-                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,year);
+                                
+                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,String.valueOf(new DataBase.SQLkyhe().getYearActiv()+1));
 
                                 dispose();
                             }
@@ -406,7 +403,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-                try{
+         try{
             if(themorsua)
             {
                 if(kiemtratuanhoc(tuanhoc.getText()))
@@ -425,7 +422,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
                                 DataBase.SQLkyhe data = new DataBase.SQLkyhe();
                                 idstudent=new DataBase.SQLkyhe().getIdStudent(nameStudent, nameClass);
                                 
-                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,String.valueOf(new DataBase.SQLkyhe().getYearActiv()));
+                                data.themDkHocHe(idstudent, tuanhoc.getText(), tongsotuan,String.valueOf(new DataBase.SQLkyhe().getYearActiv()+1));
 
                                 dispose();
                             }

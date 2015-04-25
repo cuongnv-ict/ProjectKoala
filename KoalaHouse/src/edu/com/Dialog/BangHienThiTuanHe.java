@@ -34,13 +34,14 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
 //        Calendar calendar = Calendar.getInstance();
 //        calendar.getTime();
 //        SimpleDateFormat form=new SimpleDateFormat("yyyy");
-        String yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        String yearnow=String.valueOf(new DataBase.SQLkyhe().getYearActiv()+1);
+        System.out.println(yearnow);
         this.yearnow=yearnow;
         //modelgoc = (DefaultTableModel) jTable1.getModel();
-        String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv());
+        String year=String.valueOf(new DataBase.SQLkyhe().getYearActiv()+1);
         new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1,year);
         
-        nam.setSelectedItem(year+"-"+String.valueOf(Integer.valueOf(year)+1));
+        nam.setSelectedItem(String.valueOf(Integer.parseInt(year)-1)+"-"+year);
     }
 
     /**
@@ -170,7 +171,7 @@ public class BangHienThiTuanHe extends javax.swing.JDialog {
         // TODO add your handling code here:
         String year = nam.getSelectedItem().toString();
         String a[]=year.split("-");
-        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1, a[0]);
+        new DataBase.SQLkyhe().BangDanhSachDanKyTuanHe(jTable1, String.valueOf(Integer.parseInt(a[0])+1));
     }//GEN-LAST:event_namActionPerformed
 
     /**
