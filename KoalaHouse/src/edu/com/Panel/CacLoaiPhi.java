@@ -28,7 +28,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
 
     public CacLoaiPhi() {
         initComponents();
-        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,"");
         model = (DefaultTableModel) BangPhi.getModel();
         id_cost = new ArrayList<Integer>();
         if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
@@ -44,7 +44,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
     }
 
     public void reload() {
-        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,nameCost.getText());
         model = (DefaultTableModel) BangPhi.getModel();
         id_cost = new ArrayList<Integer>();
         if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
@@ -66,6 +66,8 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         ThemPhi = new javax.swing.JLabel();
         Sua = new javax.swing.JLabel();
         Xoa = new javax.swing.JLabel();
+        nameCost = new javax.swing.JTextField();
+        sreach = new javax.swing.JButton();
 
         BangPhi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         BangPhi.setModel(new javax.swing.table.DefaultTableModel(
@@ -108,6 +110,19 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             }
         });
 
+        nameCost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameCostKeyReleased(evt);
+            }
+        });
+
+        sreach.setText("Tìm kiếm");
+        sreach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sreachActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,8 +133,12 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 .addComponent(Sua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Xoa)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nameCost, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sreach)
+                .addContainerGap())
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +148,10 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                     .addComponent(ThemPhi)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(Xoa)
-                        .addComponent(Sua)))
+                        .addComponent(Sua)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sreach, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameCost, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
         );
@@ -143,7 +165,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                 cost.setVisible(true);
                 Vector vec = new Vector();
                 if (cost.getButton()) {
-                    new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+                    new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,"");
                     model = (DefaultTableModel) BangPhi.getModel();
                     if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
                         XuLy.setID(id_cost, BangPhi, 0);
@@ -181,7 +203,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             ThemGia cost = new ThemGia(null, true, vec, id_cost.get(row));
             cost.setVisible(true);
             if (cost.getButton()) {
-                new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+                new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,"");
                 model = (DefaultTableModel) BangPhi.getModel();
                 if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
                     XuLy.setID(id_cost, BangPhi, 0);
@@ -197,7 +219,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             ThemGia cost = new ThemGia(null, true, vec, id_cost.get(BangPhi.getSelectedRow()));
             cost.setVisible(true);
             if (cost.getButton()) {
-                new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+                new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,"");
                 model = (DefaultTableModel) BangPhi.getModel();
                 if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
                     XuLy.setID(id_cost, BangPhi, 0);
@@ -231,7 +253,7 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                     new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i));
                 }
             }
-            new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi);
+            new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,"");
             model = (DefaultTableModel) BangPhi.getModel();
             if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
                 XuLy.setID(id_cost, BangPhi, 0);
@@ -239,11 +261,33 @@ public class CacLoaiPhi extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_XoaMouseClicked
 
+    private void sreachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sreachActionPerformed
+        // TODO add your handling code here:
+        new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,nameCost.getText());
+        model = (DefaultTableModel) BangPhi.getModel();
+        id_cost = new ArrayList<Integer>();
+        if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_cost, BangPhi, 0);
+        }
+    }//GEN-LAST:event_sreachActionPerformed
+
+    private void nameCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameCostKeyReleased
+        // TODO add your handling code here:
+         new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,nameCost.getText());
+        model = (DefaultTableModel) BangPhi.getModel();
+        id_cost = new ArrayList<Integer>();
+        if (!BangPhi.getValueAt(0, 0).toString().equals("")) {
+            XuLy.setID(id_cost, BangPhi, 0);
+        }
+    }//GEN-LAST:event_nameCostKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable BangPhi;
     private javax.swing.JLabel Sua;
     private javax.swing.JLabel ThemPhi;
     private javax.swing.JLabel Xoa;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTextField nameCost;
+    private javax.swing.JButton sreach;
     // End of variables declaration//GEN-END:variables
 }

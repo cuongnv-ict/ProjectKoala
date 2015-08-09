@@ -23,8 +23,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Xoa" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="nameCost" min="-2" pref="197" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="sreach" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane7" alignment="1" pref="814" max="32767" attributes="0"/>
+          <Component id="jScrollPane7" pref="814" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -36,6 +40,10 @@
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Component id="Xoa" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="Sua" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="sreach" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="nameCost" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -128,6 +136,19 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="XoaMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nameCost">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameCostKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="sreach">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sreachActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
