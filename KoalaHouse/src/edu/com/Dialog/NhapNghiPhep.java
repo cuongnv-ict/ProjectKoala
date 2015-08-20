@@ -380,41 +380,41 @@ public class NhapNghiPhep extends javax.swing.JDialog {
             try
             {
                int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa đối tượng đã chọn không", null, JOptionPane.YES_NO_OPTION);
-               if(click==JOptionPane.NO_OPTION){
-                    return;
-                }
-            String name = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 1).toString();
-            String classes = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 2).toString();
-            
-            ArrayList infoHS = new Get().GetIdAndFacStudent(name, classes);
-         //   int idStudent = Integer.parseInt(infoHS.get(0).toString());
-            int idTrungTam = Integer.parseInt(infoHS.get(1).toString());
-            String datebd = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 3).toString();
-            String datekt = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 4).toString();
-            System.out.println(String.valueOf(idNghiPhep.get(bangDSNghỉPhep.getSelectedRow())));
-            int idStudent = new DataBase.SQLXeBus().getIdStudent(name, classes);
-            int b[] = null;
-            for(int i=0;i<bangDSNghỉPhep.getSelectedRowCount();i++)
-            {
-                b=bangDSNghỉPhep.getSelectedRows();
-            }
-            for(int i=0;i<b.length;i++)
-            {
-            a.XoaNghiPhep(idStudent, datebd, datekt,idNghiPhep.get(b[i]));
-            }       
-             String year []= search_year.getSelectedItem().toString().split("-");
-             yearend=new DataBase.SQLkyhe().getYearEnd(year[0]);
-            new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep,  search_year.getSelectedItem().toString(),yearbegin,yearend);
-            idNghiPhep = new ArrayList<Integer>();
-                    try{
-                     if (!bangDSNghỉPhep.getValueAt(0, 0).toString().equals("")) {
-                         XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
-                    //resize(jTable4);
-                     }
-                    }
-                    catch(Exception ex)
-                    {}
+               if(click==JOptionPane.YES_OPTION){
+                    String name = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 1).toString();
+                    String classes = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 2).toString();
 
+                    ArrayList infoHS = new Get().GetIdAndFacStudent(name, classes);
+                 //   int idStudent = Integer.parseInt(infoHS.get(0).toString());
+                    int idTrungTam = Integer.parseInt(infoHS.get(1).toString());
+                    String datebd = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 3).toString();
+                    String datekt = bangDSNghỉPhep.getValueAt(bangDSNghỉPhep.getSelectedRow(), 4).toString();
+                    System.out.println(String.valueOf(idNghiPhep.get(bangDSNghỉPhep.getSelectedRow())));
+                    int idStudent = new DataBase.SQLXeBus().getIdStudent(name, classes);
+                    int b[] = null;
+                    for(int i=0;i<bangDSNghỉPhep.getSelectedRowCount();i++)
+                    {
+                        b=bangDSNghỉPhep.getSelectedRows();
+                    }
+                    for(int i=0;i<b.length;i++)
+                    {
+                    a.XoaNghiPhep(idStudent, datebd, datekt,idNghiPhep.get(b[i]));
+                    }       
+                     String year []= search_year.getSelectedItem().toString().split("-");
+                     yearend=new DataBase.SQLkyhe().getYearEnd(year[0]);
+                    new DataBase.SQLBangNghiPhep().BangNghiPhep_year(bangDSNghỉPhep,  search_year.getSelectedItem().toString(),yearbegin,yearend);
+                    idNghiPhep = new ArrayList<Integer>();
+                            try{
+                             if (!bangDSNghỉPhep.getValueAt(0, 0).toString().equals("")) {
+                                 XuLy.setID(idNghiPhep, bangDSNghỉPhep, 0);
+                            //resize(jTable4);
+                             }
+                            }
+                            catch(Exception ex)
+                            {}
+                }
+                return;
+               
                         }
             catch(Exception ex)
             {}

@@ -302,34 +302,35 @@ public class DKHocHe extends javax.swing.JPanel {
                 if(!flags)
                 {
                     int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-                    if(click==JOptionPane.NO_OPTION){
-                        return;
-                    }
+                    if(click==JOptionPane.YES_OPTION){
+                         boolean xoaorkhong;
+                        DataBase.SQLkyhe data= new DataBase.SQLkyhe();
+                        xoaorkhong=data.xoaDkHe(jTable4, 7,id_hoche);
 
-                    boolean xoaorkhong;
-                    DataBase.SQLkyhe data= new DataBase.SQLkyhe();
-                    xoaorkhong=data.xoaDkHe(jTable4, 7,id_hoche);
-                    
-                    String year = nam.getSelectedItem().toString();
-                    String a[]=year.split("-");
-                    new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,a[0]); 
-                    id_hoche = new ArrayList<Integer>();
-                    try
-                    {
-
-                        if (!jTable4.getValueAt(0, 1).toString().equals("")) {
-                            XuLy.setID(id_hoche, jTable4, 0);
-                            resize(jTable4);
-                        }
-                        else
+                        String year = nam.getSelectedItem().toString();
+                        String a[]=year.split("-");
+                        new DataBase.SQLkyhe().BandDanhSachDangKyHocHe_TimKiemTheoNam(jTable4,a[0]); 
+                        id_hoche = new ArrayList<Integer>();
+                        try
                         {
-                            resize(jTable4);
+
+                            if (!jTable4.getValueAt(0, 1).toString().equals("")) {
+                                XuLy.setID(id_hoche, jTable4, 0);
+                                resize(jTable4);
+                            }
+                            else
+                            {
+                                resize(jTable4);
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+
                         }
                     }
-                    catch(Exception ex)
-                    {
+                    return;
 
-                    }
+                   
                 }
                 else
                 {

@@ -1646,14 +1646,15 @@ public class ListKoala extends javax.swing.JFrame {
                 String tenlop = nodex.toString();
                 int idtenlop;
                 int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn cho lớp đã chọn ra trường không", null, JOptionPane.YES_NO_OPTION);
-                if (click == JOptionPane.NO_OPTION) {
-                    return;
-                }
-                idtenlop = new DataBase.DataTable().LayIdTenLop(tenlop);
-                new DataBase.SQLJTree().ratruong(idtenlop);
-                String message = String.format("Học sinh đã cho toàn bộ ra trường");
-                JOptionPane.showMessageDialog(null, message);
+                if (click == JOptionPane.YES_OPTION) {
+                    idtenlop = new DataBase.DataTable().LayIdTenLop(tenlop);
+                    new DataBase.SQLJTree().ratruong(idtenlop);
+                    String message = String.format("Học sinh đã cho toàn bộ ra trường");
+                    JOptionPane.showMessageDialog(null, message);
 
+                }
+                return;
+            
             } else {
                 String message = String.format("Bạn Không Thể Thực Hiện Thao Tác Ở Đây");
                 JOptionPane.showMessageDialog(null, message);

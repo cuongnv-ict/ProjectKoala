@@ -1,2 +1,0 @@
-DataBase.HocSinh.DebtList
-DataBase.HocSinh.DebtListComparator

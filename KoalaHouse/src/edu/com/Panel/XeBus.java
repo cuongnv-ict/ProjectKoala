@@ -442,11 +442,8 @@ public class XeBus extends javax.swing.JPanel {
                     if(!flags)
                     {
                         int click = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa học sinh đã chọn không", null, JOptionPane.YES_NO_OPTION);
-                        if(click==JOptionPane.NO_OPTION){
-                            return;
-                        }
-
-                        boolean xoaorkhong;
+                        if(click==JOptionPane.YES_OPTION){
+                              boolean xoaorkhong;
                         DataBase.SQLXeBus data= new DataBase.SQLXeBus();
                         xoaorkhong=data.xoaxebus(jTable4, 11,id_xebus);
 
@@ -464,6 +461,9 @@ public class XeBus extends javax.swing.JPanel {
                                 }
                             catch(Exception ex)
                             {}
+                        }
+
+                        return;
 
                     }
                     else
