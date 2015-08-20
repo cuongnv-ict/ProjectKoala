@@ -105,7 +105,58 @@ public class ThemGia extends javax.swing.JDialog {
             setComboBox(E_thang, arr[1]);
             setComboBox(E_nam, arr[2]);
         }
+        this.id = id;
 
+    }
+    public ThemGia(java.awt.Frame parent, boolean modal,boolean samefee, Vector vector, int id) {
+        super(parent, modal);
+        initComponents();
+        button = false;
+        this.setResizable(false);
+        this.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 200, Toolkit.getDefaultToolkit().getScreenSize().height / 2 - 200);
+        DongY.setText("Thêm");
+        title.setText("Thêm Phí Tương Tự");
+        datcoc.setSelected(new DataBase.SQLHocPhi().getSelected(id));
+        if (datcoc.isSelected()) {
+            TenPhi.setEditable(false);
+            Ky.setEnabled(false);
+        }
+        TenPhi.setText(vector.get(1).toString());
+        trongmuon.setSelected(vector.get(1).toString().equals("Phí Trông Muộn"));
+        if (trongmuon.isSelected()) {
+            TenPhi.setEditable(false);
+        }
+        hocHe.setSelected(vector.get(1).toString().equals("Phí Học Hè"));
+        if (hocHe.isSelected()) {
+            TenPhi.setEditable(false);
+            Ky.setEnabled(false);
+        }
+        hoanhocphi.setSelected(vector.get(1).toString().equals("Hoàn Học Phí"));
+        if (hoanhocphi.isSelected()) {
+            TenPhi.setEditable(false);
+        }
+        Gia.setText(vector.get(6).toString());
+        setComboBox(Ky, vector.get(2).toString());
+        setComboBox(Nam, vector.get(3).toString());
+        Nam.addItem( vector.get(3).toString());
+        Nam.setSelectedItem( vector.get(3).toString());
+        String date[] =  vector.get(3).toString().split("-");
+        B_nam.addItem(date[0]);
+        B_nam.addItem(date[1]);
+        E_nam.addItem(date[0]);
+        E_nam.addItem(date[1]);
+        String[] arr = vector.get(4).toString().split("-");
+        if (arr.length == 3) {
+            setComboBox(B_ngay, arr[0]);
+            setComboBox(B_thang, arr[1]);
+            setComboBox(B_nam, arr[2]);
+        }
+        arr = vector.get(5).toString().split("-");
+        if (arr.length == 3) {
+            setComboBox(E_ngay, arr[0]);
+            setComboBox(E_thang, arr[1]);
+            setComboBox(E_nam, arr[2]);
+        }
         this.id = id;
 
     }

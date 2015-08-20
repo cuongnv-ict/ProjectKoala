@@ -22,6 +22,8 @@
               <Component id="Sua" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Xoa" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="nameCost" min="-2" pref="197" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -43,6 +45,7 @@
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="sreach" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="nameCost" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -149,6 +152,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sreachActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/edu/com/image/thesame.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m ph&#xed; t&#x1b0;&#x1a1;ng t&#x1ef1;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
