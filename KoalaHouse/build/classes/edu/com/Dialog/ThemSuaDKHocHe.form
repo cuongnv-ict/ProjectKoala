@@ -111,8 +111,8 @@
         <Property name="text" type="java.lang.String" value="ch&#xfa; &#xfd; c&#xe1;c tu&#x1ea7;n c&#xe1;ch nhau d&#x1ea5;u &quot;,&quot; v&#xed; d&#x1ee5; : 1,2"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tuanhocActionPerformed"/>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tuanhocFocusGained"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tuanhocActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">

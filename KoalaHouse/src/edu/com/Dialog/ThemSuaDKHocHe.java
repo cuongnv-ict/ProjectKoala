@@ -505,7 +505,7 @@ public class ThemSuaDKHocHe extends javax.swing.JDialog {
 
     private void tuanhocFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tuanhocFocusGained
         // TODO add your handling code here:
-        tuanhoc.setText("");
+        tuanhoc.setText("1,2,3,4,5,6");
     }//GEN-LAST:event_tuanhocFocusGained
 
     /**
