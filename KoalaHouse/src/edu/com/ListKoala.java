@@ -399,6 +399,7 @@ public class ListKoala extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         CapNhatNamHoc = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         hs_phi = new javax.swing.JMenuItem();
@@ -853,6 +854,14 @@ public class ListKoala extends javax.swing.JFrame {
             }
         });
         Namhoc.add(jMenuItem5);
+
+        jMenuItem2.setText("Quản lý danh sách đặt cọc");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        Namhoc.add(jMenuItem2);
 
         CapNhatNamHoc.setText("Cập nhật năm học");
         CapNhatNamHoc.addActionListener(new java.awt.event.ActionListener() {
@@ -2020,6 +2029,12 @@ public class ListKoala extends javax.swing.JFrame {
         tk.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        DSDatCoc ds = new DSDatCoc(null,true);
+        ds.setVisible(true); 
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void writeFile() {
         try {
             System.out.println("xoa mk lisstkoala");
@@ -2092,6 +2107,7 @@ public class ListKoala extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

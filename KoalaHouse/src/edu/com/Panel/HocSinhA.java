@@ -807,6 +807,8 @@ public class HocSinhA extends javax.swing.JPanel {
                 model.removeRow(0);
             }
             if(check){
+                int isDatCoc = new Get().GetIsDatCoc(id, idTrungTam);
+                if(isDatCoc == 2)
                 {
                     int idCost = new RecieptManagerment().GetIdPhiDatCoc(id);
                     new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);

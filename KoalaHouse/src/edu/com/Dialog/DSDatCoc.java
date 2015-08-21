@@ -4,6 +4,18 @@
  */
 package edu.com.Dialog;
 
+import DataBase.HocSinh.AStudentAndLateDay;
+import DataBase.HocSinh.DatCocManagerment;
+import DataBase.HocSinh.Get;
+import edu.com.CloseButton.CloseTabButton;
+import edu.com.Panel.HocSinhA;
+import edu.com.upbang.EditTable;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Venus
@@ -13,9 +25,20 @@ public class DSDatCoc extends javax.swing.JDialog {
     /**
      * Creates new form DSDatCoc
      */
+    public ArrayList IDClasses;
+    public ArrayList IdStudents;
+    public JTabbedPane center;
+    public int idFac;
     public DSDatCoc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         //add ten lop vao combobox
+        ArrayList nameClasses = new Get().GetNameClass();
+        for(int i=0;i<nameClasses.size();i++)
+            lop.addItem(nameClasses.get(i));
+        IDClasses = new Get().GetIDClass();
+        idFac = new Get().GetIDFac();
+        IdStudents = new DatCocManagerment().BangDanhSachHocSinhDatCoc(jTable1,String.valueOf(IDClasses.get(0)));
     }
 
     /**
@@ -31,21 +54,38 @@ public class DSDatCoc extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lop = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Danh Sách Đặt Cọc");
 
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", " Họ & Tên Học Sinh", "Khoản Đặt Coc", " Ngày Đóng"
+                "STT", " Họ & Tên Học Sinh", "Sắp Hoàn Trả", "Đã Hoàn Trả", "Chọn HS Muốn Hoàn Phí"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Cancle");
@@ -62,25 +102,61 @@ public class DSDatCoc extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Lớp:");
+
+        lop.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lopActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("Hoàn Phí Đặt Cọc");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         pack();
@@ -96,9 +172,63 @@ public class DSDatCoc extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+            ArrayList a = new ArrayList();
+            a = getStudentNeedReturn(jTable1);//lay tat ca cac row ma dc tich danh dau
+            for(int i=0;i<a.size();i++){
+                boolean check = true;//bien kiem tra xem row dc them co trung voi row da co
+                Vector v= new Vector();
+                v = (Vector) a.get(i);
+                int stt = Integer.parseInt(v.get(0).toString());
+                String idHocS = String.valueOf(IdStudents.get(stt-1));
+                int isDatCoc = new Get().GetIsDatCoc(Integer.parseInt(idHocS), idFac);
+                if(isDatCoc != 1)
+                    new AStudentAndLateDay().setSeTraDatCoc(idHocS, new Get().GetIDFac());
+            }
+            int maLop = lop.getSelectedIndex();
+            IdStudents = new DatCocManagerment().BangDanhSachHocSinhDatCoc(jTable1,String.valueOf(IDClasses.get(maLop)));
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void lopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lopActionPerformed
+        // TODO add your handling code here:
+        if(IDClasses != null){
+            int maLop = lop.getSelectedIndex();
+            IdStudents = new DatCocManagerment().BangDanhSachHocSinhDatCoc(jTable1,String.valueOf(IDClasses.get(maLop)));
+        }
+    }//GEN-LAST:event_lopActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+//        if(evt.getClickCount()==2){
+//            //map cac truong
+//            String sTT = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+//            int stt = Integer.parseInt(sTT);
+//            int id = Integer.parseInt(IdStudents.get(stt - 1).toString());
+//            String tenHocSinh = jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString();
+//            //HocSinhA.idTemp = id;
+//            System.out.println(tenHocSinh+" - "+id);
+//        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
+    public ArrayList getStudentNeedReturn(JTable tableName){
+        DefaultTableModel tableModel;
+        tableModel = (DefaultTableModel) tableName.getModel();
+        
+        ArrayList a = new ArrayList();
+        for(int i=0;i< tableModel.getRowCount();i++){
+            Vector v = new Vector();
+            v = (Vector) tableModel.getDataVector().elementAt(i);
+            if(v.get(4) != null)
+                if((v.get(4).toString())=="true"){
+                    a.add(v); 
+                }
+        }
+        return a;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -140,7 +270,10 @@ public class DSDatCoc extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox lop;
     // End of variables declaration//GEN-END:variables
 }

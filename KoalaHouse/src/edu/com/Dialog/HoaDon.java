@@ -81,6 +81,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public int idHocSinh = 0;
     String[] str;
     public boolean inLai = false;
+    public String shdTemp;
     Convert convert = new Convert();
     
     /**
@@ -117,6 +118,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             case 4: soHoaDon = "HT"+XuLy.getNumber4(String.valueOf(sott));break;
         }
         stt.setText(String.valueOf(soHoaDon));
+        shdTemp = soHoaDon;
         tenTrungTam.setText(trungTam);
         idTrungTam = HoaDon.idTT;
         if(idTrungTam==0){
@@ -191,8 +193,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
             }
         }
-        int phidatcoc = new RecieptManagerment().PhiDatCoc(idHocSinh);
-        Total = Total + 2*phidatcoc;
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
         daThu.setText(XuLy.setMoney(String.valueOf(Total)));
         int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
@@ -622,7 +622,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jLabel18.setText("Lớp:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Người ĐD:");
+        jLabel17.setText("Phụ Huynh:");
 
         NguoiDaiDien.setText("Nguyễn Ngọc Lan");
 
@@ -630,6 +630,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jLabel19.setText("Hình Thức TT:");
 
         HinhThucDong.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiền mặt", "Chuyển khoản" }));
+        HinhThucDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HinhThucDongActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Cơ Sở:");
@@ -1052,6 +1057,15 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
         }
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void HinhThucDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HinhThucDongActionPerformed
+        // TODO add your handling code here:
+        if(HinhThucDong.getSelectedIndex()==0){
+            stt.setText(String.valueOf(shdTemp));
+        }else{
+            stt.setText("CK");
+        }
+    }//GEN-LAST:event_HinhThucDongActionPerformed
 
     /**
      * @param args the command line arguments

@@ -101,6 +101,8 @@ public class RecieptManagerment {
                     int phi = Integer.parseInt((String) str[3]);
                     phi = phi * number;
                     str[3] = phi;
+                    str[2] = new Get().GetSummerWeeks(students_id,ki,nam);
+                    str[1] = "Tuần: ";
                 }
                 if(hoanHocPhi){
                     String ki = rs1.getString(3);
@@ -126,7 +128,9 @@ public class RecieptManagerment {
                 }
             }
             //xem co dong hoc phi dat coc khong
-            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+            int isDC = new Get().GetIsDatCoc(students_id, idFac);
+            if(isDC == 2){
+             rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
             while(rs1.next()){
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
@@ -140,6 +144,7 @@ public class RecieptManagerment {
                 str1[3] = XuLy.setMoney(str1[3].toString());
                 data.add(str1);
                 }
+            }   
             }
             //xem co phi xe bus không
             rs1 = statement.executeQuery("SELECT TienXe,StartDate,EndDate FROM projectkoala.buslist where idStudents = "+students_id+" and IsActive = 1;");
@@ -156,7 +161,11 @@ public class RecieptManagerment {
             //sap xep lai ten phi
             for(int j=0;j<data.size();j++){
                 Object[] s = data.get(j);
-                String thoigian = s[1].toString()+" -> "+s[2].toString();
+                String thoigian;
+                if(s[1].equals("Tuần: "))
+                    thoigian = s[1].toString()+s[2].toString();
+                else
+                    thoigian = s[1].toString()+" -> "+s[2].toString();
                 s[1] = s[0].toString();
                 s[2] = thoigian;
                 s[0] = j+1;

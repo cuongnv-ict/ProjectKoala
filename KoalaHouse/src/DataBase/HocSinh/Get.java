@@ -159,12 +159,43 @@ public class Get{
         
         return nameClasses;
 }
+    public ArrayList GetIDClass(){
+    ArrayList nameClasses = new ArrayList();
+        try {
+            rs1 = statement.executeQuery("SELECT Id FROM classes;");
+            while(rs1.next()){
+                String name = rs1.getString(1);
+                nameClasses.add(name);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return nameClasses;
+}
     public int GetNumberSummerWeek(int idStudent,String ki,String nam){
         int number = 0;
         try {
             rs1 = statement.executeQuery("SELECT soTuanHoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 0 and Semester = "+ki+" and year="+nam+"");
             while(rs1.next()){
                 number = rs1.getInt(1);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return number;
+        
+    }
+    public String GetSummerWeeks(int idStudent,String ki,String nam){
+        String number = "";
+        try {
+            rs1 = statement.executeQuery("SELECT tuanhoc FROM projectkoala.learnsummer where idStudents = "+idStudent+" and IsActive = 0 and Semester = "+ki+" and year="+nam+"");
+            while(rs1.next()){
+                number = rs1.getString(1);
             }
             statement.close();
             connect.close();
