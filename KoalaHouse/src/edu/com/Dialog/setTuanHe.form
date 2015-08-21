@@ -447,6 +447,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -491,6 +492,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="7"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -551,6 +553,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -595,6 +598,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="11"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -682,6 +686,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="18"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
@@ -707,6 +712,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
@@ -742,6 +748,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel20">
@@ -786,6 +793,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="14"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel21">
@@ -898,6 +906,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="25"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel25">
@@ -923,6 +932,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel26">
@@ -958,6 +968,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel29">
@@ -1002,6 +1013,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="21"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel30">
@@ -1106,6 +1118,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="19"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel33">
@@ -1131,6 +1144,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel34">
@@ -1237,6 +1251,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel40">
@@ -1281,6 +1296,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="5"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel41">
@@ -1316,6 +1332,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel44">
@@ -1360,6 +1377,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="12"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel45">
@@ -1385,6 +1403,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel46">
@@ -1434,6 +1453,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="16"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel48">
@@ -1483,6 +1503,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="23"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel50">
@@ -1513,6 +1534,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="dateE4">
@@ -1552,6 +1574,7 @@
             <StringItem index="30" value="31"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="9"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel52">
@@ -1587,6 +1610,7 @@
             <StringItem index="11" value="12"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="6"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel55">

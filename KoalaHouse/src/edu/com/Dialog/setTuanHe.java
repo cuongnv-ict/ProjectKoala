@@ -284,10 +284,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel9.setText("Tháng");
 
         monthS1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthS1.setSelectedIndex(5);
 
         jLabel4.setText("Ngày");
 
         dateS1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateS1.setSelectedIndex(7);
 
         jLabel5.setText("Ngày Bắt Đầu:");
 
@@ -298,10 +300,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel13.setText("Tháng");
 
         monthE1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthE1.setSelectedIndex(5);
 
         jLabel6.setText("Ngày");
 
         dateE1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateE1.setSelectedIndex(11);
 
         jLabel7.setText("Ngày Kết Thúc:");
 
@@ -315,10 +319,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel15.setText("Năm");
 
         dateE2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateE2.setSelectedIndex(18);
 
         jLabel16.setText("Ngày");
 
         monthE2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthE2.setSelectedIndex(5);
 
         jLabel17.setText("Tháng");
 
@@ -327,10 +333,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel19.setText("Tháng");
 
         monthS2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthS2.setSelectedIndex(5);
 
         jLabel20.setText("Ngày");
 
         dateS2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateS2.setSelectedIndex(14);
 
         jLabel21.setText("Ngày Bắt Đầu:");
 
@@ -346,10 +354,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel24.setText("Năm");
 
         dateE3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateE3.setSelectedIndex(25);
 
         jLabel25.setText("Ngày");
 
         monthE3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthE3.setSelectedIndex(5);
 
         jLabel26.setText("Tháng");
 
@@ -358,10 +368,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel28.setText("Tháng");
 
         monthS3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthS3.setSelectedIndex(5);
 
         jLabel29.setText("Ngày");
 
         dateS3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateS3.setSelectedIndex(21);
 
         jLabel30.setText("Ngày Bắt Đầu:");
 
@@ -374,10 +386,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel32.setText("Ngày");
 
         dateS6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateS6.setSelectedIndex(19);
 
         jLabel33.setText("Tháng");
 
         monthS6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthS6.setSelectedIndex(6);
 
         jLabel34.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel34.setText("Tuần 4:");
@@ -398,10 +412,12 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel39.setText("Tháng");
 
         monthS4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthS4.setSelectedIndex(6);
 
         jLabel40.setText("Ngày");
 
         dateS4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateS4.setSelectedIndex(5);
 
         jLabel41.setText("Ngày Bắt Đầu:");
 
@@ -410,34 +426,41 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel43.setText("Tháng");
 
         monthE5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthE5.setSelectedIndex(6);
 
         jLabel44.setText("Tháng");
 
         dateS5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateS5.setSelectedIndex(12);
 
         jLabel45.setText("Ngày Bắt Đầu:");
 
         monthS5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthS5.setSelectedIndex(6);
 
         jLabel46.setText("Ngày");
 
         jLabel47.setText("Ngày");
 
         dateE5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateE5.setSelectedIndex(16);
 
         jLabel48.setText("Ngày Kết Thúc:");
 
         jLabel49.setText("Năm");
 
         dateE6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateE6.setSelectedIndex(23);
 
         jLabel50.setText("Ngày");
 
         jLabel51.setText("Ngày Kết Thúc:");
 
         monthE6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthE6.setSelectedIndex(6);
 
         dateE4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dateE4.setSelectedIndex(9);
 
         jLabel52.setText("Tháng");
 
@@ -446,6 +469,7 @@ public class setTuanHe extends javax.swing.JDialog {
         jLabel54.setText("Năm");
 
         monthE4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthE4.setSelectedIndex(6);
 
         jLabel55.setText("Tháng");
 
