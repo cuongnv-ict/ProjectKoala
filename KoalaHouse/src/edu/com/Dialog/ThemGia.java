@@ -50,9 +50,9 @@ public class ThemGia extends javax.swing.JDialog {
             Nam.setSelectedItem(String.valueOf(h) + "-" + String.valueOf(h + 1));
             flags = true;
             B_nam.addItem(h);
-            B_nam.addItem(h+1);
+            B_nam.addItem(h + 1);
             E_nam.addItem(h);
-            E_nam.addItem(h+1);
+            E_nam.addItem(h + 1);
         }
     }
 
@@ -86,9 +86,9 @@ public class ThemGia extends javax.swing.JDialog {
         Gia.setText(vector.get(6).toString());
         setComboBox(Ky, vector.get(2).toString());
         setComboBox(Nam, vector.get(3).toString());
-        Nam.addItem( vector.get(3).toString());
-        Nam.setSelectedItem( vector.get(3).toString());
-        String date[] =  vector.get(3).toString().split("-");
+        Nam.addItem(vector.get(3).toString());
+        Nam.setSelectedItem(vector.get(3).toString());
+        String date[] = vector.get(3).toString().split("-");
         B_nam.addItem(date[0]);
         B_nam.addItem(date[1]);
         E_nam.addItem(date[0]);
@@ -105,10 +105,20 @@ public class ThemGia extends javax.swing.JDialog {
             setComboBox(E_thang, arr[1]);
             setComboBox(E_nam, arr[2]);
         }
+        if (B_ngay.getSelectedIndex() != 0) {
+            IsTime.setSelected(true);
+            B_ngay.setEnabled(true);
+            B_thang.setEnabled(true);
+            B_nam.setEnabled(true);
+            E_ngay.setEnabled(true);
+            E_thang.setEnabled(true);
+            E_nam.setEnabled(true);
+        }
         this.id = id;
 
     }
-    public ThemGia(java.awt.Frame parent, boolean modal,boolean samefee, Vector vector, int id) {
+
+    public ThemGia(java.awt.Frame parent, boolean modal, boolean samefee, Vector vector, int id) {
         super(parent, modal);
         initComponents();
         button = false;
@@ -138,9 +148,9 @@ public class ThemGia extends javax.swing.JDialog {
         Gia.setText(vector.get(6).toString());
         setComboBox(Ky, vector.get(2).toString());
         setComboBox(Nam, vector.get(3).toString());
-        Nam.addItem( vector.get(3).toString());
-        Nam.setSelectedItem( vector.get(3).toString());
-        String date[] =  vector.get(3).toString().split("-");
+        Nam.addItem(vector.get(3).toString());
+        Nam.setSelectedItem(vector.get(3).toString());
+        String date[] = vector.get(3).toString().split("-");
         B_nam.addItem(date[0]);
         B_nam.addItem(date[1]);
         E_nam.addItem(date[0]);
@@ -219,6 +229,7 @@ public class ThemGia extends javax.swing.JDialog {
         E_nam = new javax.swing.JComboBox();
         hocHe = new javax.swing.JCheckBox();
         hoanhocphi = new javax.swing.JCheckBox();
+        IsTime = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -285,6 +296,7 @@ public class ThemGia extends javax.swing.JDialog {
         jLabel5.setPreferredSize(new java.awt.Dimension(43, 25));
 
         B_ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        B_ngay.setEnabled(false);
         B_ngay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 B_ngayActionPerformed(evt);
@@ -292,13 +304,16 @@ public class ThemGia extends javax.swing.JDialog {
         });
 
         B_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
+        B_nam.setEnabled(false);
 
         B_thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        B_thang.setEnabled(false);
 
         jLabel6.setText("Ngày Kết Thúc:");
         jLabel6.setPreferredSize(new java.awt.Dimension(43, 25));
 
         E_thang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tháng", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        E_thang.setEnabled(false);
         E_thang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 E_thangActionPerformed(evt);
@@ -306,8 +321,10 @@ public class ThemGia extends javax.swing.JDialog {
         });
 
         E_ngay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ngày", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        E_ngay.setEnabled(false);
 
         E_nam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Năm" }));
+        E_nam.setEnabled(false);
 
         hocHe.setText("Phí Học Hè");
         hocHe.addActionListener(new java.awt.event.ActionListener() {
@@ -320,6 +337,13 @@ public class ThemGia extends javax.swing.JDialog {
         hoanhocphi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hoanhocphiActionPerformed(evt);
+            }
+        });
+
+        IsTime.setText("Xác định thời gian thu phí");
+        IsTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IsTimeActionPerformed(evt);
             }
         });
 
@@ -340,22 +364,6 @@ public class ThemGia extends javax.swing.JDialog {
                             .addComponent(Gia, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                             .addComponent(TenPhi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(B_ngay, 0, 90, Short.MAX_VALUE)
-                                .addComponent(E_ngay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(46, 46, 46)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(B_thang, 0, 83, Short.MAX_VALUE)
-                                .addComponent(E_thang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(51, 51, 51)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(B_nam, 0, 79, Short.MAX_VALUE)
-                                .addComponent(E_nam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(24, 24, 24)
@@ -378,7 +386,26 @@ public class ThemGia extends javax.swing.JDialog {
                                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(hoanhocphi))))))))
+                                            .addComponent(hoanhocphi))))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(IsTime)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(B_ngay, 0, 90, Short.MAX_VALUE)
+                                        .addComponent(E_ngay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(46, 46, 46)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(B_thang, 0, 83, Short.MAX_VALUE)
+                                        .addComponent(E_thang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(51, 51, 51)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(B_nam, 0, 79, Short.MAX_VALUE)
+                                        .addComponent(E_nam, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
@@ -393,25 +420,27 @@ public class ThemGia extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Gia, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                .addGap(21, 21, 21)
+                .addComponent(IsTime)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B_thang, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(E_ngay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(E_thang, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(E_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Ky, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nam, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(datcoc)
                     .addComponent(hocHe))
@@ -432,21 +461,31 @@ public class ThemGia extends javax.swing.JDialog {
     private void DongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DongYActionPerformed
         // TODO add your handling code here:
         Vector vec = new Vector();
-        if (getTenPhi().equals("") || getGia().equals("")
-                || B_ngay.getSelectedIndex() == 0 || B_thang.getSelectedIndex() == 0 || B_nam.getSelectedIndex() == 0
-                || E_ngay.getSelectedIndex() == 0 || E_thang.getSelectedIndex() == 0 || E_nam.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa điền đủ thông tin !", null, JOptionPane.ERROR_MESSAGE);
+        if (getTenPhi().equals("") || getGia().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa điền đủ thông tin học phí !", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!XuLy.getTime(B_nam.getSelectedItem().toString() + "-" + B_thang.getSelectedItem().toString() + "-" + B_ngay.getSelectedItem().toString(), E_nam.getSelectedItem().toString() + "-" + E_thang.getSelectedItem().toString() + "-" + E_ngay.getSelectedItem().toString())) {
+        if (IsTime.isSelected()
+                && (B_ngay.getSelectedIndex() == 0 || B_thang.getSelectedIndex() == 0
+                || B_nam.getSelectedIndex() == 0 || E_ngay.getSelectedIndex() == 0
+                || E_thang.getSelectedIndex() == 0 || E_nam.getSelectedIndex() == 0)) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa xác định thời gian nộp phí!", null, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (IsTime.isSelected() && !XuLy.getTime(B_nam.getSelectedItem().toString() + "-" + B_thang.getSelectedItem().toString() + "-" + B_ngay.getSelectedItem().toString(), E_nam.getSelectedItem().toString() + "-" + E_thang.getSelectedItem().toString() + "-" + E_ngay.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(rootPane, "Bạn điền hạn nộp tiền không chính xác !", null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         vec.add(getTenPhi());
         vec.add(Ky.getSelectedIndex() + 1);
         vec.add(getNamHoc());
-        vec.add(B_nam.getSelectedItem().toString() + "-" + B_thang.getSelectedItem().toString() + "-" + B_ngay.getSelectedItem().toString());
-        vec.add(E_nam.getSelectedItem().toString() + "-" + E_thang.getSelectedItem().toString() + "-" + E_ngay.getSelectedItem().toString());
+        if (IsTime.isSelected()) {
+            vec.add(B_nam.getSelectedItem().toString() + "-" + B_thang.getSelectedItem().toString() + "-" + B_ngay.getSelectedItem().toString());
+            vec.add(E_nam.getSelectedItem().toString() + "-" + E_thang.getSelectedItem().toString() + "-" + E_ngay.getSelectedItem().toString());
+        } else {
+            vec.add(-1);
+            vec.add(-1);
+        }
         if (datcoc.isSelected()) {
             vec.add("-" + XuLy.getMoney(getGia()));
         } else {
@@ -556,12 +595,28 @@ public class ThemGia extends javax.swing.JDialog {
             TenPhi.setText("Hoàn Học Phí");
             TenPhi.setEditable(false);
             Ky.setSelectedIndex(4);
-            
+
         } else {
             TenPhi.setEditable(true);
             Ky.setEnabled(true);
         }
     }//GEN-LAST:event_hoanhocphiActionPerformed
+
+    private void IsTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IsTimeActionPerformed
+        // TODO add your handling code here:
+        boolean time = true;
+        if (IsTime.isSelected()) {
+            time = true;
+        } else {
+            time = false;
+        }
+        B_ngay.setEnabled(time);
+        B_thang.setEnabled(time);
+        B_nam.setEnabled(time);
+        E_ngay.setEnabled(time);
+        E_thang.setEnabled(time);
+        E_nam.setEnabled(time);
+    }//GEN-LAST:event_IsTimeActionPerformed
     /**
      *
      * @param args the command line arguments
@@ -576,6 +631,7 @@ public class ThemGia extends javax.swing.JDialog {
     private javax.swing.JComboBox E_thang;
     private javax.swing.JTextField Gia;
     private javax.swing.JButton HuyBo;
+    private javax.swing.JCheckBox IsTime;
     private javax.swing.JComboBox Ky;
     private javax.swing.JComboBox Nam;
     private javax.swing.JTextField TenPhi;

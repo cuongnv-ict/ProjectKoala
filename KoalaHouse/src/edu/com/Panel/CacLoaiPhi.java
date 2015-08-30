@@ -160,10 +160,11 @@ public class CacLoaiPhi extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(Xoa)
                         .addComponent(Sua)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sreach, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameCost, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(sreach, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nameCost, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
         );
@@ -262,7 +263,9 @@ public class CacLoaiPhi extends javax.swing.JPanel {
             }
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
                 if ((Boolean) model.getValueAt(i, 7) == true) {
-                    new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), BangPhi.getValueAt(i, 2).toString(), id_cost.get(i));
+                    new DataBase.SQLHocPhi().xoaHocPhi(BangPhi.getValueAt(i, 2).toString(), 
+                            BangPhi.getValueAt(i, 1).toString()+" - " +BangPhi.getValueAt(i, 2).toString()+" - Năm Học: "+ BangPhi.getValueAt(i, 3).toString(),
+                            id_cost.get(i));
                 }
             }
             new DataBase.SQLHocPhi().BangDanhSachPhi(BangPhi,"");

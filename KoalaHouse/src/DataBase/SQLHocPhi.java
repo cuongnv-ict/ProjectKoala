@@ -45,11 +45,11 @@ public class SQLHocPhi {
         }
     }
 
-    public void BangDanhSachPhi(JTable table,String name) {
+    public void BangDanhSachPhi(JTable table, String name) {
         try {
             Object[] nameColumn = {"STT", "Tên", "Kì học", "Năm học", "Ngày bắt đầu", "Ngày kết thúc", "Giá", ""};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
-            rs1 = statement.executeQuery("select Id,NameCost,cost.Semesters,cost.year,cost.StartDate,cost.EndDate,Amount from cost,semesters where cost.year = semesters.Year and IsActivity=1 and NameCost like \"%"+name+"%\" group by  Id order by year,Semesters,NameCost");
+            rs1 = statement.executeQuery("select Id,NameCost,cost.Semesters,cost.year,cost.StartDate,cost.EndDate,Amount from cost,semesters where cost.year = semesters.Year and IsActivity=1 and NameCost like \"%" + name + "%\" group by  Id order by year,Semesters,NameCost");
             if (!rs1.next()) {
                 for (int i = 0; i < 10; i++) {
                     Object[] str = new Object[8];
@@ -140,7 +140,7 @@ public class SQLHocPhi {
             return true;
         } catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(null, "Bạn không thể xóa phí " + name + " khi đang được áp dụng cho một số học sinh trong trường.", null, JOptionPane.ERROR_MESSAGE);
-            int click = JOptionPane.showConfirmDialog(null, " Loại phí này đã được áp dụng cho 1 số học sinh.\n Nếu xóa bạn sẽ mất hết thông tin liên quan đến phí này.\n Bạn có muốn xóa không ?", "Xóa học phí", JOptionPane.YES_NO_OPTION);
+            int click = JOptionPane.showConfirmDialog(null, " Loại phí: " + name + " đã được áp dụng cho 1 số học sinh.\n Nếu xóa bạn sẽ mất hết thông tin những học sinh được tính phí này .\n Bạn có muốn xóa không ?", "Xóa học phí", JOptionPane.YES_NO_OPTION);
             if (click == JOptionPane.NO_OPTION) {
                 return false;
             } else {
@@ -181,8 +181,14 @@ public class SQLHocPhi {
             Pstate.setString(1, vector.get(0).toString());
             Pstate.setString(2, vector.get(1).toString());
             Pstate.setString(3, vector.get(2).toString());
-            Pstate.setString(4, vector.get(3).toString());
-            Pstate.setString(5, vector.get(4).toString());
+            if (vector.get(3).toString().equals("-1")) {
+                Pstate.setString(4, null);
+                Pstate.setString(5, null);
+            } else {
+                Pstate.setString(4, vector.get(3).toString());
+                Pstate.setString(5, vector.get(4).toString());
+            }
+
             Pstate.setString(6, String.valueOf(Integer.parseInt(vector.get(5).toString())));
             Pstate.execute();
             return true;
@@ -223,8 +229,13 @@ public class SQLHocPhi {
             Pstate.setString(3, vector.get(0).toString());
             Pstate.setString(4, vector.get(1).toString());
             Pstate.setString(5, vector.get(2).toString());
-            Pstate.setString(6, vector.get(3).toString());
-            Pstate.setString(7, vector.get(4).toString());
+            if (vector.get(3).toString().equals("-1")) {
+                Pstate.setString(6, null);
+                Pstate.setString(7, null);
+            } else {
+                Pstate.setString(6, vector.get(3).toString());
+                Pstate.setString(7, vector.get(4).toString());
+            }
             Pstate.setString(8, String.valueOf(Integer.parseInt(vector.get(5).toString())));
             Pstate.execute();
             return true;
@@ -301,7 +312,7 @@ public class SQLHocPhi {
             }
             model = new DefaultTableModel(rowColumn, nameColumn) {
                 Class[] types = new Class[]{
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,java.lang.Boolean.class
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
                 };
 
                 public Class getColumnClass(int columnIndex) {
