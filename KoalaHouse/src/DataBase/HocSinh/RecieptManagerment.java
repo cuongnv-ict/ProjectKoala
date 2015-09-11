@@ -80,8 +80,11 @@ public class RecieptManagerment {
                 if(ten.indexOf("hoàn học phí")!=-1 || ten.indexOf("hoan hoc phi")!= -1){
                     hoanHocPhi = true;
                 }
-                str[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
-                str[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                str[1] = "";str[2]="";
+                if(rs1.getString(7) != null)
+                    str[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                if(rs1.getString(8) != null)
+                    str[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
                 str[3] = rs1.getString(5);
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
@@ -130,13 +133,19 @@ public class RecieptManagerment {
             //xem co dong hoc phi dat coc khong
             int isDC = new Get().GetIsDatCoc(students_id, idFac);
             if(isDC == 2){
-             rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+             rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Giữ Chỗ\"))");
             while(rs1.next()){
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
                 str1[0]= rs1.getString(4)+" (Hoàn Trả)";
-                str1[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
-                str1[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                if(rs1.getString(7) != null)
+                    str1[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                else
+                    str1[1] = "";
+                if(rs1.getString(8) != null)
+                    str1[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                else
+                    str1[2] = "";
                 str1[3] = rs1.getString(5);        
                 if(((String)str1[3]).charAt(0)=='-'){
                     str1[3] = ((String)str1[3]).substring(1);
@@ -152,8 +161,14 @@ public class RecieptManagerment {
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
                 str1[0]= "Xe Bus";
-                str1[1] = new XuLiXau().NamThangNgay(rs1.getString(2));
-                str1[2] = new XuLiXau().NamThangNgay(rs1.getString(3));
+                if(rs1.getString(7) != null)
+                    str1[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                else
+                    str1[1] = "";
+                if(rs1.getString(8) != null)
+                    str1[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                else
+                    str1[2] = "";
                 str1[3] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 }
@@ -164,8 +179,10 @@ public class RecieptManagerment {
                 String thoigian;
                 if(s[1].equals("Tuần: "))
                     thoigian = s[1].toString()+s[2].toString();
-                else
+                else if(s[1].toString().length()>1)
                     thoigian = s[1].toString()+" -> "+s[2].toString();
+                else 
+                    thoigian = "";
                 s[1] = s[0].toString();
                 s[2] = thoigian;
                 s[0] = j+1;
@@ -202,9 +219,12 @@ public class RecieptManagerment {
             while(rs1.next()){
                 phi = rs1.getInt(5);
                 phi = phi * 6;
-                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
-                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
-                str[2] = tu +" -> "+den;
+                if(rs1.getString(7) != null && rs1.getString(8) != null){
+                    String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                    String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                    str[2] = tu +" -> "+den;
+                }else
+                    str[2] = "";
             }
             str[3] = XuLy.setMoney(String.valueOf(phi));
             stt++;
@@ -230,9 +250,12 @@ public class RecieptManagerment {
                 if(ten.indexOf("hoàn học phí")!=-1 || ten.indexOf("hoan hoc phi")!= -1){
                     hoanHocPhi = true;
                 }
-                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
-                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
-                str[2] = tu +" -> "+den;
+                if(rs1.getString(7) != null && rs1.getString(8) != null){
+                    String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                    String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                    str[2] = tu +" -> "+den;
+                }else
+                    str[2] = "";
                 str[3] = rs1.getString(5);
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
@@ -279,15 +302,20 @@ public class RecieptManagerment {
                 }
             }
             //xem co dong hoc phi dat coc khong
-            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+            int isDC = new Get().GetIsDatCoc(students_id, idFac);
+            if(isDC == 2){
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Giữ Chỗ\"))");
             while(rs1.next()){
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
                 str1[0] = stt;
                 str1[1]= rs1.getString(4)+" (Hoàn Trả)";
-                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
-                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
-                str1[2] = tu +" -> "+den;
+                if(rs1.getString(7) != null && rs1.getString(8) != null){
+                    String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                    String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                    str1[2] = tu +" -> "+den;
+                }else
+                    str1[2] = "";
                 str1[3] = rs1.getString(5);        
                 if(((String)str1[3]).charAt(0)=='-'){
                     str1[3] = ((String)str1[3]).substring(1);
@@ -297,6 +325,7 @@ public class RecieptManagerment {
                 stt++;
                 }
             }
+            }
             //xem co phi xe bus không
             rs1 = statement.executeQuery("SELECT TienXe,StartDate,EndDate FROM projectkoala.buslist where idStudents = "+students_id+" and IsActive = 1;");
             while(rs1.next()){
@@ -304,9 +333,12 @@ public class RecieptManagerment {
                 if(rs1.getInt(1)>0){
                 str1[0]= stt;
                 str1[1]= "Phí Xe Buýt";
-                String tu = new XuLiXau().NamThangNgay(rs1.getString(2));
-                String den = new XuLiXau().NamThangNgay(rs1.getString(3));
-                str1[2] = tu +" -> "+den;
+                if(rs1.getString(7) != null && rs1.getString(8) != null){
+                    String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                    String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                    str1[2] = tu +" -> "+den;
+                }else
+                    str1[2] = "";
                 str1[3] = XuLy.setMoney(rs1.getString(1));
                 data.add(str1);
                 stt++;
@@ -491,9 +523,12 @@ public class RecieptManagerment {
                     check5=true;
                 }
                 str[0] = stt;
-                String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
-                String den = new XuLiXau().NamThangNgay(rs1.getString(8));
-                str[2] = tu+" -> "+den;
+                if(rs1.getString(7) != null && rs1.getString(8) != null){
+                    String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
+                    String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                    str[2] = tu +" -> "+den;
+                }else
+                    str[2] = "";
                 str[3] = rs1.getString(5);
                 if(((String)str[3]).charAt(0)=='-'){
                     str[3] = ((String)str[3]).substring(1);
@@ -560,9 +595,12 @@ public class RecieptManagerment {
                     int totalTime = new AStudentAndLateDay().LateDay(students_id,idFac,ki,nam);
                     phi = totalTime *phi;
                     str10[3] = XuLy.setMoney(String.valueOf(phi));
+                    if(rs1.getString(7) != null && rs1.getString(8) != null){
                     String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
                     String den = new XuLiXau().NamThangNgay(rs1.getString(8));
-                    str10[2] = tu+" -> "+den;
+                    str10[2] = tu +" -> "+den;
+                }else
+                    str10[2] = "";
                 }
                   if(checkhoanhoc){
                     String ki = rs1.getString(3);
@@ -585,7 +623,9 @@ public class RecieptManagerment {
                   }
             }
             //xem co dong hoc phi dat coc khong
-            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+            int isDC = new Get().GetIsDatCoc(students_id, idFac);
+            if(isDC == 2){
+            rs1 = statement.executeQuery("SELECT * FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+students_id+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Giữ Chỗ\"))");
             while(rs1.next()){
                 
                 if(rs1.getInt(1)>0){
@@ -596,8 +636,9 @@ public class RecieptManagerment {
                 String sotien2 = XuLy.getMoney((String) str9[3]);
                 int tong  = Integer.parseInt(sotien) + Integer.parseInt(sotien2);
                 str9[3] = XuLy.setMoney(String.valueOf(tong));
-                str11[3] = "Có hoàn phí đặt cọc";
+                str11[3] = "Có hoàn phí giữ chỗ";
                 }
+            }
             }
             data.add(str1);
             data.add(str2);
@@ -722,9 +763,12 @@ public class RecieptManagerment {
                     str[0] = stt;
                     str[1] = rs1.getString(4);
                     str[3] = XuLy.setMoney(rs1.getString(5));
+                    if(rs1.getString(7) != null && rs1.getString(8) != null){
                     String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
                     String den = new XuLiXau().NamThangNgay(rs1.getString(8));
-                    str[2] = tu+" -> "+den;
+                    str[2] = tu +" -> "+den;
+                }else
+                    str[2] = "";
                     data.add(str);
                     stt++;
                 }
@@ -749,7 +793,7 @@ public class RecieptManagerment {
     public int PhiDatCoc(int idStudent){
         int total = 0;
         try {
-            rs1 = statement.executeQuery("SELECT Amount FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\"))");
+            rs1 = statement.executeQuery("SELECT Amount FROM projectkoala.cost where Id = (SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Giữ Chỗ\"))");
             while(rs1.next()){
                 total = rs1.getInt(1);
             }
@@ -763,7 +807,7 @@ public class RecieptManagerment {
     public int GetIdPhiDatCoc(int idStudent){
         int id = 0;
         try {
-            rs1 = statement.executeQuery("SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Đặt Cọc\")");
+            rs1 = statement.executeQuery("SELECT max(Cost_Id) FROM projectkoala.students_has_cost where Students_Id = "+idStudent+" and IsDebt = 0 and Cost_Id in (SELECT Id FROM cost where NameCost = \"Phí Giữ Chỗ\")");
             while(rs1.next()){
                 id = rs1.getInt(1);
             }

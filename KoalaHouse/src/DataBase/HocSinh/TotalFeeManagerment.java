@@ -210,11 +210,11 @@ public class TotalFeeManagerment {
             rs1 = statement.executeQuery("SELECT count(NameCost) FROM cost,students_has_cost\n" +
             "where cost.Id = students_has_cost.Cost_Id and students_has_cost.IsDebt = 0 \n" +
             "and students_has_cost.Faculties_Id = "+idFac+" \n" +
-            "and cost.NameCost = 'Phí Đặt Cọc'");
+            "and cost.NameCost = 'Phí Giữ Chỗ'");
             if(rs1!= null)
             while(rs1.next()){
                 if(rs1.getInt(1)>0){
-                    nameColumn.add("Hoàn Phí Đặt Cọc");
+                    nameColumn.add("Hoàn Phí Giữ Chỗ");
                 }
             }
         } catch (SQLException ex) {

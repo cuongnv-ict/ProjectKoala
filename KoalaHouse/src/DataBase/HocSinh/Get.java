@@ -358,12 +358,14 @@ public class Get{
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }
         try{
+            int isDC = new Get().GetIsDatCoc(idStudent, idTrungTam);
+            if(isDC == 2){
             rs2 = statement.executeQuery("SELECT NameCost,Amount,cost.Semesters,cost.year FROM projectkoala.cost,students_has_cost\n" +
             "where students_has_cost.Students_Id = "+idStudent+" and students_has_cost.IsDebt = 0\n" +
-            "and students_has_cost.Cost_Id = cost.Id and cost.NameCost = \"Phí Đặt Cọc\"");
+            "and students_has_cost.Cost_Id = cost.Id and cost.NameCost = \"Phí Giữ Chỗ\"");
             while(rs2.next()){
                 Object[] str = new Object[2];
-                str[0] = "Hoàn Phí Đặt Cọc";
+                str[0] = "Hoàn Phí Giữ Chỗ";
                 if(rs2.getString(2).charAt(0)== '-')
                     str[1] = rs2.getString(2).substring(1);
                 else
@@ -372,6 +374,7 @@ public class Get{
             }
             statement.close();
             connect.close();
+            }
         }catch (SQLException ex) {
             Logger.getLogger(Get.class.getName()).log(Level.SEVERE, null, ex);
         }

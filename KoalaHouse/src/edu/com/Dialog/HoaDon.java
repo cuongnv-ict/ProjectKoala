@@ -1542,11 +1542,13 @@ public void getComponentsOfReceived() {
     tfHoTen = TenHocSinh.getText();
     tfMa = "";
     tfCoso = tenTrungTam.getText();
-    lbNguoiThanhToan = jLabel17.getText();
-    lbLop = jLabel18.getText();
+    lbNguoiThanhToan = jLabel18.getText();
+    //lbLop = jLabel18.getText();
+    lbLop = "";
     lbHinhThucThanhToan = jLabel19.getText();
-    tfNguoiThanhToan = NguoiDaiDien.getText();
-    tfLop = tenLop.getText();
+    tfNguoiThanhToan = tenLop.getText();
+    //tfLop = tenLop.getText();
+    tfLop = "";
     tfHinhThucThanhToan = String.valueOf(HinhThucDong.getSelectedItem());
     getTableData(jTable1);
     lbTongTien = jLabel23.getText();

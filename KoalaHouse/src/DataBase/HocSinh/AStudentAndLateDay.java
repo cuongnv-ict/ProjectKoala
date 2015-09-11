@@ -414,6 +414,17 @@ public class AStudentAndLateDay {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void setHuySeTraDatCoc(String idStudent, int idFac){
+        String query = "UPDATE `projectkoala`.`students` SET `IsDatCoc`='0' WHERE `Id`='"+idStudent+"' and`Faculties_Id`='"+idFac+"';";
+        try {
+            PreparedStatement pstmt = connect.prepareStatement(query);
+            pstmt.executeUpdate();
+            pstmt.close();
+            connect.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
      public void UpdateNgayNhapHoc(int idStudent, int idFac, String ngay){
         String query = "UPDATE `projectkoala`.`students` SET `NhapHoc`='"+ngay+"' WHERE `Id`='"+idStudent+"' and`Faculties_Id`='"+idFac+"';";
         try {

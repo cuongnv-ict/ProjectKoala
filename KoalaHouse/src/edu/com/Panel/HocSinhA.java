@@ -802,7 +802,7 @@ public class HocSinhA extends javax.swing.JPanel {
             int k = model.getRowCount();
             for(int i = 0;i<k;i++){
                 int idCost = Integer.parseInt(model.getValueAt(0,0).toString());
-                if(model.getValueAt(0, 1).equals("Phí Đặt Cọc")) check = false;
+                if(model.getValueAt(0, 1).equals("Phí Giữ Chỗ")) check = false;
                 new CostOfStudent().UpdatePhiCuaHs(id, idCost, idTrungTam);
                 model.removeRow(0);
             }

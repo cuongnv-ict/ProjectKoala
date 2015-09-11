@@ -278,7 +278,7 @@ public class ThemGia extends javax.swing.JDialog {
 
         jLabel4.setText("Năm Học:");
 
-        datcoc.setText("Phí Đặt Cọc");
+        datcoc.setText("Phí Giữ Chỗ");
         datcoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datcocActionPerformed(evt);
@@ -530,7 +530,7 @@ public class ThemGia extends javax.swing.JDialog {
             trongmuon.setSelected(false);
             TenPhi.setEditable(false);
             hoanhocphi.setSelected(false);
-            TenPhi.setText("Phí Đặt Cọc");
+            TenPhi.setText("Phí Giữ Chỗ");
             Ky.setSelectedIndex(4);
             Ky.setEnabled(false);
             hocHe.setSelected(false);

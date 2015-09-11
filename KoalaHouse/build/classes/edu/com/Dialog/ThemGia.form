@@ -258,7 +258,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="datcoc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ph&#xed; &#x110;&#x1eb7;t C&#x1ecd;c"/>
+        <Property name="text" type="java.lang.String" value="Ph&#xed; Gi&#x1eef; Ch&#x1ed7;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="datcocActionPerformed"/>
