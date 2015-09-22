@@ -161,12 +161,12 @@ public class RecieptManagerment {
                 Object str1[] = new Object[5];
                 if(rs1.getInt(1)>0){
                 str1[0]= "Xe Bus";
-                if(rs1.getString(7) != null)
-                    str1[1] = new XuLiXau().NamThangNgay(rs1.getString(7));
+                if(rs1.getString(2) != null)
+                    str1[1] = new XuLiXau().NamThangNgay(rs1.getString(2));
                 else
                     str1[1] = "";
-                if(rs1.getString(8) != null)
-                    str1[2] = new XuLiXau().NamThangNgay(rs1.getString(8));
+                if(rs1.getString(3) != null)
+                    str1[2] = new XuLiXau().NamThangNgay(rs1.getString(3));
                 else
                     str1[2] = "";
                 str1[3] = XuLy.setMoney(rs1.getString(1));
@@ -333,9 +333,9 @@ public class RecieptManagerment {
                 if(rs1.getInt(1)>0){
                 str1[0]= stt;
                 str1[1]= "Phí Xe Buýt";
-                if(rs1.getString(7) != null && rs1.getString(8) != null){
-                    String tu = new XuLiXau().NamThangNgay(rs1.getString(7));
-                    String den = new XuLiXau().NamThangNgay(rs1.getString(8));
+                if(rs1.getString(2) != null && rs1.getString(3) != null){
+                    String tu = new XuLiXau().NamThangNgay(rs1.getString(2));
+                    String den = new XuLiXau().NamThangNgay(rs1.getString(3));
                     str1[2] = tu +" -> "+den;
                 }else
                     str1[2] = "";
