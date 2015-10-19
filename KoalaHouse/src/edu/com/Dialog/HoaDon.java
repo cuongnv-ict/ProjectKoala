@@ -82,6 +82,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     String[] str;
     public boolean inLai = false;
     public String shdTemp;
+    private boolean isPrintAgain = false;
     Convert convert = new Convert();
     
     /**
@@ -356,6 +357,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             thang.setSelectedIndex(Integer.parseInt(thongTin[1]));thang.setEnabled(false);
             nam.setSelectedIndex(Integer.parseInt(thongTin[2]));
             stt.setText(thongTin[3]);
+            isPrintAgain = true;
             TenHocSinh.setText(thongTin[4]);TenHocSinh.setEnabled(false);
             tenTrungTam.setText(thongTin[5]);tenTrungTam.setEnabled(false);
             NguoiDaiDien.setText(thongTin[6]);NguoiDaiDien.setEnabled(false);
@@ -1061,8 +1063,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private void HinhThucDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HinhThucDongActionPerformed
         // TODO add your handling code here:
         if(HinhThucDong.getSelectedIndex()==0){
+        if(!isPrintAgain)        
             stt.setText(String.valueOf(shdTemp));
+        isPrintAgain = false;
         }else{
+        isPrintAgain = false;
             stt.setText("CK");
         }
     }//GEN-LAST:event_HinhThucDongActionPerformed
