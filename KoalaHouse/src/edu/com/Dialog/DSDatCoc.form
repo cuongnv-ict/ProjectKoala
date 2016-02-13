@@ -25,17 +25,20 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jScrollPane1" pref="808" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" pref="152" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="67" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jButton4" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jButton3" min="-2" pref="152" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton4" min="-2" pref="151" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" pref="151" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -48,29 +51,30 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lop" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jButton3" min="-2" pref="44" max="-2" attributes="0"/>
-                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                          </Group>
+              <Component id="jScrollPane2" pref="137" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lop" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton3" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="jButton4" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" min="-2" pref="359" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButton4" min="-2" pref="43" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButton2" min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <Component id="jScrollPane1" min="-2" pref="359" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -139,7 +143,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancle"/>
+        <Property name="text" type="java.lang.String" value="Close"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
@@ -172,7 +176,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ho&#xe0;n Ph&#xed; Gi&#x1eef; Ch&#x1ed7;"/>
+        <Property name="text" type="java.lang.String" value="Kh&#xf4;ng Gi&#x1eef;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
@@ -183,10 +187,41 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="H&#x1ee7;y Ho&#xe0;n Tr&#x1ea3;"/>
+        <Property name="text" type="java.lang.String" value="&#x110;ang Gi&#x1eef;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="0"/>
+            </Property>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="H&#x1b0;&#x1edb;ng d&#x1eab;n ch&#x1ec9;nh s&#x1eed;a ph&#xed; gi&#x1eef; ch&#x1ed7; c&#x1ee7;a c&#xe1;c h&#x1ecd;c sinh:&#xa;- T&#xed;ch ch&#x1ecd;n h&#x1ecd;c sinh mu&#x1ed1;n ch&#x1ec9;nh s&#x1eed;a &#x1edf; c&#x1ed9;t &quot;Ch&#x1ecd;n HS Mu&#x1ed1;n Ch&#x1ec9;nh S&#x1eed;a&quot;&#xa;- Click v&#xe0;o n&#xfa;t:&#xa;&#x9;+ &quot;Kh&#xf4;ng Gi&#x1eef; : &#x111;&#x1ec3; ch&#x1ec9;nh tr&#x1ea1;ng th&#xe1;i h&#x1ecd;c sinh n&#xe0;y th&#xe0;nh kh&#xf4;ng gi&#x1eef; Ph&#xed; gi&#x1eef; ch&#x1ed7;&#xa;&#x9;+ &quot;&#x110;ang Gi&#x1eef;&quot; : &#x111;&#x1ec3; ch&#x1ec9;nh tr&#x1ea1;ng th&#xe1;i h&#x1ecd;c sinh n&#xe0;y th&#xe0;nh &#x111;ang gi&#x1eef; Ph&#xed; gi&#x1eef; ch&#x1ed7;&#xa;&#x9;+ &quot;&#x110;&#xe3; Ho&#xe0;n&quot; : &#x111;&#x1ec3; ch&#x1ec9;nh tr&#x1ea1;ng th&#xe1;i h&#x1ecd;c sinh n&#xe0;y th&#xe0;nh &#x111;&#xe3; ho&#xe0;n Ph&#xed; gi&#x1eef; ch&#x1ed7;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&#x110;&#xe3; Ho&#xe0;n"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -269,6 +269,14 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
         }
         TongTien.setText(XuLy.setMoney(String.valueOf(Total)));
+        int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
+        if(x <0){
+            jLabel23.setText("Số Tiền Hoàn Trả :");
+            x = x* (-1);
+            TongTien.setText(XuLy.setMoney(String.valueOf(x)));
+            checkDaThu.setText("Hoàn Trả :");
+            daThu.setText(XuLy.setMoney(String.valueOf(x)));
+        }   
         String tienbc = convert.chuyentien(TongTien.getText());
         //viet hoa chu cai dau
         char[] head = new char[1];
@@ -397,6 +405,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             jTable1.setEnabled(false);
             br.close();
             inLai = true;
+            totalWhenNoStudent();
         }
         catch(Exception e){
             System.out.println("Error!!");

@@ -403,8 +403,8 @@ public class AStudentAndLateDay {
             Logger.getLogger(AStudentAndLateDay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public void setSeTraDatCoc(String idStudent, int idFac){
-        String query = "UPDATE `projectkoala`.`students` SET `IsDatCoc`='2' WHERE `Id`='"+idStudent+"' and`Faculties_Id`='"+idFac+"';";
+     public void setDangGiuDatCoc(String idStudent, int idFac){
+        String query = "UPDATE `projectkoala`.`students` SET `IsDatCoc`='-1' WHERE `Id`='"+idStudent+"' and`Faculties_Id`='"+idFac+"';";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
             pstmt.executeUpdate();

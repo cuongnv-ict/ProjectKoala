@@ -798,22 +798,30 @@ public class HocSinhA extends javax.swing.JPanel {
         if(receipts.getButton()){
             //them cac phi vao lich su dong tien
             //xoa cac phi trong bang
-            boolean check = true;
+            boolean checkPhiGiuCho = false;
+            boolean checkHoanPhiGiuCho = false;
             int k = model.getRowCount();
             for(int i = 0;i<k;i++){
                 int idCost = Integer.parseInt(model.getValueAt(0,0).toString());
-                if(model.getValueAt(0, 1).equals("Phí Giữ Chỗ")) check = false;
+                String nameCost = model.getValueAt(0, 1).toString().toLowerCase();
+                //----------chuan hoa nameCost------
+                //loai bo dau cach o dau string
+                //loai bo dau cach o cuoi string
+                nameCost = nameCost.replaceAll(" ","");
+                //----------------------------------
+                if(nameCost.equals("phígiữchỗ")) checkPhiGiuCho = true;
+                if(nameCost.equals("hoànphígiữchỗ")) checkHoanPhiGiuCho = true;
+                System.out.println(checkHoanPhiGiuCho+"--"+checkPhiGiuCho);
                 new CostOfStudent().UpdatePhiCuaHs(id, idCost, idTrungTam);
                 model.removeRow(0);
             }
-            if(check){
-                int isDatCoc = new Get().GetIsDatCoc(id, idTrungTam);
-                if(isDatCoc == 2)
-                {
+            if(checkPhiGiuCho){//neu la co dong phi giu cho
                     int idCost = new RecieptManagerment().GetIdPhiDatCoc(id);
-                    new CostOfStudent().DeleteDSPhiCuaHs(id, idCost, idTrungTam);
-                    new AStudentAndLateDay().setDatCoc(id, idTrungTam);
-                }
+                    new AStudentAndLateDay().setDangGiuDatCoc(String.valueOf(id), idTrungTam);
+            }
+            if(checkHoanPhiGiuCho){//neu co phi hoan giu cho
+                int idCost = new RecieptManagerment().GetIdPhiDatCoc(id);
+                new AStudentAndLateDay().setDatCoc(id, idTrungTam);
             }
             Total();
         }

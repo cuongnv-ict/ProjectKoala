@@ -273,6 +273,7 @@ public class HistoryManagerment {
         String query ="INSERT INTO `projectkoala`.`receipts` (`Id`, `Faculties_Id`, `Accounts_Id`, `Students_Id`, `No`, `NamePayer`, `NameCasher`, `Number`, `CreateDate`, `IsTransfer`, `Percent`, `Reason`) VALUES ('"+i+"', '"+idFac+"', '"+idAccount+"','0', '"+NOofReciept+"', '"+NguoiDong+"', '"+NguoiThu+"', '"+SoTien+"', '"+Date+"', '"+HinhThucDong+"', '"+PhanTram+"', '"+LiDo+"');";
         try {
             PreparedStatement pstmt = connect.prepareStatement(query);
+            System.out.println(query);
             pstmt.executeUpdate();
             statement.close();
             pstmt.close();

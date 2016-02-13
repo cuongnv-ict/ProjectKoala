@@ -47,7 +47,7 @@ public class DatCocManagerment {
         ArrayList idStudents = new ArrayList();
         int stt = 1;
         try {
-            Object[] nameColumn = {"Số TT", "Họ Tên", "Sắp Hoàn Trả", "Đã Hoàn Trả","Chọn HS Muốn Hoàn Phí"};
+            Object[] nameColumn = {"Số TT", "Họ Tên", "Đang Giữ", "Đã Hoàn Trả","Chọn HS Muốn Chỉnh Sửa"};
             ArrayList<Object[]> data = new ArrayList<Object[]>();
             ArrayList<Object[]> list = new ArrayList<Object[]>();
             rs1 = statement.executeQuery("SELECT hs.Id,hs.FullName,hs.IsDatCoc FROM projectkoala.students hs, classes_has_students class\n" +
@@ -58,7 +58,7 @@ public class DatCocManagerment {
                 str[1] = rs1.getString(2);
                 int isDatCoc = rs1.getInt(3);
                 str[2]="";
-                if(isDatCoc==2)
+                if(isDatCoc == -1)
                     str[2] = "X";
                 str[3]="";
                 if(isDatCoc==1)
