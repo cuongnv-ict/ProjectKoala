@@ -156,6 +156,8 @@ public static void SapXepThang(ArrayList data, final int column) {
             String arr[] = str.split(",");
             try {
                 for (int i = 0; i < arr.length; i++) {
+                    if(i==0 && arr[i].equals("-"))
+                        continue;
                     Integer.parseInt(arr[i]);
                 }
                 str = "";
