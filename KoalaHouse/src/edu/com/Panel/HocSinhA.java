@@ -13,6 +13,7 @@ import DataBase.HocSinh.Get;
 import DataBase.HocSinh.RecieptManagerment;
 import edu.com.Dialog.ChiTietNghiPhep;
 import edu.com.Dialog.HoaDon;
+import edu.com.Dialog.HoaDon_PhiGiuCho;
 import edu.com.ThongBaoKyHe.ThongBaoKyGeVer2;
 import edu.com.Dialog.LichSuDongTien2;
 import edu.com.Dialog.NgayHoc;
@@ -786,20 +787,46 @@ public class HocSinhA extends javax.swing.JPanel {
     }//GEN-LAST:event_Button_HocSinh_ThemPhiActionPerformed
 
     private void Button_HocSinh_ThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_HocSinh_ThanhToanActionPerformed
-        HoaDon.tenHS = edit_ten.getText();
-        HoaDon.tenNguoiDaiDien = cha.getText();
-        HoaDon.trungTam = TrungTam.getText();
-        HoaDon.idhs = id;
-        HoaDon.lop = Lop.getText();
-        HoaDon.idTT = idTrungTam;
-        HoaDon receipts= new HoaDon(null, true);
-        receipts.setLocation(360, 0);
-        receipts.show();
-        if(receipts.getButton()){
+        //check is phi giu cho
+        boolean checkPhiGiuCho = false;
+        boolean checkHoanPhiGiuCho = false;
+        if(model.getRowCount() == 1){
+                String nameCost = model.getValueAt(0, 1).toString().toLowerCase();
+                //----------chuan hoa nameCost------
+                //loai bo dau cach o dau string
+                //loai bo dau cach o cuoi string
+                nameCost = nameCost.replaceAll(" ","");
+                //----------------------------------
+                if(nameCost.contains("phígiữchỗ") && !nameCost.contains("hoànphígiữchỗ")) checkPhiGiuCho = true;
+                if(nameCost.contains("hoànphígiữchỗ")) checkHoanPhiGiuCho = true;
+        }
+        boolean checkAlreadyPrintf = false;
+        if(checkHoanPhiGiuCho || checkPhiGiuCho){
+            HoaDon_PhiGiuCho.tenHS = edit_ten.getText();
+            HoaDon_PhiGiuCho.tenNguoiDaiDien = cha.getText();
+            HoaDon_PhiGiuCho.trungTam = TrungTam.getText();
+            HoaDon_PhiGiuCho.idhs = id;
+            HoaDon_PhiGiuCho.lop = Lop.getText();
+            HoaDon_PhiGiuCho.idTT = idTrungTam;
+            HoaDon_PhiGiuCho receipts= new HoaDon_PhiGiuCho(null, true);
+            receipts.setLocation(360, 0);
+            receipts.show();
+            checkAlreadyPrintf = receipts.getButton();
+        }else{
+            HoaDon.tenHS = edit_ten.getText();
+            HoaDon.tenNguoiDaiDien = cha.getText();
+            HoaDon.trungTam = TrungTam.getText();
+            HoaDon.idhs = id;
+            HoaDon.lop = Lop.getText();
+            HoaDon.idTT = idTrungTam;
+            HoaDon receipts= new HoaDon(null, true);
+            receipts.setLocation(360, 0);
+            receipts.show();
+            checkAlreadyPrintf = receipts.getButton();
+        }
+        if(checkAlreadyPrintf){
             //them cac phi vao lich su dong tien
-            //xoa cac phi trong bang
-            boolean checkPhiGiuCho = false;
-            boolean checkHoanPhiGiuCho = false;
+            //xoa cac phi trong bang      
             int k = model.getRowCount();
             for(int i = 0;i<k;i++){
                 int idCost = Integer.parseInt(model.getValueAt(0,0).toString());
@@ -809,8 +836,8 @@ public class HocSinhA extends javax.swing.JPanel {
                 //loai bo dau cach o cuoi string
                 nameCost = nameCost.replaceAll(" ","");
                 //----------------------------------
-                if(nameCost.equals("phígiữchỗ")) checkPhiGiuCho = true;
-                if(nameCost.equals("hoànphígiữchỗ")) checkHoanPhiGiuCho = true;
+                if(nameCost.contains("phígiữchỗ") && !nameCost.contains("hoànphígiữchỗ")) checkPhiGiuCho = true;
+                if(nameCost.contains("hoànphígiữchỗ")) checkHoanPhiGiuCho = true;
                 System.out.println(checkHoanPhiGiuCho+"--"+checkPhiGiuCho);
                 new CostOfStudent().UpdatePhiCuaHs(id, idCost, idTrungTam);
                 model.removeRow(0);

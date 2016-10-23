@@ -66,7 +66,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Pham The Quyen
  */
-public class HoaDon extends javax.swing.JDialog implements Printable{
+public class HoaDon_PhiGiuCho extends javax.swing.JDialog implements Printable{
     public static int idhs;
     public static String tenHS;
     public static String tenNguoiDaiDien;
@@ -83,14 +83,20 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     public boolean inLai = false;
     public String shdTemp;
     private boolean isPrintAgain = false;
+    public static ArrayList<String> noteContent;
     Convert convert = new Convert();
     
     /**
      * Creates new form NewJDialog
      */
-    public HoaDon(java.awt.Frame parent, boolean modal) {
+    public HoaDon_PhiGiuCho(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        if(noteContent != null && noteContent.size() != 0){
+            for(String str : noteContent){
+                NoteCostText.append(str+"\n");
+            }
+        }
         TenHocSinh.setText(tenHS);
         NguoiDaiDien.setText(tenNguoiDaiDien);
         tenLop.setText(lop);
@@ -108,8 +114,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         //set so hoa don
         sott = new RecieptManagerment().GetNextNumberReceipt(aDate.toString());
         String soHoaDon = null;
-        int id_Fac = HoaDon.idTT;
-        if(HoaDon.idhs==0){
+        int id_Fac = HoaDon_PhiGiuCho.idTT;
+        if(HoaDon_PhiGiuCho.idhs==0){
             id_Fac = new Get().GetIDFac();
         }
         switch(id_Fac){
@@ -121,11 +127,11 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         stt.setText(String.valueOf(soHoaDon));
         shdTemp = soHoaDon;
         tenTrungTam.setText(trungTam);
-        idTrungTam = HoaDon.idTT;
+        idTrungTam = HoaDon_PhiGiuCho.idTT;
         if(idTrungTam==0){
             idTrungTam = new Get().GetIDFac();
         }
-        idHocSinh = HoaDon.idhs;
+        idHocSinh = HoaDon_PhiGiuCho.idhs;
         //tinh tong tien 
         if(idHocSinh>0){
         new RecieptManagerment().BangDSPhiHoaDon(idhs,idTrungTam, jTable1);
@@ -138,12 +144,12 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             daThu.setText("0");
         }
         //xoa du lieu static
-        HoaDon.tenHS = "";
-        HoaDon.tenNguoiDaiDien = "";
-        HoaDon.trungTam = "";
-        HoaDon.idhs = 0;
-        HoaDon.lop = "";
-        HoaDon.idTT = 0;
+        HoaDon_PhiGiuCho.tenHS = "";
+        HoaDon_PhiGiuCho.tenNguoiDaiDien = "";
+        HoaDon_PhiGiuCho.trungTam = "";
+        HoaDon_PhiGiuCho.idhs = 0;
+        HoaDon_PhiGiuCho.lop = "";
+        HoaDon_PhiGiuCho.idTT = 0;
         if(idHocSinh>0){
         int x = Integer.parseInt(XuLy.getMoney(TongTien.getText()));
         if(x <0){
@@ -468,6 +474,8 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         hienChietKhau = new javax.swing.JCheckBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        NoteCostText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -763,17 +771,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
         jTable1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -829,15 +826,14 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
             }
         });
 
+        NoteCostText.setColumns(20);
+        NoteCostText.setRows(5);
+        jScrollPane2.setViewportView(NoteCostText);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ThongTinHocSinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -847,10 +843,6 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(271, 271, 271))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(hienChietKhau)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -867,6 +859,20 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ThongTinHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ThongTinHocSinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(hienChietKhau))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -886,7 +892,9 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hienChietKhau)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -951,7 +959,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 pj.print(printRequest);
                // jButton1.setVisible(true);
             } catch (PrinterException ex) {
-                Logger.getLogger(HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HoaDon_PhiGiuCho.class.getName()).log(Level.SEVERE, null, ex);
                // jButton1.setVisible(true);
             }
         }
@@ -1008,7 +1016,10 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     }//GEN-LAST:event_jTable1MouseEntered
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-      
+        if(evt.getClickCount()==1){
+            String nameCost =jTable1.getValueAt(jTable1.getSelectedRow(),1).toString();
+            System.out.println("have : "+nameCost);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
@@ -1098,20 +1109,21 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoaDon_PhiGiuCho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoaDon_PhiGiuCho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoaDon_PhiGiuCho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoaDon_PhiGiuCho.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HoaDon dialog = new HoaDon(new javax.swing.JFrame(), true);
+                HoaDon_PhiGiuCho dialog = new HoaDon_PhiGiuCho(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1129,6 +1141,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JComboBox HinhThucDong;
     private javax.swing.JPanel NgayThangNam;
     private javax.swing.JTextField NguoiDaiDien;
+    private javax.swing.JTextArea NoteCostText;
     private javax.swing.JTextField TenHocSinh;
     private javax.swing.JPanel ThongTinCoSo;
     private javax.swing.JPanel ThongTinHoaDon;
@@ -1161,6 +1174,7 @@ public class HoaDon extends javax.swing.JDialog implements Printable{
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox nam;
     private javax.swing.JComboBox ngay;
@@ -1292,11 +1306,17 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         grphcs.drawLine(195, 180, 195, 180 + (nRow + 1) * 20);
         grphcs.drawLine(320, 180, 320, 180 + (nRow + 1) * 20);
         }
-        
-        
         int rowIndex = 190 + nRow * 20;
-        rowIndex = rowIndex + 20;
-        System.out.println(rowIndex);
+        rowIndex = rowIndex + 40;
+        //here to printf note about cost "phi giu cho"----page 1-----
+        HoaDon_PhiGiuCho.noteContent = new ArrayList<String>();
+        for (String line : NoteCostText.getText().split("\\n")){
+            grphcs.drawString(line, 20, rowIndex);
+            noteContent.add(line);
+            rowIndex+= 20;
+        }
+        //finish printf note------------------------------------
+//        System.out.println(rowIndex);
         grphcs.drawString(lbTongTien, 20, rowIndex + 20);
         grphcs.drawString(tfTongTien, 80, rowIndex + 20);
         if(checkDaThu.isSelected()) {
@@ -1432,7 +1452,13 @@ public int print(Graphics grphcs, PageFormat pf, int page) throws PrinterExcepti
         }
         
         int rowIndexLeft = 190 + nRow * 20;
-        rowIndexLeft = rowIndexLeft + 20;
+        rowIndexLeft = rowIndexLeft + 40;
+        //here to printf note about cost "phi giu cho"--- page 2 ------
+        for (String line : NoteCostText.getText().split("\\n")){
+            grphcs.drawString(line, 440, rowIndexLeft);
+            rowIndexLeft+= 20;
+        }
+        //finish printf note------------------------------------
         
         grphcs.drawString(lbTongTien, 440, rowIndexLeft + 20);
         grphcs.drawString(tfTongTien, 500, rowIndexLeft + 20);
